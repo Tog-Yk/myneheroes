@@ -2,6 +2,7 @@ package net.togyk.myneheroes;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.togyk.myneheroes.Item.ModItemGroups;
 import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.block.ModBlocks;
 import org.slf4j.Logger;
@@ -19,5 +20,6 @@ public class MyneHeroes implements ModInitializer {
     public void onInitialize() {
         ModItems.registerModItems();
         ModBlocks.registerModBlocks();
+        ModItemGroups.registerItemGroups();
     }
 }

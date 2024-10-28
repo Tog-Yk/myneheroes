@@ -19,9 +19,5 @@ public class ModItems {
     public static void registerModItems() {
         MyneHeroes.LOGGER.info("Registering Mod Items for " + MyneHeroes.MOD_ID);
 
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
-            entries.add(VIBRANIUM_INGOT);
-            entries.add(RAW_VIBRANIUM);
-        });
     }
 }
