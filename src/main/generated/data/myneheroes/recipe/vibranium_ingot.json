@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "myneheroes:vibranium_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "myneheroes:vibranium_ingot"
+  }
+}

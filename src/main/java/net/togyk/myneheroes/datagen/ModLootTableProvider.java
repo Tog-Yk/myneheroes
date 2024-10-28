@@ -1,0 +1,24 @@
+package net.togyk.myneheroes.datagen;
+
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.minecraft.registry.RegistryWrapper;
+import net.togyk.myneheroes.Item.ModItems;
+import net.togyk.myneheroes.block.ModBlocks;
+
+import java.util.concurrent.CompletableFuture;
+
+public class ModLootTableProvider extends FabricBlockLootTableProvider {
+    public ModLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        super(dataOutput, registryLookup);
+    }
+
+    @Override
+    public void generate() {
+        addDrop(ModBlocks.VIBRANIUM_BLOCK);
+        addDrop(ModBlocks.RAW_VIBRANIUM_BLOCK);
+
+        addDrop(ModBlocks.VIBRANIUM_ORE, oreDrops(ModBlocks.VIBRANIUM_ORE, ModItems.RAW_VIBRANIUM));
+        addDrop(ModBlocks.DEEPSLATE_VIBRANIUM_ORE, oreDrops(ModBlocks.DEEPSLATE_VIBRANIUM_ORE, ModItems.RAW_VIBRANIUM));
+    }
+}
