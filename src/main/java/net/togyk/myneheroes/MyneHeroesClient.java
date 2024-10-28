@@ -1,4 +1,4 @@
-package com.togyk;
+package net.togyk.myneheroes;
 
 import net.fabricmc.api.ClientModInitializer;
 

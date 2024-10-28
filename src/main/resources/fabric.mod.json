@@ -5,24 +5,24 @@
 	"name": "MyneHeroes",
 	"description": "This is a heroes mod aiming to create a more customizable feel",
 	"authors": [
-		"Me!"
+		"Tog_Yk"
 	],
 	"contact": {
 		"homepage": "https://myneheroes.net/",
 		"sources": "https://github.com/Tog-Yk/myneheroes"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/myneheroes/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.togyk.MyneHeroes"
+			"net.togyk.myneheroes.MyneHeroes"
 		],
 		"fabric-datagen": [
-			"com.togyk.MyneHeroesDataGenerator"
+			"net.togyk.myneheroes.MyneHeroesDataGenerator"
 		],
 		"client": [
-			"com.togyk.MyneHeroesClient"
+			"net.togyk.myneheroes.MyneHeroesClient"
 		]
 	},
 	"mixins": [
@@ -30,7 +30,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.16.7",
-		"minecraft": "~1.21.3",
+		"minecraft": "~1.21",
 		"java": ">=21",
 		"fabric-api": "*"
 	},
