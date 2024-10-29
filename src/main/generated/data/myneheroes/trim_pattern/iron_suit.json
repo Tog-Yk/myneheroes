@@ -1,0 +1,8 @@
+{
+  "asset_id": "myneheroes:iron_suit",
+  "decal": false,
+  "description": {
+    "translate": "trim_pattern.myneheroes.iron_suit"
+  },
+  "template_item": "myneheroes:iron_suit_template"
+}

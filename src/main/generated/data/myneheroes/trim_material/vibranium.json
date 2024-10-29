@@ -1,0 +1,9 @@
+{
+  "asset_name": "vibranium",
+  "description": {
+    "color": "#3E616E",
+    "translate": "trim_material.myneheroes.vibranium"
+  },
+  "ingredient": "myneheroes:vibranium_ingot",
+  "item_model_index": 0.9
+}

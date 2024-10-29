@@ -1,9 +1,15 @@
 {
   "item.myneheroes.vibranium_ingot": "Vibranium Ingot",
   "item.myneheroes.raw_vibranium": "Raw Vibranium",
+  "item.myneheroes.iron_suit_template": "Iron Suit Template",
 
   "block.myneheroes.vibranium_block": "Vibranium Block",
   "block.myneheroes.raw_vibranium_block": "Raw Vibranium Block",
   "block.myneheroes.vibranium_ore": "Vibranium Ore",
-  "block.myneheroes.deepslate_vibranium_ore": "Deepslate Vibranium Ore"
+  "block.myneheroes.deepslate_vibranium_ore": "Deepslate Vibranium Ore",
+
+  "trim_material.myneheroes.vibranium": "Vibranium Material",
+  "trim_pattern.myneheroes.iron_suit": "Iron Suit",
+
+  "itemgroup.myneheroes.myneheroes": "MyneHeroes"
 }

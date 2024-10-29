@@ -26,5 +26,7 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         itemModelGenerator.register(ModItems.VIBRANIUM_INGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAW_VIBRANIUM, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.IRON_SUIT_TEMPLATE, Models.GENERATED);
     }
 }

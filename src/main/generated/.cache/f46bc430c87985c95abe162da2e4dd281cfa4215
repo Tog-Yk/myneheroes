@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-28T11:40:58.7934185	MyneHeroes/Model Definitions
+// 1.21.1	2024-10-28T21:05:57.7962101	MyneHeroes/Model Definitions
 57f1c3c823147ba9d3f58b9d5ac1e842cdcabc4b assets\myneheroes\models\block\vibranium_block.json
 ea679906995d9522b0b07d69d84f73c3935e2af4 assets\myneheroes\models\item\raw_vibranium_block.json
 793bbace57ce2c77fd41443ae57fdd97bac7be02 assets\myneheroes\blockstates\vibranium_block.json
@@ -13,3 +13,4 @@ fe8da6753cc78c2292cc4dc583e5145efd062648 assets\myneheroes\blockstates\deepslate
 df02e4cb93575f4a6ac86f4e18217a0632dea5d2 assets\myneheroes\blockstates\raw_vibranium_block.json
 ab76c19c023d8a4025d2f0ec2342f8256eb91b6f assets\myneheroes\models\item\vibranium_block.json
 bf1bbab695e3b5ebee40e56e5e6fc5005a7d7657 assets\myneheroes\models\block\vibranium_ore.json
+ed46ccccfa9d319b85436d8bdf8354ba6a3f406f assets\myneheroes\models\item\iron_suit_template.json
