@@ -1,5 +1,7 @@
 {
   "values": [
-    "myneheroes:vibranium_ingot"
+    "myneheroes:vibranium_ingot",
+    "myneheroes:titanium_ingot",
+    "myneheroes:gold_titanium_ingot"
   ]
 }

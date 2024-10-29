@@ -20,11 +20,24 @@ import java.util.Map;
 public class ModTrimMaterials {
     public static final RegistryKey<ArmorTrimMaterial> VIBRANIUM = RegistryKey.of(RegistryKeys.TRIM_MATERIAL,
             Identifier.of(MyneHeroes.MOD_ID, "vibranium"));
+
+    public static final RegistryKey<ArmorTrimMaterial> TITANIUM = RegistryKey.of(RegistryKeys.TRIM_MATERIAL,
+            Identifier.of(MyneHeroes.MOD_ID, "titanium"));
+
+    public static final RegistryKey<ArmorTrimMaterial> GOLD_TITANIUM = RegistryKey.of(RegistryKeys.TRIM_MATERIAL,
+            Identifier.of(MyneHeroes.MOD_ID, "gold_titanium"));
+
     //register more Keys here
 
     public static void bootstrap(Registerable<ArmorTrimMaterial> registerable) {
         register(registerable, VIBRANIUM, Registries.ITEM.getEntry(ModItems.VIBRANIUM_INGOT),
                 Style.EMPTY.withColor(TextColor.parse("#3e616e").getOrThrow()), 0.9f);
+
+        register(registerable, TITANIUM, Registries.ITEM.getEntry(ModItems.TITANIUM_INGOT),
+                Style.EMPTY.withColor(TextColor.parse("#b6bbaf").getOrThrow()), 0.1f);
+
+        register(registerable, GOLD_TITANIUM, Registries.ITEM.getEntry(ModItems.GOLD_TITANIUM_INGOT),
+                Style.EMPTY.withColor(TextColor.parse("#976a27").getOrThrow()), 0.6f);
 
         //register more bootstraps here
     }

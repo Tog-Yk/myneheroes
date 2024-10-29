@@ -17,7 +17,10 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         getOrCreateTagBuilder(ItemTags.TRIM_MATERIALS)
-                .add(ModItems.VIBRANIUM_INGOT);
+                .add(ModItems.VIBRANIUM_INGOT)
+                .add(ModItems.TITANIUM_INGOT)
+                .add(ModItems.GOLD_TITANIUM_INGOT);
+
         getOrCreateTagBuilder(ItemTags.TRIM_TEMPLATES)
                 .add(ModItems.IRON_SUIT_TEMPLATE);
     }

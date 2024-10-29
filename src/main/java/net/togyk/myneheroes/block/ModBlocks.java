@@ -27,6 +27,24 @@ public class ModBlocks {
             new Block(AbstractBlock.Settings.create().strength(3f)
                     .requiresTool().sounds(BlockSoundGroup.DEEPSLATE)));
 
+    public static final Block TITANIUM_BLOCK = registerBlock("titanium_block",
+            new Block(AbstractBlock.Settings.create().strength(4f)
+                    .requiresTool().sounds(BlockSoundGroup.METAL)));
+
+    public static final Block RAW_TITANIUM_BLOCK = registerBlock("raw_titanium_block",
+            new Block(AbstractBlock.Settings.create().strength(3f)
+                    .requiresTool()));
+    public static final Block TITANIUM_ORE = registerBlock("titanium_ore",
+            new Block(AbstractBlock.Settings.create().strength(3f)
+                    .requiresTool().sounds(BlockSoundGroup.STONE)));
+    public static final Block DEEPSLATE_TITANIUM_ORE = registerBlock("deepslate_titanium_ore",
+            new Block(AbstractBlock.Settings.create().strength(3f)
+                    .requiresTool().sounds(BlockSoundGroup.DEEPSLATE)));
+
+    public static final Block GOLD_TITANIUM_BLOCK = registerBlock("gold_titanium_block",
+            new Block(AbstractBlock.Settings.create().strength(4f)
+                    .requiresTool().sounds(BlockSoundGroup.METAL)));
+
 
 
     private static Block registerBlock(String name, Block block) {
@@ -42,9 +60,5 @@ public class ModBlocks {
     public static void registerModBlocks() {
         MyneHeroes.LOGGER.info("Registering Mod Blocks for " + MyneHeroes.MOD_ID);
 
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
-            entries.add(ModBlocks.VIBRANIUM_BLOCK);
-            entries.add(ModBlocks.RAW_VIBRANIUM_BLOCK);
-        });
     }
 }

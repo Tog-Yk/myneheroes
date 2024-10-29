@@ -1,15 +1,35 @@
 {
   "item.myneheroes.vibranium_ingot": "Vibranium Ingot",
   "item.myneheroes.raw_vibranium": "Raw Vibranium",
+
+  "item.myneheroes.titanium_ingot": "Titanium Ingot",
+  "item.myneheroes.raw_titanium": "Raw Titanium",
+
+  "item.myneheroes.gold_titanium_ingot": "Gold Titanium Ingot",
+
   "item.myneheroes.iron_suit_template": "Iron Suit Template",
+
+
 
   "block.myneheroes.vibranium_block": "Vibranium Block",
   "block.myneheroes.raw_vibranium_block": "Raw Vibranium Block",
   "block.myneheroes.vibranium_ore": "Vibranium Ore",
   "block.myneheroes.deepslate_vibranium_ore": "Deepslate Vibranium Ore",
 
-  "trim_material.myneheroes.vibranium": "Vibranium Material",
+  "block.myneheroes.titanium_block": "Titanium Block",
+  "block.myneheroes.raw_titanium_block": "Raw Titanium Block",
+  "block.myneheroes.titanium_ore": "Titanium Ore",
+  "block.myneheroes.deepslate_titanium_ore": "Deepslate Titanium Ore",
+
+  "block.myneheroes.gold_titanium_block": "Gold Titanium Block",
+
+
+  "trim_material.myneheroes.vibranium": "Vibranium",
+  "trim_material.myneheroes.titanium": "Titanium",
+  "trim_material.myneheroes.gold_titanium": "Gold Titanium",
+
   "trim_pattern.myneheroes.iron_suit": "Iron Suit",
+
 
   "itemgroup.myneheroes.myneheroes": "MyneHeroes"
 }
