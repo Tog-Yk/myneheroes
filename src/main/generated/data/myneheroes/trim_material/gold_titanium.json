@@ -1,0 +1,9 @@
+{
+  "asset_name": "gold_titanium",
+  "description": {
+    "color": "#976A27",
+    "translate": "trim_material.myneheroes.gold_titanium"
+  },
+  "ingredient": "myneheroes:gold_titanium_ingot",
+  "item_model_index": 0.6
+}
