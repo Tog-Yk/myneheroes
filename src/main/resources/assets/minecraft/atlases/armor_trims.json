@@ -36,6 +36,10 @@
         "trims/models/armor/raiser_leggings",
         "trims/models/armor/host",
         "trims/models/armor/host_leggings",
+        "trims/models/armor/flow",
+        "trims/models/armor/flow_leggings",
+        "trims/models/armor/bolt",
+        "trims/models/armor/bolt_leggings",
         "myneheroes:trims/models/armor/iron_suit",
         "myneheroes:trims/models/armor/iron_suit_leggings"
       ],
