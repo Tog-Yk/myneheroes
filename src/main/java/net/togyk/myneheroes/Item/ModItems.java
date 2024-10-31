@@ -21,18 +21,6 @@ public class ModItems {
 
     public static final Item IRON_SUIT_TEMPLATE = registerItem("iron_suit_template",new Item(new Item.Settings()));
 
-    public static final Item VIBRANIUM_HELMET = registerItem("vibranium_helmet",
-            new ArmorItem(ModArmorMaterials.VIBRANIUM_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(15))));
-    public static final Item VIBRANIUM_CHESTPLATE = registerItem("vibranium_chestplate",
-            new ArmorItem(ModArmorMaterials.VIBRANIUM_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(15))));
-    public static final Item VIBRANIUM_LEGGINGS = registerItem("vibranium_leggings",
-            new ArmorItem(ModArmorMaterials.VIBRANIUM_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(15))));
-    public static final Item VIBRANIUM_BOOTS = registerItem("vibranium_boots",
-            new ArmorItem(ModArmorMaterials.VIBRANIUM_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(15))));
 
 
     private static Item registerItem(String name, Item item) {
