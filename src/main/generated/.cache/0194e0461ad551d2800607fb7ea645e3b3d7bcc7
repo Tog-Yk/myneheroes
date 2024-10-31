@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-30T14:22:46.4805459	MyneHeroes/Recipes
+// 1.21.1	2024-10-31T16:36:48.3523033	MyneHeroes/Recipes
 e2c79bd278b3a3ed2d79c0405b8cb2ffb736b0b2 data\myneheroes\advancement\recipes\decorations\vibranium_block.json
 ec98c1e6476d520c7b408b1ca8e244f7e6516c10 data\myneheroes\recipe\vibranium_ingot_from_blasting_vibranium_ore.json
 288d7880b9ccf59235f00379b2858c2b78252494 data\myneheroes\recipe\gold_titanium_ingot.json
@@ -43,8 +43,8 @@ cc017d4141d3ec4e5ec8e25c53b03bf18d1ef831 data\myneheroes\advancement\recipes\bui
 588e57bae7dba271aaef7a1942cdc22bb302b481 data\myneheroes\recipe\raw_titanium_block.json
 316fad156eadf28b1d448ec78da7e1ec0351089e data\myneheroes\recipe\vibranium_ingot.json
 7d4f471407f0c3da864283d3fbe39a2cb7ea4acf data\myneheroes\recipe\titanium_ingot_from_smelting_raw_titanium.json
-25d7329fa818f27ae9d3e10c2978f0ed6cbf96e6 data\myneheroes\advancement\recipes\decorations\titanium_block.json
 01623682724dcb599b3ff1ceb70c568351de08fd data\myneheroes\recipe\titanium_ingot_from_smelting_deepslate_titanium_ore.json
+25d7329fa818f27ae9d3e10c2978f0ed6cbf96e6 data\myneheroes\advancement\recipes\decorations\titanium_block.json
 4292f516f1653a85a391cdd465d837843f87de22 data\myneheroes\recipe\titanium_block.json
 8a82c397b231451b9bb6d86f56401697d9aea43d data\myneheroes\recipe\gold_titanium_ingot_from_smelting_raw_gold_titanium.json
 eb513e93e71aecfc94701ad2ba476e84c068e569 data\myneheroes\advancement\recipes\building_blocks\vibranium_ingot.json

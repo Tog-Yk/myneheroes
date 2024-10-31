@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-30T14:22:46.4787228	MyneHeroes/Model Definitions
+// 1.21.1	2024-10-31T16:36:48.3509369	MyneHeroes/Model Definitions
 57f1c3c823147ba9d3f58b9d5ac1e842cdcabc4b assets\myneheroes\models\block\vibranium_block.json
 0ab1601b24419e5c76c12a776447fb079224d6d7 assets\myneheroes\models\item\deepslate_titanium_ore.json
 80cfefacad01db4592cde39e639798a54bcce352 assets\myneheroes\models\block\gold_titanium_block.json
@@ -31,8 +31,8 @@ fcdb508dc310f6751f9ad71111deb283ce12ffb0 assets\myneheroes\models\item\raw_titan
 441c63fe4e523cbb6154df8e8c50df0f8e67ed3c assets\myneheroes\blockstates\deepslate_titanium_ore.json
 89d8ef2f488d660b22cd0fb37dadcd4fb6b554c3 assets\myneheroes\models\item\titanium_block.json
 a262603c62bd3c98d3b294a822bfafe69aac3ca7 assets\myneheroes\models\item\gold_titanium_ingot.json
-15a868020af43d842bbd8824d54d353ee3118b2c assets\myneheroes\models\block\raw_vibranium_block.json
 33aa7c7720ad3a8326bbb8882add97d91680d72d assets\myneheroes\models\block\raw_titanium_block.json
+15a868020af43d842bbd8824d54d353ee3118b2c assets\myneheroes\models\block\raw_vibranium_block.json
 4f6ac268910c81f51a4d819420fc9b9507e23562 assets\myneheroes\models\item\raw_gold_titanium_block.json
 df02e4cb93575f4a6ac86f4e18217a0632dea5d2 assets\myneheroes\blockstates\raw_vibranium_block.json
 bf1bbab695e3b5ebee40e56e5e6fc5005a7d7657 assets\myneheroes\models\block\vibranium_ore.json

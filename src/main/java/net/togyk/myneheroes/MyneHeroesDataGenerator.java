@@ -7,6 +7,8 @@ import net.minecraft.registry.RegistryKeys;
 import net.togyk.myneheroes.datagen.*;
 import net.togyk.myneheroes.trim.ModTrimMaterials;
 import net.togyk.myneheroes.trim.ModTrimPatterns;
+import net.togyk.myneheroes.worldgen.ModConfiguredFeatures;
+import net.togyk.myneheroes.worldgen.ModPlacedFeatures;
 
 public class MyneHeroesDataGenerator implements DataGeneratorEntrypoint {
     @Override
@@ -26,5 +28,7 @@ public class MyneHeroesDataGenerator implements DataGeneratorEntrypoint {
     public void buildRegistry(RegistryBuilder registryBuilder){
         registryBuilder.addRegistry(RegistryKeys.TRIM_MATERIAL, ModTrimMaterials::bootstrap);
         registryBuilder.addRegistry(RegistryKeys.TRIM_PATTERN, ModTrimPatterns::bootstrap);
+        registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap);
+        registryBuilder.addRegistry(RegistryKeys.PLACED_FEATURE, ModPlacedFeatures::bootstrap);
     }
 }
