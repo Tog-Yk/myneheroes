@@ -17,8 +17,15 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
     public void generate() {
         addDrop(ModBlocks.VIBRANIUM_BLOCK);
         addDrop(ModBlocks.RAW_VIBRANIUM_BLOCK);
-
         addDrop(ModBlocks.VIBRANIUM_ORE, oreDrops(ModBlocks.VIBRANIUM_ORE, ModItems.RAW_VIBRANIUM));
         addDrop(ModBlocks.DEEPSLATE_VIBRANIUM_ORE, oreDrops(ModBlocks.DEEPSLATE_VIBRANIUM_ORE, ModItems.RAW_VIBRANIUM));
+
+        addDrop(ModBlocks.TITANIUM_BLOCK);
+        addDrop(ModBlocks.RAW_TITANIUM_BLOCK);
+        addDrop(ModBlocks.TITANIUM_ORE, oreDrops(ModBlocks.TITANIUM_ORE, ModItems.RAW_TITANIUM));
+        addDrop(ModBlocks.DEEPSLATE_TITANIUM_ORE, oreDrops(ModBlocks.DEEPSLATE_TITANIUM_ORE, ModItems.RAW_TITANIUM));
+
+        addDrop(ModBlocks.GOLD_TITANIUM_BLOCK);
+        addDrop(ModBlocks.RAW_GOLD_TITANIUM_BLOCK);
     }
 }

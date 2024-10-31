@@ -1,5 +1,11 @@
-// 1.21.1	2024-10-29T12:22:02.9778581	MyneHeroes/Block Loot Tables
+// 1.21.1	2024-10-30T14:22:46.4765331	MyneHeroes/Block Loot Tables
+fc0aa42f38ed1ea10c157a35f88522cc3bc70eec data\myneheroes\loot_table\blocks\raw_gold_titanium_block.json
 45d00de659784212310602181e3d7b93b7520039 data\myneheroes\loot_table\blocks\deepslate_vibranium_ore.json
+f13b2de3a5c9d69a5e484ce3b27a1952bf22005e data\myneheroes\loot_table\blocks\titanium_block.json
 abefb372136aafcca66d447592c67a55d8fd72da data\myneheroes\loot_table\blocks\raw_vibranium_block.json
+c7078f3c516d78670dc43ce1994c0508acca974f data\myneheroes\loot_table\blocks\titanium_ore.json
 ea3a87df4171bc08041a6a0a08e60e01e93e1753 data\myneheroes\loot_table\blocks\vibranium_ore.json
+30b5fa63830dce80046d7ebc34f671da6359854d data\myneheroes\loot_table\blocks\raw_titanium_block.json
+0d25b5a85b885082e428813f3251c5e419cc5507 data\myneheroes\loot_table\blocks\gold_titanium_block.json
+0350621c38d0021c95c855c266e93fb979d1afcc data\myneheroes\loot_table\blocks\deepslate_titanium_ore.json
 b9b31ea4a59aa9c8e102873a188a663a88af6b8d data\myneheroes\loot_table\blocks\vibranium_block.json

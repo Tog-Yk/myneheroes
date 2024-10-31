@@ -33,8 +33,10 @@ public class ModItemGroups {
                         entries.add(ModBlocks.DEEPSLATE_TITANIUM_ORE);
 
                         entries.add(ModItems.GOLD_TITANIUM_INGOT);;
+                        entries.add(ModItems.RAW_GOLD_TITANIUM);;
 
                         entries.add(ModBlocks.GOLD_TITANIUM_BLOCK);
+                        entries.add(ModBlocks.RAW_GOLD_TITANIUM_BLOCK);
 
                         entries.add(ModItems.IRON_SUIT_TEMPLATE);
 

@@ -6,6 +6,7 @@
   "item.myneheroes.raw_titanium": "Raw Titanium",
 
   "item.myneheroes.gold_titanium_ingot": "Gold Titanium Ingot",
+  "item.myneheroes.raw_gold_titanium": "Raw Gold Titanium",
 
   "item.myneheroes.iron_suit_template": "Iron Suit Template",
 
@@ -22,6 +23,7 @@
   "block.myneheroes.deepslate_titanium_ore": "Deepslate Titanium Ore",
 
   "block.myneheroes.gold_titanium_block": "Gold Titanium Block",
+  "block.myneheroes.raw_gold_titanium_block": "Raw Gold Titanium Block",
 
 
   "trim_material.myneheroes.vibranium": "Vibranium",

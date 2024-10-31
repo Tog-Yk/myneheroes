@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.25,
+  "group": "gold_titanium",
+  "ingredient": {
+    "item": "myneheroes:raw_gold_titanium"
+  },
+  "result": {
+    "id": "myneheroes:gold_titanium_ingot"
+  }
+}

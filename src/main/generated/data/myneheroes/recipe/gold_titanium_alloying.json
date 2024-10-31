@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "myneheroes:raw_titanium"
+    },
+    {
+      "item": "minecraft:raw_gold"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "id": "myneheroes:raw_gold_titanium"
+  }
+}

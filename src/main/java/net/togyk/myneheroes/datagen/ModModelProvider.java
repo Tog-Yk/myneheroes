@@ -26,6 +26,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DEEPSLATE_TITANIUM_ORE);
 
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLD_TITANIUM_BLOCK);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.RAW_GOLD_TITANIUM_BLOCK);
 
     }
 
@@ -38,6 +39,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.RAW_TITANIUM, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.GOLD_TITANIUM_INGOT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RAW_GOLD_TITANIUM, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.IRON_SUIT_TEMPLATE, Models.GENERATED);
     }

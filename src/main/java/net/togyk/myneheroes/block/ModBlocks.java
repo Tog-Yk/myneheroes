@@ -44,6 +44,9 @@ public class ModBlocks {
     public static final Block GOLD_TITANIUM_BLOCK = registerBlock("gold_titanium_block",
             new Block(AbstractBlock.Settings.create().strength(4f)
                     .requiresTool().sounds(BlockSoundGroup.METAL)));
+    public static final Block RAW_GOLD_TITANIUM_BLOCK = registerBlock("raw_gold_titanium_block",
+            new Block(AbstractBlock.Settings.create().strength(4f)
+                    .requiresTool()));
 
 
 

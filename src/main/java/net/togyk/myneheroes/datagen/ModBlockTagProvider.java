@@ -19,11 +19,29 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.VIBRANIUM_BLOCK)
                 .add(ModBlocks.RAW_VIBRANIUM_BLOCK)
                 .add(ModBlocks.VIBRANIUM_ORE)
-                .add(ModBlocks.DEEPSLATE_VIBRANIUM_ORE);
+                .add(ModBlocks.DEEPSLATE_VIBRANIUM_ORE)
+
+                .add(ModBlocks.TITANIUM_BLOCK)
+                .add(ModBlocks.RAW_TITANIUM_BLOCK)
+                .add(ModBlocks.TITANIUM_ORE)
+                .add(ModBlocks.DEEPSLATE_TITANIUM_ORE)
+
+                .add(ModBlocks.GOLD_TITANIUM_BLOCK)
+                .add(ModBlocks.RAW_GOLD_TITANIUM_BLOCK);
+
         getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
                 .add(ModBlocks.VIBRANIUM_BLOCK)
                 .add(ModBlocks.RAW_VIBRANIUM_BLOCK)
                 .add(ModBlocks.VIBRANIUM_ORE)
-                .add(ModBlocks.DEEPSLATE_VIBRANIUM_ORE);
+                .add(ModBlocks.DEEPSLATE_VIBRANIUM_ORE)
+
+                .add(ModBlocks.TITANIUM_BLOCK)
+                .add(ModBlocks.RAW_TITANIUM_BLOCK)
+                .add(ModBlocks.TITANIUM_ORE)
+                .add(ModBlocks.DEEPSLATE_TITANIUM_ORE)
+
+                .add(ModBlocks.GOLD_TITANIUM_BLOCK)
+                .add(ModBlocks.RAW_GOLD_TITANIUM_BLOCK);
+
     }
 }

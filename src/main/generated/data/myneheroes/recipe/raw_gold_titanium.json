@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "myneheroes:raw_gold_titanium_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "myneheroes:raw_gold_titanium"
+  }
+}
