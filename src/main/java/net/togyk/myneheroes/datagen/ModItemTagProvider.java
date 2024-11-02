@@ -23,6 +23,23 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
         getOrCreateTagBuilder(ItemTags.TRIM_TEMPLATES)
                 .add(ModItems.IRON_SUIT_TEMPLATE);
+
+        getOrCreateTagBuilder(ItemTags.TRIMMABLE_ARMOR)
+                .add(ModItems.VIBRANIUM_HELMET)
+                .add(ModItems.VIBRANIUM_CHESTPLATE)
+                .add(ModItems.VIBRANIUM_LEGGINGS)
+                .add(ModItems.VIBRANIUM_BOOTS)
+
+                .add(ModItems.TITANIUM_HELMET)
+                .add(ModItems.TITANIUM_CHESTPLATE)
+                .add(ModItems.TITANIUM_LEGGINGS)
+                .add(ModItems.TITANIUM_BOOTS)
+
+                .add(ModItems.GOLD_TITANIUM_HELMET)
+                .add(ModItems.GOLD_TITANIUM_CHESTPLATE)
+                .add(ModItems.GOLD_TITANIUM_LEGGINGS)
+                .add(ModItems.GOLD_TITANIUM_BOOTS);
+
     }
 
 }

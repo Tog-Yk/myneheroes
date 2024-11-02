@@ -3,6 +3,7 @@ package net.togyk.myneheroes.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
@@ -58,6 +59,111 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input(Items.RAW_GOLD)
                 .criterion(hasItem(ModItems.RAW_TITANIUM), conditionsFromItem(ModItems.RAW_TITANIUM))
                 .offerTo(exporter,"gold_titanium_alloying");
+
+
+
+
+        //simple armor recipes
+        //vibranium
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.VIBRANIUM_HELMET)
+                .pattern("###")
+                .pattern("# #")
+                .input('#', ModItems.VIBRANIUM_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.VIBRANIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.VIBRANIUM_CHESTPLATE)
+                .pattern("# #")
+                .pattern("###")
+                .pattern("###")
+                .input('#', ModItems.VIBRANIUM_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.VIBRANIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.VIBRANIUM_LEGGINGS)
+                .pattern("###")
+                .pattern("# #")
+                .pattern("# #")
+                .input('#', ModItems.VIBRANIUM_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.VIBRANIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.VIBRANIUM_BOOTS)
+                .pattern("# #")
+                .pattern("# #")
+                .input('#', ModItems.VIBRANIUM_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.VIBRANIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_INGOT))
+                .offerTo(exporter);
+
+
+
+        //Titanium
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.TITANIUM_HELMET)
+                .pattern("###")
+                .pattern("# #")
+                .input('#', ModItems.TITANIUM_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.TITANIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.TITANIUM_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.TITANIUM_CHESTPLATE)
+                .pattern("# #")
+                .pattern("###")
+                .pattern("###")
+                .input('#', ModItems.TITANIUM_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.TITANIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.TITANIUM_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.TITANIUM_LEGGINGS)
+                .pattern("###")
+                .pattern("# #")
+                .pattern("# #")
+                .input('#', ModItems.TITANIUM_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.TITANIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.TITANIUM_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.TITANIUM_BOOTS)
+                .pattern("# #")
+                .pattern("# #")
+                .input('#', ModItems.TITANIUM_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.TITANIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.TITANIUM_INGOT))
+                .offerTo(exporter);
+
+
+
+        //vibranium
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.GOLD_TITANIUM_HELMET)
+                .pattern("###")
+                .pattern("# #")
+                .input('#', ModItems.GOLD_TITANIUM_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.GOLD_TITANIUM_CHESTPLATE)
+                .pattern("# #")
+                .pattern("###")
+                .pattern("###")
+                .input('#', ModItems.GOLD_TITANIUM_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.GOLD_TITANIUM_LEGGINGS)
+                .pattern("###")
+                .pattern("# #")
+                .pattern("# #")
+                .input('#', ModItems.GOLD_TITANIUM_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.GOLD_TITANIUM_BOOTS)
+                .pattern("# #")
+                .pattern("# #")
+                .input('#', ModItems.GOLD_TITANIUM_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_INGOT))
+                .offerTo(exporter);
+
 
 
 

@@ -11,7 +11,7 @@ import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.block.ModBlocks;
 
 public class ModItemGroups {
-    public static final ItemGroup MYNEHEROES_ITEMS_GROUP = Registry.register(Registries.ITEM_GROUP,
+    public static final ItemGroup MYNEHEROES_GROUP = Registry.register(Registries.ITEM_GROUP,
             Identifier.of(MyneHeroes.MOD_ID, "myneheroes"),
             FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.VIBRANIUM_INGOT))
                     .displayName(Text.translatable("itemgroup.myneheroes.myneheroes"))
@@ -41,6 +41,30 @@ public class ModItemGroups {
                         entries.add(ModItems.IRON_SUIT_TEMPLATE);
 
                     }).build());
+
+    public static final ItemGroup MYNEHEROES_ARMOR_GROUP = Registry.register(Registries.ITEM_GROUP,
+            Identifier.of(MyneHeroes.MOD_ID, "myneheroes_armor"),
+            FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.VIBRANIUM_CHESTPLATE))
+                    .displayName(Text.translatable("itemgroup.myneheroes.myneheroes_armor"))
+                    .entries((displayContext, entries) -> {
+                        entries.add(ModItems.VIBRANIUM_HELMET);
+                        entries.add(ModItems.VIBRANIUM_CHESTPLATE);
+                        entries.add(ModItems.VIBRANIUM_LEGGINGS);
+                        entries.add(ModItems.VIBRANIUM_BOOTS);
+
+                        entries.add(ModItems.TITANIUM_HELMET);
+                        entries.add(ModItems.TITANIUM_CHESTPLATE);
+                        entries.add(ModItems.TITANIUM_LEGGINGS);
+                        entries.add(ModItems.TITANIUM_BOOTS);
+
+                        entries.add(ModItems.GOLD_TITANIUM_HELMET);
+                        entries.add(ModItems.GOLD_TITANIUM_CHESTPLATE);
+                        entries.add(ModItems.GOLD_TITANIUM_LEGGINGS);
+                        entries.add(ModItems.GOLD_TITANIUM_BOOTS);
+
+                    }).build());
+
+
     public static void registerItemGroups() {
         MyneHeroes.LOGGER.info("Registering Item Groups for " + MyneHeroes.MOD_ID);
     }

@@ -10,6 +10,21 @@
 
   "item.myneheroes.iron_suit_template": "Iron Suit Template",
 
+  "item.myneheroes.vibranium_helmet": "Vibranium Helmet",
+  "item.myneheroes.vibranium_chestplate": "Vibranium Chestplate",
+  "item.myneheroes.vibranium_leggings": "Vibranium Leggings",
+  "item.myneheroes.vibranium_boots": "Vibranium Boost",
+
+  "item.myneheroes.titanium_helmet": "Titanium Helmet",
+  "item.myneheroes.titanium_chestplate": "Titanium Chestplate",
+  "item.myneheroes.titanium_leggings": "Titanium Leggings",
+  "item.myneheroes.titanium_boots": "Titanium Boost",
+
+  "item.myneheroes.gold_titanium_helmet": "Gold Titanium Helmet",
+  "item.myneheroes.gold_titanium_chestplate": "Gold Titanium Chestplate",
+  "item.myneheroes.gold_titanium_leggings": "Gold Titanium Leggings",
+  "item.myneheroes.gold_titanium_boots": "Gold Titanium Boost",
+
 
 
   "block.myneheroes.vibranium_block": "Vibranium Block",
@@ -33,5 +48,6 @@
   "trim_pattern.myneheroes.iron_suit": "Iron Suit",
 
 
-  "itemgroup.myneheroes.myneheroes": "MyneHeroes"
+  "itemgroup.myneheroes.myneheroes": "MyneHeroes",
+  "itemgroup.myneheroes.myneheroes_armor": "MyneHeroes - Armor"
 }

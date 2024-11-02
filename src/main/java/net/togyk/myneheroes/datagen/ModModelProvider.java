@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
+import net.minecraft.item.ArmorItem;
 import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.block.ModBlocks;
 
@@ -42,5 +43,20 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.RAW_GOLD_TITANIUM, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.IRON_SUIT_TEMPLATE, Models.GENERATED);
+
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_BOOTS));
+
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.TITANIUM_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.TITANIUM_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.TITANIUM_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.TITANIUM_BOOTS));
+
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.GOLD_TITANIUM_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.GOLD_TITANIUM_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.GOLD_TITANIUM_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.GOLD_TITANIUM_BOOTS));
     }
 }
