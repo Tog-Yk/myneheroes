@@ -20,7 +20,7 @@ public class ModArmorMaterials {
     public static final RegistryEntry<ArmorMaterial> TITANIUM_MATERIAL = registerArmorMaterial("titanium",
             () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
                 map.put(ArmorItem.Type.BOOTS, 2);
-                map.put(ArmorItem.Type.LEGGINGS, 4);
+                map.put(ArmorItem.Type.LEGGINGS, 5);
                 map.put(ArmorItem.Type.CHESTPLATE, 6);
                 map.put(ArmorItem.Type.HELMET, 2);
                 map.put(ArmorItem.Type.BODY, 4);
@@ -31,13 +31,13 @@ public class ModArmorMaterials {
     //vibranium armors
     public static final RegistryEntry<ArmorMaterial> VIBRANIUM_MATERIAL = registerArmorMaterial("vibranium",
             () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-                map.put(ArmorItem.Type.BOOTS, 2);
-                map.put(ArmorItem.Type.LEGGINGS, 4);
-                map.put(ArmorItem.Type.CHESTPLATE, 6);
-                map.put(ArmorItem.Type.HELMET, 2);
-                map.put(ArmorItem.Type.BODY, 4);
+                map.put(ArmorItem.Type.BOOTS, 3);
+                map.put(ArmorItem.Type.LEGGINGS, 6);
+                map.put(ArmorItem.Type.CHESTPLATE, 8);
+                map.put(ArmorItem.Type.HELMET, 4);
+                map.put(ArmorItem.Type.BODY, 7);
             }), 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, () -> Ingredient.ofItems(ModItems.VIBRANIUM_INGOT),
-                    List.of(new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID, "vibranium"))), 0,0));
+                    List.of(new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID, "vibranium"))), 2.0F,0.05F));
 
     /*
      * Ironman pattern
@@ -51,10 +51,10 @@ public class ModArmorMaterials {
     public static final RegistryEntry<ArmorMaterial> GOLD_TITANIUM_MATERIAL = registerArmorMaterial("gold_titanium",
             () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
                 map.put(ArmorItem.Type.BOOTS, 2);
-                map.put(ArmorItem.Type.LEGGINGS, 4);
-                map.put(ArmorItem.Type.CHESTPLATE, 6);
-                map.put(ArmorItem.Type.HELMET, 2);
-                map.put(ArmorItem.Type.BODY, 4);
+                map.put(ArmorItem.Type.LEGGINGS, 5);
+                map.put(ArmorItem.Type.CHESTPLATE, 7);
+                map.put(ArmorItem.Type.HELMET, 3);
+                map.put(ArmorItem.Type.BODY, 5);
             }), 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, () -> Ingredient.ofItems(ModItems.GOLD_TITANIUM_INGOT),
                     List.of(new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID, "gold_titanium"))), 0,0));
     /*
