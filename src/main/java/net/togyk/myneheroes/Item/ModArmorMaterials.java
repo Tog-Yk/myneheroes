@@ -16,7 +16,8 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class ModArmorMaterials {
-    //titanium armor
+    // titanium armor
+    // Very Strong!!
     public static final RegistryEntry<ArmorMaterial> TITANIUM_MATERIAL = registerArmorMaterial("titanium",
             () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
                 map.put(ArmorItem.Type.BOOTS, 2);
