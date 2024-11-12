@@ -40,6 +40,8 @@ public class ModItemGroups {
 
                         entries.add(ModItems.IRON_SUIT_TEMPLATE);
 
+                        entries.add(ModItems.INJECTION);
+
                     }).build());
 
     public static final ItemGroup MYNEHEROES_ARMOR_GROUP = Registry.register(Registries.ITEM_GROUP,

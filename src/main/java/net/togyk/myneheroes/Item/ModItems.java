@@ -5,6 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.togyk.myneheroes.Item.custom.InjectionItem;
 import net.togyk.myneheroes.MyneHeroes;
 
 public class ModItems {
@@ -19,6 +20,7 @@ public class ModItems {
 
     public static final Item IRON_SUIT_TEMPLATE = registerItem("iron_suit_template",new Item(new Item.Settings()));
 
+    public static final Item INJECTION = registerItem("injection", new InjectionItem(new Item.Settings().maxCount(1)));
 
     //armors
     //vibranium armors
