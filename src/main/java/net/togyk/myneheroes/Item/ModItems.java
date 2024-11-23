@@ -5,6 +5,8 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
+import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 
 public class ModItems {
@@ -19,8 +21,25 @@ public class ModItems {
 
     public static final Item IRON_SUIT_TEMPLATE = registerItem("iron_suit_template",new Item(new Item.Settings()));
 
+    public static final Item ARC_REACTOR = registerItem("arc_reactor",new ReactorItem(400, new Item.Settings()));
+
 
     //armors
+    //debug armors
+    public static final Item DEBUG_HELMET = registerItem("debug_helmet",
+            new AdvancedArmorItem(ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(15))));
+    public static final Item DEBUG_CHESTPLATE = registerItem("debug_chestplate",
+            new AdvancedArmorItem(ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(15))));
+    public static final Item DEBUG_LEGGINGS = registerItem("debug_leggings",
+            new AdvancedArmorItem(ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(15))));
+    public static final Item DEBUG_BOOTS = registerItem("debug_boots",
+            new AdvancedArmorItem(ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(15))));
+
+
     //vibranium armors
     public static final Item VIBRANIUM_HELMET = registerItem("vibranium_helmet",
             new ArmorItem(ModArmorMaterials.VIBRANIUM_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()

@@ -16,6 +16,20 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class ModArmorMaterials {
+    // a material to debug
+    public static final RegistryEntry<ArmorMaterial> DEBUG_MATERIAL =registerArmorMaterial("debug",
+            () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                map.put(ArmorItem.Type.BOOTS, 2);
+                map.put(ArmorItem.Type.LEGGINGS, 5);
+                map.put(ArmorItem.Type.CHESTPLATE, 6);
+                map.put(ArmorItem.Type.HELMET, 2);
+                map.put(ArmorItem.Type.BODY, 4);
+            }), 20, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, () -> Ingredient.ofItems(ModItems.VIBRANIUM_INGOT),
+                    List.of(
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"debug"), "", true)
+                    ),0,0));
+
+
     //titanium armor
     public static final RegistryEntry<ArmorMaterial> TITANIUM_MATERIAL = registerArmorMaterial("titanium",
             () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
@@ -44,6 +58,7 @@ public class ModArmorMaterials {
      * Spiderman pattern
      * Kryptonian pattern
      * Speedster pattern
+     * panther pattern
      */
 
 
@@ -62,6 +77,7 @@ public class ModArmorMaterials {
      * Spiderman pattern
      * Kryptonian pattern
      * Speedster pattern
+     * panther pattern
      */
 
 
@@ -71,6 +87,7 @@ public class ModArmorMaterials {
      * Spiderman pattern
      * Kryptonian pattern
      * Speedster pattern
+     * panther pattern
      */
 
 
@@ -80,6 +97,7 @@ public class ModArmorMaterials {
      * Spiderman pattern
      * Kryptonian pattern
      * Speedster pattern
+     * panther pattern
      */
 
 
