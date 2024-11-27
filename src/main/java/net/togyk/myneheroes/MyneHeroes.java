@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 
 import net.togyk.myneheroes.Item.ModItemGroups;
 import net.togyk.myneheroes.Item.ModItems;
+import net.togyk.myneheroes.ability.Abilities;
 import net.togyk.myneheroes.block.ModBlocks;
 import net.togyk.myneheroes.worldgen.ModBiomeModifications;
 import org.slf4j.Logger;
@@ -23,5 +24,7 @@ public class MyneHeroes implements ModInitializer {
         ModBlocks.registerModBlocks();
         ModItemGroups.registerItemGroups();
         ModBiomeModifications.registerModBiomeModifications();
+
+        Abilities.registerModItems();
     }
 }
