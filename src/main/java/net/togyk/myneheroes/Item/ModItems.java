@@ -21,7 +21,7 @@ public class ModItems {
 
     public static final Item IRON_SUIT_TEMPLATE = registerItem("iron_suit_template",new Item(new Item.Settings()));
 
-    public static final Item ARC_REACTOR = registerItem("arc_reactor",new ReactorItem(400, new Item.Settings()));
+    public static final Item ARC_REACTOR = registerItem("arc_reactor",new ReactorItem(4000, new Item.Settings().maxCount(1)));
 
 
     //armors
@@ -92,6 +92,5 @@ public class ModItems {
 
     public static void registerModItems() {
         MyneHeroes.LOGGER.info("Registering Mod Items for " + MyneHeroes.MOD_ID);
-
     }
 }
