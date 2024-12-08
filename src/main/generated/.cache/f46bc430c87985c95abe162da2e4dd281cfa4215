@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-23T13:40:51.6220716	MyneHeroes/Model Definitions
+// 1.21.1	2024-12-29T16:33:47.7874057	MyneHeroes/Model Definitions
 87918a3fd8aa109eecee5746b4bd680d2f6f1f6c assets\myneheroes\models\item\titanium_leggings_diamond_trim.json
 522dc4ce5caa69c69914b805830ee9ec3ca5ae41 assets\myneheroes\models\item\vibranium_chestplate.json
 66494859f3d877dea18e7174dbbb7099847db808 assets\myneheroes\models\item\raw_gold_titanium.json
@@ -38,8 +38,8 @@ c3cade68bed305832e61b268f5989380ef80d059 assets\myneheroes\models\item\debug_leg
 fb2391bb87361aef07eed755bcea3208795ae674 assets\myneheroes\models\item\debug_chestplate_copper_trim.json
 7df42e27b3472435463b1f253490d421bdac70dd assets\myneheroes\models\item\debug_boots_iron_trim.json
 27cfe10b20fa4365ae2f166576bf3db021039112 assets\myneheroes\models\item\debug_helmet_netherite_trim.json
-0a00452d2954a5653ff04befd8dfd90bc1c1c650 assets\myneheroes\models\item\gold_titanium_chestplate_netherite_trim.json
 84724f4d2e4b5fbdfc83ff6949216a8daf59e867 assets\myneheroes\models\item\debug_boots_netherite_trim.json
+0a00452d2954a5653ff04befd8dfd90bc1c1c650 assets\myneheroes\models\item\gold_titanium_chestplate_netherite_trim.json
 e4da874e983e4cf9f38dab988693cc277a3166e7 assets\myneheroes\models\item\gold_titanium_leggings_copper_trim.json
 8a11963cf82cdaf16cbb25ba5aec6cada2332b88 assets\myneheroes\models\item\debug_chestplate_gold_trim.json
 3f4406b4b736d16d040f7c438a6d63438c7f5caa assets\myneheroes\models\item\vibranium_chestplate_diamond_trim.json

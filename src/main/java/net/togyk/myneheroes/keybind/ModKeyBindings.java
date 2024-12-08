@@ -9,11 +9,12 @@ import org.lwjgl.glfw.GLFW;
 public class ModKeyBindings {
     public static KeyBinding toggleHudKeybinding;
     public static KeyBinding shootRepolser;
+    public static KeyBinding fuelReactor;
 
     public static void registerKeyBinds() {
         MyneHeroes.LOGGER.info("Registering Keybinds for " + MyneHeroes.MOD_ID);
         toggleHudKeybinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.myneheroes.togglehud", //translatable key
+                "key.myneheroes.toggle_hud", //translatable key
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_H, // Default key of: H
                 "category.myneheroes" // keybind category
@@ -22,6 +23,12 @@ public class ModKeyBindings {
                 "key.myneheroes.shoot_repolser", //translatable key
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_R, // Default key of: R
+                "category.myneheroes" // keybind category
+        ));
+        fuelReactor = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.myneheroes.fuel_reactor", //translatable key
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_V, // Default key of: V
                 "category.myneheroes" // keybind category
         ));
     }

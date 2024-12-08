@@ -25,6 +25,12 @@ public class ModKeybindingHelper {
                     ClientPlayNetworking.send(new KeybindPayload(1));
                 }
             }
+            // Access the Use Item/Place Block keybind
+            if (ModKeyBindings.fuelReactor.wasPressed()) {
+                if (MinecraftClient.getInstance().player != null){
+                    ClientPlayNetworking.send(new KeybindPayload(2));
+                }
+            }
         });
     }
 }

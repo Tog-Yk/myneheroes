@@ -7,8 +7,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
@@ -24,6 +22,8 @@ public class ArmorHudOverlay implements HudRenderCallback {
             "textures/gui/level_gauge.png");
 
     //reactor info
+    private static final Identifier BATTERY_BACKGROUND = Identifier.of(MyneHeroes.MOD_ID,
+            "textures/gui/battery_background.png");
     private static final Identifier BATTERY_CASING = Identifier.of(MyneHeroes.MOD_ID,
             "textures/gui/battery_casing.png");
     private static final Identifier BATTERY = Identifier.of(MyneHeroes.MOD_ID,
@@ -49,22 +49,7 @@ public class ArmorHudOverlay implements HudRenderCallback {
     private static final Identifier ABILITY_SCREEN_SIGHT = Identifier.of(MyneHeroes.MOD_ID,
             "textures/gui/ability_screen.png");
 
-    /**
-     * Searches the player's inventory for the first matching item.
-     *
-     * @param player The player to search in.
-     * @return The matching ItemStack, or an empty ItemStack if not found.
-     */
-    private ItemStack getReactorItemClass(PlayerEntity player) {
-        PlayerInventory inventory = player.getInventory();
-        for (int i = 0; i < inventory.size(); i++) {
-            ItemStack stack = inventory.getStack(i);
-            if (stack.getItem() instanceof ReactorItem) {
-                return stack;
-            }
-        }
-        return ItemStack.EMPTY;
-    }
+
     @Override
     public void onHudRender(DrawContext drawContext, RenderTickCounter tickCounter) {
         MinecraftClient client = MinecraftClient.getInstance();
@@ -81,16 +66,23 @@ public class ArmorHudOverlay implements HudRenderCallback {
                     drawContext.drawTexture(LEVEL_GAUGE, width/2 - 15, height -70, 0, 0, 30, 30, 30, 30);
 
                     //reactor info
-                    ItemStack reactorItemStack = getReactorItemClass(client.player);
+                    drawContext.drawTexture(BATTERY_BACKGROUND, 10, height -10 -30, 0, 0, 18, 30, 18, 30);
+
+                    ItemStack reactorItemStack = MyneHeroes.getReactorItemClass(client.player);
                     if (reactorItemStack != ItemStack.EMPTY && reactorItemStack.getItem() instanceof ReactorItem reactorItem) {
                         drawContext.drawTexture(CONNECTED, 30, height -10 -18, 0, 0, 24, 18, 24, 18);
                         drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, reactorItemStack.getName(),57,height -10 -8,0xFFFFFF);
 
 
+                        float fuelPercentile = (float) reactorItem.getStoredFuelOrDefault(reactorItemStack, 0) / reactorItem.getMaxFuel();
+                        int maxFuelLength = 26;
+                        int currentFuelLength = (int) (maxFuelLength * fuelPercentile);
+                        drawContext.drawTexture(FUEL, 10 + 2, height -10 -30 +2 + maxFuelLength - currentFuelLength,0,maxFuelLength - currentFuelLength,6, currentFuelLength,6,4);
+
                         float powerPercentile = (float) reactorItem.getStoredPowerOrDefault(reactorItemStack, 0) / reactorItem.getMaxPower();
                         int maxBatteryLength = 26;
                         int currentBatteryLength = (int) (maxBatteryLength * powerPercentile);
-                        drawContext.drawTexture(BATTERY, 10 + 2, height -10 -30 +2 + maxBatteryLength - currentBatteryLength,0,0,14, currentBatteryLength,14,4);
+                        drawContext.drawTexture(BATTERY, 10 + 10, height -10 -30 +2 + maxBatteryLength - currentBatteryLength,0,maxBatteryLength - currentBatteryLength,6, currentBatteryLength,6,4);
                     }
                     drawContext.drawTexture(BATTERY_CASING, 10, height -10 -30, 0, 0, 18, 30, 18, 30);
 

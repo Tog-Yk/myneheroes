@@ -6,8 +6,11 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
+import net.togyk.myneheroes.Item.custom.DyeableAdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
+
+import java.util.List;
 
 public class ModItems {
     public static final Item VIBRANIUM_INGOT = registerItem("vibranium_ingot", new Item(new Item.Settings()));
@@ -21,22 +24,22 @@ public class ModItems {
 
     public static final Item IRON_SUIT_TEMPLATE = registerItem("iron_suit_template",new Item(new Item.Settings()));
 
-    public static final Item ARC_REACTOR = registerItem("arc_reactor",new ReactorItem(4000, new Item.Settings().maxCount(1)));
+    public static final Item ARC_REACTOR = registerItem("arc_reactor",new ReactorItem(4000, 2400, new Item.Settings().maxCount(1)));
 
 
     //armors
     //debug armors
     public static final Item DEBUG_HELMET = registerItem("debug_helmet",
-            new AdvancedArmorItem(ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
+            new DyeableAdvancedArmorItem(List.of(false,true), List.of(-1,-6265536), ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
                     .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(15))));
     public static final Item DEBUG_CHESTPLATE = registerItem("debug_chestplate",
-            new AdvancedArmorItem(ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
+            new DyeableAdvancedArmorItem(List.of(false,true), List.of(-1,-6265536), ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
                     .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(15))));
     public static final Item DEBUG_LEGGINGS = registerItem("debug_leggings",
-            new AdvancedArmorItem(ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
+            new DyeableAdvancedArmorItem(List.of(false,true), List.of(-1,-6265536), ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
                     .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(15))));
     public static final Item DEBUG_BOOTS = registerItem("debug_boots",
-            new AdvancedArmorItem(ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
+            new DyeableAdvancedArmorItem(List.of(false,true), List.of(-1,-6265536), ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
                     .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(15))));
 
 

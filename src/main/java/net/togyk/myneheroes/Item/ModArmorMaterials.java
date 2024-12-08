@@ -26,7 +26,8 @@ public class ModArmorMaterials {
                 map.put(ArmorItem.Type.BODY, 4);
             }), 20, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, () -> Ingredient.ofItems(ModItems.VIBRANIUM_INGOT),
                     List.of(
-                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"debug"), "", true)
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"debug"), "", false),
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"debug_dye"), "", true)
                     ),0,0));
 
 
