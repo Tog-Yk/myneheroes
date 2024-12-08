@@ -11,7 +11,7 @@ import net.togyk.myneheroes.networking.KeybindPayload;
 public class ModKeybindingHelper {
     public static void registerModKeybingHelper() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (ModKeybindings.toggleHudKeybinding.wasPressed()) {
+            if (ModKeyBindings.toggleHudKeybinding.wasPressed()) {
                 if (MinecraftClient.getInstance().player != null) {
                     ItemStack helmetStack = MinecraftClient.getInstance().player.getEquippedStack(EquipmentSlot.HEAD);
                     if (helmetStack != null && helmetStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
@@ -20,7 +20,7 @@ public class ModKeybindingHelper {
                 }
             }
             // Access the Use Item/Place Block keybind
-            if (ModKeybindings.shootRepolser.wasPressed()) {
+            if (ModKeyBindings.shootRepolser.wasPressed()) {
                 if (MinecraftClient.getInstance().player != null){
                     ClientPlayNetworking.send(new KeybindPayload(1));
                 }
