@@ -10,6 +10,13 @@
 
   "item.myneheroes.iron_suit_template": "Iron Suit Template",
 
+  "item.myneheroes.arc_reactor": "Arc Reactor",
+
+  "item.myneheroes.debug_helmet": "Debug Helmet",
+  "item.myneheroes.debug_chestplate": "Debug Chestplate",
+  "item.myneheroes.debug_leggings": "Debug Leggings",
+  "item.myneheroes.debug_boots": "Debug Boost",
+
   "item.myneheroes.vibranium_helmet": "Vibranium Helmet",
   "item.myneheroes.vibranium_chestplate": "Vibranium Chestplate",
   "item.myneheroes.vibranium_leggings": "Vibranium Leggings",
@@ -49,5 +56,11 @@
 
 
   "itemgroup.myneheroes.myneheroes": "MyneHeroes",
-  "itemgroup.myneheroes.myneheroes_armor": "MyneHeroes - Armor"
+  "itemgroup.myneheroes.myneheroes_armor": "MyneHeroes - Armor",
+
+
+  "key.category.myneheroes": "MyneHeroes",
+
+  "key.myneheroes.togglehud": "Toggle Hud",
+  "key.myneheroes.shoot_repolser": "Shoot Repolser"
 }

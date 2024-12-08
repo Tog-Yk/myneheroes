@@ -40,7 +40,7 @@ public class ModItemGroups {
 
                         entries.add(ModItems.IRON_SUIT_TEMPLATE);
 
-                        entries.add(ModItems.INJECTION);
+                        entries.add(ModItems.ARC_REACTOR);
 
                     }).build());
 
@@ -49,6 +49,11 @@ public class ModItemGroups {
             FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.VIBRANIUM_CHESTPLATE))
                     .displayName(Text.translatable("itemgroup.myneheroes.myneheroes_armor"))
                     .entries((displayContext, entries) -> {
+                        entries.add(ModItems.DEBUG_HELMET);
+                        entries.add(ModItems.DEBUG_CHESTPLATE);
+                        entries.add(ModItems.DEBUG_LEGGINGS);
+                        entries.add(ModItems.DEBUG_BOOTS);
+
                         entries.add(ModItems.VIBRANIUM_HELMET);
                         entries.add(ModItems.VIBRANIUM_CHESTPLATE);
                         entries.add(ModItems.VIBRANIUM_LEGGINGS);

@@ -44,14 +44,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
 
 
-        offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.VIBRANIUM_INGOT, RecipeCategory.DECORATIONS, ModBlocks.VIBRANIUM_BLOCK);
-        offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.RAW_VIBRANIUM, RecipeCategory.DECORATIONS, ModBlocks.RAW_VIBRANIUM_BLOCK);
+        offerReversibleCompactingRecipes(exporter, RecipeCategory.MISC, ModItems.VIBRANIUM_INGOT, RecipeCategory.DECORATIONS, ModBlocks.VIBRANIUM_BLOCK);
+        offerReversibleCompactingRecipes(exporter, RecipeCategory.MISC, ModItems.RAW_VIBRANIUM, RecipeCategory.DECORATIONS, ModBlocks.RAW_VIBRANIUM_BLOCK);
 
-        offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.TITANIUM_INGOT, RecipeCategory.DECORATIONS, ModBlocks.TITANIUM_BLOCK);
-        offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.RAW_TITANIUM, RecipeCategory.DECORATIONS, ModBlocks.RAW_TITANIUM_BLOCK);
+        offerReversibleCompactingRecipes(exporter, RecipeCategory.MISC, ModItems.TITANIUM_INGOT, RecipeCategory.DECORATIONS, ModBlocks.TITANIUM_BLOCK);
+        offerReversibleCompactingRecipes(exporter, RecipeCategory.MISC, ModItems.RAW_TITANIUM, RecipeCategory.DECORATIONS, ModBlocks.RAW_TITANIUM_BLOCK);
 
-        offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.GOLD_TITANIUM_INGOT, RecipeCategory.DECORATIONS, ModBlocks.GOLD_TITANIUM_BLOCK);
-        offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.RAW_GOLD_TITANIUM, RecipeCategory.DECORATIONS, ModBlocks.RAW_GOLD_TITANIUM_BLOCK);
+        offerReversibleCompactingRecipes(exporter, RecipeCategory.MISC, ModItems.GOLD_TITANIUM_INGOT, RecipeCategory.DECORATIONS, ModBlocks.GOLD_TITANIUM_BLOCK);
+        offerReversibleCompactingRecipes(exporter, RecipeCategory.MISC, ModItems.RAW_GOLD_TITANIUM, RecipeCategory.DECORATIONS, ModBlocks.RAW_GOLD_TITANIUM_BLOCK);
 
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModItems.RAW_GOLD_TITANIUM, 2)
@@ -61,18 +61,28 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .offerTo(exporter,"gold_titanium_alloying");
 
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ARC_REACTOR)
+                .pattern(" # ")
+                .pattern("#%#")
+                .pattern(" # ")
+                .input('#', Items.IRON_INGOT)
+                .input('%', ModItems.VIBRANIUM_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.VIBRANIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_INGOT))
+                .offerTo(exporter);
+
 
 
         //simple armor recipes
         //vibranium
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.VIBRANIUM_HELMET)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.VIBRANIUM_HELMET)
                 .pattern("###")
                 .pattern("# #")
                 .input('#', ModItems.VIBRANIUM_INGOT)
                 .criterion(FabricRecipeProvider.hasItem(ModItems.VIBRANIUM_INGOT),
                         FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_INGOT))
                 .offerTo(exporter);
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.VIBRANIUM_CHESTPLATE)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.VIBRANIUM_CHESTPLATE)
                 .pattern("# #")
                 .pattern("###")
                 .pattern("###")
@@ -80,7 +90,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(ModItems.VIBRANIUM_INGOT),
                         FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_INGOT))
                 .offerTo(exporter);
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.VIBRANIUM_LEGGINGS)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.VIBRANIUM_LEGGINGS)
                 .pattern("###")
                 .pattern("# #")
                 .pattern("# #")
@@ -88,7 +98,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(ModItems.VIBRANIUM_INGOT),
                         FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_INGOT))
                 .offerTo(exporter);
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.VIBRANIUM_BOOTS)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.VIBRANIUM_BOOTS)
                 .pattern("# #")
                 .pattern("# #")
                 .input('#', ModItems.VIBRANIUM_INGOT)
@@ -99,14 +109,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
 
         //Titanium
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.TITANIUM_HELMET)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.TITANIUM_HELMET)
                 .pattern("###")
                 .pattern("# #")
                 .input('#', ModItems.TITANIUM_INGOT)
                 .criterion(FabricRecipeProvider.hasItem(ModItems.TITANIUM_INGOT),
                         FabricRecipeProvider.conditionsFromItem(ModItems.TITANIUM_INGOT))
                 .offerTo(exporter);
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.TITANIUM_CHESTPLATE)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.TITANIUM_CHESTPLATE)
                 .pattern("# #")
                 .pattern("###")
                 .pattern("###")
@@ -114,7 +124,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(ModItems.TITANIUM_INGOT),
                         FabricRecipeProvider.conditionsFromItem(ModItems.TITANIUM_INGOT))
                 .offerTo(exporter);
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.TITANIUM_LEGGINGS)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.TITANIUM_LEGGINGS)
                 .pattern("###")
                 .pattern("# #")
                 .pattern("# #")
@@ -122,7 +132,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(ModItems.TITANIUM_INGOT),
                         FabricRecipeProvider.conditionsFromItem(ModItems.TITANIUM_INGOT))
                 .offerTo(exporter);
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.TITANIUM_BOOTS)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.TITANIUM_BOOTS)
                 .pattern("# #")
                 .pattern("# #")
                 .input('#', ModItems.TITANIUM_INGOT)
@@ -133,14 +143,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
 
         //vibranium
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.GOLD_TITANIUM_HELMET)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.GOLD_TITANIUM_HELMET)
                 .pattern("###")
                 .pattern("# #")
                 .input('#', ModItems.GOLD_TITANIUM_INGOT)
                 .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_INGOT),
                         FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_INGOT))
                 .offerTo(exporter);
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.GOLD_TITANIUM_CHESTPLATE)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.GOLD_TITANIUM_CHESTPLATE)
                 .pattern("# #")
                 .pattern("###")
                 .pattern("###")
@@ -148,7 +158,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_INGOT),
                         FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_INGOT))
                 .offerTo(exporter);
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.GOLD_TITANIUM_LEGGINGS)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.GOLD_TITANIUM_LEGGINGS)
                 .pattern("###")
                 .pattern("# #")
                 .pattern("# #")
@@ -156,7 +166,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_INGOT),
                         FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_INGOT))
                 .offerTo(exporter);
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.GOLD_TITANIUM_BOOTS)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.GOLD_TITANIUM_BOOTS)
                 .pattern("# #")
                 .pattern("# #")
                 .input('#', ModItems.GOLD_TITANIUM_INGOT)

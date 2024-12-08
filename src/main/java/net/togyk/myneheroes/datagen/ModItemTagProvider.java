@@ -25,6 +25,11 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.IRON_SUIT_TEMPLATE);
 
         getOrCreateTagBuilder(ItemTags.TRIMMABLE_ARMOR)
+                .add(ModItems.DEBUG_HELMET)
+                .add(ModItems.DEBUG_CHESTPLATE)
+                .add(ModItems.DEBUG_LEGGINGS)
+                .add(ModItems.DEBUG_BOOTS)
+
                 .add(ModItems.VIBRANIUM_HELMET)
                 .add(ModItems.VIBRANIUM_CHESTPLATE)
                 .add(ModItems.VIBRANIUM_LEGGINGS)
