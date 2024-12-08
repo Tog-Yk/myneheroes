@@ -3,7 +3,6 @@ package net.togyk.myneheroes.networking;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -26,22 +25,22 @@ public class ModMessages {
                     if (player != null) {
                         ItemStack chestplateStack = player.getEquippedStack(EquipmentSlot.CHEST);
                         if (chestplateStack != null && chestplateStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-                            ItemStack reactorItemStack = ItemStack.EMPTY;
+                            ItemStack reactorItemStack = MyneHeroes.getReactorItemClass(player);
                             PlayerInventory inventory = player.getInventory();
-                            for (int i = 0; i < inventory.size(); i++) {
-                                ItemStack stack = inventory.getStack(i);
-                                if (stack.getItem() instanceof ReactorItem) {
-                                    reactorItemStack = stack;
-                                    break;
-                                }
-                            }
                             if (!(reactorItemStack == ItemStack.EMPTY)) {
                                 advancedArmorItem.ShootRepolserAndReturnLazarEntity(player, reactorItemStack);
                             }
                         }
                     }
                 } else if (payload.integer() == 2) {
-
+                    ServerPlayerEntity player = context.player();
+                    if (player != null) {
+                        ItemStack reactorStack = MyneHeroes.getReactorItemClass(player);
+                        if (reactorStack != ItemStack.EMPTY && reactorStack.getItem() instanceof ReactorItem reactorItem) {
+                            int currentFuel = reactorItem.getStoredFuelOrDefault(reactorStack,0);
+                            reactorItem.setStoredFuel(reactorStack,currentFuel+10);
+                        }
+                    }
                 }
                 //
             });

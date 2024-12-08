@@ -61,6 +61,7 @@
 
   "key.category.myneheroes": "MyneHeroes",
 
-  "key.myneheroes.togglehud": "Toggle Hud",
-  "key.myneheroes.shoot_repolser": "Shoot Repolser"
+  "key.myneheroes.toggle_hud": "Toggle Hud",
+  "key.myneheroes.shoot_repolser": "Shoot Repolser",
+  "key.myneheroes.fuel_reactor": "Fuel Reactor"
 }
