@@ -42,6 +42,9 @@ public class ModItemGroups {
 
                         entries.add(ModItems.ARC_REACTOR);
 
+                        entries.add(ModItems.ABILITY_HOLDING);
+                        entries.add(ModItems.LAZAR_HOLDING);
+
                     }).build());
 
     public static final ItemGroup MYNEHEROES_ARMOR_GROUP = Registry.register(Registries.ITEM_GROUP,

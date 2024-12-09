@@ -2,6 +2,7 @@ package net.togyk.myneheroes.networking;
 
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -10,6 +11,8 @@ import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.util.PlayerAbilities;
 
 public class ModMessages {
     public static final Identifier KEYBIND_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "keybind");
@@ -20,19 +23,27 @@ public class ModMessages {
         ServerPlayNetworking.registerGlobalReceiver(KeybindPayload.ID, (payload, context) -> {
             context.server().execute(() -> {
                 // logic for pressing a keybind
-                if (payload.integer() == 1) {
-                    ServerPlayerEntity player = context.player();
-                    if (player != null) {
-                        ItemStack chestplateStack = player.getEquippedStack(EquipmentSlot.CHEST);
-                        if (chestplateStack != null && chestplateStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-                            ItemStack reactorItemStack = MyneHeroes.getReactorItemClass(player);
-                            PlayerInventory inventory = player.getInventory();
-                            if (!(reactorItemStack == ItemStack.EMPTY)) {
-                                advancedArmorItem.ShootRepolserAndReturnLazarEntity(player, reactorItemStack);
-                            }
-                        }
+                if (payload.integer() == 0) {
+                    if (MinecraftClient.getInstance().player != null) {
+                        Ability firstAbility = ((PlayerAbilities) context.player()).getFirstAbility();
+                        firstAbility.serverUse(context.player());
                     }
-                } else if (payload.integer() == 2) {
+                } else if (payload.integer() == 1) {
+                    if (MinecraftClient.getInstance().player != null) {
+                        Ability firstAbility = ((PlayerAbilities) context.player()).getSecondAbility();
+                        firstAbility.serverUse(context.player());
+                    }
+                }else if (payload.integer() == 2) {
+                    if (MinecraftClient.getInstance().player != null) {
+                        Ability firstAbility = ((PlayerAbilities) context.player()).getThirdAbility();
+                        firstAbility.serverUse(context.player());
+                    }
+                }else if (payload.integer() == 3) {
+                    if (MinecraftClient.getInstance().player != null) {
+                        Ability firstAbility = ((PlayerAbilities) context.player()).getFourthAbility();
+                        firstAbility.serverUse(context.player());
+                    }
+                } else if (payload.integer() == 5) {
                     ServerPlayerEntity player = context.player();
                     if (player != null) {
                         ItemStack reactorStack = MyneHeroes.getReactorItemClass(player);

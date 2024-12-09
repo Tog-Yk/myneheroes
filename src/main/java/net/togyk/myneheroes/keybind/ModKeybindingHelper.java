@@ -3,32 +3,66 @@ package net.togyk.myneheroes.keybind;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ItemStack;
-import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
+import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.networking.KeybindPayload;
+import net.togyk.myneheroes.util.PlayerAbilities;
 
 public class ModKeybindingHelper {
     public static void registerModKeybingHelper() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (ModKeyBindings.toggleHudKeybinding.wasPressed()) {
-                if (MinecraftClient.getInstance().player != null) {
-                    ItemStack helmetStack = MinecraftClient.getInstance().player.getEquippedStack(EquipmentSlot.HEAD);
-                    if (helmetStack != null && helmetStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-                        advancedArmorItem.ToggleHud(helmetStack);
+            // Access the Use Item/Place Block keybind
+            if (ModKeyBindings.fuelReactor.isPressed()) {
+                if (MinecraftClient.getInstance().player != null){
+                    ClientPlayNetworking.send(new KeybindPayload(5));
+                }
+            }
+            if (ModKeyBindings.useFirstAbility.isPressed()) {
+                if (MinecraftClient.getInstance().player != null){
+                    Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).getFirstAbility();
+                    if (ability != null) {
+                        //send two things
+                        //to do everything what has to be done on the client side
+                        ability.clientUse(MinecraftClient.getInstance().player);
+                        //to send a message to the server to do everything what has to be done on the server side
+                        ClientPlayNetworking.send(new KeybindPayload(0));
                     }
                 }
             }
-            // Access the Use Item/Place Block keybind
-            if (ModKeyBindings.shootRepolser.wasPressed()) {
+            if (ModKeyBindings.useSecondAbility.isPressed()) {
                 if (MinecraftClient.getInstance().player != null){
-                    ClientPlayNetworking.send(new KeybindPayload(1));
+                    Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).getSecondAbility();
+                    if (ability != null) {
+                        //send two things
+                        //to do everything what has to be done on the client side
+                        ability.clientUse(MinecraftClient.getInstance().player);
+                        //to send a message to the server to do everything what has to be done on the server side
+                        ClientPlayNetworking.send(new KeybindPayload(1));
+                    }
                 }
             }
-            // Access the Use Item/Place Block keybind
-            if (ModKeyBindings.fuelReactor.wasPressed()) {
+            if (ModKeyBindings.useThirdAbility.isPressed()) {
                 if (MinecraftClient.getInstance().player != null){
-                    ClientPlayNetworking.send(new KeybindPayload(2));
+                    Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).getThirdAbility();
+                    if (ability != null) {
+                        //send two things
+                        //to do everything what has to be done on the client side
+                        ability.clientUse(MinecraftClient.getInstance().player);
+                        //to send a message to the server to do everything what has to be done on the server side
+                        ClientPlayNetworking.send(new KeybindPayload(2));
+                    }
+                }
+            }
+            if (ModKeyBindings.useForthAbility.isPressed()) {
+                if (MinecraftClient.getInstance().player != null){
+                    Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).getFourthAbility();
+                    if (ability != null) {
+                        //send two things
+                        //to do everything what has to be done on the client side
+                        ability.clientUse(MinecraftClient.getInstance().player);
+                        //to send a message to the server to do everything what has to be done on the server side
+                        ClientPlayNetworking.send(new KeybindPayload(3));
+                    }
                 }
             }
         });

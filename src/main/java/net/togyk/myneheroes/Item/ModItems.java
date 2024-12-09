@@ -5,9 +5,12 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.togyk.myneheroes.Item.custom.AbilityHoldingItem;
 import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.ability.ShootLazarAbilityFromReactor;
 
 public class ModItems {
     public static final Item VIBRANIUM_INGOT = registerItem("vibranium_ingot", new Item(new Item.Settings()));
@@ -23,20 +26,23 @@ public class ModItems {
 
     public static final Item ARC_REACTOR = registerItem("arc_reactor",new ReactorItem(4000, 2400, new Item.Settings().maxCount(1)));
 
+    public static final Item ABILITY_HOLDING = registerItem("ability_holding",new AbilityHoldingItem(new Ability("ability",100), new Item.Settings().maxCount(1)));
+    public static final Item LAZAR_HOLDING = registerItem("lazar_holding",new AbilityHoldingItem(new ShootLazarAbilityFromReactor("lazar",10), new Item.Settings().maxCount(1)));
+
 
     //armors
     //debug armors
     public static final Item DEBUG_HELMET = registerItem("debug_helmet",
-            new AdvancedArmorItem(ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
+            new AdvancedArmorItem(null, ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
                     .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(15))));
     public static final Item DEBUG_CHESTPLATE = registerItem("debug_chestplate",
-            new AdvancedArmorItem(ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
+            new AdvancedArmorItem(null, ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
                     .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(15))));
     public static final Item DEBUG_LEGGINGS = registerItem("debug_leggings",
-            new AdvancedArmorItem(ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
+            new AdvancedArmorItem(null, ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
                     .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(15))));
     public static final Item DEBUG_BOOTS = registerItem("debug_boots",
-            new AdvancedArmorItem(ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
+            new AdvancedArmorItem(null, ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
                     .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(15))));
 
 

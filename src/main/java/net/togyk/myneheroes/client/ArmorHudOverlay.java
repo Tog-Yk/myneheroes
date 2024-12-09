@@ -8,10 +8,13 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.util.PlayerAbilities;
 
 @Environment(EnvType.CLIENT)
 public class ArmorHudOverlay implements HudRenderCallback {
@@ -56,7 +59,7 @@ public class ArmorHudOverlay implements HudRenderCallback {
         if (client.player != null) {
             ItemStack helmetStack = client.player.getEquippedStack(EquipmentSlot.HEAD);
             if (helmetStack != null && helmetStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-                if (advancedArmorItem.ShouldApplyHud(helmetStack)) {
+                if (advancedArmorItem.ShouldApplyHud()) {
 
                     int width = drawContext.getScaledWindowWidth();
                     int height = drawContext.getScaledWindowHeight();
@@ -95,8 +98,29 @@ public class ArmorHudOverlay implements HudRenderCallback {
                     drawContext.drawTexture(BATTERY_CASING, 53, height/2 - 60, 0, 0,14,120,18,30); // white rectangle
 
                     //sight
-                    drawContext.drawTexture(SIGHT, width/3 * 2 - 32, height/2 - 64, 0, 0,64,64,64,64); // white rectangle
-                    drawContext.drawTexture(ABILITY_SCREEN_SIGHT, width/3 * 2 + 28, height/2 - 108, 0, 0,48,64,48,64); // white rectangle
+                    drawContext.drawTexture(SIGHT, width/3 * 2 - 32, height/2 - 64, 0, 0,64,64,64,64);
+
+                    int abilityScreenX = width/3 * 2 + 28;
+                    int abilityScreenY = height/2 - 108;
+                    int abilityScreenWidth = 48;
+                    int abilityScreenHeight = 64;
+                    drawContext.drawTexture(ABILITY_SCREEN_SIGHT, abilityScreenX, abilityScreenY, 0, 0,abilityScreenWidth,abilityScreenHeight,abilityScreenWidth,abilityScreenHeight);
+                    Ability firstAbility = ((PlayerAbilities) client.player).getFirstAbility();
+                    if (firstAbility != null) {
+                        drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(firstAbility.getName()), abilityScreenX + 4, abilityScreenY + 4, 0xFFFFFF);
+                    }
+                    Ability secondAbility = ((PlayerAbilities) client.player).getSecondAbility();
+                    if (secondAbility != null) {
+                        drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(secondAbility.getName()), abilityScreenX + 4, abilityScreenY + 14, 0xFFFFFF);
+                    }
+                    Ability thirdAbility = ((PlayerAbilities) client.player).getThirdAbility();
+                    if (thirdAbility != null) {
+                        drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(thirdAbility.getName()), abilityScreenX + 4, abilityScreenY + 24, 0xFFFFFF);
+                    }
+                    Ability fourthAbility = ((PlayerAbilities) client.player).getFourthAbility();
+                    if (fourthAbility != null) {
+                        drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(fourthAbility.getName()), abilityScreenX + 4, abilityScreenY + 34, 0xFFFFFF);
+                    }
                 }
             } else {
                 return;
