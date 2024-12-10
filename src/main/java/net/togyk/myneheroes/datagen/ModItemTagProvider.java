@@ -2,6 +2,7 @@ package net.togyk.myneheroes.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 import net.togyk.myneheroes.Item.ModItems;
@@ -44,6 +45,11 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.GOLD_TITANIUM_CHESTPLATE)
                 .add(ModItems.GOLD_TITANIUM_LEGGINGS)
                 .add(ModItems.GOLD_TITANIUM_BOOTS);
+        getOrCreateTagBuilder(ItemTags.DYEABLE)
+                .add(ModItems.DEBUG_HELMET)
+                .add(ModItems.DEBUG_CHESTPLATE)
+                .add(ModItems.DEBUG_LEGGINGS)
+                .add(ModItems.DEBUG_BOOTS);
 
     }
 

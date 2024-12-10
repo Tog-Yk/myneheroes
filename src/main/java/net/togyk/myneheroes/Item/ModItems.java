@@ -10,7 +10,7 @@ import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
-import net.togyk.myneheroes.ability.ShootLazarAbilityFromReactor;
+import net.togyk.myneheroes.ability.ShootLaserAbilityFromReactor;
 
 public class ModItems {
     public static final Item VIBRANIUM_INGOT = registerItem("vibranium_ingot", new Item(new Item.Settings()));
@@ -27,7 +27,7 @@ public class ModItems {
     public static final Item ARC_REACTOR = registerItem("arc_reactor",new ReactorItem(4000, 2400, new Item.Settings().maxCount(1)));
 
     public static final Item ABILITY_HOLDING = registerItem("ability_holding",new AbilityHoldingItem(new Ability("ability",100), new Item.Settings().maxCount(1)));
-    public static final Item LAZAR_HOLDING = registerItem("lazar_holding",new AbilityHoldingItem(new ShootLazarAbilityFromReactor("lazar",10), new Item.Settings().maxCount(1)));
+    public static final Item LAZAR_HOLDING = registerItem("lazar_holding",new AbilityHoldingItem(new ShootLaserAbilityFromReactor("lazar",10), new Item.Settings().maxCount(1)));
 
 
     //armors

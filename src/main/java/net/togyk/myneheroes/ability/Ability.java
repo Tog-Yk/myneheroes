@@ -12,8 +12,6 @@ public class Ability {
     public final Identifier icon;
     public final Identifier disabled_icon;
 
-    public final boolean isClientSideUse = true;
-
     public Ability(String name,int cooldown) {
         abilityName = name;
         icon = Identifier.of(MyneHeroes.MOD_ID,"textures/ability/"+name+".png");
@@ -22,23 +20,27 @@ public class Ability {
     }
 
     public void clientUse(PlayerEntity player) {
-        if (player.getWorld().isClient && cooldown == 0) {
+        if (player.getWorld().isClient && this.getCooldown() == 0) {
         }
     }
     public void serverUse(PlayerEntity player) {
-        if (!player.getWorld().isClient && cooldown == 0) {
-            cooldown = maxCooldown;
+        if (!player.getWorld().isClient && this.getCooldown() == 0) {
+            setCooldown(getMaxCooldown());
         }
     }
 
     public void tick() {
-        if (cooldown != 0) {
-            cooldown -= 1;
+        if (this.cooldown != 0) {
+            this.cooldown -= 1;
         }
     }
 
     public String getName() {
         return abilityName;
+    }
+
+    public int getCooldown() {
+        return cooldown;
     }
 
     public void setCooldown(int integer) {

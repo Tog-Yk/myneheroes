@@ -26,12 +26,13 @@ public class AdvancedArmorItem extends ArmorItem {
     }
 
     public boolean ShouldApplyHud() {
-        BooleanAbility ability = (BooleanAbility) AbilityUtil.getAbilityMatchingName(abilities,"toggle_hud");
-        if (ability != null) {
-            return ability.get();
-        } else {
-            return false;
+        if (abilities != null) {
+            BooleanAbility ability = (BooleanAbility) AbilityUtil.getAbilityMatchingName(abilities, "toggle_hud");
+            if (ability != null) {
+                return ability.get();
+            }
         }
+        return false;
     }
 
     @Override

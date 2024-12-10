@@ -1,6 +1,7 @@
 package net.togyk.myneheroes.ability;
 
 import net.minecraft.item.ArmorItem;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -12,12 +13,12 @@ public class AbilityUtil {
         HelmetAbilities.add(new BooleanAbility("toggle_hud"));
         abilitiesPerType.put(ArmorItem.Type.HELMET, HelmetAbilities);
         List<Ability> abilities = new ArrayList<>();
-        abilities.add(new ShootLazarAbilityFromReactor("shoot_lazar", 10));
+        abilities.add(new ShootLaserAbilityFromReactor("shoot_laser", 10));
         abilitiesPerType.put(ArmorItem.Type.CHESTPLATE,abilities);
         standardArmorAbilities = abilitiesPerType;
     }
 
-    public static Ability getAbilityMatchingName(List<Ability> abilityList, String name) {
+    public static Ability getAbilityMatchingName(@NotNull List<Ability> abilityList, String name) {
         for (Ability ability : abilityList) {
             if (Objects.equals(ability.getName(), name)) {
                 return ability;

@@ -6,13 +6,13 @@ import net.togyk.myneheroes.MyneHeroes;
 public class BooleanAbility extends Ability{
     private boolean bool = true;
     public BooleanAbility(String name) {
-        super(name, 2);
+        super(name, 4);
     }
 
     @Override
     public void clientUse(PlayerEntity player) {
         //switch the boolean
-        if (player.getWorld().isClient && cooldown == 0) {
+        if (player.getWorld().isClient && getCooldown() == 0) {
             bool = !bool;
         }
     }

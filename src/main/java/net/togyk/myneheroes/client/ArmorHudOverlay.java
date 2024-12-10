@@ -14,6 +14,7 @@ import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.keybind.ModKeyBindings;
 import net.togyk.myneheroes.util.PlayerAbilities;
 
 @Environment(EnvType.CLIENT)
@@ -107,19 +108,39 @@ public class ArmorHudOverlay implements HudRenderCallback {
                     drawContext.drawTexture(ABILITY_SCREEN_SIGHT, abilityScreenX, abilityScreenY, 0, 0,abilityScreenWidth,abilityScreenHeight,abilityScreenWidth,abilityScreenHeight);
                     Ability firstAbility = ((PlayerAbilities) client.player).getFirstAbility();
                     if (firstAbility != null) {
-                        drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(firstAbility.getName()), abilityScreenX + 4, abilityScreenY + 4, 0xFFFFFF);
+                        if (ModKeyBindings.useFirstAbility.isPressed()) {
+                            drawContext.drawTexture(firstAbility.disabled_icon, abilityScreenX + 4, abilityScreenY + 4, 0, 0, 8, 8, 8, 8);
+                        } else {
+                            drawContext.drawTexture(firstAbility.icon, abilityScreenX + 4, abilityScreenY + 4, 0, 0, 8, 8, 8, 8);
+                        }
+                        drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(firstAbility.getName()), abilityScreenX + 4+10, abilityScreenY + 4, 0xFFFFFF);
                     }
                     Ability secondAbility = ((PlayerAbilities) client.player).getSecondAbility();
                     if (secondAbility != null) {
-                        drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(secondAbility.getName()), abilityScreenX + 4, abilityScreenY + 14, 0xFFFFFF);
+                        if (ModKeyBindings.useSecondAbility.isPressed()) {
+                            drawContext.drawTexture(secondAbility.disabled_icon, abilityScreenX + 4, abilityScreenY + 14, 0, 0, 8, 8, 8, 8);
+                        } else {
+                            drawContext.drawTexture(secondAbility.icon, abilityScreenX + 4, abilityScreenY + 14, 0, 0, 8, 8, 8, 8);
+                        }
+                        drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(secondAbility.getName()), abilityScreenX + 4+10, abilityScreenY + 14, 0xFFFFFF);
                     }
                     Ability thirdAbility = ((PlayerAbilities) client.player).getThirdAbility();
                     if (thirdAbility != null) {
-                        drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(thirdAbility.getName()), abilityScreenX + 4, abilityScreenY + 24, 0xFFFFFF);
+                        if (ModKeyBindings.useThirdAbility.isPressed()) {
+                            drawContext.drawTexture(thirdAbility.disabled_icon, abilityScreenX + 4, abilityScreenY + 24, 0, 0, 8, 8, 8, 8);
+                        } else {
+                            drawContext.drawTexture(thirdAbility.icon, abilityScreenX + 4, abilityScreenY + 24, 0, 0, 8, 8, 8, 8);
+                        }
+                        drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(thirdAbility.getName()), abilityScreenX + 4+10, abilityScreenY + 24, 0xFFFFFF);
                     }
                     Ability fourthAbility = ((PlayerAbilities) client.player).getFourthAbility();
                     if (fourthAbility != null) {
-                        drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(fourthAbility.getName()), abilityScreenX + 4, abilityScreenY + 34, 0xFFFFFF);
+                        if (ModKeyBindings.useForthAbility.isPressed()) {
+                            drawContext.drawTexture(fourthAbility.disabled_icon, abilityScreenX + 4, abilityScreenY + 34, 0, 0, 8, 8, 8, 8);
+                        } else {
+                            drawContext.drawTexture(fourthAbility.icon, abilityScreenX + 4, abilityScreenY + 34, 0, 0, 8, 8, 8, 8);
+                        }
+                        drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(fourthAbility.getName()), abilityScreenX + 4+10, abilityScreenY + 34, 0xFFFFFF);
                     }
                 }
             } else {

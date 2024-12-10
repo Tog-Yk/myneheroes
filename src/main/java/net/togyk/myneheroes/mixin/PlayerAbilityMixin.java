@@ -26,10 +26,12 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
     private void tick(CallbackInfo info) {
         PlayerEntity player = MinecraftClient.getInstance().player;
         if (player != null) {
-            abilities = getAbilities(player);
+            List<Ability> bufferList = getAbilities(player);
+            if (bufferList != null) {
+                abilities = bufferList;
+            }
         }
-        for (int i = 0; i < abilities.size(); i++) {
-            Ability ability = abilities.get(i);
+        for (Ability ability : abilities) {
             ability.tick();
         }
     }
@@ -85,7 +87,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
 
     @Override
     public Ability getFirstAbility() {
-        if (!abilities.isEmpty()) {
+        if (abilities != null && !abilities.isEmpty()) {
             return abilities.get(0);
         } else {
             return null;
@@ -94,7 +96,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
 
     @Override
     public Ability getSecondAbility() {
-        if (abilities.size() >= 2) {
+        if (abilities != null && abilities.size() >= 2) {
             return abilities.get(1);
         } else {
             return null;
@@ -103,7 +105,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
 
     @Override
     public Ability getThirdAbility() {
-        if (abilities.size() >= 3) {
+        if (abilities != null && abilities.size() >= 3) {
             return abilities.get(2);
         } else {
             return null;
@@ -112,7 +114,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
 
     @Override
     public Ability getFourthAbility() {
-        if (abilities.size() >= 4) {
+        if (abilities != null && abilities.size() >= 4) {
             return abilities.get(3);
         } else {
             return null;

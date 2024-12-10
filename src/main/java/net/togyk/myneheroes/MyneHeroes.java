@@ -9,6 +9,7 @@ import net.togyk.myneheroes.Item.ModItemGroups;
 import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.block.ModBlocks;
+import net.togyk.myneheroes.entity.ModEntities;
 import net.togyk.myneheroes.networking.ModMessages;
 import net.togyk.myneheroes.worldgen.ModBiomeModifications;
 import org.slf4j.Logger;
@@ -28,6 +29,7 @@ public class MyneHeroes implements ModInitializer {
         ModBlocks.registerModBlocks();
         ModItemGroups.registerItemGroups();
         ModBiomeModifications.registerModBiomeModifications();
+        ModEntities.registerModEntities();
 
         ModMessages.registerServerMessages();
     }
