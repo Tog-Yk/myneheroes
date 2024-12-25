@@ -7,6 +7,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.AbilityHoldingItem;
 import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
+import net.togyk.myneheroes.Item.custom.PowerInjectionItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
@@ -29,6 +30,7 @@ public class ModItems {
     public static final Item ABILITY_HOLDING = registerItem("ability_holding",new AbilityHoldingItem(new Ability("ability",100), new Item.Settings().maxCount(1)));
     public static final Item LAZAR_HOLDING = registerItem("lazar_holding",new AbilityHoldingItem(new ShootLaserAbilityFromReactor("lazar",10), new Item.Settings().maxCount(1)));
 
+    public static final Item POWER_INJECTION = registerItem("power_injection", new PowerInjectionItem(new Item.Settings().maxCount(1)));
 
     //armors
     //debug armors

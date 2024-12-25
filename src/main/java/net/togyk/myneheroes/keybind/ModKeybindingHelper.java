@@ -3,7 +3,6 @@ package net.togyk.myneheroes.keybind;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
-import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.networking.KeybindPayload;
 import net.togyk.myneheroes.util.PlayerAbilities;

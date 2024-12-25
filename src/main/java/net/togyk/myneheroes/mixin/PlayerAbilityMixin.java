@@ -8,7 +8,9 @@ import net.minecraft.item.ItemStack;
 import net.togyk.myneheroes.Item.custom.AbilityHoldingItem;
 import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
 import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.util.PlayerAbilities;
+import net.togyk.myneheroes.util.PlayerPowers;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -38,6 +40,17 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
 
     private List<Ability> getAbilities(PlayerEntity player) {
         List<Ability> abilityList = new ArrayList<>();
+        List<Power> powerList = ((PlayerPowers) player).getPowers();
+        if (!powerList.isEmpty()) {
+            for (Power power : powerList) {
+                for (Ability ability : power.abilities) {
+                    if (!abilityList.contains(ability)) {
+                        abilityList.add(ability);
+                    }
+                }
+            }
+        }
+
         PlayerInventory inventory = player.getInventory();
         ItemStack helmetStack = player.getEquippedStack(EquipmentSlot.HEAD);
         if (helmetStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {

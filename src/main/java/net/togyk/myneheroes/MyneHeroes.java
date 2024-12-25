@@ -10,7 +10,9 @@ import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.block.ModBlocks;
 import net.togyk.myneheroes.entity.ModEntities;
+import net.togyk.myneheroes.event.ModEvents;
 import net.togyk.myneheroes.networking.ModMessages;
+import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.worldgen.ModBiomeModifications;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +34,9 @@ public class MyneHeroes implements ModInitializer {
         ModEntities.registerModEntities();
 
         ModMessages.registerServerMessages();
+        ModEvents.registerEvents();
+
+        Powers.registerPowers();
     }
     /**
      * Searches the player's inventory for the first matching item.

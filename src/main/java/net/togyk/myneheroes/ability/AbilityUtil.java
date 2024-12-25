@@ -7,6 +7,8 @@ import java.util.*;
 
 public class AbilityUtil {
     private static final Map<ArmorItem.Type,List<Ability>> standardArmorAbilities;
+
+    private static final Map<String,List<Ability>> powerAbilities;
     static {
         Map<ArmorItem.Type,List<Ability>> abilitiesPerType = new HashMap<>();
         List<Ability> HelmetAbilities = new ArrayList<>();
@@ -16,6 +18,13 @@ public class AbilityUtil {
         abilities.add(new ShootLaserAbilityFromReactor("shoot_laser", 10));
         abilitiesPerType.put(ArmorItem.Type.CHESTPLATE,abilities);
         standardArmorAbilities = abilitiesPerType;
+
+        Map<String,List<Ability>> abilitiesPerPower = new HashMap<>();
+        List<Ability> kryptonian = new ArrayList<>();
+        kryptonian.add(new LasersFromEyesAbility("laser_eyes", 4));
+        abilitiesPerPower.put("kryptonian", kryptonian);
+
+        powerAbilities = abilitiesPerPower;
     }
 
     public static Ability getAbilityMatchingName(@NotNull List<Ability> abilityList, String name) {
@@ -29,5 +38,9 @@ public class AbilityUtil {
 
     public static List<Ability> getStandardArmorAbilities(ArmorItem.Type type) {
         return standardArmorAbilities.get(type);
+    }
+
+    public static List<Ability> getAbilitiesForPower(String powerName) {
+        return powerAbilities.containsKey(powerName) ? powerAbilities.get(powerName) : new ArrayList<>();
     }
 }
