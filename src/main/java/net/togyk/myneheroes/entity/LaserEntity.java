@@ -6,28 +6,22 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleTypes;
+import net.minecraft.item.Items;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.world.World;
+import net.togyk.myneheroes.MyneHeroes;
+import org.jetbrains.annotations.NotNull;
+
+import java.awt.*;
 
 public class LaserEntity extends PersistentProjectileEntity {
+    private Color color;
+    private Color innerColor;
 
     public LaserEntity(EntityType<LaserEntity> laserProjectileEntityEntityType, World world) {
         super(laserProjectileEntityEntityType, world);
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-        if (this.getWorld().isClient) {
-            for (int i = 0; i < 5; i++) {
-                this.getWorld().addParticle(ParticleTypes.END_ROD,
-                        this.getX() + this.random.nextGaussian() * 0.1,
-                        this.getY() + this.random.nextGaussian() * 0.1,
-                        this.getZ() + this.random.nextGaussian() * 0.1,
-                        0, 0, 0);
-            }
-        }
+        this.color = Color.RED;
+        this.innerColor = new Color(255, 200, 200);
     }
 
     @Override
@@ -49,7 +43,25 @@ public class LaserEntity extends PersistentProjectileEntity {
     @Override
     protected ItemStack getDefaultItemStack() {
         //will give a crash at some point. Don't care enough to fix right now
-        return ItemStack.EMPTY;
+        return new ItemStack(Items.ARROW);
         //>>>Caused by: java.lang.IllegalStateException: Cannot encode empty ItemStack
+    }
+
+    @NotNull
+    public Color getColor() {
+        return this.color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    @NotNull
+    public Color getInnerColor() {
+        return this.innerColor;
+    }
+
+    public void setInnerColor(Color color) {
+        this.innerColor = color;
     }
 }

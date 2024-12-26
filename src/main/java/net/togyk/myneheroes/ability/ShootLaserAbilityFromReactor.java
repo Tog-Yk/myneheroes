@@ -9,6 +9,8 @@ import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.entity.LaserEntity;
 import net.togyk.myneheroes.entity.ModEntities;
 
+import java.awt.*;
+
 public class ShootLaserAbilityFromReactor extends Ability{
     public ShootLaserAbilityFromReactor(String name, int cooldown) {
         super(name, cooldown);
@@ -36,6 +38,9 @@ public class ShootLaserAbilityFromReactor extends Ability{
                     projectile.setPosition(player.getX(), player.getEyeY(), player.getZ());
                     projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
                     projectile.applyDamageModifier(2.0F);
+                    //Colors don't work
+                    projectile.setColor(Color.CYAN);
+                    projectile.setInnerColor(new Color(200,255,255));
 
                     player.getWorld().spawnEntity(projectile);
                 }
