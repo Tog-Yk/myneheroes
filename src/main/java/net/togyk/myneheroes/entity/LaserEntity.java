@@ -3,6 +3,7 @@ package net.togyk.myneheroes.entity;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
@@ -38,6 +39,11 @@ public class LaserEntity extends PersistentProjectileEntity {
                 getWorld().setBlockState(blockHitResult.getBlockPos(), Blocks.WATER.getDefaultState());
             }
         }
+    }
+
+    @Override
+    protected boolean tryPickup(PlayerEntity player) {
+        return false;
     }
 
     @Override
