@@ -17,6 +17,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Collections.max;
+
 @Mixin(PlayerEntity.class)
 public abstract class PlayerPowerMixin implements PlayerPowers {
     private List<Power> powers = new ArrayList<>();
@@ -61,6 +63,18 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
     public void addPower(Power power) {
         if (!this.powers.contains(power)) {
             this.powers.add(power);
+        }
+    }
+
+    public float getDamageMultiplier() {
+        List<Integer> multipliers = new ArrayList<>();
+        for (Power power : this.powers) {
+            multipliers.add(power.getDamageMultiplier());
+        }
+        if (!multipliers.isEmpty()) {
+            return max(multipliers);
+        } else {
+            return 1.0F;
         }
     }
 }

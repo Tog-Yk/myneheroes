@@ -3,6 +3,7 @@
 	"package": "net.togyk.myneheroes.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
+		"LivingEntityMixin",
 		"PlayerAbilityMixin",
 		"PlayerPowerMixin"
 	],

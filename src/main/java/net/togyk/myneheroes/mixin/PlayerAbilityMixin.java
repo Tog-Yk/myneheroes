@@ -43,9 +43,11 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         List<Power> powerList = ((PlayerPowers) player).getPowers();
         if (!powerList.isEmpty()) {
             for (Power power : powerList) {
-                for (Ability ability : power.abilities) {
-                    if (!abilityList.contains(ability)) {
-                        abilityList.add(ability);
+                if (!power.isDampened()) {
+                    for (Ability ability : power.abilities) {
+                        if (!abilityList.contains(ability)) {
+                            abilityList.add(ability);
+                        }
                     }
                 }
             }

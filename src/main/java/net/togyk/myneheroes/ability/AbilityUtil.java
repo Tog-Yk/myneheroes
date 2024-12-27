@@ -21,7 +21,7 @@ public class AbilityUtil {
 
         Map<String,List<Ability>> abilitiesPerPower = new HashMap<>();
         List<Ability> kryptonian = new ArrayList<>();
-        kryptonian.add(new LasersFromEyesAbility("laser_eyes", 4));
+        kryptonian.add(new LasersFromEyesAbility("laser_eyes", 2));
         abilitiesPerPower.put("kryptonian", kryptonian);
 
         powerAbilities = abilitiesPerPower;
