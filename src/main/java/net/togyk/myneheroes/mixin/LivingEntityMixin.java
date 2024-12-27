@@ -4,6 +4,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.damage.ModDamageTypes;
@@ -22,7 +23,7 @@ public abstract class LivingEntityMixin {
         LivingEntity entity = (LivingEntity) (Object) this;
 
         // Check if the source is a player
-        if (source.getAttacker() instanceof LivingEntity attacker && attacker.isPlayer() && !source.getType().equals(attacker.getWorld().getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(ModDamageTypes.POWERFUL_PUNCH_TYPE_KEY).value())) {
+        if (source.getAttacker() instanceof LivingEntity attacker && attacker.isPlayer() && source.getType().equals(attacker.getWorld().getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).get(Identifier.ofVanilla("player_attack")))) {
             // Multiply the damage taken
             float multiplier = ((PlayerPowers) attacker).getDamageMultiplier(); // Your custom multiplier
             if (multiplier != 1.0F) {
