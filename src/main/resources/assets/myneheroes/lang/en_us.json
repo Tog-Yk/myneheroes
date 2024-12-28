@@ -67,5 +67,6 @@
   "key.myneheroes.shoot_repolser": "Shoot Repolser",
   "key.myneheroes.fuel_reactor": "Fuel Reactor",
 
-  "death.attack.punched" : "%1$s was slaughtered!"
+  "death.attack.punched" : "%1$s was slaughtered!",
+  "death.attack.punched.item" : "%1$s was slaughtered using %3$s"
 }

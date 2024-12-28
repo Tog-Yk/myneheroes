@@ -62,11 +62,13 @@ public class PowerInjectionItem extends Item {
             Power usersLastPower = powers.getLast();
             this.setPowerId(user.getStackInHand(hand), Powers.getFirstMatchingId(usersLastPower));
             playerPowersI.removePower(usersLastPower);
+            user.swingHand(Hand.MAIN_HAND);
             return TypedActionResult.success(user.getStackInHand(hand));
         } else if (Powers.containsId(powerId) && !powers.contains(Powers.get(powerId))) {
             Power power = Powers.get(powerId);
             playerPowersI.addPower(power);
             this.setPowerId(user.getStackInHand(hand), Powers.getFirstMatchingId(null));
+            user.swingHand(Hand.MAIN_HAND);
             return TypedActionResult.success(user.getStackInHand(hand));
         } else {
             return TypedActionResult.pass(user.getStackInHand(hand));
