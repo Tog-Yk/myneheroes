@@ -5,7 +5,6 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.DyeableAdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
