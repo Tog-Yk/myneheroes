@@ -15,12 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
-    private final List<Boolean> isDyeable;
     private final List<Integer> defaultColors;
 
-    public DyeableAdvancedArmorItem(List<Boolean> isDyeable, List<Integer> defaultColors, RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
+    public DyeableAdvancedArmorItem(List<Integer> defaultColors, RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
         super(material, type, settings);
-        this.isDyeable = isDyeable;
         this.defaultColors = defaultColors;
     }
 
@@ -40,7 +38,7 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
     }
 
     public Integer getColor(ItemStack stack, int index) {
-        if (this.isDyeable.get(index)) {
+        if (layerIsDyeable(index)) {
             NbtCompound nbt = getNbt(stack);
             if (nbt != null && nbt.contains("colors")) {
                 NbtList nbtList = nbt.getList("colors", NbtElement.INT_TYPE);
@@ -74,6 +72,13 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
         }
 
         setNbt(stack, nbt);
+    }
+    public boolean layerIsDyeable(int index) {
+        //getting the layer
+        List<ArmorMaterial.Layer> layers = getMaterial().value().layers();
+        ArmorMaterial.Layer layer = layers.get(index);
+
+        return layer.isDyeable();
     }
     /*
     all the nbt and how they get saved

@@ -73,15 +73,17 @@ public class ArmorHudOverlay implements HudRenderCallback {
                         drawContext.drawTexture(CONNECTED, 30, height -10 -18, 0, 0, 24, 18, 24, 18);
                         drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, reactorItemStack.getName(),57,height -10 -8,0xFFFFFF);
 
+                        drawContext.drawItem(reactorItemStack,width - 30, height - 30);
 
-                        float fuelPercentile = (float) reactorItem.getStoredFuelOrDefault(reactorItemStack, 0) / reactorItem.getMaxFuel();
+
+                        int fuelPercentile = reactorItem.getStoredFuelOrDefault(reactorItemStack, 0) / reactorItem.getMaxFuel();
                         int maxFuelLength = 26;
-                        int currentFuelLength = (int) (maxFuelLength * fuelPercentile);
+                        int currentFuelLength = maxFuelLength * fuelPercentile;
                         drawContext.drawTexture(FUEL, 10 + 2, height -10 -30 +2 + maxFuelLength - currentFuelLength,0,maxFuelLength - currentFuelLength,6, currentFuelLength,6,4);
 
-                        float powerPercentile = (float) reactorItem.getStoredPowerOrDefault(reactorItemStack, 0) / reactorItem.getMaxPower();
+                        int powerPercentile = reactorItem.getStoredPowerOrDefault(reactorItemStack, 0) / reactorItem.getMaxPower();
                         int maxBatteryLength = 26;
-                        int currentBatteryLength = (int) (maxBatteryLength * powerPercentile);
+                        int currentBatteryLength = maxBatteryLength * powerPercentile;
                         drawContext.drawTexture(BATTERY, 10 + 10, height -10 -30 +2 + maxBatteryLength - currentBatteryLength,0,maxBatteryLength - currentBatteryLength,6, currentBatteryLength,6,4);
                     }
                     drawContext.drawTexture(BATTERY_CASING, 10, height -10 -30, 0, 0, 18, 30, 18, 30);
@@ -99,7 +101,7 @@ public class ArmorHudOverlay implements HudRenderCallback {
                     drawContext.drawTexture(ABILITY_SCREEN_SIGHT, width/3 * 2 + 28, height/2 - 108, 0, 0,48,64,48,64); // white rectangle
                 }
             } else {
-                return;
+                drawContext.fillGradient(10,10,30,30, 0x0000FF20,0x00FF0020);
             }
         }
     }
