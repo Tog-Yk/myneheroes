@@ -9,6 +9,7 @@ import net.togyk.myneheroes.Item.ModItemGroups;
 import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.block.ModBlocks;
+import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.networking.ModMessages;
 import net.togyk.myneheroes.worldgen.ModBiomeModifications;
 import org.slf4j.Logger;
@@ -27,9 +28,12 @@ public class MyneHeroes implements ModInitializer {
         ModItems.registerModItems();
         ModBlocks.registerModBlocks();
         ModItemGroups.registerItemGroups();
+
         ModBiomeModifications.registerModBiomeModifications();
 
         ModMessages.registerServerMessages();
+
+        ModDataComponentTypes.registerDataComponentTypes();
     }
     /**
      * Searches the player's inventory for the first matching item.

@@ -4,12 +4,16 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.NbtComponent;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtInt;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.component.ModDataComponentTypes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,18 +28,12 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
 
     public Integer getColor(ItemStack stack, int index) {
         if (layerIsDyeable(index)) {
-            NbtCompound nbt = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT).getNbt();
-            NbtCompound modnbt = new NbtCompound();
-            if (nbt.contains(MyneHeroes.MOD_ID)) {
-                modnbt = nbt.getCompound(MyneHeroes.MOD_ID);
+            List<Integer> colors = stack.get(ModDataComponentTypes.COLORS);
+            if (colors != null && colors.size() > index) {
+                return colors.get(index);
+            } else {
+                return this.defaultColors.get(index);
             }
-            if (modnbt != null && modnbt.contains("colors")) {
-                NbtList nbtList = modnbt.getList("colors", NbtElement.INT_TYPE);
-                if (nbtList.size() >= index) {
-                    return nbtList.getInt(index);
-                }
-            }
-            return this.defaultColors.get(index);
         } else {
             return -1;
         }
@@ -54,17 +52,7 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
         colors.set(index, color);
 
         //save to nbt
-        NbtCompound nbt = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT).getNbt();
-        NbtCompound modnbt = new NbtCompound();
-        if (nbt.contains(MyneHeroes.MOD_ID)) {
-            modnbt = nbt.getCompound(MyneHeroes.MOD_ID);
-        }
-        NbtList nbtList = new NbtList();
-        for (Integer integer : colors) {
-            nbtList.add(NbtInt.of(integer));
-        }
-        modnbt.put("colors", nbtList);
-        nbt.put(MyneHeroes.MOD_ID, modnbt);
+        stack.set(ModDataComponentTypes.COLORS, colors);
     }
     public boolean layerIsDyeable(int index) {
         //getting the layer
@@ -77,4 +65,15 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
     all the nbt and how they get saved
     shouldApplyHud: nbt.putBoolean("should_apply_hud", !shouldApplyHud);
      */
+
+    @Override
+    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+        tooltip.add(Text.literal("Colors:").formatted(Formatting.BLUE));
+        for (int i = 0; i < defaultColors.size(); i++) {
+            if (layerIsDyeable(i)) {
+                tooltip.add(Text.literal(" " + String.valueOf(-1 * getColor(stack, i))));
+            }
+        }
+        super.appendTooltip(stack, context, tooltip, type);
+    }
 }
