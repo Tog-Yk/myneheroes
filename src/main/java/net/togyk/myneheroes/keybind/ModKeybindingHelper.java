@@ -15,7 +15,7 @@ public class ModKeybindingHelper {
                 if (MinecraftClient.getInstance().player != null) {
                     ItemStack helmetStack = MinecraftClient.getInstance().player.getEquippedStack(EquipmentSlot.HEAD);
                     if (helmetStack != null && helmetStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-                        advancedArmorItem.ToggleHud(helmetStack);
+                        advancedArmorItem.toggleHud(helmetStack);
                     }
                 }
             }
