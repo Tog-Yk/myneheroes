@@ -1,18 +1,11 @@
 package net.togyk.myneheroes.Item.custom;
 
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.NbtComponent;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtInt;
-import net.minecraft.nbt.NbtList;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
 
 import java.util.ArrayList;
@@ -20,10 +13,12 @@ import java.util.List;
 
 public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
     private final List<Integer> defaultColors;
+    private final List<Integer> lightLevels;
 
-    public DyeableAdvancedArmorItem(List<Integer> defaultColors, RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
+    public DyeableAdvancedArmorItem(List<Integer> defaultColors, List<Integer> lightLevels, RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
         super(material, type, settings);
         this.defaultColors = defaultColors;
+        this.lightLevels = lightLevels;
     }
 
     public Integer getColor(ItemStack stack, int index) {
@@ -61,10 +56,17 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
 
         return layer.isDyeable();
     }
-    /*
-    all the nbt and how they get saved
-    shouldApplyHud: nbt.putBoolean("should_apply_hud", !shouldApplyHud);
-     */
+
+    public int getLightLevel(int index) {
+        if (lightLevels.size() > index) {
+            return Math.max(-1, Math.min(15, lightLevels.get(index)));
+        }
+        return -1;
+    }
+
+    public boolean layerIsLightable(int index) {
+        return getLightLevel(index) != -1;
+    }
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
