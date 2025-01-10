@@ -56,7 +56,7 @@ public class ArmorHudOverlay implements HudRenderCallback {
         if (client.player != null) {
             ItemStack helmetStack = client.player.getEquippedStack(EquipmentSlot.HEAD);
             if (helmetStack != null && helmetStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-                if (advancedArmorItem.ShouldApplyHud(helmetStack)) {
+                if (advancedArmorItem.shouldApplyHud(helmetStack)) {
 
                     int width = drawContext.getScaledWindowWidth();
                     int height = drawContext.getScaledWindowHeight();

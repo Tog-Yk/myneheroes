@@ -28,7 +28,7 @@ public class ModMessages {
                             ItemStack reactorItemStack = MyneHeroes.getReactorItemClass(player);
                             PlayerInventory inventory = player.getInventory();
                             if (!(reactorItemStack == ItemStack.EMPTY)) {
-                                advancedArmorItem.ShootRepolserAndReturnLazarEntity(player, reactorItemStack);
+                                advancedArmorItem.shootRepolserAndReturnLazarEntity(player, reactorItemStack);
                             }
                         }
                     }

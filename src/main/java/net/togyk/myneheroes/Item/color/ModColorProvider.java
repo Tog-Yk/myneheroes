@@ -1,4 +1,4 @@
-package net.togyk.myneheroes.color;
+package net.togyk.myneheroes.Item.color;
 
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.item.Item;

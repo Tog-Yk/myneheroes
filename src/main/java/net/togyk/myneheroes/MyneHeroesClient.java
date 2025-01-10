@@ -3,7 +3,7 @@ package net.togyk.myneheroes;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.togyk.myneheroes.client.ArmorHudOverlay;
-import net.togyk.myneheroes.color.ModColorProvider;
+import net.togyk.myneheroes.Item.color.ModColorProvider;
 import net.togyk.myneheroes.keybind.ModKeybindingHelper;
 import net.togyk.myneheroes.keybind.ModKeyBindings;
 import net.togyk.myneheroes.networking.ModMessages;

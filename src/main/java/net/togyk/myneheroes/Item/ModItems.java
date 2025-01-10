@@ -30,16 +30,16 @@ public class ModItems {
     //armors
     //debug armors
     public static final Item DEBUG_HELMET = registerItem("debug_helmet",
-            new DyeableAdvancedArmorItem(List.of(-1, Colors.YELLOW), ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
+            new DyeableAdvancedArmorItem(List.of(-1, -65536), ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
                     .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(15))));
     public static final Item DEBUG_CHESTPLATE = registerItem("debug_chestplate",
             new DyeableAdvancedArmorItem(List.of(-1,Colors.RED), ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
                     .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(15))));
     public static final Item DEBUG_LEGGINGS = registerItem("debug_leggings",
-            new DyeableAdvancedArmorItem(List.of(-1,Colors.BLUE), ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
+            new DyeableAdvancedArmorItem(List.of(-1,-61131), ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
                     .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(15))));
     public static final Item DEBUG_BOOTS = registerItem("debug_boots",
-            new DyeableAdvancedArmorItem(List.of(-1,Colors.GRAY), ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
+            new DyeableAdvancedArmorItem(List.of(-1,-45536), ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
                     .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(15))));
 
 
