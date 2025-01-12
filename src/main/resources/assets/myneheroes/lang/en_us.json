@@ -46,6 +46,7 @@
 
   "block.myneheroes.gold_titanium_block": "Gold Titanium Block",
   "block.myneheroes.raw_gold_titanium_block": "Raw Gold Titanium Block",
+  "block.myneheroes.armor_dyeing_station": "Armor Dyeing Station",
 
 
   "trim_material.myneheroes.vibranium": "Vibranium",
@@ -63,5 +64,7 @@
 
   "key.myneheroes.toggle_hud": "Toggle Hud",
   "key.myneheroes.shoot_repolser": "Shoot Repolser",
-  "key.myneheroes.fuel_reactor": "Fuel Reactor"
+  "key.myneheroes.fuel_reactor": "Fuel Reactor",
+
+  "container.myneheroes.armor_dyeing_station": "Armor Dyeing Station"
 }

@@ -2,13 +2,17 @@ package net.togyk.myneheroes;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.togyk.myneheroes.Item.ModItemGroups;
 import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
+import net.togyk.myneheroes.block.ModBlockEntityTypes;
 import net.togyk.myneheroes.block.ModBlocks;
+import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
+import net.togyk.myneheroes.block.screen.ModScreenHandlerTypes;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.networking.ModMessages;
 import net.togyk.myneheroes.worldgen.ModBiomeModifications;
@@ -34,6 +38,11 @@ public class MyneHeroes implements ModInitializer {
         ModMessages.registerServerMessages();
 
         ModDataComponentTypes.registerDataComponentTypes();
+
+        ModBlockEntityTypes.registerModBlockEntityTypes();
+        ModScreenHandlerTypes.registerModScreenHandlerTypes();
+
+        ItemStorage.SIDED.registerForBlockEntity(ArmorDyeingBlockEntity::getInventoryProvider, ModBlockEntityTypes.ARMOR_DYEING_BLOCK_ENTITY);
     }
     /**
      * Searches the player's inventory for the first matching item.

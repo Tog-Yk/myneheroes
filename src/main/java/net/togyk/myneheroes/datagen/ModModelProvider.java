@@ -29,6 +29,8 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLD_TITANIUM_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.RAW_GOLD_TITANIUM_BLOCK);
 
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ARMOR_DYEING_STATION);
+
     }
 
     @Override

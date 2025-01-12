@@ -42,6 +42,8 @@ public class ModItemGroups {
 
                         entries.add(ModItems.ARC_REACTOR);
 
+                        entries.add(ModBlocks.ARMOR_DYEING_STATION);
+
                     }).build());
 
     public static final ItemGroup MYNEHEROES_ARMOR_GROUP = Registry.register(Registries.ITEM_GROUP,
