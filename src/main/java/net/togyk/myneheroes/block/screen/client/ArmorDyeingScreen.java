@@ -104,16 +104,16 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         this.mouseClicked = false;
         if (this.handler.canSelect()) {
-            int i = this.x + 47;
-            int j = this.y + 6;
+            int i = this.x + 48;
+            int j = this.y + 10;
             int k = this.scrollOffset + 4;
 
             //option buttons
             for (int l = this.scrollOffset; l < k; l++) {
                 int m = l - this.scrollOffset;
                 double d = mouseX - (double) i;
-                double e = mouseY - (double)(j + m * 18);
-                if (d >= 0.0 && e >= 0.0 && d < 18.0 && e < 18.0 && this.handler.onButtonClick(this.client.player, l)) {
+                double e = mouseY - (double)(j + m * 16);
+                if (d >= 0.0 && e >= 0.0 && d < 16.0 && e < 16.0 && this.handler.onButtonClick(this.client.player, l)) {
                     MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
                     this.client.interactionManager.clickButton(this.handler.syncId, l);
                     return true;
