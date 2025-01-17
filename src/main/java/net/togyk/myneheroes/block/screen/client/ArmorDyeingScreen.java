@@ -3,6 +3,7 @@ package net.togyk.myneheroes.block.screen.client;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.sound.SoundEvents;
@@ -10,6 +11,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.block.screen.client.widget.ColorSliderWidget;
 import net.togyk.myneheroes.block.screen.handeler.ArmorDyeingScreenHandler;
 
 import java.util.List;
@@ -28,9 +30,40 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
     private boolean mouseClicked;
     private int scrollOffset;
 
+    ColorSliderWidget sliderWidgetRed;
+    ColorSliderWidget sliderWidgetGreen;
+    ColorSliderWidget sliderWidgetBlue;
+
+    ButtonWidget setButton;
+    ButtonWidget setDefaultButton;
+
     @Override
     protected void init() {
         super.init();
+
+        this.sliderWidgetRed = new ColorSliderWidget("Red", this.x + 96, this.y + 10, 64, 14, 0);
+        addDrawableChild(sliderWidgetRed);
+        this.sliderWidgetGreen = new ColorSliderWidget("Green", this.x + 96, this.y + 26, 64, 14, 0);
+        addDrawableChild(sliderWidgetGreen);
+        this.sliderWidgetBlue = new ColorSliderWidget("Blue", this.x + 96, this.y + 43, 64, 14, 0);
+        addDrawableChild(sliderWidgetBlue);
+
+        this.setButton = ButtonWidget.builder(Text.of("set"), button -> {
+                    if (this.handler.canDye()) {
+                        this.handler.dye(getSelectedColor());
+                    }
+                })
+                .dimensions(this.x + 96, this.y + 60, 31, 14)
+                .build();
+        addDrawableChild(setButton);
+        this.setDefaultButton = ButtonWidget.builder(Text.of("default"), button -> {
+                    if (this.handler.canDye()) {
+                        this.handler.dyeDefault();
+                    }
+                })
+                .dimensions(this.x + 129, this.y + 60, 31, 14)
+                .build();
+        addDrawableChild(setDefaultButton);
     }
 
     public ArmorDyeingScreen(ArmorDyeingScreenHandler handler, PlayerInventory inventory, Text title) {
@@ -166,10 +199,36 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
         return (this.handler.getOptions().size() / 4);
     }
 
+    private int getSelectedColor() {
+        int color = -16777216;
+        color += sliderWidgetRed.getValue() * 256 * 256;
+        color += sliderWidgetGreen.getValue() * 256;
+        color += sliderWidgetBlue.getValue();
+        return color;
+    }
+
     private void onInventoryChange() {
         if (!this.handler.canDye()) {
             this.scrollAmount = 0.0F;
             this.scrollOffset = 0;
+
+            this.sliderWidgetRed.setAlpha(0.0F);
+            this.sliderWidgetGreen.setAlpha(0.0F);
+            this.sliderWidgetBlue.setAlpha(0.0F);
+
+            this.setButton.setAlpha(0.0F);
+            this.setDefaultButton.setAlpha(0.0F);
+            this.setButton.active = false;
+            this.setDefaultButton.active = false;
+        } else {
+            this.sliderWidgetRed.setAlpha(1.0F);
+            this.sliderWidgetGreen.setAlpha(1.0F);
+            this.sliderWidgetBlue.setAlpha(1.0F);
+
+            this.setButton.setAlpha(1.0F);
+            this.setDefaultButton.setAlpha(1.0F);
+            this.setButton.active = true;
+            this.setDefaultButton.active = true;
         }
     }
 }

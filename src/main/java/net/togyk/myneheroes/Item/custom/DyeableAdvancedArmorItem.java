@@ -32,6 +32,14 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
         }
         return -1;
     }
+
+    public int getDefaultColor(int index) {
+        if (layerIsDyeable(index) && this.defaultColors.size() > index) {
+            return this.defaultColors.get(index);
+        }
+        return -1;
+    }
+
     public void setColor(ItemStack stack, int index, Integer color) {
         if (index >= defaultColors.size()) {
             return;

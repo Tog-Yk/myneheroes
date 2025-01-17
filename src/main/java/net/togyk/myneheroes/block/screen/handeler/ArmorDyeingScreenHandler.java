@@ -118,6 +118,21 @@ public class ArmorDyeingScreenHandler extends ScreenHandler {
     public boolean canDye() {
         return !this.blockEntity.getInventory().isEmpty() && this.selectedOption < this.indexOptions.size();
     }
+    public void dye(int color) {
+        ItemStack stack = blockEntity.getInventory().getStack(0);
+        if (stack.getItem() instanceof DyeableAdvancedArmorItem armorItem) {
+            armorItem.setColor(stack, this.indexOptions.get(this.selectedOption), color);
+            blockEntity.getInventory().markDirty();
+        }
+    }
+
+    public void dyeDefault() {
+        ItemStack stack = blockEntity.getInventory().getStack(0);
+        if (stack.getItem() instanceof DyeableAdvancedArmorItem armorItem) {
+            armorItem.setColor(stack, this.indexOptions.get(this.selectedOption), armorItem.getDefaultColor(this.indexOptions.get(this.selectedOption)));
+            blockEntity.getInventory().markDirty();
+        }
+    }
 
     @Override
     public void onClosed(PlayerEntity player) {
