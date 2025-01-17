@@ -26,12 +26,11 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
             List<Integer> colors = stack.get(ModDataComponentTypes.COLORS);
             if (colors != null && colors.size() > index) {
                 return colors.get(index);
-            } else {
+            } else if (this.defaultColors.size() > index){
                 return this.defaultColors.get(index);
             }
-        } else {
-            return -1;
         }
+        return -1;
     }
     public void setColor(ItemStack stack, int index, Integer color) {
         if (index >= defaultColors.size()) {

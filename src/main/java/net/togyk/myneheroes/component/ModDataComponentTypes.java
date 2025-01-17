@@ -12,7 +12,7 @@ import java.util.function.UnaryOperator;
 
 public class ModDataComponentTypes {
     public static final ComponentType<List<Integer>> COLORS =
-            register("coordinates", builder -> builder.codec(Codec.list(Codec.INT)));
+            register("colors", builder -> builder.codec(Codec.list(Codec.INT)));
 
 
     private static <T>ComponentType<T> register(String name, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
