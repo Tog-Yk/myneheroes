@@ -14,6 +14,9 @@ public class ModDataComponentTypes {
     public static final ComponentType<List<Integer>> COLORS =
             register("colors", builder -> builder.codec(Codec.list(Codec.INT)));
 
+    public static final ComponentType<List<Integer>> LIGHT_LEVEL =
+            register("light_level", builder -> builder.codec(Codec.list(Codec.INT)));
+
 
     private static <T>ComponentType<T> register(String name, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
         return Registry.register(Registries.DATA_COMPONENT_TYPE, Identifier.of(MyneHeroes.MOD_ID, name),

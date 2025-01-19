@@ -49,7 +49,7 @@ public abstract class ArmorFeatureRendererMixin<T extends LivingEntity, M extend
             int layerIndex = layers.indexOf(layer);
             if (armorItem.layerIsLightable(layerIndex)) {
                 // times 1048576 to make a lightLever of 15 the maximum light
-                return armorItem.getLightLevel(layers.indexOf(layer)) * 1048576;
+                return armorItem.getLightLevel(itemStack, layers.indexOf(layer)) * 1048576;
             }
         }
         return light;
