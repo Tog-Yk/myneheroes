@@ -2,16 +2,24 @@ package net.togyk.myneheroes.networking;
 
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.block.Block;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
+import net.togyk.myneheroes.Item.custom.DyeableAdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
 
 public class ModMessages {
+    public static final Identifier BLOCKPOS_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "block_pos");
+    public static final Identifier COLOR_ITEM_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "color_item");
     public static final Identifier KEYBIND_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "keybind");
 
     public static void registerServerMessages() {
@@ -45,6 +53,28 @@ public class ModMessages {
                 //
             });
         });
+
+        PayloadTypeRegistry.playC2S().register(ColorItemPayload.ID, ColorItemPayload.CODEC);
+
+        ServerPlayNetworking.registerGlobalReceiver(ColorItemPayload.ID, (payload, context) -> {
+            context.server().execute(() -> {
+                // logic for dyeing an item
+                World world = context.player().getWorld();
+                if (world != null) {
+                    BlockEntity blockEntity = world.getBlockEntity(payload.pos());
+                    if (blockEntity instanceof ArmorDyeingBlockEntity armorDyeingBlockEntity) {
+                        SimpleInventory inventory = armorDyeingBlockEntity.getInventory();
+                        ItemStack stack = inventory.getStack(0);
+                        if (stack.getItem() instanceof DyeableAdvancedArmorItem armorItem) {
+                            armorItem.setColor(stack, payload.index(), payload.color());
+                            inventory.markDirty();
+                        }
+                    }
+                }
+            });
+        });
+
+
     }
 
     public static void registerClientMessages() {

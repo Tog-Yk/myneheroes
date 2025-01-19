@@ -1,5 +1,6 @@
 package net.togyk.myneheroes.block.screen.handeler;
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.SimpleInventory;
@@ -13,6 +14,7 @@ import net.togyk.myneheroes.block.ModBlocks;
 import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
 import net.togyk.myneheroes.block.screen.ModScreenHandlerTypes;
 import net.togyk.myneheroes.networking.BlockPosPayload;
+import net.togyk.myneheroes.networking.ColorItemPayload;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,18 +121,14 @@ public class ArmorDyeingScreenHandler extends ScreenHandler {
         return !this.blockEntity.getInventory().isEmpty() && this.selectedOption < this.indexOptions.size();
     }
     public void dye(int color) {
-        ItemStack stack = blockEntity.getInventory().getStack(0);
-        if (stack.getItem() instanceof DyeableAdvancedArmorItem armorItem) {
-            armorItem.setColor(stack, this.indexOptions.get(this.selectedOption), color);
-            blockEntity.getInventory().markDirty();
-        }
+        ClientPlayNetworking.send(new ColorItemPayload(this.blockEntity.getPos(), this.indexOptions.get(this.selectedOption), color));
     }
 
     public void dyeDefault() {
         ItemStack stack = blockEntity.getInventory().getStack(0);
         if (stack.getItem() instanceof DyeableAdvancedArmorItem armorItem) {
-            armorItem.setColor(stack, this.indexOptions.get(this.selectedOption), armorItem.getDefaultColor(this.indexOptions.get(this.selectedOption)));
-            blockEntity.getInventory().markDirty();
+            int color =  armorItem.getDefaultColor(this.indexOptions.get(this.selectedOption));
+            ClientPlayNetworking.send(new ColorItemPayload(this.blockEntity.getPos(), this.indexOptions.get(this.selectedOption), color));
         }
     }
 
