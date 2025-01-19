@@ -52,7 +52,7 @@ public class ArmorDyeingScreenHandler extends ScreenHandler {
 
 
     private void addBlockInventory(SimpleInventory inventory) {
-        addSlot(new Slot(inventory, 0, 16, 33) {
+        addSlot(new Slot(inventory, 0, 16, 39) {
             @Override
             public boolean canInsert(ItemStack stack) {
                 return stack.getItem() instanceof DyeableAdvancedArmorItem;
@@ -63,7 +63,7 @@ public class ArmorDyeingScreenHandler extends ScreenHandler {
     private void addPlayerInventory(PlayerInventory inventory) {
         for (int row = 0; row < 3; row++) {
             for (int colum = 0; colum < 9; colum++) {
-                addSlot(new Slot(inventory, 9 + colum + row * 9, 8 + colum * 18, 84 + row * 18));
+                addSlot(new Slot(inventory, 9 + colum + row * 9, 8 + colum * 18, 96 + row * 18));
             }
         }
         addPlayerHotbar(inventory);
@@ -71,7 +71,7 @@ public class ArmorDyeingScreenHandler extends ScreenHandler {
 
     private void addPlayerHotbar(PlayerInventory inventory) {
         for (int colum = 0; colum < 9; colum++) {
-            addSlot(new Slot(inventory, colum, 8 + colum * 18, 142));
+            addSlot(new Slot(inventory, colum, 8 + colum * 18, 154));
         }
     }
 

@@ -41,11 +41,13 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
     protected void init() {
         super.init();
 
-        this.sliderWidgetRed = new ColorSliderWidget("Red", this.x + 96, this.y + 10, 64, 14, 0);
+        this.playerInventoryTitleY += 12;
+
+        this.sliderWidgetRed = new ColorSliderWidget("Red", this.x + 96, this.y + 16, 64, 14, 0);
         addDrawableChild(sliderWidgetRed);
-        this.sliderWidgetGreen = new ColorSliderWidget("Green", this.x + 96, this.y + 26, 64, 14, 0);
+        this.sliderWidgetGreen = new ColorSliderWidget("Green", this.x + 96, this.y + 32, 64, 14, 0);
         addDrawableChild(sliderWidgetGreen);
-        this.sliderWidgetBlue = new ColorSliderWidget("Blue", this.x + 96, this.y + 43, 64, 14, 0);
+        this.sliderWidgetBlue = new ColorSliderWidget("Blue", this.x + 96, this.y + 49, 64, 14, 0);
         addDrawableChild(sliderWidgetBlue);
 
         this.setButton = ButtonWidget.builder(Text.of("set"), button -> {
@@ -53,7 +55,7 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
                         this.handler.dye(getSelectedColor());
                     }
                 })
-                .dimensions(this.x + 96, this.y + 60, 31, 14)
+                .dimensions(this.x + 96, this.y + 66, 31, 14)
                 .build();
         addDrawableChild(setButton);
         this.setDefaultButton = ButtonWidget.builder(Text.of("default"), button -> {
@@ -61,13 +63,15 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
                         this.handler.dyeDefault();
                     }
                 })
-                .dimensions(this.x + 129, this.y + 60, 31, 14)
+                .dimensions(this.x + 129, this.y + 66, 31, 14)
                 .build();
         addDrawableChild(setDefaultButton);
     }
 
     public ArmorDyeingScreen(ArmorDyeingScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
+        this.backgroundHeight = 177;
+
         handler.setContentsChangedListener(this::onInventoryChange);
     }
 
@@ -79,7 +83,7 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
 
         int k = (int)(49.0F * this.scrollAmount);
         Identifier identifier = this.shouldScroll() ? SCROLLER_TEXTURE : SCROLLER_DISABLED_TEXTURE;
-        context.drawTexture(identifier, i + 68, j + 10 + k, 0, 0, 12, 15, 12, 15);
+        context.drawTexture(identifier, i + 68, j + 16 + k, 0, 0, 12, 15, 12, 15);
     }
 
     @Override
@@ -90,7 +94,7 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
         this.handler.updateOptions();
 
         int l = this.x + 48;
-        int m = this.y + 10;
+        int m = this.y + 16;
         int n = this.scrollOffset + 12;
         renderOptionsBackground(context, mouseX, mouseY, l, m, n);
         if (!handler.getOptions().isEmpty()) {
@@ -138,7 +142,7 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
         this.mouseClicked = false;
         if (this.handler.canSelect()) {
             int i = this.x + 48;
-            int j = this.y + 10;
+            int j = this.y + 16;
             int k = this.scrollOffset + 4;
 
             //option buttons
@@ -155,7 +159,7 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
 
             //slider
             i = this.x + 68;
-            j = this.y + 7;
+            j = this.y + 16;
             if (mouseX >= (double)i && mouseX < (double)(i + 12) && mouseY >= (double)j && mouseY < (double)(j + 70)) {
                 MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
                 this.mouseClicked = true;
@@ -168,8 +172,8 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
     @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
         if (this.mouseClicked && this.shouldScroll()) {
-            int i = this.y + 14;
-            int j = i + 54;
+            int i = this.y + 16;
+            int j = i + 64;
             this.scrollAmount = ((float)mouseY - (float)i - 7.5F) / ((float)(j - i) - 15.0F);
             this.scrollAmount = MathHelper.clamp(this.scrollAmount, 0.0F, 1.0F);
             this.scrollOffset = (int)((double)(this.scrollAmount * (float)this.getMaxScroll()) + 0.5) * 4;
