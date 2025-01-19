@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "myneheroes:item/debug_helmet",
-    "layer1": "myneheroes:item/debug_helmet_1"
-  }
-}

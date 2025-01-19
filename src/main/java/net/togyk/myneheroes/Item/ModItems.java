@@ -28,21 +28,6 @@ public class ModItems {
 
 
     //armors
-    //debug armors
-    public static final Item DEBUG_HELMET = registerItem("debug_helmet",
-            new DyeableAdvancedArmorItem(List.of(-1, Colors.RED), List.of(15, -1), ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(15))));
-    public static final Item DEBUG_CHESTPLATE = registerItem("debug_chestplate",
-            new DyeableAdvancedArmorItem(List.of(-1, Colors.RED), List.of(15, -1), ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(15))));
-    public static final Item DEBUG_LEGGINGS = registerItem("debug_leggings",
-            new DyeableAdvancedArmorItem(List.of(-1, Colors.RED), List.of(15, -1), ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(15))));
-    public static final Item DEBUG_BOOTS = registerItem("debug_boots",
-            new DyeableAdvancedArmorItem(List.of(-1, Colors.RED), List.of(15, -1), ModArmorMaterials.DEBUG_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(15))));
-
-
     //vibranium armors
     public static final Item VIBRANIUM_HELMET = registerItem("vibranium_helmet",
             new ArmorItem(ModArmorMaterials.VIBRANIUM_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
@@ -55,6 +40,20 @@ public class ModItems {
                     .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(15))));
     public static final Item VIBRANIUM_BOOTS = registerItem("vibranium_boots",
             new ArmorItem(ModArmorMaterials.VIBRANIUM_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(15))));
+
+    //mark6 armors
+    public static final Item MARK6_VIBRANIUM_HELMET = registerItem("mark6_vibranium_helmet",
+            new DyeableAdvancedArmorItem(List.of(-12696503, -11241349, -1443585), List.of(-1, -1, 15), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(15))));
+    public static final Item MARK6_VIBRANIUM_CHESTPLATE = registerItem("mark6_vibranium_chestplate",
+            new DyeableAdvancedArmorItem(List.of(-12696503, -11241349, -1443585), List.of(-1, -1, 15), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(15))));
+    public static final Item MARK6_VIBRANIUM_LEGGINGS = registerItem("mark6_vibranium_leggings",
+            new DyeableAdvancedArmorItem(List.of(-12696503, -11241349, -1443585), List.of(-1, -1, 15), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(15))));
+    public static final Item MARK6_VIBRANIUM_BOOTS = registerItem("mark6_vibranium_boots",
+            new DyeableAdvancedArmorItem(List.of(-12696503, -11241349, -1443585), List.of(-1, -1, 15), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
                     .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(15))));
 
 

@@ -54,10 +54,17 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_LEGGINGS));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_BOOTS));
 
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.MARK6_VIBRANIUM_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.MARK6_VIBRANIUM_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.MARK6_VIBRANIUM_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.MARK6_VIBRANIUM_BOOTS));
+
+
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.TITANIUM_HELMET));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.TITANIUM_CHESTPLATE));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.TITANIUM_LEGGINGS));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.TITANIUM_BOOTS));
+
 
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.GOLD_TITANIUM_HELMET));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.GOLD_TITANIUM_CHESTPLATE));

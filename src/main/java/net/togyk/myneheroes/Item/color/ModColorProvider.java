@@ -16,9 +16,9 @@ public class ModColorProvider {
     }
 
     public static void registerColorProviders(){
-        registerDyeableArmorItem(ModItems.DEBUG_HELMET);
-        registerDyeableArmorItem(ModItems.DEBUG_CHESTPLATE);
-        registerDyeableArmorItem(ModItems.DEBUG_LEGGINGS);
-        registerDyeableArmorItem(ModItems.DEBUG_BOOTS);
+        registerDyeableArmorItem(ModItems.MARK6_VIBRANIUM_HELMET);
+        registerDyeableArmorItem(ModItems.MARK6_VIBRANIUM_CHESTPLATE);
+        registerDyeableArmorItem(ModItems.MARK6_VIBRANIUM_LEGGINGS);
+        registerDyeableArmorItem(ModItems.MARK6_VIBRANIUM_BOOTS);
     }
 }
