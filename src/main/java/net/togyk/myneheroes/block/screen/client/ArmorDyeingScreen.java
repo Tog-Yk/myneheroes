@@ -40,7 +40,6 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
     @Override
     protected void init() {
         super.init();
-        this.titleX = (this.backgroundWidth - this.textRenderer.getWidth(this.title));
 
         this.playerInventoryTitleY += 12;
 
