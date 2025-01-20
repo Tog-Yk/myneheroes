@@ -29,6 +29,10 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLD_TITANIUM_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.RAW_GOLD_TITANIUM_BLOCK);
 
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ARMOR_DYEING_STATION);
+
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ARMOR_LIGHT_LEVELING_STATION);
+
     }
 
     @Override
@@ -59,10 +63,12 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_LEGGINGS));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_BOOTS));
 
+
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.TITANIUM_HELMET));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.TITANIUM_CHESTPLATE));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.TITANIUM_LEGGINGS));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.TITANIUM_BOOTS));
+
 
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.GOLD_TITANIUM_HELMET));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.GOLD_TITANIUM_CHESTPLATE));

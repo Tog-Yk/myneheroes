@@ -1,16 +1,16 @@
 package net.togyk.myneheroes.block;
 
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.block.custom.ArmorDyeingBlockEntityBlock;
+import net.togyk.myneheroes.block.custom.ArmorLightLevelerBlockEntityBlock;
 
 public class ModBlocks {
     public static final Block VIBRANIUM_BLOCK = registerBlock("vibranium_block",
@@ -47,6 +47,12 @@ public class ModBlocks {
     public static final Block RAW_GOLD_TITANIUM_BLOCK = registerBlock("raw_gold_titanium_block",
             new Block(AbstractBlock.Settings.create().strength(4f)
                     .requiresTool()));
+
+    public static final Block ARMOR_DYEING_STATION = registerBlock("armor_dyeing_station",
+            new ArmorDyeingBlockEntityBlock(AbstractBlock.Settings.create().strength(4f)
+                    .requiresTool()));
+    public static final Block ARMOR_LIGHT_LEVELING_STATION = registerBlock("armor_light_leveling_station",
+            new ArmorLightLevelerBlockEntityBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.WOOD)));
 
 
 

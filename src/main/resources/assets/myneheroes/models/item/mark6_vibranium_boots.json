@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "myneheroes:item/mark6_vibranium_boots",
+    "layer1": "myneheroes:item/mark6_vibranium_details_boots",
+    "layer2": "myneheroes:item/mark6_vibranium_glow_boots"
+  }
+}

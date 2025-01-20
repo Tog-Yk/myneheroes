@@ -45,7 +45,7 @@ public class ModTrimMaterials {
 
     /*
 
-    @param itemModelIndex = color displayed on the item based on a float and the item model
+    @param itemModelIndex = lightLevel displayed on the item based on a float and the item model
      */
     private static void register(Registerable<ArmorTrimMaterial> registerable, RegistryKey<ArmorTrimMaterial> armorTrimKey,
                                  RegistryEntry<Item> item, Style style, float itemModelIndex) {

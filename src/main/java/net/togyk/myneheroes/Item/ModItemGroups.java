@@ -47,6 +47,9 @@ public class ModItemGroups {
 
                         entries.add(ModItems.POWER_INJECTION);
 
+                        entries.add(ModBlocks.ARMOR_DYEING_STATION);
+                        entries.add(ModBlocks.ARMOR_LIGHT_LEVELING_STATION);
+
                     }).build());
 
     public static final ItemGroup MYNEHEROES_ARMOR_GROUP = Registry.register(Registries.ITEM_GROUP,
@@ -54,10 +57,10 @@ public class ModItemGroups {
             FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.VIBRANIUM_CHESTPLATE))
                     .displayName(Text.translatable("itemgroup.myneheroes.myneheroes_armor"))
                     .entries((displayContext, entries) -> {
-                        entries.add(ModItems.DEBUG_HELMET);
-                        entries.add(ModItems.DEBUG_CHESTPLATE);
-                        entries.add(ModItems.DEBUG_LEGGINGS);
-                        entries.add(ModItems.DEBUG_BOOTS);
+                        entries.add(ModItems.MARK6_VIBRANIUM_HELMET);
+                        entries.add(ModItems.MARK6_VIBRANIUM_CHESTPLATE);
+                        entries.add(ModItems.MARK6_VIBRANIUM_LEGGINGS);
+                        entries.add(ModItems.MARK6_VIBRANIUM_BOOTS);
 
                         entries.add(ModItems.VIBRANIUM_HELMET);
                         entries.add(ModItems.VIBRANIUM_CHESTPLATE);

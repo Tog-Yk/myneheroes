@@ -2,13 +2,19 @@ package net.togyk.myneheroes;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.togyk.myneheroes.Item.ModItemGroups;
 import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
+import net.togyk.myneheroes.block.ModBlockEntityTypes;
 import net.togyk.myneheroes.block.ModBlocks;
+import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
+import net.togyk.myneheroes.block.entity.ArmorLightLevelerBlockEntity;
+import net.togyk.myneheroes.block.screen.ModScreenHandlerTypes;
+import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.entity.ModEntities;
 import net.togyk.myneheroes.event.ModEvents;
 import net.togyk.myneheroes.networking.ModMessages;
@@ -30,11 +36,20 @@ public class MyneHeroes implements ModInitializer {
         ModItems.registerModItems();
         ModBlocks.registerModBlocks();
         ModItemGroups.registerItemGroups();
+
         ModBiomeModifications.registerModBiomeModifications();
         ModEntities.registerModEntities();
 
         ModMessages.registerServerMessages();
         ModEvents.registerEvents();
+
+        ModDataComponentTypes.registerDataComponentTypes();
+
+        ModBlockEntityTypes.registerModBlockEntityTypes();
+        ModScreenHandlerTypes.registerModScreenHandlerTypes();
+
+        ItemStorage.SIDED.registerForBlockEntity(ArmorDyeingBlockEntity::getInventoryProvider, ModBlockEntityTypes.ARMOR_DYEING_BLOCK_ENTITY);
+        ItemStorage.SIDED.registerForBlockEntity(ArmorLightLevelerBlockEntity::getInventoryProvider, ModBlockEntityTypes.ARMOR_LIGHT_LEVELER_BLOCK_ENTITY);
 
         Powers.registerPowers();
     }
