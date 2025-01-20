@@ -43,6 +43,7 @@ public class ModItemGroups {
                         entries.add(ModItems.ARC_REACTOR);
 
                         entries.add(ModBlocks.ARMOR_DYEING_STATION);
+                        entries.add(ModBlocks.ARMOR_LIGHT_LEVELING_STATION);
 
                     }).build());
 

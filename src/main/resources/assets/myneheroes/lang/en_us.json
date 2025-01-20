@@ -12,15 +12,15 @@
 
   "item.myneheroes.arc_reactor": "Arc Reactor",
 
-  "item.myneheroes.debug_helmet": "Debug Helmet",
-  "item.myneheroes.debug_chestplate": "Debug Chestplate",
-  "item.myneheroes.debug_leggings": "Debug Leggings",
-  "item.myneheroes.debug_boots": "Debug Boost",
-
   "item.myneheroes.vibranium_helmet": "Vibranium Helmet",
   "item.myneheroes.vibranium_chestplate": "Vibranium Chestplate",
   "item.myneheroes.vibranium_leggings": "Vibranium Leggings",
   "item.myneheroes.vibranium_boots": "Vibranium Boost",
+
+  "item.myneheroes.mark6_vibranium_helmet": "Mark-6 Vibranium Helmet",
+  "item.myneheroes.mark6_vibranium_chestplate": "Mark-6 Vibranium Chestplate",
+  "item.myneheroes.mark6_vibranium_leggings": "Mark-6 Vibranium Leggings",
+  "item.myneheroes.mark6_vibranium_boots": "Mark-6 Vibranium Boost",
 
   "item.myneheroes.titanium_helmet": "Titanium Helmet",
   "item.myneheroes.titanium_chestplate": "Titanium Chestplate",
@@ -48,6 +48,8 @@
   "block.myneheroes.raw_gold_titanium_block": "Raw Gold Titanium Block",
   "block.myneheroes.armor_dyeing_station": "Armor Dyeing Station",
 
+  "block.myneheroes.armor_light_leveling_station": "Armor Light Leveling Station",
+
 
   "trim_material.myneheroes.vibranium": "Vibranium",
   "trim_material.myneheroes.titanium": "Titanium",
@@ -66,5 +68,6 @@
   "key.myneheroes.shoot_repolser": "Shoot Repolser",
   "key.myneheroes.fuel_reactor": "Fuel Reactor",
 
-  "container.myneheroes.armor_dyeing_station": "Armor Dyeing Station"
+  "container.myneheroes.armor_dyeing_station": "Armor Dyeing Station",
+  "container.myneheroes.armor_light_leveler_station": "Armor Light Leveler Station"
 }

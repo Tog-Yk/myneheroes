@@ -17,7 +17,7 @@ import java.util.List;
 
 @Mixin(ArmorFeatureRenderer.class)
 public abstract class ArmorFeatureRendererMixin<T extends LivingEntity, M extends BipedEntityModel<T>, A extends BipedEntityModel<T>> {
-    //change the color of a armorMaterial layer based on the items NBT and if it extends the DyeableAdvancedArmorItem from this mod
+    //change the lightLevel of a armorMaterial layer based on the items NBT and if it extends the DyeableAdvancedArmorItem from this mod
     //only works on dyeable layers so check your armorMaterial
     @ModifyVariable(
             method = "renderArmor",
@@ -47,9 +47,9 @@ public abstract class ArmorFeatureRendererMixin<T extends LivingEntity, M extend
         if (itemStack.getItem() instanceof DyeableAdvancedArmorItem armorItem) {
             List<ArmorMaterial.Layer> layers = armorItem.getMaterial().value().layers();
             int layerIndex = layers.indexOf(layer);
-            if (armorItem.layerIsLightable(layerIndex)) {
+            if (armorItem.layerIsLightable(itemStack, layerIndex)) {
                 // times 1048576 to make a lightLever of 15 the maximum light
-                return armorItem.getLightLevel(itemStack, layers.indexOf(layer)) * 1048576;
+                return armorItem.getLightLevel(itemStack, layerIndex) * 1048576;
             }
         }
         return light;

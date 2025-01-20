@@ -7,10 +7,14 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
+import net.togyk.myneheroes.block.entity.ArmorLightLevelerBlockEntity;
 
 public class ModBlockEntityTypes {
     public static final BlockEntityType<ArmorDyeingBlockEntity> ARMOR_DYEING_BLOCK_ENTITY = register("armor_dyeing_block_entity",
             BlockEntityType.Builder.create(ArmorDyeingBlockEntity::new, ModBlocks.ARMOR_DYEING_STATION)
+                    .build());
+    public static final BlockEntityType<ArmorLightLevelerBlockEntity> ARMOR_LIGHT_LEVELER_BLOCK_ENTITY = register("armor_light_leveler_block_entity",
+            BlockEntityType.Builder.create(ArmorLightLevelerBlockEntity::new, ModBlocks.ARMOR_LIGHT_LEVELING_STATION)
                     .build());
 
     private static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType<T> type) {

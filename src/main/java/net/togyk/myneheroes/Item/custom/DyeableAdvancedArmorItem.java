@@ -101,8 +101,8 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
         stack.set(ModDataComponentTypes.LIGHT_LEVEL, colors);
     }
 
-    public boolean layerIsLightable(int index) {
-        return getDefaultLightLevel(index) >= 0;
+    public boolean layerIsLightable(ItemStack stack, int index) {
+        return getLightLevel(stack, index) >= 0;
     }
 
     @Override

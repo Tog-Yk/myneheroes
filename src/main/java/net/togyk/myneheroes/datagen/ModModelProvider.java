@@ -31,6 +31,8 @@ public class ModModelProvider extends FabricModelProvider {
 
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ARMOR_DYEING_STATION);
 
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ARMOR_LIGHT_LEVELING_STATION);
+
     }
 
     @Override
@@ -53,11 +55,6 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_CHESTPLATE));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_LEGGINGS));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_BOOTS));
-
-        itemModelGenerator.registerArmor(((ArmorItem) ModItems.MARK6_VIBRANIUM_HELMET));
-        itemModelGenerator.registerArmor(((ArmorItem) ModItems.MARK6_VIBRANIUM_CHESTPLATE));
-        itemModelGenerator.registerArmor(((ArmorItem) ModItems.MARK6_VIBRANIUM_LEGGINGS));
-        itemModelGenerator.registerArmor(((ArmorItem) ModItems.MARK6_VIBRANIUM_BOOTS));
 
 
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.TITANIUM_HELMET));

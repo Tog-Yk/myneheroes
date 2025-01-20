@@ -8,6 +8,7 @@ public class ModHandledScreens {
     public static void registerModScreenHandlerTypes() {
         MyneHeroes.LOGGER.info("Registering Handled Screen for " + MyneHeroes.MOD_ID);
 
-        HandledScreens.register(ModScreenHandlerTypes.ARMOR_DYEING, ArmorDyeingScreen::new  );
+        HandledScreens.register(ModScreenHandlerTypes.ARMOR_DYEING, ArmorDyeingScreen::new);
+        HandledScreens.register(ModScreenHandlerTypes.ARMOR_LIGHT_LEVELER, ArmorLightLevelerScreen::new);
     }
 }

@@ -12,6 +12,7 @@ import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.block.ModBlockEntityTypes;
 import net.togyk.myneheroes.block.ModBlocks;
 import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
+import net.togyk.myneheroes.block.entity.ArmorLightLevelerBlockEntity;
 import net.togyk.myneheroes.block.screen.ModScreenHandlerTypes;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.networking.ModMessages;
@@ -43,6 +44,7 @@ public class MyneHeroes implements ModInitializer {
         ModScreenHandlerTypes.registerModScreenHandlerTypes();
 
         ItemStorage.SIDED.registerForBlockEntity(ArmorDyeingBlockEntity::getInventoryProvider, ModBlockEntityTypes.ARMOR_DYEING_BLOCK_ENTITY);
+        ItemStorage.SIDED.registerForBlockEntity(ArmorLightLevelerBlockEntity::getInventoryProvider, ModBlockEntityTypes.ARMOR_LIGHT_LEVELER_BLOCK_ENTITY);
     }
     /**
      * Searches the player's inventory for the first matching item.

@@ -11,11 +11,14 @@ import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.block.screen.handeler.ArmorDyeingScreenHandler;
+import net.togyk.myneheroes.block.screen.handeler.ArmorLightLevelerScreenHandler;
 import net.togyk.myneheroes.networking.BlockPosPayload;
 
 public class ModScreenHandlerTypes {
     public static final ScreenHandlerType<ArmorDyeingScreenHandler> ARMOR_DYEING =
             register("armor_dyeing", ArmorDyeingScreenHandler::new, BlockPosPayload.PACKET_CODEC);
+    public static final ScreenHandlerType<ArmorLightLevelerScreenHandler> ARMOR_LIGHT_LEVELER =
+            register("armor_light_leveler", ArmorLightLevelerScreenHandler::new, BlockPosPayload.PACKET_CODEC);
 
 
     public static <T extends ScreenHandler, D extends CustomPayload> ExtendedScreenHandlerType<T, D>
