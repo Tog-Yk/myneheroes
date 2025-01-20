@@ -6,7 +6,9 @@ import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +17,8 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
     private final List<Integer> defaultColors;
     private final List<Integer> defaultLightLevels;
 
-    public DyeableAdvancedArmorItem(List<Integer> defaultColors, List<Integer> lightLevels, RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
-        super(material, type, settings);
+    public DyeableAdvancedArmorItem(List<Integer> defaultColors, List<Integer> lightLevels, @Nullable Ability suitSpecificAbility, RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
+        super(suitSpecificAbility, material, type, settings);
         this.defaultColors = defaultColors;
         this.defaultLightLevels = lightLevels;
     }

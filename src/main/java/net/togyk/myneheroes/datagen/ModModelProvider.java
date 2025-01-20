@@ -53,10 +53,10 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.ABILITY_HOLDING, Models.GENERATED);
         itemModelGenerator.register(ModItems.LAZAR_HOLDING, Models.GENERATED);
 
-        itemModelGenerator.registerArmor(((ArmorItem) ModItems.DEBUG_HELMET));
-        itemModelGenerator.registerArmor(((ArmorItem) ModItems.DEBUG_CHESTPLATE));
-        itemModelGenerator.registerArmor(((ArmorItem) ModItems.DEBUG_LEGGINGS));
-        itemModelGenerator.registerArmor(((ArmorItem) ModItems.DEBUG_BOOTS));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.MARK6_VIBRANIUM_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.MARK6_VIBRANIUM_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.MARK6_VIBRANIUM_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.MARK6_VIBRANIUM_BOOTS));
 
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_HELMET));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_CHESTPLATE));

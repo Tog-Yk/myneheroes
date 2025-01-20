@@ -40,10 +40,10 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.GOLD_TITANIUM_LEGGINGS)
                 .add(ModItems.GOLD_TITANIUM_BOOTS);
         getOrCreateTagBuilder(ItemTags.DYEABLE)
-                .add(ModItems.DEBUG_HELMET)
-                .add(ModItems.DEBUG_CHESTPLATE)
-                .add(ModItems.DEBUG_LEGGINGS)
-                .add(ModItems.DEBUG_BOOTS);
+                .add(ModItems.MARK6_VIBRANIUM_HELMET)
+                .add(ModItems.MARK6_VIBRANIUM_CHESTPLATE)
+                .add(ModItems.MARK6_VIBRANIUM_LEGGINGS)
+                .add(ModItems.MARK6_VIBRANIUM_BOOTS);
 
     }
 
