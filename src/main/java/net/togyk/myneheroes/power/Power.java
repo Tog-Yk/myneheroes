@@ -7,15 +7,17 @@ import java.util.List;
 
 public class Power {
     private final String name;
-    private final int damageMultiplier;
+    private final float damageMultiplier;
+    private final float resistance;
     public List<Ability> abilities;
 
     private boolean isDampened = false;
     int color;
 
-    public Power(String name, int damageMultiplier, int color, List<Ability> abilities) {
+    public Power(String name, float damageMultiplier, float resistance, int color, List<Ability> abilities) {
         this.name = name;
         this.damageMultiplier = damageMultiplier;
+        this.resistance = resistance;
         this.color = color;
         this.abilities = abilities;
     }
@@ -39,8 +41,12 @@ public class Power {
         isDampened = dampened;
     }
 
-    public int getDamageMultiplier() {
+    public float getDamageMultiplier() {
         return damageMultiplier;
+    }
+
+    public float getResistance() {
+        return resistance;
     }
 
     public int getColor() {

@@ -15,7 +15,7 @@ public class Powers {
     public static void registerPowers() {
         MyneHeroes.LOGGER.info("registering Powers for" + MyneHeroes.MOD_ID);
 
-        registerPower(Identifier.of(MyneHeroes.MOD_ID, "kryptonian"), new Power("kryptonian", 5, 0xFFBB0033, AbilityUtil.getAbilitiesForPower("kryptonian")));
+        registerPower(Identifier.of(MyneHeroes.MOD_ID, "kryptonian"), new Power("kryptonian", 5.0F, 0.3F, 0xFFBB0033, AbilityUtil.getAbilitiesForPower("kryptonian")));
     }
 
     public static void registerPower(Identifier id, Power power) {

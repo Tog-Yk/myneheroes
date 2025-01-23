@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Collections.max;
+import static java.util.Collections.min;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerPowerMixin implements PlayerPowers {
@@ -69,12 +70,24 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
     }
 
     public float getDamageMultiplier() {
-        List<Integer> multipliers = new ArrayList<>();
+        List<Float> multipliers = new ArrayList<>();
         for (Power power : this.powers) {
             multipliers.add(power.getDamageMultiplier());
         }
         if (!multipliers.isEmpty()) {
             return max(multipliers);
+        } else {
+            return 1.0F;
+        }
+    }
+
+    public float getResistance() {
+        List<Float> multipliers = new ArrayList<>();
+        for (Power power : this.powers) {
+            multipliers.add(power.getResistance());
+        }
+        if (!multipliers.isEmpty()) {
+            return min(multipliers);
         } else {
             return 1.0F;
         }

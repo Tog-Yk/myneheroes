@@ -10,4 +10,5 @@ public interface PlayerPowers {
     void removePower(Power power);
     void addPower(Power power);
     float getDamageMultiplier();
+    float getResistance();
 }
