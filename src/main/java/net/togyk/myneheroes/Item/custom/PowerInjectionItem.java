@@ -36,6 +36,14 @@ public class PowerInjectionItem extends Item {
         }
         return null;
     }
+    public Power getPower(ItemStack stack) {
+        Identifier powerId = getPowerId(stack);
+        if (powerId != null && Powers.containsId(powerId)) {
+            return Powers.get(powerId);
+        } else {
+            return null;
+        }
+    }
 
     public void setPowerId(ItemStack stack, Identifier powerId) {
         NbtCompound nbt = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT).getNbt();
@@ -54,18 +62,17 @@ public class PowerInjectionItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        Identifier powerId = this.getPowerId(user.getStackInHand(hand));
+        Power power = getPower(user.getStackInHand(hand));
 
         PlayerPowers playerPowersI = ((PlayerPowers) user);
         List<Power> powers = playerPowersI.getPowers();
-        if (powerId == null && !powers.isEmpty()) {
+        if (power == null && !powers.isEmpty()) {
             Power usersLastPower = powers.getLast();
             this.setPowerId(user.getStackInHand(hand), Powers.getFirstMatchingId(usersLastPower));
             playerPowersI.removePower(usersLastPower);
             user.swingHand(Hand.MAIN_HAND);
             return TypedActionResult.success(user.getStackInHand(hand));
-        } else if (Powers.containsId(powerId) && !powers.contains(Powers.get(powerId))) {
-            Power power = Powers.get(powerId);
+        } else if (!powers.contains(power)) {
             playerPowersI.addPower(power);
             this.setPowerId(user.getStackInHand(hand), Powers.getFirstMatchingId(null));
             user.swingHand(Hand.MAIN_HAND);

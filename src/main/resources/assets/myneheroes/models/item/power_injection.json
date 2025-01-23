@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "myneheroes:item/power_injection"
+    "layer0": "myneheroes:item/power_injection",
+    "layer1": "myneheroes:item/power_injection_contents"
   }
 }

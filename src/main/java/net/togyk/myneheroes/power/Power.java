@@ -11,10 +11,12 @@ public class Power {
     public List<Ability> abilities;
 
     private boolean isDampened = false;
+    int color;
 
-    public Power(String name, int damageMultiplier, List<Ability> abilities) {
+    public Power(String name, int damageMultiplier, int color, List<Ability> abilities) {
         this.name = name;
         this.damageMultiplier = damageMultiplier;
+        this.color = color;
         this.abilities = abilities;
     }
     public NbtCompound getNbt() {
@@ -39,5 +41,9 @@ public class Power {
 
     public int getDamageMultiplier() {
         return damageMultiplier;
+    }
+
+    public int getColor() {
+        return color;
     }
 }
