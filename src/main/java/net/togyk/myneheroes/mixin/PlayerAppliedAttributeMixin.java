@@ -37,7 +37,7 @@ public abstract class PlayerAppliedAttributeMixin implements PlayerPowers {
             // Multiply the damage taken
             float multiplier = ((PlayerPowers) player).getResistance(); // Your custom multiplier
             if (multiplier != 1.0F) {
-                return multiplier;
+                return amount * multiplier;
             }
         }
         return amount;
