@@ -5,7 +5,6 @@
 	"package": "net.togyk.myneheroes.mixin",
 	"mixins": [
 		"ArmorFeatureRendererMixin",
-		"LivingEntityMixin",
 		"PlayerAbilityMixin",
 		"PlayerAppliedAttributeMixin",
 		"PlayerPowerMixin"

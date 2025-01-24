@@ -42,4 +42,40 @@ public abstract class PlayerAppliedAttributeMixin implements PlayerPowers {
         }
         return amount;
     }
+    @ModifyVariable(
+            method = "attack",
+            at = @At("STORE"),
+            ordinal = 0
+    )
+    private DamageSource modifyAttackSource(DamageSource source) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+
+        // Check if the source is a player
+        if (player != null) {
+            // Multiply the damage taken
+            float multiplier = ((PlayerPowers) player).getDamageMultiplier(); // Your custom multiplier
+            if (multiplier != 1.0F) {
+                return ModDamageTypes.of(player.getWorld(), ModDamageTypes.POWERFUL_PUNCH_TYPE_KEY, player);
+            }
+        }
+        return source;
+    }
+    @ModifyVariable(
+            method = "attack",
+            at = @At("STORE"),
+            ordinal = 3
+    )
+    private float modifyAttackDamage(float i) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+
+        // Check if the source is a player
+        if (player != null) {
+            // Multiply the damage taken
+            float multiplier = ((PlayerPowers) player).getDamageMultiplier(); // Your custom multiplier
+            if (multiplier != 1.0F) {
+                return i * multiplier;
+            }
+        }
+        return i;
+    }
 }
