@@ -8,6 +8,7 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.MyneHeroes;
 import org.jetbrains.annotations.NotNull;
@@ -25,14 +26,26 @@ public class LaserEntity extends PersistentProjectileEntity {
     }
 
     @Override
-    protected void onBlockHit(BlockHitResult blockHitResult) {
+    protected void onEntityHit(EntityHitResult entityHitResult) {
+        super.onEntityHit(entityHitResult);
         this.discard();
+    }
+
+    @Override
+    protected double getGravity() {
+        return 0.02;
+    }
+
+    @Override
+    protected void onBlockHit(BlockHitResult blockHitResult) {
+        super.onBlockHit(blockHitResult);
         if (!getWorld().isClient) {
             Block hitBlock = getWorld().getBlockState(blockHitResult.getBlockPos()).getBlock();
             if (hitBlock == Blocks.ICE) {
                 getWorld().setBlockState(blockHitResult.getBlockPos(), Blocks.WATER.getDefaultState());
             }
         }
+        this.discard();
     }
 
     @Override
