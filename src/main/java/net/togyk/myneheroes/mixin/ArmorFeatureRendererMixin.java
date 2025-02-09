@@ -49,19 +49,11 @@ public abstract class ArmorFeatureRendererMixin<T extends LivingEntity, M extend
             int layerIndex = layers.indexOf(layer);
             if (armorItem.layerIsLightable(itemStack, layerIndex)) {
                 // times 1048576 to make a lightLever of 15 the maximum light
-                return armorItem.getLightLevel(itemStack, layerIndex) * 1048576;
+                MyneHeroes.LOGGER.info(String.valueOf((armorItem.getLightLevel(itemStack, layerIndex) / 15) * 15728880));
+                MyneHeroes.LOGGER.info(String.valueOf(armorItem.getLightLevel(itemStack, layerIndex) / 15));
+                return (armorItem.getLightLevel(itemStack, layerIndex) / 15) * 15728880;
             }
         }
         return light;
     }
-    //MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, A model, int i, Identifier identifier
-
-    //Lnet/minecraft/client/util/math/MatrixStack;
-    //Lnet/minecraft/client/render/VertexConsumerProvider;
-    //I
-    //Lnet/minecraft/client/render/entity/model/BipedEntityModel;
-    //I
-    //Lnet/minecraft/util/Identifier;
-
-    //Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/client/render/entity/model/BipedEntityModel;ILnet/minecraft/util/Identifier;
 }
