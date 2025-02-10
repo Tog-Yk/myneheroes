@@ -2,6 +2,7 @@ package net.togyk.myneheroes.Item;
 
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ShieldItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Colors;
@@ -96,6 +97,8 @@ public class ModItems {
                     .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(15))));
 
 
+    public static final Item VIBRANIUM_SHIELD = registerItem("vibranium_shield",
+            new ShieldItem(new Item.Settings().maxDamage(336)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(MyneHeroes.MOD_ID, name), item);

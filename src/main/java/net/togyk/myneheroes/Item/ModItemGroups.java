@@ -50,6 +50,8 @@ public class ModItemGroups {
                         entries.add(ModBlocks.ARMOR_DYEING_STATION);
                         entries.add(ModBlocks.ARMOR_LIGHT_LEVELING_STATION);
 
+                        entries.add(ModItems.VIBRANIUM_SHIELD);
+
                     }).build());
 
     public static final ItemGroup MYNEHEROES_ARMOR_GROUP = Registry.register(Registries.ITEM_GROUP,
