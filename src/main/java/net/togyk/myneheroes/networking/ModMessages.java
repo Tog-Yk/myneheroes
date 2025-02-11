@@ -7,12 +7,14 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.Item.custom.DyeableAdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.event.MissedSwingCallback;
 import net.togyk.myneheroes.util.PlayerAbilities;
 import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
 import net.togyk.myneheroes.block.entity.ArmorLightLevelerBlockEntity;
@@ -22,6 +24,7 @@ public class ModMessages {
     public static final Identifier COLOR_ITEM_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "color_item");
     public static final Identifier KEYBIND_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "keybind");
     public static final Identifier LIGHT_LEVELER_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "light_leveler");
+    public static final Identifier MISSED_SWING_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "missed_swing");
 
     public static void registerServerMessages() {
         PayloadTypeRegistry.playC2S().register(KeybindPayload.ID, KeybindPayload.CODEC);
@@ -103,7 +106,14 @@ public class ModMessages {
             });
         });
 
+        PayloadTypeRegistry.playC2S().register(PlayerSwingPayload.ID, PlayerSwingPayload.CODEC);
 
+
+        ServerPlayNetworking.registerGlobalReceiver(PlayerSwingPayload.ID, (payload, context) -> {
+            context.server().execute(() -> {
+                MissedSwingCallback.EVENT.invoker().onMissedSwing(context.player(), Hand.MAIN_HAND);
+            });
+        });
     }
 
     public static void registerClientMessages() {

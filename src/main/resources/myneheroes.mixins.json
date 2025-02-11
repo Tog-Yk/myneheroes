@@ -7,7 +7,8 @@
 		"ArmorFeatureRendererMixin",
 		"PlayerAbilityMixin",
 		"PlayerAppliedAttributeMixin",
-		"PlayerPowerMixin"
+		"PlayerPowerMixin",
+		"PlayerSwingMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

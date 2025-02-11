@@ -1,10 +1,17 @@
 package net.togyk.myneheroes.event;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
+import net.togyk.myneheroes.Item.custom.ThrowableShieldItem;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.entity.LaserEntity;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.util.PlayerPowers;
@@ -44,6 +51,22 @@ public class ModEvents {
 
             // count down if players are no longer in the Nether
             timeInNether.keySet().removeIf(player -> player.getWorld() != server.getWorld(ServerWorld.NETHER));
+        });
+
+        MissedSwingCallback.EVENT.register((PlayerEntity player, Hand hand) -> {
+            // Create an arrow entity. (This example does not consume inventory arrows.)
+            ItemStack stack = player.getStackInHand(hand);
+            if (stack.getItem() instanceof ThrowableShieldItem shieldItem) {
+                Vec3d look = player.getRotationVec(1.0F);
+
+                PersistentProjectileEntity projectile = new LaserEntity(shieldItem.getProjectileEntityType(), player.getWorld());
+                projectile.setOwner(player);
+                projectile.setPosition(player.getX(), player.getEyeY(), player.getZ());
+                projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
+                projectile.applyDamageModifier(2.0F);
+
+                player.getWorld().spawnEntity(projectile);
+            }
         });
     }
 }

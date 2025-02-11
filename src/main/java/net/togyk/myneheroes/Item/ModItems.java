@@ -7,14 +7,11 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
-import net.togyk.myneheroes.Item.custom.DyeableAdvancedArmorItem;
-import net.togyk.myneheroes.Item.custom.AbilityHoldingItem;
-import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
-import net.togyk.myneheroes.Item.custom.PowerInjectionItem;
-import net.togyk.myneheroes.Item.custom.ReactorItem;
+import net.togyk.myneheroes.Item.custom.*;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.ShootLaserAbilityFromReactor;
+import net.togyk.myneheroes.entity.ModEntities;
 
 import java.util.List;
 
@@ -98,7 +95,7 @@ public class ModItems {
 
 
     public static final Item VIBRANIUM_SHIELD = registerItem("vibranium_shield",
-            new ShieldItem(new Item.Settings().maxDamage(336)));
+            new ThrowableShieldItem(ModEntities.LASER,2.0F,new Item.Settings().maxDamage(336)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(MyneHeroes.MOD_ID, name), item);
