@@ -1,14 +1,18 @@
 package net.togyk.myneheroes.event;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
+import net.togyk.myneheroes.Item.custom.StationaryItem;
 import net.togyk.myneheroes.Item.custom.ThrowableShieldItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.entity.LaserEntity;
@@ -68,5 +72,18 @@ public class ModEvents {
                 player.getWorld().spawnEntity(projectile);
             }
         });
+
+        UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
+            // Check if the entity that was clicked is your custom projectile.
+            if (!entity.getWorld().isClient && entity instanceof StationaryItem stationaryItem) {
+                // Send a normal chat message to the player (false means not as an action bar message).
+                player.sendMessage(Text.literal("You clicked my projectile!"), false);
+
+                return stationaryItem.interactEntity(player, hand);
+            }
+            // Otherwise, let other handlers process the interaction.
+            return ActionResult.PASS;
+        });
+
     }
 }

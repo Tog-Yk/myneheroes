@@ -8,7 +8,8 @@
 		"PlayerAbilityMixin",
 		"PlayerAppliedAttributeMixin",
 		"PlayerPowerMixin",
-		"PlayerSwingMixin"
+		"PlayerSwingMixin",
+		"StationaryItemPlayerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

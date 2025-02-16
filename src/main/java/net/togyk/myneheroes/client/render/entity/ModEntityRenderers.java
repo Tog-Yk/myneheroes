@@ -11,5 +11,6 @@ public class ModEntityRenderers {
     public static void registerModEntityRenderers() {
         MyneHeroes.LOGGER.info("Registering Mod Entities for " + MyneHeroes.MOD_ID);
         EntityRendererRegistry.INSTANCE.register(ModEntities.LASER, LaserEntityRenderer::new);
+        EntityRendererRegistry.INSTANCE.register(ModEntities.STATIONARY_ITEM, StationaryItemEntityRenderer::new);
     }
 }
