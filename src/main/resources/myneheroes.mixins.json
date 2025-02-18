@@ -9,7 +9,7 @@
 		"PlayerAppliedAttributeMixin",
 		"PlayerPowerMixin",
 		"PlayerSwingMixin",
-		"StationaryItemPlayerMixin"
+		"StationaryConvertItemEntityMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
