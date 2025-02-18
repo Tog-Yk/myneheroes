@@ -14,5 +14,11 @@ public class ModPredicates {
                     // Check if the entity is using the shield.
                     return stack.getItem() instanceof ShieldItem && entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0F : 0.0F;
                 });
+
+        ModelPredicateProviderRegistry.register(ModItems.A_SYMBOLS_SHIELD, Identifier.of(MyneHeroes.MOD_ID,"blocking"),
+                (stack, world, entity, seed) -> {
+                    // Check if the entity is using the shield.
+                    return stack.getItem() instanceof ShieldItem && entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0F : 0.0F;
+                });
     }
 }

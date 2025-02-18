@@ -1,6 +1,6 @@
 {
 	"textures": {
-		"0": "myneheroes:item/vibranium_shield",
+		"0": "myneheroes:item/a_symbols_shield",
 		"particle": "myneheroes:item/vibranium_shield"
 	},
 	"elements": [

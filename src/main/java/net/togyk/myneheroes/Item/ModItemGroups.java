@@ -51,6 +51,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.ARMOR_LIGHT_LEVELING_STATION);
 
                         entries.add(ModItems.VIBRANIUM_SHIELD);
+                        entries.add(ModItems.A_SYMBOLS_SHIELD);
 
                     }).build());
 
