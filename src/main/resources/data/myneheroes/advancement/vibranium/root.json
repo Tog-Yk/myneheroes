@@ -1,0 +1,33 @@
+{
+  "criteria": {
+    "vibranium_materials": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "myneheroes:vibranium_materials"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.myneheroes.vibranium.root.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "myneheroes:vibranium_ingot"
+    },
+    "title": {
+      "translate": "advancements.myneheroes.vibranium.root.title"
+    },
+    "background": "myneheroes:textures/block/raw_titanium_block.png"
+  },
+  "requirements": [
+    [
+      "vibranium_materials"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

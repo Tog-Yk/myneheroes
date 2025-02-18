@@ -14,10 +14,7 @@
 
   "item.myneheroes.power_injection": "Power Injection",
 
-  "item.myneheroes.debug_helmet": "Debug Helmet",
-  "item.myneheroes.debug_chestplate": "Debug Chestplate",
-  "item.myneheroes.debug_leggings": "Debug Leggings",
-  "item.myneheroes.debug_boots": "Debug Boost",
+  "item.myneheroes.vibranium_shield": "Vibranium Shield",
 
   "item.myneheroes.vibranium_helmet": "Vibranium Helmet",
   "item.myneheroes.vibranium_chestplate": "Vibranium Chestplate",
@@ -75,10 +72,18 @@
   "key.myneheroes.shoot_repolser": "Shoot Repolser",
   "key.myneheroes.fuel_reactor": "Fuel Reactor",
 
+
   "container.myneheroes.armor_dyeing_station": "Armor Dyeing Station",
   "container.myneheroes.armor_light_leveler_station": "Armor Light Leveler Station",
-  "key.myneheroes.fuel_reactor": "Fuel Reactor",
+
 
   "death.attack.punched" : "%1$s was slaughtered!",
-  "death.attack.punched.item" : "%1$s was slaughtered using %3$s"
+  "death.attack.punched.item" : "%1$s was slaughtered using %3$s",
+
+
+  "advancements.myneheroes.vibranium.root.title": "An outer-worldly metal",
+  "advancements.myneheroes.vibranium.root.description": "Acquire vibranium",
+
+  "advancements.myneheroes.vibranium.shield.title": "Thats just a prototype",
+  "advancements.myneheroes.vibranium.shield.description": "Acquire a shield made from vibranium"
 }

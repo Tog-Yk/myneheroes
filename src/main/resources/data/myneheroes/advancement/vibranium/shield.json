@@ -1,0 +1,33 @@
+{
+  "parent": "myneheroes:vibranium/root",
+  "criteria": {
+    "vibranium_shields": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "myneheroes:vibranium_shields"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.myneheroes.vibranium.shield.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "myneheroes:vibranium_shield"
+    },
+    "title": {
+      "translate": "advancements.myneheroes.vibranium.shield.title"
+    }
+  },
+  "requirements": [
+    [
+      "vibranium_shields"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
