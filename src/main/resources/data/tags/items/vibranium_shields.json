@@ -1,5 +1,5 @@
 {
-  "replace": false,
+  "replace": true,
   "values": [
     "myneheroes:vibranium_shield",
     "myneheroes:a_symbols_shield"
