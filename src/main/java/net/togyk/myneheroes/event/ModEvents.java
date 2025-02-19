@@ -13,6 +13,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.togyk.myneheroes.Item.custom.StationaryItem;
+import net.togyk.myneheroes.Item.custom.ThrowableItem;
 import net.togyk.myneheroes.Item.custom.ThrowableShieldItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.entity.LaserEntity;
@@ -60,16 +61,8 @@ public class ModEvents {
         MissedSwingCallback.EVENT.register((PlayerEntity player, Hand hand) -> {
             // Create an arrow entity. (This example does not consume inventory arrows.)
             ItemStack stack = player.getStackInHand(hand);
-            if (stack.getItem() instanceof ThrowableShieldItem shieldItem) {
-                Vec3d look = player.getRotationVec(1.0F);
-
-                PersistentProjectileEntity projectile = new LaserEntity(shieldItem.getProjectileEntityType(), player.getWorld());
-                projectile.setOwner(player);
-                projectile.setPosition(player.getX(), player.getEyeY(), player.getZ());
-                projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
-                projectile.applyDamageModifier(2.0F);
-
-                player.getWorld().spawnEntity(projectile);
+            if (player.getWorld() != null && stack.getItem() instanceof ThrowableItem throwableItem) {
+                throwableItem.Throw(player.getWorld(), player, hand);
             }
         });
 
