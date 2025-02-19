@@ -12,6 +12,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.entity.LaserEntity;
+import net.togyk.myneheroes.entity.ModEntities;
+import net.togyk.myneheroes.entity.ThrownItemEntity;
 
 public class ThrowableShieldItem extends ShieldItem implements StationaryItem, ThrowableItem{
     private final float bonusAttackDamage;
@@ -40,16 +42,20 @@ public class ThrowableShieldItem extends ShieldItem implements StationaryItem, T
     @Override
     public void Throw(World world, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
-        if (stack.getItem() instanceof ThrowableShieldItem shieldItem) {
+        if (stack.getItem() instanceof ThrowableShieldItem) {
             Vec3d look = player.getRotationVec(1.0F);
 
-            PersistentProjectileEntity projectile = new LaserEntity(shieldItem.getProjectileEntityType(), player.getWorld());
+            ItemStack projectileStack = stack.copy();
+            projectileStack.setCount(1);
+
+            PersistentProjectileEntity projectile = new ThrownItemEntity(ModEntities.THROWN_ITEM, player.getWorld(), player, projectileStack);
             projectile.setOwner(player);
             projectile.setPosition(player.getX(), player.getEyeY(), player.getZ());
             projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
             projectile.applyDamageModifier(bonusAttackDamage);
 
             player.getWorld().spawnEntity(projectile);
+            stack.decrement(1);
         }
     }
 }
