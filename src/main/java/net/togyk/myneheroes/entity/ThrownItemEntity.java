@@ -5,10 +5,14 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.Item.ModItems;
+import net.togyk.myneheroes.MyneHeroes;
 
 public class ThrownItemEntity extends PersistentProjectileEntity {
     private static final TrackedData<ItemStack> STACK = DataTracker.registerData(ThrownItemEntity.class, TrackedDataHandlerRegistry.ITEM_STACK);
@@ -51,4 +55,30 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
         builder.add(STACK, ItemStack.EMPTY);
     }
 
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        NbtCompound modNbt = new NbtCompound();
+        if (!this.getDisplayStack().isEmpty()) {
+            modNbt.put("Item", this.getDisplayStack().encode(this.getRegistryManager()));
+        }
+
+        nbt.put(MyneHeroes.MOD_ID, modNbt);
+
+        super.writeCustomDataToNbt(nbt);
+    }
+
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        if (nbt.contains(MyneHeroes.MOD_ID)) {
+            NbtCompound modNbt = nbt.getCompound(MyneHeroes.MOD_ID);
+            if (nbt.contains("Item", NbtElement.COMPOUND_TYPE)) {
+                NbtCompound nbtCompound = modNbt.getCompound("Item");
+                this.setStack((ItemStack) ItemStack.fromNbt(this.getRegistryManager(), nbtCompound).orElse(ItemStack.EMPTY));
+            } else {
+                this.setStack(ItemStack.EMPTY);
+            }
+        }
+
+        super.readCustomDataFromNbt(nbt);
+    }
 }
