@@ -36,8 +36,8 @@ public class ThrownItemEntityRenderer extends ProjectileEntityRenderer<ThrownIte
     public void render(ThrownItemEntity entity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
         matrixStack.push();
 
-        ItemStack itemStack = entity.getItemStack();
-        MyneHeroes.LOGGER.info(String.valueOf(itemStack));
+        ItemStack itemStack = entity.getDisplayStack();
+        MyneHeroes.LOGGER.debug(String.valueOf(itemStack));
         this.random.setSeed((long) getSeed(itemStack));
         BakedModel bakedModel = this.itemRenderer.getModel(itemStack, entity.getWorld(), null, entity.getId());
         boolean bl = bakedModel.hasDepth();

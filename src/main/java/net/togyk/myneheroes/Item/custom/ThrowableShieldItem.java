@@ -45,17 +45,13 @@ public class ThrowableShieldItem extends ShieldItem implements StationaryItem, T
         if (stack.getItem() instanceof ThrowableShieldItem) {
             Vec3d look = player.getRotationVec(1.0F);
 
-            ItemStack projectileStack = stack.copy();
-            projectileStack.setCount(1);
-
-            PersistentProjectileEntity projectile = new ThrownItemEntity(ModEntities.THROWN_ITEM, player.getWorld(), player, projectileStack);
+            PersistentProjectileEntity projectile = new ThrownItemEntity(ModEntities.THROWN_ITEM, player.getWorld(), player, stack);
             projectile.setOwner(player);
             projectile.setPosition(player.getX(), player.getEyeY(), player.getZ());
             projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
             projectile.applyDamageModifier(bonusAttackDamage);
 
             player.getWorld().spawnEntity(projectile);
-            stack.decrement(1);
         }
     }
 }
