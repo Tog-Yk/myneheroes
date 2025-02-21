@@ -77,7 +77,7 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
     public void writeCustomDataToNbt(NbtCompound nbt) {
         NbtCompound modNbt = new NbtCompound();
         if (!this.getDisplayStack().isEmpty()) {
-            modNbt.put("Item", this.getDisplayStack().encode(this.getRegistryManager()));
+            modNbt.put("item", this.getDisplayStack().encode(this.getRegistryManager()));
         }
 
         nbt.put(MyneHeroes.MOD_ID, modNbt);
@@ -89,11 +89,11 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
     public void readCustomDataFromNbt(NbtCompound nbt) {
         if (nbt.contains(MyneHeroes.MOD_ID)) {
             NbtCompound modNbt = nbt.getCompound(MyneHeroes.MOD_ID);
-            if (nbt.contains("Item", NbtElement.COMPOUND_TYPE)) {
-                NbtCompound nbtCompound = modNbt.getCompound("Item");
-                this.setStack((ItemStack) ItemStack.fromNbt(this.getRegistryManager(), nbtCompound).orElse(ItemStack.EMPTY));
+            if (nbt.contains("item", NbtElement.COMPOUND_TYPE)) {
+                NbtCompound nbtCompound = modNbt.getCompound("item");
+                this.setDisplayStack(ItemStack.fromNbt(this.getRegistryManager(), nbtCompound).orElse(ItemStack.EMPTY));
             } else {
-                this.setStack(ItemStack.EMPTY);
+                this.setDisplayStack(ItemStack.EMPTY);
             }
         }
 
