@@ -42,38 +42,36 @@ public class LaserEntityRenderer extends ProjectileEntityRenderer<LaserEntity> {
 
         // Render the emissive texture
         VertexConsumer emissiveConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(TEXTURE_OUTER));
-        Color originalAlphaColor = entity.getColor();
-        Color lowerAlphaColor = new Color(originalAlphaColor.getRed(), originalAlphaColor.getGreen(), originalAlphaColor.getBlue(), Math.max(originalAlphaColor.getAlpha() - 150, 50));
-        renderBox(matrices, emissiveConsumer, 0xF000F0, 0.075f, lowerAlphaColor);
+        renderBox(matrices, emissiveConsumer, 0xF000F0, 0.075f, entity.getColor());
 
         matrices.pop();
     }
 
 
-    private void renderBox(MatrixStack matrices, VertexConsumer vertexConsumer, int light, float size, Color color) {
+    private void renderBox(MatrixStack matrices, VertexConsumer vertexConsumer, int light, float size, int color) {
         MatrixStack.Entry entry = matrices.peek();
 
         // Front face
         vertexConsumer.vertex(entry.getPositionMatrix(), -size, -size, -size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(0.0f, 1.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
                 .normal(0.0f, 0.0f, -1.0f);
         vertexConsumer.vertex(entry.getPositionMatrix(), size, -size, -size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(1.0f, 1.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
                 .normal(0.0f, 0.0f, -1.0f);
         vertexConsumer.vertex(entry.getPositionMatrix(), size, size, -size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(1.0f, 0.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
                 .normal(0.0f, 0.0f, -1.0f);
         vertexConsumer.vertex(entry.getPositionMatrix(), -size, size, -size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(0.0f, 0.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
@@ -81,25 +79,25 @@ public class LaserEntityRenderer extends ProjectileEntityRenderer<LaserEntity> {
 
         // Back face
         vertexConsumer.vertex(entry.getPositionMatrix(), -size, -size, size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(0.0f, 1.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
                 .normal(0.0f, 0.0f, 1.0f);
         vertexConsumer.vertex(entry.getPositionMatrix(), size, -size, size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(1.0f, 1.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
                 .normal(0.0f, 0.0f, 1.0f);
         vertexConsumer.vertex(entry.getPositionMatrix(), size, size, size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(1.0f, 0.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
                 .normal(0.0f, 0.0f, 1.0f);
         vertexConsumer.vertex(entry.getPositionMatrix(), -size, size, size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(0.0f, 0.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
@@ -107,25 +105,25 @@ public class LaserEntityRenderer extends ProjectileEntityRenderer<LaserEntity> {
 
         // Left face
         vertexConsumer.vertex(entry.getPositionMatrix(), -size, -size, size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(0.0f, 1.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
                 .normal(-1.0f, 0.0f, 0.0f);
         vertexConsumer.vertex(entry.getPositionMatrix(), -size, -size, -size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(1.0f, 1.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
                 .normal(-1.0f, 0.0f, 0.0f);
         vertexConsumer.vertex(entry.getPositionMatrix(), -size, size, -size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(1.0f, 0.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
                 .normal(-1.0f, 0.0f, 0.0f);
         vertexConsumer.vertex(entry.getPositionMatrix(), -size, size, size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(0.0f, 0.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
@@ -133,25 +131,25 @@ public class LaserEntityRenderer extends ProjectileEntityRenderer<LaserEntity> {
 
         // Right face
         vertexConsumer.vertex(entry.getPositionMatrix(), size, -size, size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(0.0f, 1.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
                 .normal(1.0f, 0.0f, 0.0f);
         vertexConsumer.vertex(entry.getPositionMatrix(), size, -size, -size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(1.0f, 1.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
                 .normal(1.0f, 0.0f, 0.0f);
         vertexConsumer.vertex(entry.getPositionMatrix(), size, size, -size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(1.0f, 0.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
                 .normal(1.0f, 0.0f, 0.0f);
         vertexConsumer.vertex(entry.getPositionMatrix(), size, size, size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(0.0f, 0.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
@@ -159,25 +157,25 @@ public class LaserEntityRenderer extends ProjectileEntityRenderer<LaserEntity> {
 
         // Top face
         vertexConsumer.vertex(entry.getPositionMatrix(), -size, size, size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(0.0f, 1.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
                 .normal(0.0f, 1.0f, 0.0f);
         vertexConsumer.vertex(entry.getPositionMatrix(), size, size, size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(1.0f, 1.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
                 .normal(0.0f, 1.0f, 0.0f);
         vertexConsumer.vertex(entry.getPositionMatrix(), size, size, -size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(1.0f, 0.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
                 .normal(0.0f, 1.0f, 0.0f);
         vertexConsumer.vertex(entry.getPositionMatrix(), -size, size, -size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(0.0f, 0.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
@@ -185,25 +183,25 @@ public class LaserEntityRenderer extends ProjectileEntityRenderer<LaserEntity> {
 
         // Bottom face
         vertexConsumer.vertex(entry.getPositionMatrix(), -size, -size, size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(0.0f, 1.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
                 .normal(0.0f, -1.0f, 0.0f);
         vertexConsumer.vertex(entry.getPositionMatrix(), size, -size, size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(1.0f, 1.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
                 .normal(0.0f, -1.0f, 0.0f);
         vertexConsumer.vertex(entry.getPositionMatrix(), size, -size, -size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(1.0f, 0.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
                 .normal(0.0f, -1.0f, 0.0f);
         vertexConsumer.vertex(entry.getPositionMatrix(), -size, -size, -size)
-                .color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha())
+                .color(color)
                 .texture(0.0f, 0.0f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)

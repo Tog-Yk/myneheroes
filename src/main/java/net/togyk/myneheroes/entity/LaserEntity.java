@@ -3,6 +3,9 @@ package net.togyk.myneheroes.entity;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
@@ -10,19 +13,14 @@ import net.minecraft.item.Items;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
-import net.togyk.myneheroes.MyneHeroes;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
-
 public class LaserEntity extends PersistentProjectileEntity {
-    private Color color;
-    private Color innerColor;
+    private static final TrackedData<Integer> color = DataTracker.registerData(LaserEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Integer> innerColor = DataTracker.registerData(LaserEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
     public LaserEntity(EntityType<LaserEntity> laserProjectileEntityEntityType, World world) {
         super(laserProjectileEntityEntityType, world);
-        this.color = Color.RED;
-        this.innerColor = new Color(255, 200, 200);
     }
 
     @Override
@@ -60,21 +58,28 @@ public class LaserEntity extends PersistentProjectileEntity {
         //>>>Caused by: java.lang.IllegalStateException: Cannot encode empty ItemStack
     }
 
-    @NotNull
-    public Color getColor() {
-        return this.color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(color, 0x55FF0000);
+        builder.add(innerColor, 0xFFFFF0F0);
     }
 
     @NotNull
-    public Color getInnerColor() {
-        return this.innerColor;
+    public int getColor() {
+        return this.getDataTracker().get(color);
     }
 
-    public void setInnerColor(Color color) {
-        this.innerColor = color;
+    public void setColor(int argb) {
+        this.getDataTracker().set(color, argb);
+    }
+
+    @NotNull
+    public int getInnerColor() {
+        return this.getDataTracker().get(innerColor);
+    }
+
+    public void setInnerColor(int argb) {
+        this.getDataTracker().set(innerColor, argb);
     }
 }

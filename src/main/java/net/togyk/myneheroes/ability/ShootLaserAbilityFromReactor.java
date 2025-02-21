@@ -8,6 +8,7 @@ import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.entity.LaserEntity;
 import net.togyk.myneheroes.entity.ModEntities;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
@@ -33,19 +34,23 @@ public class ShootLaserAbilityFromReactor extends Ability{
                     // shoot a lazar
                     Vec3d look = player.getRotationVec(1.0F);
 
-                    LaserEntity projectile = new LaserEntity(ModEntities.LASER, player.getWorld());
-                    projectile.setOwner(player);
-                    projectile.setPosition(player.getX(), player.getEyeY(), player.getZ());
-                    projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
-                    projectile.applyDamageModifier(2.0F);
-                    //Colors don't work
-                    projectile.setColor(Color.CYAN);
-                    projectile.setInnerColor(new Color(200,255,255));
+                    LaserEntity projectile = getLaserEntity(player, look);
 
                     player.getWorld().spawnEntity(projectile);
                 }
             }
         }
         super.serverUse(player);
+    }
+
+    private static @NotNull LaserEntity getLaserEntity(PlayerEntity player, Vec3d look) {
+        LaserEntity projectile = new LaserEntity(ModEntities.LASER, player.getWorld());
+        projectile.setOwner(player);
+        projectile.setPosition(player.getX(), player.getEyeY(), player.getZ());
+        projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
+        projectile.applyDamageModifier(2.0F);
+        projectile.setColor(0x3300FFFF);
+        projectile.setInnerColor(0xFFF0FFFF);
+        return projectile;
     }
 }
