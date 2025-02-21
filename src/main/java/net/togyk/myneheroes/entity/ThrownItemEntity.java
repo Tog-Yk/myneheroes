@@ -243,4 +243,14 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
             // Optionally, if you’re implementing bounce limits, update your bounce counter here.
         }
     }
+
+    @Override
+    public void tick() {
+        super.tick();
+    }
+
+    @Override
+    protected void age() {
+        this.age++;
+    }
 }
