@@ -52,7 +52,7 @@ public class ModItemGroups {
 
                         entries.add(ModItems.VIBRANIUM_SHIELD);
                         entries.add(ModItems.A_SYMBOLS_SHIELD);
-
+                        entries.add(ModItems.COSMIC_SHIELD);
                     }).build());
 
     public static final ItemGroup MYNEHEROES_ARMOR_GROUP = Registry.register(Registries.ITEM_GROUP,

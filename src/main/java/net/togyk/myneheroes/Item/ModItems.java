@@ -97,6 +97,9 @@ public class ModItems {
     public static final Item A_SYMBOLS_SHIELD = registerItem("a_symbols_shield",
             new ThrowableShieldItem(2.0F,new Item.Settings().maxDamage(336)));
 
+    public static final Item COSMIC_SHIELD = registerItem("cosmic_shield",
+            new ThrowableShieldItem(2.0F,new Item.Settings().maxDamage(336)));
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(MyneHeroes.MOD_ID, name), item);
     }

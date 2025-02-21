@@ -1,0 +1,7 @@
+{
+	"parent" : "myneheroes:item/vibranium_shield_blocking",
+	"textures": {
+		"0": "myneheroes:item/cosmic_shield",
+		"particle": "myneheroes:item/cosmic_shield"
+	}
+}
