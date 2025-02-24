@@ -113,6 +113,12 @@ public class ArmorHudOverlay implements HudRenderCallback {
                         } else {
                             drawContext.drawTexture(firstAbility.icon, abilityScreenX + 4, abilityScreenY + 4, 0, 0, 8, 8, 8, 8);
                         }
+                        if (firstAbility.getCooldown() != 0) {
+                            float cooldownPercentile = (float) firstAbility.getCooldown() / firstAbility.getMaxCooldown();
+                            int maxIconLength = 8;
+                            int currentCooldownLength = (int) (maxIconLength * cooldownPercentile);
+                            drawContext.fill(abilityScreenX + 4, abilityScreenY + 4 + maxIconLength - currentCooldownLength, abilityScreenX + 4 + 8, abilityScreenY + 4 + maxIconLength, 0x88BBBBBB);
+                        }
                         drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(firstAbility.getName()), abilityScreenX + 4+10, abilityScreenY + 4, 0xFFFFFF);
                     }
                     Ability secondAbility = ((PlayerAbilities) client.player).getSecondAbility();
@@ -121,6 +127,12 @@ public class ArmorHudOverlay implements HudRenderCallback {
                             drawContext.drawTexture(secondAbility.disabled_icon, abilityScreenX + 4, abilityScreenY + 14, 0, 0, 8, 8, 8, 8);
                         } else {
                             drawContext.drawTexture(secondAbility.icon, abilityScreenX + 4, abilityScreenY + 14, 0, 0, 8, 8, 8, 8);
+                        }
+                        if (secondAbility.getCooldown() != 0) {
+                            float cooldownPercentile = (float) secondAbility.getCooldown() / secondAbility.getMaxCooldown();
+                            int maxIconLength = 8;
+                            int currentCooldownLength = (int) (maxIconLength * cooldownPercentile);
+                            drawContext.fill(abilityScreenX + 4, abilityScreenY + 14 + maxIconLength - currentCooldownLength, abilityScreenX + 4 + 8, abilityScreenY + 14 + maxIconLength, 0x88BBBBBB);
                         }
                         drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(secondAbility.getName()), abilityScreenX + 4+10, abilityScreenY + 14, 0xFFFFFF);
                     }
@@ -131,6 +143,12 @@ public class ArmorHudOverlay implements HudRenderCallback {
                         } else {
                             drawContext.drawTexture(thirdAbility.icon, abilityScreenX + 4, abilityScreenY + 24, 0, 0, 8, 8, 8, 8);
                         }
+                        if (thirdAbility.getCooldown() != 0) {
+                            float cooldownPercentile = (float) thirdAbility.getCooldown() / thirdAbility.getMaxCooldown();
+                            int maxIconLength = 8;
+                            int currentCooldownLength = (int) (maxIconLength * cooldownPercentile);
+                            drawContext.fill(abilityScreenX + 4, abilityScreenY + 24 + maxIconLength - currentCooldownLength, abilityScreenX + 4 + 8, abilityScreenY + 24 + maxIconLength, 0x88BBBBBB);
+                        }
                         drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(thirdAbility.getName()), abilityScreenX + 4+10, abilityScreenY + 24, 0xFFFFFF);
                     }
                     Ability fourthAbility = ((PlayerAbilities) client.player).getFourthAbility();
@@ -140,11 +158,15 @@ public class ArmorHudOverlay implements HudRenderCallback {
                         } else {
                             drawContext.drawTexture(fourthAbility.icon, abilityScreenX + 4, abilityScreenY + 34, 0, 0, 8, 8, 8, 8);
                         }
+                        if (fourthAbility.getCooldown() != 0) {
+                            float cooldownPercentile = (float) fourthAbility.getCooldown() / fourthAbility.getMaxCooldown();
+                            int maxIconLength = 8;
+                            int currentCooldownLength = (int) (maxIconLength * cooldownPercentile);
+                            drawContext.fill(abilityScreenX + 4, abilityScreenY + 34 + maxIconLength - currentCooldownLength, abilityScreenX + 4 + 8, abilityScreenY + 34 + maxIconLength, 0x88BBBBBB);
+                        }
                         drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(fourthAbility.getName()), abilityScreenX + 4+10, abilityScreenY + 34, 0xFFFFFF);
                     }
                 }
-            } else {
-                return;
             }
         }
     }
