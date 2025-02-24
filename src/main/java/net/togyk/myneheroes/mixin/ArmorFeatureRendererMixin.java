@@ -48,9 +48,7 @@ public abstract class ArmorFeatureRendererMixin<T extends LivingEntity, M extend
             List<ArmorMaterial.Layer> layers = armorItem.getMaterial().value().layers();
             int layerIndex = layers.indexOf(layer);
             if (armorItem.layerIsLightable(itemStack, layerIndex)) {
-                // times 1048576 to make a lightLever of 15 the maximum light
-                MyneHeroes.LOGGER.info(String.valueOf((armorItem.getLightLevel(itemStack, layerIndex) / 15) * 15728880));
-                MyneHeroes.LOGGER.info(String.valueOf(armorItem.getLightLevel(itemStack, layerIndex) / 15));
+                // times 15728880 to make a lightLever of 15 the maximum light
                 return (armorItem.getLightLevel(itemStack, layerIndex) / 15) * 15728880;
             }
         }
