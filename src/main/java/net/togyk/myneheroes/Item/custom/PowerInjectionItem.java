@@ -15,8 +15,7 @@ import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.power.Power;
-import net.togyk.myneheroes.power.Powers;
-import net.togyk.myneheroes.util.PlayerPowers;
+import net.togyk.myneheroes.util.PowerData;
 
 import java.util.List;
 
@@ -26,35 +25,27 @@ public class PowerInjectionItem extends Item {
         super(settings);
     }
 
-    public Identifier getPowerId(ItemStack stack) {
+    public Power getPower(ItemStack stack) {
         NbtCompound nbt = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT).getNbt();
         if (nbt.contains(MyneHeroes.MOD_ID, NbtElement.COMPOUND_TYPE)) {
             var modNbt = nbt.getCompound(MyneHeroes.MOD_ID);
-            if (modNbt.contains("power_id")) {
-                return Identifier.of(modNbt.getString("power_id"));
+            if (modNbt.contains("power")) {
+                return PowerData.nbtToPower(modNbt.getCompound("power"));
             }
         }
         return null;
     }
-    public Power getPower(ItemStack stack) {
-        Identifier powerId = getPowerId(stack);
-        if (powerId != null && Powers.containsId(powerId)) {
-            return Powers.get(powerId);
-        } else {
-            return null;
-        }
-    }
 
-    public void setPowerId(ItemStack stack, Identifier powerId) {
+    public void setPower(ItemStack stack, Power power) {
         NbtCompound nbt = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT).getNbt();
         var modidData = new NbtCompound();
         if (nbt.contains(MyneHeroes.MOD_ID)) {
             modidData = nbt.getCompound(MyneHeroes.MOD_ID);
         }
-        if (powerId != null) {
-            modidData.putString("power_id", powerId.toString());
+        if (power != null) {
+            modidData.put("power", power.getNbt());
         } else {
-            modidData.remove("power_id");
+            modidData.remove("power");
         }
         nbt.put(MyneHeroes.MOD_ID, modidData);
         stack.set(DataComponentTypes.CUSTOM_DATA, NbtComponent.of(nbt));
@@ -62,31 +53,30 @@ public class PowerInjectionItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        Power power = getPower(user.getStackInHand(hand));
+        Power power = this.getPower(user.getStackInHand(hand));
 
-        PlayerPowers playerPowersI = ((PlayerPowers) user);
-        List<Power> powers = playerPowersI.getPowers();
+        List<Power> powers = PowerData.getPowers(user);
+        List<Identifier> powerIds = powers.stream().map(Power::getId).toList();
         if (power == null && !powers.isEmpty()) {
             Power usersLastPower = powers.getLast();
-            this.setPowerId(user.getStackInHand(hand), Powers.getFirstMatchingId(usersLastPower));
-            playerPowersI.removePower(usersLastPower);
+            this.setPower(user.getStackInHand(hand), usersLastPower);
+            PowerData.removePower(user, usersLastPower);
             user.swingHand(Hand.MAIN_HAND);
             return TypedActionResult.success(user.getStackInHand(hand));
-        } else if (!powers.contains(power)) {
-            playerPowersI.addPower(power);
-            this.setPowerId(user.getStackInHand(hand), Powers.getFirstMatchingId(null));
+        } else if (power != null && !powerIds.contains(power.id)) {
+            PowerData.addPower(user, power);
+            this.setPower(user.getStackInHand(hand), null);
             user.swingHand(Hand.MAIN_HAND);
             return TypedActionResult.success(user.getStackInHand(hand));
-        } else {
-            return TypedActionResult.pass(user.getStackInHand(hand));
         }
+        return TypedActionResult.pass(user.getStackInHand(hand));
     }
     @Override
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType type) {
         if (type.isAdvanced()) {
-            Identifier storedPowerId = this.getPowerId(stack);
-            if (storedPowerId != null) {
-                tooltip.add(Text.literal("Stored Power: " + storedPowerId).formatted(Formatting.AQUA));
+            Power power = this.getPower(stack);
+            if (power != null) {
+                tooltip.add(Text.literal("Stored Power: " + power.getName()).formatted(Formatting.AQUA));
             } else {
                 tooltip.add(Text.literal("Stored Power: none").formatted(Formatting.AQUA));
             }

@@ -1,11 +1,13 @@
 package net.togyk.myneheroes.power;
 
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.ability.Ability;
 
 import java.util.List;
 
 public class Power {
+    public final Identifier id;
     private final String name;
     private final float damageMultiplier;
     private final float resistance;
@@ -14,7 +16,8 @@ public class Power {
     private boolean isDampened = false;
     int color;
 
-    public Power(String name, float damageMultiplier, float resistance, int color, List<Ability> abilities) {
+    public Power(Identifier id, String name, float damageMultiplier, float resistance, int color, List<Ability> abilities) {
+        this.id = id;
         this.name = name;
         this.damageMultiplier = damageMultiplier;
         this.resistance = resistance;
@@ -23,10 +26,15 @@ public class Power {
     }
     public NbtCompound getNbt() {
         NbtCompound nbt = new NbtCompound();
+        nbt.putString("id", this.id.toString());
         return nbt;
     }
 
     public void readNbt(NbtCompound nbt) {
+    }
+
+    public Identifier getId() {
+        return id;
     }
 
     public String getName() {
@@ -51,5 +59,17 @@ public class Power {
 
     public int getColor() {
         return color;
+    }
+
+    @Override
+    public String toString() {
+        return this.id.toString() + "{name: "+ this.name +
+                ",\ndamageMultiplier: " + this.damageMultiplier +
+                ",\nresistance: " + this.resistance +
+                ",\nabilities:" + this.abilities.toString();
+    }
+
+    public Power copy() {
+        return new Power(this.id, String.valueOf(this.getName()), this.getDamageMultiplier(), this.getResistance(), this.getColor(), List.copyOf(this.abilities));
     }
 }

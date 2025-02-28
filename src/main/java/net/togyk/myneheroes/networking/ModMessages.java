@@ -1,11 +1,15 @@
 package net.togyk.myneheroes.networking;
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -15,9 +19,15 @@ import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.event.MissedSwingCallback;
+import net.togyk.myneheroes.power.Power;
+import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.util.PlayerAbilities;
 import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
 import net.togyk.myneheroes.block.entity.ArmorLightLevelerBlockEntity;
+import net.togyk.myneheroes.util.PlayerPowers;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModMessages {
     public static final Identifier BLOCKPOS_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "block_pos");
@@ -25,6 +35,7 @@ public class ModMessages {
     public static final Identifier KEYBIND_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "keybind");
     public static final Identifier LIGHT_LEVELER_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "light_leveler");
     public static final Identifier MISSED_SWING_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "missed_swing");
+    public static final Identifier PLAYER_POWER_SYNC_DATA_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "power_sync_data");
 
     public static void registerServerMessages() {
         PayloadTypeRegistry.playC2S().register(KeybindPayload.ID, KeybindPayload.CODEC);
@@ -114,8 +125,27 @@ public class ModMessages {
                 MissedSwingCallback.EVENT.invoker().onMissedSwing(context.player(), Hand.MAIN_HAND);
             });
         });
+
+        PayloadTypeRegistry.playS2C().register(PlayerPowerSyncDataPayload.ID, PlayerPowerSyncDataPayload.CODEC);
     }
 
     public static void registerClientMessages() {
+        ClientPlayNetworking.registerGlobalReceiver(PlayerPowerSyncDataPayload.ID, (payload, context) -> {
+            context.client().execute(() -> {
+                List<Power> powers = new ArrayList<>();
+                if (payload.nbt().contains(MyneHeroes.MOD_ID)) {
+                    NbtList powerNbt = payload.nbt().getList(MyneHeroes.MOD_ID, NbtElement.COMPOUND_TYPE);
+                    for (NbtElement nbtElement : powerNbt) {
+                        if (nbtElement instanceof NbtCompound nbtCompound) {
+                            Identifier powerId = Identifier.of(nbtCompound.getString("id"));
+                            Power power = Powers.get(powerId);
+                            power.readNbt(nbtCompound);
+                            powers.add(power);
+                        }
+                    }
+                }
+                ((PlayerPowers) context.player()).setPowers(powers);
+            });
+        });
     }
 }

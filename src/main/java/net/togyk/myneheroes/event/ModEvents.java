@@ -3,7 +3,6 @@ package net.togyk.myneheroes.event;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -11,15 +10,12 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Vec3d;
 import net.togyk.myneheroes.Item.custom.StationaryItem;
 import net.togyk.myneheroes.Item.custom.ThrowableItem;
-import net.togyk.myneheroes.Item.custom.ThrowableShieldItem;
 import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.entity.LaserEntity;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.Powers;
-import net.togyk.myneheroes.util.PlayerPowers;
+import net.togyk.myneheroes.util.PowerData;
 
 import java.util.*;
 
@@ -39,10 +35,10 @@ public class ModEvents {
                         timeInNether.put(player, timeInNether.getOrDefault(player, 0L) + 1);
 
                         if (timeInNether.get(player) >= 2 * 60 * 20L) {
+                            List<Power> currentPowers = PowerData.getPowers(player);
                             Power kryptonianPower = Powers.get(Identifier.of(MyneHeroes.MOD_ID, "kryptonian"));
-                            if (kryptonianPower != null) {
-                                ((PlayerPowers) player).addPower(kryptonianPower);
-                                MyneHeroes.LOGGER.info("congrats on becoming a kryptonian");
+                            if (kryptonianPower != null && !currentPowers.contains(kryptonianPower)) {
+                                PowerData.addPower(player, kryptonianPower);
                             }
                             timeInNether.put(player,0L);
                         }

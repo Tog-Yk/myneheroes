@@ -10,7 +10,7 @@ import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.util.PlayerAbilities;
-import net.togyk.myneheroes.util.PlayerPowers;
+import net.togyk.myneheroes.util.PowerData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -40,7 +40,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
 
     private List<Ability> getAbilities(PlayerEntity player) {
         List<Ability> abilityList = new ArrayList<>();
-        List<Power> powerList = ((PlayerPowers) player).getPowers();
+        List<Power> powerList = PowerData.getPowers(player);
         if (!powerList.isEmpty()) {
             for (Power power : powerList) {
                 if (power != null && !power.isDampened()) {

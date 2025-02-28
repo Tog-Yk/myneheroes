@@ -4,11 +4,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
-import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.power.Power;
-import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.util.PlayerPowers;
+import net.togyk.myneheroes.util.PowerData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,6 +22,17 @@ import static java.util.Collections.min;
 @Mixin(PlayerEntity.class)
 public abstract class PlayerPowerMixin implements PlayerPowers {
     private List<Power> powers = new ArrayList<>();
+    private boolean isDirty = false;
+
+
+    @Inject(at = @At("HEAD"), method = "tick")
+    private void tick(CallbackInfo info) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        if (this.isDirty) {
+            PowerData.setPowers(player, powers);
+            this.isDirty = false;
+        }
+    }
 
     @Inject(at = @At("HEAD"), method = "readCustomDataFromNbt")
     private void readFromNbt(NbtCompound nbt, CallbackInfo info) {
@@ -31,23 +41,20 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
             NbtList powerNbt = nbt.getList(MyneHeroes.MOD_ID, NbtElement.COMPOUND_TYPE);
             for (NbtElement nbtElement : powerNbt) {
                 if (nbtElement instanceof NbtCompound nbtCompound) {
-                    Identifier powerId = Identifier.of(nbtCompound.getString("power"));
-                    Power power = Powers.get(powerId);
-                    power.readNbt(nbtCompound);
-                    this.addPower(power);
+                    Power power = PowerData.nbtToPower(nbtCompound);
+                    powers.add(power);
                 }
             }
         }
         this.powers = powers;
+        this.isDirty = true;
     }
     @Inject(at = @At("HEAD"), method = "writeCustomDataToNbt")
     private void writeToNbt(NbtCompound nbt, CallbackInfo info) {
         NbtList powerNbt = new NbtList();
-        for (Power power : this.getPowers()) {
-            NbtCompound powerCompound = power.getNbt();
-            Identifier powerId = Powers.getFirstMatchingId(power);
-            if (powerId != null) {
-                powerCompound.putString("power", powerId.toString());
+        for (Power power : PowerData.getPowers((PlayerEntity) (Object) this)) {
+            if (power != null) {
+                NbtCompound powerCompound = power.getNbt();
                 powerNbt.add(powerCompound);
             }
         }
