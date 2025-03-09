@@ -1,28 +1,20 @@
 package net.togyk.myneheroes.ability;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
-import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.entity.LaserEntity;
 import net.togyk.myneheroes.entity.ModEntities;
 
-import java.awt.*;
-
-public class LasersFromEyesAbility extends Ability{
-    public LasersFromEyesAbility(String name, int cooldown) {
-        super(name, cooldown);
+public class LazarsFromEyesAbility extends Ability{
+    public LazarsFromEyesAbility(Identifier id, String name, int cooldown) {
+        super(id, name, cooldown);
     }
 
     @Override
-    public void clientUse(PlayerEntity player) {
-    }
-
-    @Override
-    public void serverUse(PlayerEntity player) {
-        if (getCooldown() == 0) {
+    public void Use(PlayerEntity player) {
+        if (this.getCooldown() == 0 && !player.getWorld().isClient) {
             // shoot laser
             Vec3d look = player.getRotationVec(1.0F);
 
@@ -34,7 +26,12 @@ public class LasersFromEyesAbility extends Ability{
             projectile.applyDamageModifier(2.0F);
 
             player.getWorld().spawnEntity(projectile);
+            super.Use(player);
         }
-        super.serverUse(player);
+    }
+
+    @Override
+    public LazarsFromEyesAbility copy() {
+        return new LazarsFromEyesAbility(this.id, this.getName(), this.getMaxCooldown());
     }
 }

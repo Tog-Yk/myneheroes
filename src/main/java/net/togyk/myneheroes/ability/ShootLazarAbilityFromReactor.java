@@ -3,6 +3,7 @@ package net.togyk.myneheroes.ability;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
@@ -10,22 +11,15 @@ import net.togyk.myneheroes.entity.LaserEntity;
 import net.togyk.myneheroes.entity.ModEntities;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
-
-public class ShootLaserAbilityFromReactor extends Ability{
-    public ShootLaserAbilityFromReactor(String name, int cooldown) {
-        super(name, cooldown);
+public class ShootLazarAbilityFromReactor extends Ability{
+    public ShootLazarAbilityFromReactor(Identifier id, String name, int cooldown) {
+        super(id, name, cooldown);
     }
 
-    @Override
-    public void clientUse(PlayerEntity player) {
-        // Use the player's main hand to mimic shooting
-        player.swingHand(Hand.MAIN_HAND);
-    }
 
     @Override
-    public void serverUse(PlayerEntity player) {
-        if (getCooldown() == 0) {
+    public void Use(PlayerEntity player) {
+        if (getCooldown() == 0 && !player.getWorld().isClient) {
             ItemStack reactorStack = MyneHeroes.getReactorItemClass(player);
             if (reactorStack.getItem() instanceof ReactorItem reactor) {
                 int reactorPower = reactor.getStoredPowerOrDefault(reactorStack, 0);
@@ -37,10 +31,14 @@ public class ShootLaserAbilityFromReactor extends Ability{
                     LaserEntity projectile = getLaserEntity(player, look);
 
                     player.getWorld().spawnEntity(projectile);
+                    player.swingHand(Hand.MAIN_HAND);
                 }
             }
+            super.Use(player);
+        } else if (getCooldown() == 0) {
+            //client gets called before the cooldown gets reset
+            player.swingHand(Hand.MAIN_HAND);
         }
-        super.serverUse(player);
     }
 
     private static @NotNull LaserEntity getLaserEntity(PlayerEntity player, Vec3d look) {
@@ -52,5 +50,10 @@ public class ShootLaserAbilityFromReactor extends Ability{
         projectile.setColor(0x3300FFFF);
         projectile.setInnerColor(0xFFF0FFFF);
         return projectile;
+    }
+
+    @Override
+    public ShootLazarAbilityFromReactor copy() {
+        return new ShootLazarAbilityFromReactor(this.id, this.getName(), this.getMaxCooldown());
     }
 }

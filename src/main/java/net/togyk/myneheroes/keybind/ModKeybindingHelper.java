@@ -22,7 +22,7 @@ public class ModKeybindingHelper {
                     if (ability != null) {
                         //send two things
                         //to do everything what has to be done on the client side
-                        ability.clientUse(MinecraftClient.getInstance().player);
+                        ability.Use(MinecraftClient.getInstance().player);
                         //to send a message to the server to do everything what has to be done on the server side
                         ClientPlayNetworking.send(new KeybindPayload(0));
                     }
@@ -34,7 +34,7 @@ public class ModKeybindingHelper {
                     if (ability != null) {
                         //send two things
                         //to do everything what has to be done on the client side
-                        ability.clientUse(MinecraftClient.getInstance().player);
+                        ability.Use(MinecraftClient.getInstance().player);
                         //to send a message to the server to do everything what has to be done on the server side
                         ClientPlayNetworking.send(new KeybindPayload(1));
                     }
@@ -46,7 +46,7 @@ public class ModKeybindingHelper {
                     if (ability != null) {
                         //send two things
                         //to do everything what has to be done on the client side
-                        ability.clientUse(MinecraftClient.getInstance().player);
+                        ability.Use(MinecraftClient.getInstance().player);
                         //to send a message to the server to do everything what has to be done on the server side
                         ClientPlayNetworking.send(new KeybindPayload(2));
                     }
@@ -58,7 +58,7 @@ public class ModKeybindingHelper {
                     if (ability != null) {
                         //send two things
                         //to do everything what has to be done on the client side
-                        ability.clientUse(MinecraftClient.getInstance().player);
+                        ability.Use(MinecraftClient.getInstance().player);
                         //to send a message to the server to do everything what has to be done on the server side
                         ClientPlayNetworking.send(new KeybindPayload(3));
                     }

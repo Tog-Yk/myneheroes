@@ -25,7 +25,12 @@ public class Powers {
     }
 
     public static Power get(Identifier id) {
-        return POWERS.getOrDefault(id, null).copy();
+        Power power = POWERS.getOrDefault(id, null);
+        if (power != null) {
+            return power.copy();
+        } else {
+            return null;
+        }
     }
 
     public static boolean containsId(Identifier id) {

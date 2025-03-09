@@ -46,22 +46,22 @@ public class ModMessages {
                 if (payload.integer() == 0) {
                     if (MinecraftClient.getInstance().player != null) {
                         Ability firstAbility = ((PlayerAbilities) context.player()).getFirstAbility();
-                        firstAbility.serverUse(context.player());
+                        firstAbility.Use(context.player());
                     }
                 } else if (payload.integer() == 1) {
                     if (MinecraftClient.getInstance().player != null) {
-                        Ability firstAbility = ((PlayerAbilities) context.player()).getSecondAbility();
-                        firstAbility.serverUse(context.player());
+                        Ability secondAbility = ((PlayerAbilities) context.player()).getSecondAbility();
+                        secondAbility.Use(context.player());
                     }
                 }else if (payload.integer() == 2) {
                     if (MinecraftClient.getInstance().player != null) {
-                        Ability firstAbility = ((PlayerAbilities) context.player()).getThirdAbility();
-                        firstAbility.serverUse(context.player());
+                        Ability thirdAbility = ((PlayerAbilities) context.player()).getThirdAbility();
+                        thirdAbility.Use(context.player());
                     }
                 }else if (payload.integer() == 3) {
                     if (MinecraftClient.getInstance().player != null) {
-                        Ability firstAbility = ((PlayerAbilities) context.player()).getFourthAbility();
-                        firstAbility.serverUse(context.player());
+                        Ability fourthAbility = ((PlayerAbilities) context.player()).getFourthAbility();
+                        fourthAbility.Use(context.player());
                     }
                 } else if (payload.integer() == 5) {
                     ServerPlayerEntity player = context.player();

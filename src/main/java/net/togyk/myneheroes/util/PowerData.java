@@ -55,7 +55,9 @@ public class PowerData {
     public static Power nbtToPower(NbtCompound nbt) {
         Identifier powerId = Identifier.of(nbt.getString("id"));
         Power power = Powers.get(powerId);
-        power.readNbt(nbt);
+        if (power != null) {
+            power.readNbt(nbt);
+        }
         return power;
     }
 }

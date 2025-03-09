@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.togyk.myneheroes.Item.ModItemGroups;
 import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
+import net.togyk.myneheroes.ability.Abilities;
 import net.togyk.myneheroes.block.ModBlockEntityTypes;
 import net.togyk.myneheroes.block.ModBlocks;
 import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
@@ -27,12 +28,15 @@ public class MyneHeroes implements ModInitializer {
     public static final String MOD_ID = "myneheroes";
 
     // This logger is used to write text to the console and the log file.
-    // It is considered best practice to clientUse your mod id as the logger's name.
+    // It is considered best practice to Use your mod id as the logger's name.
     // That way, it's clear which mod wrote info, warnings, and errors.
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     @Override
     public void onInitialize() {
+        Abilities.registerAbilities();
+        Powers.registerPowers();
+
         ModItems.registerModItems();
         ModBlocks.registerModBlocks();
         ModItemGroups.registerItemGroups();
@@ -50,8 +54,6 @@ public class MyneHeroes implements ModInitializer {
 
         ItemStorage.SIDED.registerForBlockEntity(ArmorDyeingBlockEntity::getInventoryProvider, ModBlockEntityTypes.ARMOR_DYEING_BLOCK_ENTITY);
         ItemStorage.SIDED.registerForBlockEntity(ArmorLightLevelerBlockEntity::getInventoryProvider, ModBlockEntityTypes.ARMOR_LIGHT_LEVELER_BLOCK_ENTITY);
-
-        Powers.registerPowers();
     }
     /**
      * Searches the player's inventory for the first matching item.

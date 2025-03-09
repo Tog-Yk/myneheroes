@@ -91,7 +91,9 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
     public float getResistance() {
         List<Float> multipliers = new ArrayList<>();
         for (Power power : this.powers) {
-            multipliers.add(power.getResistance());
+            if (power != null) {
+                multipliers.add(power.getResistance());
+            }
         }
         if (!multipliers.isEmpty()) {
             return min(multipliers);

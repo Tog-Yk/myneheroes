@@ -17,6 +17,7 @@ import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.util.PowerData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PowerInjectionItem extends Item {
@@ -56,17 +57,20 @@ public class PowerInjectionItem extends Item {
         Power power = this.getPower(user.getStackInHand(hand));
 
         List<Power> powers = PowerData.getPowers(user);
-        List<Identifier> powerIds = powers.stream().map(Power::getId).toList();
+        List<Identifier> powerIds = new ArrayList<>();
+        if (!powers.isEmpty() && powers != null) {
+            powerIds = powers.stream().map(Power::getId).toList();
+        }
         if (power == null && !powers.isEmpty()) {
             Power usersLastPower = powers.getLast();
             this.setPower(user.getStackInHand(hand), usersLastPower);
             PowerData.removePower(user, usersLastPower);
-            user.swingHand(Hand.MAIN_HAND);
+            user.swingHand(hand);
             return TypedActionResult.success(user.getStackInHand(hand));
         } else if (power != null && !powerIds.contains(power.id)) {
             PowerData.addPower(user, power);
             this.setPower(user.getStackInHand(hand), null);
-            user.swingHand(Hand.MAIN_HAND);
+            user.swingHand(hand);
             return TypedActionResult.success(user.getStackInHand(hand));
         }
         return TypedActionResult.pass(user.getStackInHand(hand));
