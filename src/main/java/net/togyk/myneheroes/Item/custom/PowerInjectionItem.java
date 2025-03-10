@@ -44,7 +44,7 @@ public class PowerInjectionItem extends Item {
             modidData = nbt.getCompound(MyneHeroes.MOD_ID);
         }
         if (power != null) {
-            modidData.put("power", power.getNbt());
+            modidData.put("power", power.writeNbt(new NbtCompound()));
         } else {
             modidData.remove("power");
         }

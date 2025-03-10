@@ -32,6 +32,19 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
             PowerData.setPowers(player, powers);
             this.isDirty = false;
         }
+        List<Power> powers = PowerData.getPowers(player);
+        for (Power power : powers) {
+            if (power != null) {
+                power.tick();
+            }
+        }
+
+        if (!powers.isEmpty()) {
+            player.getAbilities().allowFlying = true;
+        } else if (!player.isInCreativeMode()) {
+            player.getAbilities().allowFlying = false;
+            player.getAbilities().flying = false;
+        }
     }
 
     @Inject(at = @At("HEAD"), method = "readCustomDataFromNbt")
@@ -54,7 +67,7 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
         NbtList powerNbt = new NbtList();
         for (Power power : PowerData.getPowers((PlayerEntity) (Object) this)) {
             if (power != null) {
-                NbtCompound powerCompound = power.getNbt();
+                NbtCompound powerCompound = power.writeNbt(new NbtCompound());
                 powerNbt.add(powerCompound);
             }
         }

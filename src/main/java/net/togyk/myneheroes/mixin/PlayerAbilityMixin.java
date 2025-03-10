@@ -26,7 +26,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
 
     @Inject(at = @At("HEAD"), method = "tick")
     private void tick(CallbackInfo info) {
-        PlayerEntity player = MinecraftClient.getInstance().player;
+        PlayerEntity player = (PlayerEntity) (Object) this;
         if (player != null) {
             List<Ability> bufferList = getAbilities(player);
             if (bufferList != null) {

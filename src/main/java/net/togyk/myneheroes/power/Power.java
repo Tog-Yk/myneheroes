@@ -14,7 +14,7 @@ public class Power {
     public List<Ability> abilities;
 
     private boolean isDampened = false;
-    int color;
+    private int color;
 
     public Power(Identifier id, String name, float damageMultiplier, float resistance, int color, List<Ability> abilities) {
         this.id = id;
@@ -24,13 +24,16 @@ public class Power {
         this.color = color;
         this.abilities = abilities;
     }
-    public NbtCompound getNbt() {
-        NbtCompound nbt = new NbtCompound();
+    public NbtCompound writeNbt(NbtCompound nbt) {
         nbt.putString("id", this.id.toString());
+        nbt.putBoolean("is_dampened", this.isDampened);
         return nbt;
     }
 
     public void readNbt(NbtCompound nbt) {
+        if (nbt.contains("is_dampened")) {
+            this.isDampened = nbt.getBoolean("is_dampened");
+        }
     }
 
     public Identifier getId() {
@@ -59,6 +62,10 @@ public class Power {
 
     public int getColor() {
         return color;
+    }
+
+    public void tick() {
+
     }
 
     @Override

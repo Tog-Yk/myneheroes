@@ -7,8 +7,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.*;
 import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.ability.Ability;
-import net.togyk.myneheroes.ability.ShootLaserAbilityFromReactor;
+import net.togyk.myneheroes.ability.Abilities;
 
 import java.util.List;
 
@@ -26,8 +25,8 @@ public class ModItems {
 
     public static final Item ARC_REACTOR = registerItem("arc_reactor",new ReactorItem(4000, 2400, new Item.Settings().maxCount(1)));
 
-    public static final Item ABILITY_HOLDING = registerItem("ability_holding",new AbilityHoldingItem(new Ability("ability",100), new Item.Settings().maxCount(1)));
-    public static final Item LAZAR_HOLDING = registerItem("lazar_holding",new AbilityHoldingItem(new ShootLaserAbilityFromReactor("lazar",10), new Item.Settings().maxCount(1)));
+    public static final Item ABILITY_HOLDING = registerItem("ability_holding",new AbilityHoldingItem(Abilities.get(Identifier.of(MyneHeroes.MOD_ID, "toggle_hud")), new Item.Settings().maxCount(1)));
+    public static final Item LAZAR_HOLDING = registerItem("lazar_holding",new AbilityHoldingItem(Abilities.get(Identifier.of(MyneHeroes.MOD_ID, "lazar_eyes")), new Item.Settings().maxCount(1)));
 
     public static final Item POWER_INJECTION = registerItem("power_injection", new PowerInjectionItem(new Item.Settings().maxCount(1)));
 
