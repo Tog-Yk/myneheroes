@@ -57,8 +57,8 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         PlayerInventory inventory = player.getInventory();
         ItemStack helmetStack = player.getEquippedStack(EquipmentSlot.HEAD);
         if (helmetStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-            if (advancedArmorItem.abilities != null) {
-                for (Ability ability : advancedArmorItem.abilities) {
+            if (advancedArmorItem.getAbilities(helmetStack) != null) {
+                for (Ability ability : advancedArmorItem.getAbilities(helmetStack)) {
                     if (!abilityList.contains(ability)) {
                         abilityList.add(ability);
                     }
@@ -67,8 +67,8 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         }
         ItemStack chestplateStack = player.getEquippedStack(EquipmentSlot.CHEST);
         if (chestplateStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-            if (advancedArmorItem.abilities != null) {
-                for (Ability ability : advancedArmorItem.abilities) {
+            if (advancedArmorItem.getAbilities(chestplateStack) != null) {
+                for (Ability ability : advancedArmorItem.getAbilities(chestplateStack)) {
                     if (!abilityList.contains(ability)) {
                         abilityList.add(ability);
                     }
@@ -77,8 +77,8 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         }
         ItemStack leggingsStack = player.getEquippedStack(EquipmentSlot.LEGS);
         if (leggingsStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-            if (advancedArmorItem.abilities != null) {
-                for (Ability ability : advancedArmorItem.abilities) {
+            if (advancedArmorItem.getAbilities(leggingsStack) != null) {
+                for (Ability ability : advancedArmorItem.getAbilities(leggingsStack)) {
                     if (!abilityList.contains(ability)) {
                         abilityList.add(ability);
                     }
@@ -87,8 +87,8 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         }
         ItemStack bootsStack = player.getEquippedStack(EquipmentSlot.FEET);
         if (bootsStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-            if (advancedArmorItem.abilities != null) {
-                for (Ability ability : advancedArmorItem.abilities) {
+            if (advancedArmorItem.getAbilities(bootsStack) != null) {
+                for (Ability ability : advancedArmorItem.getAbilities(bootsStack)) {
                     if (!abilityList.contains(ability)) {
                         abilityList.add(ability);
                     }

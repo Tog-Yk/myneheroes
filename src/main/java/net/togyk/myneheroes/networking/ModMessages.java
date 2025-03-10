@@ -5,15 +5,18 @@ import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
+import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.DyeableAdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
@@ -70,6 +73,64 @@ public class ModMessages {
                         if (reactorStack != ItemStack.EMPTY && reactorStack.getItem() instanceof ReactorItem reactorItem) {
                             int currentFuel = reactorItem.getStoredFuelOrDefault(reactorStack,0);
                             reactorItem.setStoredFuel(reactorStack,currentFuel+10);
+                        }
+                    }
+                } else if (payload.integer() == 10) {
+                    ServerPlayerEntity player = context.player();
+                    if (player != null) {
+                        ItemStack stack = player.getEquippedStack(EquipmentSlot.HEAD);
+                        if (stack != ItemStack.EMPTY && stack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
+                            List<Ability> notUnlocked = advancedArmorItem.getNotUnlockedAbilities(stack);
+                            if (!notUnlocked.isEmpty()) {
+                                advancedArmorItem.UnlockAbility(stack, notUnlocked.getFirst().getId());
+                                player.sendMessage(Text.of("unlocked " + notUnlocked.getFirst().getName()), false);
+                                return;
+                            }
+                        }
+                        stack = player.getEquippedStack(EquipmentSlot.CHEST);
+                        if (stack != ItemStack.EMPTY && stack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
+                            List<Ability> notUnlocked = advancedArmorItem.getNotUnlockedAbilities(stack);
+                            if (!notUnlocked.isEmpty()) {
+                                advancedArmorItem.UnlockAbility(stack, notUnlocked.getFirst().getId());
+                                player.sendMessage(Text.of("unlocked " + notUnlocked.getFirst().getName()), false);
+                                return;
+                            }
+                        }
+                        stack = player.getEquippedStack(EquipmentSlot.LEGS);
+                        if (stack != ItemStack.EMPTY && stack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
+                            List<Ability> notUnlocked = advancedArmorItem.getNotUnlockedAbilities(stack);
+                            if (!notUnlocked.isEmpty()) {
+                                advancedArmorItem.UnlockAbility(stack, notUnlocked.getFirst().getId());
+                                player.sendMessage(Text.of("unlocked " + notUnlocked.getFirst().getName()), false);
+                                return;
+                            }
+                        }
+                        stack = player.getEquippedStack(EquipmentSlot.FEET);
+                        if (stack != ItemStack.EMPTY && stack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
+                            List<Ability> notUnlocked = advancedArmorItem.getNotUnlockedAbilities(stack);
+                            if (!notUnlocked.isEmpty()) {
+                                advancedArmorItem.UnlockAbility(stack, notUnlocked.getFirst().getId());
+                                player.sendMessage(Text.of("unlocked " + notUnlocked.getFirst().getName()), false);
+                                return;
+                            }
+                        }
+                        stack = player.getEquippedStack(EquipmentSlot.MAINHAND);
+                        if (stack != ItemStack.EMPTY && stack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
+                            List<Ability> notUnlocked = advancedArmorItem.getNotUnlockedAbilities(stack);
+                            if (!notUnlocked.isEmpty()) {
+                                advancedArmorItem.UnlockAbility(stack, notUnlocked.getFirst().getId());
+                                player.sendMessage(Text.of("unlocked " + notUnlocked.getFirst().getName()), false);
+                                return;
+                            }
+                        }
+                        stack = player.getEquippedStack(EquipmentSlot.OFFHAND);
+                        if (stack != ItemStack.EMPTY && stack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
+                            List<Ability> notUnlocked = advancedArmorItem.getNotUnlockedAbilities(stack);
+                            if (!notUnlocked.isEmpty()) {
+                                advancedArmorItem.UnlockAbility(stack, notUnlocked.getFirst().getId());
+                                player.sendMessage(Text.of("unlocked " + notUnlocked.getFirst().getName()), false);
+                                return;
+                            }
                         }
                     }
                 }
