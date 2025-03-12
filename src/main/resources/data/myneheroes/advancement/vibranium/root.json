@@ -4,7 +4,10 @@
       "conditions": {
         "items": [
           {
-            "tag": "myneheroes:vibranium_materials"
+            "items": [
+              "myneheroes:vibranium_ingot",
+              "myneheroes:raw_vibranium"
+            ]
           }
         ]
       },

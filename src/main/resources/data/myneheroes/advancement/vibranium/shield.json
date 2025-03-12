@@ -5,7 +5,11 @@
       "conditions": {
         "items": [
           {
-            "tag": "myneheroes:vibranium_shields"
+            "items": [
+              "myneheroes:vibranium_shield",
+              "myneheroes:cosmic_shield",
+              "myneheroes:a_symbols_shield"
+            ]
           }
         ]
       },
