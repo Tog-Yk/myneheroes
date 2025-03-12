@@ -93,4 +93,8 @@ public abstract class Ability {
     }
 
     public abstract Ability copy();
+
+    public Identifier getId() {
+        return id;
+    }
 }
