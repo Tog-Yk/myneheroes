@@ -19,7 +19,7 @@ public class ShootLazarAbilityFromReactor extends Ability{
 
     @Override
     public void Use(PlayerEntity player) {
-        if (getCooldown() == 0 && !player.getWorld().isClient) {
+        if (getCooldown() == 0) {
             ItemStack reactorStack = MyneHeroes.getReactorItemClass(player);
             if (reactorStack.getItem() instanceof ReactorItem reactor) {
                 int reactorPower = reactor.getStoredPowerOrDefault(reactorStack, 0);

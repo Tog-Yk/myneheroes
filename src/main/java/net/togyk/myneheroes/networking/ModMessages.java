@@ -80,55 +80,17 @@ public class ModMessages {
                     if (player != null) {
                         ItemStack stack = player.getEquippedStack(EquipmentSlot.HEAD);
                         if (stack != ItemStack.EMPTY && stack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-                            List<Ability> notUnlocked = advancedArmorItem.getNotUnlockedAbilities(stack);
-                            if (!notUnlocked.isEmpty()) {
-                                advancedArmorItem.UnlockAbility(stack, notUnlocked.getFirst().getId());
-                                player.sendMessage(Text.of("unlocked " + notUnlocked.getFirst().getName()), false);
+                            if (advancedArmorItem.getAbilities(stack).isEmpty()) {
+                                advancedArmorItem.UnlockAbility(stack, Identifier.of(MyneHeroes.MOD_ID, "toggle_hud"));
+                                player.sendMessage(Text.of("unlocked Hud"), false);
                                 return;
                             }
                         }
                         stack = player.getEquippedStack(EquipmentSlot.CHEST);
-                        if (stack != ItemStack.EMPTY && stack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-                            List<Ability> notUnlocked = advancedArmorItem.getNotUnlockedAbilities(stack);
-                            if (!notUnlocked.isEmpty()) {
-                                advancedArmorItem.UnlockAbility(stack, notUnlocked.getFirst().getId());
-                                player.sendMessage(Text.of("unlocked " + notUnlocked.getFirst().getName()), false);
-                                return;
-                            }
-                        }
-                        stack = player.getEquippedStack(EquipmentSlot.LEGS);
-                        if (stack != ItemStack.EMPTY && stack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-                            List<Ability> notUnlocked = advancedArmorItem.getNotUnlockedAbilities(stack);
-                            if (!notUnlocked.isEmpty()) {
-                                advancedArmorItem.UnlockAbility(stack, notUnlocked.getFirst().getId());
-                                player.sendMessage(Text.of("unlocked " + notUnlocked.getFirst().getName()), false);
-                                return;
-                            }
-                        }
-                        stack = player.getEquippedStack(EquipmentSlot.FEET);
-                        if (stack != ItemStack.EMPTY && stack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-                            List<Ability> notUnlocked = advancedArmorItem.getNotUnlockedAbilities(stack);
-                            if (!notUnlocked.isEmpty()) {
-                                advancedArmorItem.UnlockAbility(stack, notUnlocked.getFirst().getId());
-                                player.sendMessage(Text.of("unlocked " + notUnlocked.getFirst().getName()), false);
-                                return;
-                            }
-                        }
-                        stack = player.getEquippedStack(EquipmentSlot.MAINHAND);
-                        if (stack != ItemStack.EMPTY && stack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-                            List<Ability> notUnlocked = advancedArmorItem.getNotUnlockedAbilities(stack);
-                            if (!notUnlocked.isEmpty()) {
-                                advancedArmorItem.UnlockAbility(stack, notUnlocked.getFirst().getId());
-                                player.sendMessage(Text.of("unlocked " + notUnlocked.getFirst().getName()), false);
-                                return;
-                            }
-                        }
-                        stack = player.getEquippedStack(EquipmentSlot.OFFHAND);
-                        if (stack != ItemStack.EMPTY && stack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-                            List<Ability> notUnlocked = advancedArmorItem.getNotUnlockedAbilities(stack);
-                            if (!notUnlocked.isEmpty()) {
-                                advancedArmorItem.UnlockAbility(stack, notUnlocked.getFirst().getId());
-                                player.sendMessage(Text.of("unlocked " + notUnlocked.getFirst().getName()), false);
+                            if (stack != ItemStack.EMPTY && stack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
+                            if (advancedArmorItem.getAbilities(stack).isEmpty()) {
+                                advancedArmorItem.UnlockAbility(stack, Identifier.of(MyneHeroes.MOD_ID, "shoot_lazar"));
+                                player.sendMessage(Text.of("unlocked Lazars"), false);
                                 return;
                             }
                         }

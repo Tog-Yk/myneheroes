@@ -47,6 +47,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
                     // Have I told you I am really amazed about your progress and your skills?
                     for (Ability ability : power.abilities) {
                         if (!abilityList.contains(ability)) {
+                            ability.setHolder(power);
                             abilityList.add(ability);
                         }
                     }
@@ -60,6 +61,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
             if (advancedArmorItem.getAbilities(helmetStack) != null) {
                 for (Ability ability : advancedArmorItem.getAbilities(helmetStack)) {
                     if (!abilityList.contains(ability)) {
+                        ability.setHolder(helmetStack);
                         abilityList.add(ability);
                     }
                 }
@@ -70,6 +72,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
             if (advancedArmorItem.getAbilities(chestplateStack) != null) {
                 for (Ability ability : advancedArmorItem.getAbilities(chestplateStack)) {
                     if (!abilityList.contains(ability)) {
+                        ability.setHolder(chestplateStack);
                         abilityList.add(ability);
                     }
                 }
@@ -80,6 +83,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
             if (advancedArmorItem.getAbilities(leggingsStack) != null) {
                 for (Ability ability : advancedArmorItem.getAbilities(leggingsStack)) {
                     if (!abilityList.contains(ability)) {
+                        ability.setHolder(leggingsStack);
                         abilityList.add(ability);
                     }
                 }
@@ -90,6 +94,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
             if (advancedArmorItem.getAbilities(bootsStack) != null) {
                 for (Ability ability : advancedArmorItem.getAbilities(bootsStack)) {
                     if (!abilityList.contains(ability)) {
+                        ability.setHolder(bootsStack);
                         abilityList.add(ability);
                     }
                 }

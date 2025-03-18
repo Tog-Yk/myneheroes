@@ -26,8 +26,8 @@ public class LazarsFromEyesAbility extends Ability{
             projectile.applyDamageModifier(2.0F);
 
             player.getWorld().spawnEntity(projectile);
-            super.Use(player);
         }
+        super.Use(player);
     }
 
     @Override

@@ -3,9 +3,12 @@ package net.togyk.myneheroes.ability;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.power.Power;
+import net.togyk.myneheroes.power.AbilityHolding;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class Ability {
     private Power HolderPower;
@@ -29,7 +32,12 @@ public abstract class Ability {
 
     public void Use(PlayerEntity player) {
         if (this.getCooldown() == 0) {
-            this.setCooldown(getMaxCooldown());
+            this.setCooldown(this.getMaxCooldown());
+        }
+        if (this.HolderItem != null && this.HolderItem.getItem() instanceof AbilityHolding holding) {
+            holding.saveAbility(this.HolderItem, this);
+        } else if (this.HolderPower != null) {
+            this.HolderPower.saveAbility(this);
         }
     }
 
@@ -39,6 +47,11 @@ public abstract class Ability {
         }
         if (this.getCooldown() < 0) {
             this.setCooldown(0);
+        }
+        if (this.HolderItem != null && this.HolderItem.getItem() instanceof AbilityHolding holding) {
+            holding.saveAbility(this.HolderItem, this);
+        } else if (this.HolderPower != null) {
+            this.HolderPower.saveAbility(this);
         }
     }
 
@@ -58,14 +71,14 @@ public abstract class Ability {
         return maxCooldown;
     }
 
-    public void setHolder(ItemStack holder) {
-        HolderItem = holder;
-        HolderPower = null;
+    public void setHolder(@Nullable ItemStack holder) {
+        this.HolderItem = holder;
+        this.HolderPower = null;
     }
 
-    public void setHolder(Power holder) {
-        HolderItem = null;
-        HolderPower = holder;
+    public void setHolder(@Nullable Power holder) {
+        this.HolderItem = null;
+        this.HolderPower = holder;
     }
 
     /*
