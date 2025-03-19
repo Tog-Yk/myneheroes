@@ -120,7 +120,7 @@ public class Power {
 
     @Override
     public String toString() {
-        return this.id.toString() + "{name: "+ this.name +
+        return this.id.toString() + "{\nname: "+ this.name +
                 ",\ndamageMultiplier: " + this.damageMultiplier +
                 ",\nresistance: " + this.resistance +
                 ",\nabilities:" + this.abilities.toString();

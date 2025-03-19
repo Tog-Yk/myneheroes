@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.networking.KeybindPayload;
+import net.togyk.myneheroes.util.AbilityScrollData;
 import net.togyk.myneheroes.util.PlayerAbilities;
 
 public class ModKeybindingHelper {
@@ -66,6 +67,20 @@ public class ModKeybindingHelper {
                         ability.Use(MinecraftClient.getInstance().player);
                         //to send a message to the server to do everything what has to be done on the server side
                         ClientPlayNetworking.send(new KeybindPayload(3));
+                    }
+                }
+            }
+            if (ModKeyBindings.abilitiesScrollUp.isPressed()) {
+                if (client.player != null){
+                    if (AbilityScrollData.getScrolledOffset(client.player) > 0) {
+                        AbilityScrollData.scrollBack(client.player);
+                    }
+                }
+            }
+            if (ModKeyBindings.abilitiesScrollDown.isPressed()) {
+                if (client.player != null){
+                    if (AbilityScrollData.canScrollFurther(client.player)) {
+                        AbilityScrollData.scrollFurther(client.player);
                     }
                 }
             }

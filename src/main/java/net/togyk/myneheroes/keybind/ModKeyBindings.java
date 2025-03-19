@@ -14,6 +14,9 @@ public class ModKeyBindings {
     public static KeyBinding useThirdAbility;
     public static KeyBinding useForthAbility;
 
+    public static KeyBinding abilitiesScrollUp;
+    public static KeyBinding abilitiesScrollDown;
+
     public static void registerKeyBinds() {
         MyneHeroes.LOGGER.info("Registering Keybinds for " + MyneHeroes.MOD_ID);
         useFirstAbility = KeyBindingHelper.registerKeyBinding(new KeyBinding(
@@ -38,6 +41,18 @@ public class ModKeyBindings {
                 "key.myneheroes.use_forth_ability", //translatable key
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_B, // Default key of: B
+                "key.category.myneheroes" // keybind category
+        ));
+        abilitiesScrollUp = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.myneheroes.scroll_up", //translatable key
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_UP, // Default key of: up
+                "key.category.myneheroes" // keybind category
+        ));
+        abilitiesScrollDown = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.myneheroes.scroll_down", //translatable key
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_DOWN, // Default key of: down
                 "key.category.myneheroes" // keybind category
         ));
         fuelReactor = KeyBindingHelper.registerKeyBinding(new KeyBinding(

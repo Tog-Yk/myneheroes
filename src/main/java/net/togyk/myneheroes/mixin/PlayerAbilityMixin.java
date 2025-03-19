@@ -1,17 +1,23 @@
 package net.togyk.myneheroes.mixin;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtList;
+import net.minecraft.sound.SoundEvent;
 import net.togyk.myneheroes.Item.custom.AbilityHoldingItem;
 import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
+import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.power.Power;
+import net.togyk.myneheroes.util.AbilityScrollData;
 import net.togyk.myneheroes.util.PlayerAbilities;
 import net.togyk.myneheroes.util.PowerData;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -21,20 +27,34 @@ import java.util.List;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerAbilityMixin implements PlayerAbilities {
+    @Shadow public abstract void playSound(SoundEvent sound, float volume, float pitch);
+
     private List<Ability> abilities = new ArrayList<>();
+    private boolean isDirty = false;
+
+    private int scrolledOffset = 0;
 
 
     @Inject(at = @At("HEAD"), method = "tick")
     private void tick(CallbackInfo info) {
         PlayerEntity player = (PlayerEntity) (Object) this;
+        if (this.isDirty) {
+            AbilityScrollData.setScrolledOffset(player, AbilityScrollData.getScrolledOffset(player));
+            this.isDirty = false;
+        }
         if (player != null) {
             List<Ability> bufferList = getAbilities(player);
             if (bufferList != null) {
-                abilities = bufferList;
+                this.abilities = bufferList;
             }
         }
-        for (Ability ability : abilities) {
+        for (Ability ability : this.abilities) {
             ability.tick();
+        }
+        if (this.scrolledOffset > this.maxScroll()) {
+            this.scrolledOffset = this.maxScroll();
+        } else if (scrolledOffset < 0) {
+            this.scrolledOffset = 0;
         }
     }
 
@@ -45,7 +65,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
             for (Power power : powerList) {
                 if (power != null && !power.isDampened()) {
                     // Have I told you I am really amazed about your progress and your skills?
-                    for (Ability ability : power.abilities) {
+                    for (Ability ability : power.getAbilities()) {
                         if (!abilityList.contains(ability)) {
                             ability.setHolder(power);
                             abilityList.add(ability);
@@ -116,8 +136,8 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
 
     @Override
     public Ability getFirstAbility() {
-        if (abilities != null && !abilities.isEmpty()) {
-            return abilities.get(0);
+        if (abilities != null && abilities.size() >= 1 + this.getScrolledOffset()) {
+            return abilities.get(this.getScrolledOffset());
         } else {
             return null;
         }
@@ -125,8 +145,8 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
 
     @Override
     public Ability getSecondAbility() {
-        if (abilities != null && abilities.size() >= 2) {
-            return abilities.get(1);
+        if (abilities != null && abilities.size() >= 2 + this.getScrolledOffset()) {
+            return abilities.get(1 + this.getScrolledOffset());
         } else {
             return null;
         }
@@ -134,8 +154,8 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
 
     @Override
     public Ability getThirdAbility() {
-        if (abilities != null && abilities.size() >= 3) {
-            return abilities.get(2);
+        if (abilities != null && abilities.size() >= 3 + this.getScrolledOffset()) {
+            return abilities.get(2 + this.getScrolledOffset());
         } else {
             return null;
         }
@@ -143,10 +163,69 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
 
     @Override
     public Ability getFourthAbility() {
-        if (abilities != null && abilities.size() >= 4) {
-            return abilities.get(3);
+        if (abilities != null && abilities.size() >= 4 + this.getScrolledOffset()) {
+            return abilities.get(3 + this.getScrolledOffset());
         } else {
             return null;
+        }
+    }
+
+
+
+
+    @Inject(at = @At("HEAD"), method = "readCustomDataFromNbt")
+    private void readFromNbt(NbtCompound nbt, CallbackInfo info) {
+        if (nbt.contains(MyneHeroes.MOD_ID)) {
+            NbtCompound modNbt = nbt.getCompound(MyneHeroes.MOD_ID);
+            if (modNbt.contains("scrolled_offset")) {
+                this.scrolledOffset = modNbt.getInt("scrolled_offset");
+            }
+        }
+        this.isDirty = true;
+    }
+    @Inject(at = @At("HEAD"), method = "writeCustomDataToNbt")
+    private void writeToNbt(NbtCompound nbt, CallbackInfo info) {
+        NbtCompound modNbt = new NbtCompound();
+        if (nbt.contains(MyneHeroes.MOD_ID)) {
+            modNbt = nbt.getCompound(MyneHeroes.MOD_ID);
+        }
+
+        modNbt.putInt("scrolled_offset",this.scrolledOffset);
+
+        nbt.put(MyneHeroes.MOD_ID,modNbt);
+    }
+
+    @Override
+    public int getScrolledOffset() {
+        return Math.max(Math.min(scrolledOffset, this.abilities.size() - 4), 0);
+    }
+
+    @Override
+    public void setScrolledOffset(int scrolledOffset) {
+        this.scrolledOffset = scrolledOffset;
+    }
+
+    @Override
+    public boolean canScrollFurther() {
+        return this.maxScroll() != this.scrolledOffset;
+    }
+
+    @Override
+    public int maxScroll() {
+        return this.abilities.size() - 4;
+    }
+
+    @Override
+    public void scrollFurther() {
+        if (this.scrolledOffset < this.maxScroll()) {
+            this.scrolledOffset += 1;
+        }
+    }
+
+    @Override
+    public void scrollBack() {
+        if (this.scrolledOffset > 0) {
+            this.scrolledOffset -= 1;
         }
     }
 }

@@ -4,8 +4,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.power.Power;
+import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.util.PlayerPowers;
 import net.togyk.myneheroes.util.PowerData;
 import org.spongepowered.asm.mixin.Mixin;
@@ -50,12 +52,20 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
     @Inject(at = @At("HEAD"), method = "readCustomDataFromNbt")
     private void readFromNbt(NbtCompound nbt, CallbackInfo info) {
         List<Power> powers = new ArrayList<>();
+
         if (nbt.contains(MyneHeroes.MOD_ID)) {
-            NbtList powerNbt = nbt.getList(MyneHeroes.MOD_ID, NbtElement.COMPOUND_TYPE);
-            for (NbtElement nbtElement : powerNbt) {
-                if (nbtElement instanceof NbtCompound nbtCompound) {
-                    Power power = PowerData.nbtToPower(nbtCompound);
-                    powers.add(power);
+            NbtCompound modNbt = nbt.getCompound(MyneHeroes.MOD_ID);
+            if (modNbt.contains("powers")) {
+                NbtList powerNbt = modNbt.getList("powers", NbtElement.COMPOUND_TYPE);
+                for (NbtElement nbtElement : powerNbt) {
+                    if (nbtElement instanceof NbtCompound nbtCompound) {
+                        Identifier powerId = Identifier.of(nbtCompound.getString("id"));
+                        Power power = Powers.get(powerId);
+                        if (power != null) {
+                            power.readNbt(nbtCompound);
+                        }
+                        powers.add(power);
+                    }
                 }
             }
         }
@@ -64,6 +74,11 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
     }
     @Inject(at = @At("HEAD"), method = "writeCustomDataToNbt")
     private void writeToNbt(NbtCompound nbt, CallbackInfo info) {
+        NbtCompound modNbt = new NbtCompound();
+        if (nbt.contains(MyneHeroes.MOD_ID)) {
+            modNbt = nbt.getCompound(MyneHeroes.MOD_ID);
+        }
+
         NbtList powerNbt = new NbtList();
         for (Power power : PowerData.getPowers((PlayerEntity) (Object) this)) {
             if (power != null) {
@@ -71,7 +86,8 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
                 powerNbt.add(powerCompound);
             }
         }
-        nbt.put(MyneHeroes.MOD_ID,powerNbt);
+        modNbt.put("powers",powerNbt);
+        nbt.put(MyneHeroes.MOD_ID,modNbt);
     }
 
     public List<Power> getPowers() {

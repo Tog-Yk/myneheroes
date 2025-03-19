@@ -39,6 +39,7 @@ public class ModMessages {
     public static final Identifier LIGHT_LEVELER_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "light_leveler");
     public static final Identifier MISSED_SWING_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "missed_swing");
     public static final Identifier PLAYER_POWER_SYNC_DATA_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "power_sync_data");
+    public static final Identifier PLAYER_ABILITY_SCROLLED_SYNC_DATA_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "ability_scrolled_sync_data");
 
     public static void registerServerMessages() {
         PayloadTypeRegistry.playC2S().register(KeybindPayload.ID, KeybindPayload.CODEC);
@@ -149,6 +150,17 @@ public class ModMessages {
             });
         });
 
+
+        PayloadTypeRegistry.playC2S().register(PlayerAbilityScrollSyncDataPayload.ID, PlayerAbilityScrollSyncDataPayload.CODEC);
+
+        ServerPlayNetworking.registerGlobalReceiver(PlayerAbilityScrollSyncDataPayload.ID, (payload, context) -> {
+            context.server().execute(() -> {
+                ((PlayerAbilities) context.player()).setScrolledOffset(payload.scrolled());
+            });
+        });
+
+
+
         PayloadTypeRegistry.playS2C().register(PlayerPowerSyncDataPayload.ID, PlayerPowerSyncDataPayload.CODEC);
     }
 
@@ -157,13 +169,16 @@ public class ModMessages {
             context.client().execute(() -> {
                 List<Power> powers = new ArrayList<>();
                 if (payload.nbt().contains(MyneHeroes.MOD_ID)) {
-                    NbtList powerNbt = payload.nbt().getList(MyneHeroes.MOD_ID, NbtElement.COMPOUND_TYPE);
-                    for (NbtElement nbtElement : powerNbt) {
-                        if (nbtElement instanceof NbtCompound nbtCompound) {
-                            Identifier powerId = Identifier.of(nbtCompound.getString("id"));
-                            Power power = Powers.get(powerId);
-                            power.readNbt(nbtCompound);
-                            powers.add(power);
+                    NbtCompound modNbt = payload.nbt().getCompound(MyneHeroes.MOD_ID);
+                    if (modNbt.contains("powers")) {
+                        NbtList powerNbt = modNbt.getList("powers", NbtElement.COMPOUND_TYPE);
+                        for (NbtElement nbtElement : powerNbt) {
+                            if (nbtElement instanceof NbtCompound nbtCompound) {
+                                Identifier powerId = Identifier.of(nbtCompound.getString("id"));
+                                Power power = Powers.get(powerId);
+                                power.readNbt(nbtCompound);
+                                powers.add(power);
+                            }
                         }
                     }
                 }

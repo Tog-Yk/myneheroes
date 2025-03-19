@@ -7,4 +7,11 @@ public interface PlayerAbilities {
     Ability getSecondAbility();
     Ability getThirdAbility();
     Ability getFourthAbility();
+
+    int getScrolledOffset();
+    void setScrolledOffset(int scrolledOffset);
+    boolean canScrollFurther();
+    int maxScroll();
+    void scrollFurther();
+    void scrollBack();
 }

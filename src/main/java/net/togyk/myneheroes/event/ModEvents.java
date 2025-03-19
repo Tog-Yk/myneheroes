@@ -37,7 +37,7 @@ public class ModEvents {
                         if (timeInNether.get(player) >= 2 * 60 * 20L) {
                             List<Power> currentPowers = PowerData.getPowers(player);
                             Power kryptonianPower = Powers.get(Identifier.of(MyneHeroes.MOD_ID, "kryptonian"));
-                            if (kryptonianPower != null && !currentPowers.contains(kryptonianPower)) {
+                            if (kryptonianPower != null && !currentPowers.stream().map(Power::getId).toList().contains(kryptonianPower.id)) {
                                 PowerData.addPower(player, kryptonianPower);
                             }
                             timeInNether.put(player,0L);
