@@ -30,6 +30,18 @@ public class ModItems {
 
     public static final Item POWER_INJECTION = registerItem("power_injection", new PowerInjectionItem(new Item.Settings().maxCount(1)));
 
+    public static final Item VIBRANIUM_SHIELD = registerItem("vibranium_shield",
+            new ThrowableShieldItem(2.0F,new Item.Settings().maxDamage(336)));
+
+    public static final Item A_SYMBOLS_SHIELD = registerItem("a_symbols_shield",
+            new ThrowableShieldItem(2.0F,new Item.Settings().maxDamage(336)));
+
+    public static final Item COSMIC_SHIELD = registerItem("cosmic_shield",
+            new ThrowableShieldItem(2.0F,new Item.Settings().maxDamage(336)));
+
+    public static final Item HUD_UPGRADE = registerItem("hud_upgrade", new UpgradeItem(Abilities.get(Identifier.of(MyneHeroes.MOD_ID, "toggle_hud")), 4, ArmorItem.Type.HELMET, new Item.Settings()));
+    public static final Item LAZAR_UPGRADE = registerItem("lazar_upgrade", new UpgradeItem(Abilities.get(Identifier.of(MyneHeroes.MOD_ID, "shoot_lazar")), 6, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
+
     //armors
     //vibranium armors
     public static final Item VIBRANIUM_HELMET = registerItem("vibranium_helmet",
@@ -88,16 +100,6 @@ public class ModItems {
     public static final Item GOLD_TITANIUM_BOOTS = registerItem("gold_titanium_boots",
             new ArmorItem(ModArmorMaterials.GOLD_TITANIUM_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
                     .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(15))));
-
-
-    public static final Item VIBRANIUM_SHIELD = registerItem("vibranium_shield",
-            new ThrowableShieldItem(2.0F,new Item.Settings().maxDamage(336)));
-
-    public static final Item A_SYMBOLS_SHIELD = registerItem("a_symbols_shield",
-            new ThrowableShieldItem(2.0F,new Item.Settings().maxDamage(336)));
-
-    public static final Item COSMIC_SHIELD = registerItem("cosmic_shield",
-            new ThrowableShieldItem(2.0F,new Item.Settings().maxDamage(336)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(MyneHeroes.MOD_ID, name), item);
