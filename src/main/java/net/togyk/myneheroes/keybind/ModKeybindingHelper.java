@@ -17,11 +17,6 @@ public class ModKeybindingHelper {
                     ClientPlayNetworking.send(new KeybindPayload(5));
                 }
             }
-            if (ModKeyBindings.unlockAbility.isPressed()) {
-                if (MinecraftClient.getInstance().player != null){
-                    ClientPlayNetworking.send(new KeybindPayload(10));
-                }
-            }
             if (ModKeyBindings.useFirstAbility.isPressed()) {
                 if (MinecraftClient.getInstance().player != null){
                     Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).getFirstAbility();

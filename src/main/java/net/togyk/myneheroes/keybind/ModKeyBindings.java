@@ -8,7 +8,6 @@ import org.lwjgl.glfw.GLFW;
 
 public class ModKeyBindings {
     public static KeyBinding fuelReactor;
-    public static KeyBinding unlockAbility;
     public static KeyBinding useFirstAbility;
     public static KeyBinding useSecondAbility;
     public static KeyBinding useThirdAbility;
@@ -59,12 +58,6 @@ public class ModKeyBindings {
                 "key.myneheroes.fuel_reactor", //translatable key
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_V, // Default key of: V
-                "key.category.myneheroes" // keybind category
-        ));
-        unlockAbility = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.myneheroes.unlockAbility", //translatable key
-                InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_Y, // Default key of: Y
                 "key.category.myneheroes" // keybind category
         ));
     }

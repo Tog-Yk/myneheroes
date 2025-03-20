@@ -76,26 +76,6 @@ public class ModMessages {
                             reactorItem.setStoredFuel(reactorStack,currentFuel+10);
                         }
                     }
-                } else if (payload.integer() == 10) {
-                    ServerPlayerEntity player = context.player();
-                    if (player != null) {
-                        ItemStack stack = player.getEquippedStack(EquipmentSlot.HEAD);
-                        if (stack != ItemStack.EMPTY && stack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-                            if (advancedArmorItem.getAbilities(stack).isEmpty()) {
-                                advancedArmorItem.UnlockAbility(stack, Identifier.of(MyneHeroes.MOD_ID, "toggle_hud"));
-                                player.sendMessage(Text.of("unlocked Hud"), false);
-                                return;
-                            }
-                        }
-                        stack = player.getEquippedStack(EquipmentSlot.CHEST);
-                            if (stack != ItemStack.EMPTY && stack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-                            if (advancedArmorItem.getAbilities(stack).isEmpty()) {
-                                advancedArmorItem.UnlockAbility(stack, Identifier.of(MyneHeroes.MOD_ID, "shoot_lazar"));
-                                player.sendMessage(Text.of("unlocked Lazars"), false);
-                                return;
-                            }
-                        }
-                    }
                 }
                 //
             });
