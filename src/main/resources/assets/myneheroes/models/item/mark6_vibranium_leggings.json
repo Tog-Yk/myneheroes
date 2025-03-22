@@ -3,6 +3,7 @@
   "textures": {
     "layer0": "myneheroes:item/mark6_vibranium_leggings",
     "layer1": "myneheroes:item/mark6_vibranium_details_leggings",
-    "layer2": "myneheroes:item/mark6_vibranium_glow_leggings"
+    "layer2": "myneheroes:item/mark6_vibranium_details_2_leggings",
+    "layer3": "myneheroes:item/mark6_vibranium_glow_leggings"
   }
 }

@@ -2,6 +2,7 @@ package net.togyk.myneheroes.Item.color;
 
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.item.Item;
+import net.togyk.myneheroes.Item.ModGeckoItems;
 import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.Item.custom.DyeableAdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.PowerInjectionItem;

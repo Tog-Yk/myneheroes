@@ -3,11 +3,17 @@ package net.togyk.myneheroes;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.togyk.myneheroes.Item.ModArmorMaterials;
+import net.togyk.myneheroes.Item.ModGeckoItems;
 import net.togyk.myneheroes.Item.ModItemGroups;
 import net.togyk.myneheroes.Item.ModItems;
+import net.togyk.myneheroes.Item.custom.DyeableAdvancedGeckoArmorItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.ability.Abilities;
 import net.togyk.myneheroes.block.ModBlockEntityTypes;
@@ -24,6 +30,8 @@ import net.togyk.myneheroes.worldgen.ModBiomeModifications;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 public class MyneHeroes implements ModInitializer {
     public static final String MOD_ID = "myneheroes";
 
@@ -38,6 +46,10 @@ public class MyneHeroes implements ModInitializer {
         Powers.registerPowers();
 
         ModItems.registerModItems();
+        if (FabricLoader.getInstance().isModLoaded("geckolib")) {
+            ModGeckoItems.registerModItems();
+        }
+
         ModBlocks.registerModBlocks();
         ModItemGroups.registerItemGroups();
 

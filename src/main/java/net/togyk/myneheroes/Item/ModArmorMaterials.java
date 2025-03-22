@@ -51,6 +51,7 @@ public class ModArmorMaterials {
                     List.of(
                             new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark6"), "", true),
                             new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark6_details"), "", true),
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark6_details_2"), "", true),
                             new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark6_glow"), "", true)
                     ),0,0));
 
