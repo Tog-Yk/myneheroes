@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "$": {
+      "item": "minecraft:green_dye"
+    },
+    "%": {
+      "item": "minecraft:blue_dye"
+    },
+    "&": {
+      "item": "minecraft:red_dye"
+    }
+  },
+  "pattern": [
+    "&%$",
+    "## ",
+    "## "
+  ],
+  "result": {
+    "count": 1,
+    "id": "myneheroes:armor_dyeing_station"
+  }
+}

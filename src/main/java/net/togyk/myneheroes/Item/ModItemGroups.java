@@ -42,9 +42,6 @@ public class ModItemGroups {
 
                         entries.add(ModItems.ARC_REACTOR);
 
-                        entries.add(ModItems.ABILITY_HOLDING);
-                        entries.add(ModItems.LAZAR_HOLDING);
-
                         entries.add(ModItems.POWER_INJECTION);
 
                         entries.add(ModBlocks.ARMOR_DYEING_STATION);

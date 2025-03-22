@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:iron_nugget"
+    },
+    "$": {
+      "tag": "minecraft:stone_buttons"
+    },
+    "&": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "pattern": [
+    "  $",
+    " & ",
+    "#  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "myneheroes:power_injection"
+  }
+}

@@ -43,7 +43,7 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
 
         if (!powers.isEmpty()) {
             player.getAbilities().allowFlying = true;
-        } else if (!player.isInCreativeMode()) {
+        } else if (!(player.isInCreativeMode() || player.isSpectator())) {
             player.getAbilities().allowFlying = false;
             player.getAbilities().flying = false;
         }

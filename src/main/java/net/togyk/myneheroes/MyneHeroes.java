@@ -26,6 +26,7 @@ import net.togyk.myneheroes.entity.ModEntities;
 import net.togyk.myneheroes.event.ModEvents;
 import net.togyk.myneheroes.networking.ModMessages;
 import net.togyk.myneheroes.power.Powers;
+import net.togyk.myneheroes.util.ModLootTableModifiers;
 import net.togyk.myneheroes.worldgen.ModBiomeModifications;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,6 +64,8 @@ public class MyneHeroes implements ModInitializer {
 
         ModBlockEntityTypes.registerModBlockEntityTypes();
         ModScreenHandlerTypes.registerModScreenHandlerTypes();
+
+        ModLootTableModifiers.modifyLootTables();
 
         ItemStorage.SIDED.registerForBlockEntity(ArmorDyeingBlockEntity::getInventoryProvider, ModBlockEntityTypes.ARMOR_DYEING_BLOCK_ENTITY);
         ItemStorage.SIDED.registerForBlockEntity(ArmorLightLevelerBlockEntity::getInventoryProvider, ModBlockEntityTypes.ARMOR_LIGHT_LEVELER_BLOCK_ENTITY);

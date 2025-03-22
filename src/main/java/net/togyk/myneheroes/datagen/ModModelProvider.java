@@ -50,9 +50,6 @@ public class ModModelProvider extends FabricModelProvider {
 
         itemModelGenerator.register(ModItems.ARC_REACTOR, Models.GENERATED);
 
-        itemModelGenerator.register(ModItems.ABILITY_HOLDING, Models.GENERATED);
-        itemModelGenerator.register(ModItems.LAZAR_HOLDING, Models.GENERATED);
-
         itemModelGenerator.register(ModItems.HUD_UPGRADE, Models.GENERATED);
         itemModelGenerator.register(ModItems.LAZAR_UPGRADE, Models.GENERATED);
 

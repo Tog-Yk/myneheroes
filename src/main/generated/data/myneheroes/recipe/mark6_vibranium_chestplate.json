@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "myneheroes:vibranium_chestplate"
+    },
+    {
+      "item": "myneheroes:iron_suit_template"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "myneheroes:mark6_vibranium_chestplate"
+  }
+}

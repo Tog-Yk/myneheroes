@@ -25,9 +25,6 @@ public class ModItems {
 
     public static final Item ARC_REACTOR = registerItem("arc_reactor",new ReactorItem(4000, 2400, new Item.Settings().maxCount(1)));
 
-    public static final Item ABILITY_HOLDING = registerItem("ability_holding",new AbilityHoldingItem(Abilities.get(Identifier.of(MyneHeroes.MOD_ID, "toggle_hud")), new Item.Settings().maxCount(1)));
-    public static final Item LAZAR_HOLDING = registerItem("lazar_holding",new AbilityHoldingItem(Abilities.get(Identifier.of(MyneHeroes.MOD_ID, "lazar_eyes")), new Item.Settings().maxCount(1)));
-
     public static final Item POWER_INJECTION = registerItem("power_injection", new PowerInjectionItem(new Item.Settings().maxCount(1)));
 
     public static final Item VIBRANIUM_SHIELD = registerItem("vibranium_shield",
