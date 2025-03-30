@@ -60,11 +60,6 @@ public class ModItemGroups {
             FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.VIBRANIUM_CHESTPLATE))
                     .displayName(Text.translatable("itemgroup.myneheroes.myneheroes_armor"))
                     .entries((displayContext, entries) -> {
-                        entries.add(ModItems.MARK6_VIBRANIUM_HELMET);
-                        entries.add(ModItems.MARK6_VIBRANIUM_CHESTPLATE);
-                        entries.add(ModItems.MARK6_VIBRANIUM_LEGGINGS);
-                        entries.add(ModItems.MARK6_VIBRANIUM_BOOTS);
-
                         entries.add(ModItems.VIBRANIUM_HELMET);
                         entries.add(ModItems.VIBRANIUM_CHESTPLATE);
                         entries.add(ModItems.VIBRANIUM_LEGGINGS);
@@ -79,6 +74,18 @@ public class ModItemGroups {
                         entries.add(ModItems.GOLD_TITANIUM_CHESTPLATE);
                         entries.add(ModItems.GOLD_TITANIUM_LEGGINGS);
                         entries.add(ModItems.GOLD_TITANIUM_BOOTS);
+
+
+                        entries.add(ModItems.MARK6_VIBRANIUM_HELMET);
+                        entries.add(ModItems.MARK6_VIBRANIUM_CHESTPLATE);
+                        entries.add(ModItems.MARK6_VIBRANIUM_LEGGINGS);
+                        entries.add(ModItems.MARK6_VIBRANIUM_BOOTS);
+
+                        entries.add(ModItems.MARK3_GOLD_TITANIUM_HELMET);
+                        entries.add(ModItems.MARK3_GOLD_TITANIUM_CHESTPLATE);
+                        entries.add(ModItems.MARK3_GOLD_TITANIUM_LEGGINGS);
+                        entries.add(ModItems.MARK3_GOLD_TITANIUM_BOOTS);
+
 
                     }).build());
 

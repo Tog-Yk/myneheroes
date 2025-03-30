@@ -255,6 +255,32 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_BOOTS))
                 .offerTo(exporter);
 
+        //Advanced Armors
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK3_GOLD_TITANIUM_HELMET)
+                .input(ModItems.GOLD_TITANIUM_HELMET)
+                .input(ModItems.IRON_SUIT_TEMPLATE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_HELMET),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_HELMET))
+                .offerTo(exporter);
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK3_GOLD_TITANIUM_CHESTPLATE)
+                .input(ModItems.GOLD_TITANIUM_CHESTPLATE)
+                .input(ModItems.IRON_SUIT_TEMPLATE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_CHESTPLATE),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_CHESTPLATE))
+                .offerTo(exporter);
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK3_GOLD_TITANIUM_LEGGINGS)
+                .input(ModItems.GOLD_TITANIUM_LEGGINGS)
+                .input(ModItems.IRON_SUIT_TEMPLATE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_LEGGINGS),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_LEGGINGS))
+                .offerTo(exporter);
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK3_GOLD_TITANIUM_BOOTS)
+                .input(ModItems.GOLD_TITANIUM_BOOTS)
+                .input(ModItems.IRON_SUIT_TEMPLATE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_BOOTS),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_BOOTS))
+                .offerTo(exporter);
+
 
         offerSmithingTrimRecipe(exporter, ModItems.IRON_SUIT_TEMPLATE, Identifier.of(MyneHeroes.MOD_ID, "iron_suit"));
     }}

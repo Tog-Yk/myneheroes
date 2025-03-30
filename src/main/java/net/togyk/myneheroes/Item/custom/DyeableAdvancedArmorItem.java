@@ -42,6 +42,12 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
         return -1;
     }
 
+
+    public void setDefaultColor(ItemStack stack, int index) {
+        setColor(stack, index, getDefaultColor(index));
+        setLayerIsDyed(stack, index, false);
+    }
+
     public void setColor(ItemStack stack, int index, Integer color) {
         if (index >= defaultColors.size()) {
             return;
@@ -54,9 +60,27 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
             colors.add(getColor(stack, i)); // Convert each NbtInt to an integer
         }
         colors.set(index, color);
+        this.setLayerIsDyed(stack, index, true);
 
         //save to nbt
         stack.set(ModDataComponentTypes.COLORS, colors);
+    }
+
+    public void setLayerIsDyed(ItemStack stack, int index, boolean bool) {
+        if (index >= defaultColors.size()) {
+            return;
+        }
+
+        List<Boolean> colors = new ArrayList<>();
+
+        //comparing the saved colors to the defaults to make sure all dyeable layers are accounted for
+        for (int i = 0; i < defaultColors.size(); i++) {
+            colors.add(layerIsDyed(stack, i)); // Convert each NbtInt to an integer
+        }
+        colors.set(index, bool);
+
+        //save to nbt
+        stack.set(ModDataComponentTypes.IS_DYED, colors);
     }
 
     public boolean layerIsDyeable(int index) {
@@ -65,6 +89,18 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
         ArmorMaterial.Layer layer = layers.get(index);
 
         return layer.isDyeable();
+    }
+
+    public boolean layerIsDyed(ItemStack stack, int index) {
+        if (this.layerIsDyeable(index)) {
+            List<Boolean> colors = stack.get(ModDataComponentTypes.IS_DYED);
+            if (colors != null && colors.size() > index) {
+                return colors.get(index);
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 
     public int getLightLevel(ItemStack stack, int index) {

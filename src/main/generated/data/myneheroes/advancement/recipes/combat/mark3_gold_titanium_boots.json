@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_gold_titanium_boots": {
+      "conditions": {
+        "items": [
+          {
+            "items": "myneheroes:gold_titanium_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "myneheroes:mark3_gold_titanium_boots"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_gold_titanium_boots"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "myneheroes:mark3_gold_titanium_boots"
+    ]
+  }
+}
