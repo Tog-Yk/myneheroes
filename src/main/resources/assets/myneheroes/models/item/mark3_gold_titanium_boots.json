@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "myneheroes:item/mark3_gold_titanium_boots",
+    "layer1": "myneheroes:item/mark3_gold_titanium_details_boots",
+    "layer2": "myneheroes:item/mark3_gold_titanium_details_2_boots",
+    "layer3": "myneheroes:item/mark3_gold_titanium_glow_boots"
+  }
+}

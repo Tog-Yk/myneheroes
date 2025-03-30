@@ -27,6 +27,9 @@ public class DyeableGeckoArmorRenderer extends GeoArmorRenderer<DyeableAdvancedG
         ArmorMaterial.Layer layer = ((DyeableAdvancedGeckoArmorItem) stack.getItem()).getMaterial().value().layers().get(index);
         String layerPath = layer.getTexture(true).getPath();
         String layerName = layerPath.substring("textures/models/armor/".length(), layerPath.length() - "_layer_2.png".length());
+        if (animatable.layerIsDyed(stack, index)) {
+            layerName = "dyed_" + layerName;
+        }
         return Identifier.of(layer.getTexture(true).getNamespace(), "textures/models/armor/geo/"+layerName+".png");
     }
 
@@ -56,7 +59,7 @@ public class DyeableGeckoArmorRenderer extends GeoArmorRenderer<DyeableAdvancedG
                 buffer = bufferSource.getBuffer(renderType);
 
                 int light = getAnimatable().layerIsLightable(currentStack, i) ? (animatable.getLightLevel(currentStack, i) / 15) * 15728880 : packedLight;
-                int color = getAnimatable().layerIsDyeable(i) ? getAnimatable().getColor(currentStack, i) : renderColor;
+                int color = getAnimatable().layerIsDyed(currentStack, i) ? getAnimatable().getColor(currentStack, i) : renderColor;
 
                 preApplyRenderLayers(poseStack, animatable, model, renderType, bufferSource, buffer, light, light, packedOverlay);
                 actuallyRender(poseStack, animatable, model, renderType,

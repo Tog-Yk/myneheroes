@@ -20,6 +20,9 @@ public class ModDataComponentTypes {
     public static final ComponentType<List<Integer>> LIGHT_LEVEL =
             register("light_level", builder -> builder.codec(Codec.list(Codec.INT)));
 
+    public static final ComponentType<List<Boolean>> IS_DYED =
+            register("is_dyed", builder -> builder.codec(Codec.list(Codec.BOOL)));
+
     public static final ComponentType<NbtCompound> ABILITIES =
             register("abilities", builder -> builder.codec(NbtCompound.CODEC));
 

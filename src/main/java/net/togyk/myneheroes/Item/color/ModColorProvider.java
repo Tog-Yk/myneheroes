@@ -37,6 +37,11 @@ public class ModColorProvider {
         registerDyeableArmorItem(ModItems.MARK6_VIBRANIUM_LEGGINGS);
         registerDyeableArmorItem(ModItems.MARK6_VIBRANIUM_BOOTS);
 
+        registerDyeableArmorItem(ModItems.MARK3_GOLD_TITANIUM_HELMET);
+        registerDyeableArmorItem(ModItems.MARK3_GOLD_TITANIUM_CHESTPLATE);
+        registerDyeableArmorItem(ModItems.MARK3_GOLD_TITANIUM_LEGGINGS);
+        registerDyeableArmorItem(ModItems.MARK3_GOLD_TITANIUM_BOOTS);
+
         registerInjectionItem(ModItems.POWER_INJECTION);
     }
 }

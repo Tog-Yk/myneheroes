@@ -93,7 +93,11 @@ public class ModMessages {
                         SimpleInventory inventory = armorDyeingBlockEntity.getInventory();
                         ItemStack stack = inventory.getStack(0);
                         if (stack.getItem() instanceof DyeableAdvancedArmorItem armorItem) {
-                            armorItem.setColor(stack, payload.index(), payload.color());
+                            if (payload.setDefault()) {
+                                armorItem.setDefaultColor(stack, payload.index());
+                            } else {
+                                armorItem.setColor(stack, payload.index(), payload.color());
+                            }
                             inventory.markDirty();
                         }
                     }

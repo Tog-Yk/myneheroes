@@ -121,14 +121,13 @@ public class ArmorDyeingScreenHandler extends ScreenHandler {
         return !this.blockEntity.getInventory().isEmpty() && this.selectedOption < this.indexOptions.size();
     }
     public void dye(int color) {
-        ClientPlayNetworking.send(new ColorItemPayload(this.blockEntity.getPos(), this.indexOptions.get(this.selectedOption), color));
+        ClientPlayNetworking.send(new ColorItemPayload(this.blockEntity.getPos(), this.indexOptions.get(this.selectedOption), color, false));
     }
 
     public void dyeDefault() {
         ItemStack stack = blockEntity.getInventory().getStack(0);
-        if (stack.getItem() instanceof DyeableAdvancedArmorItem armorItem) {
-            int color =  armorItem.getDefaultColor(this.indexOptions.get(this.selectedOption));
-            ClientPlayNetworking.send(new ColorItemPayload(this.blockEntity.getPos(), this.indexOptions.get(this.selectedOption), color));
+        if (stack.getItem() instanceof DyeableAdvancedArmorItem) {
+            ClientPlayNetworking.send(new ColorItemPayload(this.blockEntity.getPos(), this.indexOptions.get(this.selectedOption), -1, true));
         }
     }
 

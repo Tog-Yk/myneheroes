@@ -71,10 +71,25 @@ public class ModArmorMaterials {
                 map.put(ArmorItem.Type.CHESTPLATE, 7);
                 map.put(ArmorItem.Type.HELMET, 3);
                 map.put(ArmorItem.Type.BODY, 5);
-            }), 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, () -> Ingredient.ofItems(ModItems.GOLD_TITANIUM_INGOT),
+            }), 20, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, () -> Ingredient.ofItems(ModItems.GOLD_TITANIUM_INGOT),
                     List.of(new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID, "gold_titanium"))), 0,0));
+
+    //Ironman pattern
+    public static final RegistryEntry<ArmorMaterial> GOLD_TITANIUM_IRONMAN_MATERIAL = registerArmorMaterial("gold_titanium_ironman",
+            () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                map.put(ArmorItem.Type.BOOTS, 2);
+                map.put(ArmorItem.Type.LEGGINGS, 5);
+                map.put(ArmorItem.Type.CHESTPLATE, 7);
+                map.put(ArmorItem.Type.HELMET, 3);
+                map.put(ArmorItem.Type.BODY, 5);
+            }), 20, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, () -> Ingredient.ofItems(ModItems.GOLD_TITANIUM_INGOT),
+                    List.of(
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark3"), "", true),
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark3_details"), "", true),
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark3_details_2"), "", true),
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark3_glow"), "", true)
+                    ),0,0));
     /*
-     * Ironman pattern
      * Spiderman pattern
      * Kryptonian pattern
      * Speedster pattern
