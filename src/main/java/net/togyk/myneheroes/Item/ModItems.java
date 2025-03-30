@@ -36,8 +36,8 @@ public class ModItems {
     public static final Item COSMIC_SHIELD = registerItem("cosmic_shield",
             new ThrowableShieldItem(2.0F,new Item.Settings().maxDamage(336)));
 
-    public static final Item HUD_UPGRADE = registerItem("hud_upgrade", new UpgradeItem(Abilities.get(Identifier.of(MyneHeroes.MOD_ID, "toggle_hud")), 4, ArmorItem.Type.HELMET, new Item.Settings()));
-    public static final Item LAZAR_UPGRADE = registerItem("lazar_upgrade", new UpgradeItem(Abilities.get(Identifier.of(MyneHeroes.MOD_ID, "shoot_lazar")), 6, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
+    public static final Item HUD_UPGRADE = registerItem("hud_upgrade", new UpgradeItem(Abilities.TOGGLE_HUD, 4, ArmorItem.Type.HELMET, new Item.Settings()));
+    public static final Item LAZAR_UPGRADE = registerItem("lazar_upgrade", new UpgradeItem(Abilities.SHOOT_LAZAR, 6, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
 
     //armors
     //vibranium armors
