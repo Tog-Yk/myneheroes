@@ -80,7 +80,7 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
         }
 
         NbtList powerNbt = new NbtList();
-        for (Power power : PowerData.getPowers((PlayerEntity) (Object) this)) {
+        for (Power power : this.powers) {
             if (power != null) {
                 NbtCompound powerCompound = power.writeNbt(new NbtCompound());
                 powerNbt.add(powerCompound);

@@ -13,12 +13,15 @@ import java.util.List;
 
 public class PowerData {
     public static List<Power> getPowers(PlayerEntity player) {
+        if (!player.getWorld().isClient) {
+            syncData((ServerPlayerEntity) player);
+        }
         return ((PlayerPowers) player).getPowers();
     }
 
     public static void setPowers(PlayerEntity player, List<Power> powers) {
+        ((PlayerPowers) player).setPowers(powers);
         if (!player.getWorld().isClient) {
-            ((PlayerPowers) player).setPowers(powers);
             syncData((ServerPlayerEntity) player);
         }
     }
