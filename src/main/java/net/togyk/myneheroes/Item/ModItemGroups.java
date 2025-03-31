@@ -53,6 +53,7 @@ public class ModItemGroups {
 
                         entries.add(ModItems.HUD_UPGRADE);
                         entries.add(ModItems.LAZAR_UPGRADE);
+                        entries.add(ModItems.FlY_UPGRADE);
                     }).build());
 
     public static final ItemGroup MYNEHEROES_ARMOR_GROUP = Registry.register(Registries.ITEM_GROUP,

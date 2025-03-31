@@ -52,6 +52,7 @@ public class ModModelProvider extends FabricModelProvider {
 
         itemModelGenerator.register(ModItems.HUD_UPGRADE, Models.GENERATED);
         itemModelGenerator.register(ModItems.LAZAR_UPGRADE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.FlY_UPGRADE, Models.GENERATED);
 
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_HELMET));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_CHESTPLATE));

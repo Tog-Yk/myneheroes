@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-28T22:40:19.949635	MyneHeroes/Recipes
+// 1.21.1	2025-03-31T22:42:51.8506447	MyneHeroes/Recipes
 ca2c0a3fe36eb08eafc538e110f6e24b79883f8d data\myneheroes\advancement\recipes\combat\mark6_vibranium_chestplate.json
 23facd530de7059b56cee3ea3576cd1be5912178 data\myneheroes\recipe\mark3_gold_titanium_leggings.json
 c220984ee37dacea342353ce8f8944ac17aa1112 data\myneheroes\advancement\recipes\misc\vibranium_helmet.json
@@ -62,6 +62,7 @@ f312804b4bac1aa3808996ebe8285518ae7dc1dc data\myneheroes\recipe\vibranium_ingot_
 322a84995968dd35a8baa9cc52e2463fb52f0bb7 data\myneheroes\recipe\gold_titanium_block.json
 e2c79bd278b3a3ed2d79c0405b8cb2ffb736b0b2 data\myneheroes\advancement\recipes\decorations\vibranium_block.json
 ec98c1e6476d520c7b408b1ca8e244f7e6516c10 data\myneheroes\recipe\vibranium_ingot_from_blasting_vibranium_ore.json
+5ba391646b5f0c4609da0e45e71e1d1904171182 data\myneheroes\advancement\recipes\tools\fly_upgrade.json
 37ea923addcef63876dc782bdd88eecab8be176b data\myneheroes\advancement\recipes\misc\titanium_helmet.json
 02eb25c6f22f3d295680e61e5b55401ec54bec35 data\myneheroes\recipe\vibranium_block.json
 7367cc876a96036814746db5d072117ef6b8b435 data\myneheroes\recipe\gold_titanium_leggings.json
@@ -70,6 +71,7 @@ ec98c1e6476d520c7b408b1ca8e244f7e6516c10 data\myneheroes\recipe\vibranium_ingot_
 78fcdcd0a739c02edb1750a14ca44460b69decea data\myneheroes\advancement\recipes\tools\lazar_upgrade.json
 2c89ee214a590b8380cea4e61048fb1b3bc9bb84 data\myneheroes\recipe\vibranium_ingot_from_smelting_vibranium_ore.json
 0c3013725392220908094b8b29be0b5bd84a4c51 data\myneheroes\advancement\recipes\misc\iron_suit.json
+c1859f02b65d0a793639bc08687ff101c629de36 data\myneheroes\recipe\fly_upgrade.json
 5b13c540dada65cdc817221ad037c2bae6d942e4 data\myneheroes\advancement\recipes\misc\gold_titanium_boots.json
 fe92d373657c6d5343386b95656e0c890fb272ea data\myneheroes\recipe\gold_titanium_chestplate.json
 2532445120feda1e4b725e59c798bf9e1f738943 data\myneheroes\recipe\raw_vibranium.json

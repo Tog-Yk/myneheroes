@@ -40,13 +40,6 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
                 power.tick(player);
             }
         }
-
-        if (mayFly(player)) {
-            player.getAbilities().allowFlying = true;
-        } else if (!(player.isInCreativeMode() || player.isSpectator())) {
-            player.getAbilities().allowFlying = false;
-            player.getAbilities().flying = false;
-        }
     }
 
     @Inject(at = @At("HEAD"), method = "readCustomDataFromNbt")
@@ -129,14 +122,5 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
         } else {
             return 1.0F;
         }
-    }
-
-    private boolean mayFly(PlayerEntity player) {
-        for (Power power: this.powers) {
-            if (power.allowFlying(player)) {
-                return true;
-            }
-        }
-        return false;
     }
 }

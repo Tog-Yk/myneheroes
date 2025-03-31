@@ -33,7 +33,7 @@ public class ReactorItem extends Item {
         if (!world.isClient) { // Only update on the server
             int storedFuel = getStoredFuelOrDefault(stack,0);
             int storedPower = this.getStoredPowerOrDefault(stack, 0);
-            if (storedFuel >= 1 && maxPower != storedPower) {
+            if (storedFuel >= 1 && maxPower - 5 >= storedPower) {
                 setStoredPower(stack, storedPower + 5);
                 setStoredFuel(stack, storedFuel-1);
             }

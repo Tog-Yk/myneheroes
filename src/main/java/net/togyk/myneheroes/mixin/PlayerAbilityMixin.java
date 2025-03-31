@@ -228,4 +228,9 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
             this.scrolledOffset -= 1;
         }
     }
+
+    @Override
+    public List<Ability> getAbilities() {
+        return abilities;
+    }
 }

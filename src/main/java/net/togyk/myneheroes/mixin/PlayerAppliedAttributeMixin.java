@@ -2,11 +2,20 @@ package net.togyk.myneheroes.mixin;
 
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
+import net.togyk.myneheroes.ability.Abilities;
+import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.ability.BooleanAbility;
 import net.togyk.myneheroes.damage.ModDamageTypes;
+import net.togyk.myneheroes.power.Power;
+import net.togyk.myneheroes.util.PlayerAbilities;
 import net.togyk.myneheroes.util.PowerData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.List;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerAppliedAttributeMixin {
@@ -24,6 +33,7 @@ public abstract class PlayerAppliedAttributeMixin {
         }
         return amount;
     }
+
     @ModifyVariable(
             method = "attack",
             at = @At("STORE"),
@@ -42,6 +52,7 @@ public abstract class PlayerAppliedAttributeMixin {
         }
         return source;
     }
+
     @ModifyVariable(
             method = "attack",
             at = @At("STORE"),
@@ -59,5 +70,31 @@ public abstract class PlayerAppliedAttributeMixin {
             }
         }
         return i;
+    }
+
+    @Inject(at = @At("HEAD"), method = "tick")
+    private void tick(CallbackInfo info) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+
+        if (mayFly(player)) {
+            player.getAbilities().allowFlying = true;
+        } else if (!(player.isInCreativeMode() || player.isSpectator())) {
+            player.getAbilities().allowFlying = false;
+            player.getAbilities().flying = false;
+        }
+    }
+
+    private boolean mayFly(PlayerEntity player) {
+        for (Power power: PowerData.getPowers(player)) {
+            if (power.allowFlying(player)) {
+                return true;
+            }
+        }
+        for (Ability ability: ((PlayerAbilities) player).getAbilities()) {
+            if (ability.getId() == Abilities.ALLOW_FLYING.getId() && ability instanceof BooleanAbility booleanAbility && booleanAbility.get()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
