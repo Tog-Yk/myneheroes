@@ -19,14 +19,17 @@ import java.util.List;
 public class Power {
     public final Identifier id;
     private final String name;
-    private final float damageMultiplier;
-    private final float resistance;
+    protected final float damageMultiplier;
+    protected final float resistance;
     public List<Ability> abilities;
 
     private boolean isDampened = false;
     private int color;
 
     private PlayerEntity holder;
+
+    private final Identifier icon;
+    private final Identifier disabledIcon;
 
     public Power(Identifier id, String name, float damageMultiplier, float resistance, int color, List<Ability> abilities) {
         this.id = id;
@@ -35,7 +38,10 @@ public class Power {
         this.resistance = resistance;
         this.color = color;
         this.abilities = abilities;
+        this.icon = Identifier.of(MyneHeroes.MOD_ID,"textures/power/icon/"+name+".png");
+        this.disabledIcon = Identifier.of(MyneHeroes.MOD_ID,"textures/power/icon/"+name+"_disabled.png");
     }
+
     public NbtCompound writeNbt(NbtCompound nbt) {
         nbt.putString("id", this.id.toString());
         nbt.putBoolean("is_dampened", this.isDampened);
@@ -69,6 +75,7 @@ public class Power {
         this.abilities = abilitiesList;
     }
 
+
     public Identifier getId() {
         return id;
     }
@@ -93,12 +100,23 @@ public class Power {
         return resistance;
     }
 
+    public boolean allowFlying(PlayerEntity player) {
+        return false;
+    }
+
     public int getColor() {
         return color;
     }
 
-    public void tick() {
+    public Identifier getIcon() {
+        return icon;
+    }
 
+    public Identifier getDisabledIcon() {
+        return disabledIcon;
+    }
+
+    public void tick(PlayerEntity player) {
     }
 
     public void setHolder(@Nullable PlayerEntity holder) {
@@ -127,6 +145,6 @@ public class Power {
     }
 
     public Power copy() {
-        return new Power(this.id, String.valueOf(this.getName()), this.getDamageMultiplier(), this.getResistance(), this.getColor(), List.copyOf(this.abilities));
+        return new Power(this.id, String.valueOf(this.getName()), damageMultiplier, resistance, this.getColor(), List.copyOf(this.abilities));
     }
 }

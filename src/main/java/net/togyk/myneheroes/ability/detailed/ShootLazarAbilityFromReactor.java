@@ -1,4 +1,4 @@
-package net.togyk.myneheroes.ability;
+package net.togyk.myneheroes.ability.detailed;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -7,11 +7,12 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.entity.LaserEntity;
 import net.togyk.myneheroes.entity.ModEntities;
 import org.jetbrains.annotations.NotNull;
 
-public class ShootLazarAbilityFromReactor extends Ability{
+public class ShootLazarAbilityFromReactor extends Ability {
     public ShootLazarAbilityFromReactor(Identifier id, String name, int cooldown) {
         super(id, name, cooldown);
     }

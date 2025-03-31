@@ -37,11 +37,11 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
         List<Power> powers = PowerData.getPowers(player);
         for (Power power : powers) {
             if (power != null) {
-                power.tick();
+                power.tick(player);
             }
         }
 
-        if (!powers.isEmpty()) {
+        if (mayFly(player)) {
             player.getAbilities().allowFlying = true;
         } else if (!(player.isInCreativeMode() || player.isSpectator())) {
             player.getAbilities().allowFlying = false;
@@ -129,5 +129,14 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
         } else {
             return 1.0F;
         }
+    }
+
+    private boolean mayFly(PlayerEntity player) {
+        for (Power power: this.powers) {
+            if (power.allowFlying(player)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

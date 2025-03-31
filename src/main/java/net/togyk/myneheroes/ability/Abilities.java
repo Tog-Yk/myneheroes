@@ -2,6 +2,8 @@ package net.togyk.myneheroes.ability;
 
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.ability.detailed.LazarsFromEyesAbility;
+import net.togyk.myneheroes.ability.detailed.ShootLazarAbilityFromReactor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +13,7 @@ public class Abilities {
 
     public static final Ability TOGGLE_HUD = registerAbility(new BooleanAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_hud"), "toggle_hud"));
     public static final Ability SHOOT_LAZAR = registerAbility(new ShootLazarAbilityFromReactor(Identifier.of(MyneHeroes.MOD_ID, "shoot_lazar"), "shoot_lazar", 10));
-    public static final Ability LAZAR_EYES = registerAbility(new LazarsFromEyesAbility(Identifier.of(MyneHeroes.MOD_ID, "lazar_eyes"), "lazar_eyes", 2));
+    public static final Ability LAZAR_EYES = registerAbility(new LazarsFromEyesAbility(Identifier.of(MyneHeroes.MOD_ID, "lazar_eyes"), "lazar_eyes", 2, 1000, 2));
 
     public static void registerAbilities() {
         MyneHeroes.LOGGER.info("registering Abilities for" + MyneHeroes.MOD_ID);

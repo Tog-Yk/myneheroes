@@ -1,5 +1,6 @@
 package net.togyk.myneheroes.client;
 
+import com.google.common.base.Predicates;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
@@ -7,6 +8,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -15,7 +17,12 @@ import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.keybind.ModKeyBindings;
+import net.togyk.myneheroes.power.Power;
+import net.togyk.myneheroes.power.StockpilePower;
 import net.togyk.myneheroes.util.PlayerAbilities;
+import net.togyk.myneheroes.util.PlayerPowers;
+
+import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class ArmorHudOverlay implements HudRenderCallback {
@@ -42,10 +49,6 @@ public class ArmorHudOverlay implements HudRenderCallback {
     // energy storage
     private static final Identifier ENERGY_STORAGE_SIDE = Identifier.of(MyneHeroes.MOD_ID,
             "textures/gui/energy_storage_side.png");
-    private static final Identifier POTENTIAL_ENERGY_BAR = Identifier.of(MyneHeroes.MOD_ID,
-            "textures/gui/potential_energy_bar.png");
-    private static final Identifier KINETIC_ENERGY_BAR = Identifier.of(MyneHeroes.MOD_ID,
-            "textures/gui/kinetic_energy_bar.png");
 
     // sight
     private static final Identifier SIGHT = Identifier.of(MyneHeroes.MOD_ID,
@@ -91,12 +94,12 @@ public class ArmorHudOverlay implements HudRenderCallback {
                     drawContext.drawTexture(BATTERY_CASING, 10, height -10 -30, 0, 0, 18, 30, 18, 30);
 
                     drawContext.drawTexture(CONNECTED_CASE, 30, height -10 -18, 0, 0, 24, 18, 24, 18);
+
+
                     //energy storage
                     drawContext.drawTexture(ENERGY_STORAGE_SIDE, 10, height/2 - 60, 0, 0,6,120,6,120); // purple rectangle
 
-                    drawContext.drawTexture(POTENTIAL_ENERGY_BAR, 21, height/2 - 60, 0, 0,14,120,32,32); // yellow rectangle
-                    drawContext.drawTexture(KINETIC_ENERGY_BAR, 37, height/2 - 60, 0, 0,14,120,32,32); // purple rectangle
-                    drawContext.drawTexture(BATTERY_CASING, 53, height/2 - 60, 0, 0,14,120,18,30); // white rectangle
+                    drawEnergyStorage(drawContext, tickCounter, client.player, 21, height/2 - 60);
 
                     //sight
                     drawContext.drawTexture(SIGHT, width/3 * 2 - 32, height/2 - 64, 0, 0,64,64,64,64);
@@ -167,6 +170,23 @@ public class ArmorHudOverlay implements HudRenderCallback {
                         drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(fourthAbility.getName()), abilityScreenX + 4+10, abilityScreenY + 34, 0xFFFFFF);
                     }
                 }
+            }
+        }
+    }
+    private void drawEnergyStorage(DrawContext drawContext, RenderTickCounter tickCounter, PlayerEntity player, int x, int y) {
+        List<Power> powers = ((PlayerPowers) player).getPowers();
+        List<Power> stockpilePowers = powers.stream().filter(Predicates.instanceOf(StockpilePower.class)).toList();
+        for (int i = 0; i < stockpilePowers.size(); i++) {
+            if (stockpilePowers.get(i) instanceof StockpilePower power) {
+                int charge = power.getCharge();
+                int maxCharge = power.getMaxCharge();
+
+                float chargePercentile = (float) charge / maxCharge;
+
+                int maxHeight = 120;
+                int currentHeight = (int) (maxHeight * chargePercentile);
+
+                drawContext.drawTexture(power.getChargeIcon(), x + 16 * i, y + maxHeight - currentHeight, 0, maxHeight - currentHeight,14,currentHeight,14,14); // yellow rectangle
             }
         }
     }

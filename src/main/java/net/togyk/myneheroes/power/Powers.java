@@ -3,7 +3,7 @@ package net.togyk.myneheroes.power;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Abilities;
-import net.togyk.myneheroes.ability.AbilityUtil;
+import net.togyk.myneheroes.power.detailed.KryptonianPower;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.Map;
 public class Powers {
     private static final Map<Identifier,Power> POWERS = new HashMap<>();
 
-    public static Power KRYPTONIAN = registerPower(new Power(Identifier.of(MyneHeroes.MOD_ID, "kryptonian"),"kryptonian", 5.0F, 0.3F, 0xFFBB0033, List.of(Abilities.LAZAR_EYES)));
+    public static Power KRYPTONIAN = registerPower(new KryptonianPower(Identifier.of(MyneHeroes.MOD_ID, "kryptonian"),"kryptonian", 10000, 5.0F, 0.3F, 0xFFBB0033, List.of(Abilities.LAZAR_EYES)));
 
     public static void registerPowers() {
         MyneHeroes.LOGGER.info("registering Powers for" + MyneHeroes.MOD_ID);
