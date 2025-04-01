@@ -11,14 +11,17 @@ public class PassiveAbility extends Ability {
     }
 
     //returns if the player still needs to be damaged
-    public boolean onGotHit(PlayerEntity player, DamageSource source, int amount) {
+    public boolean onGotHit(PlayerEntity player, DamageSource source, float amount) {
         return true;
     }
 
-    public void onDeath(PlayerEntity player, DamageSource source) {
+    public boolean onDeath(PlayerEntity player, DamageSource source) {
+        return true;
     }
 
-    public void onDamage(PlayerEntity player, Entity target) {
+    //returns if the player still needs to attack
+    public boolean onDamage(PlayerEntity player, Entity target) {
+        return true;
     }
 
     @Override

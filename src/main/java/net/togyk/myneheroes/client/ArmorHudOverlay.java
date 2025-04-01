@@ -200,8 +200,8 @@ public class ArmorHudOverlay implements HudRenderCallback {
         List<Identifier> stockpileAbilitiesIds = filterIds(stockpileAbilities);
         for (int a = i; a < stockpileAbilitiesIds.size() + i; a++) {
             Identifier id = stockpileAbilitiesIds.get(a - i);
-            int charge = 0;
-            int maxCharge = 0;
+            float charge = 0;
+            float maxCharge = 0;
             
             Identifier chargeIcon = null;
             

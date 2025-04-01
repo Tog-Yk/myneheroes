@@ -1,10 +1,9 @@
 package net.togyk.myneheroes.mixin;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
-import net.togyk.myneheroes.ability.Abilities;
-import net.togyk.myneheroes.ability.Ability;
-import net.togyk.myneheroes.ability.BooleanAbility;
+import net.togyk.myneheroes.ability.*;
 import net.togyk.myneheroes.damage.ModDamageTypes;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.util.PlayerAbilities;
@@ -14,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
@@ -70,6 +70,57 @@ public abstract class PlayerAppliedAttributeMixin {
             }
         }
         return i;
+    }
+
+    @Inject(at = @At("HEAD"), method = "damage", cancellable = true)
+    private void PassiveAbilityOnHitUpdater(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        List<Ability> abilities = ((PlayerAbilities) player).getAbilities();
+
+        boolean shouldCancel = false;
+        for (Ability ability : abilities) {
+            if (ability instanceof PassiveAbility passiveAbility && !passiveAbility.onGotHit(player, source, amount)) {
+                shouldCancel = true;
+            }
+        }
+
+        if (shouldCancel) {
+            cir.cancel();
+        }
+    }
+
+    @Inject(at = @At("HEAD"), method = "attack", cancellable = true)
+    private void PassiveAbilityAttackUpdater(Entity target, CallbackInfo ci) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        List<Ability> abilities = ((PlayerAbilities) player).getAbilities();
+
+        boolean shouldCancel = false;
+        for (Ability ability : abilities) {
+            if (ability instanceof PassiveAbility passiveAbility && !passiveAbility.onDamage(player, target)) {
+                shouldCancel = true;
+            }
+        }
+
+        if (shouldCancel) {
+            ci.cancel();
+        }
+    }
+
+    @Inject(at = @At("HEAD"), method = "onDeath", cancellable = true)
+    private void PassiveAbilityDeathUpdater(DamageSource damageSource, CallbackInfo ci) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        List<Ability> abilities = ((PlayerAbilities) player).getAbilities();
+
+        boolean shouldCancel = false;
+        for (Ability ability : abilities) {
+            if (ability instanceof PassiveAbility passiveAbility && !passiveAbility.onDeath(player, damageSource)) {
+                shouldCancel = true;
+            }
+        }
+
+        if (shouldCancel) {
+            ci.cancel();
+        }
     }
 
     @Inject(at = @At("HEAD"), method = "tick")

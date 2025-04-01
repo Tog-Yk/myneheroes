@@ -4,7 +4,7 @@ import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.detailed.FlyFromReactorAbility;
 import net.togyk.myneheroes.ability.detailed.LazarsFromEyesAbility;
-import net.togyk.myneheroes.ability.detailed.ReleaseKineticEnergy;
+import net.togyk.myneheroes.ability.detailed.ReleaseKineticEnergyAbility;
 import net.togyk.myneheroes.ability.detailed.ShootLazarAbilityFromReactor;
 
 import java.util.HashMap;
@@ -17,7 +17,7 @@ public class Abilities {
     public static final Ability SHOOT_LAZAR = registerAbility(new ShootLazarAbilityFromReactor(Identifier.of(MyneHeroes.MOD_ID, "shoot_lazar"), "shoot_lazar", 10));
     public static final Ability ALLOW_FLYING = registerAbility(new FlyFromReactorAbility(Identifier.of(MyneHeroes.MOD_ID, "allow_flying"), "allow_flying", 1));
 
-    public static final Ability RELEASE_KINETIC_ENERGY = registerAbility(new ReleaseKineticEnergy(Identifier.of(MyneHeroes.MOD_ID, "release_kinetic_energy"), "release_kinetic_energy", 120, 200, 1.0F));
+    public static final Ability RELEASE_KINETIC_ENERGY = registerAbility(new ReleaseKineticEnergyAbility(Identifier.of(MyneHeroes.MOD_ID, "release_kinetic_energy"), "release_kinetic_energy", 120, 200, 1.0F));
 
     public static final Ability LAZAR_EYES = registerAbility(new LazarsFromEyesAbility(Identifier.of(MyneHeroes.MOD_ID, "lazar_eyes"), "lazar_eyes", 2, 1000, 2));
 

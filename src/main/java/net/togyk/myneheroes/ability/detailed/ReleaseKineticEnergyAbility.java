@@ -19,14 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ReleaseKineticEnergy extends PassiveAbility implements StockpileAbility{
-    private int charge = 0;
-    protected final int maxCharge;
+public class ReleaseKineticEnergyAbility extends PassiveAbility implements StockpileAbility{
+    private float charge = 0;
+    protected final float maxCharge;
     protected final float rangeMultiplier;
 
     private final Identifier chargeIcon;
 
-    public ReleaseKineticEnergy(Identifier id, String name, int cooldown, int maxCharge, float rangeMultiplier) {
+    public ReleaseKineticEnergyAbility(Identifier id, String name, int cooldown, float maxCharge, float rangeMultiplier) {
         super(id, name, cooldown);
         this.maxCharge = maxCharge;
         this.chargeIcon = Identifier.of(MyneHeroes.MOD_ID,"textures/ability/charge/"+name+".png");
@@ -35,9 +35,6 @@ public class ReleaseKineticEnergy extends PassiveAbility implements StockpileAbi
 
     @Override
     public void tick() {
-        if (this.getMaxCharge() != this.getCharge()) {
-            this.setCharge(getCharge() + 1);
-        }
         super.tick();
     }
 
@@ -103,10 +100,12 @@ public class ReleaseKineticEnergy extends PassiveAbility implements StockpileAbi
     }
 
     @Override
-    public boolean onGotHit(PlayerEntity player, DamageSource source, int amount) {
+    public boolean onGotHit(PlayerEntity player, DamageSource source, float amount) {
+        Random random = new Random();
         if (this.getMaxCharge() != this.getCharge()) {
-            this.setCharge(getCharge() + amount);
+            this.setCharge((getCharge() + amount * (random.nextFloat(0, 6))));
         }
+        this.save();
         return true;
     }
 
@@ -115,21 +114,21 @@ public class ReleaseKineticEnergy extends PassiveAbility implements StockpileAbi
         return true;
     }
 
-    public int getCharge() {
+    public float getCharge() {
         return charge;
     }
 
-    public void setCharge(int charge) {
+    public void setCharge(float charge) {
         this.charge = Math.min(charge, this.getMaxCharge());
     }
 
-    public int getMaxCharge() {
+    public float getMaxCharge() {
         return maxCharge;
     }
 
     @Override
     public NbtCompound writeNbt(NbtCompound nbt) {
-        nbt.putInt("charge", this.getCharge());
+        nbt.putFloat("charge", this.getCharge());
         return super.writeNbt(nbt);
     }
 
@@ -138,7 +137,7 @@ public class ReleaseKineticEnergy extends PassiveAbility implements StockpileAbi
         super.readNbt(nbt);
 
         if (nbt.contains("charge")) {
-            this.setCharge(nbt.getInt("charge"));
+            this.setCharge(nbt.getFloat("charge"));
         }
     }
 
@@ -147,7 +146,7 @@ public class ReleaseKineticEnergy extends PassiveAbility implements StockpileAbi
     }
 
     @Override
-    public ReleaseKineticEnergy copy() {
-        return new ReleaseKineticEnergy(id, abilityName, maxCooldown, maxCharge, rangeMultiplier);
+    public ReleaseKineticEnergyAbility copy() {
+        return new ReleaseKineticEnergyAbility(id, abilityName, maxCooldown, maxCharge, rangeMultiplier);
     }
 }

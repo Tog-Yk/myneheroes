@@ -4,8 +4,8 @@ package net.togyk.myneheroes.ability;
 import net.minecraft.util.Identifier;
 
 public interface StockpileAbility{
-    int getCharge();
-    void setCharge(int charge);
-    int getMaxCharge();
+    float getCharge();
+    void setCharge(float charge);
+    float getMaxCharge();
     Identifier getChargeIcon();
 }
