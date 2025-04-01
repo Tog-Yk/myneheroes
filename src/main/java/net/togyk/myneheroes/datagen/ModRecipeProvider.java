@@ -130,6 +130,10 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(Items.STONE_SLAB),
                         FabricRecipeProvider.conditionsFromItem(Items.STONE_SLAB))
                 .offerTo(exporter);
+        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(ModItems.VIBRANIUM_INGOT), RecipeCategory.TOOLS, ModItems.KINETIC_ENERGY_STORAGE_UPGRADE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.VIBRANIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_INGOT))
+                .offerTo(exporter);
 
 
         //simple armor recipes

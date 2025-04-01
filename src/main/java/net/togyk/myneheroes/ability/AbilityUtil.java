@@ -26,6 +26,16 @@ public class AbilityUtil {
         return null;
     }
 
+    public static List<Ability> getAbilitiesMatchingId(List<Ability> abilityList, Identifier id) {
+        List<Ability> abilities = new ArrayList<>();
+        for (Ability ability : abilityList) {
+            if (ability != null && ability.getId() == id) {
+                abilities.add(ability);
+            }
+        }
+        return abilities;
+    }
+
     public static Ability nbtToAbility(NbtCompound nbt) {
         Identifier abilityId = Identifier.of(nbt.getString("id"));
         Ability ability = Abilities.get(abilityId);

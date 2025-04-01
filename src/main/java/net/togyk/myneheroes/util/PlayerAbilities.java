@@ -10,6 +10,7 @@ public interface PlayerAbilities {
     Ability getThirdAbility();
     Ability getFourthAbility();
     List<Ability> getAbilities();
+    List<Ability> getFilteredAbilities();
 
     int getScrolledOffset();
     void setScrolledOffset(int scrolledOffset);

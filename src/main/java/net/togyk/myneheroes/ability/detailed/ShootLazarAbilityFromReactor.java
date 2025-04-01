@@ -33,13 +33,13 @@ public class ShootLazarAbilityFromReactor extends Ability {
 
                     player.getWorld().spawnEntity(projectile);
                     player.swingHand(Hand.MAIN_HAND);
+
+                    this.setCooldown(this.getMaxCooldown());
                 }
             }
-            super.Use(player);
-        } else if (getCooldown() == 0) {
-            //client gets called before the cooldown gets reset
-            player.swingHand(Hand.MAIN_HAND);
         }
+
+        this.save();
     }
 
     private static @NotNull LaserEntity getLaserEntity(PlayerEntity player, Vec3d look) {

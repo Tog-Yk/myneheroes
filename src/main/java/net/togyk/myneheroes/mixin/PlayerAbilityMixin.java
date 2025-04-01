@@ -5,13 +5,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtList;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.AbilityHoldingItem;
 import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.ability.StockpileAbility;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.util.AbilityScrollData;
 import net.togyk.myneheroes.util.PlayerAbilities;
@@ -134,10 +134,23 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         return abilityList;
     }
 
+    public List<Ability> getFilteredAbilities() {
+        List<Ability> abilityList = new ArrayList<>();
+        List<Identifier> ids = new ArrayList<>();
+        for (Ability ability : this.abilities) {
+            if (ability.Usable() && !(ability instanceof StockpileAbility && ids.contains(ability.getId()))) {
+                abilityList.add(ability);
+                ids.add(ability.getId());
+            }
+        }
+        return abilityList;
+    }
+
     @Override
     public Ability getFirstAbility() {
-        if (abilities != null && abilities.size() >= 1 + this.getScrolledOffset()) {
-            return abilities.get(this.getScrolledOffset());
+        List<Ability> filteredAbilities = getFilteredAbilities();
+        if (filteredAbilities != null && filteredAbilities.size() >= 1 + this.getScrolledOffset()) {
+            return filteredAbilities.get(this.getScrolledOffset());
         } else {
             return null;
         }
@@ -145,8 +158,9 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
 
     @Override
     public Ability getSecondAbility() {
-        if (abilities != null && abilities.size() >= 2 + this.getScrolledOffset()) {
-            return abilities.get(1 + this.getScrolledOffset());
+        List<Ability> filteredAbilities = getFilteredAbilities();
+        if (filteredAbilities != null && filteredAbilities.size() >= 2 + this.getScrolledOffset()) {
+            return filteredAbilities.get(1 + this.getScrolledOffset());
         } else {
             return null;
         }
@@ -154,8 +168,9 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
 
     @Override
     public Ability getThirdAbility() {
-        if (abilities != null && abilities.size() >= 3 + this.getScrolledOffset()) {
-            return abilities.get(2 + this.getScrolledOffset());
+        List<Ability> filteredAbilities = getFilteredAbilities();
+        if (filteredAbilities != null && filteredAbilities.size() >= 3 + this.getScrolledOffset()) {
+            return filteredAbilities.get(2 + this.getScrolledOffset());
         } else {
             return null;
         }
@@ -163,8 +178,9 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
 
     @Override
     public Ability getFourthAbility() {
-        if (abilities != null && abilities.size() >= 4 + this.getScrolledOffset()) {
-            return abilities.get(3 + this.getScrolledOffset());
+        List<Ability> filteredAbilities = getFilteredAbilities();
+        if (filteredAbilities != null && filteredAbilities.size() >= 4 + this.getScrolledOffset()) {
+            return filteredAbilities.get(3 + this.getScrolledOffset());
         } else {
             return null;
         }
@@ -212,7 +228,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
 
     @Override
     public int maxScroll() {
-        return this.abilities.size() - 4;
+        return this.getFilteredAbilities().size() - 4;
     }
 
     @Override

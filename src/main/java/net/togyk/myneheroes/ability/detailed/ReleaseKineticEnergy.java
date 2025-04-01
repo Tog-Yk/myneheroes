@@ -1,0 +1,153 @@
+package net.togyk.myneheroes.ability.detailed;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
+import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.ability.PassiveAbility;
+import net.togyk.myneheroes.ability.StockpileAbility;
+import net.togyk.myneheroes.damage.ModDamageTypes;
+import net.togyk.myneheroes.util.PlayerAbilities;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class ReleaseKineticEnergy extends PassiveAbility implements StockpileAbility{
+    private int charge = 0;
+    protected final int maxCharge;
+    protected final float rangeMultiplier;
+
+    private final Identifier chargeIcon;
+
+    public ReleaseKineticEnergy(Identifier id, String name, int cooldown, int maxCharge, float rangeMultiplier) {
+        super(id, name, cooldown);
+        this.maxCharge = maxCharge;
+        this.chargeIcon = Identifier.of(MyneHeroes.MOD_ID,"textures/ability/charge/"+name+".png");
+        this.rangeMultiplier = rangeMultiplier;
+    }
+
+    @Override
+    public void tick() {
+        if (this.getMaxCharge() != this.getCharge()) {
+            this.setCharge(getCharge() + 1);
+        }
+        super.tick();
+    }
+
+    @Override
+    public void Use(PlayerEntity player) {
+        int charge = 0;
+        List<Ability> abilities = ((PlayerAbilities) player).getAbilities();
+        List<Ability> matchingAbilities = new ArrayList<>();
+        for (Ability ability : abilities) {
+            if (ability.getId() == this.getId() && ability instanceof StockpileAbility stockpileAbility) {
+                charge += stockpileAbility.getCharge();
+                matchingAbilities.add(ability);
+            }
+        }
+
+        if (this.getCooldown() == 0 && charge != 0) {
+            //*kinetic energy explosion*
+            this.explode(player, (float) (this.rangeMultiplier * Math.sqrt((double) charge / 50)), (float) Math.sqrt((double) charge / 100), (float) Math.sqrt((double) charge / 75));
+
+            for (Ability ability : matchingAbilities) {
+                ((StockpileAbility) ability).setCharge(0);
+                ability.setCooldown(this.getMaxCooldown());
+                ability.save();
+            }
+        }
+    }
+
+    private void explode(PlayerEntity player, float radius, float knockback, float damage) {
+        World world = player.getWorld();
+        // Get all entities within the radius, excluding the player.
+        List<Entity> targets = world.getEntitiesByClass(Entity.class,
+                player.getBoundingBox().expand(radius),
+                entity -> entity != player);
+
+        for (Entity target : targets) {
+            // Compute the vector from player to the target.
+            Vec3d direction = target.getPos().subtract(player.getPos());
+            double distance = direction.length();
+            if (distance > 0) {
+                // Normalize and optionally scale by a falloff factor.
+                Vec3d knockbackVector = direction.normalize().multiply(knockback * (1 - distance / radius));
+                // Velocity on the y-axis should be a bit less due to gravity and all.
+                knockbackVector.multiply(1, 0.75, 1);
+
+                target.addVelocity(knockbackVector.x, knockbackVector.y, knockbackVector.z);
+            }
+            // Damage the entity using the player as the source.
+            target.damage(ModDamageTypes.of(player.getWorld(), ModDamageTypes.POWERFUL_PUNCH_TYPE_KEY, player), (float) (damage * (1 - distance / radius)));
+        }
+
+        // Spawn particles around the player.
+        Random random = new Random();
+        for (int i = 0; i < 30 * radius; i++) {
+            double speedX = (random.nextDouble() - 0.5) * 2;
+            double speedY = (random.nextDouble() - 0.5) * 2;
+            double speedZ = (random.nextDouble() - 0.5) * 2;
+            world.addParticle(ParticleTypes.DRAGON_BREATH,
+                    player.getX(),
+                    player.getY() + player.getHeight() / 2,
+                    player.getZ(),
+                    speedX, speedY, speedZ);
+        }
+    }
+
+    @Override
+    public boolean onGotHit(PlayerEntity player, DamageSource source, int amount) {
+        if (this.getMaxCharge() != this.getCharge()) {
+            this.setCharge(getCharge() + amount);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean Usable() {
+        return true;
+    }
+
+    public int getCharge() {
+        return charge;
+    }
+
+    public void setCharge(int charge) {
+        this.charge = Math.min(charge, this.getMaxCharge());
+    }
+
+    public int getMaxCharge() {
+        return maxCharge;
+    }
+
+    @Override
+    public NbtCompound writeNbt(NbtCompound nbt) {
+        nbt.putInt("charge", this.getCharge());
+        return super.writeNbt(nbt);
+    }
+
+    @Override
+    public void readNbt(NbtCompound nbt) {
+        super.readNbt(nbt);
+
+        if (nbt.contains("charge")) {
+            this.setCharge(nbt.getInt("charge"));
+        }
+    }
+
+    public Identifier getChargeIcon() {
+        return chargeIcon;
+    }
+
+    @Override
+    public ReleaseKineticEnergy copy() {
+        return new ReleaseKineticEnergy(id, abilityName, maxCooldown, maxCharge, rangeMultiplier);
+    }
+}

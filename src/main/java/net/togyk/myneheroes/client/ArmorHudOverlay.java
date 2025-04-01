@@ -16,13 +16,18 @@ import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.ability.AbilityUtil;
+import net.togyk.myneheroes.ability.StockpileAbility;
 import net.togyk.myneheroes.keybind.ModKeyBindings;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.StockpilePower;
 import net.togyk.myneheroes.util.PlayerAbilities;
-import net.togyk.myneheroes.util.PlayerPowers;
+import net.togyk.myneheroes.util.PowerData;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Environment(EnvType.CLIENT)
 public class ArmorHudOverlay implements HudRenderCallback {
@@ -174,9 +179,10 @@ public class ArmorHudOverlay implements HudRenderCallback {
         }
     }
     private void drawEnergyStorage(DrawContext drawContext, RenderTickCounter tickCounter, PlayerEntity player, int x, int y) {
-        List<Power> powers = ((PlayerPowers) player).getPowers();
+        List<Power> powers = PowerData.getPowers(player);
         List<Power> stockpilePowers = powers.stream().filter(Predicates.instanceOf(StockpilePower.class)).toList();
-        for (int i = 0; i < stockpilePowers.size(); i++) {
+        int i;
+        for (i = 0; i < stockpilePowers.size(); i++) {
             if (stockpilePowers.get(i) instanceof StockpilePower power) {
                 int charge = power.getCharge();
                 int maxCharge = power.getMaxCharge();
@@ -189,5 +195,44 @@ public class ArmorHudOverlay implements HudRenderCallback {
                 drawContext.drawTexture(power.getChargeIcon(), x + 16 * i, y + maxHeight - currentHeight, 0, maxHeight - currentHeight,14,currentHeight,14,14); // yellow rectangle
             }
         }
+        List<Ability> abilities = ((PlayerAbilities) player).getAbilities();
+        List<Ability> stockpileAbilities = abilities.stream().filter(Predicates.instanceOf(StockpileAbility.class)).toList();
+        List<Identifier> stockpileAbilitiesIds = filterIds(stockpileAbilities);
+        for (int a = i; a < stockpileAbilitiesIds.size() + i; a++) {
+            Identifier id = stockpileAbilitiesIds.get(a - i);
+            int charge = 0;
+            int maxCharge = 0;
+            
+            Identifier chargeIcon = null;
+            
+            for (Ability ability : AbilityUtil.getAbilitiesMatchingId(stockpileAbilities, id)) {
+                if (ability instanceof StockpileAbility stockpileAbility) {
+                    charge += stockpileAbility.getCharge();
+                    maxCharge += stockpileAbility.getMaxCharge();
+                    
+                    chargeIcon = stockpileAbility.getChargeIcon();
+                }
+            }
+            
+            if (chargeIcon != null) {
+
+                float chargePercentile = (float) charge / maxCharge;
+
+                int maxHeight = 120;
+                int currentHeight = (int) (maxHeight * chargePercentile);
+
+                drawContext.drawTexture(chargeIcon, x + 16 * i, y + maxHeight - currentHeight, 0, maxHeight - currentHeight, 14, currentHeight, 14, 14); // yellow rectangle
+            }
+        }
+    }
+    
+    private List<Identifier> filterIds(List<Ability> abilities) {
+        List<Identifier> ids = new ArrayList<>();
+        for (Identifier id : abilities.stream().map(Ability::getId).toList()) {
+            if (id != null && !ids.contains(id)) {
+                ids.add(id);
+            }
+        }
+        return ids;
     }
 }

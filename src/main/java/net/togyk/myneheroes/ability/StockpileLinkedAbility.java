@@ -31,11 +31,7 @@ public class StockpileLinkedAbility extends Ability{
             power.setCharge(power.getCharge() - this.getCost());
             this.setCooldown(this.getMaxCooldown());
         }
-        if (this.getHolderItem() != null && this.getHolderItem() instanceof ItemStack stack && stack.getItem() instanceof AbilityHolding holding) {
-            holding.saveAbility(stack, this);
-        } else if (this.getHolderItem() instanceof Power power) {
-            power.saveAbility(this);
-        }
+        this.save();
     }
 
     @Override

@@ -3,7 +3,6 @@ package net.togyk.myneheroes.ability;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.power.Power;
@@ -15,8 +14,8 @@ public abstract class Ability {
     private ItemStack HolderItem;
 
     public final Identifier id;
-    private final String abilityName;
-    private final int maxCooldown;
+    protected final String abilityName;
+    protected final int maxCooldown;
     public int cooldown;
 
     public final Identifier icon;
@@ -25,8 +24,8 @@ public abstract class Ability {
     public Ability(Identifier id, String name,int cooldown) {
         this.id = id;
         this.abilityName = name;
-        this.icon = Identifier.of(MyneHeroes.MOD_ID,"textures/ability/"+name+".png");
-        this.disabled_icon = Identifier.of(MyneHeroes.MOD_ID,"textures/ability/"+name+"_disabled.png");
+        this.icon = Identifier.of(id.getNamespace(),"textures/ability/"+id.getPath()+".png");
+        this.disabled_icon = Identifier.of(id.getNamespace(),"textures/ability/"+id.getPath()+"_disabled.png");
         this.maxCooldown = cooldown;
     }
 
@@ -34,11 +33,7 @@ public abstract class Ability {
         if (this.getCooldown() == 0) {
             this.setCooldown(this.getMaxCooldown());
         }
-        if (this.HolderItem != null && this.HolderItem.getItem() instanceof AbilityHolding holding) {
-            holding.saveAbility(this.HolderItem, this);
-        } else if (this.HolderPower != null) {
-            this.HolderPower.saveAbility(this);
-        }
+        this.save();
     }
 
     public void tick() {
@@ -48,10 +43,14 @@ public abstract class Ability {
         if (this.getCooldown() < 0) {
             this.setCooldown(0);
         }
-        if (this.HolderItem != null && this.HolderItem.getItem() instanceof AbilityHolding holding) {
-            holding.saveAbility(this.HolderItem, this);
-        } else if (this.HolderPower != null) {
-            this.HolderPower.saveAbility(this);
+        this.save();
+    }
+
+    public void save() {
+        if (this.getHolderItem() instanceof ItemStack stack && stack.getItem() instanceof AbilityHolding holding) {
+            holding.saveAbility(stack, this);
+        } else if (this.getHolderItem() instanceof Power power) {
+            power.saveAbility(this);
         }
     }
 
@@ -91,6 +90,10 @@ public abstract class Ability {
         } else {
             return HolderPower;
         }
+    }
+
+    public boolean Usable() {
+        return true;
     }
 
     public NbtCompound writeNbt(NbtCompound nbt) {
