@@ -39,6 +39,37 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.GOLD_TITANIUM_CHESTPLATE)
                 .add(ModItems.GOLD_TITANIUM_LEGGINGS)
                 .add(ModItems.GOLD_TITANIUM_BOOTS);
+
+        getOrCreateTagBuilder(ItemTags.ARMOR_ENCHANTABLE)
+                .add(ModItems.VIBRANIUM_HELMET)
+                .add(ModItems.VIBRANIUM_CHESTPLATE)
+                .add(ModItems.VIBRANIUM_LEGGINGS)
+                .add(ModItems.VIBRANIUM_BOOTS)
+
+                .add(ModItems.TITANIUM_HELMET)
+                .add(ModItems.TITANIUM_CHESTPLATE)
+                .add(ModItems.TITANIUM_LEGGINGS)
+                .add(ModItems.TITANIUM_BOOTS)
+
+                .add(ModItems.GOLD_TITANIUM_HELMET)
+                .add(ModItems.GOLD_TITANIUM_CHESTPLATE)
+                .add(ModItems.GOLD_TITANIUM_LEGGINGS)
+                .add(ModItems.GOLD_TITANIUM_BOOTS)
+
+                .add(ModItems.MARK6_VIBRANIUM_HELMET)
+                .add(ModItems.MARK6_VIBRANIUM_CHESTPLATE)
+                .add(ModItems.MARK6_VIBRANIUM_LEGGINGS)
+                .add(ModItems.MARK6_VIBRANIUM_BOOTS)
+
+                .add(ModItems.MARK3_GOLD_TITANIUM_HELMET)
+                .add(ModItems.MARK3_GOLD_TITANIUM_CHESTPLATE)
+                .add(ModItems.MARK3_GOLD_TITANIUM_LEGGINGS)
+                .add(ModItems.MARK3_GOLD_TITANIUM_BOOTS)
+
+                .add(ModItems.MARK45_NETHERITE_HELMET)
+                .add(ModItems.MARK45_NETHERITE_CHESTPLATE)
+                .add(ModItems.MARK45_NETHERITE_LEGGINGS)
+                .add(ModItems.MARK45_NETHERITE_BOOTS);
     }
 
 }
