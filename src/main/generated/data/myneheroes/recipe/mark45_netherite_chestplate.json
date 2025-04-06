@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:netherite_chestplate"
+    },
+    {
+      "item": "myneheroes:iron_suit_template"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "myneheroes:mark45_netherite_chestplate"
+  }
+}

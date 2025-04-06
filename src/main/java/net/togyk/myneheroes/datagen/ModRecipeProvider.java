@@ -263,7 +263,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_BOOTS))
                 .offerTo(exporter);
 
-        //Advanced Armors
         ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK3_GOLD_TITANIUM_HELMET)
                 .input(ModItems.GOLD_TITANIUM_HELMET)
                 .input(ModItems.IRON_SUIT_TEMPLATE)
@@ -287,6 +286,31 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input(ModItems.IRON_SUIT_TEMPLATE)
                 .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_BOOTS),
                         FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_BOOTS))
+                .offerTo(exporter);
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK45_NETHERITE_HELMET)
+                .input(Items.NETHERITE_HELMET)
+                .input(ModItems.IRON_SUIT_TEMPLATE)
+                .criterion(FabricRecipeProvider.hasItem(Items.NETHERITE_HELMET),
+                        FabricRecipeProvider.conditionsFromItem(Items.NETHERITE_HELMET))
+                .offerTo(exporter);
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK45_NETHERITE_CHESTPLATE)
+                .input(Items.NETHERITE_CHESTPLATE)
+                .input(ModItems.IRON_SUIT_TEMPLATE)
+                .criterion(FabricRecipeProvider.hasItem(Items.NETHERITE_CHESTPLATE),
+                        FabricRecipeProvider.conditionsFromItem(Items.NETHERITE_CHESTPLATE))
+                .offerTo(exporter);
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK45_NETHERITE_LEGGINGS)
+                .input(Items.NETHERITE_LEGGINGS)
+                .input(ModItems.IRON_SUIT_TEMPLATE)
+                .criterion(FabricRecipeProvider.hasItem(Items.NETHERITE_LEGGINGS),
+                        FabricRecipeProvider.conditionsFromItem(Items.NETHERITE_LEGGINGS))
+                .offerTo(exporter);
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK45_NETHERITE_BOOTS)
+                .input(Items.NETHERITE_BOOTS)
+                .input(ModItems.IRON_SUIT_TEMPLATE)
+                .criterion(FabricRecipeProvider.hasItem(Items.NETHERITE_BOOTS),
+                        FabricRecipeProvider.conditionsFromItem(Items.NETHERITE_BOOTS))
                 .offerTo(exporter);
 
 

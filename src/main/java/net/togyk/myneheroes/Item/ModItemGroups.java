@@ -88,6 +88,11 @@ public class ModItemGroups {
                         entries.add(ModItems.MARK3_GOLD_TITANIUM_LEGGINGS);
                         entries.add(ModItems.MARK3_GOLD_TITANIUM_BOOTS);
 
+                        entries.add(ModItems.MARK45_NETHERITE_HELMET);
+                        entries.add(ModItems.MARK45_NETHERITE_CHESTPLATE);
+                        entries.add(ModItems.MARK45_NETHERITE_LEGGINGS);
+                        entries.add(ModItems.MARK45_NETHERITE_BOOTS);
+
 
                     }).build());
 

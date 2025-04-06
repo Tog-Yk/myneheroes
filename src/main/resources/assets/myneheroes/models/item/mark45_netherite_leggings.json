@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "myneheroes:item/mark45_netherite_leggings",
+    "layer1": "myneheroes:item/mark45_netherite_details_leggings",
+    "layer2": "myneheroes:item/mark45_netherite_details_2_leggings",
+    "layer3": "myneheroes:item/mark45_netherite_glow_leggings"
+  }
+}

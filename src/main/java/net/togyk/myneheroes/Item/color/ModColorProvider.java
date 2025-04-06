@@ -42,6 +42,11 @@ public class ModColorProvider {
         registerDyeableArmorItem(ModItems.MARK3_GOLD_TITANIUM_LEGGINGS);
         registerDyeableArmorItem(ModItems.MARK3_GOLD_TITANIUM_BOOTS);
 
+        registerDyeableArmorItem(ModItems.MARK45_NETHERITE_HELMET);
+        registerDyeableArmorItem(ModItems.MARK45_NETHERITE_CHESTPLATE);
+        registerDyeableArmorItem(ModItems.MARK45_NETHERITE_LEGGINGS);
+        registerDyeableArmorItem(ModItems.MARK45_NETHERITE_BOOTS);
+
         registerInjectionItem(ModItems.POWER_INJECTION);
     }
 }

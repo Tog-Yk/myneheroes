@@ -2,6 +2,7 @@ package net.togyk.myneheroes.Item;
 
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -108,8 +109,23 @@ public class ModArmorMaterials {
 
 
     //netherite armors
+
+    //Ironman pattern
+    public static final RegistryEntry<ArmorMaterial> NETHERITE_IRONMAN_MATERIAL = registerArmorMaterial("netherite_ironman",
+            () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                map.put(ArmorItem.Type.BOOTS, 3);
+                map.put(ArmorItem.Type.LEGGINGS, 6);
+                map.put(ArmorItem.Type.CHESTPLATE, 8);
+                map.put(ArmorItem.Type.HELMET, 3);
+                map.put(ArmorItem.Type.BODY, 11);
+            }), 20, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
+                    List.of(
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark45"), "", true),
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark45_details"), "", true),
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark45_details_2"), "", true),
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark45_glow"), "", true)
+                    ),0,0));
     /*
-     * Ironman pattern
      * Spiderman pattern
      * Kryptonian pattern
      * Speedster pattern
