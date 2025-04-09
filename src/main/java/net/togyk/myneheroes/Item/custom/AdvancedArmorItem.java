@@ -32,24 +32,10 @@ public class AdvancedArmorItem extends ArmorItem implements AbilityHolding {
     public AdvancedArmorItem(@Nullable Ability suitSpecificAbility,RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
         super(material, type, settings);
     }
-
-    public boolean ShouldApplyHud(ItemStack stack) {
-        if (this.getAbilities(stack) != null) {
-            Ability ability = AbilityUtil.getAbilityMatchingName(this.getAbilities(stack), "toggle_hud");
-            if (ability instanceof BooleanAbility booleanAbility) {
-                return booleanAbility.get();
-            }
-        }
-        return false;
-    }
-
     @Override
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType type) {
-        tooltip.add(Text.literal("hud:").formatted(Formatting.BLUE));
-        if (ShouldApplyHud(stack)) {
-            tooltip.add(Text.literal(" active").formatted(Formatting.DARK_GREEN));
-        } else {
-            tooltip.add(Text.literal(" not active").formatted(Formatting.DARK_RED));
+        for (Ability ability: this.getAbilities(stack)) {
+            ability.appendTooltip(stack, context, tooltip, type);
         }
         super.appendTooltip(stack, context, tooltip, type);
     }

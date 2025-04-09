@@ -2,10 +2,7 @@ package net.togyk.myneheroes.ability;
 
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.ability.detailed.FlyFromReactorAbility;
-import net.togyk.myneheroes.ability.detailed.LazarsFromEyesAbility;
-import net.togyk.myneheroes.ability.detailed.ReleaseKineticEnergyAbility;
-import net.togyk.myneheroes.ability.detailed.ShootLazarAbilityFromReactor;
+import net.togyk.myneheroes.ability.detailed.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +10,7 @@ import java.util.Map;
 public class Abilities {
     private static final Map<Identifier,Ability> ABILITIES = new HashMap<>();
 
-    public static final Ability TOGGLE_HUD = registerAbility(new BooleanAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_hud"), "toggle_hud"));
+    public static final Ability TOGGLE_HUD = registerAbility(new MechanicalHudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_hud"), "toggle_hud"));
     public static final Ability SHOOT_LAZAR = registerAbility(new ShootLazarAbilityFromReactor(Identifier.of(MyneHeroes.MOD_ID, "shoot_lazar"), "shoot_lazar", 10));
     public static final Ability ALLOW_FLYING = registerAbility(new FlyFromReactorAbility(Identifier.of(MyneHeroes.MOD_ID, "allow_flying"), "allow_flying", 1));
 

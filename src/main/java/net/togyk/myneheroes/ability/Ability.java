@@ -1,13 +1,19 @@
 package net.togyk.myneheroes.ability;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.AbilityHolding;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public abstract class Ability {
     private Power HolderPower;
@@ -106,6 +112,9 @@ public abstract class Ability {
         if (nbt.contains("cooldown")) {
             this.setCooldown(nbt.getInt("cooldown"));
         }
+    }
+
+    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType type) {
     }
 
     public abstract Ability copy();

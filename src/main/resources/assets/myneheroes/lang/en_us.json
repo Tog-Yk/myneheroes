@@ -79,6 +79,10 @@
   "trim_pattern.myneheroes.iron_suit": "Iron Suit",
 
 
+  "tooltip.myneheroes.hud_active": "Hud: Active",
+  "tooltip.myneheroes.hud_inactive": "Hud: Inactive",
+
+
   "itemgroup.myneheroes.myneheroes": "MyneHeroes",
   "itemgroup.myneheroes.myneheroes_armor": "MyneHeroes - Armor",
 
