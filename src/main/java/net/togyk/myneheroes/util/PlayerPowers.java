@@ -11,4 +11,9 @@ public interface PlayerPowers {
     void addPower(Power power);
     float getDamageMultiplier();
     float getResistance();
+
+    int getScrolledOffset();
+    void setScrolledOffset(int scrolledOffset);
+    void scrollFurther();
+    void scrollBack();
 }

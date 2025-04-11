@@ -16,10 +16,10 @@ public class StockpilePower extends Power {
 
     private final Identifier chargeIcon;
 
-    public StockpilePower(Identifier id, String name, int maxCharge, float damageMultiplier, float resistance, int color, List<Ability> abilities) {
-        super(id, name, damageMultiplier, resistance, color, abilities);
+    public StockpilePower(Identifier id, int maxCharge, float damageMultiplier, float resistance, int color, List<Ability> abilities) {
+        super(id, damageMultiplier, resistance, color, abilities);
         this.maxCharge = maxCharge;
-        this.chargeIcon = Identifier.of(MyneHeroes.MOD_ID,"textures/power/charge/"+name+".png");;
+        this.chargeIcon = Identifier.of(id.getNamespace(),"textures/power/charge/"+id.getPath()+".png");;
     }
 
     @Override
@@ -73,13 +73,13 @@ public class StockpilePower extends Power {
 
     @Override
     public StockpilePower copy() {
-        return new StockpilePower(this.id, String.valueOf(this.getName()), this.getMaxCharge(), damageMultiplier, resistance, this.getColor(), List.copyOf(this.abilities));
+        return new StockpilePower(this.id, this.getMaxCharge(), damageMultiplier, resistance, this.getColor(), List.copyOf(this.abilities));
     }
 
     @Override
     public List<Ability> getAbilities() {
         List<Ability> abilities = new ArrayList<>();
-        for (Ability ability: super.getAbilities()) {
+        for (Ability ability: this.abilities) {
             if (ability instanceof StockpileLinkedAbility linkedAbility) {
                 if (this.getCharge() >= linkedAbility.getUnlocksAt()) {
                     abilities.add(ability);

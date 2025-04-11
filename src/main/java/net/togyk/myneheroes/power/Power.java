@@ -1,14 +1,10 @@
 package net.togyk.myneheroes.power;
 
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.util.Identifier;
-import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.AbilityUtil;
 import org.jetbrains.annotations.Nullable;
@@ -18,7 +14,6 @@ import java.util.List;
 
 public class Power {
     public final Identifier id;
-    private final String name;
     protected final float damageMultiplier;
     protected final float resistance;
     public List<Ability> abilities;
@@ -28,18 +23,17 @@ public class Power {
 
     private PlayerEntity holder;
 
-    private final Identifier icon;
-    private final Identifier disabledIcon;
+    private final Identifier background;
+    private final Identifier disabledBackground;
 
-    public Power(Identifier id, String name, float damageMultiplier, float resistance, int color, List<Ability> abilities) {
+    public Power(Identifier id, float damageMultiplier, float resistance, int color, List<Ability> abilities) {
         this.id = id;
-        this.name = name;
         this.damageMultiplier = damageMultiplier;
         this.resistance = resistance;
         this.color = color;
         this.abilities = abilities;
-        this.icon = Identifier.of(MyneHeroes.MOD_ID,"textures/power/icon/"+name+".png");
-        this.disabledIcon = Identifier.of(MyneHeroes.MOD_ID,"textures/power/icon/"+name+"_disabled.png");
+        this.background = Identifier.of(id.getNamespace(),"textures/power/"+id.getPath()+"_background.png");
+        this.disabledBackground = Identifier.of(id.getNamespace(),"textures/power/"+id.getPath()+"_background_disabled.png");
     }
 
     public NbtCompound writeNbt(NbtCompound nbt) {
@@ -47,7 +41,7 @@ public class Power {
         nbt.putBoolean("is_dampened", this.isDampened);
 
         NbtList abilitiesNbt = new NbtList();
-        for (Ability ability : this.getAbilities()) {
+        for (Ability ability : this.abilities) {
             abilitiesNbt.add(ability.writeNbt(new NbtCompound()));
         }
 
@@ -80,10 +74,6 @@ public class Power {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public boolean isDampened() {
         return isDampened;
     }
@@ -108,12 +98,12 @@ public class Power {
         return color;
     }
 
-    public Identifier getIcon() {
-        return icon;
+    public Identifier getDisabledBackground() {
+        return disabledBackground;
     }
 
-    public Identifier getDisabledIcon() {
-        return disabledIcon;
+    public Identifier getBackground() {
+        return background;
     }
 
     public void tick(PlayerEntity player) {
@@ -138,13 +128,12 @@ public class Power {
 
     @Override
     public String toString() {
-        return this.id.toString() + "{\nname: "+ this.name +
-                ",\ndamageMultiplier: " + this.damageMultiplier +
+        return this.id.toString() + "{\ndamageMultiplier: " + this.damageMultiplier +
                 ",\nresistance: " + this.resistance +
                 ",\nabilities:" + this.abilities.toString();
     }
 
     public Power copy() {
-        return new Power(this.id, String.valueOf(this.getName()), damageMultiplier, resistance, this.getColor(), List.copyOf(this.abilities));
+        return new Power(this.id, damageMultiplier, resistance, this.getColor(), List.copyOf(this.abilities));
     }
 }

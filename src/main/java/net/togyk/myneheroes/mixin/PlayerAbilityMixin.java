@@ -13,7 +13,7 @@ import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.StockpileAbility;
 import net.togyk.myneheroes.power.Power;
-import net.togyk.myneheroes.util.AbilityScrollData;
+import net.togyk.myneheroes.util.ScrollData;
 import net.togyk.myneheroes.util.PlayerAbilities;
 import net.togyk.myneheroes.util.PowerData;
 import org.spongepowered.asm.mixin.Mixin;
@@ -39,7 +39,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
     private void tick(CallbackInfo info) {
         PlayerEntity player = (PlayerEntity) (Object) this;
         if (this.isDirty) {
-            AbilityScrollData.setScrolledOffset(player, AbilityScrollData.getScrolledOffset(player));
+            ScrollData.setScrolledAbilitiesOffset(player, ScrollData.getScrolledAbilitiesOffset(player));
             this.isDirty = false;
         }
         if (player != null) {
@@ -193,8 +193,8 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
     private void readFromNbt(NbtCompound nbt, CallbackInfo info) {
         if (nbt.contains(MyneHeroes.MOD_ID)) {
             NbtCompound modNbt = nbt.getCompound(MyneHeroes.MOD_ID);
-            if (modNbt.contains("scrolled_offset")) {
-                this.scrolledOffset = modNbt.getInt("scrolled_offset");
+            if (modNbt.contains("scrolled_ability_offset")) {
+                this.scrolledOffset = modNbt.getInt("scrolled_ability_offset");
             }
         }
         this.isDirty = true;
@@ -206,7 +206,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
             modNbt = nbt.getCompound(MyneHeroes.MOD_ID);
         }
 
-        modNbt.putInt("scrolled_offset",this.scrolledOffset);
+        modNbt.putInt("scrolled_ability_offset",this.scrolledOffset);
 
         nbt.put(MyneHeroes.MOD_ID,modNbt);
     }

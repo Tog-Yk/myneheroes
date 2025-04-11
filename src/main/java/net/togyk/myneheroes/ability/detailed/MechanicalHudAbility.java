@@ -9,7 +9,7 @@ import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.HudAbility;
-import net.togyk.myneheroes.client.ArmorHudOverlay;
+import net.togyk.myneheroes.client.HudOverlay;
 import net.togyk.myneheroes.keybind.ModKeyBindings;
 import net.togyk.myneheroes.util.HudActionResult;
 import net.togyk.myneheroes.util.PlayerAbilities;
@@ -17,33 +17,33 @@ import net.togyk.myneheroes.util.PlayerAbilities;
 public class MechanicalHudAbility extends HudAbility {
     //gauge
     private static final Identifier CENTER_LINE_GAUGE = Identifier.of(MyneHeroes.MOD_ID,
-            "textures/gui/center_line_gauge.png");
+            "textures/gui/hud/mechanical/center_line_gauge.png");
     private static final Identifier LEVEL_GAUGE = Identifier.of(MyneHeroes.MOD_ID,
-            "textures/gui/level_gauge.png");
+            "textures/gui/hud/mechanical/level_gauge.png");
 
     //reactor info
     private static final Identifier BATTERY_BACKGROUND = Identifier.of(MyneHeroes.MOD_ID,
-            "textures/gui/battery_background.png");
+            "textures/gui/hud/mechanical/battery_background.png");
     private static final Identifier BATTERY_CASING = Identifier.of(MyneHeroes.MOD_ID,
-            "textures/gui/battery_casing.png");
+            "textures/gui/hud/mechanical/battery_casing.png");
     private static final Identifier BATTERY = Identifier.of(MyneHeroes.MOD_ID,
-            "textures/gui/battery.png");
+            "textures/gui/hud/mechanical/battery.png");
     private static final Identifier FUEL = Identifier.of(MyneHeroes.MOD_ID,
-            "textures/gui/fuel.png");
+            "textures/gui/hud/mechanical/fuel.png");
     private static final Identifier CONNECTED_CASE = Identifier.of(MyneHeroes.MOD_ID,
-            "textures/gui/connected_case.png");
+            "textures/gui/hud/mechanical/connected_case.png");
     private static final Identifier CONNECTED = Identifier.of(MyneHeroes.MOD_ID,
-            "textures/gui/connected.png");
+            "textures/gui/hud/mechanical/connected.png");
 
     // energy storage
     private static final Identifier ENERGY_STORAGE_SIDE = Identifier.of(MyneHeroes.MOD_ID,
-            "textures/gui/energy_storage_side.png");
+            "textures/gui/hud/mechanical/energy_storage_side.png");
 
     // sight
     private static final Identifier SIGHT = Identifier.of(MyneHeroes.MOD_ID,
-            "textures/gui/sight.png");
+            "textures/gui/hud/mechanical/sight.png");
     private static final Identifier ABILITY_SCREEN_SIGHT = Identifier.of(MyneHeroes.MOD_ID,
-            "textures/gui/ability_screen.png");
+            "textures/gui/hud/mechanical/ability_screen.png");
 
     public MechanicalHudAbility(Identifier id, String name) {
         super(id, name);
@@ -89,7 +89,7 @@ public class MechanicalHudAbility extends HudAbility {
             //energy storage
             drawContext.drawTexture(ENERGY_STORAGE_SIDE, 10, height/2 - 60, 0, 0,6,120,6,120);
 
-            ArmorHudOverlay.drawEnergyStorage(drawContext, tickCounter, client.player, 21, height/2 - 60);
+            HudOverlay.drawEnergyStorage(drawContext, tickCounter, client.player, 21, height/2 - 60);
 
             //sight
             drawContext.drawTexture(SIGHT, width/3 * 2 - 32, height/2 - 64, 0, 0,64,64,64,64);
@@ -101,16 +101,16 @@ public class MechanicalHudAbility extends HudAbility {
             drawContext.drawTexture(ABILITY_SCREEN_SIGHT, abilityScreenX, abilityScreenY, 0, 0,abilityScreenWidth,abilityScreenHeight,abilityScreenWidth,abilityScreenHeight);
 
             Ability firstAbility = ((PlayerAbilities) client.player).getFirstAbility();
-            ArmorHudOverlay.drawAbility(drawContext, tickCounter, firstAbility, ModKeyBindings.useFirstAbility.isPressed(), abilityScreenX + 4, abilityScreenY + 4);
+            HudOverlay.drawAbility(drawContext, tickCounter, firstAbility, ModKeyBindings.useFirstAbility.isPressed(), abilityScreenX + 4, abilityScreenY + 4);
 
             Ability secondAbility = ((PlayerAbilities) client.player).getSecondAbility();
-            ArmorHudOverlay.drawAbility(drawContext, tickCounter, secondAbility, ModKeyBindings.useSecondAbility.isPressed(), abilityScreenX + 4, abilityScreenY + 14);
+            HudOverlay.drawAbility(drawContext, tickCounter, secondAbility, ModKeyBindings.useSecondAbility.isPressed(), abilityScreenX + 4, abilityScreenY + 14);
 
             Ability thirdAbility = ((PlayerAbilities) client.player).getThirdAbility();
-            ArmorHudOverlay.drawAbility(drawContext, tickCounter, thirdAbility, ModKeyBindings.useThirdAbility.isPressed(), abilityScreenX + 4, abilityScreenY + 24);
+            HudOverlay.drawAbility(drawContext, tickCounter, thirdAbility, ModKeyBindings.useThirdAbility.isPressed(), abilityScreenX + 4, abilityScreenY + 24);
 
             Ability fourthAbility = ((PlayerAbilities) client.player).getFourthAbility();
-            ArmorHudOverlay.drawAbility(drawContext, tickCounter, fourthAbility, ModKeyBindings.useForthAbility.isPressed(), abilityScreenX + 4, abilityScreenY + 34);
+            HudOverlay.drawAbility(drawContext, tickCounter, fourthAbility, ModKeyBindings.useForthAbility.isPressed(), abilityScreenX + 4, abilityScreenY + 34);
 
             return HudActionResult.ABILITIES_HUD_DRAWN;
         }

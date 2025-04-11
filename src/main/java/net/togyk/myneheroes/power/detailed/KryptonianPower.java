@@ -5,15 +5,13 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.ability.Ability;
-import net.togyk.myneheroes.ability.StockpileLinkedAbility;
 import net.togyk.myneheroes.power.StockpilePower;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class KryptonianPower extends StockpilePower {
-    public KryptonianPower(Identifier id, String name, int maxCharge, float damageMultiplier, float resistance, int color, List<Ability> abilities) {
-        super(id, name, maxCharge, damageMultiplier, resistance, color, abilities);
+    public KryptonianPower(Identifier id, int maxCharge, float damageMultiplier, float resistance, int color, List<Ability> abilities) {
+        super(id, maxCharge, damageMultiplier, resistance, color, abilities);
     }
 
     @Override
@@ -37,6 +35,6 @@ public class KryptonianPower extends StockpilePower {
 
     @Override
     public KryptonianPower copy() {
-        return new KryptonianPower(this.id, String.valueOf(this.getName()), this.getMaxCharge(), damageMultiplier, resistance, this.getColor(), List.copyOf(this.abilities));
+        return new KryptonianPower(this.id, this.getMaxCharge(), damageMultiplier, resistance, this.getColor(), List.copyOf(this.abilities));
     }
 }

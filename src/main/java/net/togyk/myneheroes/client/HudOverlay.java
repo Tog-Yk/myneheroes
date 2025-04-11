@@ -7,32 +7,22 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderTickCounter;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
-import net.togyk.myneheroes.Item.custom.ReactorItem;
-import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.AbilityUtil;
 import net.togyk.myneheroes.ability.HudAbility;
 import net.togyk.myneheroes.ability.StockpileAbility;
-import net.togyk.myneheroes.keybind.ModKeyBindings;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.StockpilePower;
-import net.togyk.myneheroes.util.HudActionResult;
-import net.togyk.myneheroes.util.PlayerAbilities;
-import net.togyk.myneheroes.util.PowerData;
+import net.togyk.myneheroes.util.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Environment(EnvType.CLIENT)
-public class ArmorHudOverlay implements HudRenderCallback {
+public class HudOverlay implements HudRenderCallback {
 
     @Override
     public void onHudRender(DrawContext drawContext, RenderTickCounter tickCounter) {
@@ -57,11 +47,25 @@ public class ArmorHudOverlay implements HudRenderCallback {
                 }
             }
 
+            int width = drawContext.getScaledWindowWidth();
+            int height = drawContext.getScaledWindowHeight();
+
             if (!hasDrawnAbilities) {
                 //draw Ability Hud
             }
             if (!hasDrawnPowers) {
-                //draw Power Hud
+                List<Power> powers = ((PlayerPowers) client.player).getPowers();
+                if (!powers.isEmpty()) {
+                    //draw Power Hud
+                    Power power = powers.get(ScrollData.getScrolledPowersOffset(client.player));
+
+                    drawContext.drawTexture(power.getBackground(), width - 112, height - 32, 0, 0, 112, 32, 112, 32);
+                    drawPowerInfo(drawContext, tickCounter, power, power.isDampened(), width - 112, height - 32);
+
+                    if (powers.size() > 1) {
+                        drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal("+" + (powers.size() - 1)), width - 112 + 4, height - 32 + 16 + 4, 0xFFFFFF);
+                    }
+                }
             }
         }
     }
@@ -138,6 +142,18 @@ public class ArmorHudOverlay implements HudRenderCallback {
                 drawContext.fill(x, y + maxIconLength - currentCooldownLength, x + 8, y + maxIconLength, 0x88BBBBBB);
             }
             drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(ability.getName()), x +10, y, 0xFFFFFF);
+        }
+    }
+
+    public static void drawPowerInfo(DrawContext drawContext, RenderTickCounter tickCounter, Power power, boolean isDisabled, int x, int y) {
+        if (power != null) {
+            if (isDisabled) {
+                drawContext.drawTexture(power.getDisabledBackground(), x, y, 0, 0, 112, 32, 112, 32);
+            } else {
+                drawContext.drawTexture(power.getBackground(), x, y, 0, 0, 112, 32, 112, 32);
+            }
+            Text powerName = Text.translatable("power."+power.getId().toTranslationKey());
+            drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, powerName, x + 4, y + 8 + 4, 0xFFFFFF);
         }
     }
 

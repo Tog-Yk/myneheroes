@@ -16,6 +16,9 @@ public class ModKeyBindings {
     public static KeyBinding abilitiesScrollUp;
     public static KeyBinding abilitiesScrollDown;
 
+    public static KeyBinding powersScrollUp;
+    public static KeyBinding powersScrollDown;
+
     public static void registerKeyBinds() {
         MyneHeroes.LOGGER.info("Registering Keybinds for " + MyneHeroes.MOD_ID);
         useFirstAbility = KeyBindingHelper.registerKeyBinding(new KeyBinding(
@@ -43,15 +46,27 @@ public class ModKeyBindings {
                 "key.category.myneheroes" // keybind category
         ));
         abilitiesScrollUp = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.myneheroes.scroll_up", //translatable key
+                "key.myneheroes.scroll_up_abilities", //translatable key
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_UP, // Default key of: up
                 "key.category.myneheroes" // keybind category
         ));
         abilitiesScrollDown = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.myneheroes.scroll_down", //translatable key
+                "key.myneheroes.scroll_down_abilities", //translatable key
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_DOWN, // Default key of: down
+                "key.category.myneheroes" // keybind category
+        ));
+        powersScrollUp = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.myneheroes.scroll_up_powers", //translatable key
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_RIGHT, // Default key of: up
+                "key.category.myneheroes" // keybind category
+        ));
+        powersScrollDown = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.myneheroes.scroll_down_powers", //translatable key
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_LEFT, // Default key of: down
                 "key.category.myneheroes" // keybind category
         ));
         fuelReactor = KeyBindingHelper.registerKeyBinding(new KeyBinding(

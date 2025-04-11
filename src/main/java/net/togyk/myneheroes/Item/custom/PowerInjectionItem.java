@@ -80,7 +80,8 @@ public class PowerInjectionItem extends Item {
         if (type.isAdvanced()) {
             Power power = this.getPower(stack);
             if (power != null) {
-                tooltip.add(Text.literal("Stored Power: " + power.getName()).formatted(Formatting.AQUA));
+                tooltip.add(Text.literal("Stored Power:").formatted(Formatting.AQUA));
+                tooltip.add(Text.translatable("power."+power.getId().toTranslationKey()).formatted(Formatting.AQUA));
             } else {
                 tooltip.add(Text.literal("Stored Power: none").formatted(Formatting.AQUA));
             }

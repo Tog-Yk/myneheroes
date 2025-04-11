@@ -139,7 +139,8 @@ public class ModMessages {
 
         ServerPlayNetworking.registerGlobalReceiver(PlayerAbilityScrollSyncDataPayload.ID, (payload, context) -> {
             context.server().execute(() -> {
-                ((PlayerAbilities) context.player()).setScrolledOffset(payload.scrolled());
+                ((PlayerAbilities) context.player()).setScrolledOffset(payload.scrolledAbilities());
+                ((PlayerPowers) context.player()).setScrolledOffset(payload.scrolledAbilities());
             });
         });
 

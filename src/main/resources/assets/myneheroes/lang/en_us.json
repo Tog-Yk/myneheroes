@@ -71,6 +71,8 @@
 
   "block.myneheroes.armor_light_leveling_station": "Armor Light Leveling Station",
 
+  "power.myneheroes.kryptonian": "Kryptonian",
+
 
   "trim_material.myneheroes.vibranium": "Vibranium",
   "trim_material.myneheroes.titanium": "Titanium",
@@ -92,6 +94,10 @@
   "key.myneheroes.toggle_hud": "Toggle Hud",
   "key.myneheroes.shoot_repolser": "Shoot Repolser",
   "key.myneheroes.fuel_reactor": "Fuel Reactor",
+  "key.myneheroes.scroll_up_abilities": "Scroll Abilities Up",
+  "key.myneheroes.scroll_down_abilities": "Scroll Abilities Down",
+  "key.myneheroes.scroll_up_powers": "Scroll Powers Up",
+  "key.myneheroes.scroll_down_powers": "Scroll Powers Down",
 
 
   "container.myneheroes.armor_dyeing_station": "Armor Dyeing Station",
