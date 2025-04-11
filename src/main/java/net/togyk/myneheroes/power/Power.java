@@ -98,12 +98,12 @@ public class Power {
         return color;
     }
 
-    public Identifier getDisabledBackground() {
-        return disabledBackground;
-    }
-
     public Identifier getBackground() {
-        return background;
+        if (this.isDampened) {
+            return background;
+        } else {
+            return disabledBackground;
+        }
     }
 
     public void tick(PlayerEntity player) {

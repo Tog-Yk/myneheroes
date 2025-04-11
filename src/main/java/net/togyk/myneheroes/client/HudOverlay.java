@@ -147,11 +147,6 @@ public class HudOverlay implements HudRenderCallback {
 
     public static void drawPowerInfo(DrawContext drawContext, RenderTickCounter tickCounter, Power power, boolean isDisabled, int x, int y) {
         if (power != null) {
-            if (isDisabled) {
-                drawContext.drawTexture(power.getDisabledBackground(), x, y, 0, 0, 112, 32, 112, 32);
-            } else {
-                drawContext.drawTexture(power.getBackground(), x, y, 0, 0, 112, 32, 112, 32);
-            }
             Text powerName = Text.translatable("power."+power.getId().toTranslationKey());
             drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, powerName, x + 4, y + 8 + 4, 0xFFFFFF);
         }

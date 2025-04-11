@@ -12,7 +12,7 @@ import java.util.Map;
 public class Powers {
     private static final Map<Identifier,Power> POWERS = new HashMap<>();
 
-    public static Power KRYPTONIAN = registerPower(new KryptonianPower(Identifier.of(MyneHeroes.MOD_ID, "kryptonian"), 10000, 5.0F, 0.3F, 0xFFBB0033, List.of(Abilities.LAZAR_EYES)));
+    public static Power KRYPTONIAN = registerPower(new KryptonianPower(Identifier.of(MyneHeroes.MOD_ID, "kryptonian"), 10000, 5.0F, 0.3F, 0xFF9CDB94, List.of(Abilities.LAZAR_EYES)));
 
     public static void registerPowers() {
         MyneHeroes.LOGGER.info("registering Powers for" + MyneHeroes.MOD_ID);
