@@ -100,9 +100,9 @@ public class Power {
 
     public Identifier getBackground() {
         if (this.isDampened) {
-            return background;
-        } else {
             return disabledBackground;
+        } else {
+            return background;
         }
     }
 
