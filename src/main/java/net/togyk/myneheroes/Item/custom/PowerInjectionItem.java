@@ -14,6 +14,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.util.PowerData;
 
@@ -27,29 +28,21 @@ public class PowerInjectionItem extends Item {
     }
 
     public Power getPower(ItemStack stack) {
-        NbtCompound nbt = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT).getNbt();
-        if (nbt.contains(MyneHeroes.MOD_ID, NbtElement.COMPOUND_TYPE)) {
-            var modNbt = nbt.getCompound(MyneHeroes.MOD_ID);
-            if (modNbt.contains("power")) {
-                return PowerData.nbtToPower(modNbt.getCompound("power"));
-            }
+        NbtCompound nbt = stack.getOrDefault(ModDataComponentTypes.POWER,  new NbtCompound());
+        if (nbt.contains("power")) {
+            return PowerData.nbtToPower(nbt.getCompound("power"));
         }
         return null;
     }
 
     public void setPower(ItemStack stack, Power power) {
-        NbtCompound nbt = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT).getNbt();
-        var modidData = new NbtCompound();
-        if (nbt.contains(MyneHeroes.MOD_ID)) {
-            modidData = nbt.getCompound(MyneHeroes.MOD_ID);
-        }
+        NbtCompound nbt = stack.getOrDefault(ModDataComponentTypes.POWER,  new NbtCompound());
         if (power != null) {
-            modidData.put("power", power.writeNbt(new NbtCompound()));
+            nbt.put("power", power.writeNbt(new NbtCompound()));
         } else {
-            modidData.remove("power");
+            nbt.remove("power");
         }
-        nbt.put(MyneHeroes.MOD_ID, modidData);
-        stack.set(DataComponentTypes.CUSTOM_DATA, NbtComponent.of(nbt));
+        stack.set(ModDataComponentTypes.POWER, nbt);
     }
 
     @Override
