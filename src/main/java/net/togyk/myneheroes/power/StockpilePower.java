@@ -72,6 +72,13 @@ public class StockpilePower extends Power {
     }
 
     @Override
+    public Identifier getBackground() {
+        Identifier initialBG = super.getBackground();
+        String path = initialBG.getPath().substring(0, initialBG.getPath().length() - ".png".length());
+        return Identifier.of(initialBG.getNamespace(),  path + (int) (((double) this.getCharge() / this.getMaxCharge()) / 0.25) + ".png");
+    }
+
+    @Override
     public StockpilePower copy() {
         return new StockpilePower(this.id, this.getMaxCharge(), damageMultiplier, resistance, this.getColor(), List.copyOf(this.abilities));
     }
