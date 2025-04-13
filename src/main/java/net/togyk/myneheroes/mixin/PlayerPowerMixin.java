@@ -108,20 +108,20 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
         }
     }
 
-    public float getDamageMultiplier() {
-        List<Float> multipliers = new ArrayList<>();
+    public double getDamageMultiplier() {
+        List<Double> multipliers = new ArrayList<>();
         for (Power power : this.powers) {
             multipliers.add(power.getDamageMultiplier());
         }
         if (!multipliers.isEmpty()) {
             return max(multipliers);
         } else {
-            return 1.0F;
+            return 1.00;
         }
     }
 
-    public float getResistance() {
-        List<Float> multipliers = new ArrayList<>();
+    public double getResistance() {
+        List<Double> multipliers = new ArrayList<>();
         for (Power power : this.powers) {
             if (power != null) {
                 multipliers.add(power.getResistance());
@@ -130,7 +130,7 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
         if (!multipliers.isEmpty()) {
             return min(multipliers);
         } else {
-            return 1.0F;
+            return 1.00;
         }
     }
 

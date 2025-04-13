@@ -9,8 +9,8 @@ public interface PlayerPowers {
     void setPowers(List<Power> powers);
     void removePower(Power power);
     void addPower(Power power);
-    float getDamageMultiplier();
-    float getResistance();
+    double getDamageMultiplier();
+    double getResistance();
 
     int getScrolledOffset();
     void setScrolledOffset(int scrolledOffset);

@@ -14,8 +14,7 @@ import java.util.List;
 
 public class Power {
     public final Identifier id;
-    protected final float damageMultiplier;
-    protected final float resistance;
+    protected final Settings settings;
     public List<Ability> abilities;
 
     private boolean isDampened = false;
@@ -26,14 +25,14 @@ public class Power {
     private final Identifier background;
     private final Identifier disabledBackground;
 
-    public Power(Identifier id, float damageMultiplier, float resistance, int color, List<Ability> abilities) {
+    public Power(Identifier id, int color, List<Ability> abilities, Settings settings) {
         this.id = id;
-        this.damageMultiplier = damageMultiplier;
-        this.resistance = resistance;
         this.color = color;
         this.abilities = abilities;
         this.background = Identifier.of(id.getNamespace(),"textures/power/"+id.getPath()+"_background.png");
         this.disabledBackground = Identifier.of(id.getNamespace(),"textures/power/"+id.getPath()+"_background_disabled.png");
+
+        this.settings = settings;
     }
 
     public NbtCompound writeNbt(NbtCompound nbt) {
@@ -82,16 +81,16 @@ public class Power {
         isDampened = dampened;
     }
 
-    public float getDamageMultiplier() {
-        return damageMultiplier;
+    public double getDamageMultiplier() {
+        return this.settings.damageMultiplier;
     }
 
-    public float getResistance() {
-        return resistance;
+    public double getResistance() {
+        return this.settings.resistance;
     }
 
     public boolean allowFlying(PlayerEntity player) {
-        return false;
+        return settings.canFly;
     }
 
     public int getColor() {
@@ -126,14 +125,53 @@ public class Power {
         return this.abilities;
     }
 
+    public static class Settings{
+        public double damageMultiplier = 1.00;
+        public double resistance = 1.00;
+
+        public boolean canFly = false;
+        public double flyingUnlocksAt = 0.05;
+
+        public double textureInterval = 1.00;
+
+        public Settings() {
+        }
+
+        public Power.Settings damageMultiplier(double dbl) {
+            this.damageMultiplier = dbl;
+            return this;
+        }
+
+        public Power.Settings resistance(double dbl) {
+            this.resistance = dbl;
+            return this;
+        }
+
+        public Power.Settings canFly() {
+            this.canFly = true;
+            return this;
+        }
+
+        public Power.Settings flyingUnlocksAt(double dbl) {
+            this.canFly = true;
+            this.flyingUnlocksAt = dbl;
+            return this;
+        }
+
+        public Power.Settings textureInterval(double dbl) {
+            this.textureInterval = dbl;
+            return this;
+        }
+    }
+
     @Override
     public String toString() {
-        return this.id.toString() + "{\ndamageMultiplier: " + this.damageMultiplier +
-                ",\nresistance: " + this.resistance +
+        return this.id.toString() + "{\ndamageMultiplier: " + this.getDamageMultiplier() +
+                ",\nresistance: " + this.getResistance() +
                 ",\nabilities:" + this.abilities.toString();
     }
 
     public Power copy() {
-        return new Power(this.id, damageMultiplier, resistance, this.getColor(), List.copyOf(this.abilities));
+        return new Power(this.id, this.getColor(), List.copyOf(this.abilities), settings);
     }
 }

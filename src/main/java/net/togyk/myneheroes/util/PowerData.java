@@ -40,11 +40,11 @@ public class PowerData {
         }
     }
 
-    public static float getDamageMultiplier(PlayerEntity player) {
+    public static double getDamageMultiplier(PlayerEntity player) {
         return ((PlayerPowers) player).getDamageMultiplier();
     }
 
-    public static float getResistance(PlayerEntity player) {
+    public static double getResistance(PlayerEntity player) {
         return ((PlayerPowers) player).getResistance();
     }
 

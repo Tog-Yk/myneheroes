@@ -10,8 +10,8 @@ import net.togyk.myneheroes.power.StockpilePower;
 import java.util.List;
 
 public class KryptonianPower extends StockpilePower {
-    public KryptonianPower(Identifier id, int maxCharge, float damageMultiplier, float resistance, int color, List<Ability> abilities) {
-        super(id, maxCharge, damageMultiplier, resistance, color, abilities);
+    public KryptonianPower(Identifier id, int maxCharge, int color, List<Ability> abilities, Settings settings) {
+        super(id, maxCharge, color, abilities, settings);
     }
 
     @Override
@@ -29,12 +29,7 @@ public class KryptonianPower extends StockpilePower {
     }
 
     @Override
-    public boolean allowFlying(PlayerEntity player) {
-        return this.getCharge() >= (this.getMaxCharge() * 0.05F);
-    }
-
-    @Override
     public KryptonianPower copy() {
-        return new KryptonianPower(this.id, this.getMaxCharge(), damageMultiplier, resistance, this.getColor(), List.copyOf(this.abilities));
+        return new KryptonianPower(this.id, this.getMaxCharge(), this.getColor(), List.copyOf(this.abilities), settings);
     }
 }

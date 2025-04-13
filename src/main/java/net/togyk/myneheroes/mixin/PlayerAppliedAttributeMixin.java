@@ -26,9 +26,9 @@ public abstract class PlayerAppliedAttributeMixin {
         // Check if the source is a player
         if (player != null) {
             // Multiply the damage taken
-            float multiplier = PowerData.getResistance(player); // Your custom multiplier
-            if (multiplier != 1.0F) {
-                return amount * multiplier;
+            double multiplier = PowerData.getResistance(player); // Your custom multiplier
+            if (multiplier != 1.00) {
+                return (float) (amount * multiplier);
             }
         }
         return amount;
@@ -45,7 +45,7 @@ public abstract class PlayerAppliedAttributeMixin {
         // Check if the source is a player
         if (player != null) {
             // Multiply the damage taken
-            float multiplier = PowerData.getDamageMultiplier(player); // Your custom multiplier
+            double multiplier = PowerData.getDamageMultiplier(player); // Your custom multiplier
             if (multiplier != 1.0F) {
                 return ModDamageTypes.of(player.getWorld(), ModDamageTypes.POWERFUL_PUNCH_TYPE_KEY, player);
             }
@@ -64,9 +64,9 @@ public abstract class PlayerAppliedAttributeMixin {
         // Check if the source is a player
         if (player != null) {
             // Multiply the damage taken
-            float multiplier = PowerData.getDamageMultiplier(player); // Your custom multiplier
-            if (multiplier != 1.0F) {
-                return i * multiplier;
+            double multiplier = PowerData.getDamageMultiplier(player); // Your custom multiplier
+            if (multiplier != 1.00) {
+                return (float) (i * multiplier);
             }
         }
         return i;
