@@ -57,13 +57,16 @@ public class HudOverlay implements HudRenderCallback {
                 List<Power> powers = ((PlayerPowers) client.player).getPowers();
                 if (!powers.isEmpty()) {
                     //draw Power Hud
-                    Power power = powers.get(ScrollData.getScrolledPowersOffset(client.player));
+                    int scrolled = ScrollData.getScrolledPowersOffset(client.player);
+                    if (powers.size() > scrolled) {
+                        Power power = powers.get(scrolled);
 
-                    drawContext.drawTexture(power.getBackground(), width - 112, height - 32, 0, 0, 112, 32, 112, 32);
-                    drawPowerInfo(drawContext, tickCounter, power, power.isDampened(), width - 112, height - 32);
+                        drawContext.drawTexture(power.getBackground(), width - 112, height - 32, 0, 0, 112, 32, 112, 32);
+                        drawPowerInfo(drawContext, tickCounter, power, power.isDampened(), width - 112, height - 32);
 
-                    if (powers.size() > 1) {
-                        drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal("+" + (powers.size() - 1)), width - 112 + 4, height - 32 + 16 + 4, 0xFFFFFF);
+                        if (powers.size() > 1) {
+                            drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal("+" + (powers.size() - 1)), width - 112 + 4, height - 32 + 16 + 4, 0xFFFFFF);
+                        }
                     }
                 }
             }
@@ -113,7 +116,7 @@ public class HudOverlay implements HudRenderCallback {
                 int maxHeight = 120;
                 int currentHeight = (int) (maxHeight * chargePercentile);
 
-                drawContext.drawTexture(chargeIcon, x + 16 * i, y + maxHeight - currentHeight, 0, maxHeight - currentHeight, 14, currentHeight, 14, 14); // yellow rectangle
+                drawContext.drawTexture(chargeIcon, x + 18 * i, y + maxHeight - currentHeight, 0, maxHeight - currentHeight, 16, currentHeight, 16, 16); // yellow rectangle
             }
         }
     }
