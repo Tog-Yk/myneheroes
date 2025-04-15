@@ -1,12 +1,10 @@
 package net.togyk.myneheroes.mixin;
 
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.MathHelper;
 import net.togyk.myneheroes.Item.custom.StationaryItem;
 import net.togyk.myneheroes.entity.ModEntities;
-import net.togyk.myneheroes.entity.SationaryItemEntity;
+import net.togyk.myneheroes.entity.StationaryItemEntity;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,7 +20,7 @@ public class StationaryConvertItemEntityMixin {
     private void ConversionOnTick(CallbackInfo info) {
         ItemEntity entity = (ItemEntity) (Object) this;
         ItemStack stack = entity.getStack();
-        if (!entity.getWorld().isClient() && !(entity instanceof SationaryItemEntity) && stack.getItem() instanceof StationaryItem) {
+        if (!entity.getWorld().isClient() && !(entity instanceof StationaryItemEntity) && stack.getItem() instanceof StationaryItem) {
             ItemEntity newItemEntity = getItemEntity(entity, stack);
 
             entity.getWorld().spawnEntity(newItemEntity);
@@ -32,7 +30,7 @@ public class StationaryConvertItemEntityMixin {
     }
 
     private static @NotNull ItemEntity getItemEntity(ItemEntity entity, ItemStack stack) {
-        ItemEntity newItemEntity = new SationaryItemEntity(ModEntities.STATIONARY_ITEM, entity.getWorld());
+        ItemEntity newItemEntity = new StationaryItemEntity(ModEntities.STATIONARY_ITEM, entity.getWorld());
         newItemEntity.setPos(entity.getX(), entity.getY(), entity.getZ());
         if (entity.getOwner() != null) {
             newItemEntity.setOwner(entity.getOwner().getUuid());

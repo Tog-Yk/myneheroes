@@ -2,6 +2,7 @@ package net.togyk.myneheroes;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,6 +24,7 @@ import net.togyk.myneheroes.block.entity.ArmorLightLevelerBlockEntity;
 import net.togyk.myneheroes.block.screen.ModScreenHandlerTypes;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.entity.ModEntities;
+import net.togyk.myneheroes.entity.StationaryArmorEntity;
 import net.togyk.myneheroes.event.ModEvents;
 import net.togyk.myneheroes.networking.ModMessages;
 import net.togyk.myneheroes.power.Powers;
@@ -69,6 +71,8 @@ public class MyneHeroes implements ModInitializer {
 
         ItemStorage.SIDED.registerForBlockEntity(ArmorDyeingBlockEntity::getInventoryProvider, ModBlockEntityTypes.ARMOR_DYEING_BLOCK_ENTITY);
         ItemStorage.SIDED.registerForBlockEntity(ArmorLightLevelerBlockEntity::getInventoryProvider, ModBlockEntityTypes.ARMOR_LIGHT_LEVELER_BLOCK_ENTITY);
+
+        FabricDefaultAttributeRegistry.register(ModEntities.STATIONARY_ARMOR, StationaryArmorEntity.createMobAttributes());
     }
     /**
      * Searches the player's inventory for the first matching item.

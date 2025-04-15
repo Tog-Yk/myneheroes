@@ -40,6 +40,7 @@ public class ModItems {
     public static final Item LAZAR_UPGRADE = registerItem("lazar_upgrade", new UpgradeItem(Abilities.SHOOT_LAZAR, 6, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
     public static final Item FlY_UPGRADE = registerItem("fly_upgrade", new UpgradeItem(Abilities.ALLOW_FLYING, 6, ArmorItem.Type.BOOTS, new Item.Settings()));
     public static final Item KINETIC_ENERGY_STORAGE_UPGRADE = registerItem("kinetic_energy_storage_upgrade", new UpgradeItem(Abilities.RELEASE_KINETIC_ENERGY, 3, null, new Item.Settings()));
+    public static final Item TAKE_OFF_SUIT_UPGRADE = registerItem("take_off_suit_upgrade", new UpgradeItem(Abilities.TAKE_OFF_SUIT, 4, null, new Item.Settings()));
 
     //armors
     //vibranium armors

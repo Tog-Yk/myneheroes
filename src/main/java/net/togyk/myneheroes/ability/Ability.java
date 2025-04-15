@@ -117,6 +117,10 @@ public abstract class Ability {
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType type) {
     }
 
+    public boolean appearsMultipleTimes() {
+        return true;
+    }
+
     public abstract Ability copy();
 
     public Identifier getId() {

@@ -12,11 +12,15 @@ public class ModEntities {
     public static final EntityType<LaserEntity> LASER = registerEntity("laser",
             EntityType.Builder.create(LaserEntity::new, SpawnGroup.MISC).dimensions(0.3F, 0.3F));
 
-    public static final EntityType<SationaryItemEntity> STATIONARY_ITEM = registerEntity("stationary_item",
-            EntityType.Builder.create(SationaryItemEntity::new, SpawnGroup.MISC).dimensions(0.75F, 0.4F));
+    public static final EntityType<StationaryItemEntity> STATIONARY_ITEM = registerEntity("stationary_item",
+            EntityType.Builder.create(StationaryItemEntity::new, SpawnGroup.MISC).dimensions(0.75F, 0.4F));
 
     public static final EntityType<ThrownItemEntity> THROWN_ITEM = registerEntity("thrown_item",
             EntityType.Builder.<ThrownItemEntity>create(ThrownItemEntity::new, SpawnGroup.MISC).dimensions(0.75F, 0.4F));
+
+    public static final EntityType<StationaryArmorEntity> STATIONARY_ARMOR = registerEntity("stationary_armor",
+            EntityType.Builder.create(StationaryArmorEntity::new, SpawnGroup.MISC)
+                    .dimensions(0.6F, 1.8F));
 
     private static <T extends Entity> EntityType<T> registerEntity(String name, EntityType.Builder<T> type) {
         return Registry.register(Registries.ENTITY_TYPE, Identifier.of(MyneHeroes.MOD_ID, name), type.build());

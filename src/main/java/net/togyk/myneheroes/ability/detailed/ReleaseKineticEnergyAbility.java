@@ -146,6 +146,11 @@ public class ReleaseKineticEnergyAbility extends PassiveAbility implements Stock
     }
 
     @Override
+    public boolean appearsMultipleTimes() {
+        return false;
+    }
+
+    @Override
     public ReleaseKineticEnergyAbility copy() {
         return new ReleaseKineticEnergyAbility(id, abilityName, maxCooldown, maxCharge, rangeMultiplier);
     }
