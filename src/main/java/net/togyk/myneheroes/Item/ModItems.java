@@ -36,6 +36,9 @@ public class ModItems {
     public static final Item COSMIC_SHIELD = registerItem("cosmic_shield",
             new ThrowableShieldItem(2.0F,new Item.Settings().maxDamage(336)));
 
+    public static final Item CIRCUIT_BOARD = registerItem("circuit_board",
+            new Item(new Item.Settings()));
+
     public static final Item HUD_UPGRADE = registerItem("hud_upgrade", new UpgradeItem(Abilities.TOGGLE_HUD, 4, ArmorItem.Type.HELMET, new Item.Settings()));
     public static final Item LAZAR_UPGRADE = registerItem("lazar_upgrade", new UpgradeItem(Abilities.SHOOT_LAZAR, 6, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
     public static final Item FlY_UPGRADE = registerItem("fly_upgrade", new UpgradeItem(Abilities.ALLOW_FLYING, 6, ArmorItem.Type.BOOTS, new Item.Settings()));

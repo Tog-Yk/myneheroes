@@ -51,9 +51,12 @@ public class ModItemGroups {
                         entries.add(ModItems.A_SYMBOLS_SHIELD);
                         entries.add(ModItems.COSMIC_SHIELD);
 
+                        entries.add(ModItems.CIRCUIT_BOARD);
+
                         entries.add(ModItems.HUD_UPGRADE);
                         entries.add(ModItems.LAZAR_UPGRADE);
                         entries.add(ModItems.FlY_UPGRADE);
+                        entries.add(ModItems.TAKE_OFF_SUIT_UPGRADE);
                         entries.add(ModItems.KINETIC_ENERGY_STORAGE_UPGRADE);
                     }).build());
 

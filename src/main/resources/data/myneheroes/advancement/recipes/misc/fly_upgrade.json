@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_stone_slab": {
+    "has_circuit_board": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:stone_slab"
+            "items": "myneheroes:circuit_board"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_stone_slab"
+      "has_circuit_board"
     ]
   ],
   "rewards": {

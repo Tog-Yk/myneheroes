@@ -18,9 +18,12 @@
   "item.myneheroes.a_symbols_shield": "A Symbols Shield",
   "item.myneheroes.cosmic_shield": "Cosmic Shield",
 
+  "item.myneheroes.circuit_board": "Circuit Board",
+
   "item.myneheroes.hud_upgrade": "Hud Upgrade",
   "item.myneheroes.lazar_upgrade": "Lazar Upgrade",
   "item.myneheroes.fly_upgrade": "Fly Upgrade",
+  "item.myneheroes.take_off_suit_upgrade": "Take Off Suit Upgrade",
   "item.myneheroes.kinetic_energy_storage_upgrade": "Kinetic Energy Storage Upgrade",
 
   "item.myneheroes.vibranium_helmet": "Vibranium Helmet",

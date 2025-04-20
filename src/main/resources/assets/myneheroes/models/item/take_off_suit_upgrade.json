@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "myneheroes:item/take_off_suit_upgrade"
+  }
+}
