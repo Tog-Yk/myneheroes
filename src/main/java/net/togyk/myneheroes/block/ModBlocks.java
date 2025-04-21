@@ -2,6 +2,8 @@ package net.togyk.myneheroes.block;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.MapColor;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -11,6 +13,8 @@ import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.block.custom.ArmorDyeingBlockEntityBlock;
 import net.togyk.myneheroes.block.custom.ArmorLightLevelerBlockEntityBlock;
+import net.togyk.myneheroes.block.custom.KryptoniteBlock;
+import net.togyk.myneheroes.block.custom.KryptoniteClusterBlock;
 
 public class ModBlocks {
     public static final Block VIBRANIUM_BLOCK = registerBlock("vibranium_block",
@@ -53,6 +57,12 @@ public class ModBlocks {
                     .requiresTool()));
     public static final Block ARMOR_LIGHT_LEVELING_STATION = registerBlock("armor_light_leveling_station",
             new ArmorLightLevelerBlockEntityBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.WOOD)));
+
+    public static final Block KRYPTONITE_BlOCK = registerBlock("kryptonite_block",
+            new KryptoniteBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.AMETHYST_BLOCK).mapColor(MapColor.LIME).strength(2.5f)));
+
+    public static final Block KRYPTONITE_CLUSTER = registerBlock("kryptonite_crystal",
+            new KryptoniteClusterBlock(AbstractBlock.Settings.create().mapColor(MapColor.LIME).solid().nonOpaque().sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(1.5F).luminance((state) -> 5).pistonBehavior(PistonBehavior.DESTROY)));
 
 
 

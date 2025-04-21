@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "myneheroes:block/kryptonite_cluster",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "myneheroes:block/kryptonite_cluster",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "myneheroes:block/kryptonite_cluster",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "myneheroes:block/kryptonite_cluster",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "myneheroes:block/kryptonite_cluster"
+    },
+    "facing=west": {
+      "model": "myneheroes:block/kryptonite_cluster",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

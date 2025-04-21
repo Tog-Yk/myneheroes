@@ -9,6 +9,8 @@
     "myneheroes:titanium_ore",
     "myneheroes:deepslate_titanium_ore",
     "myneheroes:gold_titanium_block",
-    "myneheroes:raw_gold_titanium_block"
+    "myneheroes:raw_gold_titanium_block",
+    "myneheroes:kryptonite_block",
+    "myneheroes:kryptonite_crystal"
   ]
 }

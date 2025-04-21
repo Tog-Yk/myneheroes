@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "myneheroes:block/kryptonite_cluster"
+  }
+}

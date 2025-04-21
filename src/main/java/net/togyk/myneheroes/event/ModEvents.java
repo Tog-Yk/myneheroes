@@ -26,34 +26,6 @@ public class ModEvents {
     public static void registerEvents() {
         MyneHeroes.LOGGER.info("registering Events for" + MyneHeroes.MOD_ID);
 
-        Map<ServerPlayerEntity, Long> timeInNether = new HashMap<>();
-        ServerTickEvents.END_SERVER_TICK.register(server -> {
-            for (ServerWorld world : server.getWorlds()) {
-                if (world.getRegistryKey().equals(ServerWorld.NETHER)) {
-
-                    for (ServerPlayerEntity player : world.getPlayers()) {
-                        timeInNether.put(player, timeInNether.getOrDefault(player, 0L) + 1);
-
-                        if (timeInNether.get(player) >= 2 * 60 * 20L) {
-                            List<Power> currentPowers = PowerData.getPowers(player);
-                            Power kryptonianPower = Powers.KRYPTONIAN.copy();
-                            if (kryptonianPower != null && !currentPowers.stream().map(Power::getId).toList().contains(kryptonianPower.id)) {
-                                PowerData.addPower(player, kryptonianPower);
-                            }
-                            timeInNether.put(player,0L);
-                        }
-                    }
-                } else {
-                    for (ServerPlayerEntity player : world.getPlayers()) {
-                        timeInNether.put(player, max(timeInNether.getOrDefault(player, 0L) - 1, 0L));
-                    }
-                }
-            }
-
-            // count down if players are no longer in the Nether
-            timeInNether.keySet().removeIf(player -> player.getWorld() != server.getWorld(ServerWorld.NETHER));
-        });
-
         MissedSwingCallback.EVENT.register((PlayerEntity player, Hand hand) -> {
             // Create an arrow entity. (This example does not consume inventory arrows.)
             ItemStack stack = player.getStackInHand(hand);

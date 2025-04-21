@@ -1,8 +1,11 @@
 package net.togyk.myneheroes;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.minecraft.client.render.RenderLayer;
 import net.togyk.myneheroes.Item.ModPredicates;
+import net.togyk.myneheroes.block.ModBlocks;
 import net.togyk.myneheroes.block.screen.client.ModHandledScreens;
 import net.togyk.myneheroes.client.HudOverlay;
 import net.togyk.myneheroes.Item.color.ModColorProvider;
@@ -26,5 +29,7 @@ public class MyneHeroesClient implements ClientModInitializer {
         ModHandledScreens.registerModScreenHandlerTypes();
 
         ModPredicates.registerModPredicates();
+
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.KRYPTONITE_CLUSTER, RenderLayer.getCutout());
     }
 }
