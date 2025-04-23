@@ -3,6 +3,7 @@ package net.togyk.myneheroes.client.render.entity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.entity.ModEntities;
 
@@ -14,5 +15,8 @@ public class ModEntityRenderers {
         EntityRendererRegistry.INSTANCE.register(ModEntities.STATIONARY_ITEM, StationaryItemEntityRenderer::new);
         EntityRendererRegistry.INSTANCE.register(ModEntities.THROWN_ITEM, ThrownItemEntityRenderer::new);
         EntityRendererRegistry.INSTANCE.register(ModEntities.STATIONARY_ARMOR, StationaryArmorEntityRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(CometEntityModel.COMET, CometEntityModel::getTexturedModelData);
+        EntityRendererRegistry.INSTANCE.register(ModEntities.COMET, CometEntityRenderer::new);
     }
 }
