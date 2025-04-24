@@ -16,7 +16,7 @@ public class ModEntityRenderers {
         EntityRendererRegistry.INSTANCE.register(ModEntities.THROWN_ITEM, ThrownItemEntityRenderer::new);
         EntityRendererRegistry.INSTANCE.register(ModEntities.STATIONARY_ARMOR, StationaryArmorEntityRenderer::new);
 
-        EntityModelLayerRegistry.registerModelLayer(CometEntityModel.COMET, CometEntityModel::getTexturedModelData);
-        EntityRendererRegistry.INSTANCE.register(ModEntities.COMET, CometEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MeteorEntityModel.METEOR, MeteorEntityModel::getTexturedModelData);
+        EntityRendererRegistry.INSTANCE.register(ModEntities.METEOR, MeteorEntityRenderer::new);
     }
 }

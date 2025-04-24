@@ -61,6 +61,8 @@ public class ModItemGroups {
 
                         entries.add(ModBlocks.KRYPTONITE_BlOCK);
                         entries.add(ModBlocks.KRYPTONITE_CLUSTER);
+
+                        entries.add(ModBlocks.METEOR_RADAR);
                     }).build());
 
     public static final ItemGroup MYNEHEROES_ARMOR_GROUP = Registry.register(Registries.ITEM_GROUP,

@@ -24,17 +24,22 @@ import net.togyk.myneheroes.block.ModBlocks;
 
 import java.util.Random;
 
-public class CometEntity extends PersistentProjectileEntity {
-    private static final TrackedData<Float> Size = DataTracker.registerData(CometEntity.class, TrackedDataHandlerRegistry.FLOAT);
-    private static final TrackedData<Integer> VariantId  = DataTracker.registerData(CometEntity.class, TrackedDataHandlerRegistry.INTEGER);
+public class MeteorEntity extends PersistentProjectileEntity {
+    private static final TrackedData<Float> Size = DataTracker.registerData(MeteorEntity.class, TrackedDataHandlerRegistry.FLOAT);
+    private static final TrackedData<Integer> VariantId  = DataTracker.registerData(MeteorEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
-    public CometEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world, CometVariant variant) {
-        super(entityType, world);
+    public MeteorEntity(World world, MeteorVariant variant) {
+        super(ModEntities.METEOR, world);
         this.setVariant(variant);
         this.setSize((new Random()).nextFloat(5, 12));
     }
+    public MeteorEntity(World world) {
+        super(ModEntities.METEOR, world);
+        this.setVariant(MeteorVariant.getRandomVariant(new Random()));
+        this.setSize((new Random()).nextFloat(5, 12));
+    }
 
-    public CometEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
+    public MeteorEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -64,7 +69,7 @@ public class CometEntity extends PersistentProjectileEntity {
             BlockPos pos = this.getBlockPos();
             world.createExplosion(this, pos.getX(), pos.getY(), pos.getZ(), getImpactPower(), true, World.ExplosionSourceType.BLOCK);
             this.createCrater(world, this.getBlockPos(), new Random());
-            this.createComet(world, this.getHighestBlockBelowY(world, pos.getX(), pos.getZ(), pos.getY()).up((int) (this.getSize() / 2)), new Random());
+            this.createMeteor(world, this.getHighestBlockBelowY(world, pos.getX(), pos.getZ(), pos.getY()).up((int) (this.getSize() / 2)), new Random());
         }
         this.discard();
     }
@@ -76,7 +81,7 @@ public class CometEntity extends PersistentProjectileEntity {
             BlockPos pos = this.getBlockPos();
             world.createExplosion(this, pos.getX(), pos.getY(), pos.getZ(), getImpactPower(), true, World.ExplosionSourceType.BLOCK);
             this.createCrater(world, this.getBlockPos(), new Random());
-            this.createComet(world, this.getHighestBlockBelowY(world, pos.getX(), pos.getZ(), pos.getY()).up((int) (this.getSize() / 2)), new Random());
+            this.createMeteor(world, this.getHighestBlockBelowY(world, pos.getX(), pos.getZ(), pos.getY()).up((int) (this.getSize() / 2)), new Random());
         }
         this.discard();
     }
@@ -96,14 +101,14 @@ public class CometEntity extends PersistentProjectileEntity {
         super.initDataTracker(builder);
         builder.add(Size, 7.50F);
         builder.add(VariantId, 0);
-        //CometVariant.getRandomVariant(new Random()).getId()
+        //MeteorVariant.getRandomVariant(new Random()).getId()
     }
 
-    public CometVariant getVariant() {
-        return CometVariant.byId(this.getDataTracker().get(VariantId));
+    public MeteorVariant getVariant() {
+        return MeteorVariant.byId(this.getDataTracker().get(VariantId));
     }
 
-    public void setVariant(CometVariant variant) {
+    public void setVariant(MeteorVariant variant) {
         this.getDataTracker().set(VariantId, variant.getId());
     }
 
@@ -191,7 +196,7 @@ public class CometEntity extends PersistentProjectileEntity {
         return new BlockPos(x, world.getBottomY(), z);
     }
 
-    private void createComet(World world, BlockPos origin, Random random) {
+    private void createMeteor(World world, BlockPos origin, Random random) {
         int radius = (int) (this.getSize() / 2);
 
         // Loop over a square bounding the circle

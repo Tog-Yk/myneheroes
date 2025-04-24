@@ -13,37 +13,37 @@ import net.minecraft.util.Util;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.entity.CometEntity;
-import net.togyk.myneheroes.entity.CometVariant;
+import net.togyk.myneheroes.entity.MeteorEntity;
+import net.togyk.myneheroes.entity.MeteorVariant;
 
 import java.util.Map;
 
-public class CometEntityRenderer extends ProjectileEntityRenderer<CometEntity> {
-    protected CometEntityModel model;
-    private static final Map<CometVariant, Identifier> ID_BY_VARIANT =
-            Util.make(Maps.newEnumMap(CometVariant.class), map -> {
-                map.put(CometVariant.DEFAULT,
-                        Identifier.of(MyneHeroes.MOD_ID, "textures/entity/comet/comet.png"));
-                map.put(CometVariant.SCULK,
-                        Identifier.of(MyneHeroes.MOD_ID, "textures/entity/comet/sculk_comet.png"));
-                map.put(CometVariant.KRYPTONITE,
-                        Identifier.of(MyneHeroes.MOD_ID, "textures/entity/comet/kryptonite_comet.png"));
-                map.put(CometVariant.VIBRANIUM,
-                        Identifier.of(MyneHeroes.MOD_ID, "textures/entity/comet/vibranium_comet.png"));
+public class MeteorEntityRenderer extends ProjectileEntityRenderer<MeteorEntity> {
+    protected MeteorEntityModel model;
+    private static final Map<MeteorVariant, Identifier> ID_BY_VARIANT =
+            Util.make(Maps.newEnumMap(MeteorVariant.class), map -> {
+                map.put(MeteorVariant.DEFAULT,
+                        Identifier.of(MyneHeroes.MOD_ID, "textures/entity/meteor/meteor.png"));
+                map.put(MeteorVariant.SCULK,
+                        Identifier.of(MyneHeroes.MOD_ID, "textures/entity/meteor/sculk_meteor.png"));
+                map.put(MeteorVariant.KRYPTONITE,
+                        Identifier.of(MyneHeroes.MOD_ID, "textures/entity/meteor/kryptonite_meteor.png"));
+                map.put(MeteorVariant.VIBRANIUM,
+                        Identifier.of(MyneHeroes.MOD_ID, "textures/entity/meteor/vibranium_meteor.png"));
             });
 
-    public CometEntityRenderer(EntityRendererFactory.Context context) {
+    public MeteorEntityRenderer(EntityRendererFactory.Context context) {
         super(context);
-        this.model = new CometEntityModel(context.getPart(CometEntityModel.COMET));
+        this.model = new MeteorEntityModel(context.getPart(MeteorEntityModel.METEOR));
     }
 
     @Override
-    public Identifier getTexture(CometEntity entity) {
+    public Identifier getTexture(MeteorEntity entity) {
         return ID_BY_VARIANT.get(entity.getVariant());
     }
 
     @Override
-    public void render(CometEntity entity, float y, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light) {
+    public void render(MeteorEntity entity, float y, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light) {
         matrixStack.push();
 
         float size = entity.getSize();

@@ -22,9 +22,10 @@ public class ModEntities {
             EntityType.Builder.create(StationaryArmorEntity::new, SpawnGroup.MISC)
                     .dimensions(0.6F, 1.8F));
 
-    public static final EntityType<CometEntity> COMET = registerEntity("comet",
-            EntityType.Builder.<CometEntity>create(CometEntity::new, SpawnGroup.MISC)
-                    .dimensions(0.5F, 0.5F));
+    public static final EntityType<MeteorEntity> METEOR = registerEntity("meteor",
+            EntityType.Builder.<MeteorEntity>create(MeteorEntity::new, SpawnGroup.MISC)
+                    .dimensions(0.5F, 0.5F)
+                    .maxTrackingRange(1500));
 
     private static <T extends Entity> EntityType<T> registerEntity(String name, EntityType.Builder<T> type) {
         return Registry.register(Registries.ENTITY_TYPE, Identifier.of(MyneHeroes.MOD_ID, name), type.build());

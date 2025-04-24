@@ -7,19 +7,19 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.entity.CometEntity;
+import net.togyk.myneheroes.entity.MeteorEntity;
 
-public class CometEntityModel extends EntityModel<CometEntity> {
-    public static final EntityModelLayer COMET = new EntityModelLayer(Identifier.of(MyneHeroes.MOD_ID, "comet"), "main");
-    private final ModelPart comet;
+public class MeteorEntityModel extends EntityModel<MeteorEntity> {
+    public static final EntityModelLayer METEOR = new EntityModelLayer(Identifier.of(MyneHeroes.MOD_ID, "meteor"), "main");
+    private final ModelPart meteor;
 
-    public CometEntityModel(ModelPart root) {
-        this.comet = root.getChild("comet");
+    public MeteorEntityModel(ModelPart root) {
+        this.meteor = root.getChild("meteor");
     }
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData comet = modelPartData.addChild("comet", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+        ModelPartData comet = modelPartData.addChild("meteor", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
 
         ModelPartData cube_r1 = comet.addChild("cube_r1", ModelPartBuilder.create().uv(0, 25).cuboid(-6.5F, -6.0F, -6.5F, 13.0F, 12.0F, 13.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 0.0F, -0.6109F, -0.5236F, 0.5585F));
 
@@ -29,11 +29,11 @@ public class CometEntityModel extends EntityModel<CometEntity> {
         return TexturedModelData.of(modelData, 128, 128);
     }
     @Override
-    public void setAngles(CometEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setAngles(MeteorEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
     }
 
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
-        comet.render(matrices, vertices, light, overlay, color);
+        meteor.render(matrices, vertices, light, overlay, color);
     }
 }

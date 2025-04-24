@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=true": {
+      "model": "myneheroes:block/meteor_radar_triggered"
+    },
+    "lit=false": {
+      "model": "myneheroes:block/meteor_radar"
+    }
+  }
+}

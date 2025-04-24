@@ -11,10 +11,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.block.custom.ArmorDyeingBlockEntityBlock;
-import net.togyk.myneheroes.block.custom.ArmorLightLevelerBlockEntityBlock;
-import net.togyk.myneheroes.block.custom.KryptoniteBlock;
-import net.togyk.myneheroes.block.custom.KryptoniteClusterBlock;
+import net.togyk.myneheroes.block.custom.*;
 
 public class ModBlocks {
     public static final Block VIBRANIUM_BLOCK = registerBlock("vibranium_block",
@@ -63,6 +60,10 @@ public class ModBlocks {
 
     public static final Block KRYPTONITE_CLUSTER = registerBlock("kryptonite_crystal",
             new KryptoniteClusterBlock(AbstractBlock.Settings.create().mapColor(MapColor.LIME).solid().nonOpaque().sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(1.5F).luminance((state) -> 5).pistonBehavior(PistonBehavior.DESTROY)));
+
+
+    public static final Block METEOR_RADAR = registerBlock("meteor_radar",
+            new MeteorRadarBlockEntityBlock(AbstractBlock.Settings.create().mapColor(MapColor.LIME).strength(1.5F, 3.5F)));
 
 
 

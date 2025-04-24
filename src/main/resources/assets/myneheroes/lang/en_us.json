@@ -77,6 +77,8 @@
   "block.myneheroes.kryptonite_block": "Kryptonite Block",
   "block.myneheroes.kryptonite_crystal": "Kryptonite Crystal",
 
+  "block.myneheroes.meteor_radar": "Meteor Radar",
+
   "power.myneheroes.kryptonian": "Kryptonian",
 
 
@@ -118,5 +120,11 @@
   "advancements.myneheroes.vibranium.root.description": "Acquire vibranium",
 
   "advancements.myneheroes.vibranium.shield.title": "Thats just a prototype",
-  "advancements.myneheroes.vibranium.shield.description": "Acquire a shield made from vibranium"
+  "advancements.myneheroes.vibranium.shield.description": "Acquire a shield made from vibranium",
+
+  "entity.myneheroes.laser": "Lazar",
+  "entity.myneheroes.stationary_item": "Stationary Item",
+  "entity.myneheroes.thrown_item": "Thrown Item",
+  "entity.myneheroes.stationary_armor": "Stationary Armor",
+  "entity.myneheroes.meteor": "Meteor"
 }

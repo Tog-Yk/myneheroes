@@ -10,14 +10,14 @@ import net.togyk.myneheroes.MyneHeroes;
 
 public class ModTags {
     public static class Blocks {
-        public static final TagKey<Block> COMET_CORE_BLOCKS = createTag("comet_core_blocks");
-        public static final TagKey<Block> COMET_CRUST_BLOCKS = createTag("comet_crust_blocks");
-        public static final TagKey<Block> KRYPTONITE_COMET_CRUST_BLOCKS = createTag("kryptonite_comet_crust_blocks");
-        public static final TagKey<Block> KRYPTONITE_COMET_CORE_BLOCKS = createTag("kryptonite_comet_core_blocks");
-        public static final TagKey<Block> SCULK_COMET_CRUST_BLOCKS = createTag("sculk_comet_crust_blocks");
-        public static final TagKey<Block> SCULK_COMET_CORE_BLOCKS = createTag("sculk_comet_core_blocks");
-        public static final TagKey<Block> VIBRANIUM_COMET_CRUST_BLOCKS = createTag("vibranium_comet_crust_blocks");
-        public static final TagKey<Block> VIBRANIUM_COMET_CORE_BLOCKS = createTag("vibranium_comet_core_blocks");
+        public static final TagKey<Block> METEOR_CORE_BLOCKS = createTag("meteor_core_blocks");
+        public static final TagKey<Block> METEOR_CRUST_BLOCKS = createTag("meteor_crust_blocks");
+        public static final TagKey<Block> KRYPTONITE_METEOR_CRUST_BLOCKS = createTag("kryptonite_meteor_crust_blocks");
+        public static final TagKey<Block> KRYPTONITE_METEOR_CORE_BLOCKS = createTag("kryptonite_meteor_core_blocks");
+        public static final TagKey<Block> SCULK_METEOR_CRUST_BLOCKS = createTag("sculk_meteor_crust_blocks");
+        public static final TagKey<Block> SCULK_METEOR_CORE_BLOCKS = createTag("sculk_meteor_core_blocks");
+        public static final TagKey<Block> VIBRANIUM_METEOR_CRUST_BLOCKS = createTag("vibranium_meteor_crust_blocks");
+        public static final TagKey<Block> VIBRANIUM_METEOR_CORE_BLOCKS = createTag("vibranium_meteor_core_blocks");
 
         private static TagKey<Block> createTag(String name) {
             return TagKey.of(RegistryKeys.BLOCK, Identifier.of(MyneHeroes.MOD_ID, name));
@@ -32,7 +32,6 @@ public class ModTags {
     }
 
     public static class Entity {
-        public static final TagKey<EntityType<?>> COMETS = createTag("comets");
 
         private static TagKey<EntityType<?>> createTag(String name) {
             return TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MyneHeroes.MOD_ID, name));

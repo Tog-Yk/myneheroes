@@ -9,6 +9,7 @@ import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
 import net.togyk.myneheroes.block.entity.ArmorLightLevelerBlockEntity;
 import net.togyk.myneheroes.block.entity.KryptoniteBlockEntity;
+import net.togyk.myneheroes.block.entity.MeteorRadarBlockEntity;
 
 public class ModBlockEntityTypes {
     public static final BlockEntityType<ArmorDyeingBlockEntity> ARMOR_DYEING_BLOCK_ENTITY = register("armor_dyeing_block_entity",
@@ -20,6 +21,10 @@ public class ModBlockEntityTypes {
 
     public static final BlockEntityType<KryptoniteBlockEntity> KRYPTONITE_BLOCK_ENTITY = register("kryptonite_block_entity",
             BlockEntityType.Builder.create(KryptoniteBlockEntity::new, ModBlocks.KRYPTONITE_BlOCK)
+                    .build());
+
+    public static final BlockEntityType<MeteorRadarBlockEntity> METEOR_RADAR_BLOCK_ENTITY = register("kryptonite_block_entity",
+            BlockEntityType.Builder.create(MeteorRadarBlockEntity::new, ModBlocks.METEOR_RADAR)
                     .build());
 
     private static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType<T> type) {

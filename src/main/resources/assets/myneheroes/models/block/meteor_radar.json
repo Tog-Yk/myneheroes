@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "bottom": "myneheroes:block/meteor_radar_bottom",
+    "top": "myneheroes:block/meteor_radar_top",
+    "north": "myneheroes:block/meteor_radar_side",
+    "south": "myneheroes:block/meteor_radar_side",
+    "west": "myneheroes:block/meteor_radar_side",
+    "east": "myneheroes:block/meteor_radar_side",
+    "particle": "#north"
+  },
+  "elements": [
+    {
+      "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#bottom"},
+        "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#top"},
+        "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#north"},
+        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#south"},
+        "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#west"},
+        "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#east"}
+      }
+    }
+  ]
+}
