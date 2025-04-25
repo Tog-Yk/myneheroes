@@ -26,6 +26,7 @@ import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.entity.ModEntities;
 import net.togyk.myneheroes.entity.StationaryArmorEntity;
 import net.togyk.myneheroes.event.ModEvents;
+import net.togyk.myneheroes.gamerule.ModGamerules;
 import net.togyk.myneheroes.networking.ModMessages;
 import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.util.ModLootTableModifiers;
@@ -55,6 +56,8 @@ public class MyneHeroes implements ModInitializer {
 
         ModBlocks.registerModBlocks();
         ModItemGroups.registerItemGroups();
+
+        ModGamerules.registerModGamerules();
 
         ModBiomeModifications.registerModBiomeModifications();
         ModEntities.registerModEntities();

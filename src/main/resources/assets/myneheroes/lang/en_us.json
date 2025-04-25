@@ -126,5 +126,7 @@
   "entity.myneheroes.stationary_item": "Stationary Item",
   "entity.myneheroes.thrown_item": "Thrown Item",
   "entity.myneheroes.stationary_armor": "Stationary Armor",
-  "entity.myneheroes.meteor": "Meteor"
+  "entity.myneheroes.meteor": "Meteor",
+
+  "gamerule.doMeteorSpawning": "Spawn Meteors"
 }
