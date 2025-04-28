@@ -11,7 +11,6 @@ import net.togyk.myneheroes.Item.custom.AbilityHoldingItem;
 import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
-import net.togyk.myneheroes.ability.StockpileAbility;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.util.ScrollData;
 import net.togyk.myneheroes.util.PlayerAbilities;
@@ -32,7 +31,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
     private List<Ability> abilities = new ArrayList<>();
     private boolean isDirty = false;
 
-    private int scrolledOffset = 0;
+    private int scrolledAbilityOffset = 0;
 
 
     @Inject(at = @At("HEAD"), method = "tick")
@@ -51,10 +50,10 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         for (Ability ability : this.abilities) {
             ability.tick();
         }
-        if (this.scrolledOffset > this.maxScroll()) {
-            this.scrolledOffset = this.maxScroll();
-        } else if (scrolledOffset < 0) {
-            this.scrolledOffset = 0;
+        if (this.scrolledAbilityOffset > this.maxAbilityScroll()) {
+            this.scrolledAbilityOffset = this.maxAbilityScroll();
+        } else if (scrolledAbilityOffset < 0) {
+            this.scrolledAbilityOffset = 0;
         }
     }
 
@@ -149,8 +148,8 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
     @Override
     public Ability getFirstAbility() {
         List<Ability> filteredAbilities = getFilteredAbilities();
-        if (filteredAbilities != null && filteredAbilities.size() >= 1 + this.getScrolledOffset()) {
-            return filteredAbilities.get(this.getScrolledOffset());
+        if (filteredAbilities != null && filteredAbilities.size() >= 1 + this.getScrolledAbilityOffset()) {
+            return filteredAbilities.get(this.getScrolledAbilityOffset());
         } else {
             return null;
         }
@@ -159,8 +158,8 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
     @Override
     public Ability getSecondAbility() {
         List<Ability> filteredAbilities = getFilteredAbilities();
-        if (filteredAbilities != null && filteredAbilities.size() >= 2 + this.getScrolledOffset()) {
-            return filteredAbilities.get(1 + this.getScrolledOffset());
+        if (filteredAbilities != null && filteredAbilities.size() >= 2 + this.getScrolledAbilityOffset()) {
+            return filteredAbilities.get(1 + this.getScrolledAbilityOffset());
         } else {
             return null;
         }
@@ -169,8 +168,8 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
     @Override
     public Ability getThirdAbility() {
         List<Ability> filteredAbilities = getFilteredAbilities();
-        if (filteredAbilities != null && filteredAbilities.size() >= 3 + this.getScrolledOffset()) {
-            return filteredAbilities.get(2 + this.getScrolledOffset());
+        if (filteredAbilities != null && filteredAbilities.size() >= 3 + this.getScrolledAbilityOffset()) {
+            return filteredAbilities.get(2 + this.getScrolledAbilityOffset());
         } else {
             return null;
         }
@@ -179,8 +178,8 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
     @Override
     public Ability getFourthAbility() {
         List<Ability> filteredAbilities = getFilteredAbilities();
-        if (filteredAbilities != null && filteredAbilities.size() >= 4 + this.getScrolledOffset()) {
-            return filteredAbilities.get(3 + this.getScrolledOffset());
+        if (filteredAbilities != null && filteredAbilities.size() >= 4 + this.getScrolledAbilityOffset()) {
+            return filteredAbilities.get(3 + this.getScrolledAbilityOffset());
         } else {
             return null;
         }
@@ -194,7 +193,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         if (nbt.contains(MyneHeroes.MOD_ID)) {
             NbtCompound modNbt = nbt.getCompound(MyneHeroes.MOD_ID);
             if (modNbt.contains("scrolled_ability_offset")) {
-                this.scrolledOffset = modNbt.getInt("scrolled_ability_offset");
+                this.scrolledAbilityOffset = modNbt.getInt("scrolled_ability_offset");
             }
         }
         this.isDirty = true;
@@ -206,42 +205,42 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
             modNbt = nbt.getCompound(MyneHeroes.MOD_ID);
         }
 
-        modNbt.putInt("scrolled_ability_offset",this.scrolledOffset);
+        modNbt.putInt("scrolled_ability_offset",this.scrolledAbilityOffset);
 
         nbt.put(MyneHeroes.MOD_ID,modNbt);
     }
 
     @Override
-    public int getScrolledOffset() {
-        return Math.max(Math.min(scrolledOffset, this.abilities.size() - 4), 0);
+    public int getScrolledAbilityOffset() {
+        return Math.max(Math.min(scrolledAbilityOffset, this.abilities.size() - 4), 0);
     }
 
     @Override
-    public void setScrolledOffset(int scrolledOffset) {
-        this.scrolledOffset = scrolledOffset;
+    public void setScrolledAbilityOffset(int scrolledAbilityOffset) {
+        this.scrolledAbilityOffset = scrolledAbilityOffset;
     }
 
     @Override
-    public boolean canScrollFurther() {
-        return this.maxScroll() != this.scrolledOffset;
+    public boolean canScrollAbilityFurther() {
+        return this.maxAbilityScroll() != this.scrolledAbilityOffset;
     }
 
     @Override
-    public int maxScroll() {
+    public int maxAbilityScroll() {
         return this.getFilteredAbilities().size() - 4;
     }
 
     @Override
-    public void scrollFurther() {
-        if (this.scrolledOffset < this.maxScroll()) {
-            this.scrolledOffset += 1;
+    public void scrollAbilityFurther() {
+        if (this.scrolledAbilityOffset < this.maxAbilityScroll()) {
+            this.scrolledAbilityOffset += 1;
         }
     }
 
     @Override
-    public void scrollBack() {
-        if (this.scrolledOffset > 0) {
-            this.scrolledOffset -= 1;
+    public void scrollAbilityBack() {
+        if (this.scrolledAbilityOffset > 0) {
+            this.scrolledAbilityOffset -= 1;
         }
     }
 

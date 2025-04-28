@@ -12,10 +12,10 @@ public interface PlayerAbilities {
     List<Ability> getAbilities();
     List<Ability> getFilteredAbilities();
 
-    int getScrolledOffset();
-    void setScrolledOffset(int scrolledOffset);
-    boolean canScrollFurther();
-    int maxScroll();
-    void scrollFurther();
-    void scrollBack();
+    int getScrolledAbilityOffset();
+    void setScrolledAbilityOffset(int scrolledAbilityOffset);
+    boolean canScrollAbilityFurther();
+    int maxAbilityScroll();
+    void scrollAbilityFurther();
+    void scrollAbilityBack();
 }

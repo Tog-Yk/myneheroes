@@ -26,7 +26,7 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
     private List<Power> powers = new ArrayList<>();
     private boolean isDirty = false;
 
-    private int scrolledOffset = 0;
+    private int scrolledPowerOffset = 0;
 
     @Inject(at = @At("HEAD"), method = "tick")
     private void tick(CallbackInfo info) {
@@ -41,8 +41,8 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
                 power.tick(player);
             }
         }
-        if (scrolledOffset < 0) {
-            this.scrolledOffset = 0;
+        if (scrolledPowerOffset < 0) {
+            this.scrolledPowerOffset = 0;
         }
     }
 
@@ -66,7 +66,7 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
                 }
             }
             if (modNbt.contains("scrolled_power_offset")) {
-                this.scrolledOffset = modNbt.getInt("scrolled_power_offset");
+                this.scrolledPowerOffset = modNbt.getInt("scrolled_power_offset");
             }
         }
         this.powers = powers;
@@ -88,7 +88,7 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
         }
         modNbt.put("powers",powerNbt);
 
-        modNbt.putInt("scrolled_power_offset",this.scrolledOffset);
+        modNbt.putInt("scrolled_power_offset",this.scrolledPowerOffset);
 
         nbt.put(MyneHeroes.MOD_ID,modNbt);
     }
@@ -135,30 +135,30 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
     }
 
     @Override
-    public int getScrolledOffset() {
-        return Math.max(Math.min(scrolledOffset, this.powers.size()), 0);
+    public int getScrolledPowerOffset() {
+        return Math.max(Math.min(scrolledPowerOffset, this.powers.size()), 0);
     }
 
     @Override
-    public void setScrolledOffset(int scrolledOffset) {
-        this.scrolledOffset = scrolledOffset;
+    public void setScrolledPowerOffset(int scrolledOffset) {
+        this.scrolledPowerOffset = scrolledOffset;
     }
 
     @Override
-    public void scrollFurther() {
-        if (this.scrolledOffset < this.powers.size()) {
-            this.scrolledOffset += 1;
+    public void scrollPowerFurther() {
+        if (this.scrolledPowerOffset + 1 < this.powers.size()) {
+            this.scrolledPowerOffset += 1;
         } else {
-            this.scrolledOffset = 0;
+            this.scrolledPowerOffset = 0;
         }
     }
 
     @Override
-    public void scrollBack() {
-        if (this.scrolledOffset > 0) {
-            this.scrolledOffset -= 1;
+    public void scrollPowerBack() {
+        if (this.scrolledPowerOffset > 0) {
+            this.scrolledPowerOffset -= 1;
         } else {
-            this.scrolledOffset = this.powers.size() - 1;
+            this.scrolledPowerOffset = this.powers.size() - 1;
         }
     }
 }

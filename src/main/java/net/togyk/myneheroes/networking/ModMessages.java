@@ -5,18 +5,15 @@ import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.DyeableAdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
@@ -139,8 +136,8 @@ public class ModMessages {
 
         ServerPlayNetworking.registerGlobalReceiver(PlayerAbilityScrollSyncDataPayload.ID, (payload, context) -> {
             context.server().execute(() -> {
-                ((PlayerAbilities) context.player()).setScrolledOffset(payload.scrolledAbilities());
-                ((PlayerPowers) context.player()).setScrolledOffset(payload.scrolledAbilities());
+                ((PlayerAbilities) context.player()).setScrolledAbilityOffset(payload.scrolledAbilities());
+                ((PlayerPowers) context.player()).setScrolledPowerOffset(payload.scrolledAbilities());
             });
         });
 
