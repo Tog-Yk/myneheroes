@@ -20,8 +20,8 @@ public class StationaryConvertItemEntityMixin {
     private void ConversionOnTick(CallbackInfo info) {
         ItemEntity entity = (ItemEntity) (Object) this;
         ItemStack stack = entity.getStack();
-        if (!entity.getWorld().isClient() && !(entity instanceof StationaryItemEntity) && stack.getItem() instanceof StationaryItem) {
-            ItemEntity newItemEntity = getItemEntity(entity, stack);
+        if (!entity.getWorld().isClient() && stack.getItem() instanceof StationaryItem) {
+            StationaryItemEntity newItemEntity = getItemEntity(entity, stack);
 
             entity.getWorld().spawnEntity(newItemEntity);
 
@@ -29,15 +29,13 @@ public class StationaryConvertItemEntityMixin {
         }
     }
 
-    private static @NotNull ItemEntity getItemEntity(ItemEntity entity, ItemStack stack) {
-        ItemEntity newItemEntity = new StationaryItemEntity(ModEntities.STATIONARY_ITEM, entity.getWorld());
+    private static @NotNull StationaryItemEntity getItemEntity(ItemEntity entity, ItemStack stack) {
+        StationaryItemEntity newItemEntity = new StationaryItemEntity(ModEntities.STATIONARY_ITEM, entity.getWorld());
         newItemEntity.setPos(entity.getX(), entity.getY(), entity.getZ());
         if (entity.getOwner() != null) {
-            newItemEntity.setOwner(entity.getOwner().getUuid());
+            newItemEntity.setOwner(entity.getOwner());
         }
-        newItemEntity.setStack(stack);
-        newItemEntity.setNeverDespawn();
-        newItemEntity.setPickupDelay(40);
+        newItemEntity.setItem(stack);
         newItemEntity.setVelocity(entity.getVelocity());
         return newItemEntity;
     }

@@ -1,13 +1,7 @@
 package net.togyk.myneheroes.entity;
 
-import com.google.common.collect.Lists;
-import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
-import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ProjectileDeflection;
+import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -28,9 +22,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.MyneHeroes;
-import org.joml.Vector3f;
-
-import java.util.Arrays;
 
 public class ThrownItemEntity extends PersistentProjectileEntity {
     private static final TrackedData<ItemStack> STACK = DataTracker.registerData(ThrownItemEntity.class, TrackedDataHandlerRegistry.ITEM_STACK);
@@ -133,7 +124,7 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
 
     @Override
     public void onPlayerCollision(PlayerEntity player) {
-        if (!this.getWorld().isClient && this.shake <= 0 && (this.getOwner() == null || player == this.getOwner())) {
+        if (!this.getWorld().isClient && this.shake <= 0 && (this.getOwner() == null || player == this.getOwner()) && this.age > 4) {
             if (this.tryPickup(player)) {
                 player.sendPickup(this, 1);
                 this.discard();
@@ -145,102 +136,103 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
     protected void onEntityHit(EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
         //pick up if possible
-        if (entity.isPlayer()) {
+        if (entity.isPlayer() && entity == getOwner()) {
             this.onPlayerCollision((PlayerEntity) entity);
-        }
-
-        //hit method modified to bounce
-        float f = (float)this.getVelocity().length();
-        double d = this.getDamage();
-        Entity entity2 = this.getOwner();
-        DamageSource damageSource = this.getDamageSources().arrow(this, (Entity)(entity2 != null ? entity2 : this));
-        if (this.getWeaponStack() != null && this.getWorld() instanceof ServerWorld serverWorld) {
-            d = (double) EnchantmentHelper.getDamage(serverWorld, this.getWeaponStack(), entity, damageSource, (float)d);
-        }
-
-        int i = MathHelper.ceil(MathHelper.clamp((double)f * d, 0.0, 2.147483647E9));
-
-        if (this.isCritical()) {
-            long l = (long)this.random.nextInt(i / 2 + 2);
-            i = (int)Math.min(l + (long)i, 2147483647L);
-        }
-
-        if (entity2 instanceof LivingEntity livingEntity) {
-            livingEntity.onAttacking(entity);
-        }
-
-        boolean bl = entity.getType() == EntityType.ENDERMAN;
-        int j = entity.getFireTicks();
-        if (this.isOnFire() && !bl) {
-            entity.setOnFireFor(5.0F);
-        }
-
-        if (entity.damage(damageSource, (float)i)) {
-            if (bl) {
-                return;
-            }
-
-            if (entity instanceof LivingEntity livingEntity2) {
-                if (!this.getWorld().isClient && this.getPierceLevel() <= 0) {
-                    livingEntity2.setStuckArrowCount(livingEntity2.getStuckArrowCount() + 1);
-                }
-
-                this.knockback(livingEntity2, damageSource);
-                if (this.getWorld() instanceof ServerWorld serverWorld2) {
-                    EnchantmentHelper.onTargetDamaged(serverWorld2, livingEntity2, damageSource, this.getWeaponStack());
-                }
-
-                this.onHit(livingEntity2);
-                if (livingEntity2 != entity2 && livingEntity2 instanceof PlayerEntity && entity2 instanceof ServerPlayerEntity && !this.isSilent()) {
-                    ((ServerPlayerEntity)entity2)
-                            .networkHandler
-                            .sendPacket(new GameStateChangeS2CPacket(GameStateChangeS2CPacket.PROJECTILE_HIT_PLAYER, GameStateChangeS2CPacket.DEMO_OPEN_SCREEN));
-                }
-            }
-
-            this.playSound(this.getSound(), 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
         } else {
-            entity.setFireTicks(j);
-            this.deflect(ProjectileDeflection.SIMPLE, entity, this.getOwner(), false);
-            this.setVelocity(this.getVelocity().multiply(0.2));
-            if (!this.getWorld().isClient && this.getVelocity().lengthSquared() < 1.0E-7) {
-                if (this.pickupType == PersistentProjectileEntity.PickupPermission.ALLOWED) {
-                    this.dropStack(this.asItemStack(), 0.1F);
-                    this.discard();
+
+            //hit method modified to bounce
+            float f = (float) this.getVelocity().length();
+            double d = this.getDamage();
+            Entity entity2 = this.getOwner();
+            DamageSource damageSource = this.getDamageSources().arrow(this, (entity2 != null ? entity2 : this));
+            if (this.getWeaponStack() != null && this.getWorld() instanceof ServerWorld serverWorld) {
+                d = EnchantmentHelper.getDamage(serverWorld, this.getWeaponStack(), entity, damageSource, (float) d);
+            }
+
+            int i = MathHelper.ceil(MathHelper.clamp((double) f * d, 0.0, 2.147483647E9));
+
+            if (this.isCritical()) {
+                long l = (long) this.random.nextInt(i / 2 + 2);
+                i = (int) Math.min(l + (long) i, 2147483647L);
+            }
+
+            if (entity2 instanceof LivingEntity livingEntity) {
+                livingEntity.onAttacking(entity);
+            }
+
+            boolean bl = entity.getType() == EntityType.ENDERMAN;
+            int j = entity.getFireTicks();
+            if (this.isOnFire() && !bl) {
+                entity.setOnFireFor(5.0F);
+            }
+
+            if (entity.damage(damageSource, (float) i)) {
+                if (bl) {
+                    return;
+                }
+
+                if (entity instanceof LivingEntity livingEntity2) {
+                    if (!this.getWorld().isClient && this.getPierceLevel() <= 0) {
+                        livingEntity2.setStuckArrowCount(livingEntity2.getStuckArrowCount() + 1);
+                    }
+
+                    this.knockback(livingEntity2, damageSource);
+                    if (this.getWorld() instanceof ServerWorld serverWorld2) {
+                        EnchantmentHelper.onTargetDamaged(serverWorld2, livingEntity2, damageSource, this.getWeaponStack());
+                    }
+
+                    this.onHit(livingEntity2);
+                    if (livingEntity2 != entity2 && livingEntity2 instanceof PlayerEntity && entity2 instanceof ServerPlayerEntity && !this.isSilent()) {
+                        ((ServerPlayerEntity) entity2)
+                                .networkHandler
+                                .sendPacket(new GameStateChangeS2CPacket(GameStateChangeS2CPacket.PROJECTILE_HIT_PLAYER, GameStateChangeS2CPacket.DEMO_OPEN_SCREEN));
+                    }
+                }
+
+                this.playSound(this.getSound(), 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
+            } else {
+                entity.setFireTicks(j);
+                this.deflect(ProjectileDeflection.SIMPLE, entity, this.getOwner(), false);
+                this.setVelocity(this.getVelocity().multiply(0.2));
+                if (!this.getWorld().isClient && this.getVelocity().lengthSquared() < 1.0E-7) {
+                    if (this.pickupType == PersistentProjectileEntity.PickupPermission.ALLOWED) {
+                        this.dropStack(this.asItemStack(), 0.1F);
+                        this.discard();
+                    }
                 }
             }
-        }
 
-        if (!this.getWorld().isClient) {
-            // Get the current velocity of the projectile.
-            Vec3d velocity = this.getVelocity();
+            if (!this.getWorld().isClient) {
+                // Get the current velocity of the projectile.
+                Vec3d velocity = this.getVelocity();
 
-            // Get the entity that was hit.
-            Entity hitEntity = entityHitResult.getEntity();
+                // Get the entity that was hit.
+                Entity hitEntity = entityHitResult.getEntity();
 
-            // Compute a normal from the center of the hit entity to the projectile.
-            // Using the entity’s bounding box center gives a better approximation.
-            Vec3d entityCenter = hitEntity.getBoundingBox().getCenter();
-            Vec3d normal = this.getPos().subtract(entityCenter);
+                // Compute a normal from the center of the hit entity to the projectile.
+                // Using the entity’s bounding box center gives a better approximation.
+                Vec3d entityCenter = hitEntity.getBoundingBox().getCenter();
+                Vec3d normal = this.getPos().subtract(entityCenter);
 
-            // If, for any reason, the normal is zero, use a fallback (e.g. upward).
-            if (normal.lengthSquared() == 0) {
-                normal = new Vec3d(0, 1, 0);
-            } else {
-                normal = normal.normalize();
+                // If, for any reason, the normal is zero, use a fallback (e.g. upward).
+                if (normal.lengthSquared() == 0) {
+                    normal = new Vec3d(0, 1, 0);
+                } else {
+                    normal = normal.normalize();
+                }
+
+                // Reflect the velocity using the formula: R = V - 2*(V·N)*N
+                double dot = velocity.dotProduct(normal);
+                Vec3d reflected = velocity.subtract(normal.multiply(2 * dot));
+
+                // Multiply by 0.9 so the projectile retains 50% of its speed.
+                Vec3d newVelocity = reflected.multiply(0.5);
+
+                // Set the new velocity.
+                this.setVelocity(newVelocity);
+
+                // Optionally, if you’re implementing bounce limits, update your bounce counter here.
             }
-
-            // Reflect the velocity using the formula: R = V - 2*(V·N)*N
-            double dot = velocity.dotProduct(normal);
-            Vec3d reflected = velocity.subtract(normal.multiply(2 * dot));
-
-            // Multiply by 0.9 so the projectile retains 90% of its speed.
-            Vec3d newVelocity = reflected.multiply(0.9);
-
-            // Set the new velocity.
-            this.setVelocity(newVelocity);
-
-            // Optionally, if you’re implementing bounce limits, update your bounce counter here.
         }
     }
 

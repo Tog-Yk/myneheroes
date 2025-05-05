@@ -5,5 +5,10 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 
 public interface StationaryItem {
-    ActionResult interactEntity(PlayerEntity player, Hand hand);
+    default boolean tryPickup(PlayerEntity player, Hand hand) {
+        return true;
+    }
+    default boolean hasToBeOwnerToPickup() {
+        return false;
+    }
 }

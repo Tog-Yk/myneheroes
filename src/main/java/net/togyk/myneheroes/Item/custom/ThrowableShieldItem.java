@@ -5,12 +5,14 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.entity.ModEntities;
+import net.togyk.myneheroes.entity.StationaryItemEntity;
 import net.togyk.myneheroes.entity.ThrownItemEntity;
 
 public class ThrowableShieldItem extends ShieldItem implements StationaryItem, ThrowableItem{
@@ -26,12 +28,6 @@ public class ThrowableShieldItem extends ShieldItem implements StationaryItem, T
         return this.bonusAttackDamage;
     }
 
-
-    @Override
-    public ActionResult interactEntity(PlayerEntity player, Hand hand) {
-        return ActionResult.PASS;
-    }
-
     @Override
     public void Throw(World world, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
@@ -44,11 +40,25 @@ public class ThrowableShieldItem extends ShieldItem implements StationaryItem, T
             PersistentProjectileEntity projectile = new ThrownItemEntity(ModEntities.THROWN_ITEM, player.getWorld(), player, projectileStack);
             projectile.setOwner(player);
             projectile.setPosition(player.getX(), player.getEyeY(), player.getZ());
-            projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
+            projectile.setVelocity(look.x, look.y, look.z, 2.0F, 0.0F);
             projectile.applyDamageModifier(bonusAttackDamage);
 
             player.getWorld().spawnEntity(projectile);
             stack.decrement(1);
         }
+    }
+
+    @Override
+    public ActionResult useOnBlock(ItemUsageContext context) {
+        World world = context.getWorld();
+        PlayerEntity player = context.getPlayer();
+
+        if (!world.isClient() && player.isSneaking()) {
+            StationaryItemEntity entity = new StationaryItemEntity(ModEntities.STATIONARY_ITEM, world);
+            entity.setItem(context.getStack().copyAndEmpty());
+            entity.setOwner(player);
+            entity.setPosition(context.getHitPos());
+        }
+        return ActionResult.PASS;
     }
 }

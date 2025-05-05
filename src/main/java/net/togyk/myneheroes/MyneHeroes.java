@@ -25,6 +25,7 @@ import net.togyk.myneheroes.block.screen.ModScreenHandlerTypes;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.entity.ModEntities;
 import net.togyk.myneheroes.entity.StationaryArmorEntity;
+import net.togyk.myneheroes.entity.StationaryItemEntity;
 import net.togyk.myneheroes.event.ModEvents;
 import net.togyk.myneheroes.gamerule.ModGamerules;
 import net.togyk.myneheroes.networking.ModMessages;
@@ -75,6 +76,7 @@ public class MyneHeroes implements ModInitializer {
         ItemStorage.SIDED.registerForBlockEntity(ArmorDyeingBlockEntity::getInventoryProvider, ModBlockEntityTypes.ARMOR_DYEING_BLOCK_ENTITY);
         ItemStorage.SIDED.registerForBlockEntity(ArmorLightLevelerBlockEntity::getInventoryProvider, ModBlockEntityTypes.ARMOR_LIGHT_LEVELER_BLOCK_ENTITY);
 
+        FabricDefaultAttributeRegistry.register(ModEntities.STATIONARY_ITEM, StationaryItemEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.STATIONARY_ARMOR, StationaryArmorEntity.createMobAttributes());
     }
     /**
