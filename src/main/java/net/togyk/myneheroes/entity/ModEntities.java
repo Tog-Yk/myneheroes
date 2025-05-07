@@ -13,7 +13,7 @@ public class ModEntities {
             EntityType.Builder.create(LaserEntity::new, SpawnGroup.MISC).dimensions(0.3F, 0.3F));
 
     public static final EntityType<StationaryItemEntity> STATIONARY_ITEM = registerEntity("stationary_item",
-            EntityType.Builder.create(StationaryItemEntity::new, SpawnGroup.MISC).dimensions(0.75F, 0.4F));
+            EntityType.Builder.<StationaryItemEntity>create(StationaryItemEntity::new, SpawnGroup.MISC).dimensions(0.75F, 0.4F));
 
     public static final EntityType<ThrownItemEntity> THROWN_ITEM = registerEntity("thrown_item",
             EntityType.Builder.<ThrownItemEntity>create(ThrownItemEntity::new, SpawnGroup.MISC).dimensions(0.75F, 0.4F));

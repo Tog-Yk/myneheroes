@@ -33,6 +33,10 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
         super(entityType, owner, world, stack, null);
         this.setDisplayStack(stack);
     }
+    public ThrownItemEntity(World world, LivingEntity owner, ItemStack stack) {
+        super(ModEntities.THROWN_ITEM, owner, world, stack, null);
+        this.setDisplayStack(stack);
+    }
 
     @Override
     protected ItemStack getDefaultItemStack() {
@@ -237,8 +241,8 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
     }
 
     @Override
-    public void tick() {
-        super.tick();
+    public boolean damage(DamageSource source, float amount) {
+        return false;
     }
 
     @Override

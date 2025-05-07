@@ -3,6 +3,7 @@ package net.togyk.myneheroes.entity;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -25,6 +26,10 @@ public class StationaryItemEntity extends LivingEntity implements Ownable {
 
     public StationaryItemEntity(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
+    }
+
+    public StationaryItemEntity(World world) {
+        super(ModEntities.STATIONARY_ITEM, world);
     }
 
     @Override
@@ -153,5 +158,15 @@ public class StationaryItemEntity extends LivingEntity implements Ownable {
                 .add(EntityAttributes.GENERIC_STEP_HEIGHT, (double)0.0F)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25);
+    }
+
+    @Override
+    public int getDespawnCounter() {
+        return super.getDespawnCounter();
+    }
+
+    @Override
+    public boolean damage(DamageSource source, float amount) {
+        return false;
     }
 }

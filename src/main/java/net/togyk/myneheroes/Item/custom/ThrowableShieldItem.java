@@ -9,6 +9,7 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.entity.ModEntities;
@@ -57,7 +58,13 @@ public class ThrowableShieldItem extends ShieldItem implements StationaryItem, T
             StationaryItemEntity entity = new StationaryItemEntity(ModEntities.STATIONARY_ITEM, world);
             entity.setItem(context.getStack().copyAndEmpty());
             entity.setOwner(player);
-            entity.setPosition(context.getHitPos());
+            Vec3d hitPos = context.getHitPos();
+            Vec3d SideVec = Vec3d.of(context.getSide().getVector()).multiply(0.4);
+
+            entity.setPosition(hitPos.add(SideVec));
+
+            world.spawnEntity(entity);
+            return ActionResult.SUCCESS;
         }
         return ActionResult.PASS;
     }
