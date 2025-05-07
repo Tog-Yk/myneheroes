@@ -23,7 +23,7 @@ public class ModBlockEntityTypes {
             BlockEntityType.Builder.create(KryptoniteBlockEntity::new, ModBlocks.KRYPTONITE_BlOCK)
                     .build());
 
-    public static final BlockEntityType<MeteorRadarBlockEntity> METEOR_RADAR_BLOCK_ENTITY = register("kryptonite_block_entity",
+    public static final BlockEntityType<MeteorRadarBlockEntity> METEOR_RADAR_BLOCK_ENTITY = register("meteor_radar_block_entity",
             BlockEntityType.Builder.create(MeteorRadarBlockEntity::new, ModBlocks.METEOR_RADAR)
                     .build());
 

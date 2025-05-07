@@ -36,7 +36,7 @@ public class MeteorEntity extends PersistentProjectileEntity {
     public MeteorEntity(World world) {
         super(ModEntities.METEOR, world);
         this.setVariant(MeteorVariant.getRandomVariant(new Random()));
-        this.setSize((new Random()).nextFloat(5, 12));
+        this.setSize((new Random()).nextFloat(6, 12));
     }
 
     public MeteorEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
@@ -65,25 +65,13 @@ public class MeteorEntity extends PersistentProjectileEntity {
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         World world = this.getWorld();
-        if (!world.isClient()) {
-            BlockPos pos = this.getBlockPos();
-            world.createExplosion(this, pos.getX(), pos.getY(), pos.getZ(), getImpactPower(), true, World.ExplosionSourceType.BLOCK);
-            this.createCrater(world, this.getBlockPos(), new Random());
-            this.createMeteor(world, this.getHighestBlockBelowY(world, pos.getX(), pos.getZ(), pos.getY()).up((int) (this.getSize() / 2)), new Random());
-        }
-        this.discard();
+        this.land(world, this.getBlockPos());
     }
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
         World world = this.getWorld();
-        if (!world.isClient()) {
-            BlockPos pos = this.getBlockPos();
-            world.createExplosion(this, pos.getX(), pos.getY(), pos.getZ(), getImpactPower(), true, World.ExplosionSourceType.BLOCK);
-            this.createCrater(world, this.getBlockPos(), new Random());
-            this.createMeteor(world, this.getHighestBlockBelowY(world, pos.getX(), pos.getZ(), pos.getY()).up((int) (this.getSize() / 2)), new Random());
-        }
-        this.discard();
+        this.land(world, this.getBlockPos());
     }
 
     @Override
@@ -147,6 +135,15 @@ public class MeteorEntity extends PersistentProjectileEntity {
     @Override
     protected double getGravity() {
         return 0.13;
+    }
+
+    protected void land(World world, BlockPos pos) {
+        if (!world.isClient()) {
+            world.createExplosion(this, pos.getX(), pos.getY(), pos.getZ(), getImpactPower(), true, World.ExplosionSourceType.BLOCK);
+            this.createCrater(world, this.getBlockPos(), new Random());
+            this.createMeteor(world, this.getHighestBlockBelowY(world, pos.getX(), pos.getZ(), pos.getY()).up((int) (this.getSize() / 2)), new Random());
+            this.discard();
+        }
     }
 
     private void createCrater(World world, BlockPos origin, Random random) {
@@ -222,6 +219,11 @@ public class MeteorEntity extends PersistentProjectileEntity {
                 }
             }
         }
+    }
+
+    @Override
+    protected float getDragInWater() {
+        return 0.9F;
     }
 
     public BlockState getRandomBlockFromTag(Random random, TagKey<Block> tag) {

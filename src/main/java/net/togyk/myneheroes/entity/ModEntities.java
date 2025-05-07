@@ -25,7 +25,9 @@ public class ModEntities {
     public static final EntityType<MeteorEntity> METEOR = registerEntity("meteor",
             EntityType.Builder.<MeteorEntity>create(MeteorEntity::new, SpawnGroup.MISC)
                     .dimensions(0.5F, 0.5F)
-                    .maxTrackingRange(1500));
+                    .maxTrackingRange(1200)
+                    .spawnableFarFromPlayer()
+                    .alwaysUpdateVelocity(true));
 
     private static <T extends Entity> EntityType<T> registerEntity(String name, EntityType.Builder<T> type) {
         return Registry.register(Registries.ENTITY_TYPE, Identifier.of(MyneHeroes.MOD_ID, name), type.build());

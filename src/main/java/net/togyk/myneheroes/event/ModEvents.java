@@ -12,7 +12,6 @@ import net.minecraft.util.math.Vec3i;
 import net.togyk.myneheroes.Item.custom.ThrowableItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.entity.MeteorEntity;
-import net.togyk.myneheroes.entity.ModEntities;
 import net.togyk.myneheroes.gamerule.ModGamerules;
 
 import java.util.List;
@@ -35,7 +34,7 @@ public class ModEvents {
             if (server.getOverworld() != null && server.getOverworld().getGameRules().getBoolean(ModGamerules.DO_METEOR_SPAWN)) {
                 Random random = new Random();
                 float randomF = random.nextFloat();
-                if (randomF < 0.04 / 20 / 60) {
+                if (randomF < 0.06 / 20 / 60) {
                     ServerWorld world = server.getOverworld();
                     List<ServerPlayerEntity> players = world.getPlayers();
 
@@ -43,19 +42,19 @@ public class ModEvents {
                         ServerPlayerEntity player = players.get(random.nextInt(players.size()));
                         BlockPos playerPos = player.getBlockPos();
 
-                        BlockPos pos = playerPos.add(random.nextInt(-320, 320), 0, random.nextInt(-320, 320));
-                        MeteorEntity projectile = new MeteorEntity(ModEntities.METEOR, world);
-                        projectile.setPosition(Vec3d.of(pos.withY(620)));
-                        projectile.setVelocity(random.nextDouble(), 0, random.nextDouble(), 3.0F, 0.5F);
+                        BlockPos pos = playerPos.add(random.nextInt(-300, 300), 0, random.nextInt(-300, 300));
+                        MeteorEntity meteor = new MeteorEntity(world);
+                        meteor.setPosition(Vec3d.of(pos.withY(620)));
+                        meteor.setVelocity(random.nextDouble(-1, 1), 0, random.nextDouble(-1, 1), 3.0F, 0);
 
-                        world.spawnEntity(projectile);
+                        world.spawnEntity(meteor);
                     } else {
                         Vec3i pos = new Vec3i(random.nextInt(-1000, 100), 620, random.nextInt(-1000, 1000));
-                        MeteorEntity projectile = new MeteorEntity(world);
-                        projectile.setPosition(Vec3d.of(pos));
-                        projectile.setVelocity(random.nextDouble(), 0, random.nextDouble(), 3.0F, 0.5F);
+                        MeteorEntity meteor = new MeteorEntity(world);
+                        meteor.setPosition(Vec3d.of(pos));
+                        meteor.setVelocity(random.nextDouble(-1, 1), 0, random.nextDouble(-1 ,1), 3.0F, 0);
 
-                        world.spawnEntity(projectile);
+                        world.spawnEntity(meteor);
                     }
                 }
             }
