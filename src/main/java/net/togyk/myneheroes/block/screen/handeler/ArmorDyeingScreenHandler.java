@@ -4,12 +4,11 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.slot.Slot;
-import net.togyk.myneheroes.Item.custom.DyeableAdvancedArmorItem;
+import net.togyk.myneheroes.Item.custom.DyeableItem;
 import net.togyk.myneheroes.block.ModBlocks;
 import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
 import net.togyk.myneheroes.block.screen.ModScreenHandlerTypes;
@@ -26,9 +25,6 @@ public class ArmorDyeingScreenHandler extends ScreenHandler {
     //a list of the index from all "dyeable" layers in the items Armor
     private List<Integer> indexOptions = new ArrayList<>();
     private int selectedOption;
-
-    Runnable contentsChangedListener = () -> {
-    };
 
     //Main Constructor
     public ArmorDyeingScreenHandler(int syncId, PlayerInventory playerInventory, ArmorDyeingBlockEntity blockEntity) {
@@ -55,7 +51,7 @@ public class ArmorDyeingScreenHandler extends ScreenHandler {
         addSlot(new Slot(inventory, 0, 16, 39) {
             @Override
             public boolean canInsert(ItemStack stack) {
-                return stack.getItem() instanceof DyeableAdvancedArmorItem;
+                return stack.getItem() instanceof DyeableItem;
             }
         });
     }
@@ -76,19 +72,18 @@ public class ArmorDyeingScreenHandler extends ScreenHandler {
     }
 
     public void setContentsChangedListener(Runnable contentsChangedListener) {
-        this.contentsChangedListener = contentsChangedListener;
+        this.blockEntity.setContentsChangedListener(contentsChangedListener);
     }
 
 
     public void updateOptions() {
         indexOptions.clear();
-        if (this.blockEntity.getInventory().getStack(0).getItem() instanceof DyeableAdvancedArmorItem armorItem) {
-            ArmorMaterial material = armorItem.getMaterial().value();
-            List<ArmorMaterial.Layer> layers = material.layers();
+        ItemStack stack = this.blockEntity.getInventory().getStack(0);
+        if (stack.getItem() instanceof DyeableItem dyeableItem) {
             // Generate options based on the armor material
-            for (ArmorMaterial.Layer layer : layers) {
-                if (armorItem.layerIsDyeable(layers.indexOf(layer))) {
-                    indexOptions.add(layers.indexOf(layer));
+            for (int i = 0; i < dyeableItem.getColors(stack).size(); i++) {
+                if (dyeableItem.layerIsDyeable(i)) {
+                    indexOptions.add(i);
                 }
             }
         }
@@ -100,6 +95,10 @@ public class ArmorDyeingScreenHandler extends ScreenHandler {
 
     public int getSelectedOption() {
         return selectedOption;
+    }
+
+    public void setSelectedOption(int i) {
+        this.selectedOption = i;
     }
 
     @Override
@@ -118,7 +117,7 @@ public class ArmorDyeingScreenHandler extends ScreenHandler {
     }
 
     public boolean canDye() {
-        return !this.blockEntity.getInventory().isEmpty() && this.selectedOption < this.indexOptions.size();
+        return !this.blockEntity.getInventory().isEmpty();
     }
     public void dye(int color) {
         ClientPlayNetworking.send(new ColorItemPayload(this.blockEntity.getPos(), this.indexOptions.get(this.selectedOption), color, false));
@@ -126,9 +125,17 @@ public class ArmorDyeingScreenHandler extends ScreenHandler {
 
     public void dyeDefault() {
         ItemStack stack = blockEntity.getInventory().getStack(0);
-        if (stack.getItem() instanceof DyeableAdvancedArmorItem) {
+        if (stack.getItem() instanceof DyeableItem) {
             ClientPlayNetworking.send(new ColorItemPayload(this.blockEntity.getPos(), this.indexOptions.get(this.selectedOption), -1, true));
         }
+    }
+
+    public int getColor() {
+        ItemStack stack = this.blockEntity.getInventory().getStack(0);
+        if (stack.getItem() instanceof DyeableItem dyeableItem && !indexOptions.isEmpty()) {
+            return dyeableItem.getColor(stack, this.indexOptions.get(this.selectedOption));
+        }
+        return -0xFFFFFF;
     }
 
     @Override

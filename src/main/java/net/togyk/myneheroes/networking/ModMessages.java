@@ -14,7 +14,8 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-import net.togyk.myneheroes.Item.custom.DyeableAdvancedArmorItem;
+import net.togyk.myneheroes.Item.custom.DyeableItem;
+import net.togyk.myneheroes.Item.custom.LightableItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
@@ -89,11 +90,11 @@ public class ModMessages {
                     if (blockEntity instanceof ArmorDyeingBlockEntity armorDyeingBlockEntity) {
                         SimpleInventory inventory = armorDyeingBlockEntity.getInventory();
                         ItemStack stack = inventory.getStack(0);
-                        if (stack.getItem() instanceof DyeableAdvancedArmorItem armorItem) {
+                        if (stack.getItem() instanceof DyeableItem dyeableItem) {
                             if (payload.setDefault()) {
-                                armorItem.setDefaultColor(stack, payload.index());
+                                dyeableItem.setDefaultColor(stack, payload.index());
                             } else {
-                                armorItem.setColor(stack, payload.index(), payload.color());
+                                dyeableItem.setColor(stack, payload.index(), payload.color());
                             }
                             inventory.markDirty();
                         }
@@ -113,8 +114,8 @@ public class ModMessages {
                     if (blockEntity instanceof ArmorLightLevelerBlockEntity armorLightLevelerBlockEntity) {
                         SimpleInventory inventory = armorLightLevelerBlockEntity.getInventory();
                         ItemStack stack = inventory.getStack(0);
-                        if (stack.getItem() instanceof DyeableAdvancedArmorItem armorItem) {
-                            armorItem.setLightLevel(stack, payload.index(), payload.lightLevel());
+                        if (stack.getItem() instanceof LightableItem lightableItem) {
+                            lightableItem.setLightLevel(stack, payload.index(), payload.lightLevel());
                             inventory.markDirty();
                         }
                     }

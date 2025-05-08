@@ -4,10 +4,11 @@ import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
-import net.togyk.myneheroes.Item.custom.DyeableAdvancedArmorItem;
-import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.Item.custom.DyeableItem;
+import net.togyk.myneheroes.Item.custom.LightableItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -25,9 +26,9 @@ public abstract class ArmorFeatureRendererMixin<T extends LivingEntity, M extend
             ordinal = 2
     )
     private int modifyColor(int i, @Local ItemStack itemStack, @Local ArmorMaterial.Layer layer) {
-        if (layer.isDyeable() && itemStack.getItem() instanceof DyeableAdvancedArmorItem armorItem) {
+        if (layer.isDyeable() && itemStack.getItem() instanceof ArmorItem armorItem && armorItem instanceof DyeableItem dyeableItem) {
             List<ArmorMaterial.Layer> layers = armorItem.getMaterial().value().layers();
-            return armorItem.getColor(itemStack,layers.indexOf(layer));
+            return dyeableItem.getColor(itemStack,layers.indexOf(layer));
         } else {
             return i;
         }
@@ -44,12 +45,12 @@ public abstract class ArmorFeatureRendererMixin<T extends LivingEntity, M extend
                     ")V"),
             index = 2)
     private int modifyLight(int light, @Local ItemStack itemStack, @Local ArmorMaterial.Layer layer) {
-        if (itemStack.getItem() instanceof DyeableAdvancedArmorItem armorItem) {
+        if (itemStack.getItem() instanceof ArmorItem armorItem && armorItem instanceof LightableItem lightableItem) {
             List<ArmorMaterial.Layer> layers = armorItem.getMaterial().value().layers();
             int layerIndex = layers.indexOf(layer);
-            if (armorItem.layerIsLightable(itemStack, layerIndex)) {
+            if (lightableItem.layerIsLightable(itemStack, layerIndex)) {
                 // times 15728880 to make a lightLever of 15 the maximum light
-                return (armorItem.getLightLevel(itemStack, layerIndex) / 15) * 15728880;
+                return (lightableItem.getLightLevel(itemStack, layerIndex) / 15) * 15728880;
             }
         }
         return light;

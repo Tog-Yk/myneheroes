@@ -13,8 +13,6 @@ import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.entity.LaserEntity;
 
-import java.awt.*;
-
 @Environment(EnvType.CLIENT)
 public class LaserEntityRenderer extends ProjectileEntityRenderer<LaserEntity> {
     public static final Identifier TEXTURE_INNER = Identifier.of(MyneHeroes.MOD_ID, "textures/entity/projectiles/laser_inner.png");

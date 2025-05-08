@@ -25,4 +25,9 @@ public class ColorSliderWidget extends SliderWidget {
     public int getValue() {
         return (int) (value * 255);
     }
+
+    public void setValue(int value) {
+        this.value = (double) value / 255;
+        this.updateMessage();
+    }
 }

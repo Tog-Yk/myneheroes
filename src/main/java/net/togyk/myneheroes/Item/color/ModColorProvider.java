@@ -2,17 +2,16 @@ package net.togyk.myneheroes.Item.color;
 
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.item.Item;
-import net.togyk.myneheroes.Item.ModGeckoItems;
 import net.togyk.myneheroes.Item.ModItems;
-import net.togyk.myneheroes.Item.custom.DyeableAdvancedArmorItem;
+import net.togyk.myneheroes.Item.custom.DyeableItem;
 import net.togyk.myneheroes.Item.custom.PowerInjectionItem;
 import net.togyk.myneheroes.power.Power;
 
 public class ModColorProvider {
     private static void registerDyeableArmorItem(Item item){
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
-            if (stack.getItem() instanceof DyeableAdvancedArmorItem dyeableAdvancedArmorItem) { // Tint only layer 1
-                return dyeableAdvancedArmorItem.getColor(stack, tintIndex);
+            if (stack.getItem() instanceof DyeableItem dyeableItem) { // Tint only layer 1
+                return dyeableItem.getColor(stack, tintIndex);
             }
             return 0xFFFFFFFF; // Default white for non-tinted layers
         }, item);

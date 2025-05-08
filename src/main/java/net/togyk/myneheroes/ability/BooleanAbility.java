@@ -3,7 +3,6 @@ package net.togyk.myneheroes.ability;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
-import net.togyk.myneheroes.MyneHeroes;
 
 public class BooleanAbility extends Ability{
     private boolean bool = true;

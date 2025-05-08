@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.togyk.myneheroes.entity.LaserEntity;
 import net.togyk.myneheroes.entity.ModEntities;
 import net.togyk.myneheroes.entity.ThrownItemEntity;
 

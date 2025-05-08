@@ -3,7 +3,6 @@ package net.togyk.myneheroes.mixin;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.togyk.myneheroes.Item.custom.StationaryItem;
-import net.togyk.myneheroes.entity.ModEntities;
 import net.togyk.myneheroes.entity.StationaryItemEntity;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,7 +29,7 @@ public class StationaryConvertItemEntityMixin {
     }
 
     private static @NotNull StationaryItemEntity getItemEntity(ItemEntity entity, ItemStack stack) {
-        StationaryItemEntity newItemEntity = new StationaryItemEntity(ModEntities.STATIONARY_ITEM, entity.getWorld());
+        StationaryItemEntity newItemEntity = new StationaryItemEntity(entity.getWorld());
         newItemEntity.setPos(entity.getX(), entity.getY(), entity.getZ());
         if (entity.getOwner() != null) {
             newItemEntity.setOwner(entity.getOwner());

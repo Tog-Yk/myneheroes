@@ -1,7 +1,5 @@
 package net.togyk.myneheroes.Item.custom;
 
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -9,11 +7,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
 import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
-import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.util.PowerData;

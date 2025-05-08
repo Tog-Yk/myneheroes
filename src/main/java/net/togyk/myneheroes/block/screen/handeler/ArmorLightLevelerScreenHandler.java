@@ -4,14 +4,12 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.slot.Slot;
-import net.togyk.myneheroes.Item.custom.DyeableAdvancedArmorItem;
+import net.togyk.myneheroes.Item.custom.LightableItem;
 import net.togyk.myneheroes.block.ModBlocks;
-import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
 import net.togyk.myneheroes.block.entity.ArmorLightLevelerBlockEntity;
 import net.togyk.myneheroes.block.screen.ModScreenHandlerTypes;
 import net.togyk.myneheroes.networking.BlockPosPayload;
@@ -27,9 +25,6 @@ public class ArmorLightLevelerScreenHandler extends ScreenHandler {
     //a list of the index from all "dyeable" layers in the items Armor
     private List<Integer> indexOptions = new ArrayList<>();
     private int selectedOption;
-
-    Runnable contentsChangedListener = () -> {
-    };
 
     //Main Constructor
     public ArmorLightLevelerScreenHandler(int syncId, PlayerInventory playerInventory, ArmorLightLevelerBlockEntity blockEntity) {
@@ -56,7 +51,7 @@ public class ArmorLightLevelerScreenHandler extends ScreenHandler {
         addSlot(new Slot(inventory, 0, 16, 33) {
             @Override
             public boolean canInsert(ItemStack stack) {
-                return stack.getItem() instanceof DyeableAdvancedArmorItem;
+                return stack.getItem() instanceof LightableItem;
             }
         });
     }
@@ -77,19 +72,18 @@ public class ArmorLightLevelerScreenHandler extends ScreenHandler {
     }
 
     public void setContentsChangedListener(Runnable contentsChangedListener) {
-        this.contentsChangedListener = contentsChangedListener;
+        this.blockEntity.setContentsChangedListener(contentsChangedListener);
     }
 
 
     public void updateOptions() {
         indexOptions.clear();
-        if (this.blockEntity.getInventory().getStack(0).getItem() instanceof DyeableAdvancedArmorItem armorItem) {
-            ArmorMaterial material = armorItem.getMaterial().value();
-            List<ArmorMaterial.Layer> layers = material.layers();
+        ItemStack stack = this.blockEntity.getInventory().getStack(0);
+        if (stack.getItem() instanceof LightableItem lightableItem) {
             // Generate options based on the armor material
-            for (ArmorMaterial.Layer layer : layers) {
-                if (armorItem.layerIsDyeable(layers.indexOf(layer))) {
-                    indexOptions.add(layers.indexOf(layer));
+            for (int i = 0; i < lightableItem.getLightLevels(stack).size(); i++) {
+                if (lightableItem.layerIsLightable(i)) {
+                    indexOptions.add(i);
                 }
             }
         }
@@ -101,6 +95,10 @@ public class ArmorLightLevelerScreenHandler extends ScreenHandler {
 
     public int getSelectedOption() {
         return selectedOption;
+    }
+
+    public void setSelectedOption(int i) {
+        selectedOption = i;
     }
 
     @Override
@@ -119,16 +117,25 @@ public class ArmorLightLevelerScreenHandler extends ScreenHandler {
     }
 
     public boolean canLevel() {
-        return !this.blockEntity.getInventory().isEmpty() && this.selectedOption < this.indexOptions.size();
+        return !this.blockEntity.getInventory().isEmpty();
     }
+
+    public int getLightlevel() {
+        ItemStack stack = this.blockEntity.getInventory().getStack(0);
+        if (stack.getItem() instanceof LightableItem lightableItem) {
+            return lightableItem.getLightLevel(stack, this.indexOptions.get(this.selectedOption));
+        }
+        return -1;
+    }
+
     public void level(int lightLevel) {
         ClientPlayNetworking.send(new LightLevelerPayload(this.blockEntity.getPos(), this.indexOptions.get(this.selectedOption), lightLevel));
     }
 
     public void levelDefault() {
         ItemStack stack = blockEntity.getInventory().getStack(0);
-        if (stack.getItem() instanceof DyeableAdvancedArmorItem armorItem) {
-            int lightLevel =  armorItem.getDefaultLightLevel(this.indexOptions.get(this.selectedOption));
+        if (stack.getItem() instanceof LightableItem lightableItem) {
+            int lightLevel =  lightableItem.getDefaultLightLevel(this.indexOptions.get(this.selectedOption));
             ClientPlayNetworking.send(new LightLevelerPayload(this.blockEntity.getPos(), this.indexOptions.get(this.selectedOption), lightLevel));
         }
     }

@@ -4,7 +4,6 @@ import net.minecraft.inventory.CraftingResultInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.AnvilScreenHandler;
-import net.minecraft.screen.ForgingScreenHandler;
 import net.minecraft.screen.Property;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;

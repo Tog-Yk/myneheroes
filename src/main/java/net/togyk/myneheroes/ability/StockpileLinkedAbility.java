@@ -1,10 +1,7 @@
 package net.togyk.myneheroes.ability;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
-import net.togyk.myneheroes.power.AbilityHolding;
-import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.StockpilePower;
 
 public class StockpileLinkedAbility extends Ability{

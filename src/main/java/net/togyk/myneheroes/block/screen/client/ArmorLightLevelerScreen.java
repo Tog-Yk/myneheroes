@@ -143,6 +143,7 @@ public class ArmorLightLevelerScreen extends HandledScreen<ArmorLightLevelerScre
                 if (d >= 0.0 && e >= 0.0 && d < 16.0 && e < 16.0 && this.handler.onButtonClick(this.client.player, l)) {
                     MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
                     this.client.interactionManager.clickButton(this.handler.syncId, l);
+                    this.updateSlider();
                     return true;
                 }
             }
@@ -166,7 +167,7 @@ public class ArmorLightLevelerScreen extends HandledScreen<ArmorLightLevelerScre
             int j = i + 48;
             this.scrollAmount = ((float)mouseY - (float)i - 7.5F) / ((float)(j - i) - 15.0F);
             this.scrollAmount = MathHelper.clamp(this.scrollAmount, 0.0F, 1.0F);
-            this.scrollOffset = (int)((double)(this.scrollAmount * (float)this.getMaxScroll()) + 0.5) * 4;
+            this.scrollOffset = (int)((double)(this.scrollAmount * (float)this.getMaxScroll()) + 0.5) * 3;
             return true;
         } else {
             return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
@@ -179,18 +180,18 @@ public class ArmorLightLevelerScreen extends HandledScreen<ArmorLightLevelerScre
             int i = this.getMaxScroll();
             float f = (float)verticalAmount / (float)i;
             this.scrollAmount = MathHelper.clamp(this.scrollAmount - f, 0.0F, 1.0F);
-            this.scrollOffset = (int)((double)(this.scrollAmount * (float)i) + 0.5) * 4;
+            this.scrollOffset = (int)((double)(this.scrollAmount * (float)i) + 0.5) * 3;
         }
 
         return true;
     }
 
     private boolean shouldScroll() {
-        return this.handler.getOptions().size() > 4;
+        return this.handler.getOptions().size() > 3;
     }
 
     protected int getMaxScroll() {
-        return (this.handler.getOptions().size() / 4);
+        return (this.handler.getOptions().size() / 3);
     }
 
     private int getSelectedLightLevel() {
@@ -201,20 +202,28 @@ public class ArmorLightLevelerScreen extends HandledScreen<ArmorLightLevelerScre
         if (!this.handler.canLevel()) {
             this.scrollAmount = 0.0F;
             this.scrollOffset = 0;
+            this.handler.setSelectedOption(0);
 
-            this.sliderWidget.setAlpha(0.0F);
+            this.sliderWidget.visible = false;
+            this.sliderWidget.active = false;
 
-            this.setButton.setAlpha(0.0F);
-            this.setDefaultButton.setAlpha(0.0F);
+            this.setButton.visible = false;
             this.setButton.active = false;
+            this.setDefaultButton.visible = false;
             this.setDefaultButton.active = false;
         } else {
-            this.sliderWidget.setAlpha(1.0F);
 
-            this.setButton.setAlpha(1.0F);
-            this.setDefaultButton.setAlpha(1.0F);
+            this.sliderWidget.visible = true;
+            this.sliderWidget.active = true;
+
+            this.setButton.visible = true;
             this.setButton.active = true;
+            this.setDefaultButton.visible = true;
             this.setDefaultButton.active = true;
         }
+    }
+
+    private void updateSlider() {
+        this.sliderWidget.setLightLevel(this.handler.getLightlevel());
     }
 }

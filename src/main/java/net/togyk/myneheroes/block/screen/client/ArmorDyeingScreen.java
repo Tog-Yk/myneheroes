@@ -41,7 +41,7 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
     protected void init() {
         super.init();
 
-        this.playerInventoryTitleY += 12;
+        this.playerInventoryTitleY = this.backgroundHeight - 92;
 
         this.sliderWidgetRed = new ColorSliderWidget("Red", this.x + 96, this.y + 16, 64, 14, 0);
         addDrawableChild(sliderWidgetRed);
@@ -153,6 +153,7 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
                 if (d >= 0.0 && e >= 0.0 && d < 16.0 && e < 16.0 && this.handler.onButtonClick(this.client.player, l)) {
                     MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
                     this.client.interactionManager.clickButton(this.handler.syncId, l);
+                    this.updateColorSliders();
                     return true;
                 }
             }
@@ -215,24 +216,46 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
         if (!this.handler.canDye()) {
             this.scrollAmount = 0.0F;
             this.scrollOffset = 0;
+            this.handler.setSelectedOption(0);
 
-            this.sliderWidgetRed.setAlpha(0.0F);
-            this.sliderWidgetGreen.setAlpha(0.0F);
-            this.sliderWidgetBlue.setAlpha(0.0F);
+            this.sliderWidgetRed.visible = false;
+            this.sliderWidgetRed.active = false;
+            this.sliderWidgetGreen.visible = false;
+            this.sliderWidgetGreen.active = false;
+            this.sliderWidgetBlue.visible = false;
+            this.sliderWidgetBlue.active = false;
 
-            this.setButton.setAlpha(0.0F);
-            this.setDefaultButton.setAlpha(0.0F);
+            this.setButton.visible = false;
             this.setButton.active = false;
+            this.setDefaultButton.visible = false;
             this.setDefaultButton.active = false;
         } else {
-            this.sliderWidgetRed.setAlpha(1.0F);
-            this.sliderWidgetGreen.setAlpha(1.0F);
-            this.sliderWidgetBlue.setAlpha(1.0F);
 
-            this.setButton.setAlpha(1.0F);
-            this.setDefaultButton.setAlpha(1.0F);
+            this.sliderWidgetRed.visible = true;
+            this.sliderWidgetRed.active = true;
+            this.sliderWidgetGreen.visible = true;
+            this.sliderWidgetGreen.active = true;
+            this.sliderWidgetBlue.visible = true;
+            this.sliderWidgetBlue.active = true;
+
+            this.setButton.visible = true;
             this.setButton.active = true;
+            this.setDefaultButton.visible = true;
             this.setDefaultButton.active = true;
+
+            this.updateColorSliders();
         }
+    }
+
+    private void updateColorSliders() {
+        this.handler.updateOptions();
+        int color = this.handler.getColor();
+        int r = (color >> 16) & 0xFF;
+        int g = (color >> 8)  & 0xFF;
+        int b =  color        & 0xFF;
+
+        this.sliderWidgetRed.setValue(r);
+        this.sliderWidgetGreen.setValue(g);
+        this.sliderWidgetBlue.setValue(b);
     }
 }

@@ -2,9 +2,7 @@ package net.togyk.myneheroes.component;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.component.ComponentType;
-import net.minecraft.component.type.NbtComponent;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtList;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;

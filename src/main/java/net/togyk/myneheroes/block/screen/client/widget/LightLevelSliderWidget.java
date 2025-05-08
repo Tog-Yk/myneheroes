@@ -24,8 +24,6 @@ public class LightLevelSliderWidget extends SliderWidget {
 
     @Override
     protected void applyValue() {
-        // Use the slider's value here when the user interacts
-        double newValue = this.value; // `value` is a double between 0.0 and 1.0
     }
 
     @Override
@@ -37,5 +35,13 @@ public class LightLevelSliderWidget extends SliderWidget {
 
     public int getLightLevel() {
         return (int) ((value * 16) -1);
+    }
+
+    public void setLightLevel(int lightLevel) {
+        if (lightLevel + 1 > 16 || lightLevel + 1 < 0) {
+            return;
+        }
+        this.value = (double) (lightLevel + 1) / 16;
+        this.updateMessage();
     }
 }

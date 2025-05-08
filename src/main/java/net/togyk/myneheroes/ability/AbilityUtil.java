@@ -1,9 +1,7 @@
 package net.togyk.myneheroes.ability;
 
-import net.minecraft.item.ArmorItem;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
-import net.togyk.myneheroes.MyneHeroes;
 import java.util.*;
 
 public class AbilityUtil {

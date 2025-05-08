@@ -9,14 +9,12 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.togyk.myneheroes.entity.ModEntities;
 import net.togyk.myneheroes.entity.StationaryItemEntity;
 import net.togyk.myneheroes.entity.ThrownItemEntity;
 
-public class ThrowableShieldItem extends ShieldItem implements StationaryItem, ThrowableItem{
+public class ThrowableShieldItem extends ShieldItem implements StationaryItem, ThrowableItem {
     private final float bonusAttackDamage;
 
     public ThrowableShieldItem(float bonusAttackDamage, Settings settings) {
@@ -38,7 +36,7 @@ public class ThrowableShieldItem extends ShieldItem implements StationaryItem, T
             ItemStack projectileStack = stack.copy();
             projectileStack.setCount(1);
 
-            PersistentProjectileEntity projectile = new ThrownItemEntity(ModEntities.THROWN_ITEM, player.getWorld(), player, projectileStack);
+            PersistentProjectileEntity projectile = new ThrownItemEntity(player.getWorld(), player, projectileStack);
             projectile.setOwner(player);
             projectile.setPosition(player.getX(), player.getEyeY(), player.getZ());
             projectile.setVelocity(look.x, look.y, look.z, 2.0F, 0.0F);
@@ -55,7 +53,7 @@ public class ThrowableShieldItem extends ShieldItem implements StationaryItem, T
         PlayerEntity player = context.getPlayer();
 
         if (!world.isClient() && player.isSneaking()) {
-            StationaryItemEntity entity = new StationaryItemEntity(ModEntities.STATIONARY_ITEM, world);
+            StationaryItemEntity entity = new StationaryItemEntity(world);
             entity.setItem(context.getStack().copyAndEmpty());
             entity.setOwner(player);
             Vec3d hitPos = context.getHitPos();

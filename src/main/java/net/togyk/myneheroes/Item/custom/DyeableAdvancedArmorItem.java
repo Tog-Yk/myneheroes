@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
+public class DyeableAdvancedArmorItem extends AdvancedArmorItem implements DyeableItem, LightableItem {
     private final List<Integer> defaultColors;
     private final List<Integer> defaultLightLevels;
 
@@ -23,7 +23,7 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
         this.defaultLightLevels = lightLevels;
     }
 
-    public Integer getColor(ItemStack stack, int index) {
+    public int getColor(ItemStack stack, int index) {
         if (layerIsDyeable(index)) {
             List<Integer> colors = stack.get(ModDataComponentTypes.COLORS);
             if (colors != null && colors.size() > index) {
@@ -33,6 +33,11 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
             }
         }
         return -1;
+    }
+
+    @Override
+    public List<Integer> getColors(ItemStack stack) {
+        return stack.getOrDefault(ModDataComponentTypes.COLORS, this.defaultColors);
     }
 
     public int getDefaultColor(int index) {
@@ -103,6 +108,11 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
         return false;
     }
 
+    @Override
+    public List<Integer> getLightLevels(ItemStack stack) {
+        return stack.getOrDefault(ModDataComponentTypes.LIGHT_LEVEL, this.defaultLightLevels);
+    }
+
     public int getLightLevel(ItemStack stack, int index) {
         if (layerIsDyeable(index)) {
             List<Integer> colors = stack.get(ModDataComponentTypes.LIGHT_LEVEL);
@@ -141,6 +151,10 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem {
 
     public boolean layerIsLightable(ItemStack stack, int index) {
         return getLightLevel(stack, index) >= 0;
+    }
+
+    public boolean layerIsLightable(int index) {
+        return true;
     }
 
     @Override

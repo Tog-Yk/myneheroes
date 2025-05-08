@@ -1,7 +1,5 @@
 package net.togyk.myneheroes.Item.custom;
 
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
@@ -13,14 +11,11 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Abilities;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.AbilityUtil;
-import net.togyk.myneheroes.ability.BooleanAbility;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.power.AbilityHolding;
 import org.jetbrains.annotations.Nullable;

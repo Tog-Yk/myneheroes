@@ -1,17 +1,10 @@
 package net.togyk.myneheroes.mixin;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Hand;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.RaycastContext;
-import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.event.MissedSwingCallback;
-import net.togyk.myneheroes.networking.ModMessages;
 import net.togyk.myneheroes.networking.PlayerSwingPayload;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

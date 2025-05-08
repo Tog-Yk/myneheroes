@@ -18,13 +18,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.block.ModBlockEntityTypes;
-import net.togyk.myneheroes.block.screen.handeler.ArmorDyeingScreenHandler;
 import net.togyk.myneheroes.block.screen.handeler.ArmorLightLevelerScreenHandler;
 import net.togyk.myneheroes.networking.BlockPosPayload;
 import org.jetbrains.annotations.Nullable;
 
 public class ArmorLightLevelerBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory<BlockPosPayload> {
     public static final Text SCREEN_NAME = Text.translatable("container." + MyneHeroes.MOD_ID + ".armor_light_leveler_station");
+
+    Runnable contentsChangedListener = () -> {
+    };
 
     private final SimpleInventory inventory = new SimpleInventory(1) {
         @Override
@@ -71,6 +73,7 @@ public class ArmorLightLevelerBlockEntity extends BlockEntity implements Extende
         markDirty();
         if (world != null)
             world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
+        contentsChangedListener.run();
     }
 
     public InventoryStorage getInventoryProvider(Direction direction) {
@@ -79,5 +82,10 @@ public class ArmorLightLevelerBlockEntity extends BlockEntity implements Extende
 
     public SimpleInventory getInventory() {
         return this.inventory;
+    }
+
+
+    public void setContentsChangedListener(Runnable contentsChangedListener) {
+        this.contentsChangedListener = contentsChangedListener;
     }
 }
