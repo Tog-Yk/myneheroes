@@ -50,6 +50,7 @@ public class ModItemGroups {
                         entries.add(ModItems.VIBRANIUM_SHIELD);
                         entries.add(ModItems.A_SYMBOLS_SHIELD);
                         entries.add(ModItems.COSMIC_SHIELD);
+                        entries.add(ModItems.CARTERS_SHIELD);
 
                         entries.add(ModItems.CIRCUIT_BOARD);
 

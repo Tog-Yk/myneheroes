@@ -36,6 +36,9 @@ public class ModItems {
     public static final Item COSMIC_SHIELD = registerItem("cosmic_shield",
             new ThrowableShieldItem(2.0F,new Item.Settings().maxDamage(336)));
 
+    public static final Item CARTERS_SHIELD = registerItem("carters_shield",
+            new ThrowableShieldItem(2.0F,new Item.Settings().maxDamage(336)));
+
     public static final Item CIRCUIT_BOARD = registerItem("circuit_board",
             new Item(new Item.Settings()));
 

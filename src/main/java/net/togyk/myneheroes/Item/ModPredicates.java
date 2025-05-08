@@ -22,5 +22,6 @@ public class ModPredicates {
         registerShieldBlocking(ModItems.VIBRANIUM_SHIELD);
         registerShieldBlocking(ModItems.A_SYMBOLS_SHIELD);
         registerShieldBlocking(ModItems.COSMIC_SHIELD);
+        registerShieldBlocking(ModItems.CARTERS_SHIELD);
     }
 }
