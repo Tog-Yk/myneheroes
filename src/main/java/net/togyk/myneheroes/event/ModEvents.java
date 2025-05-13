@@ -34,7 +34,7 @@ public class ModEvents {
             if (server.getOverworld() != null && server.getOverworld().getGameRules().getBoolean(ModGamerules.DO_METEOR_SPAWN)) {
                 Random random = new Random();
                 float randomF = random.nextFloat();
-                if (randomF < 0.06 / 20 / 60) {
+                if (randomF < 0.04 / 20 / 60) {
                     ServerWorld world = server.getOverworld();
                     List<ServerPlayerEntity> players = world.getPlayers();
 

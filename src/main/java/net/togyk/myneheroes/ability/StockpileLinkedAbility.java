@@ -5,8 +5,8 @@ import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.power.StockpilePower;
 
 public class StockpileLinkedAbility extends Ability{
-    private final int unlocksAt;
-    private final int cost;
+    protected final int unlocksAt;
+    protected final int cost;
 
     public StockpileLinkedAbility(Identifier id, String name, int cooldown, int unlocksAt, int cost) {
         super(id, name, cooldown);

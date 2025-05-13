@@ -16,9 +16,11 @@ public class Abilities {
 
     public static final Ability RELEASE_KINETIC_ENERGY = registerAbility(new ReleaseKineticEnergyAbility(Identifier.of(MyneHeroes.MOD_ID, "release_kinetic_energy"), "release_kinetic_energy", 120, 200, 1.0F));
 
-    public static final Ability LAZAR_EYES = registerAbility(new LazarsFromEyesAbility(Identifier.of(MyneHeroes.MOD_ID, "lazar_eyes"), "lazar_eyes", 2, 1000, 2));
+    public static final Ability LAZAR_EYES = registerAbility(new LazarsFromEyesAbility(Identifier.of(MyneHeroes.MOD_ID, "lazar_eyes"), "lazar_eyes", 2, 1000, 4));
 
     public static final Ability TAKE_OFF_SUIT = registerAbility(new StationarySuitAbility(Identifier.of(MyneHeroes.MOD_ID, "take_off_suit"), "take_off_suit", 2));
+
+    public static final Ability FROST_BREATH = registerAbility(new FrostBreathAbility(Identifier.of(MyneHeroes.MOD_ID, "frost_breath"), "frost_breath", 0, 48, 8, 6));
 
     public static void registerAbilities() {
         MyneHeroes.LOGGER.info("registering Abilities for " + MyneHeroes.MOD_ID);
