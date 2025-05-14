@@ -17,8 +17,8 @@ public class Powers {
     public static Power KRYPTONIAN = registerPower(new KryptonianPower(Identifier.of(MyneHeroes.MOD_ID, "kryptonian"), 10000, 0xFF9CDB94, List.of(Abilities.FROST_BREATH.copy(), Abilities.LAZAR_EYES.copy()),
             new Power.Settings().damageMultiplier(5.00).resistance(0.3F).textureInterval(0.25).flyingUnlocksAt(0.05),
             new Power.attributeModifiers()
-                    .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, Identifier.of(MyneHeroes.MOD_ID, "kryptonian.speed"), 0.6F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
-                    .addAttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH, Identifier.of(MyneHeroes.MOD_ID, "kryptonian.health"), 20.0F, EntityAttributeModifier.Operation.ADD_VALUE)
+                    .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, Identifier.of(MyneHeroes.MOD_ID, "kryptonian.speed"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> 0.6D)
+                    .addAttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH, Identifier.of(MyneHeroes.MOD_ID, "kryptonian.health"), EntityAttributeModifier.Operation.ADD_VALUE, () -> 20.0D)
     ));
 
     public static void registerPowers() {

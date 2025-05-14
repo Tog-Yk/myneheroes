@@ -18,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public class Power {
     public final Identifier id;
@@ -185,8 +186,8 @@ public class Power {
         private final Map<RegistryEntry<EntityAttribute>, PowerAttributeModifierCreator> modifiers = new Object2ObjectOpenHashMap();
 
 
-        public Power.attributeModifiers addAttributeModifier(RegistryEntry<EntityAttribute> attribute, Identifier id, double amount, EntityAttributeModifier.Operation operation) {
-            this.modifiers.put(attribute, new PowerAttributeModifierCreator(id, amount, operation));
+        public Power.attributeModifiers addAttributeModifier(RegistryEntry<EntityAttribute> attribute, Identifier id, EntityAttributeModifier.Operation operation, Supplier<Double> valueSupplier) {
+            this.modifiers.put(attribute, new PowerAttributeModifierCreator(id, operation, valueSupplier));
             return this;
         }
 
@@ -219,9 +220,9 @@ public class Power {
     }
 
 
-    record PowerAttributeModifierCreator(Identifier id, double baseValue, EntityAttributeModifier.Operation operation) {
+    record PowerAttributeModifierCreator(Identifier id, EntityAttributeModifier.Operation operation, Supplier<Double> valueSupplier) {
         public EntityAttributeModifier createAttributeModifier() {
-            return new EntityAttributeModifier(this.id, this.baseValue, this.operation);
+                return new EntityAttributeModifier(this.id, valueSupplier.get(), this.operation);
         }
     }
 
