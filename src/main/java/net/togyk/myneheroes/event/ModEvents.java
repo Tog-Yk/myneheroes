@@ -1,5 +1,6 @@
 package net.togyk.myneheroes.event;
 
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -13,6 +14,8 @@ import net.togyk.myneheroes.Item.custom.ThrowableItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.entity.MeteorEntity;
 import net.togyk.myneheroes.gamerule.ModGamerules;
+import net.togyk.myneheroes.power.Power;
+import net.togyk.myneheroes.util.PowerData;
 
 import java.util.List;
 import java.util.Random;
@@ -58,6 +61,11 @@ public class ModEvents {
                     }
                 }
             }
+        });
+
+        ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, aliveAfterTeleport) -> {
+            List<Power> oldPowers = PowerData.getPowers(oldPlayer);
+            PowerData.setPowers(newPlayer, oldPowers);
         });
     }
 }
