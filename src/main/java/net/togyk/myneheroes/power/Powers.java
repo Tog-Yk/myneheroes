@@ -1,5 +1,7 @@
 package net.togyk.myneheroes.power;
 
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Abilities;
@@ -13,7 +15,11 @@ public class Powers {
     private static final Map<Identifier,Power> POWERS = new HashMap<>();
 
     public static Power KRYPTONIAN = registerPower(new KryptonianPower(Identifier.of(MyneHeroes.MOD_ID, "kryptonian"), 10000, 0xFF9CDB94, List.of(Abilities.FROST_BREATH.copy(), Abilities.LAZAR_EYES.copy()),
-            new Power.Settings().damageMultiplier(5.00).resistance(0.3F).textureInterval(0.25).flyingUnlocksAt(0.05)));
+            new Power.Settings().damageMultiplier(5.00).resistance(0.3F).textureInterval(0.25).flyingUnlocksAt(0.05),
+            new Power.attributeModifiers()
+                    .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, Identifier.of(MyneHeroes.MOD_ID, "kryptonian.speed"), 0.6F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
+                    .addAttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH, Identifier.of(MyneHeroes.MOD_ID, "kryptonian.health"), 20.0F, EntityAttributeModifier.Operation.ADD_VALUE)
+    ));
 
     public static void registerPowers() {
         MyneHeroes.LOGGER.info("registering Powers for" + MyneHeroes.MOD_ID);

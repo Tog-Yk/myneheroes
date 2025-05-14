@@ -15,8 +15,8 @@ public class StockpilePower extends Power {
 
     private final Identifier chargeIcon;
 
-    public StockpilePower(Identifier id, int maxCharge, int color, List<Ability> abilities, Settings settings) {
-        super(id, color, abilities, settings);
+    public StockpilePower(Identifier id, int maxCharge, int color, List<Ability> abilities, Settings settings, attributeModifiers attributeModifiers) {
+        super(id, color, abilities, settings, attributeModifiers);
         this.maxCharge = maxCharge;
         this.chargeIcon = Identifier.of(id.getNamespace(),"textures/power/charge/"+id.getPath()+".png");;
     }
@@ -84,7 +84,7 @@ public class StockpilePower extends Power {
 
     @Override
     public StockpilePower copy() {
-        return new StockpilePower(this.id, this.getMaxCharge(), this.getColor(), List.copyOf(this.abilities), settings);
+        return new StockpilePower(this.id, this.getMaxCharge(), this.getColor(), List.copyOf(this.abilities), settings, attributeModifiers);
     }
 
     @Override

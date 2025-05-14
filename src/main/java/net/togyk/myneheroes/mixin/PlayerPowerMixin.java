@@ -39,6 +39,7 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
         for (Power power : powers) {
             if (power != null) {
                 power.tick(player);
+                power.updateAttributes(player.getAttributes());
             }
         }
         if (scrolledPowerOffset < 0) {
@@ -97,14 +98,25 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
         return this.powers;
     }
     public void setPowers(List<Power> powers) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        for (Power power : this.powers) {
+            power.removeAttributes(player.getAttributes());
+        }
         this.powers = powers;
+        for (Power power : powers) {
+            power.applyAttributes(player.getAttributes());
+        }
     }
     public void removePower(Power power) {
         this.powers.remove(power);
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        power.removeAttributes(player.getAttributes());
     }
     public void addPower(Power power) {
         if (!this.powers.contains(power)) {
             this.powers.add(power);
+            PlayerEntity player = (PlayerEntity) (Object) this;
+            power.applyAttributes(player.getAttributes());
         }
     }
 

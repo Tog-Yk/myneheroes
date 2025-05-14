@@ -1,9 +1,15 @@
 package net.togyk.myneheroes.power;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.minecraft.entity.attribute.AttributeContainer;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.AbilityUtil;
@@ -11,6 +17,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Power {
     public final Identifier id;
@@ -18,14 +25,16 @@ public class Power {
     public List<Ability> abilities;
 
     private boolean isDampened = false;
-    private int color;
+    protected int color;
 
     private PlayerEntity holder;
 
     private final Identifier background;
     private final Identifier disabledBackground;
 
-    public Power(Identifier id, int color, List<Ability> abilities, Settings settings) {
+    protected final attributeModifiers attributeModifiers;
+
+    public Power(Identifier id, int color, List<Ability> abilities, Settings settings, attributeModifiers attributeModifiers) {
         this.id = id;
         this.color = color;
         this.abilities = abilities;
@@ -33,6 +42,7 @@ public class Power {
         this.disabledBackground = Identifier.of(id.getNamespace(),"textures/power/"+id.getPath()+"_background_disabled.png");
 
         this.settings = settings;
+        this.attributeModifiers = attributeModifiers;
     }
 
     public NbtCompound writeNbt(NbtCompound nbt) {
@@ -171,7 +181,51 @@ public class Power {
                 ",\nabilities:" + this.abilities.toString();
     }
 
+    public static class attributeModifiers {
+        private final Map<RegistryEntry<EntityAttribute>, PowerAttributeModifierCreator> modifiers = new Object2ObjectOpenHashMap();
+
+
+        public Power.attributeModifiers addAttributeModifier(RegistryEntry<EntityAttribute> attribute, Identifier id, double amount, EntityAttributeModifier.Operation operation) {
+            this.modifiers.put(attribute, new PowerAttributeModifierCreator(id, amount, operation));
+            return this;
+        }
+
+        public attributeModifiers() {
+        }
+    }
+
+    public void updateAttributes(AttributeContainer attributeContainer) {
+        removeAttributes(attributeContainer);
+        applyAttributes(attributeContainer);
+    }
+
+    public void removeAttributes(AttributeContainer attributeContainer) {
+        for(Map.Entry<RegistryEntry<EntityAttribute>, PowerAttributeModifierCreator> entry : this.attributeModifiers.modifiers.entrySet()) {
+            EntityAttributeInstance entityAttributeInstance = attributeContainer.getCustomInstance(entry.getKey());
+            if (entityAttributeInstance != null) {
+                entityAttributeInstance.removeModifier((entry.getValue()).id());
+            }
+        }
+    }
+
+    public void applyAttributes(AttributeContainer attributeContainer) {
+        for(Map.Entry<RegistryEntry<EntityAttribute>, PowerAttributeModifierCreator> entry : this.attributeModifiers.modifiers.entrySet()) {
+            EntityAttributeInstance entityAttributeInstance = attributeContainer.getCustomInstance(entry.getKey());
+            if (entityAttributeInstance != null) {
+                entityAttributeInstance.removeModifier((entry.getValue()).id());
+                entityAttributeInstance.addPersistentModifier((entry.getValue()).createAttributeModifier());
+            }
+        }
+    }
+
+
+    record PowerAttributeModifierCreator(Identifier id, double baseValue, EntityAttributeModifier.Operation operation) {
+        public EntityAttributeModifier createAttributeModifier() {
+            return new EntityAttributeModifier(this.id, this.baseValue, this.operation);
+        }
+    }
+
     public Power copy() {
-        return new Power(this.id, this.getColor(), List.copyOf(this.abilities), settings);
+        return new Power(this.id, color, List.copyOf(this.abilities), settings, attributeModifiers);
     }
 }
