@@ -64,8 +64,10 @@ public class ModEvents {
         });
 
         ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, aliveAfterTeleport) -> {
-            List<Power> oldPowers = PowerData.getPowers(oldPlayer);
-            PowerData.setPowers(newPlayer, oldPowers);
+            if (aliveAfterTeleport || newPlayer.getServer().getOverworld().getGameRules().getBoolean(ModGamerules.KEEP_POWERS)) {
+                List<Power> oldPowers = PowerData.getPowers(oldPlayer);
+                PowerData.setPowers(newPlayer, oldPowers);
+            }
         });
     }
 }
