@@ -45,8 +45,8 @@ public class MechanicalHudAbility extends HudAbility {
     private static final Identifier ABILITY_SCREEN_SIGHT = Identifier.of(MyneHeroes.MOD_ID,
             "textures/gui/hud/mechanical/ability_screen.png");
 
-    public MechanicalHudAbility(Identifier id, String name) {
-        super(id, name);
+    public MechanicalHudAbility(Identifier id, String name, Ability.Settings settings) {
+        super(id, name, settings);
     }
 
     @Override
@@ -119,6 +119,6 @@ public class MechanicalHudAbility extends HudAbility {
 
     @Override
     public MechanicalHudAbility copy() {
-        return new MechanicalHudAbility(this.id, this.getName());
+        return new MechanicalHudAbility(this.id, this.getName(), settings);
     }
 }

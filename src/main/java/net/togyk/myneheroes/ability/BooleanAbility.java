@@ -6,8 +6,8 @@ import net.minecraft.util.Identifier;
 
 public class BooleanAbility extends Ability{
     private boolean bool = true;
-    public BooleanAbility(Identifier id, String name) {
-        super(id, name, 4);
+    public BooleanAbility(Identifier id, String name, Settings settings) {
+        super(id, name, 4, settings, (player) -> false);
     }
 
     @Override
@@ -15,8 +15,9 @@ public class BooleanAbility extends Ability{
         //switch the boolean
         if (getCooldown() == 0) {
             bool = !bool;
+            this.setCooldown(this.getMaxCooldown());
         }
-        super.Use(player);
+        this.save();
     }
 
     public boolean get() {
@@ -39,6 +40,6 @@ public class BooleanAbility extends Ability{
 
     @Override
     public BooleanAbility copy() {
-        return new BooleanAbility(this.id, this.getName());
+        return new BooleanAbility(this.id, this.getName(), settings);
     }
 }

@@ -12,8 +12,9 @@ import net.togyk.myneheroes.power.AbilityHolding;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Function;
 
-public abstract class Ability {
+public class Ability {
     private Power HolderPower;
     private ItemStack HolderItem;
 
@@ -25,17 +26,24 @@ public abstract class Ability {
     public final Identifier icon;
     public final Identifier disabled_icon;
 
-    public Ability(Identifier id, String name,int cooldown) {
+    protected final Function<PlayerEntity, Boolean> use;
+    protected final Settings settings;
+
+    public Ability(Identifier id, String name, int cooldown, Settings settings, Function<PlayerEntity, Boolean> use) {
         this.id = id;
         this.abilityName = name;
         this.icon = Identifier.of(id.getNamespace(),"textures/ability/"+id.getPath()+".png");
         this.disabled_icon = Identifier.of(id.getNamespace(),"textures/ability/"+id.getPath()+"_disabled.png");
         this.maxCooldown = cooldown;
+        this.use = use;
+        this.settings = settings;
     }
 
     public void Use(PlayerEntity player) {
         if (this.getCooldown() == 0) {
-            this.setCooldown(this.getMaxCooldown());
+            if (this.use.apply(player)) {
+                this.setCooldown(this.getMaxCooldown());
+            }
         }
         this.save();
     }
@@ -97,7 +105,7 @@ public abstract class Ability {
     }
 
     public boolean Usable() {
-        return true;
+        return settings.usable;
     }
 
     public NbtCompound writeNbt(NbtCompound nbt) {
@@ -116,10 +124,30 @@ public abstract class Ability {
     }
 
     public boolean appearsMultipleTimes() {
-        return true;
+        return settings.appearsMultipleTimes;
     }
 
-    public abstract Ability copy();
+    public Ability copy() {
+        return new Ability(id, abilityName, maxCooldown, settings, use);
+    }
+
+    public static class Settings{
+        public boolean appearsMultipleTimes = true;
+        public boolean usable = true;
+
+        public Settings() {
+        }
+
+        public Ability.Settings appearsMultipleTimes(boolean bl) {
+            this.appearsMultipleTimes = bl;
+            return this;
+        }
+
+        public Ability.Settings usable(boolean bl) {
+            this.usable = bl;
+            return this;
+        }
+    }
 
     public Identifier getId() {
         return id;

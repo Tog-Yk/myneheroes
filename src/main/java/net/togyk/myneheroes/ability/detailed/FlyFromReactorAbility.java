@@ -5,13 +5,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.BooleanAbility;
 
 public class FlyFromReactorAbility extends BooleanAbility {
     private final int cost;
 
-    public FlyFromReactorAbility(Identifier id, String name, int cost) {
-        super(id, name);
+    public FlyFromReactorAbility(Identifier id, String name, Ability.Settings settings, int cost) {
+        super(id, name, settings);
         this.cost = cost;
     }
 
@@ -51,6 +52,6 @@ public class FlyFromReactorAbility extends BooleanAbility {
 
     @Override
     public FlyFromReactorAbility copy() {
-        return new FlyFromReactorAbility(id, getName(), cost);
+        return new FlyFromReactorAbility(id, getName(), settings, cost);
     }
 }

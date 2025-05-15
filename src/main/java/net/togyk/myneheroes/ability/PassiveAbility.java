@@ -6,8 +6,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 
 public class PassiveAbility extends Ability {
-    public PassiveAbility(Identifier id, String name, int cooldown) {
-        super(id, name, cooldown);
+    public PassiveAbility(Identifier id, String name, int cooldown, Ability.Settings settings) {
+        super(id, name, cooldown, settings, (player) -> false);
     }
 
     //returns if the player still needs to be damaged
@@ -25,12 +25,7 @@ public class PassiveAbility extends Ability {
     }
 
     @Override
-    public boolean Usable() {
-        return false;
-    }
-
-    @Override
     public Ability copy() {
-        return new PassiveAbility(id, abilityName, cooldown);
+        return new PassiveAbility(id, abilityName, cooldown, settings);
     }
 }
