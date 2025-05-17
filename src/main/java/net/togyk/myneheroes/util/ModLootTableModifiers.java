@@ -16,14 +16,14 @@ public class ModLootTableModifiers {
             if (LootTables.VILLAGE_WEAPONSMITH_CHEST.equals(key)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.162f))
+                        .conditionally(RandomChanceLootCondition.builder(0.75f))
                         .with(ItemEntry.builder(ModItems.IRON_SUIT_TEMPLATE))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build())
 
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.042f))
+                        .conditionally(RandomChanceLootCondition.builder(0.2f))
                         .with(ItemEntry.builder(ModItems.HUD_UPGRADE))
-                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build()); //1-2 items per roll
+                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
 
                 tableBuilder.pool(poolBuilder.build());
             }
