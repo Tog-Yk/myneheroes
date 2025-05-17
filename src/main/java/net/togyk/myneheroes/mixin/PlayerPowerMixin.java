@@ -46,6 +46,7 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
 
     @Inject(at = @At("HEAD"), method = "readCustomDataFromNbt")
     private void readFromNbt(NbtCompound nbt, CallbackInfo info) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
         List<Power> powers = new ArrayList<>();
 
         if (nbt.contains(MyneHeroes.MOD_ID)) {
@@ -59,6 +60,7 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
                         if (power != null) {
                             power.readNbt(nbtCompound);
                         }
+                        power.setHolder(player);
                         powers.add(power);
                     }
                 }
@@ -98,22 +100,26 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
         PlayerEntity player = (PlayerEntity) (Object) this;
         for (Power power : this.powers) {
             power.removeAttributes(player.getAttributes());
+            power.setHolder(null);
         }
         this.powers = powers;
         for (Power power : powers) {
             power.applyAttributes(player.getAttributes());
+            power.setHolder(player);
         }
     }
     public void removePower(Power power) {
         this.powers.remove(power);
         PlayerEntity player = (PlayerEntity) (Object) this;
         power.removeAttributes(player.getAttributes());
+        power.setHolder(null);
     }
     public void addPower(Power power) {
         if (!this.powers.contains(power)) {
             this.powers.add(power);
             PlayerEntity player = (PlayerEntity) (Object) this;
             power.applyAttributes(player.getAttributes());
+            power.setHolder(player);
         }
     }
 

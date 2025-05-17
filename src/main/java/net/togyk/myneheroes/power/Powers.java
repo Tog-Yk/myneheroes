@@ -21,6 +21,12 @@ public class Powers {
                     .addAttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH, Identifier.of(MyneHeroes.MOD_ID, "kryptonian.health"), EntityAttributeModifier.Operation.ADD_VALUE, () -> 20.0D)
     ));
 
+    public static Power SPEEDSTER = registerPower(new SpeedsterPower(Identifier.of(MyneHeroes.MOD_ID, "speedster"), 0xFFF5D150, List.of(Abilities.TOGGLE_SPEED.copy(), Abilities.SPEED_UP.copy(), Abilities.SPEED_DOWN.copy()), 15,
+            new Power.Settings().damageMultiplier(1.10).resistance(0.95F),
+            new Power.attributeModifiers()
+                    .addAttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH, Identifier.of(MyneHeroes.MOD_ID, "speedster.health"), EntityAttributeModifier.Operation.ADD_VALUE, () -> 2.0D)
+    ));
+
     public static void registerPowers() {
         MyneHeroes.LOGGER.info("registering Powers for" + MyneHeroes.MOD_ID);
     }

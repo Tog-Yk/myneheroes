@@ -28,7 +28,7 @@ public class Power {
     private boolean isDampened = false;
     protected int color;
 
-    private PlayerEntity holder;
+    private static PlayerEntity holder;
 
     private final Identifier background;
     private final Identifier disabledBackground;
@@ -119,12 +119,12 @@ public class Power {
     public void tick(PlayerEntity player) {
     }
 
-    public void setHolder(@Nullable PlayerEntity holder) {
-        this.holder = holder;
+    public static void setHolder(@Nullable PlayerEntity newHolder) {
+        holder = newHolder;
     }
 
-    public PlayerEntity getHolder() {
-        return this.holder;
+    public static PlayerEntity getHolder() {
+        return holder;
     }
 
     public void saveAbility(Ability ability) {
@@ -195,13 +195,17 @@ public class Power {
         }
     }
 
+    public attributeModifiers getAttributeModifiers() {
+        return attributeModifiers;
+    }
+
     public void updateAttributes(AttributeContainer attributeContainer) {
         removeAttributes(attributeContainer);
         applyAttributes(attributeContainer);
     }
 
     public void removeAttributes(AttributeContainer attributeContainer) {
-        for(Map.Entry<RegistryEntry<EntityAttribute>, PowerAttributeModifierCreator> entry : this.attributeModifiers.modifiers.entrySet()) {
+        for(Map.Entry<RegistryEntry<EntityAttribute>, PowerAttributeModifierCreator> entry : this.getAttributeModifiers().modifiers.entrySet()) {
             EntityAttributeInstance entityAttributeInstance = attributeContainer.getCustomInstance(entry.getKey());
             if (entityAttributeInstance != null) {
                 entityAttributeInstance.removeModifier((entry.getValue()).id());
@@ -210,7 +214,7 @@ public class Power {
     }
 
     public void applyAttributes(AttributeContainer attributeContainer) {
-        for(Map.Entry<RegistryEntry<EntityAttribute>, PowerAttributeModifierCreator> entry : this.attributeModifiers.modifiers.entrySet()) {
+        for(Map.Entry<RegistryEntry<EntityAttribute>, PowerAttributeModifierCreator> entry : this.getAttributeModifiers().modifiers.entrySet()) {
             EntityAttributeInstance entityAttributeInstance = attributeContainer.getCustomInstance(entry.getKey());
             if (entityAttributeInstance != null) {
                 entityAttributeInstance.removeModifier((entry.getValue()).id());

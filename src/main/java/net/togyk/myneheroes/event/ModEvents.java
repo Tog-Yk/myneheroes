@@ -1,7 +1,11 @@
 package net.togyk.myneheroes.event;
 
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.entity.damage.DamageTypes;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -15,6 +19,7 @@ import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.entity.MeteorEntity;
 import net.togyk.myneheroes.gamerule.ModGamerules;
 import net.togyk.myneheroes.power.Power;
+import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.util.PowerData;
 
 import java.util.List;
@@ -67,6 +72,23 @@ public class ModEvents {
             if (aliveAfterTeleport || newPlayer.getServer().getOverworld().getGameRules().getBoolean(ModGamerules.KEEP_POWERS)) {
                 List<Power> oldPowers = PowerData.getPowers(oldPlayer);
                 PowerData.setPowers(newPlayer, oldPowers);
+            }
+        });
+
+        ServerLivingEntityEvents.AFTER_DAMAGE.register((entity, source, originalAmount, actualAmount, blocked) -> {
+            if (entity instanceof PlayerEntity player && !blocked) {
+                // Check if the damage source is lightning
+                if (source.isOf(DamageTypes.LIGHTNING_BOLT)) {
+                    // Check if the player has the Speed effect
+                    StatusEffectInstance speedEffect = player.getStatusEffect(StatusEffects.SPEED);
+                    if (speedEffect != null && speedEffect.getDuration() > 0) {
+                        Power speedster = Powers.SPEEDSTER.copy();
+                        List<Power> currentPowers = PowerData.getPowers(player);
+                        if (!currentPowers.stream().map(Power::getId).toList().contains(speedster.id)) {
+                            PowerData.addPower(player, speedster);
+                        }
+                    }
+                }
             }
         });
     }

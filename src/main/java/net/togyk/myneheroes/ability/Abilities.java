@@ -24,6 +24,7 @@ import net.togyk.myneheroes.ability.detailed.*;
 import net.togyk.myneheroes.entity.LaserEntity;
 import net.togyk.myneheroes.entity.ModEntities;
 import net.togyk.myneheroes.entity.StationaryArmorEntity;
+import net.togyk.myneheroes.power.VariableLinkedPower;
 
 import java.util.*;
 
@@ -110,14 +111,9 @@ public class Abilities {
             player.sendMessage(Text.literal("All your equipment has to have this ability"), true);
             return true;
         }
-    }) {
-        @Override
-        public boolean appearsMultipleTimes() {
-            return false;
-        }
-    });
+    }));
 
-    public static final Ability FROST_BREATH = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "frost_breath"), "frost_breath", 0, 48, 8, new Ability.Settings(),  (player) -> {
+    public static final Ability FROST_BREATH = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "frost_breath"), "frost_breath", 2, 48, 8, new Ability.Settings(),  (player) -> {
         Vec3d direction = player.getRotationVec(1.0F);
         Vec3d origin = player.getEyePos().add(0, -0.2, 0);
         World world = player.getWorld();
@@ -167,6 +163,24 @@ public class Abilities {
             return true;
         }
         return false;
+    }));
+
+    public static final Ability SPEED_UP = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_up"), "speed_up", "speedLevel", 2, new Ability.Settings(),  (player, power) -> {
+        int speed = power.getInt("speedLevel");
+        power.setInt("speedLevel", speed + 1);
+        return true;
+    }));
+
+    public static final Ability SPEED_DOWN = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_down"), "speed_down", "speedLevel", 2, new Ability.Settings(),  (player, power) -> {
+        int speed = power.getInt("speedLevel");
+        power.setInt("speedLevel", speed - 1);
+        return true;
+    }));
+
+    public static final Ability TOGGLE_SPEED = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speed"), "toggle_speed", "speedActive", 2, new Ability.Settings(),  (player, power) -> {
+        boolean isActive = power.getBoolean("speedActive");
+        power.setBoolean("speedActive", !isActive);
+        return true;
     }));
 
     public static void registerAbilities() {
