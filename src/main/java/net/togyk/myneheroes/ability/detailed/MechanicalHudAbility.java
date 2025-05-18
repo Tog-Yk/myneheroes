@@ -1,9 +1,12 @@
 package net.togyk.myneheroes.ability.detailed;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
@@ -95,22 +98,29 @@ public class MechanicalHudAbility extends HudAbility {
             drawContext.drawTexture(SIGHT, width/3 * 2 - 32, height/2 - 64, 0, 0,64,64,64,64);
 
             int abilityScreenX = width/3 * 2 + 28;
-            int abilityScreenY = height/2 - 108;
+            int abilityScreenY = height/2 - 128;
             int abilityScreenWidth = 48;
-            int abilityScreenHeight = 64;
+            int abilityScreenHeight = 85;
             drawContext.drawTexture(ABILITY_SCREEN_SIGHT, abilityScreenX, abilityScreenY, 0, 0,abilityScreenWidth,abilityScreenHeight,abilityScreenWidth,abilityScreenHeight);
 
+            TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+            boolean hasChatOpen = MinecraftClient.getInstance().currentScreen instanceof ChatScreen;
+
             Ability firstAbility = ((PlayerAbilities) client.player).getFirstAbility();
-            HudOverlay.drawAbility(drawContext, tickCounter, firstAbility, ModKeyBindings.useFirstAbility.isPressed(), abilityScreenX + 4, abilityScreenY + 4);
+            HudOverlay.drawAbility(drawContext, tickCounter, firstAbility, ModKeyBindings.useFirstAbility.isPressed(), abilityScreenX + 6, abilityScreenY + 4);
+            drawContext.drawTextWithShadow(textRenderer, hasChatOpen? Text.translatable(firstAbility.getId().toTranslationKey()) : ModKeyBindings.useFirstAbility.getBoundKeyLocalizedText(), abilityScreenX + 6 + 18, abilityScreenY + 4 + 4, 0xFFFFFF);
 
             Ability secondAbility = ((PlayerAbilities) client.player).getSecondAbility();
-            HudOverlay.drawAbility(drawContext, tickCounter, secondAbility, ModKeyBindings.useSecondAbility.isPressed(), abilityScreenX + 4, abilityScreenY + 14);
+            HudOverlay.drawAbility(drawContext, tickCounter, secondAbility, ModKeyBindings.useSecondAbility.isPressed(), abilityScreenX + 6, abilityScreenY + 22);
+            drawContext.drawTextWithShadow(textRenderer, hasChatOpen? Text.translatable(secondAbility.getId().toTranslationKey()) : ModKeyBindings.useSecondAbility.getBoundKeyLocalizedText(), abilityScreenX + 6 + 18, abilityScreenY + 22 + 4, 0xFFFFFF);
 
             Ability thirdAbility = ((PlayerAbilities) client.player).getThirdAbility();
-            HudOverlay.drawAbility(drawContext, tickCounter, thirdAbility, ModKeyBindings.useThirdAbility.isPressed(), abilityScreenX + 4, abilityScreenY + 24);
+            HudOverlay.drawAbility(drawContext, tickCounter, thirdAbility, ModKeyBindings.useThirdAbility.isPressed(), abilityScreenX + 6, abilityScreenY + 40);
+            drawContext.drawTextWithShadow(textRenderer, hasChatOpen? Text.translatable(thirdAbility.getId().toTranslationKey()) : ModKeyBindings.useThirdAbility.getBoundKeyLocalizedText(), abilityScreenX + 6 + 18, abilityScreenY + 40 + 4, 0xFFFFFF);
 
             Ability fourthAbility = ((PlayerAbilities) client.player).getFourthAbility();
-            HudOverlay.drawAbility(drawContext, tickCounter, fourthAbility, ModKeyBindings.useForthAbility.isPressed(), abilityScreenX + 4, abilityScreenY + 34);
+            HudOverlay.drawAbility(drawContext, tickCounter, fourthAbility, ModKeyBindings.useForthAbility.isPressed(), abilityScreenX + 6, abilityScreenY + 58);
+            drawContext.drawTextWithShadow(textRenderer, hasChatOpen? Text.translatable(fourthAbility.getId().toTranslationKey()) : ModKeyBindings.useForthAbility.getBoundKeyLocalizedText(), abilityScreenX + 6 + 18, abilityScreenY + 58 + 4, 0xFFFFFF);
 
             return HudActionResult.ABILITIES_HUD_DRAWN;
         }

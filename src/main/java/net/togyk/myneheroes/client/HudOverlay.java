@@ -5,7 +5,9 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
@@ -14,6 +16,7 @@ import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.AbilityUtil;
 import net.togyk.myneheroes.ability.HudAbility;
 import net.togyk.myneheroes.ability.StockpileAbility;
+import net.togyk.myneheroes.keybind.ModKeyBindings;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.StockpilePower;
 import net.togyk.myneheroes.util.*;
@@ -52,6 +55,56 @@ public class HudOverlay implements HudRenderCallback {
 
             if (!hasDrawnAbilities) {
                 //draw Ability Hud
+                TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+                boolean hasChatOpen = MinecraftClient.getInstance().currentScreen instanceof ChatScreen;
+                Text text;
+
+                int y = 4;
+
+                Ability abilityBeforeFirst = ((PlayerAbilities) client.player).getAbilityBeforeFirst();
+                if (abilityBeforeFirst != null) {
+                    drawContext.drawTexture(abilityBeforeFirst.icon, width - 20, y, 0, 8, 16, 8, 16, 16);
+                    drawContext.fill(width - 20, y, width - 4, y + 8, 0x70000000);
+                }
+                y += 10;
+
+                Ability firstAbility = ((PlayerAbilities) client.player).getFirstAbility();
+                drawAbility(drawContext, tickCounter, firstAbility, ModKeyBindings.useFirstAbility.isPressed(), width - 20, y);
+                if (firstAbility != null) {
+                    text = hasChatOpen ? Text.translatable(firstAbility.getId().toTranslationKey()) : ModKeyBindings.useFirstAbility.getBoundKeyLocalizedText();
+                    drawContext.drawTextWithShadow(textRenderer, text, width - 6 - 18 - textRenderer.getWidth(text), y + 4, 0xFFFFFF);
+                }
+                y += 18;
+
+                Ability secondAbility = ((PlayerAbilities) client.player).getSecondAbility();
+                drawAbility(drawContext, tickCounter, secondAbility, ModKeyBindings.useSecondAbility.isPressed(), width - 20, y);
+                if (secondAbility != null) {
+                    text = hasChatOpen ? Text.translatable(secondAbility.getId().toTranslationKey()) : ModKeyBindings.useSecondAbility.getBoundKeyLocalizedText();
+                    drawContext.drawTextWithShadow(textRenderer, text, width - 6 - 18 - textRenderer.getWidth(text), y + 4, 0xFFFFFF);
+                }
+                y += 18;
+
+                Ability thirdAbility = ((PlayerAbilities) client.player).getThirdAbility();
+                drawAbility(drawContext, tickCounter, thirdAbility, ModKeyBindings.useThirdAbility.isPressed(), width - 20, y);
+                if (thirdAbility != null) {
+                    text = hasChatOpen ? Text.translatable(thirdAbility.getId().toTranslationKey()) : ModKeyBindings.useThirdAbility.getBoundKeyLocalizedText();
+                    drawContext.drawTextWithShadow(textRenderer, text, width - 6 - 18 - textRenderer.getWidth(text), y + 4, 0xFFFFFF);
+                }
+                y += 18;
+
+                Ability fourthAbility = ((PlayerAbilities) client.player).getFourthAbility();
+                drawAbility(drawContext, tickCounter, fourthAbility, ModKeyBindings.useForthAbility.isPressed(), width - 20, y);
+                if (fourthAbility != null) {
+                    text = hasChatOpen ? Text.translatable(fourthAbility.getId().toTranslationKey()) : ModKeyBindings.useForthAbility.getBoundKeyLocalizedText();
+                    drawContext.drawTextWithShadow(textRenderer, text, width - 6 - 18 - textRenderer.getWidth(text), y + 4, 0xFFFFFF);
+                }
+                y += 18;
+
+                Ability fifthAbility = ((PlayerAbilities) client.player).getFifthAbility();
+                if (fifthAbility != null) {
+                    drawContext.drawTexture(fifthAbility.icon, width - 20, y, 0, 0, 16, 8, 16, 16);
+                    drawContext.fill(width - 20, y, width - 4, y + 8, 0x70000000);
+                }
             }
             if (!hasDrawnPowers) {
                 List<Power> powers = ((PlayerPowers) client.player).getPowers();
@@ -134,17 +187,16 @@ public class HudOverlay implements HudRenderCallback {
     public static void drawAbility(DrawContext drawContext, RenderTickCounter tickCounter, Ability ability, boolean isDisabled, int x, int y) {
         if (ability != null) {
             if (isDisabled) {
-                drawContext.drawTexture(ability.disabled_icon, x, y, 0, 0, 8, 8, 8, 8);
+                drawContext.drawTexture(ability.disabled_icon, x, y, 0, 0, 16, 16, 16, 16);
             } else {
-                drawContext.drawTexture(ability.icon, x, y, 0, 0, 8, 8, 8, 8);
+                drawContext.drawTexture(ability.icon, x, y, 0, 0, 16, 16, 16, 16);
             }
             if (ability.getCooldown() != 0) {
                 float cooldownPercentile = (float) ability.getCooldown() / ability.getMaxCooldown();
-                int maxIconLength = 8;
+                int maxIconLength = 16;
                 int currentCooldownLength = (int) (maxIconLength * cooldownPercentile);
-                drawContext.fill(x, y + maxIconLength - currentCooldownLength, x + 8, y + maxIconLength, 0x88BBBBBB);
+                drawContext.fill(x, y + maxIconLength - currentCooldownLength, x + 16, y + maxIconLength, 0x88BBBBBB);
             }
-            drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(ability.getName()), x +10, y, 0xFFFFFF);
         }
     }
 

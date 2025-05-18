@@ -185,6 +185,26 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         }
     }
 
+    @Override
+    public Ability getAbilityBeforeFirst() {
+        List<Ability> filteredAbilities = getFilteredAbilities();
+        if (filteredAbilities != null && filteredAbilities.size() > 4 && this.getScrolledAbilityOffset() > 0) {
+            return filteredAbilities.get(this.getScrolledAbilityOffset() - 1);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public Ability getFifthAbility() {
+        List<Ability> filteredAbilities = getFilteredAbilities();
+        if (filteredAbilities != null && filteredAbilities.size() >= 5 + this.getScrolledAbilityOffset()) {
+            return filteredAbilities.get(4 + this.getScrolledAbilityOffset());
+        } else {
+            return null;
+        }
+    }
+
 
 
 

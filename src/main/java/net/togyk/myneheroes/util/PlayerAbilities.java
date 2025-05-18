@@ -9,6 +9,8 @@ public interface PlayerAbilities {
     Ability getSecondAbility();
     Ability getThirdAbility();
     Ability getFourthAbility();
+    Ability getAbilityBeforeFirst();
+    Ability getFifthAbility();
     List<Ability> getAbilities();
     List<Ability> getFilteredAbilities();
 
