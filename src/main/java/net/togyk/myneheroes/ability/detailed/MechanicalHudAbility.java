@@ -26,6 +26,7 @@ import net.togyk.myneheroes.util.PlayerAbilities;
 import net.togyk.myneheroes.util.PowerData;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class MechanicalHudAbility extends HudAbility {
@@ -62,8 +63,26 @@ public class MechanicalHudAbility extends HudAbility {
     // sight
     private static final Identifier SIGHT = Identifier.of(MyneHeroes.MOD_ID,
             "hud/mechanical/sight");
-    private static final Identifier ABILITY_SCREEN = Identifier.of(MyneHeroes.MOD_ID,
-            "hud/mechanical/ability_screen");
+
+    //ability screen
+    private static final Identifier ABILITY_SCREEN_LEFT_TOP_CORNER = Identifier.of(MyneHeroes.MOD_ID,
+            "hud/mechanical/ability_screen/left_top_corner");
+    private static final Identifier ABILITY_SCREEN_TOP_LINE = Identifier.of(MyneHeroes.MOD_ID,
+            "hud/mechanical/ability_screen/top_line");
+    private static final Identifier ABILITY_SCREEN_RIGHT_TOP_CORNER = Identifier.of(MyneHeroes.MOD_ID,
+            "hud/mechanical/ability_screen/right_top_corner");
+    private static final Identifier ABILITY_SCREEN_LEFT_LINE = Identifier.of(MyneHeroes.MOD_ID,
+            "hud/mechanical/ability_screen/left_line");
+    private static final Identifier ABILITY_SCREEN_MIDDLE = Identifier.of(MyneHeroes.MOD_ID,
+            "hud/mechanical/ability_screen/middle");
+    private static final Identifier ABILITY_SCREEN_RIGHT_LINE = Identifier.of(MyneHeroes.MOD_ID,
+            "hud/mechanical/ability_screen/right_line");
+    private static final Identifier ABILITY_SCREEN_LEFT_BOTTOM_CORNER = Identifier.of(MyneHeroes.MOD_ID,
+            "hud/mechanical/ability_screen/left_bottom_corner");
+    private static final Identifier ABILITY_SCREEN_BOTTOM_LINE = Identifier.of(MyneHeroes.MOD_ID,
+            "hud/mechanical/ability_screen/bottom_line");
+    private static final Identifier ABILITY_SCREEN_RIGHT_BOTTOM_CORNER = Identifier.of(MyneHeroes.MOD_ID,
+            "hud/mechanical/ability_screen/right_bottom_corner");
 
     public MechanicalHudAbility(Identifier id, String name, Ability.Settings settings) {
         super(id, name, settings);
@@ -122,60 +141,74 @@ public class MechanicalHudAbility extends HudAbility {
             drawEnergyStorage(drawContext, tickCounter, client.player, width / 32 + 12, height/2 - 60, 14, 120);
 
             //sight
-            drawContext.drawGuiTexture(SIGHT, 64, 64, 0, 0, width/3 * 2 - 32, height/2 - 64,64,64);
-            int abilityScreenX = width/3 * 2 + 28;
-            int abilityScreenY = height/2 - 128;
-            int abilityScreenWidth = 48;
-            int abilityScreenHeight = 85;
-            drawContext.drawGuiTexture(ABILITY_SCREEN, abilityScreenWidth, abilityScreenHeight, 0, 0, abilityScreenX, abilityScreenY, abilityScreenWidth, abilityScreenHeight);
-
+            drawContext.drawGuiTexture(SIGHT, 64, 64, 0, 0, width/3 * 2 - 32, height/2 - 64, 64, 64);
 
             // Reset state
-            RenderSystem.disableBlend();
 
             //abilities
-
-            TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-            boolean hasChatOpen = MinecraftClient.getInstance().currentScreen instanceof ChatScreen;
-            Text text;
-            List<Integer> textLengths = new ArrayList<>();
-
-            int y = abilityScreenY + 4;
-
             Ability firstAbility = ((PlayerAbilities) client.player).getFirstAbility();
-            HudOverlay.drawAbility(drawContext, tickCounter, firstAbility, ModKeyBindings.useFirstAbility.isPressed(), abilityScreenX + 6, y);
+
             if (firstAbility != null) {
-                text = hasChatOpen ? Text.translatable(firstAbility.getId().toTranslationKey()) : ModKeyBindings.useFirstAbility.getBoundKeyLocalizedText();
-                textLengths.add(textRenderer.getWidth(text));
-                drawContext.drawTextWithShadow(textRenderer, text, abilityScreenX + 6 + 18, y + 4, 0xFFFFFF);
-            }
-            y += 18;
+                TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+                boolean hasChatOpen = MinecraftClient.getInstance().currentScreen instanceof ChatScreen;
 
-            Ability secondAbility = ((PlayerAbilities) client.player).getSecondAbility();
-            HudOverlay.drawAbility(drawContext, tickCounter, secondAbility, ModKeyBindings.useSecondAbility.isPressed(), abilityScreenX + 6, y);
-            if (secondAbility != null) {
-                text = hasChatOpen ? Text.translatable(secondAbility.getId().toTranslationKey()) : ModKeyBindings.useSecondAbility.getBoundKeyLocalizedText();
-                textLengths.add(textRenderer.getWidth(text));
-                drawContext.drawTextWithShadow(textRenderer, text, abilityScreenX + 6 + 18, y + 4, 0xFFFFFF);
-            }
-            y += 18;
 
-            Ability thirdAbility = ((PlayerAbilities) client.player).getThirdAbility();
-            HudOverlay.drawAbility(drawContext, tickCounter, thirdAbility, ModKeyBindings.useThirdAbility.isPressed(), abilityScreenX + 6, y);
-            if (thirdAbility != null) {
-                text = hasChatOpen ? Text.translatable(thirdAbility.getId().toTranslationKey()) : ModKeyBindings.useThirdAbility.getBoundKeyLocalizedText();
-                textLengths.add(textRenderer.getWidth(text));
-                drawContext.drawTextWithShadow(textRenderer, text, abilityScreenX + 6 + 18, y + 4, 0xFFFFFF);
-            }
-            y += 18;
+                List<Integer> textLengths = new ArrayList<>();
+                Text firstAbilityText;
+                Ability secondAbility = ((PlayerAbilities) client.player).getSecondAbility();
+                Text secondAbilityText = null;
+                Ability thirdAbility = ((PlayerAbilities) client.player).getThirdAbility();
+                Text thirdAbilityText = null;
+                Ability fourthAbility = ((PlayerAbilities) client.player).getFourthAbility();
+                Text fourthAbilityText = null;
 
-            Ability fourthAbility = ((PlayerAbilities) client.player).getFourthAbility();
-            HudOverlay.drawAbility(drawContext, tickCounter, fourthAbility, ModKeyBindings.useForthAbility.isPressed(), abilityScreenX + 6, y);
-            if (fourthAbility != null) {
-                text = hasChatOpen ? Text.translatable(fourthAbility.getId().toTranslationKey()) : ModKeyBindings.useForthAbility.getBoundKeyLocalizedText();
-                textLengths.add(textRenderer.getWidth(text));
-                drawContext.drawTextWithShadow(textRenderer, text, abilityScreenX + 6 + 18, y + 4, 0xFFFFFF);
+                firstAbilityText = hasChatOpen ? Text.translatable("ability."+firstAbility.getId().toTranslationKey()) : ModKeyBindings.useFirstAbility.getBoundKeyLocalizedText();
+                textLengths.add(textRenderer.getWidth(firstAbilityText));
+                if (secondAbility != null) {
+                    secondAbilityText = hasChatOpen ? Text.translatable("ability."+secondAbility.getId().toTranslationKey()) : ModKeyBindings.useSecondAbility.getBoundKeyLocalizedText();
+                    textLengths.add(textRenderer.getWidth(secondAbilityText));
+                    if (thirdAbility != null) {
+                        thirdAbilityText = hasChatOpen ? Text.translatable("ability."+thirdAbility.getId().toTranslationKey()) : ModKeyBindings.useThirdAbility.getBoundKeyLocalizedText();
+                        textLengths.add(textRenderer.getWidth(thirdAbilityText));
+                        if (fourthAbility != null) {
+                            fourthAbilityText = hasChatOpen ? Text.translatable("ability."+fourthAbility.getId().toTranslationKey()) : ModKeyBindings.useForthAbility.getBoundKeyLocalizedText();
+                            textLengths.add(textRenderer.getWidth(fourthAbilityText));
+                        }
+                    }
+                }
+
+                int abilityScreenWidth = 6 + 18 + textLengths.stream().max(Comparator.naturalOrder()).get() + 6;
+                int abilityScreenHeight = 4 + textLengths.size() * 18 + 2;
+                int abilityScreenX = width/3 * 2 + 28;
+                int abilityScreenY = height/2 - 50 - abilityScreenHeight;
+                drawAbilityScreen(drawContext, abilityScreenX, abilityScreenY, abilityScreenWidth, abilityScreenHeight);
+
+                int y = abilityScreenY + 4;
+
+                HudOverlay.drawAbility(drawContext, tickCounter, firstAbility, ModKeyBindings.useFirstAbility.isPressed(), abilityScreenX + 6, y);
+                if (firstAbility != null) {
+                    drawContext.drawTextWithShadow(textRenderer, firstAbilityText, abilityScreenX + 6 + 18, y + 4, 0xFFFFFF);
+                }
+                y += 18;
+
+                HudOverlay.drawAbility(drawContext, tickCounter, secondAbility, ModKeyBindings.useSecondAbility.isPressed(), abilityScreenX + 6, y);
+                if (secondAbility != null) {
+                    drawContext.drawTextWithShadow(textRenderer, secondAbilityText, abilityScreenX + 6 + 18, y + 4, 0xFFFFFF);
+                }
+                y += 18;
+
+                HudOverlay.drawAbility(drawContext, tickCounter, thirdAbility, ModKeyBindings.useThirdAbility.isPressed(), abilityScreenX + 6, y);
+                if (thirdAbility != null) {
+                    drawContext.drawTextWithShadow(textRenderer, thirdAbilityText, abilityScreenX + 6 + 18, y + 4, 0xFFFFFF);
+                }
+                y += 18;
+
+                HudOverlay.drawAbility(drawContext, tickCounter, fourthAbility, ModKeyBindings.useForthAbility.isPressed(), abilityScreenX + 6, y);
+                if (fourthAbility != null) {
+                    drawContext.drawTextWithShadow(textRenderer, fourthAbilityText, abilityScreenX + 6 + 18, y + 4, 0xFFFFFF);
+                }
             }
+            RenderSystem.disableBlend();
 
 
             return HudActionResult.ABILITIES_HUD_DRAWN;
@@ -230,6 +263,20 @@ public class MechanicalHudAbility extends HudAbility {
                 drawContext.drawGuiTexture(ENERGY_STORAGE_BACKGROUND, width, height, 0, 0, x + 18 * i, y, width, height);
             }
         }
+    }
+
+    public static void drawAbilityScreen(DrawContext drawContext, int x, int y, int width, int height) {
+        drawContext.drawGuiTexture(ABILITY_SCREEN_LEFT_TOP_CORNER, 3, 3, 0, 0, x, y, 3, 3);
+        drawContext.drawGuiTexture(ABILITY_SCREEN_TOP_LINE, width - 6, 3, 0, 0, x + 3, y, width - 6, 3);
+        drawContext.drawGuiTexture(ABILITY_SCREEN_RIGHT_TOP_CORNER, 3, 3, 0, 0, x + width - 3, y, 3, 3);
+
+        drawContext.drawGuiTexture(ABILITY_SCREEN_LEFT_LINE, 3, height - 6, 0, 0, x, y + 3, 3, height - 6);
+        drawContext.drawGuiTexture(ABILITY_SCREEN_MIDDLE, width - 6, height - 6, 0, 0, x + 3, y + 3, width - 6, height - 6);
+        drawContext.drawGuiTexture(ABILITY_SCREEN_RIGHT_LINE, 3, height - 6, 0, 0, x + width - 3, y + 3, 3, height - 6);
+
+        drawContext.drawGuiTexture(ABILITY_SCREEN_LEFT_BOTTOM_CORNER, 3, 3, 0, 0, x, y + height - 3, 3, 3);
+        drawContext.drawGuiTexture(ABILITY_SCREEN_BOTTOM_LINE, width - 6, 3, 0, 0, x + 3, y + height - 3, width - 6, 3);
+        drawContext.drawGuiTexture(ABILITY_SCREEN_RIGHT_BOTTOM_CORNER, 3, 3, 0, 0, x + width - 3, y + height - 3, 3, 3);
     }
 
     private static List<Identifier> filterIds(List<Ability> abilities) {
