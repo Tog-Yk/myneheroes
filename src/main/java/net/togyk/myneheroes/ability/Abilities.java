@@ -165,19 +165,19 @@ public class Abilities {
         return false;
     }));
 
-    public static final Ability SPEED_UP = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_up"), "speed_up", "speedLevel", 2, new Ability.Settings(),  (player, power) -> {
+    public static final Ability SPEED_UP = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_up"), "speed_up", "speedLevel", 5, new Ability.Settings(),  (player, power) -> {
         int speed = power.getInt("speedLevel");
         power.setInt("speedLevel", speed + 1);
         return true;
     }));
 
-    public static final Ability SPEED_DOWN = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_down"), "speed_down", "speedLevel", 2, new Ability.Settings(),  (player, power) -> {
+    public static final Ability SPEED_DOWN = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_down"), "speed_down", "speedLevel", 5, new Ability.Settings(),  (player, power) -> {
         int speed = power.getInt("speedLevel");
         power.setInt("speedLevel", speed - 1);
         return true;
     }));
 
-    public static final Ability TOGGLE_SPEED = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speed"), "toggle_speed", "speedActive", 2, new Ability.Settings(),  (player, power) -> {
+    public static final Ability TOGGLE_SPEED = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speed"), "toggle_speed", "speedActive", 5, new Ability.Settings(),  (player, power) -> {
         boolean isActive = power.getBoolean("speedActive");
         power.setBoolean("speedActive", !isActive);
         return true;

@@ -71,7 +71,7 @@ public class HudOverlay implements HudRenderCallback {
                 Ability firstAbility = ((PlayerAbilities) client.player).getFirstAbility();
                 drawAbility(drawContext, tickCounter, firstAbility, ModKeyBindings.useFirstAbility.isPressed(), width - 20, y);
                 if (firstAbility != null) {
-                    text = hasChatOpen ? Text.translatable(firstAbility.getId().toTranslationKey()) : ModKeyBindings.useFirstAbility.getBoundKeyLocalizedText();
+                    text = hasChatOpen ? Text.translatable("ability."+firstAbility.getId().toTranslationKey()) : ModKeyBindings.useFirstAbility.getBoundKeyLocalizedText();
                     drawContext.drawTextWithShadow(textRenderer, text, width - 6 - 18 - textRenderer.getWidth(text), y + 4, 0xFFFFFF);
                 }
                 y += 18;
@@ -79,7 +79,7 @@ public class HudOverlay implements HudRenderCallback {
                 Ability secondAbility = ((PlayerAbilities) client.player).getSecondAbility();
                 drawAbility(drawContext, tickCounter, secondAbility, ModKeyBindings.useSecondAbility.isPressed(), width - 20, y);
                 if (secondAbility != null) {
-                    text = hasChatOpen ? Text.translatable(secondAbility.getId().toTranslationKey()) : ModKeyBindings.useSecondAbility.getBoundKeyLocalizedText();
+                    text = hasChatOpen ? Text.translatable("ability."+secondAbility.getId().toTranslationKey()) : ModKeyBindings.useSecondAbility.getBoundKeyLocalizedText();
                     drawContext.drawTextWithShadow(textRenderer, text, width - 6 - 18 - textRenderer.getWidth(text), y + 4, 0xFFFFFF);
                 }
                 y += 18;
@@ -87,7 +87,7 @@ public class HudOverlay implements HudRenderCallback {
                 Ability thirdAbility = ((PlayerAbilities) client.player).getThirdAbility();
                 drawAbility(drawContext, tickCounter, thirdAbility, ModKeyBindings.useThirdAbility.isPressed(), width - 20, y);
                 if (thirdAbility != null) {
-                    text = hasChatOpen ? Text.translatable(thirdAbility.getId().toTranslationKey()) : ModKeyBindings.useThirdAbility.getBoundKeyLocalizedText();
+                    text = hasChatOpen ? Text.translatable("ability."+thirdAbility.getId().toTranslationKey()) : ModKeyBindings.useThirdAbility.getBoundKeyLocalizedText();
                     drawContext.drawTextWithShadow(textRenderer, text, width - 6 - 18 - textRenderer.getWidth(text), y + 4, 0xFFFFFF);
                 }
                 y += 18;
@@ -95,7 +95,7 @@ public class HudOverlay implements HudRenderCallback {
                 Ability fourthAbility = ((PlayerAbilities) client.player).getFourthAbility();
                 drawAbility(drawContext, tickCounter, fourthAbility, ModKeyBindings.useForthAbility.isPressed(), width - 20, y);
                 if (fourthAbility != null) {
-                    text = hasChatOpen ? Text.translatable(fourthAbility.getId().toTranslationKey()) : ModKeyBindings.useForthAbility.getBoundKeyLocalizedText();
+                    text = hasChatOpen ? Text.translatable("ability."+fourthAbility.getId().toTranslationKey()) : ModKeyBindings.useForthAbility.getBoundKeyLocalizedText();
                     drawContext.drawTextWithShadow(textRenderer, text, width - 6 - 18 - textRenderer.getWidth(text), y + 4, 0xFFFFFF);
                 }
                 y += 18;
@@ -126,7 +126,7 @@ public class HudOverlay implements HudRenderCallback {
         }
     }
 
-    public static void drawEnergyStorage(DrawContext drawContext, RenderTickCounter tickCounter, PlayerEntity player, int x, int y) {
+    public static void drawEnergyStorage(DrawContext drawContext, RenderTickCounter tickCounter, PlayerEntity player, int x, int y, int width, int height) {
         List<Power> powers = PowerData.getPowers(player);
         List<Power> stockpilePowers = powers.stream().filter(Predicates.instanceOf(StockpilePower.class)).toList();
         int i;
@@ -137,10 +137,9 @@ public class HudOverlay implements HudRenderCallback {
 
                 float chargePercentile = (float) charge / maxCharge;
 
-                int maxHeight = 120;
-                int currentHeight = (int) (maxHeight * chargePercentile);
+                int currentHeight = (int) (height * chargePercentile);
 
-                drawContext.drawTexture(power.getChargeIcon(), x + 16 * i, y + maxHeight - currentHeight, 0, maxHeight - currentHeight,14,currentHeight,14,14); // yellow rectangle
+                drawContext.drawTexture(power.getChargeIcon(), x + 16 * i, y + height - currentHeight, 0, height - currentHeight, width, currentHeight, 14, 14); // yellow rectangle
             }
         }
         List<Ability> abilities = ((PlayerAbilities) player).getAbilities();
@@ -166,10 +165,9 @@ public class HudOverlay implements HudRenderCallback {
 
                 float chargePercentile = (float) charge / maxCharge;
 
-                int maxHeight = 120;
-                int currentHeight = (int) (maxHeight * chargePercentile);
+                int currentHeight = (int) (height * chargePercentile);
 
-                drawContext.drawTexture(chargeIcon, x + 18 * i, y + maxHeight - currentHeight, 0, maxHeight - currentHeight, 16, currentHeight, 16, 16); // yellow rectangle
+                drawContext.drawTexture(chargeIcon, x + 18 * i, y + height - currentHeight, 0, height - currentHeight, 16, currentHeight, 16, 16); // yellow rectangle
             }
         }
     }
