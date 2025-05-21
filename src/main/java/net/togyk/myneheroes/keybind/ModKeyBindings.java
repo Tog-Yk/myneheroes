@@ -11,7 +11,7 @@ public class ModKeyBindings {
     public static KeyBinding useFirstAbility;
     public static KeyBinding useSecondAbility;
     public static KeyBinding useThirdAbility;
-    public static KeyBinding useForthAbility;
+    public static KeyBinding useFourthAbility;
 
     public static KeyBinding abilitiesScrollUp;
     public static KeyBinding abilitiesScrollDown;
@@ -39,8 +39,8 @@ public class ModKeyBindings {
                 GLFW.GLFW_KEY_R, // Default key of: R
                 "key.category.myneheroes" // keybind category
         ));
-        useForthAbility = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.myneheroes.use_forth_ability", //translatable key
+        useFourthAbility = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.myneheroes.use_fourth_ability", //translatable key
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_B, // Default key of: B
                 "key.category.myneheroes" // keybind category

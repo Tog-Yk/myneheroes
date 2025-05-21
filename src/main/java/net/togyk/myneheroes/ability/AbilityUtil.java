@@ -6,15 +6,6 @@ import java.util.*;
 
 public class AbilityUtil {
 
-    public static Ability getAbilityMatchingName(List<Ability> abilityList, String name) {
-        for (Ability ability : abilityList) {
-            if (ability != null && Objects.equals(ability.getName(), name)) {
-                return ability;
-            }
-        }
-        return null;
-    }
-
     public static Ability getAbilityMatchingId(List<Ability> abilityList, Identifier id) {
         for (Ability ability : abilityList) {
             if (ability != null && ability.getId() == id) {
@@ -38,7 +29,7 @@ public class AbilityUtil {
         Identifier abilityId = Identifier.of(nbt.getString("id"));
         Ability ability = Abilities.get(abilityId);
         if (ability != null) {
-            ability.readNbt(nbt);
+            ability.copy().readNbt(nbt);
         }
         return ability;
     }

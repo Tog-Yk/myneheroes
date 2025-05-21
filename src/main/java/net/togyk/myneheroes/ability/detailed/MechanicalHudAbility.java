@@ -84,8 +84,8 @@ public class MechanicalHudAbility extends HudAbility {
     private static final Identifier ABILITY_SCREEN_RIGHT_BOTTOM_CORNER = Identifier.of(MyneHeroes.MOD_ID,
             "hud/mechanical/ability_screen/right_bottom_corner");
 
-    public MechanicalHudAbility(Identifier id, String name, Ability.Settings settings) {
-        super(id, name, settings);
+    public MechanicalHudAbility(Identifier id, Ability.Settings settings) {
+        super(id, settings);
     }
 
     @Override
@@ -171,7 +171,7 @@ public class MechanicalHudAbility extends HudAbility {
                         thirdAbilityText = hasChatOpen ? Text.translatable("ability."+thirdAbility.getId().toTranslationKey()) : ModKeyBindings.useThirdAbility.getBoundKeyLocalizedText();
                         textLengths.add(textRenderer.getWidth(thirdAbilityText));
                         if (fourthAbility != null) {
-                            fourthAbilityText = hasChatOpen ? Text.translatable("ability."+fourthAbility.getId().toTranslationKey()) : ModKeyBindings.useForthAbility.getBoundKeyLocalizedText();
+                            fourthAbilityText = hasChatOpen ? Text.translatable("ability."+fourthAbility.getId().toTranslationKey()) : ModKeyBindings.useFourthAbility.getBoundKeyLocalizedText();
                             textLengths.add(textRenderer.getWidth(fourthAbilityText));
                         }
                     }
@@ -203,7 +203,7 @@ public class MechanicalHudAbility extends HudAbility {
                 }
                 y += 18;
 
-                HudOverlay.drawAbility(drawContext, tickCounter, fourthAbility, ModKeyBindings.useForthAbility.isPressed(), abilityScreenX + 6, y);
+                HudOverlay.drawAbility(drawContext, tickCounter, fourthAbility, ModKeyBindings.useFourthAbility.isPressed(), abilityScreenX + 6, y);
                 if (fourthAbility != null) {
                     drawContext.drawTextWithShadow(textRenderer, fourthAbilityText, abilityScreenX + 6 + 18, y + 4, 0xFFFFFF);
                 }
@@ -291,6 +291,6 @@ public class MechanicalHudAbility extends HudAbility {
 
     @Override
     public MechanicalHudAbility copy() {
-        return new MechanicalHudAbility(this.id, this.getName(), settings);
+        return new MechanicalHudAbility(this.id, settings);
     }
 }

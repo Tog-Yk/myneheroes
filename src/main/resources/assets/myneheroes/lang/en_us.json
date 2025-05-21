@@ -81,6 +81,20 @@
   "block.myneheroes.meteor_radar": "Meteor Radar",
 
   "power.myneheroes.kryptonian": "Kryptonian",
+  "power.myneheroes.speedster": "Speester",
+
+  "ability.myneheroes.toggle_hud": "Toggle Hud",
+  "ability.myneheroes.shoot_lazar": "Shoot Laser",
+  "ability.myneheroes.allow_flying": "Allow Flying",
+  "ability.myneheroes.release_kinetic_energy": "Release Kinetic Energy",
+  "ability.myneheroes.take_off_suit": "Take Off Suit",
+
+  "ability.myneheroes.lazar_eyes": "Laser Eyes",
+  "ability.myneheroes.frost_breath": "Frost Breath",
+
+  "ability.myneheroes.speed_up": "Speed Up",
+  "ability.myneheroes.speed_down": "Speed Down",
+  "ability.myneheroes.toggle_speed": "Toggle Speed",
 
 
   "trim_material.myneheroes.vibranium": "Vibranium",
@@ -100,13 +114,16 @@
 
   "key.category.myneheroes": "MyneHeroes",
 
-  "key.myneheroes.toggle_hud": "Toggle Hud",
-  "key.myneheroes.shoot_repolser": "Shoot Repolser",
   "key.myneheroes.fuel_reactor": "Fuel Reactor",
   "key.myneheroes.scroll_up_abilities": "Scroll Abilities Up",
   "key.myneheroes.scroll_down_abilities": "Scroll Abilities Down",
   "key.myneheroes.scroll_up_powers": "Scroll Powers Up",
   "key.myneheroes.scroll_down_powers": "Scroll Powers Down",
+
+  "key.myneheroes.use_first_ability": "Use First Ability",
+  "key.myneheroes.use_second_ability": "Use Second Ability",
+  "key.myneheroes.use_third_ability": "Use Third Ability",
+  "key.myneheroes.use_fourth_ability": "Use Fourth Ability",
 
 
   "container.myneheroes.armor_dyeing_station": "Armor Dyeing Station",

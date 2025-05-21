@@ -26,10 +26,10 @@ public class ReleaseKineticEnergyAbility extends PassiveAbility implements Stock
 
     private final Identifier chargeIcon;
 
-    public ReleaseKineticEnergyAbility(Identifier id, String name, Ability.Settings settings, int cooldown, float maxCharge, float rangeMultiplier) {
-        super(id, name, cooldown, settings);
+    public ReleaseKineticEnergyAbility(Identifier id, Ability.Settings settings, int cooldown, float maxCharge, float rangeMultiplier) {
+        super(id, cooldown, settings);
         this.maxCharge = maxCharge;
-        this.chargeIcon = Identifier.of(MyneHeroes.MOD_ID,"textures/ability/charge/"+name+".png");
+        this.chargeIcon = Identifier.of(MyneHeroes.MOD_ID,"textures/ability/charge/"+id.getPath()+".png");
         this.rangeMultiplier = rangeMultiplier;
     }
 
@@ -152,6 +152,6 @@ public class ReleaseKineticEnergyAbility extends PassiveAbility implements Stock
 
     @Override
     public ReleaseKineticEnergyAbility copy() {
-        return new ReleaseKineticEnergyAbility(id, abilityName, settings, maxCooldown, maxCharge, rangeMultiplier);
+        return new ReleaseKineticEnergyAbility(id, settings, maxCooldown, maxCharge, rangeMultiplier);
     }
 }

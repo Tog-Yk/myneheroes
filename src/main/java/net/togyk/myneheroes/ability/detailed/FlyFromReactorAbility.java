@@ -11,8 +11,8 @@ import net.togyk.myneheroes.ability.BooleanAbility;
 public class FlyFromReactorAbility extends BooleanAbility {
     private final int cost;
 
-    public FlyFromReactorAbility(Identifier id, String name, Ability.Settings settings, int cost) {
-        super(id, name, settings);
+    public FlyFromReactorAbility(Identifier id, Ability.Settings settings, int cost) {
+        super(id, settings);
         this.cost = cost;
     }
 
@@ -52,6 +52,6 @@ public class FlyFromReactorAbility extends BooleanAbility {
 
     @Override
     public FlyFromReactorAbility copy() {
-        return new FlyFromReactorAbility(id, getName(), settings, cost);
+        return new FlyFromReactorAbility(id, settings, cost);
     }
 }

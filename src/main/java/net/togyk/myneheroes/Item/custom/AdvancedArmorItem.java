@@ -38,11 +38,13 @@ public class AdvancedArmorItem extends ArmorItem implements AbilityHolding {
         List<Identifier> abilitiesIds = this.getAbilities(stack).stream().map(Ability::getId).toList();
         if (!abilitiesIds.contains(id)) {
             //save to nbt
-            this.saveAbility(stack, Abilities.get(id));
-            return true;
-        } else {
-            return false;
+            Ability ability = Abilities.get(id);
+            if (ability != null) {
+                this.saveAbility(stack, ability.copy());
+                return true;
+            }
         }
+        return false;
     }
 
     public List<Ability> getAbilities(ItemStack stack) {

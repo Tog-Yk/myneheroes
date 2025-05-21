@@ -93,9 +93,9 @@ public class HudOverlay implements HudRenderCallback {
                 y += 18;
 
                 Ability fourthAbility = ((PlayerAbilities) client.player).getFourthAbility();
-                drawAbility(drawContext, tickCounter, fourthAbility, ModKeyBindings.useForthAbility.isPressed(), width - 20, y);
+                drawAbility(drawContext, tickCounter, fourthAbility, ModKeyBindings.useFourthAbility.isPressed(), width - 20, y);
                 if (fourthAbility != null) {
-                    text = hasChatOpen ? Text.translatable("ability."+fourthAbility.getId().toTranslationKey()) : ModKeyBindings.useForthAbility.getBoundKeyLocalizedText();
+                    text = hasChatOpen ? Text.translatable("ability."+fourthAbility.getId().toTranslationKey()) : ModKeyBindings.useFourthAbility.getBoundKeyLocalizedText();
                     drawContext.drawTextWithShadow(textRenderer, text, width - 6 - 18 - textRenderer.getWidth(text), y + 4, 0xFFFFFF);
                 }
                 y += 18;

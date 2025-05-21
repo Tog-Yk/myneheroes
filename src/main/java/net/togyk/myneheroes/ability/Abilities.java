@@ -24,21 +24,20 @@ import net.togyk.myneheroes.ability.detailed.*;
 import net.togyk.myneheroes.entity.LaserEntity;
 import net.togyk.myneheroes.entity.ModEntities;
 import net.togyk.myneheroes.entity.StationaryArmorEntity;
-import net.togyk.myneheroes.power.VariableLinkedPower;
 
 import java.util.*;
 
 public class Abilities {
     private static final Map<Identifier,Ability> ABILITIES = new HashMap<>();
 
-    public static final Ability TOGGLE_HUD = registerAbility(new MechanicalHudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_hud"), "toggle_hud", new Ability.Settings()));
-    public static final Ability SHOOT_LAZAR = registerAbility(new Ability(Identifier.of(MyneHeroes.MOD_ID, "shoot_lazar"), "shoot_lazar", 10, new Ability.Settings(), (player) -> {
+    public static final Ability TOGGLE_HUD = registerAbility(new MechanicalHudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_hud"), new Ability.Settings()));
+    public static final Ability SHOOT_LAZAR = registerAbility(new Ability(Identifier.of(MyneHeroes.MOD_ID, "shoot_laser"), 10, new Ability.Settings(), (player) -> {
         ItemStack reactorStack = MyneHeroes.getReactorItemClass(player);
         if (reactorStack.getItem() instanceof ReactorItem reactor) {
             int reactorPower = reactor.getStoredPowerOrDefault(reactorStack, 0);
             if (reactorPower >= 50) {
                 reactor.setStoredPower(reactorStack, reactorPower - 50);
-                // shoot a lazar
+                // shoot a laser
                 Vec3d look = player.getRotationVec(1.0F);
 
                 LaserEntity projectile = new LaserEntity(ModEntities.LASER, player.getWorld());
@@ -61,11 +60,11 @@ public class Abilities {
         }
         return false;
     }));
-    public static final Ability ALLOW_FLYING = registerAbility(new FlyFromReactorAbility(Identifier.of(MyneHeroes.MOD_ID, "allow_flying"), "allow_flying", new Ability.Settings(), 1));
+    public static final Ability ALLOW_FLYING = registerAbility(new FlyFromReactorAbility(Identifier.of(MyneHeroes.MOD_ID, "allow_flying"), new Ability.Settings(), 1));
 
-    public static final Ability RELEASE_KINETIC_ENERGY = registerAbility(new ReleaseKineticEnergyAbility(Identifier.of(MyneHeroes.MOD_ID, "release_kinetic_energy"), "release_kinetic_energy", new Ability.Settings(), 120, 200, 1.0F));
+    public static final Ability RELEASE_KINETIC_ENERGY = registerAbility(new ReleaseKineticEnergyAbility(Identifier.of(MyneHeroes.MOD_ID, "release_kinetic_energy"), new Ability.Settings(), 120, 200, 1.0F));
 
-    public static final Ability LAZAR_EYES = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "lazar_eyes"), "lazar_eyes", 2, 1000, 4, new Ability.Settings(),  (player) -> {
+    public static final Ability LAZAR_EYES = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "laser_eyes"), 2, 1000, 4, new Ability.Settings(),  (player) -> {
         if (!player.getWorld().isClient) {
             // shoot laser
             Vec3d look = player.getRotationVec(1.0F);
@@ -85,7 +84,7 @@ public class Abilities {
         return false;
     }));
 
-    public static final Ability TAKE_OFF_SUIT = registerAbility(new Ability(Identifier.of(MyneHeroes.MOD_ID, "take_off_suit"), "take_off_suit", 2, new Ability.Settings().appearsMultipleTimes(false),  (player) -> {
+    public static final Ability TAKE_OFF_SUIT = registerAbility(new Ability(Identifier.of(MyneHeroes.MOD_ID, "take_off_suit"), 2, new Ability.Settings().appearsMultipleTimes(false),  (player) -> {
         List<ItemStack> armor = new ArrayList<>();
         for (ItemStack stack : player.getArmorItems()) {
             if (stack.getItem() instanceof AdvancedArmorItem item) {
@@ -113,7 +112,7 @@ public class Abilities {
         }
     }));
 
-    public static final Ability FROST_BREATH = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "frost_breath"), "frost_breath", 2, 48, 8, new Ability.Settings(),  (player) -> {
+    public static final Ability FROST_BREATH = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "frost_breath"), 2, 48, 8, new Ability.Settings(),  (player) -> {
         Vec3d direction = player.getRotationVec(1.0F);
         Vec3d origin = player.getEyePos().add(0, -0.2, 0);
         World world = player.getWorld();
@@ -165,19 +164,19 @@ public class Abilities {
         return false;
     }));
 
-    public static final Ability SPEED_UP = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_up"), "speed_up", "speedLevel", 5, new Ability.Settings(),  (player, power) -> {
+    public static final Ability SPEED_UP = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_up"), "speedLevel", 5, new Ability.Settings(),  (player, power) -> {
         int speed = power.getInt("speedLevel");
         power.setInt("speedLevel", speed + 1);
         return true;
     }));
 
-    public static final Ability SPEED_DOWN = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_down"), "speed_down", "speedLevel", 5, new Ability.Settings(),  (player, power) -> {
+    public static final Ability SPEED_DOWN = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_down"), "speedLevel", 5, new Ability.Settings(),  (player, power) -> {
         int speed = power.getInt("speedLevel");
         power.setInt("speedLevel", speed - 1);
         return true;
     }));
 
-    public static final Ability TOGGLE_SPEED = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speed"), "toggle_speed", "speedActive", 5, new Ability.Settings(),  (player, power) -> {
+    public static final Ability TOGGLE_SPEED = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speed"), "speedActive", 5, new Ability.Settings(),  (player, power) -> {
         boolean isActive = power.getBoolean("speedActive");
         power.setBoolean("speedActive", !isActive);
         return true;
@@ -198,6 +197,6 @@ public class Abilities {
     }
 
     public static Ability get(Identifier id) {
-        return ABILITIES.getOrDefault(id, null).copy();
+        return ABILITIES.getOrDefault(id, null);
     }
 }

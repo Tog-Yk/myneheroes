@@ -19,7 +19,6 @@ public class Ability {
     private ItemStack HolderItem;
 
     public final Identifier id;
-    protected final String abilityName;
     protected final int maxCooldown;
     public int cooldown;
 
@@ -29,9 +28,8 @@ public class Ability {
     protected final Function<PlayerEntity, Boolean> use;
     protected final Settings settings;
 
-    public Ability(Identifier id, String name, int cooldown, Settings settings, Function<PlayerEntity, Boolean> use) {
+    public Ability(Identifier id, int cooldown, Settings settings, Function<PlayerEntity, Boolean> use) {
         this.id = id;
-        this.abilityName = name;
         this.icon = Identifier.of(id.getNamespace(),"textures/ability/"+id.getPath()+".png");
         this.disabled_icon = Identifier.of(id.getNamespace(),"textures/ability/"+id.getPath()+"_disabled.png");
         this.maxCooldown = cooldown;
@@ -64,10 +62,6 @@ public class Ability {
         } else if (this.getHolderItem() instanceof Power power) {
             power.saveAbility(this);
         }
-    }
-
-    public String getName() {
-        return abilityName;
     }
 
     public int getCooldown() {
@@ -128,7 +122,7 @@ public class Ability {
     }
 
     public Ability copy() {
-        return new Ability(id, abilityName, maxCooldown, settings, use);
+        return new Ability(id, maxCooldown, settings, use);
     }
 
     public static class Settings{

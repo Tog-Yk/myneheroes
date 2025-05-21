@@ -10,8 +10,8 @@ public class StockpileLinkedAbility extends Ability{
     protected final int unlocksAt;
     protected final int cost;
 
-    public StockpileLinkedAbility(Identifier id, String name, int cooldown, int unlocksAt, int cost, Ability.Settings settings, Function<PlayerEntity, Boolean> use) {
-        super(id, name, cooldown, settings, use);
+    public StockpileLinkedAbility(Identifier id, int cooldown, int unlocksAt, int cost, Ability.Settings settings, Function<PlayerEntity, Boolean> use) {
+        super(id, cooldown, settings, use);
         this.unlocksAt = unlocksAt;
         this.cost = cost;
     }
@@ -37,6 +37,6 @@ public class StockpileLinkedAbility extends Ability{
 
     @Override
     public StockpileLinkedAbility copy() {
-        return new StockpileLinkedAbility(this.getId(), this.getName(), this.getMaxCooldown(), this.unlocksAt, this.cost, settings, use);
+        return new StockpileLinkedAbility(this.getId(), this.getMaxCooldown(), this.unlocksAt, this.cost, settings, use);
     }
 }

@@ -6,8 +6,8 @@ import net.minecraft.util.Identifier;
 
 public class BooleanAbility extends Ability{
     private boolean bool = true;
-    public BooleanAbility(Identifier id, String name, Settings settings) {
-        super(id, name, 4, settings, (player) -> false);
+    public BooleanAbility(Identifier id, Settings settings) {
+        super(id, 4, settings, (player) -> false);
     }
 
     @Override
@@ -40,6 +40,6 @@ public class BooleanAbility extends Ability{
 
     @Override
     public BooleanAbility copy() {
-        return new BooleanAbility(this.id, this.getName(), settings);
+        return new BooleanAbility(this.id, settings);
     }
 }

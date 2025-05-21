@@ -27,7 +27,7 @@ public class AbilityHoldingItem extends Item implements AbilityHolding {
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        tooltip.add(Text.literal("Holds ability: "+ability.getName()));
+        tooltip.add(Text.literal("Holds ability: " + Text.translatable("ability."+ability.getId().toTranslationKey())));
         super.appendTooltip(stack, context, tooltip, type);
     }
 

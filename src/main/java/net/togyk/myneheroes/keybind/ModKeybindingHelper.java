@@ -53,7 +53,7 @@ public class ModKeybindingHelper {
                     }
                 }
             }
-            if (ModKeyBindings.useForthAbility.isPressed()) {
+            if (ModKeyBindings.useFourthAbility.isPressed()) {
                 if (MinecraftClient.getInstance().player != null){
                     Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).getFourthAbility();
                     if (ability != null) {

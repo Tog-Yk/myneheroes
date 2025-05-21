@@ -13,8 +13,8 @@ import net.togyk.myneheroes.util.HudActionResult;
 import java.util.List;
 
 public class HudAbility extends BooleanAbility {
-    public HudAbility(Identifier id, String name, Ability.Settings settings) {
-        super(id, name, settings);
+    public HudAbility(Identifier id, Ability.Settings settings) {
+        super(id, settings);
     }
 
     public HudActionResult drawHud(DrawContext drawContext, RenderTickCounter tickCounter) {
@@ -33,6 +33,6 @@ public class HudAbility extends BooleanAbility {
 
     @Override
     public HudAbility copy() {
-        return new HudAbility(this.id, this.getName(), settings);
+        return new HudAbility(this.id, settings);
     }
 }
