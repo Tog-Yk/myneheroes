@@ -84,7 +84,7 @@ public class Abilities {
         return false;
     }));
 
-    public static final Ability TAKE_OFF_SUIT = registerAbility(new Ability(Identifier.of(MyneHeroes.MOD_ID, "take_off_suit"), 2, new Ability.Settings().appearsMultipleTimes(false),  (player) -> {
+    public static final Ability TAKE_OFF_SUIT = registerAbility(new Ability(Identifier.of(MyneHeroes.MOD_ID, "take_off_suit"), 10, new Ability.Settings().appearsMultipleTimes(false),  (player) -> {
         List<ItemStack> armor = new ArrayList<>();
         for (ItemStack stack : player.getArmorItems()) {
             if (stack.getItem() instanceof AdvancedArmorItem item) {
@@ -112,7 +112,7 @@ public class Abilities {
         }
     }));
 
-    public static final Ability FROST_BREATH = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "frost_breath"), 2, 48, 8, new Ability.Settings(),  (player) -> {
+    public static final Ability FROST_BREATH = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "frost_breath"), 10, 48, 8, new Ability.Settings(),  (player) -> {
         Vec3d direction = player.getRotationVec(1.0F);
         Vec3d origin = player.getEyePos().add(0, -0.2, 0);
         World world = player.getWorld();
@@ -164,19 +164,19 @@ public class Abilities {
         return false;
     }));
 
-    public static final Ability SPEED_UP = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_up"), "speedLevel", 5, new Ability.Settings(),  (player, power) -> {
+    public static final Ability SPEED_UP = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_up"), "speedLevel", 10, new Ability.Settings(),  (player, power) -> {
         int speed = power.getInt("speedLevel");
         power.setInt("speedLevel", speed + 1);
         return true;
     }));
 
-    public static final Ability SPEED_DOWN = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_down"), "speedLevel", 5, new Ability.Settings(),  (player, power) -> {
+    public static final Ability SPEED_DOWN = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_down"), "speedLevel", 10, new Ability.Settings(),  (player, power) -> {
         int speed = power.getInt("speedLevel");
         power.setInt("speedLevel", speed - 1);
         return true;
     }));
 
-    public static final Ability TOGGLE_SPEED = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speed"), "speedActive", 5, new Ability.Settings(),  (player, power) -> {
+    public static final Ability TOGGLE_SPEED = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speed"), "speedActive", 10, new Ability.Settings(),  (player, power) -> {
         boolean isActive = power.getBoolean("speedActive");
         power.setBoolean("speedActive", !isActive);
         return true;

@@ -18,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class Power {
@@ -52,7 +53,9 @@ public class Power {
 
         NbtList abilitiesNbt = new NbtList();
         for (Ability ability : this.abilities) {
-            abilitiesNbt.add(ability.writeNbt(new NbtCompound()));
+            if (ability != null) {
+                abilitiesNbt.add(ability.writeNbt(new NbtCompound()));
+            }
         }
 
         nbt.put("abilities", abilitiesNbt);
@@ -128,7 +131,7 @@ public class Power {
     }
 
     public void saveAbility(Ability ability) {
-        List<Identifier> identifiers = this.abilities.stream().map(Ability::getId).toList();
+        List<Identifier> identifiers = this.abilities.stream().filter(Predicate.not(Predicate.isEqual(null))).map(Ability::getId).toList();
         Identifier id = ability.getId();
     }
 

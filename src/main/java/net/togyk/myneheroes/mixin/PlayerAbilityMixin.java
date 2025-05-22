@@ -48,7 +48,9 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
             }
         }
         for (Ability ability : this.abilities) {
-            ability.tick();
+            if (ability != null) {
+                ability.tick();
+            }
         }
         if (this.scrolledAbilityOffset > this.maxAbilityScroll()) {
             this.scrolledAbilityOffset = this.maxAbilityScroll();
@@ -65,7 +67,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
                 if (power != null && !power.isDampened()) {
                     // Have I told you I am really amazed about your progress and your skills?
                     for (Ability ability : power.getAbilities()) {
-                        if (!abilityList.contains(ability)) {
+                        if (!abilityList.contains(ability) && ability != null) {
                             ability.setHolder(power);
                             abilityList.add(ability);
                         }
@@ -79,7 +81,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         if (helmetStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
             if (advancedArmorItem.getAbilities(helmetStack) != null) {
                 for (Ability ability : advancedArmorItem.getAbilities(helmetStack)) {
-                    if (!abilityList.contains(ability)) {
+                    if (!abilityList.contains(ability) && ability != null) {
                         ability.setHolder(helmetStack);
                         abilityList.add(ability);
                     }
@@ -90,7 +92,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         if (chestplateStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
             if (advancedArmorItem.getAbilities(chestplateStack) != null) {
                 for (Ability ability : advancedArmorItem.getAbilities(chestplateStack)) {
-                    if (!abilityList.contains(ability)) {
+                    if (!abilityList.contains(ability) && ability != null) {
                         ability.setHolder(chestplateStack);
                         abilityList.add(ability);
                     }
@@ -101,7 +103,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         if (leggingsStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
             if (advancedArmorItem.getAbilities(leggingsStack) != null) {
                 for (Ability ability : advancedArmorItem.getAbilities(leggingsStack)) {
-                    if (!abilityList.contains(ability)) {
+                    if (!abilityList.contains(ability) && ability != null) {
                         ability.setHolder(leggingsStack);
                         abilityList.add(ability);
                     }
@@ -112,7 +114,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         if (bootsStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
             if (advancedArmorItem.getAbilities(bootsStack) != null) {
                 for (Ability ability : advancedArmorItem.getAbilities(bootsStack)) {
-                    if (!abilityList.contains(ability)) {
+                    if (!abilityList.contains(ability) && ability != null) {
                         ability.setHolder(bootsStack);
                         abilityList.add(ability);
                     }

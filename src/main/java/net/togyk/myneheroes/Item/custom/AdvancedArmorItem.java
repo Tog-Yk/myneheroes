@@ -59,7 +59,9 @@ public class AdvancedArmorItem extends ArmorItem implements AbilityHolding {
         for (NbtElement nbtElement : abilitiesNbt) {
             if (nbtElement instanceof NbtCompound nbtCompound) {
                 Ability ability = AbilityUtil.nbtToAbility(nbtCompound);
-                abilitiesList.add(ability);
+                if (ability != null) {
+                    abilitiesList.add(ability);
+                }
             }
         }
         return abilitiesList;
