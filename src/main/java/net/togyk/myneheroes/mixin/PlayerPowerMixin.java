@@ -10,6 +10,7 @@ import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.util.PlayerPowers;
 import net.togyk.myneheroes.util.PowerData;
+import net.togyk.myneheroes.util.ScrollData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -39,7 +40,9 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
                 power.updateAttributes(player.getAttributes());
             }
         }
-        if (scrolledPowerOffset < 0) {
+        if (this.scrolledPowerOffset > this.maxPowerScroll()) {
+            this.scrolledPowerOffset = this.maxPowerScroll();
+        } else if (scrolledPowerOffset < 0) {
             this.scrolledPowerOffset = 0;
         }
     }
@@ -141,7 +144,12 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
 
     @Override
     public int getScrolledPowerOffset() {
-        return Math.max(Math.min(scrolledPowerOffset, this.powers.size()), 0);
+        return Math.max(scrolledPowerOffset, 0);
+    }
+
+    @Override
+    public int maxPowerScroll() {
+        return this.powers.size() - 1;
     }
 
     @Override
@@ -151,7 +159,7 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
 
     @Override
     public void scrollPowerFurther() {
-        if (this.scrolledPowerOffset + 1 < this.powers.size()) {
+        if (this.scrolledPowerOffset < maxPowerScroll()) {
             this.scrolledPowerOffset += 1;
         } else {
             this.scrolledPowerOffset = 0;
@@ -163,7 +171,7 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
         if (this.scrolledPowerOffset > 0) {
             this.scrolledPowerOffset -= 1;
         } else {
-            this.scrolledPowerOffset = this.powers.size() - 1;
+            this.scrolledPowerOffset = maxPowerScroll();
         }
     }
 }

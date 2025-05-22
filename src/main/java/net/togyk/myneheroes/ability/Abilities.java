@@ -112,7 +112,7 @@ public class Abilities {
         }
     }));
 
-    public static final Ability FROST_BREATH = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "frost_breath"), 10, 48, 8, new Ability.Settings(),  (player) -> {
+    public static final Ability FROST_BREATH = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "frost_breath"), 4, 48, 8, new Ability.Settings(),  (player) -> {
         Vec3d direction = player.getRotationVec(1.0F);
         Vec3d origin = player.getEyePos().add(0, -0.2, 0);
         World world = player.getWorld();

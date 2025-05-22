@@ -16,4 +16,5 @@ public interface PlayerPowers {
     void setScrolledPowerOffset(int scrolledOffset);
     void scrollPowerFurther();
     void scrollPowerBack();
+    int maxPowerScroll();
 }

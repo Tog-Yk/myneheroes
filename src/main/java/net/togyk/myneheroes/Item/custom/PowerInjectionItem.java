@@ -1,5 +1,6 @@
 package net.togyk.myneheroes.Item.custom;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -13,6 +14,7 @@ import net.minecraft.world.World;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.util.PowerData;
+import net.togyk.myneheroes.util.ScrollData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,15 +49,18 @@ public class PowerInjectionItem extends Item {
 
         List<Power> powers = PowerData.getPowers(user);
         List<Identifier> powerIds = new ArrayList<>();
-        if (!powers.isEmpty() && powers != null) {
+        if (!powers.isEmpty()) {
             powerIds = powers.stream().map(Power::getId).toList();
         }
         if (power == null && !powers.isEmpty()) {
-            Power usersLastPower = powers.getLast();
-            this.setPower(user.getStackInHand(hand), usersLastPower);
-            PowerData.removePower(user, usersLastPower);
-            user.swingHand(hand);
-            return TypedActionResult.success(user.getStackInHand(hand));
+            int scrolled = ScrollData.getScrolledPowersOffset(user);
+            if (powers.size() > scrolled) {
+                Power usersPower = powers.get(scrolled);
+                this.setPower(user.getStackInHand(hand), usersPower);
+                PowerData.removePower(user, usersPower);
+                user.swingHand(hand);
+                return TypedActionResult.success(user.getStackInHand(hand));
+            }
         } else if (power != null && !powerIds.contains(power.id)) {
             PowerData.addPower(user, power);
             this.setPower(user.getStackInHand(hand), null);

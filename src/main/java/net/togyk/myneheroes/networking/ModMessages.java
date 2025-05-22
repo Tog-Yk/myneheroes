@@ -138,12 +138,13 @@ public class ModMessages {
         ServerPlayNetworking.registerGlobalReceiver(PlayerAbilityScrollSyncDataPayload.ID, (payload, context) -> {
             context.server().execute(() -> {
                 ((PlayerAbilities) context.player()).setScrolledAbilityOffset(payload.scrolledAbilities());
-                ((PlayerPowers) context.player()).setScrolledPowerOffset(payload.scrolledAbilities());
+                ((PlayerPowers) context.player()).setScrolledPowerOffset(payload.scrolledPowers());
             });
         });
 
 
 
+        PayloadTypeRegistry.playS2C().register(PlayerAbilityScrollSyncDataPayload.ID, PlayerAbilityScrollSyncDataPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(PlayerPowerSyncDataPayload.ID, PlayerPowerSyncDataPayload.CODEC);
     }
 
@@ -166,6 +167,13 @@ public class ModMessages {
                     }
                 }
                 ((PlayerPowers) context.player()).setPowers(powers);
+            });
+        });
+
+        ClientPlayNetworking.registerGlobalReceiver(PlayerAbilityScrollSyncDataPayload.ID, (payload, context) -> {
+            context.client().execute(() -> {
+                ((PlayerAbilities) context.player()).setScrolledAbilityOffset(payload.scrolledAbilities());
+                ((PlayerPowers) context.player()).setScrolledPowerOffset(payload.scrolledPowers());
             });
         });
     }

@@ -38,7 +38,9 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
     private void tick(CallbackInfo info) {
         PlayerEntity player = (PlayerEntity) (Object) this;
         if (this.isDirty) {
-            ScrollData.setScrolledAbilitiesOffset(player, ScrollData.getScrolledAbilitiesOffset(player));
+            if (!player.getWorld().isClient()) {
+                ScrollData.setScrolledAbilitiesOffset(player, scrolledAbilityOffset);
+            }
             this.isDirty = false;
         }
         if (player != null) {
@@ -234,7 +236,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
 
     @Override
     public int getScrolledAbilityOffset() {
-        return Math.max(Math.min(scrolledAbilityOffset, this.abilities.size() - 4), 0);
+        return Math.max(scrolledAbilityOffset, 0);
     }
 
     @Override
