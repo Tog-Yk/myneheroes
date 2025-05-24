@@ -95,21 +95,23 @@ public class Abilities {
             }
         }
         if (armor.size() == 4) {
-            StationaryArmorEntity entity = new StationaryArmorEntity(ModEntities.STATIONARY_ARMOR, player.getWorld());
-            entity.setPosition(player.getX(), player.getY(), player.getZ());
-            entity.setAngles(player.getYaw(), player.getPitch());
-            entity.setVelocity(player.getVelocity());
+            if (!player.getWorld().isClient()) {
+                StationaryArmorEntity entity = new StationaryArmorEntity(ModEntities.STATIONARY_ARMOR, player.getWorld());
+                entity.setPosition(player.getX(), player.getY(), player.getZ());
+                entity.setAngles(player.getYaw(), player.getPitch());
+                entity.setVelocity(player.getVelocity());
 
-            for (ItemStack stack : armor) {
-                entity.equipStack(((AdvancedArmorItem) stack.getItem()).getSlotType() , stack.copyAndEmpty());
+                for (ItemStack stack : armor) {
+                    entity.equipStack(((AdvancedArmorItem) stack.getItem()).getSlotType(), stack.copyAndEmpty());
+                }
+
+                player.getWorld().spawnEntity(entity);
+                return true;
             }
-
-            player.getWorld().spawnEntity(entity);
-            return true;
         } else {
             player.sendMessage(Text.literal("All your equipment has to have this ability"), true);
-            return true;
         }
+        return false;
     }));
 
     public static final Ability FROST_BREATH = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "frost_breath"), 4, 48, 8, new Ability.Settings(),  (player) -> {
