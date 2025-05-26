@@ -1,5 +1,8 @@
 package net.togyk.myneheroes.power;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.Dynamic;
+import io.netty.buffer.ByteBuf;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -9,10 +12,15 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 import net.togyk.myneheroes.ability.Ability;
-import net.togyk.myneheroes.ability.AbilityUtil;
+import net.togyk.myneheroes.util.AbilityUtil;
+import net.togyk.myneheroes.util.PowerUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -22,6 +30,22 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class Power {
+    public static final Codec<Power> CODEC = Codec.PASSTHROUGH
+            .xmap(
+                    dynamic -> PowerUtil.nbtToPower((NbtCompound) dynamic.convert(NbtOps.INSTANCE).getValue()),
+                    power -> new Dynamic<>(NbtOps.INSTANCE, power.writeNbt(new NbtCompound()))
+            );
+
+    public static final PacketCodec<ByteBuf, Power> PACKET_CODEC = new PacketCodec<>() {
+        public Power decode(ByteBuf buf) {
+            return PowerUtil.nbtToPower(PacketCodecs.NBT_COMPOUND.decode(buf));
+        }
+
+        public void encode(ByteBuf buf, Power power) {
+            PacketCodecs.NBT_COMPOUND.encode(buf, power.writeNbt(new NbtCompound()));
+        }
+    };
+
     public final Identifier id;
     protected final Settings settings;
     public List<Ability> abilities;
@@ -29,7 +53,7 @@ public class Power {
     private boolean isDampened = false;
     protected int color;
 
-    private static PlayerEntity holder;
+    private PlayerEntity holder;
 
     private final Identifier background;
     private final Identifier disabledBackground;
@@ -54,6 +78,7 @@ public class Power {
         NbtList abilitiesNbt = new NbtList();
         for (Ability ability : this.abilities) {
             if (ability != null) {
+                ability.setHolder(this);
                 abilitiesNbt.add(ability.writeNbt(new NbtCompound()));
             }
         }
@@ -122,11 +147,11 @@ public class Power {
     public void tick(PlayerEntity player) {
     }
 
-    public static void setHolder(@Nullable PlayerEntity newHolder) {
+    public void setHolder(@Nullable PlayerEntity newHolder) {
         holder = newHolder;
     }
 
-    public static PlayerEntity getHolder() {
+    public PlayerEntity getHolder() {
         return holder;
     }
 

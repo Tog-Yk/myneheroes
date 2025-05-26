@@ -15,9 +15,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.ability.Abilities;
 import net.togyk.myneheroes.ability.Ability;
-import net.togyk.myneheroes.ability.AbilityUtil;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.power.AbilityHolding;
+import net.togyk.myneheroes.util.AbilityUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;

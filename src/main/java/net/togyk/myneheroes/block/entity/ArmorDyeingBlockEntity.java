@@ -18,7 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.block.ModBlockEntityTypes;
-import net.togyk.myneheroes.block.screen.handeler.ArmorDyeingScreenHandler;
+import net.togyk.myneheroes.client.screen.handeler.ArmorDyeingScreenHandler;
 import net.togyk.myneheroes.networking.BlockPosPayload;
 import org.jetbrains.annotations.Nullable;
 

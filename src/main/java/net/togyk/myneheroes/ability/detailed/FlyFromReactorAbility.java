@@ -18,7 +18,7 @@ public class FlyFromReactorAbility extends BooleanAbility {
 
     @Override
     public void tick() {
-        if (this.getHolderItem() instanceof ItemStack stack && stack.getHolder() instanceof PlayerEntity player) {
+        if (this.getIndirectHolder() instanceof ItemStack stack && stack.getHolder() instanceof PlayerEntity player) {
             if (this.get() && player.getAbilities().flying) {
                 ItemStack reactorStack = MyneHeroes.getReactorItemClass(player);
                 if (reactorStack.getItem() instanceof ReactorItem reactor) {
@@ -35,7 +35,7 @@ public class FlyFromReactorAbility extends BooleanAbility {
     @Override
     public boolean get() {
         if (super.get()) {
-            if (this.getHolderItem() instanceof ItemStack stack && stack.getHolder() instanceof PlayerEntity player) {
+            if (this.getIndirectHolder() instanceof ItemStack stack && stack.getHolder() instanceof PlayerEntity player) {
                 ItemStack reactorStack = MyneHeroes.getReactorItemClass(player);
                 if (reactorStack.getItem() instanceof ReactorItem reactor) {
                     int reactorPower = reactor.getStoredPowerOrDefault(reactorStack, 0);

@@ -1,4 +1,4 @@
-package net.togyk.myneheroes.block.screen.handeler;
+package net.togyk.myneheroes.client.screen.handeler;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,7 +11,7 @@ import net.minecraft.screen.slot.Slot;
 import net.togyk.myneheroes.Item.custom.DyeableItem;
 import net.togyk.myneheroes.block.ModBlocks;
 import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
-import net.togyk.myneheroes.block.screen.ModScreenHandlerTypes;
+import net.togyk.myneheroes.client.screen.ModScreenHandlerTypes;
 import net.togyk.myneheroes.networking.BlockPosPayload;
 import net.togyk.myneheroes.networking.ColorItemPayload;
 

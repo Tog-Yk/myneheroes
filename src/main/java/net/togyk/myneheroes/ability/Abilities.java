@@ -33,30 +33,32 @@ public class Abilities {
     public static final Ability TOGGLE_HUD = registerAbility(new MechanicalHudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_hud"), new Ability.Settings()));
     public static final Ability SHOOT_LAZAR = registerAbility(new Ability(Identifier.of(MyneHeroes.MOD_ID, "shoot_laser"), 10, new Ability.Settings(), (player) -> {
         ItemStack reactorStack = MyneHeroes.getReactorItemClass(player);
-        if (reactorStack.getItem() instanceof ReactorItem reactor) {
-            int reactorPower = reactor.getStoredPowerOrDefault(reactorStack, 0);
-            if (reactorPower >= 50) {
-                reactor.setStoredPower(reactorStack, reactorPower - 50);
-                // shoot a laser
-                Vec3d look = player.getRotationVec(1.0F);
+        if (!player.getWorld().isClient) {
+            if (reactorStack.getItem() instanceof ReactorItem reactor) {
+                int reactorPower = reactor.getStoredPowerOrDefault(reactorStack, 0);
+                if (reactorPower >= 50) {
+                    reactor.setStoredPower(reactorStack, reactorPower - 50);
+                    // shoot a laser
+                    Vec3d look = player.getRotationVec(1.0F);
 
-                LaserEntity projectile = new LaserEntity(ModEntities.LASER, player.getWorld());
-                projectile.setOwner(player);
-                projectile.setPosition(player.getX(), player.getEyeY(), player.getZ());
-                projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
-                projectile.applyDamageModifier(2.0F);
-                projectile.setColor(0x3300FFFF);
-                projectile.setInnerColor(0xFFF0FFFF);
+                    LaserEntity projectile = new LaserEntity(ModEntities.LASER, player.getWorld());
+                    projectile.setOwner(player);
+                    projectile.setPosition(player.getX(), player.getEyeY(), player.getZ());
+                    projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
+                    projectile.applyDamageModifier(2.0F);
+                    projectile.setColor(0x3300FFFF);
+                    projectile.setInnerColor(0xFFF0FFFF);
 
-                player.getWorld().spawnEntity(projectile);
-                player.swingHand(Hand.MAIN_HAND);
+                    player.getWorld().spawnEntity(projectile);
+                    player.swingHand(Hand.MAIN_HAND);
 
-                return true;
+                    return true;
+                } else {
+                    player.sendMessage(Text.literal("your reactor has to have enough charge"), true);
+                }
             } else {
-                player.sendMessage(Text.literal("your reactor has to have enough charge"), true);
+                player.sendMessage(Text.literal("you must have an arc reactor"), true);
             }
-        } else {
-            player.sendMessage(Text.literal("you must have an arc reactor"), true);
         }
         return false;
     }));
@@ -184,6 +186,8 @@ public class Abilities {
         return true;
     }));
 
+    public static final Ability TOOLBELT_3 = registerAbility(new ToolbeltAbility(Identifier.of(MyneHeroes.MOD_ID, "toolbelt_3"), new Ability.Settings(), 3));
+
     public static void registerAbilities() {
         MyneHeroes.LOGGER.info("registering Abilities for " + MyneHeroes.MOD_ID);
     }
@@ -199,6 +203,14 @@ public class Abilities {
     }
 
     public static Ability get(Identifier id) {
-        return ABILITIES.getOrDefault(id, null);
+        Ability ability = ABILITIES.getOrDefault(id, null);
+        if (ability != null) {
+            return ability.copy();
+        }
+        return null;
+    }
+
+    public static boolean contains(Identifier id) {
+        return ABILITIES.containsKey(id);
     }
 }

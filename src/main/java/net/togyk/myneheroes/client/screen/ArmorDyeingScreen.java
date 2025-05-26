@@ -1,4 +1,4 @@
-package net.togyk.myneheroes.block.screen.client;
+package net.togyk.myneheroes.client.screen;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -11,20 +11,20 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.block.screen.client.widget.ColorSliderWidget;
-import net.togyk.myneheroes.block.screen.handeler.ArmorDyeingScreenHandler;
+import net.togyk.myneheroes.client.screen.widget.ColorSliderWidget;
+import net.togyk.myneheroes.client.screen.handeler.ArmorDyeingScreenHandler;
 
 import java.util.List;
 
 public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
     private static final Identifier TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/container/armor_dyeing.png");
 
-    private static final Identifier OPTION_SELECTED_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprite/container/armor_dyeing/option_selected.png");
-    private static final Identifier OPTION_HIGHLIGHTED_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprite/container/armor_dyeing/option_highlighted.png");
-    private static final Identifier OPTION_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprite/container/armor_dyeing/option.png");
+    private static final Identifier OPTION_SELECTED_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprites/container/armor_dyeing/option_selected.png");
+    private static final Identifier OPTION_HIGHLIGHTED_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprites/container/armor_dyeing/option_highlighted.png");
+    private static final Identifier OPTION_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprites/container/armor_dyeing/option.png");
 
-    private static final Identifier SCROLLER_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprite/container/armor_dyeing/scroller.png");
-    private static final Identifier SCROLLER_DISABLED_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprite/container/armor_dyeing/scroller_disabled.png");
+    private static final Identifier SCROLLER_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprites/container/armor_dyeing/scroller.png");
+    private static final Identifier SCROLLER_DISABLED_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprites/container/armor_dyeing/scroller_disabled.png");
 
     private float scrollAmount;
     private boolean mouseClicked;

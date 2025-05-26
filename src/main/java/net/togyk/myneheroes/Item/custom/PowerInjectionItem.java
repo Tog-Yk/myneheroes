@@ -26,21 +26,11 @@ public class PowerInjectionItem extends Item {
     }
 
     public Power getPower(ItemStack stack) {
-        NbtCompound nbt = stack.getOrDefault(ModDataComponentTypes.POWER,  new NbtCompound());
-        if (nbt.contains("power")) {
-            return PowerData.nbtToPower(nbt.getCompound("power"));
-        }
-        return null;
+        return stack.getOrDefault(ModDataComponentTypes.POWER,  null);
     }
 
     public void setPower(ItemStack stack, Power power) {
-        NbtCompound nbt = stack.getOrDefault(ModDataComponentTypes.POWER,  new NbtCompound());
-        if (power != null) {
-            nbt.put("power", power.writeNbt(new NbtCompound()));
-        } else {
-            nbt.remove("power");
-        }
-        stack.set(ModDataComponentTypes.POWER, nbt);
+        stack.set(ModDataComponentTypes.POWER, power);
     }
 
     @Override

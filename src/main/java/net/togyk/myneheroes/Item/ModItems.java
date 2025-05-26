@@ -2,8 +2,11 @@ package net.togyk.myneheroes.Item;
 
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.SwordItem;
+import net.minecraft.item.ToolMaterials;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.*;
 import net.togyk.myneheroes.MyneHeroes;
@@ -47,6 +50,7 @@ public class ModItems {
     public static final Item FlY_UPGRADE = registerItem("fly_upgrade", new UpgradeItem(Abilities.ALLOW_FLYING, 6, ArmorItem.Type.BOOTS, new Item.Settings()));
     public static final Item KINETIC_ENERGY_STORAGE_UPGRADE = registerItem("kinetic_energy_storage_upgrade", new UpgradeItem(Abilities.RELEASE_KINETIC_ENERGY, 3, null, new Item.Settings()));
     public static final Item TAKE_OFF_SUIT_UPGRADE = registerItem("take_off_suit_upgrade", new UpgradeItem(Abilities.TAKE_OFF_SUIT, 4, null, new Item.Settings()));
+    public static final Item TOOLBELT_3_UPGRADE = registerItem("toolbelt_3_upgrade", new UpgradeWithTooltipItem(Abilities.TOOLBELT_3, 4, ArmorItem.Type.LEGGINGS, Text.translatable("item.myneheroes.toolbelt_3_upgrade.size", 3), new Item.Settings()));
 
     //armors
     //vibranium armors

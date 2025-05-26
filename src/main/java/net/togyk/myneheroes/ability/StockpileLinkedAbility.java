@@ -26,7 +26,7 @@ public class StockpileLinkedAbility extends Ability{
 
     @Override
     public void Use(PlayerEntity player) {
-        if (this.getCooldown() == 0 && this.getHolderItem() instanceof StockpilePower power && power.getCharge() >= this.getCost()) {
+        if (this.getCooldown() == 0 && this.getIndirectHolder() instanceof StockpilePower power && power.getCharge() >= this.getCost()) {
             if (this.use.apply(player)) {
                 power.setCharge(power.getCharge() - this.getCost());
                 this.setCooldown(this.getMaxCooldown());

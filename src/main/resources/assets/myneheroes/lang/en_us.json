@@ -27,6 +27,9 @@
   "item.myneheroes.take_off_suit_upgrade": "Take Off Suit Upgrade",
   "item.myneheroes.kinetic_energy_storage_upgrade": "Kinetic Energy Storage Upgrade",
 
+  "item.myneheroes.toolbelt_3_upgrade": "Toolbelt",
+  "item.myneheroes.toolbelt_3_upgrade.size": "Size: %1$s",
+
   "item.myneheroes.vibranium_helmet": "Vibranium Helmet",
   "item.myneheroes.vibranium_chestplate": "Vibranium Chestplate",
   "item.myneheroes.vibranium_leggings": "Vibranium Leggings",
@@ -95,6 +98,8 @@
   "ability.myneheroes.speed_up": "Speed Up",
   "ability.myneheroes.speed_down": "Speed Down",
   "ability.myneheroes.toggle_speed": "Toggle Speed",
+
+  "ability.myneheroes.toolbelt_3": "Open Toolbelt",
 
 
   "trim_material.myneheroes.vibranium": "Vibranium",

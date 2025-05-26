@@ -14,7 +14,7 @@ import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
-import net.togyk.myneheroes.ability.AbilityUtil;
+import net.togyk.myneheroes.util.AbilityUtil;
 import net.togyk.myneheroes.ability.HudAbility;
 import net.togyk.myneheroes.ability.StockpileAbility;
 import net.togyk.myneheroes.client.HudOverlay;
@@ -185,25 +185,25 @@ public class MechanicalHudAbility extends HudAbility {
 
                 int y = abilityScreenY + 4;
 
-                HudOverlay.drawAbility(drawContext, tickCounter, firstAbility, ModKeyBindings.useFirstAbility.isPressed(), abilityScreenX + 6, y);
+                HudOverlay.drawAbility(drawContext, firstAbility, ModKeyBindings.useFirstAbility.isPressed(), abilityScreenX + 6, y);
                 if (firstAbility != null) {
                     drawContext.drawTextWithShadow(textRenderer, firstAbilityText, abilityScreenX + 6 + 18, y + 4, 0xFFFFFF);
                 }
                 y += 18;
 
-                HudOverlay.drawAbility(drawContext, tickCounter, secondAbility, ModKeyBindings.useSecondAbility.isPressed(), abilityScreenX + 6, y);
+                HudOverlay.drawAbility(drawContext, secondAbility, ModKeyBindings.useSecondAbility.isPressed(), abilityScreenX + 6, y);
                 if (secondAbility != null) {
                     drawContext.drawTextWithShadow(textRenderer, secondAbilityText, abilityScreenX + 6 + 18, y + 4, 0xFFFFFF);
                 }
                 y += 18;
 
-                HudOverlay.drawAbility(drawContext, tickCounter, thirdAbility, ModKeyBindings.useThirdAbility.isPressed(), abilityScreenX + 6, y);
+                HudOverlay.drawAbility(drawContext, thirdAbility, ModKeyBindings.useThirdAbility.isPressed(), abilityScreenX + 6, y);
                 if (thirdAbility != null) {
                     drawContext.drawTextWithShadow(textRenderer, thirdAbilityText, abilityScreenX + 6 + 18, y + 4, 0xFFFFFF);
                 }
                 y += 18;
 
-                HudOverlay.drawAbility(drawContext, tickCounter, fourthAbility, ModKeyBindings.useFourthAbility.isPressed(), abilityScreenX + 6, y);
+                HudOverlay.drawAbility(drawContext, fourthAbility, ModKeyBindings.useFourthAbility.isPressed(), abilityScreenX + 6, y);
                 if (fourthAbility != null) {
                     drawContext.drawTextWithShadow(textRenderer, fourthAbilityText, abilityScreenX + 6 + 18, y + 4, 0xFFFFFF);
                 }

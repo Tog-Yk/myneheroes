@@ -12,8 +12,10 @@ import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.ability.Abilities;
 import net.togyk.myneheroes.ability.Ability;
-import net.togyk.myneheroes.ability.AbilityUtil;
+import net.togyk.myneheroes.util.AbilityUtil;
 import net.togyk.myneheroes.ability.HudAbility;
 import net.togyk.myneheroes.ability.StockpileAbility;
 import net.togyk.myneheroes.keybind.ModKeyBindings;
@@ -69,7 +71,7 @@ public class HudOverlay implements HudRenderCallback {
                 y += 10;
 
                 Ability firstAbility = ((PlayerAbilities) client.player).getFirstAbility();
-                drawAbility(drawContext, tickCounter, firstAbility, ModKeyBindings.useFirstAbility.isPressed(), width - 20, y);
+                drawAbility(drawContext, firstAbility, ModKeyBindings.useFirstAbility.isPressed(), width - 20, y);
                 if (firstAbility != null) {
                     text = hasChatOpen ? Text.translatable("ability."+firstAbility.getId().toTranslationKey()) : ModKeyBindings.useFirstAbility.getBoundKeyLocalizedText();
                     drawContext.drawTextWithShadow(textRenderer, text, width - 6 - 18 - textRenderer.getWidth(text), y + 4, 0xFFFFFF);
@@ -77,7 +79,7 @@ public class HudOverlay implements HudRenderCallback {
                 y += 18;
 
                 Ability secondAbility = ((PlayerAbilities) client.player).getSecondAbility();
-                drawAbility(drawContext, tickCounter, secondAbility, ModKeyBindings.useSecondAbility.isPressed(), width - 20, y);
+                drawAbility(drawContext, secondAbility, ModKeyBindings.useSecondAbility.isPressed(), width - 20, y);
                 if (secondAbility != null) {
                     text = hasChatOpen ? Text.translatable("ability."+secondAbility.getId().toTranslationKey()) : ModKeyBindings.useSecondAbility.getBoundKeyLocalizedText();
                     drawContext.drawTextWithShadow(textRenderer, text, width - 6 - 18 - textRenderer.getWidth(text), y + 4, 0xFFFFFF);
@@ -85,7 +87,7 @@ public class HudOverlay implements HudRenderCallback {
                 y += 18;
 
                 Ability thirdAbility = ((PlayerAbilities) client.player).getThirdAbility();
-                drawAbility(drawContext, tickCounter, thirdAbility, ModKeyBindings.useThirdAbility.isPressed(), width - 20, y);
+                drawAbility(drawContext, thirdAbility, ModKeyBindings.useThirdAbility.isPressed(), width - 20, y);
                 if (thirdAbility != null) {
                     text = hasChatOpen ? Text.translatable("ability."+thirdAbility.getId().toTranslationKey()) : ModKeyBindings.useThirdAbility.getBoundKeyLocalizedText();
                     drawContext.drawTextWithShadow(textRenderer, text, width - 6 - 18 - textRenderer.getWidth(text), y + 4, 0xFFFFFF);
@@ -93,7 +95,7 @@ public class HudOverlay implements HudRenderCallback {
                 y += 18;
 
                 Ability fourthAbility = ((PlayerAbilities) client.player).getFourthAbility();
-                drawAbility(drawContext, tickCounter, fourthAbility, ModKeyBindings.useFourthAbility.isPressed(), width - 20, y);
+                drawAbility(drawContext, fourthAbility, ModKeyBindings.useFourthAbility.isPressed(), width - 20, y);
                 if (fourthAbility != null) {
                     text = hasChatOpen ? Text.translatable("ability."+fourthAbility.getId().toTranslationKey()) : ModKeyBindings.useFourthAbility.getBoundKeyLocalizedText();
                     drawContext.drawTextWithShadow(textRenderer, text, width - 6 - 18 - textRenderer.getWidth(text), y + 4, 0xFFFFFF);
@@ -182,7 +184,7 @@ public class HudOverlay implements HudRenderCallback {
         return ids;
     }
 
-    public static void drawAbility(DrawContext drawContext, RenderTickCounter tickCounter, Ability ability, boolean isDisabled, int x, int y) {
+    public static void drawAbility(DrawContext drawContext, Ability ability, boolean isDisabled, int x, int y) {
         if (ability != null) {
             if (isDisabled) {
                 drawContext.drawTexture(ability.disabled_icon, x, y, 0, 0, 16, 16, 16, 16);

@@ -1,22 +1,46 @@
 package net.togyk.myneheroes.ability;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.Dynamic;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.AbilityHolding;
+import net.togyk.myneheroes.util.AbilityUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Function;
 
 public class Ability {
+    public static final Codec<Ability> CODEC = Codec.PASSTHROUGH
+            .xmap(
+                    dynamic -> AbilityUtil.nbtToAbility((NbtCompound) dynamic.convert(NbtOps.INSTANCE).getValue()),
+                    ability -> new Dynamic<>(NbtOps.INSTANCE, ability.writeNbt(new NbtCompound()))
+            );
+
+    public static final PacketCodec<ByteBuf, Ability> PACKET_CODEC = new PacketCodec<>() {
+        public Ability decode(ByteBuf buf) {
+            return AbilityUtil.nbtToAbility(PacketCodecs.NBT_COMPOUND.decode(buf));
+        }
+
+        public void encode(ByteBuf buf, Ability ability) {
+            PacketCodecs.NBT_COMPOUND.encode(buf, ability.writeNbt(new NbtCompound()));
+        }
+    };
+
     private Power HolderPower;
     private ItemStack HolderItem;
+    private SelectionAbility HolderAbility;
 
     public final Identifier id;
     protected final int maxCooldown;
@@ -39,7 +63,7 @@ public class Ability {
 
     public void Use(PlayerEntity player) {
         if (this.getCooldown() == 0) {
-            if (this.use.apply(player)) {
+            if (this.use.apply(player) && !player.getWorld().isClient()) {
                 this.setCooldown(this.getMaxCooldown());
             }
         }
@@ -57,10 +81,12 @@ public class Ability {
     }
 
     public void save() {
-        if (this.getHolderItem() instanceof ItemStack stack && stack.getItem() instanceof AbilityHolding holding) {
+        if (this.getHolder() instanceof ItemStack stack && stack.getItem() instanceof AbilityHolding holding) {
             holding.saveAbility(stack, this);
-        } else if (this.getHolderItem() instanceof Power power) {
+        } else if (this.getHolder() instanceof Power power) {
             power.saveAbility(this);
+        } else if (this.getHolder() instanceof SelectionAbility ability) {
+            ability.saveAbility(this);
         }
     }
 
@@ -79,20 +105,44 @@ public class Ability {
     public void setHolder(@Nullable ItemStack holder) {
         this.HolderItem = holder;
         this.HolderPower = null;
+        this.HolderAbility = null;
     }
 
     public void setHolder(@Nullable Power holder) {
         this.HolderItem = null;
         this.HolderPower = holder;
+        this.HolderAbility = null;
+    }
+
+    public void setHolder(@Nullable SelectionAbility holder) {
+        this.HolderItem = null;
+        this.HolderPower = null;
+        this.HolderAbility = holder;
     }
 
     /*
     returns a power or an ItemStack based on the current holder
     returns null if there is no holder set
      */
-    public Object getHolderItem() {
+    public Object getIndirectHolder() {
         if (HolderItem != null) {
             return HolderItem;
+        } else if (HolderAbility != null) {
+            return HolderAbility.getIndirectHolder();
+        } else {
+            return HolderPower;
+        }
+    }
+
+    /*
+    returns a Power, ItemStack or SelectionAbility based on the current holder
+    returns null if there is no holder set
+     */
+    public Object getHolder() {
+        if (HolderItem != null) {
+            return HolderItem;
+        } else if (HolderAbility != null) {
+            return HolderAbility;
         } else {
             return HolderPower;
         }

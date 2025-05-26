@@ -17,7 +17,7 @@ import net.togyk.myneheroes.block.ModBlockEntityTypes;
 import net.togyk.myneheroes.block.ModBlocks;
 import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
 import net.togyk.myneheroes.block.entity.ArmorLightLevelerBlockEntity;
-import net.togyk.myneheroes.block.screen.ModScreenHandlerTypes;
+import net.togyk.myneheroes.client.screen.ModScreenHandlerTypes;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.entity.ModEntities;
 import net.togyk.myneheroes.entity.StationaryArmorEntity;

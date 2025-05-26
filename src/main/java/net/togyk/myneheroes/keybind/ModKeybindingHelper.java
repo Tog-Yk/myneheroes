@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.networking.KeybindPayload;
+import net.togyk.myneheroes.networking.UseSelectedAbilityPayload;
 import net.togyk.myneheroes.util.ScrollData;
 import net.togyk.myneheroes.util.PlayerAbilities;
 
@@ -21,7 +22,6 @@ public class ModKeybindingHelper {
                 if (MinecraftClient.getInstance().player != null){
                     Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).getFirstAbility();
                     if (ability != null) {
-                        //send two things
                         //to do everything what has to be done on the client side
                         ability.Use(MinecraftClient.getInstance().player);
                         //to send a message to the server to do everything what has to be done on the server side
@@ -33,7 +33,6 @@ public class ModKeybindingHelper {
                 if (MinecraftClient.getInstance().player != null){
                     Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).getSecondAbility();
                     if (ability != null) {
-                        //send two things
                         //to do everything what has to be done on the client side
                         ability.Use(MinecraftClient.getInstance().player);
                         //to send a message to the server to do everything what has to be done on the server side
@@ -45,7 +44,6 @@ public class ModKeybindingHelper {
                 if (MinecraftClient.getInstance().player != null){
                     Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).getThirdAbility();
                     if (ability != null) {
-                        //send two things
                         //to do everything what has to be done on the client side
                         ability.Use(MinecraftClient.getInstance().player);
                         //to send a message to the server to do everything what has to be done on the server side
@@ -57,7 +55,6 @@ public class ModKeybindingHelper {
                 if (MinecraftClient.getInstance().player != null){
                     Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).getFourthAbility();
                     if (ability != null) {
-                        //send two things
                         //to do everything what has to be done on the client side
                         ability.Use(MinecraftClient.getInstance().player);
                         //to send a message to the server to do everything what has to be done on the server side

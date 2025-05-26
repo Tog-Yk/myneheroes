@@ -59,6 +59,7 @@ public class ModItemGroups {
                         entries.add(ModItems.FlY_UPGRADE);
                         entries.add(ModItems.TAKE_OFF_SUIT_UPGRADE);
                         entries.add(ModItems.KINETIC_ENERGY_STORAGE_UPGRADE);
+                        entries.add(ModItems.TOOLBELT_3_UPGRADE);
 
                         entries.add(ModBlocks.KRYPTONITE_BlOCK);
                         entries.add(ModBlocks.KRYPTONITE_CLUSTER);

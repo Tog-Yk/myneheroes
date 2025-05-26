@@ -1,4 +1,4 @@
-package net.togyk.myneheroes.block.screen.client.widget;
+package net.togyk.myneheroes.client.screen.widget;
 
 import net.minecraft.client.gui.widget.SliderWidget;
 import net.minecraft.text.Text;

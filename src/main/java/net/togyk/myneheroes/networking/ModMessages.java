@@ -3,8 +3,8 @@ package net.togyk.myneheroes.networking;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -18,7 +18,10 @@ import net.togyk.myneheroes.Item.custom.DyeableItem;
 import net.togyk.myneheroes.Item.custom.LightableItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.ability.Abilities;
 import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.ability.SelectionAbility;
+import net.togyk.myneheroes.ability.ToolbeltAbility;
 import net.togyk.myneheroes.event.MissedSwingCallback;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.Powers;
@@ -46,22 +49,22 @@ public class ModMessages {
             context.server().execute(() -> {
                 // logic for pressing a keybind
                 if (payload.integer() == 0) {
-                    if (MinecraftClient.getInstance().player != null) {
+                    if (context.player() != null) {
                         Ability firstAbility = ((PlayerAbilities) context.player()).getFirstAbility();
                         firstAbility.Use(context.player());
                     }
                 } else if (payload.integer() == 1) {
-                    if (MinecraftClient.getInstance().player != null) {
+                    if (context.player() != null) {
                         Ability secondAbility = ((PlayerAbilities) context.player()).getSecondAbility();
                         secondAbility.Use(context.player());
                     }
                 }else if (payload.integer() == 2) {
-                    if (MinecraftClient.getInstance().player != null) {
+                    if (context.player() != null) {
                         Ability thirdAbility = ((PlayerAbilities) context.player()).getThirdAbility();
                         thirdAbility.Use(context.player());
                     }
                 }else if (payload.integer() == 3) {
-                    if (MinecraftClient.getInstance().player != null) {
+                    if (context.player() != null) {
                         Ability fourthAbility = ((PlayerAbilities) context.player()).getFourthAbility();
                         fourthAbility.Use(context.player());
                     }
@@ -75,7 +78,6 @@ public class ModMessages {
                         }
                     }
                 }
-                //
             });
         });
 
@@ -146,6 +148,31 @@ public class ModMessages {
 
         PayloadTypeRegistry.playS2C().register(PlayerAbilityScrollSyncDataPayload.ID, PlayerAbilityScrollSyncDataPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(PlayerPowerSyncDataPayload.ID, PlayerPowerSyncDataPayload.CODEC);
+
+        PayloadTypeRegistry.playC2S().register(UseSelectedAbilityPayload.ID, UseSelectedAbilityPayload.CODEC);
+
+
+        ServerPlayNetworking.registerGlobalReceiver(UseSelectedAbilityPayload.ID, (payload, context) -> {
+            context.server().execute(() -> {
+                List<Ability> abilities = ((PlayerAbilities) context.player()).getFilteredAbilities();
+                Ability ability = abilities.get(payload.abilityIndex());
+                if (Abilities.contains(ability.getId()) && ability instanceof SelectionAbility selectionAbility) {
+                    selectionAbility.UseAbility(context.player(), payload.index());
+                }
+            });
+        });
+
+        PayloadTypeRegistry.playC2S().register(SwapFromToolbeltPayload.ID, SwapFromToolbeltPayload.CODEC);
+
+        ServerPlayNetworking.registerGlobalReceiver(SwapFromToolbeltPayload.ID, (payload, context) -> {
+            context.server().execute(() -> {
+                List<Ability> abilities = ((PlayerAbilities) context.player()).getFilteredAbilities();
+                Ability ability = abilities.get(payload.toolbeltIndex());
+                if (Abilities.contains(ability.getId()) && ability instanceof ToolbeltAbility toolbelt) {
+                    toolbelt.swapItem(context.player(), payload.index());
+                }
+            });
+        });
     }
 
     public static void registerClientMessages() {

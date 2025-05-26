@@ -7,6 +7,8 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.power.Power;
 
 import java.util.List;
 import java.util.function.UnaryOperator;
@@ -24,8 +26,8 @@ public class ModDataComponentTypes {
     public static final ComponentType<NbtCompound> ABILITIES =
             register("abilities", builder -> builder.codec(NbtCompound.CODEC));
 
-    public static final ComponentType<NbtCompound> POWER =
-            register("power", builder -> builder.codec(NbtCompound.CODEC));
+    public static final ComponentType<Power> POWER =
+            register("power", builder -> builder.codec(Power.CODEC));
 
 
     private static <T>ComponentType<T> register(String name, UnaryOperator<ComponentType.Builder<T>> builderOperator) {

@@ -1,4 +1,4 @@
-package net.togyk.myneheroes.block.screen.client;
+package net.togyk.myneheroes.client.screen;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -11,20 +11,20 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.block.screen.client.widget.LightLevelSliderWidget;
-import net.togyk.myneheroes.block.screen.handeler.ArmorLightLevelerScreenHandler;
+import net.togyk.myneheroes.client.screen.widget.LightLevelSliderWidget;
+import net.togyk.myneheroes.client.screen.handeler.ArmorLightLevelerScreenHandler;
 
 import java.util.List;
 
 public class ArmorLightLevelerScreen extends HandledScreen<ArmorLightLevelerScreenHandler> {
     private static final Identifier TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/container/armor_light_leveler.png");
 
-    private static final Identifier OPTION_SELECTED_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprite/container/armor_light_leveler/option_selected.png");
-    private static final Identifier OPTION_HIGHLIGHTED_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprite/container/armor_light_leveler/option_highlighted.png");
-    private static final Identifier OPTION_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprite/container/armor_light_leveler/option.png");
+    private static final Identifier OPTION_SELECTED_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprites/container/armor_light_leveler/option_selected.png");
+    private static final Identifier OPTION_HIGHLIGHTED_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprites/container/armor_light_leveler/option_highlighted.png");
+    private static final Identifier OPTION_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprites/container/armor_light_leveler/option.png");
 
-    private static final Identifier SCROLLER_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprite/container/armor_light_leveler/scroller.png");
-    private static final Identifier SCROLLER_DISABLED_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprite/container/armor_light_leveler/scroller_disabled.png");
+    private static final Identifier SCROLLER_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprites/container/armor_light_leveler/scroller.png");
+    private static final Identifier SCROLLER_DISABLED_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/sprites/container/armor_light_leveler/scroller_disabled.png");
 
     private float scrollAmount;
     private boolean mouseClicked;

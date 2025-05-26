@@ -1,8 +1,7 @@
-package net.togyk.myneheroes.block.screen.client;
+package net.togyk.myneheroes.client.screen;
 
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.block.screen.ModScreenHandlerTypes;
 
 public class ModHandledScreens {
     public static void registerModScreenHandlerTypes() {
@@ -10,5 +9,7 @@ public class ModHandledScreens {
 
         HandledScreens.register(ModScreenHandlerTypes.ARMOR_DYEING, ArmorDyeingScreen::new);
         HandledScreens.register(ModScreenHandlerTypes.ARMOR_LIGHT_LEVELER, ArmorLightLevelerScreen::new);
+        HandledScreens.register(ModScreenHandlerTypes.SELECTION_ABILITY, SelectionAbilityScreen::new);
+        HandledScreens.register(ModScreenHandlerTypes.TOOLBELT_ABILITY, ToolbeltAbilityScreen::new);
     }
 }

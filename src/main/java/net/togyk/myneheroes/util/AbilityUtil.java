@@ -1,7 +1,11 @@
-package net.togyk.myneheroes.ability;
+package net.togyk.myneheroes.util;
 
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
+import net.togyk.myneheroes.ability.Abilities;
+import net.togyk.myneheroes.ability.Ability;
+
 import java.util.*;
 
 public class AbilityUtil {
@@ -29,7 +33,7 @@ public class AbilityUtil {
         Identifier abilityId = Identifier.of(nbt.getString("id"));
         Ability ability = Abilities.get(abilityId);
         if (ability != null) {
-            ability.copy().readNbt(nbt);
+            ability.readNbt(nbt);
         }
         return ability;
     }
