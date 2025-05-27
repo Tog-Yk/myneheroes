@@ -132,11 +132,6 @@ public class SpeedsterPower extends Power implements VariableLinkedPower {
     }
 
     @Override
-    public List<Ability> getAbilities() {
-        return super.getAbilities();
-    }
-
-    @Override
     public SpeedsterPower copy() {
         return new SpeedsterPower(id, color, abilities, maxSpeedLevel, settings, attributeModifiers);
     }

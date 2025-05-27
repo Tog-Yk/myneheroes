@@ -4,8 +4,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.power.Power;
+import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.util.PlayerPowers;
 import net.togyk.myneheroes.util.PowerData;
 import net.togyk.myneheroes.util.PowerUtil;
@@ -56,12 +58,13 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
                 NbtList powerNbt = modNbt.getList("powers", NbtElement.COMPOUND_TYPE);
                 for (NbtElement nbtElement : powerNbt) {
                     if (nbtElement instanceof NbtCompound nbtCompound) {
-                        if (nbtCompound.contains("power")) {
-                            NbtCompound powersNbt = nbtCompound.getCompound("power");
-                            Power power = PowerUtil.nbtToPower(powersNbt);
-                            power.setHolder(player);
-                            powers.add(power);
+                        Identifier powerId = Identifier.of(nbtCompound.getString("id"));
+                        Power power = Powers.get(powerId);
+                        if (power != null) {
+                            power.readNbt(nbtCompound);
                         }
+                        power.setHolder(player);
+                        powers.add(power);
                     }
                 }
             }
@@ -127,14 +130,6 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
         Double multiplier = 1.00;
         for (Power power : this.powers) {
             multiplier *= power.getDamageMultiplier();
-        }
-        return multiplier;
-    }
-
-    public double getResistance() {
-        Double multiplier = 1.00;
-        for (Power power : this.powers) {
-            multiplier *= power.getResistance();
         }
         return multiplier;
     }

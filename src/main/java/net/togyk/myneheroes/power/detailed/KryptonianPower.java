@@ -21,10 +21,12 @@ public class KryptonianPower extends StockpilePower {
 
         boolean isExposedToSun = world.isDay() && world.isSkyVisible(pos);
 
-        if (!this.isDampened() && isExposedToSun) {
-            if (this.getMaxCharge() != this.getCharge()) {
+        if (!this.isDampened()) {
+            if (isExposedToSun && this.getMaxCharge() != this.getCharge()) {
                 setCharge(getCharge() + 1);
             }
+        } else {
+            setCharge(getCharge() - 25);
         }
     }
 

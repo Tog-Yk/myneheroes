@@ -44,10 +44,6 @@ public class PowerData {
         return ((PlayerPowers) player).getDamageMultiplier();
     }
 
-    public static double getResistance(PlayerEntity player) {
-        return ((PlayerPowers) player).getResistance();
-    }
-
 
     private static void syncData(ServerPlayerEntity player) {
         NbtCompound nbt = new NbtCompound();

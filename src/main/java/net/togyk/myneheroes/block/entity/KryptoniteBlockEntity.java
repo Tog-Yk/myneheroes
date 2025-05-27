@@ -2,6 +2,8 @@ package net.togyk.myneheroes.block.entity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -15,6 +17,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.block.ModBlockEntityTypes;
 import net.togyk.myneheroes.block.custom.KryptoniteBlock;
+import net.togyk.myneheroes.effect.ModEffects;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.util.PowerData;
@@ -42,9 +45,11 @@ public class KryptoniteBlockEntity extends BlockEntity {
             List<UUID> eligiblePlayers = new ArrayList<>();
             for (PlayerEntity player : players) {
                 boolean isExposedToSun = world.isDay() && world.isSkyVisible(player.getBlockPos());
-                List<Identifier> currentPowers = PowerData.getPowers(player).stream().map(Power::getId).toList();
-                if (currentPowers.contains(Powers.KRYPTONIAN.getId())) {
-                    //give the player kryptonite poisoning
+                List<Power> currentPowers = PowerData.getPowers(player);
+                if (hasKryptoniteDampenedPower(currentPowers)) {
+                    if (!player.hasStatusEffect(ModEffects.KRYPTONITE_POISON)) {
+                        player.addStatusEffect(new StatusEffectInstance(ModEffects.KRYPTONITE_POISON, 200, 0));
+                    }
                     this.TimeNearBlockPerPlayer.remove(player.getUuid());
                 } else if (!isExposedToSun) {
                     eligiblePlayers.add(player.getUuid());
@@ -86,6 +91,15 @@ public class KryptoniteBlockEntity extends BlockEntity {
                 dfs(world, next, visited);
             }
         }
+    }
+
+    private boolean hasKryptoniteDampenedPower(List<Power> powers) {
+        for (Power power : powers) {
+            if (power.isDampenedByKryptonite()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

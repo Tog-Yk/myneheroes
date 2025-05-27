@@ -4,10 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.Dynamic;
 import io.netty.buffer.ByteBuf;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import net.minecraft.entity.attribute.AttributeContainer;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -17,7 +14,7 @@ import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
+import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.util.AbilityUtil;
 import net.togyk.myneheroes.util.PowerUtil;
@@ -73,7 +70,6 @@ public class Power {
 
     public NbtCompound writeNbt(NbtCompound nbt) {
         nbt.putString("id", this.id.toString());
-        nbt.putBoolean("is_dampened", this.isDampened);
 
         NbtList abilitiesNbt = new NbtList();
         for (Ability ability : this.abilities) {
@@ -88,10 +84,6 @@ public class Power {
     }
 
     public void readNbt(NbtCompound nbt) {
-        if (nbt.contains("is_dampened")) {
-            this.isDampened = nbt.getBoolean("is_dampened");
-        }
-
         NbtList abilitiesNbt = new NbtList();
         if (nbt.contains("abilities")) {
             abilitiesNbt = nbt.getList("abilities", NbtElement.COMPOUND_TYPE);
@@ -124,8 +116,8 @@ public class Power {
         return this.settings.damageMultiplier;
     }
 
-    public double getResistance() {
-        return this.settings.resistance;
+    public double getArmor() {
+        return this.settings.armor;
     }
 
     public boolean allowFlying(PlayerEntity player) {
@@ -161,17 +153,26 @@ public class Power {
     }
 
     public List<Ability> getAbilities() {
-        return this.abilities;
+        if (!this.isDampened()) {
+            return this.abilities;
+        }
+        return new ArrayList<>();
+    }
+
+    public boolean isDampenedByKryptonite() {
+        return settings.isDampenedByKryptonite;
     }
 
     public static class Settings{
         public double damageMultiplier = 1.00;
-        public double resistance = 1.00;
+        public double armor = 1.00;
 
         public boolean canFly = false;
         public double flyingUnlocksAt = 0.05;
 
         public double textureInterval = 1.00;
+
+        public boolean isDampenedByKryptonite = false;
 
         public Settings() {
         }
@@ -181,8 +182,8 @@ public class Power {
             return this;
         }
 
-        public Power.Settings resistance(double dbl) {
-            this.resistance = dbl;
+        public Power.Settings armor(double dbl) {
+            this.armor = dbl;
             return this;
         }
 
@@ -201,12 +202,17 @@ public class Power {
             this.textureInterval = dbl;
             return this;
         }
+
+        public Power.Settings dampenedByKryptonite() {
+            this.isDampenedByKryptonite = true;
+            return this;
+        }
     }
 
     @Override
     public String toString() {
         return this.id.toString() + "{\ndamageMultiplier: " + this.getDamageMultiplier() +
-                ",\nresistance: " + this.getResistance() +
+                ",\narmor: " + this.getArmor() +
                 ",\nabilities:" + this.abilities.toString();
     }
 
@@ -224,7 +230,8 @@ public class Power {
     }
 
     public attributeModifiers getAttributeModifiers() {
-        return attributeModifiers;
+        return attributeModifiers
+                .addAttributeModifier(EntityAttributes.GENERIC_ARMOR, Identifier.of(MyneHeroes.MOD_ID, "power.armor"), EntityAttributeModifier.Operation.ADD_VALUE, this::getArmor);
     }
 
     public void updateAttributes(AttributeContainer attributeContainer) {

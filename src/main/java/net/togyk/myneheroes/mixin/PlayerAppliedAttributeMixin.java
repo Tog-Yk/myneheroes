@@ -19,20 +19,6 @@ import java.util.List;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerAppliedAttributeMixin {
-    @ModifyVariable(method = "damage", at = @At("HEAD"), ordinal = 0)
-    private float modifyDamageAfterApply(float amount) {
-        PlayerEntity player = (PlayerEntity) (Object) this;
-
-        // Check if the source is a player
-        if (player != null) {
-            // Multiply the damage taken
-            double multiplier = PowerData.getResistance(player); // Your custom multiplier
-            if (multiplier != 1.00) {
-                return (float) (amount * multiplier);
-            }
-        }
-        return amount;
-    }
 
     @ModifyVariable(
             method = "attack",

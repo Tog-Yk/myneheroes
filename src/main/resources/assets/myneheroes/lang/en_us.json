@@ -151,5 +151,7 @@
   "entity.myneheroes.stationary_armor": "Stationary Armor",
   "entity.myneheroes.meteor": "Meteor",
 
-  "gamerule.doMeteorSpawning": "Spawn Meteors"
+  "gamerule.doMeteorSpawning": "Spawn Meteors",
+
+  "effect.myneheroes.kryptonite_poison": "Kryptonite Poison"
 }

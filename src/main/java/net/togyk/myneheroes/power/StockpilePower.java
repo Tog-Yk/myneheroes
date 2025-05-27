@@ -34,7 +34,7 @@ public class StockpilePower extends Power {
     }
 
     public void setCharge(int charge) {
-        this.charge = Math.min(charge, this.getMaxCharge());
+        this.charge = Math.max(Math.min(charge, this.getMaxCharge()), 0);
     }
 
     public int getMaxCharge() {
@@ -62,8 +62,9 @@ public class StockpilePower extends Power {
     }
 
     @Override
-    public double getResistance() {
-        return 1.0F - (1.0F - super.getResistance()) * (float) (Math.sqrt((double) this.getCharge() / this.getMaxCharge()));
+    public double getArmor() {
+        double armor = super.getArmor() * (float) (Math.sqrt((double) this.getCharge() / this.getMaxCharge()));
+        return armor;
     }
 
     public Identifier getChargeIcon() {

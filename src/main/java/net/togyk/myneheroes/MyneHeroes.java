@@ -19,6 +19,7 @@ import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
 import net.togyk.myneheroes.block.entity.ArmorLightLevelerBlockEntity;
 import net.togyk.myneheroes.client.screen.ModScreenHandlerTypes;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
+import net.togyk.myneheroes.effect.ModEffects;
 import net.togyk.myneheroes.entity.ModEntities;
 import net.togyk.myneheroes.entity.StationaryArmorEntity;
 import net.togyk.myneheroes.entity.StationaryItemEntity;
@@ -66,6 +67,8 @@ public class MyneHeroes implements ModInitializer {
         ModScreenHandlerTypes.registerModScreenHandlerTypes();
 
         ModLootTableModifiers.modifyLootTables();
+
+        ModEffects.registerEffects();
 
         ItemStorage.SIDED.registerForBlockEntity(ArmorDyeingBlockEntity::getInventoryProvider, ModBlockEntityTypes.ARMOR_DYEING_BLOCK_ENTITY);
         ItemStorage.SIDED.registerForBlockEntity(ArmorLightLevelerBlockEntity::getInventoryProvider, ModBlockEntityTypes.ARMOR_LIGHT_LEVELER_BLOCK_ENTITY);
