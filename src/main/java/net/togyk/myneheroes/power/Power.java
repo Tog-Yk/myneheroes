@@ -173,6 +173,8 @@ public class Power {
         public double textureInterval = 1.00;
 
         public boolean isDampenedByKryptonite = false;
+        public boolean isDampenedByRunes = false;
+        public boolean isDampenedByMetaDampeners = false;
 
         public Settings() {
         }
@@ -205,6 +207,16 @@ public class Power {
 
         public Power.Settings dampenedByKryptonite() {
             this.isDampenedByKryptonite = true;
+            return this;
+        }
+
+        public Power.Settings dampenedByRunes() {
+            this.isDampenedByRunes = true;
+            return this;
+        }
+
+        public Power.Settings dampenedByMetaDampeners() {
+            this.isDampenedByMetaDampeners = true;
             return this;
         }
     }
