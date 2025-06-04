@@ -84,7 +84,7 @@
   "block.myneheroes.meteor_radar": "Meteor Radar",
 
   "power.myneheroes.kryptonian": "Kryptonian",
-  "power.myneheroes.speedster": "Speester",
+  "power.myneheroes.speedster": "Speedster",
 
   "ability.myneheroes.toggle_hud": "Toggle Hud",
   "ability.myneheroes.shoot_laser": "Shoot Laser",
@@ -139,11 +139,23 @@
   "death.attack.punched.item" : "%1$s was slaughtered using %3$s",
 
 
-  "advancements.myneheroes.vibranium.root.title": "An outer-worldly metal",
+  "advancements.myneheroes.vibranium.root.title": "An other-worldly metal",
   "advancements.myneheroes.vibranium.root.description": "Acquire vibranium",
 
   "advancements.myneheroes.vibranium.shield.title": "Thats just a prototype",
   "advancements.myneheroes.vibranium.shield.description": "Acquire a shield made from vibranium",
+
+  "advancements.myneheroes.powers.transferring_powers.title": "Transferring powers",
+  "advancements.myneheroes.powers.transferring_powers.description": "Craft an power injection",
+
+  "advancements.myneheroes.powers.the_fastest_man_alive.title": "The fasted man alive",
+  "advancements.myneheroes.powers.the_fastest_man_alive.description": "Be struck by lighting while having speed and become a speedster",
+
+  "advancements.myneheroes.powers.kryptonite.title": "Man’s Greatest Weakness",
+  "advancements.myneheroes.powers.kryptonite.description": "Find kryptonite in a meteor",
+
+  "advancements.myneheroes.powers.the_man_of_steel.title": "The man of steel",
+  "advancements.myneheroes.powers.the_man_of_steel.description": "Be near kryptonite long enough, without being exposed to the sun, to become a kryptonian",
 
   "entity.myneheroes.laser": "Lazar",
   "entity.myneheroes.stationary_item": "Stationary Item",

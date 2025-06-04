@@ -13,6 +13,7 @@ import net.togyk.myneheroes.Item.ModItemGroups;
 import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.ability.Abilities;
+import net.togyk.myneheroes.advancement.criterion.ModCriteria;
 import net.togyk.myneheroes.block.ModBlockEntityTypes;
 import net.togyk.myneheroes.block.ModBlocks;
 import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
@@ -78,6 +79,7 @@ public class MyneHeroes implements ModInitializer {
         FabricDefaultAttributeRegistry.register(ModEntities.STATIONARY_ARMOR, StationaryArmorEntity.createMobAttributes());
 
         ModCommands.registerModCommands();
+        ModCriteria.register();
     }
     /**
      * Searches the player's inventory for the first matching item.

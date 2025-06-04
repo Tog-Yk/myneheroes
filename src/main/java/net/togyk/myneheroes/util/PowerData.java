@@ -5,6 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
+import net.togyk.myneheroes.advancement.criterion.ModCriteria;
 import net.togyk.myneheroes.networking.PlayerPowerSyncDataPayload;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.Powers;
@@ -49,6 +50,9 @@ public class PowerData {
         NbtCompound nbt = new NbtCompound();
         player.writeCustomDataToNbt(nbt);
         ServerPlayNetworking.send(player, new PlayerPowerSyncDataPayload(nbt));
+        for (Power power : ((PlayerPowers) player).getPowers()) {
+            ModCriteria.POWERS_CHANGED_CRITERION.trigger(player, power.getId());
+        }
     }
 
     public static Power nbtToPower(NbtCompound nbt) {

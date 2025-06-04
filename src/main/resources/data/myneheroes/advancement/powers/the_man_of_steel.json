@@ -1,0 +1,29 @@
+{
+  "parent": "myneheroes:powers/kryptonite",
+  "criteria": {
+    "kryptonian": {
+      "conditions": {
+        "id": "myneheroes:kryptonian"
+      },
+      "trigger": "myneheroes:powers_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.myneheroes.powers.the_man_of_steel.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "myneheroes:kryptonite_crystal"
+    },
+    "title": {
+      "translate": "advancements.myneheroes.powers.the_man_of_steel.title"
+    }
+  },
+  "requirements": [
+    [
+      "kryptonian"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

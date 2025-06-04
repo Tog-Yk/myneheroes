@@ -1,0 +1,35 @@
+{
+  "criteria": {
+    "injections": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "myneheroes:power_injection"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.myneheroes.powers.transferring_powers.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "myneheroes:power_injection"
+    },
+    "title": {
+      "translate": "advancements.myneheroes.powers.transferring_powers.title"
+    },
+    "background": "myneheroes:textures/block/kryptonite_block.png"
+  },
+  "requirements": [
+    [
+      "injections"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

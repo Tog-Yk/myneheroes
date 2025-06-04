@@ -1,0 +1,36 @@
+{
+  "parent": "myneheroes:powers/transferring_powers",
+  "criteria": {
+    "kryptonite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "myneheroes:kryptonite_crystal",
+              "myneheroes:kryptonite_block"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.myneheroes.powers.kryptonite.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "myneheroes:kryptonite_crystal"
+    },
+    "title": {
+      "translate": "advancements.myneheroes.powers.kryptonite.title"
+    }
+  },
+  "requirements": [
+    [
+      "kryptonite"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,29 @@
+{
+  "parent": "myneheroes:powers/transferring_powers",
+  "criteria": {
+    "speedster": {
+      "conditions": {
+        "id": "myneheroes:speedster"
+      },
+      "trigger": "myneheroes:powers_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.myneheroes.powers.the_fastest_man_alive.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:lightning_rod"
+    },
+    "title": {
+      "translate": "advancements.myneheroes.powers.the_fastest_man_alive.title"
+    }
+  },
+  "requirements": [
+    [
+      "speedster"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
