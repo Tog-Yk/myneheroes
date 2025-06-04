@@ -18,6 +18,7 @@ import net.togyk.myneheroes.block.ModBlocks;
 import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
 import net.togyk.myneheroes.block.entity.ArmorLightLevelerBlockEntity;
 import net.togyk.myneheroes.client.screen.ModScreenHandlerTypes;
+import net.togyk.myneheroes.command.ModCommands;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.effect.ModEffects;
 import net.togyk.myneheroes.entity.ModEntities;
@@ -75,6 +76,8 @@ public class MyneHeroes implements ModInitializer {
 
         FabricDefaultAttributeRegistry.register(ModEntities.STATIONARY_ITEM, StationaryItemEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.STATIONARY_ARMOR, StationaryArmorEntity.createMobAttributes());
+
+        ModCommands.registerModCommands();
     }
     /**
      * Searches the player's inventory for the first matching item.

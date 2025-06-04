@@ -10,6 +10,7 @@ import net.togyk.myneheroes.power.detailed.KryptonianPower;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Powers {
     private static final Map<Identifier,Power> POWERS = new HashMap<>();
@@ -55,5 +56,9 @@ public class Powers {
     }
     public static boolean containsPower(Power power) {
         return POWERS.containsValue(power);
+    }
+
+    public static Set<Identifier> getIds() {
+        return POWERS.keySet();
     }
 }

@@ -12,7 +12,7 @@ public class PowerUtil {
 
     public static Power getPowerMatchingId(List<Power> powerList, Identifier id) {
         for (Power power : powerList) {
-            if (power != null && power.getId() == id) {
+            if (power != null && power.getId().equals(id)) {
                 return power;
             }
         }
@@ -22,7 +22,7 @@ public class PowerUtil {
     public static List<Power> getPowersMatchingId(List<Power> powerList, Identifier id) {
         List<Power> powers = new ArrayList<>();
         for (Power power : powerList) {
-            if (power != null && power.getId() == id) {
+            if (power != null && power.getId().equals(id)) {
                 powers.add(power);
             }
         }
