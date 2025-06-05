@@ -13,8 +13,11 @@ import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
+import net.togyk.myneheroes.Item.custom.UpgradeItem;
+import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.power.Power;
-import net.togyk.myneheroes.power.AbilityHolding;
+import net.togyk.myneheroes.Item.custom.AbilityHolding;
 import net.togyk.myneheroes.util.AbilityUtil;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,7 +47,7 @@ public class Ability {
 
     public final Identifier id;
     protected final int maxCooldown;
-    public int cooldown;
+    private int cooldown;
 
     public final Identifier icon;
     public final Identifier disabled_icon;
@@ -63,39 +66,46 @@ public class Ability {
 
     public void Use(PlayerEntity player) {
         if (this.getCooldown() == 0) {
-            if (this.use.apply(player) && !player.getWorld().isClient()) {
+            if (this.use.apply(player)) {
                 this.setCooldown(this.getMaxCooldown());
             }
         }
-        this.save();
+        this.save(player.getWorld());
     }
 
-    public void tick() {
+    public void tick(PlayerEntity player) {
+        int initialCooldown = this.getCooldown();
         if (this.getCooldown() != 0) {
             this.setCooldown(this.getCooldown() - 1);
         }
         if (this.getCooldown() < 0) {
             this.setCooldown(0);
         }
-        this.save();
+        int beforeSave = this.getCooldown();
+        this.save(player.getWorld());
+        MyneHeroes.LOGGER.info(player.getWorld().isClient? "c " + initialCooldown + " -> " + beforeSave + " -> " + this.getCooldown() : "s " + initialCooldown + " -> " + beforeSave + " -> " + this.getCooldown());
     }
 
-    public void save() {
-        if (this.getHolder() instanceof ItemStack stack && stack.getItem() instanceof AbilityHolding holding) {
-            holding.saveAbility(stack, this);
+    public void save(World world) {
+        if (this.getHolder() instanceof ItemStack stack) {
+            if (stack.getItem() instanceof AbilityHolding holding) {
+                holding.saveAbility(stack, world, this);
+            } else if (stack.getItem() instanceof UpgradeItem upgrade) {
+                upgrade.saveAbility(stack, world, this);
+            }
         } else if (this.getHolder() instanceof Power power) {
             power.saveAbility(this);
         } else if (this.getHolder() instanceof SelectionAbility ability) {
-            ability.saveAbility(this);
+            ability.saveAbility(world, this);
         }
     }
 
     public int getCooldown() {
-        return cooldown;
+        return this.cooldown;
     }
 
     public void setCooldown(int integer) {
-        cooldown = integer;
+        this.cooldown = integer;
     }
 
     public int getMaxCooldown() {
@@ -126,7 +136,11 @@ public class Ability {
      */
     public Object getIndirectHolder() {
         if (HolderItem != null) {
-            return HolderItem;
+            if (HolderItem.getItem() instanceof UpgradeItem upgradeItem) {
+                return upgradeItem.getHolder();
+            } else {
+                return HolderItem;
+            }
         } else if (HolderAbility != null) {
             return HolderAbility.getIndirectHolder();
         } else {
@@ -154,13 +168,13 @@ public class Ability {
 
     public NbtCompound writeNbt(NbtCompound nbt) {
         nbt.putString("id", this.id.toString());
-        nbt.putInt("cooldown", this.getCooldown());
+        nbt.putInt("cooldown", this.cooldown);
         return nbt;
     }
 
     public void readNbt(NbtCompound nbt) {
         if (nbt.contains("cooldown")) {
-            this.setCooldown(nbt.getInt("cooldown"));
+            this.cooldown = nbt.getInt("cooldown");
         }
     }
 

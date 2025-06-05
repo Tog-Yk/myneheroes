@@ -10,6 +10,7 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 import net.togyk.myneheroes.client.screen.handeler.SelectionAbilityScreenHandler;
 import net.togyk.myneheroes.networking.SelectionScreenAbilityPayload;
 import net.togyk.myneheroes.util.AbilityUtil;
@@ -28,11 +29,11 @@ public class SelectionAbility extends Ability implements ExtendedScreenHandlerFa
     }
 
     @Override
-    public void tick() {
-        super.tick();
+    public void tick(PlayerEntity player) {
+        super.tick(player);
         for (Ability ability : abilities) {
             ability.setHolder(this);
-            ability.tick();
+            ability.tick(player);
         }
     }
 
@@ -40,7 +41,7 @@ public class SelectionAbility extends Ability implements ExtendedScreenHandlerFa
     public void Use(PlayerEntity player) {
         if (getCooldown() == 0) {
             player.openHandledScreen(this);
-            save();
+            save(player.getWorld());
         }
     }
 
@@ -48,7 +49,7 @@ public class SelectionAbility extends Ability implements ExtendedScreenHandlerFa
         Ability ability = this.abilities.get(index);
         ability.Use(player);
         this.setCooldown(ability.getMaxCooldown());
-        this.save();
+        this.save(player.getWorld());
     }
 
     @Override
@@ -63,8 +64,8 @@ public class SelectionAbility extends Ability implements ExtendedScreenHandlerFa
         return abilities;
     }
 
-    public void saveAbility(Ability ability) {
-        this.save();
+    public void saveAbility(World world, Ability ability) {
+        this.save(world);
     }
 
     @Override

@@ -6,10 +6,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
-import net.togyk.myneheroes.block.entity.ArmorLightLevelerBlockEntity;
-import net.togyk.myneheroes.block.entity.KryptoniteBlockEntity;
-import net.togyk.myneheroes.block.entity.MeteorRadarBlockEntity;
+import net.togyk.myneheroes.block.entity.*;
 
 public class ModBlockEntityTypes {
     public static final BlockEntityType<ArmorDyeingBlockEntity> ARMOR_DYEING_BLOCK_ENTITY = register("armor_dyeing_block_entity",
@@ -25,6 +22,10 @@ public class ModBlockEntityTypes {
 
     public static final BlockEntityType<MeteorRadarBlockEntity> METEOR_RADAR_BLOCK_ENTITY = register("meteor_radar_block_entity",
             BlockEntityType.Builder.create(MeteorRadarBlockEntity::new, ModBlocks.METEOR_RADAR)
+                    .build());
+
+    public static final BlockEntityType<UpgradeStationBlockEntity> UPGRADE_STATION_BLOCK_ENTITY = register("upgrade_station",
+            BlockEntityType.Builder.create(UpgradeStationBlockEntity::new, ModBlocks.UPGRADE_STATION)
                     .build());
 
     private static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType<T> type) {

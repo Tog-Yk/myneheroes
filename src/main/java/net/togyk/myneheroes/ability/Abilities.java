@@ -31,7 +31,7 @@ public class Abilities {
     private static final Map<Identifier,Ability> ABILITIES = new HashMap<>();
 
     public static final Ability TOGGLE_HUD = registerAbility(new MechanicalHudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_hud"), new Ability.Settings()));
-    public static final Ability SHOOT_LAZAR = registerAbility(new Ability(Identifier.of(MyneHeroes.MOD_ID, "shoot_laser"), 10, new Ability.Settings(), (player) -> {
+    public static final Ability SHOOT_LASER = registerAbility(new Ability(Identifier.of(MyneHeroes.MOD_ID, "shoot_laser"), 10, new Ability.Settings(), (player) -> {
         ItemStack reactorStack = MyneHeroes.getReactorItemClass(player);
         if (!player.getWorld().isClient) {
             if (reactorStack.getItem() instanceof ReactorItem reactor) {
@@ -52,7 +52,6 @@ public class Abilities {
                     player.getWorld().spawnEntity(projectile);
                     player.swingHand(Hand.MAIN_HAND);
 
-                    return true;
                 } else {
                     player.sendMessage(Text.literal("your reactor has to have enough charge"), true);
                 }
@@ -60,13 +59,13 @@ public class Abilities {
                 player.sendMessage(Text.literal("you must have an arc reactor"), true);
             }
         }
-        return false;
+        return true;
     }));
     public static final Ability ALLOW_FLYING = registerAbility(new FlyFromReactorAbility(Identifier.of(MyneHeroes.MOD_ID, "allow_flying"), new Ability.Settings(), 1));
 
     public static final Ability RELEASE_KINETIC_ENERGY = registerAbility(new ReleaseKineticEnergyAbility(Identifier.of(MyneHeroes.MOD_ID, "release_kinetic_energy"), new Ability.Settings(), 120, 200, 1.0F));
 
-    public static final Ability LAZAR_EYES = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "laser_eyes"), 2, 1000, 4, new Ability.Settings(),  (player) -> {
+    public static final Ability LASER_EYES = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "laser_eyes"), 2, 1000, 4, new Ability.Settings(),  (player) -> {
         if (!player.getWorld().isClient) {
             // shoot laser
             Vec3d look = player.getRotationVec(1.0F);
@@ -90,7 +89,7 @@ public class Abilities {
         List<ItemStack> armor = new ArrayList<>();
         for (ItemStack stack : player.getArmorItems()) {
             if (stack.getItem() instanceof AdvancedArmorItem item) {
-                List<Identifier> ids = item.getAbilities(stack).stream().map(Ability::getId).toList();
+                List<Identifier> ids = item.getAbilities(stack, player.getWorld()).stream().map(Ability::getId).toList();
                 if (ids.contains(Identifier.of(MyneHeroes.MOD_ID, "take_off_suit"))) {
                     armor.add(stack);
                 }

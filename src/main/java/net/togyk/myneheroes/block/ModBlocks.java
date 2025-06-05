@@ -65,7 +65,8 @@ public class ModBlocks {
     public static final Block METEOR_RADAR = registerBlock("meteor_radar",
             new MeteorRadarBlockEntityBlock(AbstractBlock.Settings.create().mapColor(MapColor.LIME).strength(1.5F, 3.5F)));
 
-
+    public static final Block UPGRADE_STATION = registerBlock("upgrade_station",
+            new UpgradeStationBlockEntityBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.ANVIL)));
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);

@@ -15,7 +15,7 @@ import java.util.Set;
 public class Powers {
     private static final Map<Identifier,Power> POWERS = new HashMap<>();
 
-    public static Power KRYPTONIAN = registerPower(new KryptonianPower(Identifier.of(MyneHeroes.MOD_ID, "kryptonian"), 10000, 0xFF9CDB94, List.of(Abilities.FROST_BREATH.copy(), Abilities.LAZAR_EYES.copy()),
+    public static Power KRYPTONIAN = registerPower(new KryptonianPower(Identifier.of(MyneHeroes.MOD_ID, "kryptonian"), 10000, 0xFF9CDB94, List.of(Abilities.FROST_BREATH.copy(), Abilities.LASER_EYES.copy()),
             new Power.Settings().damageMultiplier(5.00).armor(10.0F).textureInterval(0.25).flyingUnlocksAt(0.05).dampenedByKryptonite(),
             new Power.attributeModifiers()
                     .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, Identifier.of(MyneHeroes.MOD_ID, "kryptonian.speed"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> 0.6D)

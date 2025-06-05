@@ -26,6 +26,6 @@ public class PassiveAbility extends Ability {
 
     @Override
     public Ability copy() {
-        return new PassiveAbility(id, cooldown, settings);
+        return new PassiveAbility(id, maxCooldown, settings);
     }
 }
