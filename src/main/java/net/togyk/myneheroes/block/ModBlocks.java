@@ -50,10 +50,10 @@ public class ModBlocks {
                     .requiresTool()));
 
     public static final Block ARMOR_DYEING_STATION = registerBlock("armor_dyeing_station",
-            new ArmorDyeingBlockEntityBlock(AbstractBlock.Settings.create().strength(4f)
+            new ArmorDyeingBlockEntityBlock(AbstractBlock.Settings.create().strength(2.5f).sounds(BlockSoundGroup.METAL)
                     .requiresTool()));
     public static final Block ARMOR_LIGHT_LEVELING_STATION = registerBlock("armor_light_leveling_station",
-            new ArmorLightLevelerBlockEntityBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.WOOD)));
+            new ArmorLightLevelerBlockEntityBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.WOOD).strength(1.5F)));
 
     public static final Block KRYPTONITE_BlOCK = registerBlock("kryptonite_block",
             new KryptoniteBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.AMETHYST_BLOCK).mapColor(MapColor.LIME).strength(2.5f)));
@@ -63,7 +63,7 @@ public class ModBlocks {
 
 
     public static final Block METEOR_RADAR = registerBlock("meteor_radar",
-            new MeteorRadarBlockEntityBlock(AbstractBlock.Settings.create().mapColor(MapColor.LIME).strength(1.5F, 3.5F)));
+            new MeteorRadarBlockEntityBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.METAL).mapColor(MapColor.LIME).strength(2.5f)));
 
 
 

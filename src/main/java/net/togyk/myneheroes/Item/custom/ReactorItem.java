@@ -119,9 +119,14 @@ public class ReactorItem extends Item {
     public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
         if (clickType == ClickType.RIGHT && slot.canTakePartial(player)) {
             if (otherStack.isIn(ModTags.Items.REACTOR_FUEL)) {
-                otherStack.decrement(1);
-                this.setStoredFuel(stack, this.getStoredFuelOrDefault(stack) + 1600);
-                return true;
+                int currentFuel = this.getStoredFuelOrDefault(stack);
+                if (currentFuel != this.getMaxFuel()) {
+                    if (!player.isCreative()) {
+                        otherStack.decrement(1);
+                    }
+                    this.setStoredFuel(stack, currentFuel + 1600);
+                    return true;
+                }
             }
         }
         return false;

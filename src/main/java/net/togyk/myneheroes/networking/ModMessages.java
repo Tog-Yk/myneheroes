@@ -4,19 +4,16 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.Item.custom.DyeableItem;
 import net.togyk.myneheroes.Item.custom.LightableItem;
-import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Abilities;
 import net.togyk.myneheroes.ability.Ability;
@@ -58,24 +55,15 @@ public class ModMessages {
                         Ability secondAbility = ((PlayerAbilities) context.player()).getSecondAbility();
                         secondAbility.Use(context.player());
                     }
-                }else if (payload.integer() == 2) {
+                } else if (payload.integer() == 2) {
                     if (context.player() != null) {
                         Ability thirdAbility = ((PlayerAbilities) context.player()).getThirdAbility();
                         thirdAbility.Use(context.player());
                     }
-                }else if (payload.integer() == 3) {
+                } else if (payload.integer() == 3) {
                     if (context.player() != null) {
                         Ability fourthAbility = ((PlayerAbilities) context.player()).getFourthAbility();
                         fourthAbility.Use(context.player());
-                    }
-                } else if (payload.integer() == 5) {
-                    ServerPlayerEntity player = context.player();
-                    if (player != null) {
-                        ItemStack reactorStack = MyneHeroes.getReactorItemClass(player);
-                        if (reactorStack != ItemStack.EMPTY && reactorStack.getItem() instanceof ReactorItem reactorItem) {
-                            int currentFuel = reactorItem.getStoredFuelOrDefault(reactorStack,0);
-                            reactorItem.setStoredFuel(reactorStack,currentFuel+10);
-                        }
                     }
                 }
             });
