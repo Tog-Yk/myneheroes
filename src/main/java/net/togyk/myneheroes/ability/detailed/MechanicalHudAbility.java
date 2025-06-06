@@ -117,7 +117,7 @@ public class MechanicalHudAbility extends HudAbility {
             ItemStack reactorItemStack = MyneHeroes.getReactorItemClass(client.player);
             if (reactorItemStack != ItemStack.EMPTY && reactorItemStack.getItem() instanceof ReactorItem reactorItem) {
 
-                float fuelPercentile = (float) reactorItem.getStoredFuelOrDefault(reactorItemStack, 0) / reactorItem.getMaxFuel();
+                float fuelPercentile = (float) reactorItem.getStoredFuelOrDefault(reactorItemStack) / reactorItem.getMaxFuel();
                 int maxFuelLength = 26;
                 int currentFuelLength = (int) (maxFuelLength * fuelPercentile);
                 drawContext.drawGuiTexture(FUEL, 14, maxFuelLength, 0, maxFuelLength - currentFuelLength, reactionInfoX + 2, reactionInfoY -30 + 2 + maxFuelLength - currentFuelLength, 14, currentFuelLength);
@@ -186,9 +186,7 @@ public class MechanicalHudAbility extends HudAbility {
                 int y = abilityScreenY + 4;
 
                 HudOverlay.drawAbility(drawContext, firstAbility, ModKeyBindings.useFirstAbility.isPressed(), abilityScreenX + 6, y);
-                if (firstAbility != null) {
-                    drawContext.drawTextWithShadow(textRenderer, firstAbilityText, abilityScreenX + 6 + 18, y + 4, 0xFFFFFF);
-                }
+                drawContext.drawTextWithShadow(textRenderer, firstAbilityText, abilityScreenX + 6 + 18, y + 4, 0xFFFFFF);
                 y += 18;
 
                 HudOverlay.drawAbility(drawContext, secondAbility, ModKeyBindings.useSecondAbility.isPressed(), abilityScreenX + 6, y);

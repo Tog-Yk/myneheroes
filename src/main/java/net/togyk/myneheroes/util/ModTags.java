@@ -25,6 +25,7 @@ public class ModTags {
     }
 
     public static class Items {
+        public static final TagKey<Item> REACTOR_FUEL = createTag("reactor_fuel");
 
         private static TagKey<Item> createTag(String name) {
             return TagKey.of(RegistryKeys.ITEM, Identifier.of(MyneHeroes.MOD_ID, name));

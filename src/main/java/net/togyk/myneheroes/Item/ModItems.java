@@ -2,8 +2,6 @@ package net.togyk.myneheroes.Item;
 
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.SwordItem;
-import net.minecraft.item.ToolMaterials;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
@@ -26,7 +24,7 @@ public class ModItems {
 
     public static final Item IRON_SUIT_TEMPLATE = registerItem("iron_suit_template",new Item(new Item.Settings()));
 
-    public static final Item ARC_REACTOR = registerItem("arc_reactor",new ReactorItem(4000, 2400, new Item.Settings().maxCount(1)));
+    public static final Item ARC_REACTOR = registerItem("arc_reactor",new ReactorItem(4000, 3200, 1600, new Item.Settings().maxCount(1)));
 
     public static final Item POWER_INJECTION = registerItem("power_injection", new PowerInjectionItem(new Item.Settings().maxCount(1)));
 

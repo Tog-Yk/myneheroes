@@ -7,7 +7,6 @@ import net.togyk.myneheroes.MyneHeroes;
 import org.lwjgl.glfw.GLFW;
 
 public class ModKeyBindings {
-    public static KeyBinding fuelReactor;
     public static KeyBinding useFirstAbility;
     public static KeyBinding useSecondAbility;
     public static KeyBinding useThirdAbility;
@@ -67,12 +66,6 @@ public class ModKeyBindings {
                 "key.myneheroes.scroll_down_powers", //translatable key
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_LEFT, // Default key of: down
-                "key.category.myneheroes" // keybind category
-        ));
-        fuelReactor = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.myneheroes.fuel_reactor", //translatable key
-                InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_V, // Default key of: V
                 "key.category.myneheroes" // keybind category
         ));
     }
