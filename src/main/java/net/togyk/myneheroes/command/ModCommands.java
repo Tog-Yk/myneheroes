@@ -22,14 +22,14 @@ public class ModCommands {
 
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             dispatcher.register(
-                    // /addPower <power>
+                    // /myneheroes$addPower <power>
                     CommandManager.literal("power").requires((source) -> source.hasPermissionLevel(2))
-                        .then(CommandManager.argument("player", EntityArgumentType.players())
+                        .then(CommandManager.argument("parent", EntityArgumentType.players())
                             .then(CommandManager.literal("add")
                             .then(CommandManager.argument("power", new PowerArgumentType())
                                     .executes(ctx -> {
                                         if (Powers.get(ctx.getArgument("power", Identifier.class)) instanceof Power power) {
-                                            PowerData.addPower(EntityArgumentType.getPlayer(ctx, "player"), power);
+                                            PowerData.addPower(EntityArgumentType.getPlayer(ctx, "parent"), power);
                                         }
                                         return 1;
                                     })
@@ -37,7 +37,7 @@ public class ModCommands {
                             .then(CommandManager.literal("remove")
                             .then(CommandManager.argument("power", new PowerArgumentType())
                                 .executes(ctx -> {
-                                    PlayerEntity player = EntityArgumentType.getPlayer(ctx, "player");
+                                    PlayerEntity player = EntityArgumentType.getPlayer(ctx, "parent");
                                     List<Power> powers = PowerData.getPowers(player);
                                     Power power = PowerUtil.getPowerMatchingId(powers, ctx.getArgument("power", Identifier.class));
                                     if (power != null) {
@@ -48,7 +48,7 @@ public class ModCommands {
                             ))
                             .then(CommandManager.literal("clear")
                                     .executes(ctx -> {
-                                        PowerData.setPowers(EntityArgumentType.getPlayer(ctx, "player"), List.of());
+                                        PowerData.setPowers(EntityArgumentType.getPlayer(ctx, "parent"), List.of());
                                         return 1;
                                     })
                             )

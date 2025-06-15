@@ -10,7 +10,6 @@ import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.util.PlayerPowers;
 import net.togyk.myneheroes.util.PowerData;
-import net.togyk.myneheroes.util.PowerUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -27,7 +26,7 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
     private int scrolledPowerOffset = 0;
 
     @Inject(at = @At("HEAD"), method = "tick")
-    private void tick(CallbackInfo info) {
+    private void tickPowers(CallbackInfo info) {
         PlayerEntity player = (PlayerEntity) (Object) this;
         if (this.isDirty) {
             PowerData.setPowers(player, powers);
@@ -40,8 +39,8 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
                 power.updateAttributes(player.getAttributes());
             }
         }
-        if (this.scrolledPowerOffset > this.maxPowerScroll()) {
-            this.scrolledPowerOffset = this.maxPowerScroll();
+        if (this.scrolledPowerOffset > this.myneheroes$maxPowerScroll()) {
+            this.scrolledPowerOffset = this.myneheroes$maxPowerScroll();
         } else if (scrolledPowerOffset < 0) {
             this.scrolledPowerOffset = 0;
         }
@@ -96,10 +95,10 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
         nbt.put(MyneHeroes.MOD_ID,modNbt);
     }
 
-    public List<Power> getPowers() {
+    public List<Power> myneheroes$getPowers() {
         return this.powers;
     }
-    public void setPowers(List<Power> powers) {
+    public void myneheroes$setPowers(List<Power> powers) {
         PlayerEntity player = (PlayerEntity) (Object) this;
         for (Power power : this.powers) {
             power.removeAttributes(player.getAttributes());
@@ -111,13 +110,13 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
             power.setHolder(player);
         }
     }
-    public void removePower(Power power) {
+    public void myneheroes$removePower(Power power) {
         this.powers.remove(power);
         PlayerEntity player = (PlayerEntity) (Object) this;
         power.removeAttributes(player.getAttributes());
         power.setHolder(null);
     }
-    public void addPower(Power power) {
+    public void myneheroes$addPower(Power power) {
         if (!this.powers.contains(power)) {
             this.powers.add(power);
             PlayerEntity player = (PlayerEntity) (Object) this;
@@ -126,7 +125,7 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
         }
     }
 
-    public double getDamageMultiplier() {
+    public double myneheroes$getDamageMultiplier() {
         Double multiplier = 1.00;
         for (Power power : this.powers) {
             multiplier *= power.getDamageMultiplier();
@@ -135,23 +134,23 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
     }
 
     @Override
-    public int getScrolledPowerOffset() {
+    public int myneheroes$getScrolledPowerOffset() {
         return Math.max(scrolledPowerOffset, 0);
     }
 
     @Override
-    public int maxPowerScroll() {
+    public int myneheroes$maxPowerScroll() {
         return this.powers.size() - 1;
     }
 
     @Override
-    public void setScrolledPowerOffset(int scrolledOffset) {
+    public void myneheroes$setScrolledPowerOffset(int scrolledOffset) {
         this.scrolledPowerOffset = scrolledOffset;
     }
 
     @Override
-    public void scrollPowerFurther() {
-        if (this.scrolledPowerOffset < maxPowerScroll()) {
+    public void myneheroes$scrollPowerFurther() {
+        if (this.scrolledPowerOffset < myneheroes$maxPowerScroll()) {
             this.scrolledPowerOffset += 1;
         } else {
             this.scrolledPowerOffset = 0;
@@ -159,11 +158,11 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
     }
 
     @Override
-    public void scrollPowerBack() {
+    public void myneheroes$scrollPowerBack() {
         if (this.scrolledPowerOffset > 0) {
             this.scrolledPowerOffset -= 1;
         } else {
-            this.scrolledPowerOffset = maxPowerScroll();
+            this.scrolledPowerOffset = myneheroes$maxPowerScroll();
         }
     }
 }

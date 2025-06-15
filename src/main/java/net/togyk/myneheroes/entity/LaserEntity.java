@@ -53,16 +53,14 @@ public class LaserEntity extends PersistentProjectileEntity {
 
     @Override
     protected ItemStack getDefaultItemStack() {
-        //will give a crash at some point. Don't care enough to fix right now
         return new ItemStack(Items.ARROW);
-        //>>>Caused by: java.lang.IllegalStateException: Cannot encode empty ItemStack
     }
 
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
-        builder.add(color, 0x55FF0000);
-        builder.add(innerColor, 0xFFFFF0F0);
+        builder.add(color, 0x40FF0000);
+        builder.add(innerColor, 0xF0FFF0F0);
     }
 
     @NotNull

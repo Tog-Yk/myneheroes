@@ -12,8 +12,6 @@ import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.ability.Abilities;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.util.AbilityUtil;
 import net.togyk.myneheroes.ability.HudAbility;
@@ -36,7 +34,7 @@ public class HudOverlay implements HudRenderCallback {
             boolean hasDrawnAbilities = false;
             boolean hasDrawnPowers = false;
 
-            List<Ability> abilities = ((PlayerAbilities) client.player).getAbilities();
+            List<Ability> abilities = ((PlayerAbilities) client.player).myneheroes$getAbilities();
             List<HudAbility> hudAbilities = getHudAbilities(abilities);
             for (HudAbility ability : hudAbilities) {
                 HudActionResult result = ability.drawHud(drawContext, tickCounter);
@@ -63,14 +61,14 @@ public class HudOverlay implements HudRenderCallback {
 
                 int y = 4;
 
-                Ability abilityBeforeFirst = ((PlayerAbilities) client.player).getAbilityBeforeFirst();
+                Ability abilityBeforeFirst = ((PlayerAbilities) client.player).myneheroes$getAbilityBeforeFirst();
                 if (abilityBeforeFirst != null) {
                     drawContext.drawTexture(abilityBeforeFirst.icon, width - 20, y, 0, 8, 16, 8, 16, 16);
                     drawContext.fill(width - 20, y, width - 4, y + 8, 0x70000000);
                 }
                 y += 10;
 
-                Ability firstAbility = ((PlayerAbilities) client.player).getFirstAbility();
+                Ability firstAbility = ((PlayerAbilities) client.player).myneheroes$getFirstAbility();
                 drawAbility(drawContext, firstAbility, ModKeyBindings.useFirstAbility.isPressed(), width - 20, y);
                 if (firstAbility != null) {
                     text = hasChatOpen ? Text.translatable("ability."+firstAbility.getId().toTranslationKey()) : ModKeyBindings.useFirstAbility.getBoundKeyLocalizedText();
@@ -78,7 +76,7 @@ public class HudOverlay implements HudRenderCallback {
                 }
                 y += 18;
 
-                Ability secondAbility = ((PlayerAbilities) client.player).getSecondAbility();
+                Ability secondAbility = ((PlayerAbilities) client.player).myneheroes$getSecondAbility();
                 drawAbility(drawContext, secondAbility, ModKeyBindings.useSecondAbility.isPressed(), width - 20, y);
                 if (secondAbility != null) {
                     text = hasChatOpen ? Text.translatable("ability."+secondAbility.getId().toTranslationKey()) : ModKeyBindings.useSecondAbility.getBoundKeyLocalizedText();
@@ -86,7 +84,7 @@ public class HudOverlay implements HudRenderCallback {
                 }
                 y += 18;
 
-                Ability thirdAbility = ((PlayerAbilities) client.player).getThirdAbility();
+                Ability thirdAbility = ((PlayerAbilities) client.player).myneheroes$getThirdAbility();
                 drawAbility(drawContext, thirdAbility, ModKeyBindings.useThirdAbility.isPressed(), width - 20, y);
                 if (thirdAbility != null) {
                     text = hasChatOpen ? Text.translatable("ability."+thirdAbility.getId().toTranslationKey()) : ModKeyBindings.useThirdAbility.getBoundKeyLocalizedText();
@@ -94,7 +92,7 @@ public class HudOverlay implements HudRenderCallback {
                 }
                 y += 18;
 
-                Ability fourthAbility = ((PlayerAbilities) client.player).getFourthAbility();
+                Ability fourthAbility = ((PlayerAbilities) client.player).myneheroes$getFourthAbility();
                 drawAbility(drawContext, fourthAbility, ModKeyBindings.useFourthAbility.isPressed(), width - 20, y);
                 if (fourthAbility != null) {
                     text = hasChatOpen ? Text.translatable("ability."+fourthAbility.getId().toTranslationKey()) : ModKeyBindings.useFourthAbility.getBoundKeyLocalizedText();
@@ -102,14 +100,14 @@ public class HudOverlay implements HudRenderCallback {
                 }
                 y += 18;
 
-                Ability fifthAbility = ((PlayerAbilities) client.player).getFifthAbility();
+                Ability fifthAbility = ((PlayerAbilities) client.player).myneheroes$getFifthAbility();
                 if (fifthAbility != null) {
                     drawContext.drawTexture(fifthAbility.icon, width - 20, y, 0, 0, 16, 8, 16, 16);
                     drawContext.fill(width - 20, y, width - 4, y + 8, 0x70000000);
                 }
             }
             if (!hasDrawnPowers) {
-                List<Power> powers = ((PlayerPowers) client.player).getPowers();
+                List<Power> powers = ((PlayerPowers) client.player).myneheroes$getPowers();
                 if (!powers.isEmpty()) {
                     //draw Power Hud
                     int scrolled = ScrollData.getScrolledPowersOffset(client.player);
@@ -144,7 +142,7 @@ public class HudOverlay implements HudRenderCallback {
                 drawContext.drawTexture(power.getChargeIcon(), x + 16 * i, y + height - currentHeight, 0, height - currentHeight, width, currentHeight, 14, 14); // yellow rectangle
             }
         }
-        List<Ability> abilities = ((PlayerAbilities) player).getAbilities();
+        List<Ability> abilities = ((PlayerAbilities) player).myneheroes$getAbilities();
         List<Ability> stockpileAbilities = abilities.stream().filter(Predicates.instanceOf(StockpileAbility.class)).toList();
         List<Identifier> stockpileAbilitiesIds = filterIds(stockpileAbilities);
         for (int a = i; a < stockpileAbilitiesIds.size() + i; a++) {

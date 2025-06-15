@@ -9,46 +9,46 @@ import net.togyk.myneheroes.networking.PlayerAbilityScrollSyncDataPayload;
 
 public class ScrollData {
     public static int getScrolledAbilitiesOffset(PlayerEntity player){
-        return ((PlayerAbilities) player).getScrolledAbilityOffset();
+        return ((PlayerAbilities) player).myneheroes$getScrolledAbilityOffset();
     }
     public static void setScrolledAbilitiesOffset(PlayerEntity player, int scrolledOffset){
-        ((PlayerAbilities) player).setScrolledAbilityOffset(scrolledOffset);
+        ((PlayerAbilities) player).myneheroes$setScrolledAbilityOffset(scrolledOffset);
         syncData(player);
     }
     public static boolean canScrollAbilitiesFurther(PlayerEntity player){
-        return ((PlayerAbilities) player).canScrollAbilityFurther();
+        return ((PlayerAbilities) player).myneheroes$canScrollAbilityFurther();
     }
 
     public static void scrollAbilitiesFurther(PlayerEntity player) {
-        ((PlayerAbilities) player).scrollAbilityFurther();
+        ((PlayerAbilities) player).myneheroes$scrollAbilityFurther();
         syncData(player);
     }
     public static void scrollAbilitiesBack(PlayerEntity player) {
-        ((PlayerAbilities) player).scrollAbilityBack();
+        ((PlayerAbilities) player).myneheroes$scrollAbilityBack();
         syncData(player);
     }
     public static int getScrolledPowersOffset(PlayerEntity player) {
-        return ((PlayerPowers) player).getScrolledPowerOffset();
+        return ((PlayerPowers) player).myneheroes$getScrolledPowerOffset();
     }
     public static void setScrolledPowersOffset(PlayerEntity player, int scrolledOffset){
-        ((PlayerPowers) player).setScrolledPowerOffset(scrolledOffset);
+        ((PlayerPowers) player).myneheroes$setScrolledPowerOffset(scrolledOffset);
         syncData(player);
     }
 
     public static void scrollPowersFurther(PlayerEntity player) {
-        ((PlayerPowers) player).scrollPowerFurther();
+        ((PlayerPowers) player).myneheroes$scrollPowerFurther();
         syncData(player);
     }
     public static void scrollPowersBack(PlayerEntity player) {
-        ((PlayerPowers) player).scrollPowerBack();
+        ((PlayerPowers) player).myneheroes$scrollPowerBack();
         syncData(player);
     }
 
     private static void syncData(PlayerEntity player) {
         if (player instanceof ServerPlayerEntity serverPlayer) {
-            ServerPlayNetworking.send(serverPlayer, new PlayerAbilityScrollSyncDataPayload(((PlayerAbilities) serverPlayer).getScrolledAbilityOffset(), ((PlayerPowers) serverPlayer).getScrolledPowerOffset()));
+            ServerPlayNetworking.send(serverPlayer, new PlayerAbilityScrollSyncDataPayload(((PlayerAbilities) serverPlayer).myneheroes$getScrolledAbilityOffset(), ((PlayerPowers) serverPlayer).myneheroes$getScrolledPowerOffset()));
         } else if (player instanceof ClientPlayerEntity clientPlayer) {
-            ClientPlayNetworking.send(new PlayerAbilityScrollSyncDataPayload(((PlayerAbilities) clientPlayer).getScrolledAbilityOffset(), ((PlayerPowers) clientPlayer).getScrolledPowerOffset()));
+            ClientPlayNetworking.send(new PlayerAbilityScrollSyncDataPayload(((PlayerAbilities) clientPlayer).myneheroes$getScrolledAbilityOffset(), ((PlayerPowers) clientPlayer).myneheroes$getScrolledPowerOffset()));
         }
     }
 }

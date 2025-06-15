@@ -18,5 +18,7 @@ public class ModEntityRenderers {
 
         EntityModelLayerRegistry.registerModelLayer(MeteorEntityModel.METEOR, MeteorEntityModel::getTexturedModelData);
         EntityRendererRegistry.INSTANCE.register(ModEntities.METEOR, MeteorEntityRenderer::new);
+        EntityRendererRegistry.INSTANCE.register(ModEntities.LIGHTNING_TRAIL, TrailEntityRenderer::new);
+        EntityRendererRegistry.INSTANCE.register(ModEntities.AFTERIMAGE_TRAIL, TrailEntityRenderer::new);
     }
 }

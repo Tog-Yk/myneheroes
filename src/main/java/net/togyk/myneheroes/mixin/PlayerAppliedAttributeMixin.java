@@ -61,7 +61,7 @@ public abstract class PlayerAppliedAttributeMixin {
     @Inject(at = @At("HEAD"), method = "damage", cancellable = true)
     private void PassiveAbilityOnHitUpdater(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         PlayerEntity player = (PlayerEntity) (Object) this;
-        List<Ability> abilities = ((PlayerAbilities) player).getAbilities();
+        List<Ability> abilities = ((PlayerAbilities) player).myneheroes$getAbilities();
 
         boolean shouldCancel = false;
         for (Ability ability : abilities) {
@@ -78,7 +78,7 @@ public abstract class PlayerAppliedAttributeMixin {
     @Inject(at = @At("HEAD"), method = "attack", cancellable = true)
     private void PassiveAbilityAttackUpdater(Entity target, CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity) (Object) this;
-        List<Ability> abilities = ((PlayerAbilities) player).getAbilities();
+        List<Ability> abilities = ((PlayerAbilities) player).myneheroes$getAbilities();
 
         boolean shouldCancel = false;
         for (Ability ability : abilities) {
@@ -95,7 +95,7 @@ public abstract class PlayerAppliedAttributeMixin {
     @Inject(at = @At("HEAD"), method = "onDeath", cancellable = true)
     private void PassiveAbilityDeathUpdater(DamageSource damageSource, CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity) (Object) this;
-        List<Ability> abilities = ((PlayerAbilities) player).getAbilities();
+        List<Ability> abilities = ((PlayerAbilities) player).myneheroes$getAbilities();
 
         boolean shouldCancel = false;
         for (Ability ability : abilities) {
@@ -127,7 +127,7 @@ public abstract class PlayerAppliedAttributeMixin {
                 return true;
             }
         }
-        for (Ability ability: ((PlayerAbilities) player).getAbilities()) {
+        for (Ability ability: ((PlayerAbilities) player).myneheroes$getAbilities()) {
             if (ability.getId() == Abilities.ALLOW_FLYING.getId() && ability instanceof BooleanAbility booleanAbility && booleanAbility.get()) {
                 return true;
             }

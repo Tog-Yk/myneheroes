@@ -146,7 +146,7 @@ public class MechanicalHudAbility extends HudAbility {
             // Reset state
 
             //abilities
-            Ability firstAbility = ((PlayerAbilities) client.player).getFirstAbility();
+            Ability firstAbility = ((PlayerAbilities) client.player).myneheroes$getFirstAbility();
 
             if (firstAbility != null) {
                 TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
@@ -155,11 +155,11 @@ public class MechanicalHudAbility extends HudAbility {
 
                 List<Integer> textLengths = new ArrayList<>();
                 Text firstAbilityText;
-                Ability secondAbility = ((PlayerAbilities) client.player).getSecondAbility();
+                Ability secondAbility = ((PlayerAbilities) client.player).myneheroes$getSecondAbility();
                 Text secondAbilityText = null;
-                Ability thirdAbility = ((PlayerAbilities) client.player).getThirdAbility();
+                Ability thirdAbility = ((PlayerAbilities) client.player).myneheroes$getThirdAbility();
                 Text thirdAbilityText = null;
-                Ability fourthAbility = ((PlayerAbilities) client.player).getFourthAbility();
+                Ability fourthAbility = ((PlayerAbilities) client.player).myneheroes$getFourthAbility();
                 Text fourthAbilityText = null;
 
                 firstAbilityText = hasChatOpen ? Text.translatable("ability."+firstAbility.getId().toTranslationKey()) : ModKeyBindings.useFirstAbility.getBoundKeyLocalizedText();
@@ -232,7 +232,7 @@ public class MechanicalHudAbility extends HudAbility {
             }
         }
 
-        List<Ability> abilities = ((PlayerAbilities) player).getAbilities();
+        List<Ability> abilities = ((PlayerAbilities) player).myneheroes$getAbilities();
         List<Ability> stockpileAbilities = abilities.stream().filter(Predicates.instanceOf(StockpileAbility.class)).toList();
         List<Identifier> stockpileAbilitiesIds = filterIds(stockpileAbilities);
         for (int a = i; a < stockpileAbilitiesIds.size() + i; a++) {
@@ -253,7 +253,7 @@ public class MechanicalHudAbility extends HudAbility {
 
             if (chargeIcon != null) {
 
-                float chargePercentile = (float) charge / maxCharge;
+                float chargePercentile = charge / maxCharge;
 
                 int currentHeight = (int) ((height - 4) * chargePercentile);
 

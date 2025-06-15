@@ -2,23 +2,66 @@ package net.togyk.myneheroes.power;
 
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.ColorHelper;
+import net.minecraft.util.math.Vec3d;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.entity.trail.AfterimageTrailEntity;
+import net.togyk.myneheroes.entity.trail.LightningTrailEntity;
+import net.togyk.myneheroes.entity.trail.TrailEntity;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 
 public class SpeedsterPower extends Power implements VariableLinkedPower {
     private int speedLevel = 0;
-    private int maxSpeedLevel;
+    private final int maxSpeedLevel;
+
+    private Optional<UUID> lastSegment = Optional.empty();
+    private Vec3d lastSegmentPos;
+    private int trailCooldown = 0;
 
     private boolean speedActive = true;
 
     public SpeedsterPower(Identifier id, int color, List<Ability> abilities, int maxSpeedLevel, Settings settings, attributeModifiers attributeModifiers) {
         super(id, color, abilities, settings, attributeModifiers);
         this.maxSpeedLevel = maxSpeedLevel;
+    }
+
+    @Override
+    public void tick(PlayerEntity player) {
+        super.tick(player);
+
+        if ((trailCooldown <= 0 ||(lastSegmentPos != null && player.getPos().distanceTo(lastSegmentPos) > 1)) && speedActive) {
+            if (getSpeedLevel() > 9) {
+                TrailEntity trail = new LightningTrailEntity(player, lastSegment, 20, 4, 3, ColorHelper.Argb.withAlpha(0x40, this.getColor()), ColorHelper.Argb.withAlpha(0xF0, ColorHelper.Argb.lerp(0.95F, this.getColor(), 0xFFFFFF)));
+                trail.setPosition(player.getX(), player.getY(), player.getZ());
+                lastSegment = Optional.of(trail.getUuid());
+                lastSegmentPos = player.getPos();
+                trailCooldown = 10;
+
+                player.getWorld().spawnEntity(trail);
+            }
+            if (getSpeedLevel() > 5 && getSpeedLevel() <= 10) {
+                TrailEntity trail = new AfterimageTrailEntity(player, lastSegment, 20, 0.75F);
+                trail.setPosition(player.getX(), player.getY(), player.getZ());
+                lastSegment = Optional.of(trail.getUuid());
+                lastSegmentPos = player.getPos();
+                trailCooldown = 10;
+
+                player.getWorld().spawnEntity(trail);
+            }
+        } else {
+            if (trailCooldown > 0) {
+                trailCooldown -= 1;
+            }
+        }
     }
 
     private Double getStepHeight() {
@@ -115,6 +158,17 @@ public class SpeedsterPower extends Power implements VariableLinkedPower {
         nbt.putBoolean("speedActive", speedActive);
         nbt.putInt("speedLevel", speedLevel);
 
+        lastSegment.ifPresent(uuid -> nbt.putUuid("lastSegment", uuid));
+        nbt.putInt("trailCooldown", trailCooldown);
+
+        if (lastSegmentPos != null) {
+            NbtCompound vecTag = new NbtCompound();
+            vecTag.putDouble("x", lastSegmentPos.x);
+            vecTag.putDouble("y", lastSegmentPos.y);
+            vecTag.putDouble("z", lastSegmentPos.z);
+            nbt.put("lastSegmentPos", vecTag);
+        }
+
         return super.writeNbt(nbt);
     }
 
@@ -128,6 +182,22 @@ public class SpeedsterPower extends Power implements VariableLinkedPower {
 
         if (nbt.contains("speedLevel")) {
             speedLevel = nbt.getInt("speedLevel");
+        }
+
+        if (nbt.contains("lastSegment")) {
+            lastSegment = Optional.of(nbt.getUuid("lastSegment"));
+        }
+
+        if (nbt.contains("trailCooldown")) {
+            trailCooldown = nbt.getInt("trailCooldown");
+        }
+
+        if (nbt.contains("lastSegmentPos", NbtElement.COMPOUND_TYPE)) {
+            NbtCompound vecTag = nbt.getCompound("lastSegmentPos");
+            double x = vecTag.getDouble("x");
+            double y = vecTag.getDouble("y");
+            double z = vecTag.getDouble("z");
+            lastSegmentPos = new Vec3d(x, y, z);
         }
     }
 

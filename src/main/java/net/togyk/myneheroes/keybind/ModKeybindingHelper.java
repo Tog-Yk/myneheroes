@@ -13,7 +13,7 @@ public class ModKeybindingHelper {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (ModKeyBindings.useFirstAbility.isPressed()) {
                 if (MinecraftClient.getInstance().player != null){
-                    Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).getFirstAbility();
+                    Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).myneheroes$getFirstAbility();
                     if (ability != null) {
                         //to do everything what has to be done on the client side
                         ability.Use(MinecraftClient.getInstance().player);
@@ -24,7 +24,7 @@ public class ModKeybindingHelper {
             }
             if (ModKeyBindings.useSecondAbility.isPressed()) {
                 if (MinecraftClient.getInstance().player != null){
-                    Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).getSecondAbility();
+                    Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).myneheroes$getSecondAbility();
                     if (ability != null) {
                         //to do everything what has to be done on the client side
                         ability.Use(MinecraftClient.getInstance().player);
@@ -35,7 +35,7 @@ public class ModKeybindingHelper {
             }
             if (ModKeyBindings.useThirdAbility.isPressed()) {
                 if (MinecraftClient.getInstance().player != null){
-                    Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).getThirdAbility();
+                    Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).myneheroes$getThirdAbility();
                     if (ability != null) {
                         //to do everything what has to be done on the client side
                         ability.Use(MinecraftClient.getInstance().player);
@@ -46,7 +46,7 @@ public class ModKeybindingHelper {
             }
             if (ModKeyBindings.useFourthAbility.isPressed()) {
                 if (MinecraftClient.getInstance().player != null){
-                    Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).getFourthAbility();
+                    Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).myneheroes$getFourthAbility();
                     if (ability != null) {
                         //to do everything what has to be done on the client side
                         ability.Use(MinecraftClient.getInstance().player);

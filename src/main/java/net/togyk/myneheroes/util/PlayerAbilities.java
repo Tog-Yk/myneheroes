@@ -5,19 +5,19 @@ import net.togyk.myneheroes.ability.Ability;
 import java.util.List;
 
 public interface PlayerAbilities {
-    Ability getFirstAbility();
-    Ability getSecondAbility();
-    Ability getThirdAbility();
-    Ability getFourthAbility();
-    Ability getAbilityBeforeFirst();
-    Ability getFifthAbility();
-    List<Ability> getAbilities();
-    List<Ability> getFilteredAbilities();
+    Ability myneheroes$getFirstAbility();
+    Ability myneheroes$getSecondAbility();
+    Ability myneheroes$getThirdAbility();
+    Ability myneheroes$getFourthAbility();
+    Ability myneheroes$getAbilityBeforeFirst();
+    Ability myneheroes$getFifthAbility();
+    List<Ability> myneheroes$getAbilities();
+    List<Ability> myneheroes$getFilteredAbilities();
 
-    int getScrolledAbilityOffset();
-    void setScrolledAbilityOffset(int scrolledAbilityOffset);
-    boolean canScrollAbilityFurther();
-    int maxAbilityScroll();
-    void scrollAbilityFurther();
-    void scrollAbilityBack();
+    int myneheroes$getScrolledAbilityOffset();
+    void myneheroes$setScrolledAbilityOffset(int scrolledAbilityOffset);
+    boolean myneheroes$canScrollAbilityFurther();
+    int myneheroes$maxAbilityScroll();
+    void myneheroes$scrollAbilityFurther();
+    void myneheroes$scrollAbilityBack();
 }

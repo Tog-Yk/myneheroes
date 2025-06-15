@@ -12,6 +12,7 @@ import net.togyk.myneheroes.Item.ModGeckoItems;
 import net.togyk.myneheroes.Item.ModItemGroups;
 import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
+import net.togyk.myneheroes.ability.Abilities;
 import net.togyk.myneheroes.advancement.criterion.ModCriteria;
 import net.togyk.myneheroes.block.ModBlockEntityTypes;
 import net.togyk.myneheroes.block.ModBlocks;
@@ -24,9 +25,11 @@ import net.togyk.myneheroes.effect.ModEffects;
 import net.togyk.myneheroes.entity.ModEntities;
 import net.togyk.myneheroes.entity.StationaryArmorEntity;
 import net.togyk.myneheroes.entity.StationaryItemEntity;
+import net.togyk.myneheroes.entity.data.ModTrackedData;
 import net.togyk.myneheroes.event.ModEvents;
 import net.togyk.myneheroes.gamerule.ModGamerules;
 import net.togyk.myneheroes.networking.ModMessages;
+import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.util.ModLootTableModifiers;
 import net.togyk.myneheroes.worldgen.ModBiomeModifications;
 import org.slf4j.Logger;
@@ -42,8 +45,6 @@ public class MyneHeroes implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        //Abilities.registerAbilities();
-        //Powers.registerPowers();
 
         ModItems.registerModItems();
         if (FabricLoader.getInstance().isModLoaded("geckolib")) {
@@ -78,6 +79,8 @@ public class MyneHeroes implements ModInitializer {
 
         ModCommands.registerModCommands();
         ModCriteria.register();
+
+        ModTrackedData.register();
     }
     /**
      * Searches the player's inventory for the first matching item.

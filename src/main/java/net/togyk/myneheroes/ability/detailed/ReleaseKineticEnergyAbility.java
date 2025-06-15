@@ -41,7 +41,7 @@ public class ReleaseKineticEnergyAbility extends PassiveAbility implements Stock
     @Override
     public void Use(PlayerEntity player) {
         int charge = 0;
-        List<Ability> abilities = ((PlayerAbilities) player).getAbilities();
+        List<Ability> abilities = ((PlayerAbilities) player).myneheroes$getAbilities();
         List<Ability> matchingAbilities = new ArrayList<>();
         for (Ability ability : abilities) {
             if (ability.getId() == this.getId() && ability instanceof StockpileAbility stockpileAbility) {

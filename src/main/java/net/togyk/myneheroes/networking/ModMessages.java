@@ -47,22 +47,22 @@ public class ModMessages {
                 // logic for pressing a keybind
                 if (payload.integer() == 0) {
                     if (context.player() != null) {
-                        Ability firstAbility = ((PlayerAbilities) context.player()).getFirstAbility();
+                        Ability firstAbility = ((PlayerAbilities) context.player()).myneheroes$getFirstAbility();
                         firstAbility.Use(context.player());
                     }
                 } else if (payload.integer() == 1) {
                     if (context.player() != null) {
-                        Ability secondAbility = ((PlayerAbilities) context.player()).getSecondAbility();
+                        Ability secondAbility = ((PlayerAbilities) context.player()).myneheroes$getSecondAbility();
                         secondAbility.Use(context.player());
                     }
                 } else if (payload.integer() == 2) {
                     if (context.player() != null) {
-                        Ability thirdAbility = ((PlayerAbilities) context.player()).getThirdAbility();
+                        Ability thirdAbility = ((PlayerAbilities) context.player()).myneheroes$getThirdAbility();
                         thirdAbility.Use(context.player());
                     }
                 } else if (payload.integer() == 3) {
                     if (context.player() != null) {
-                        Ability fourthAbility = ((PlayerAbilities) context.player()).getFourthAbility();
+                        Ability fourthAbility = ((PlayerAbilities) context.player()).myneheroes$getFourthAbility();
                         fourthAbility.Use(context.player());
                     }
                 }
@@ -127,8 +127,8 @@ public class ModMessages {
 
         ServerPlayNetworking.registerGlobalReceiver(PlayerAbilityScrollSyncDataPayload.ID, (payload, context) -> {
             context.server().execute(() -> {
-                ((PlayerAbilities) context.player()).setScrolledAbilityOffset(payload.scrolledAbilities());
-                ((PlayerPowers) context.player()).setScrolledPowerOffset(payload.scrolledPowers());
+                ((PlayerAbilities) context.player()).myneheroes$setScrolledAbilityOffset(payload.scrolledAbilities());
+                ((PlayerPowers) context.player()).myneheroes$setScrolledPowerOffset(payload.scrolledPowers());
             });
         });
 
@@ -142,7 +142,7 @@ public class ModMessages {
 
         ServerPlayNetworking.registerGlobalReceiver(UseSelectedAbilityPayload.ID, (payload, context) -> {
             context.server().execute(() -> {
-                List<Ability> abilities = ((PlayerAbilities) context.player()).getFilteredAbilities();
+                List<Ability> abilities = ((PlayerAbilities) context.player()).myneheroes$getFilteredAbilities();
                 Ability ability = abilities.get(payload.abilityIndex());
                 if (Abilities.contains(ability.getId()) && ability instanceof SelectionAbility selectionAbility) {
                     selectionAbility.UseAbility(context.player(), payload.index());
@@ -154,7 +154,7 @@ public class ModMessages {
 
         ServerPlayNetworking.registerGlobalReceiver(SwapFromToolbeltPayload.ID, (payload, context) -> {
             context.server().execute(() -> {
-                List<Ability> abilities = ((PlayerAbilities) context.player()).getFilteredAbilities();
+                List<Ability> abilities = ((PlayerAbilities) context.player()).myneheroes$getFilteredAbilities();
                 Ability ability = abilities.get(payload.toolbeltIndex());
                 if (Abilities.contains(ability.getId()) && ability instanceof ToolbeltAbility toolbelt) {
                     toolbelt.swapItem(context.player(), payload.index());
@@ -181,14 +181,14 @@ public class ModMessages {
                         }
                     }
                 }
-                ((PlayerPowers) context.player()).setPowers(powers);
+                ((PlayerPowers) context.player()).myneheroes$setPowers(powers);
             });
         });
 
         ClientPlayNetworking.registerGlobalReceiver(PlayerAbilityScrollSyncDataPayload.ID, (payload, context) -> {
             context.client().execute(() -> {
-                ((PlayerAbilities) context.player()).setScrolledAbilityOffset(payload.scrolledAbilities());
-                ((PlayerPowers) context.player()).setScrolledPowerOffset(payload.scrolledPowers());
+                ((PlayerAbilities) context.player()).myneheroes$setScrolledAbilityOffset(payload.scrolledAbilities());
+                ((PlayerPowers) context.player()).myneheroes$setScrolledPowerOffset(payload.scrolledPowers());
             });
         });
     }

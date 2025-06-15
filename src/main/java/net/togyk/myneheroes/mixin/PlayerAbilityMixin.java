@@ -44,7 +44,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
             this.isDirty = false;
         }
         if (player != null) {
-            List<Ability> bufferList = getAbilities(player);
+            List<Ability> bufferList = myneheroes$getAbilities(player);
             if (bufferList != null) {
                 this.abilities = bufferList;
             }
@@ -54,14 +54,14 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
                 ability.tick();
             }
         }
-        if (this.scrolledAbilityOffset > this.maxAbilityScroll()) {
-            this.scrolledAbilityOffset = this.maxAbilityScroll();
+        if (this.scrolledAbilityOffset > this.myneheroes$maxAbilityScroll()) {
+            this.scrolledAbilityOffset = this.myneheroes$maxAbilityScroll();
         } else if (scrolledAbilityOffset < 0) {
             this.scrolledAbilityOffset = 0;
         }
     }
 
-    private List<Ability> getAbilities(PlayerEntity player) {
+    private List<Ability> myneheroes$getAbilities(PlayerEntity player) {
         List<Ability> abilityList = new ArrayList<>();
         List<Power> powerList = PowerData.getPowers(player);
         if (!powerList.isEmpty()) {
@@ -137,7 +137,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         return abilityList;
     }
 
-    public List<Ability> getFilteredAbilities() {
+    public List<Ability> myneheroes$getFilteredAbilities() {
         List<Ability> abilityList = new ArrayList<>();
         List<Identifier> ids = new ArrayList<>();
         for (Ability ability : this.abilities) {
@@ -150,60 +150,60 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
     }
 
     @Override
-    public Ability getFirstAbility() {
-        List<Ability> filteredAbilities = getFilteredAbilities();
-        if (filteredAbilities != null && filteredAbilities.size() >= 1 + this.getScrolledAbilityOffset()) {
-            return filteredAbilities.get(this.getScrolledAbilityOffset());
+    public Ability myneheroes$getFirstAbility() {
+        List<Ability> filteredAbilities = myneheroes$getFilteredAbilities();
+        if (filteredAbilities != null && filteredAbilities.size() >= 1 + this.myneheroes$getScrolledAbilityOffset()) {
+            return filteredAbilities.get(this.myneheroes$getScrolledAbilityOffset());
         } else {
             return null;
         }
     }
 
     @Override
-    public Ability getSecondAbility() {
-        List<Ability> filteredAbilities = getFilteredAbilities();
-        if (filteredAbilities != null && filteredAbilities.size() >= 2 + this.getScrolledAbilityOffset()) {
-            return filteredAbilities.get(1 + this.getScrolledAbilityOffset());
+    public Ability myneheroes$getSecondAbility() {
+        List<Ability> filteredAbilities = myneheroes$getFilteredAbilities();
+        if (filteredAbilities != null && filteredAbilities.size() >= 2 + this.myneheroes$getScrolledAbilityOffset()) {
+            return filteredAbilities.get(1 + this.myneheroes$getScrolledAbilityOffset());
         } else {
             return null;
         }
     }
 
     @Override
-    public Ability getThirdAbility() {
-        List<Ability> filteredAbilities = getFilteredAbilities();
-        if (filteredAbilities != null && filteredAbilities.size() >= 3 + this.getScrolledAbilityOffset()) {
-            return filteredAbilities.get(2 + this.getScrolledAbilityOffset());
+    public Ability myneheroes$getThirdAbility() {
+        List<Ability> filteredAbilities = myneheroes$getFilteredAbilities();
+        if (filteredAbilities != null && filteredAbilities.size() >= 3 + this.myneheroes$getScrolledAbilityOffset()) {
+            return filteredAbilities.get(2 + this.myneheroes$getScrolledAbilityOffset());
         } else {
             return null;
         }
     }
 
     @Override
-    public Ability getFourthAbility() {
-        List<Ability> filteredAbilities = getFilteredAbilities();
-        if (filteredAbilities != null && filteredAbilities.size() >= 4 + this.getScrolledAbilityOffset()) {
-            return filteredAbilities.get(3 + this.getScrolledAbilityOffset());
+    public Ability myneheroes$getFourthAbility() {
+        List<Ability> filteredAbilities = myneheroes$getFilteredAbilities();
+        if (filteredAbilities != null && filteredAbilities.size() >= 4 + this.myneheroes$getScrolledAbilityOffset()) {
+            return filteredAbilities.get(3 + this.myneheroes$getScrolledAbilityOffset());
         } else {
             return null;
         }
     }
 
     @Override
-    public Ability getAbilityBeforeFirst() {
-        List<Ability> filteredAbilities = getFilteredAbilities();
-        if (filteredAbilities != null && filteredAbilities.size() > 4 && this.getScrolledAbilityOffset() > 0) {
-            return filteredAbilities.get(this.getScrolledAbilityOffset() - 1);
+    public Ability myneheroes$getAbilityBeforeFirst() {
+        List<Ability> filteredAbilities = myneheroes$getFilteredAbilities();
+        if (filteredAbilities != null && filteredAbilities.size() > 4 && this.myneheroes$getScrolledAbilityOffset() > 0) {
+            return filteredAbilities.get(this.myneheroes$getScrolledAbilityOffset() - 1);
         } else {
             return null;
         }
     }
 
     @Override
-    public Ability getFifthAbility() {
-        List<Ability> filteredAbilities = getFilteredAbilities();
-        if (filteredAbilities != null && filteredAbilities.size() >= 5 + this.getScrolledAbilityOffset()) {
-            return filteredAbilities.get(4 + this.getScrolledAbilityOffset());
+    public Ability myneheroes$getFifthAbility() {
+        List<Ability> filteredAbilities = myneheroes$getFilteredAbilities();
+        if (filteredAbilities != null && filteredAbilities.size() >= 5 + this.myneheroes$getScrolledAbilityOffset()) {
+            return filteredAbilities.get(4 + this.myneheroes$getScrolledAbilityOffset());
         } else {
             return null;
         }
@@ -235,41 +235,41 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
     }
 
     @Override
-    public int getScrolledAbilityOffset() {
+    public int myneheroes$getScrolledAbilityOffset() {
         return Math.max(scrolledAbilityOffset, 0);
     }
 
     @Override
-    public void setScrolledAbilityOffset(int scrolledAbilityOffset) {
+    public void myneheroes$setScrolledAbilityOffset(int scrolledAbilityOffset) {
         this.scrolledAbilityOffset = scrolledAbilityOffset;
     }
 
     @Override
-    public boolean canScrollAbilityFurther() {
-        return this.maxAbilityScroll() != this.scrolledAbilityOffset;
+    public boolean myneheroes$canScrollAbilityFurther() {
+        return this.myneheroes$maxAbilityScroll() != this.scrolledAbilityOffset;
     }
 
     @Override
-    public int maxAbilityScroll() {
-        return this.getFilteredAbilities().size() - 4;
+    public int myneheroes$maxAbilityScroll() {
+        return this.myneheroes$getFilteredAbilities().size() - 4;
     }
 
     @Override
-    public void scrollAbilityFurther() {
-        if (this.scrolledAbilityOffset < this.maxAbilityScroll()) {
+    public void myneheroes$scrollAbilityFurther() {
+        if (this.scrolledAbilityOffset < this.myneheroes$maxAbilityScroll()) {
             this.scrolledAbilityOffset += 1;
         }
     }
 
     @Override
-    public void scrollAbilityBack() {
+    public void myneheroes$scrollAbilityBack() {
         if (this.scrolledAbilityOffset > 0) {
             this.scrolledAbilityOffset -= 1;
         }
     }
 
     @Override
-    public List<Ability> getAbilities() {
+    public List<Ability> myneheroes$getAbilities() {
         return abilities;
     }
 }

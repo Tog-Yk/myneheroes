@@ -17,11 +17,11 @@ public class PowerData {
         if (!player.getWorld().isClient) {
             syncData((ServerPlayerEntity) player);
         }
-        return ((PlayerPowers) player).getPowers();
+        return ((PlayerPowers) player).myneheroes$getPowers();
     }
 
     public static void setPowers(PlayerEntity player, List<Power> powers) {
-        ((PlayerPowers) player).setPowers(powers);
+        ((PlayerPowers) player).myneheroes$setPowers(powers);
         if (!player.getWorld().isClient) {
             syncData((ServerPlayerEntity) player);
         }
@@ -29,20 +29,20 @@ public class PowerData {
 
     public static void removePower(PlayerEntity player, Power power) {
         if (!player.getWorld().isClient) {
-            ((PlayerPowers) player).removePower(power);
+            ((PlayerPowers) player).myneheroes$removePower(power);
             syncData((ServerPlayerEntity) player);
         }
     }
 
     public static void addPower(PlayerEntity player, Power power) {
         if (!player.getWorld().isClient) {
-            ((PlayerPowers) player).addPower(power);
+            ((PlayerPowers) player).myneheroes$addPower(power);
             syncData((ServerPlayerEntity) player);
         }
     }
 
     public static double getDamageMultiplier(PlayerEntity player) {
-        return ((PlayerPowers) player).getDamageMultiplier();
+        return ((PlayerPowers) player).myneheroes$getDamageMultiplier();
     }
 
 
@@ -50,7 +50,7 @@ public class PowerData {
         NbtCompound nbt = new NbtCompound();
         player.writeCustomDataToNbt(nbt);
         ServerPlayNetworking.send(player, new PlayerPowerSyncDataPayload(nbt));
-        for (Power power : ((PlayerPowers) player).getPowers()) {
+        for (Power power : ((PlayerPowers) player).myneheroes$getPowers()) {
             ModCriteria.POWERS_CHANGED_CRITERION.trigger(player, power.getId());
         }
     }

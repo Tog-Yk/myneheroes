@@ -41,7 +41,7 @@ public class SelectionAbilityScreenHandler extends ScreenHandler {
     }
 
     public SelectionAbility getAbility() {
-        List<Ability> abilities = ((PlayerAbilities) this.player).getFilteredAbilities();
+        List<Ability> abilities = ((PlayerAbilities) this.player).myneheroes$getFilteredAbilities();
         List<Identifier> abilityIds = abilities.stream().map(Ability::getId).toList();
         int selectionIndex = abilityIds.indexOf(this.ability.getId());
 
@@ -49,7 +49,7 @@ public class SelectionAbilityScreenHandler extends ScreenHandler {
     }
 
     public void useAbility(int index) {
-        List<Ability> abilities = ((PlayerAbilities) this.player).getFilteredAbilities();
+        List<Ability> abilities = ((PlayerAbilities) this.player).myneheroes$getFilteredAbilities();
         List<Identifier> abilityIds = abilities.stream().map(Ability::getId).toList();
         int selectionIndex = abilityIds.indexOf(this.ability.getId());
 

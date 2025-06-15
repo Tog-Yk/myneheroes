@@ -43,7 +43,7 @@ public class Abilities {
 
                     LaserEntity projectile = new LaserEntity(ModEntities.LASER, player.getWorld());
                     projectile.setOwner(player);
-                    projectile.setPosition(player.getX(), player.getEyeY(), player.getZ());
+                    projectile.setPosition(player.getX(), player.getEyeY() - projectile.getHeight(), player.getZ());
                     projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
                     projectile.applyDamageModifier(2.0F);
                     projectile.setColor(0x3300FFFF);
@@ -187,10 +187,6 @@ public class Abilities {
     }));
 
     public static final Ability TOOLBELT_3 = registerAbility(new ToolbeltAbility(Identifier.of(MyneHeroes.MOD_ID, "toolbelt_3"), new Ability.Settings(), 3));
-
-    public static void registerAbilities() {
-        MyneHeroes.LOGGER.info("registering Abilities for " + MyneHeroes.MOD_ID);
-    }
 
     private static Ability registerAbility(Ability ability) {
         if (!ABILITIES.containsKey(ability.id)) {
