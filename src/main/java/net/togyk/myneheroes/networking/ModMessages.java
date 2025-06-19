@@ -78,13 +78,19 @@ public class ModMessages {
                 if (world != null) {
                     BlockEntity blockEntity = world.getBlockEntity(payload.pos());
                     if (blockEntity instanceof ArmorDyeingBlockEntity armorDyeingBlockEntity) {
-                        SimpleInventory inventory = armorDyeingBlockEntity.getInventory();
+                        SimpleInventory inventory = armorDyeingBlockEntity.getInput();
                         ItemStack stack = inventory.getStack(0);
+
+                        SimpleInventory fuel = armorDyeingBlockEntity.getFuel();
+
                         if (stack.getItem() instanceof DyeableItem dyeableItem) {
                             if (payload.setDefault()) {
                                 dyeableItem.setDefaultColor(stack, payload.index());
-                            } else {
+                            } else if (!fuel.isEmpty()) {
                                 dyeableItem.setColor(stack, payload.index(), payload.color());
+
+                                fuel.getStack(0).decrement(1);
+                                fuel.markDirty();
                             }
                             inventory.markDirty();
                         }

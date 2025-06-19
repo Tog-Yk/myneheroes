@@ -239,7 +239,7 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
             this.sliderWidgetBlue.active = true;
 
             this.setButton.visible = true;
-            this.setButton.active = true;
+            this.setButton.active = !this.handler.getBlockEntity().getFuel().isEmpty();
             this.setDefaultButton.visible = true;
             this.setDefaultButton.active = true;
 

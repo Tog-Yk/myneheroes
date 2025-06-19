@@ -5,6 +5,7 @@ import net.minecraft.item.Item;
 import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.Item.custom.DyeableItem;
 import net.togyk.myneheroes.Item.custom.PowerInjectionItem;
+import net.togyk.myneheroes.Item.custom.SimpleDyeableItem;
 import net.togyk.myneheroes.power.Power;
 
 public class ModColorProvider {
@@ -16,6 +17,7 @@ public class ModColorProvider {
             return 0xFFFFFFFF; // Default white for non-tinted layers
         }, item);
     }
+
     private static void registerInjectionItem(Item item){
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
             if (stack.getItem() instanceof PowerInjectionItem injectionItem && tintIndex == 1) { // Tint only layer 1
@@ -26,7 +28,19 @@ public class ModColorProvider {
                     return 0x00FFFFFF;
                 }
             }
-            return 0xFFBBBBBB; // Default gray for non-tinted layers
+            return 0xFFFFFFFF;
+        }, item);
+    }
+
+    private static void registerSimpleDyeableItem(Item item){
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+            if (stack.getItem() instanceof SimpleDyeableItem dyeableItem && tintIndex == 1) { // Tint only layer 1
+                if (dyeableItem.layerIsDyed(stack, 0)) {
+                    return dyeableItem.getColor(stack, 0);
+                }
+                return 0x00FFFFFF;
+            }
+            return 0xFFFFFFFF;
         }, item);
     }
 
@@ -47,5 +61,7 @@ public class ModColorProvider {
         registerDyeableArmorItem(ModItems.MARK45_NETHERITE_BOOTS);
 
         registerInjectionItem(ModItems.POWER_INJECTION);
+
+        registerSimpleDyeableItem(ModItems.COLORING_COMPOUND);
     }
 }

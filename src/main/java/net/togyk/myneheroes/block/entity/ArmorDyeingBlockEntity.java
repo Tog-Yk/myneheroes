@@ -28,7 +28,7 @@ public class ArmorDyeingBlockEntity extends BlockEntity implements ExtendedScree
     Runnable contentsChangedListener = () -> {
     };
 
-    private final SimpleInventory inventory = new SimpleInventory(1) {
+    private final SimpleInventory input = new SimpleInventory(1) {
         @Override
         public void markDirty() {
             super.markDirty();
@@ -36,7 +36,18 @@ public class ArmorDyeingBlockEntity extends BlockEntity implements ExtendedScree
         }
     };
 
-    private final InventoryStorage inventoryStorage = InventoryStorage.of(inventory, null);
+    private final InventoryStorage InputInventoryStorage = InventoryStorage.of(input, null);
+
+    private final SimpleInventory fuel = new SimpleInventory(1) {
+        @Override
+        public void markDirty() {
+            super.markDirty();
+            update();
+        }
+    };
+
+    private final InventoryStorage FuelInventoryStorage = InventoryStorage.of(fuel, null);
+
 
     public ArmorDyeingBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntityTypes.ARMOR_DYEING_BLOCK_ENTITY, pos, state);
@@ -45,12 +56,23 @@ public class ArmorDyeingBlockEntity extends BlockEntity implements ExtendedScree
     @Override
     protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt, registryLookup);
-        Inventories.readNbt(nbt, this.inventory.getHeldStacks(), registryLookup);
+        if (nbt.contains("input")) {
+            Inventories.readNbt(nbt.getCompound("input"), this.input.getHeldStacks(), registryLookup);
+        }
+        if (nbt.contains("fuel")) {
+            Inventories.readNbt(nbt.getCompound("fuel"), this.fuel.getHeldStacks(), registryLookup);
+        }
     }
 
     @Override
     protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
-        Inventories.writeNbt(nbt, this.inventory.getHeldStacks(), registryLookup);
+        NbtCompound inputNbt = new NbtCompound();
+        Inventories.writeNbt(inputNbt, this.input.getHeldStacks(), registryLookup);
+        nbt.put("input", inputNbt);
+
+        NbtCompound fuelNbt = new NbtCompound();
+        Inventories.writeNbt(fuelNbt, this.fuel.getHeldStacks(), registryLookup);
+        nbt.put("fuel", fuelNbt);
         super.writeNbt(nbt, registryLookup);
     }
 
@@ -76,12 +98,19 @@ public class ArmorDyeingBlockEntity extends BlockEntity implements ExtendedScree
         contentsChangedListener.run();
     }
 
-    public InventoryStorage getInventoryProvider(Direction direction) {
-        return inventoryStorage;
+    public InventoryStorage getInputInventoryProvider(Direction direction) {
+        return InputInventoryStorage;
     }
 
-    public SimpleInventory getInventory() {
-        return this.inventory;
+    public SimpleInventory getInput() {
+        return this.input;
+    }
+
+    public InventoryStorage getFuelInventoryStorage(Direction direction) {
+        return FuelInventoryStorage;
+    }
+    public SimpleInventory getFuel() {
+        return this.fuel;
     }
 
     public void setContentsChangedListener(Runnable contentsChangedListener) {

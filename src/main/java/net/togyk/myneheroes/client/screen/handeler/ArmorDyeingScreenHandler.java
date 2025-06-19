@@ -14,6 +14,7 @@ import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
 import net.togyk.myneheroes.client.screen.ModScreenHandlerTypes;
 import net.togyk.myneheroes.networking.BlockPosPayload;
 import net.togyk.myneheroes.networking.ColorItemPayload;
+import net.togyk.myneheroes.util.ModTags;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,11 +34,16 @@ public class ArmorDyeingScreenHandler extends ScreenHandler {
         this.blockEntity = blockEntity;
         this.context = ScreenHandlerContext.create(this.blockEntity.getWorld(), this.blockEntity.getPos());
 
-        SimpleInventory inventory = this.blockEntity.getInventory();
-        checkSize(inventory, 1);
-        inventory.onOpen(playerInventory.player);
+        SimpleInventory inputInventory = this.blockEntity.getInput();
+        checkSize(inputInventory, 1);
+        inputInventory.onOpen(playerInventory.player);
+        addBlockInputInventory(inputInventory);
 
-        addBlockInventory(inventory);
+        SimpleInventory fuelInventory = this.blockEntity.getFuel();
+        checkSize(fuelInventory, 1);
+        fuelInventory.onOpen(playerInventory.player);
+        addBlockFuelInventory(fuelInventory);
+
         addPlayerInventory(playerInventory);
     }
 
@@ -47,11 +53,19 @@ public class ArmorDyeingScreenHandler extends ScreenHandler {
     }
 
 
-    private void addBlockInventory(SimpleInventory inventory) {
+    private void addBlockInputInventory(SimpleInventory inventory) {
         addSlot(new Slot(inventory, 0, 16, 39) {
             @Override
             public boolean canInsert(ItemStack stack) {
                 return stack.getItem() instanceof DyeableItem;
+            }
+        });
+    }
+    private void addBlockFuelInventory(SimpleInventory inventory) {
+        addSlot(new Slot(inventory, 0, 16, 61) {
+            @Override
+            public boolean canInsert(ItemStack stack) {
+                return stack.isIn(ModTags.Items.COLORING_FUEL);
             }
         });
     }
@@ -78,7 +92,7 @@ public class ArmorDyeingScreenHandler extends ScreenHandler {
 
     public void updateOptions() {
         indexOptions.clear();
-        ItemStack stack = this.blockEntity.getInventory().getStack(0);
+        ItemStack stack = this.blockEntity.getInput().getStack(0);
         if (stack.getItem() instanceof DyeableItem dyeableItem) {
             // Generate options based on the armor material
             for (int i = 0; i < dyeableItem.getColors(stack).size(); i++) {
@@ -113,25 +127,25 @@ public class ArmorDyeingScreenHandler extends ScreenHandler {
     }
 
     public boolean canSelect() {
-        return !this.blockEntity.getInventory().isEmpty();
+        return !this.blockEntity.getInput().isEmpty();
     }
 
     public boolean canDye() {
-        return !this.blockEntity.getInventory().isEmpty();
+        return !this.blockEntity.getInput().isEmpty();
     }
     public void dye(int color) {
         ClientPlayNetworking.send(new ColorItemPayload(this.blockEntity.getPos(), this.indexOptions.get(this.selectedOption), color, false));
     }
 
     public void dyeDefault() {
-        ItemStack stack = blockEntity.getInventory().getStack(0);
+        ItemStack stack = blockEntity.getInput().getStack(0);
         if (stack.getItem() instanceof DyeableItem) {
             ClientPlayNetworking.send(new ColorItemPayload(this.blockEntity.getPos(), this.indexOptions.get(this.selectedOption), -1, true));
         }
     }
 
     public int getColor() {
-        ItemStack stack = this.blockEntity.getInventory().getStack(0);
+        ItemStack stack = this.blockEntity.getInput().getStack(0);
         if (stack.getItem() instanceof DyeableItem dyeableItem && !indexOptions.isEmpty()) {
             return dyeableItem.getColor(stack, this.indexOptions.get(this.selectedOption));
         }
@@ -141,7 +155,7 @@ public class ArmorDyeingScreenHandler extends ScreenHandler {
     @Override
     public void onClosed(PlayerEntity player) {
         super.onClosed(player);
-        this.blockEntity.getInventory().onClose(player);
+        this.blockEntity.getInput().onClose(player);
     }
 
     @Override
@@ -152,11 +166,11 @@ public class ArmorDyeingScreenHandler extends ScreenHandler {
             ItemStack inSlot = slot.getStack();
             newStack = inSlot.copy();
 
-            if (slotIndex < this.blockEntity.getInventory().size()) {
-                if (!insertItem(inSlot, this.blockEntity.getInventory().size(), this.slots.size(), true)){
+            if (slotIndex < this.blockEntity.getInput().size()) {
+                if (!insertItem(inSlot, this.blockEntity.getInput().size(), this.slots.size(), true)){
                     return ItemStack.EMPTY;
                 }
-            } else if (!insertItem(inSlot, 0, this.blockEntity.getInventory().size(), false)){
+            } else if (!insertItem(inSlot, 0, this.blockEntity.getInput().size(), false)){
                 return ItemStack.EMPTY;
             }
             if (inSlot.isEmpty()) {

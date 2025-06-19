@@ -12,7 +12,6 @@ import net.togyk.myneheroes.Item.ModGeckoItems;
 import net.togyk.myneheroes.Item.ModItemGroups;
 import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
-import net.togyk.myneheroes.ability.Abilities;
 import net.togyk.myneheroes.advancement.criterion.ModCriteria;
 import net.togyk.myneheroes.block.ModBlockEntityTypes;
 import net.togyk.myneheroes.block.ModBlocks;
@@ -29,7 +28,6 @@ import net.togyk.myneheroes.entity.data.ModTrackedData;
 import net.togyk.myneheroes.event.ModEvents;
 import net.togyk.myneheroes.gamerule.ModGamerules;
 import net.togyk.myneheroes.networking.ModMessages;
-import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.util.ModLootTableModifiers;
 import net.togyk.myneheroes.worldgen.ModBiomeModifications;
 import org.slf4j.Logger;
@@ -71,7 +69,8 @@ public class MyneHeroes implements ModInitializer {
 
         ModEffects.registerEffects();
 
-        ItemStorage.SIDED.registerForBlockEntity(ArmorDyeingBlockEntity::getInventoryProvider, ModBlockEntityTypes.ARMOR_DYEING_BLOCK_ENTITY);
+        ItemStorage.SIDED.registerForBlockEntity(ArmorDyeingBlockEntity::getInputInventoryProvider, ModBlockEntityTypes.ARMOR_DYEING_BLOCK_ENTITY);
+        ItemStorage.SIDED.registerForBlockEntity(ArmorDyeingBlockEntity::getInputInventoryProvider, ModBlockEntityTypes.ARMOR_DYEING_BLOCK_ENTITY);
         ItemStorage.SIDED.registerForBlockEntity(ArmorLightLevelerBlockEntity::getInventoryProvider, ModBlockEntityTypes.ARMOR_LIGHT_LEVELER_BLOCK_ENTITY);
 
         FabricDefaultAttributeRegistry.register(ModEntities.STATIONARY_ITEM, StationaryItemEntity.createAttributes());

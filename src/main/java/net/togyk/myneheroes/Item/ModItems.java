@@ -50,6 +50,9 @@ public class ModItems {
     public static final Item TAKE_OFF_SUIT_UPGRADE = registerItem("take_off_suit_upgrade", new UpgradeItem(Abilities.TAKE_OFF_SUIT, 4, null, new Item.Settings()));
     public static final Item TOOLBELT_3_UPGRADE = registerItem("toolbelt_3_upgrade", new UpgradeWithTooltipItem(Abilities.TOOLBELT_3, 4, ArmorItem.Type.LEGGINGS, Text.translatable("item.myneheroes.toolbelt_3_upgrade.size", 3), new Item.Settings()));
 
+    public static final Item COLORING_COMPOUND = registerItem("coloring_compound",
+            new SimpleDyeableItem(-1, new Item.Settings()));
+
     //armors
     //vibranium armors
     public static final Item VIBRANIUM_HELMET = registerItem("vibranium_helmet",

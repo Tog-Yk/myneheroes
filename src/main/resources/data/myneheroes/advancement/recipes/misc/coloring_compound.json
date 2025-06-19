@@ -3,15 +3,15 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "myneheroes:toolbelt_3"
+        "recipe": "myneheroes:coloring_compound"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_copper_ingot": {
+    "has_clay_ball": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:leather"
+            "items": "minecraft:clay_ball"
           }
         ]
       },
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_copper_ingot"
+      "has_clay_ball"
     ]
   ],
   "rewards": {
     "recipes": [
-      "myneheroes:toolbelt_3"
+      "myneheroes:coloring_compound"
     ]
   }
 }

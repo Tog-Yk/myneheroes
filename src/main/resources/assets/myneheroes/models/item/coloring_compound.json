@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "myneheroes:item/coloring_compound",
+    "layer1": "myneheroes:item/coloring_compound_color"
+  }
+}
