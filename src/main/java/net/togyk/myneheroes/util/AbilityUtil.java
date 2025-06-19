@@ -2,9 +2,10 @@ package net.togyk.myneheroes.util;
 
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
 import net.togyk.myneheroes.ability.Abilities;
 import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.upgrade.Upgrade;
+import net.togyk.myneheroes.upgrade.Upgrades;
 
 import java.util.*;
 
@@ -36,5 +37,14 @@ public class AbilityUtil {
             ability.readNbt(nbt);
         }
         return ability;
+    }
+
+    public static Upgrade nbtToUpgrade(NbtCompound nbt) {
+        Identifier upgradeId = Identifier.of(nbt.getString("id"));
+        Upgrade upgrade = Upgrades.get(upgradeId);
+        if (upgrade != null) {
+            upgrade.readNbt(nbt);
+        }
+        return upgrade;
     }
 }

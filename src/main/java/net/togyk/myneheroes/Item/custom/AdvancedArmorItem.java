@@ -16,6 +16,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
+import net.togyk.myneheroes.upgrade.AbilityUpgrade;
+import net.togyk.myneheroes.upgrade.Upgrade;
+import net.togyk.myneheroes.util.AbilityUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -40,13 +43,13 @@ public class AdvancedArmorItem extends ArmorItem implements AbilityHolding, Upgr
             return abilities;
         }
 
-        for (ItemStack upgradeStack : this.getUpgrades(stack, world)) {
-            if (upgradeStack.getItem() instanceof UpgradeItem upgrade) {
-                for (Ability ability : upgrade.getAbilities(upgradeStack)) {
-                    ability.setHolder(upgradeStack);
+        for (Upgrade upgrade : this.getUpgrades(stack)) {
+            if (upgrade instanceof AbilityUpgrade abilityUpgrade) {
+                upgrade.setHolderStack(stack);
+                for (Ability ability : abilityUpgrade.getAbilities()) {
+                    ability.setHolder(upgrade);
                     abilities.add(ability);
                 }
-                upgrade.setHolder(stack);
             }
         }
 
@@ -55,58 +58,34 @@ public class AdvancedArmorItem extends ArmorItem implements AbilityHolding, Upgr
 
     @Override
     public void saveAbility(ItemStack stack, World world, Ability ability) {
-        NbtCompound nbt = stack.getOrDefault(ModDataComponentTypes.ABILITIES, new NbtCompound());
-
-        NbtList abilitiesNbt = new NbtList();
-        if (nbt.contains("abilities")) {
-            abilitiesNbt = nbt.getList("abilities", NbtElement.COMPOUND_TYPE);
-        }
-
-        //getting a list of all the id to replace the correct one
-        List<Ability> loadedAbilities = this.getAbilities(stack, world);
-        List<Identifier> identifiers = loadedAbilities.stream().map(Ability::getId).toList();
-
-        if (identifiers.contains(ability.getId())) {
-            int index = identifiers.indexOf(ability.getId());
-            if (abilitiesNbt.size() > index) {
-                abilitiesNbt.set(index, ability.writeNbt(new NbtCompound()));
-            } else {
-                abilitiesNbt.add(ability.writeNbt(new NbtCompound()));
-            }
-        } else {
-            abilitiesNbt.add(ability.writeNbt(new NbtCompound()));
-        }
-
-        nbt.put("abilities", abilitiesNbt);
-
-        stack.set(ModDataComponentTypes.ABILITIES, nbt);
     }
 
     @Override
-    public void saveUpgrade(ItemStack stack, ItemStack upgrade, World world) {
+    public void saveUpgrade(ItemStack stack, Upgrade upgrade) {
         NbtCompound nbt = stack.getOrDefault(ModDataComponentTypes.UPGRADES, new NbtCompound());
 
-        NbtList abilitiesNbt = new NbtList();
+        NbtList upgradesNbt = new NbtList();
         if (nbt.contains("upgrades")) {
-            abilitiesNbt = nbt.getList("upgrades", NbtElement.COMPOUND_TYPE);
+            upgradesNbt = nbt.getList("upgrades", NbtElement.COMPOUND_TYPE);
         }
 
         //getting a list of all the id to replace the correct one
-        List<ItemStack> upgrades = this.getUpgrades(stack, world);
-        List<Item> upgradeItems = upgrades.stream().map(ItemStack::getItem).toList();
+        List<Upgrade> upgrades = this.getUpgrades(stack);
+        List<Identifier> identifiers = upgrades.stream().map(Upgrade::getId).toList();
 
-        if (upgradeItems.contains(upgrade.getItem())) {
-            int index = upgradeItems.indexOf(upgrade.getItem());
-            if (abilitiesNbt.size() > index) {
-                abilitiesNbt.set(index, upgrade.encodeAllowEmpty(world.getRegistryManager()));
+        if (identifiers.contains(upgrade.getId())) {
+            int index = identifiers.indexOf(upgrade.getId());
+            if (upgradesNbt.size() > index) {
+                upgradesNbt.set(index, upgrade.writeNbt(new NbtCompound()));
             } else {
-                abilitiesNbt.add(upgrade.encodeAllowEmpty(world.getRegistryManager()));
+                upgradesNbt.add(upgrade.writeNbt(new NbtCompound()));
             }
         } else {
-            abilitiesNbt.add(upgrade.encodeAllowEmpty(world.getRegistryManager()));
+            upgradesNbt.add(upgrade.writeNbt(new NbtCompound()));
         }
 
-        nbt.put("upgrades", abilitiesNbt);
+
+        nbt.put("upgrades", upgradesNbt);
 
         stack.set(ModDataComponentTypes.UPGRADES, nbt);
     }
@@ -118,53 +97,46 @@ public class AdvancedArmorItem extends ArmorItem implements AbilityHolding, Upgr
     }
 
     @Override
-    public boolean canBeUpgraded() {
-        return true;
+    public boolean canUpgrade(ItemStack stack, Upgrade upgrade) {
+        boolean hasUpgrade = hasUpgrade(stack, upgrade);
+        boolean canBePutInSlot = upgrade.getCompatibleTypes().contains(this.getType());
+        return !hasUpgrade && canBePutInSlot;
+    }
+
+    public boolean hasUpgrade(ItemStack stack, Upgrade upgrade) {
+        return this.getUpgrades(stack).stream().map(Upgrade::getId).toList().contains(upgrade.getId());
     }
 
     @Override
-    public boolean canUpgrade(ItemStack stack, ItemStack upgradeStack, World world) {
-        if (upgradeStack.getItem() instanceof UpgradeItem upgrade) {
-            boolean hasUpgrade = hasUpgrade(stack, upgrade, world);
-            boolean canBePutInSlot = upgrade.getEquipmentSlot() == null || upgrade.getEquipmentSlot() == this.getType();
-            return !hasUpgrade && canBePutInSlot;
-        }
-        return false;
-    }
-
-    public boolean hasUpgrade(ItemStack stack, UpgradeItem upgrade, World world) {
-        return this.getUpgrades(stack, world).stream().map(ItemStack::getItem).toList().contains(upgrade);
-    }
-
-    @Override
-    public List<ItemStack> getUpgrades(ItemStack stack, World world) {
+    public List<Upgrade> getUpgrades(ItemStack stack) {
         NbtCompound nbt = stack.getOrDefault(ModDataComponentTypes.UPGRADES, new NbtCompound());
 
-        NbtList abilitiesNbt = new NbtList();
+        NbtList upgradesNbt = new NbtList();
         if (nbt.contains("upgrades")) {
-            abilitiesNbt = nbt.getList("upgrades", NbtElement.COMPOUND_TYPE);
+            upgradesNbt = nbt.getList("upgrades", NbtElement.COMPOUND_TYPE);
         }
 
-        List<ItemStack> abilitiesList = new ArrayList<>();
-        for (NbtElement nbtElement : abilitiesNbt) {
+        List<Upgrade> upgradeList = new ArrayList<>();
+        for (NbtElement nbtElement : upgradesNbt) {
             if (nbtElement instanceof NbtCompound nbtCompound) {
-                ItemStack upgradeStack = ItemStack.fromNbtOrEmpty(world.getRegistryManager(), nbtCompound);
-                if (upgradeStack != null) {
-                    abilitiesList.add(upgradeStack);
+                Upgrade upgrade = AbilityUtil.nbtToUpgrade(nbtCompound);
+                if (upgrade != null) {
+                    upgrade.setHolderStack(stack);
+                    upgradeList.add(upgrade);
                 }
             }
         }
-        return abilitiesList;
+        return upgradeList;
     }
 
     @Override
-    public void setUpgrades(ItemStack stack, List<ItemStack> upgrades, World world) {
+    public void setUpgrades(ItemStack stack, List<Upgrade> upgrades) {
         NbtCompound nbt = new NbtCompound();
 
         NbtList upgradesNbt = new NbtList();
 
-        for (ItemStack upgradeStack : upgrades) {
-            upgradesNbt.add(upgradeStack.encodeAllowEmpty(world.getRegistryManager()));
+        for (Upgrade upgrade : upgrades) {
+            upgradesNbt.add(upgrade.writeNbt(new NbtCompound()));
         }
 
         nbt.put("upgrades", upgradesNbt);

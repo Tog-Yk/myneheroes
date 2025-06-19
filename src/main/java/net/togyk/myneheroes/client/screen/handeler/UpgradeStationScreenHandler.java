@@ -14,7 +14,9 @@ import net.togyk.myneheroes.block.ModBlocks;
 import net.togyk.myneheroes.block.entity.UpgradeStationBlockEntity;
 import net.togyk.myneheroes.client.screen.ModScreenHandlerTypes;
 import net.togyk.myneheroes.networking.BlockPosPayload;
+import net.togyk.myneheroes.upgrade.Upgrade;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UpgradeStationScreenHandler extends ScreenHandler {
@@ -55,9 +57,10 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
         } else {
             ItemStack inputStack = blockEntity.getInput().getStack(0);
             if (inputStack.getItem() instanceof UpgradableItem upgradableItem) {
-                List<ItemStack> upgrades = upgradableItem.getUpgrades(inputStack, this.world);
-                for (ItemStack stack : upgrades) {
-                    blockEntity.getUpgrades().setStack(upgrades.indexOf(stack), stack);
+                List<Upgrade> upgrades = upgradableItem.getUpgrades(inputStack);
+                for (Upgrade upgrade : upgrades) {
+                    ItemStack stack = upgrade.getItemStack(this.world);
+                    blockEntity.getUpgrades().setStack(upgrades.indexOf(upgrade), stack);
                 }
             }
         }
@@ -67,8 +70,16 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
         if (!blockEntity.getInput().isEmpty()) {
             ItemStack inputStack = blockEntity.getInput().getStack(0);
             if (inputStack.getItem() instanceof UpgradableItem upgradableItem) {
-                List<ItemStack> upgrades = blockEntity.getUpgrades().getHeldStacks();
-                upgradableItem.setUpgrades(inputStack, upgrades, this.world);
+                List<Upgrade> upgrades = new ArrayList<>();
+                for (ItemStack stack : blockEntity.getUpgrades().getHeldStacks()) {
+                    if (stack.getItem() instanceof UpgradeItem upgradeItem) {
+                        Upgrade upgrade = upgradeItem.getUpgrade();
+                        upgrade.setItemStack(stack, this.world);
+
+                        upgrades.add(upgrade);
+                    }
+                }
+                upgradableItem.setUpgrades(inputStack, upgrades);
             }
         }
     }
@@ -92,37 +103,37 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
         addSlot(new Slot(inventory, 0, 67, 7) {
             @Override
             public boolean canInsert(ItemStack stack) {
-                return stack.getItem() instanceof UpgradeItem && canUpgrade(stack);
+                return stack.getItem() instanceof UpgradeItem upgradeItem && canUpgrade(upgradeItem.getUpgrade());
             }
         });
         addSlot(new Slot(inventory, 1, 93, 7) {
             @Override
             public boolean canInsert(ItemStack stack) {
-                return stack.getItem() instanceof UpgradeItem && canUpgrade(stack);
+                return stack.getItem() instanceof UpgradeItem upgradeItem && canUpgrade(upgradeItem.getUpgrade());
             }
         });
         addSlot(new Slot(inventory, 2, 54, 32) {
             @Override
             public boolean canInsert(ItemStack stack) {
-                return stack.getItem() instanceof UpgradeItem && canUpgrade(stack);
+                return stack.getItem() instanceof UpgradeItem upgradeItem && canUpgrade(upgradeItem.getUpgrade());
             }
         });
         addSlot(new Slot(inventory, 3, 106, 32) {
             @Override
             public boolean canInsert(ItemStack stack) {
-                return stack.getItem() instanceof UpgradeItem && canUpgrade(stack);
+                return stack.getItem() instanceof UpgradeItem upgradeItem && canUpgrade(upgradeItem.getUpgrade());
             }
         });
         addSlot(new Slot(inventory, 4, 67, 57) {
             @Override
             public boolean canInsert(ItemStack stack) {
-                return stack.getItem() instanceof UpgradeItem && canUpgrade(stack);
+                return stack.getItem() instanceof UpgradeItem upgradeItem && canUpgrade(upgradeItem.getUpgrade());
             }
         });
         addSlot(new Slot(inventory, 5, 93, 57) {
             @Override
             public boolean canInsert(ItemStack stack) {
-                return stack.getItem() instanceof UpgradeItem && canUpgrade(stack);
+                return stack.getItem() instanceof UpgradeItem upgradeItem && canUpgrade(upgradeItem.getUpgrade());
             }
         });
     }
@@ -142,8 +153,8 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
         }
     }
 
-    public boolean canUpgrade(ItemStack stack) {
-        return !this.blockEntity.getInput().isEmpty() && this.blockEntity.getInput().getStack(0).getItem() instanceof UpgradableItem upgradableItem && upgradableItem.canUpgrade(this.blockEntity.getInput().getStack(0), stack, this.world);
+    public boolean canUpgrade(Upgrade upgrade) {
+        return !this.blockEntity.getInput().isEmpty() && this.blockEntity.getInput().getStack(0).getItem() instanceof UpgradableItem upgradableItem && upgradableItem.canUpgrade(this.blockEntity.getInput().getStack(0), upgrade);
     }
 
     @Override
@@ -177,7 +188,7 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
                 if (!this.insertItem(originalStack, blockInputStart, blockInputEnd, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (originalStack.getItem() instanceof UpgradeItem && canUpgrade(originalStack)) {
+            } else if (originalStack.getItem() instanceof UpgradeItem upgradeItem && canUpgrade(upgradeItem.getUpgrade())) {
                 if (!this.insertItem(originalStack, blockUpgradeStart, blockUpgradeEnd, false)) {
                     return ItemStack.EMPTY;
                 }

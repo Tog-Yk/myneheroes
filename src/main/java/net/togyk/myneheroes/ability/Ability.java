@@ -14,10 +14,11 @@ import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-import net.togyk.myneheroes.Item.custom.UpgradeItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.Item.custom.AbilityHolding;
+import net.togyk.myneheroes.upgrade.AbilityUpgrade;
+import net.togyk.myneheroes.upgrade.Upgrade;
 import net.togyk.myneheroes.util.AbilityUtil;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,6 +45,7 @@ public class Ability {
     private Power HolderPower;
     private ItemStack HolderItem;
     private SelectionAbility HolderAbility;
+    private Upgrade HolderUpgrade;
 
     public final Identifier id;
     protected final int maxCooldown;
@@ -74,29 +76,27 @@ public class Ability {
     }
 
     public void tick(PlayerEntity player) {
-        int initialCooldown = this.getCooldown();
         if (this.getCooldown() != 0) {
             this.setCooldown(this.getCooldown() - 1);
         }
         if (this.getCooldown() < 0) {
             this.setCooldown(0);
         }
-        int beforeSave = this.getCooldown();
         this.save(player.getWorld());
-        MyneHeroes.LOGGER.info(player.getWorld().isClient? "c " + initialCooldown + " -> " + beforeSave + " -> " + this.getCooldown() : "s " + initialCooldown + " -> " + beforeSave + " -> " + this.getCooldown());
     }
 
     public void save(World world) {
-        if (this.getHolder() instanceof ItemStack stack) {
+        Object holder = this.getHolder();
+        if (holder instanceof ItemStack stack) {
             if (stack.getItem() instanceof AbilityHolding holding) {
                 holding.saveAbility(stack, world, this);
-            } else if (stack.getItem() instanceof UpgradeItem upgrade) {
-                upgrade.saveAbility(stack, world, this);
             }
-        } else if (this.getHolder() instanceof Power power) {
+        } else if (holder instanceof Power power) {
             power.saveAbility(this);
-        } else if (this.getHolder() instanceof SelectionAbility ability) {
+        } else if (holder instanceof SelectionAbility ability) {
             ability.saveAbility(world, this);
+        } else if (holder instanceof AbilityUpgrade upgrade) {
+            upgrade.saveAbility(this);
         }
     }
 
@@ -116,18 +116,28 @@ public class Ability {
         this.HolderItem = holder;
         this.HolderPower = null;
         this.HolderAbility = null;
+        this.HolderUpgrade = null;
     }
 
     public void setHolder(@Nullable Power holder) {
         this.HolderItem = null;
         this.HolderPower = holder;
         this.HolderAbility = null;
+        this.HolderUpgrade = null;
     }
 
     public void setHolder(@Nullable SelectionAbility holder) {
         this.HolderItem = null;
         this.HolderPower = null;
         this.HolderAbility = holder;
+        this.HolderUpgrade = null;
+    }
+
+    public void setHolder(@Nullable Upgrade upgrade) {
+        this.HolderItem = null;
+        this.HolderPower = null;
+        this.HolderAbility = null;
+        this.HolderUpgrade = upgrade;
     }
 
     /*
@@ -136,15 +146,13 @@ public class Ability {
      */
     public Object getIndirectHolder() {
         if (HolderItem != null) {
-            if (HolderItem.getItem() instanceof UpgradeItem upgradeItem) {
-                return upgradeItem.getHolder();
-            } else {
-                return HolderItem;
-            }
+            return HolderItem;
         } else if (HolderAbility != null) {
             return HolderAbility.getIndirectHolder();
-        } else {
+        } else if (HolderPower != null) {
             return HolderPower;
+        } else {
+            return HolderUpgrade;
         }
     }
 
@@ -157,8 +165,10 @@ public class Ability {
             return HolderItem;
         } else if (HolderAbility != null) {
             return HolderAbility;
-        } else {
+        } else if (HolderPower != null) {
             return HolderPower;
+        } else {
+            return HolderUpgrade;
         }
     }
 
