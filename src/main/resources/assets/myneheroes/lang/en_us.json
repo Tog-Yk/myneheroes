@@ -83,6 +83,8 @@
 
   "block.myneheroes.meteor_radar": "Meteor Radar",
 
+  "block.myneheroes.upgrade_station": "Upgrade Station",
+
   "power.myneheroes.kryptonian": "Kryptonian",
   "power.myneheroes.speedster": "Speedster",
 
@@ -134,7 +136,7 @@
   "container.myneheroes.armor_dyeing_station": "Armor Dyeing Station",
   "container.myneheroes.armor_light_leveler_station": "Armor Light Leveler Station",
   "container.myneheroes.upgrade_station_1": "Upgrade",
-  "container.myneheroes.upgrade_station_2": "   Station",
+  "container.myneheroes.upgrade_station_2": "  Station",
 
 
   "death.attack.punched" : "%1$s was slaughtered!",

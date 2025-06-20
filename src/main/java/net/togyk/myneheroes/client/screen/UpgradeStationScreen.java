@@ -1,5 +1,6 @@
 package net.togyk.myneheroes.client.screen;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.entity.player.PlayerInventory;
@@ -20,6 +21,7 @@ public class UpgradeStationScreen extends HandledScreen<UpgradeStationScreenHand
         int i = this.x;
         int j = this.y;
         context.drawTexture(TEXTURE, i, j, 0, 0, this.backgroundWidth, this.backgroundHeight);
+        context.drawText(MinecraftClient.getInstance().textRenderer, this.handler.getBlockEntity().getDisplayName2(),  i + 8, j + 15, 0xFF373737, false);
     }
 
     @Override
