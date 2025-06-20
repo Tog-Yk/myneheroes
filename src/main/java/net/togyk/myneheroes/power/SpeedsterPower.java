@@ -5,6 +5,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.Vec3d;
@@ -13,13 +14,13 @@ import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.entity.trail.AfterimageTrailEntity;
 import net.togyk.myneheroes.entity.trail.LightningTrailEntity;
 import net.togyk.myneheroes.entity.trail.TrailEntity;
+import net.togyk.myneheroes.upgrade.ColorUpgrade;
+import net.togyk.myneheroes.upgrade.Upgrade;
+import net.togyk.myneheroes.util.AbilityUtil;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
-public class SpeedsterPower extends Power implements VariableLinkedPower {
+public class SpeedsterPower extends Power implements VariableLinkedPower, UpgradablePower {
     private int speedLevel = 0;
     private final int maxSpeedLevel;
 
@@ -28,6 +29,8 @@ public class SpeedsterPower extends Power implements VariableLinkedPower {
     private int trailCooldown = 0;
 
     private boolean speedActive = true;
+
+    private List<Upgrade> upgrades = new ArrayList<>();
 
     public SpeedsterPower(Identifier id, int color, List<Ability> abilities, int maxSpeedLevel, Settings settings, attributeModifiers attributeModifiers) {
         super(id, color, abilities, settings, attributeModifiers);
@@ -40,7 +43,27 @@ public class SpeedsterPower extends Power implements VariableLinkedPower {
 
         if ((trailCooldown <= 0 ||(lastSegmentPos != null && player.getPos().distanceTo(lastSegmentPos) > 1)) && speedActive) {
             if (getSpeedLevel() > 9) {
-                TrailEntity trail = new LightningTrailEntity(player, lastSegment, 20, 4, 3, ColorHelper.Argb.withAlpha(0x40, this.getColor()), ColorHelper.Argb.withAlpha(0xF0, ColorHelper.Argb.lerp(0.95F, this.getColor(), 0xFFFFFF)));
+                List<Integer> outerColors = new ArrayList<>();
+
+                if (!upgrades.isEmpty()) {
+                    for (Upgrade upgrade : this.upgrades) {
+                        if (upgrade instanceof ColorUpgrade colorUpgrade) {
+                            outerColors.add(ColorHelper.Argb.withAlpha(0x40, colorUpgrade.getColor(player.getWorld())));
+                        }
+                    }
+                } else {
+                    outerColors = List.of(ColorHelper.Argb.withAlpha(0x40, this.getColor()));
+                }
+
+                List<Integer> innerColors = outerColors.stream().map(color -> {
+                    if (color != 0x40000000) {
+                        return ColorHelper.Argb.withAlpha(0xF0, ColorHelper.Argb.lerp(0.75F, color, 0xFFFFFF));
+                    } else {
+                        return ColorHelper.Argb.withAlpha(0xF0, color);
+                    }
+                }).toList();
+
+                TrailEntity trail = new LightningTrailEntity(player, lastSegment, 20, 4, 3, outerColors, innerColors);
                 trail.setPosition(player.getX(), player.getY(), player.getZ());
                 lastSegment = Optional.of(trail.getUuid());
                 lastSegmentPos = player.getPos();
@@ -169,6 +192,14 @@ public class SpeedsterPower extends Power implements VariableLinkedPower {
             nbt.put("lastSegmentPos", vecTag);
         }
 
+        NbtList upgradesNbt = new NbtList();
+
+        for (Upgrade upgrade : upgrades) {
+            upgradesNbt.add(upgrade.writeNbt(new NbtCompound()));
+        }
+
+        nbt.put("upgrades", upgradesNbt);
+
         return super.writeNbt(nbt);
     }
 
@@ -199,6 +230,41 @@ public class SpeedsterPower extends Power implements VariableLinkedPower {
             double z = vecTag.getDouble("z");
             lastSegmentPos = new Vec3d(x, y, z);
         }
+
+
+        NbtList upgradesNbt = new NbtList();
+        if (nbt.contains("upgrades")) {
+            upgradesNbt = nbt.getList("upgrades", NbtElement.COMPOUND_TYPE);
+        }
+
+        List<Upgrade> upgradeList = new ArrayList<>();
+        for (NbtElement nbtElement : upgradesNbt) {
+            if (nbtElement instanceof NbtCompound nbtCompound) {
+                Upgrade upgrade = AbilityUtil.nbtToUpgrade(nbtCompound);
+                if (upgrade != null) {
+                    upgradeList.add(upgrade);
+                }
+            }
+        }
+
+        this.upgrades = upgradeList;
+    }
+
+    @Override
+    public boolean canUpgrade(Upgrade upgrade) {
+        //this would be: return this.upgrades.size() < 4 && upgrade instanceof ColorUpgrade;
+        //but the upgrades don't want to work when there is multiple
+        return this.upgrades.size() < 1 && upgrade instanceof ColorUpgrade;
+    }
+
+    @Override
+    public List<Upgrade> getUpgrades() {
+        return upgrades;
+    }
+
+    @Override
+    public void setUpgrades(List<Upgrade> upgrades) {
+        this.upgrades = upgrades;
     }
 
     @Override

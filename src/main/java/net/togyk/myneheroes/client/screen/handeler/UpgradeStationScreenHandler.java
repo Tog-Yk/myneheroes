@@ -53,7 +53,7 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
 
     private void updateInventory() {
         if (blockEntity.getInput().isEmpty()) {
-            blockEntity.getUpgrades().clearToList();
+            blockEntity.getUpgrades().clear();
         } else {
             ItemStack inputStack = blockEntity.getInput().getStack(0);
             if (inputStack.getItem() instanceof UpgradableItem upgradableItem) {
@@ -73,7 +73,7 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
                 List<Upgrade> upgrades = new ArrayList<>();
                 for (ItemStack stack : blockEntity.getUpgrades().getHeldStacks()) {
                     if (stack.getItem() instanceof UpgradeItem upgradeItem) {
-                        Upgrade upgrade = upgradeItem.getUpgrade();
+                        Upgrade upgrade = upgradeItem.getUpgrade(this.world);
                         upgrade.setItemStack(stack, this.world);
 
                         upgrades.add(upgrade);
@@ -103,37 +103,79 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
         addSlot(new Slot(inventory, 0, 67, 7) {
             @Override
             public boolean canInsert(ItemStack stack) {
-                return stack.getItem() instanceof UpgradeItem upgradeItem && canUpgrade(upgradeItem.getUpgrade());
+                if (stack.getItem() instanceof UpgradeItem upgradeItem) {
+                    Upgrade upgrade = upgradeItem.getUpgrade(world);
+                    if (upgrade != null) {
+                        upgrade.setItemStack(stack, world);
+                        return canUpgrade(upgrade);
+                    }
+                }
+                return false;
             }
         });
         addSlot(new Slot(inventory, 1, 93, 7) {
             @Override
             public boolean canInsert(ItemStack stack) {
-                return stack.getItem() instanceof UpgradeItem upgradeItem && canUpgrade(upgradeItem.getUpgrade());
+                if (stack.getItem() instanceof UpgradeItem upgradeItem) {
+                    Upgrade upgrade = upgradeItem.getUpgrade(world);
+                    if (upgrade != null) {
+                        upgrade.setItemStack(stack, world);
+                        return canUpgrade(upgrade);
+                    }
+                }
+                return false;
             }
         });
         addSlot(new Slot(inventory, 2, 54, 32) {
             @Override
             public boolean canInsert(ItemStack stack) {
-                return stack.getItem() instanceof UpgradeItem upgradeItem && canUpgrade(upgradeItem.getUpgrade());
+                if (stack.getItem() instanceof UpgradeItem upgradeItem) {
+                    Upgrade upgrade = upgradeItem.getUpgrade(world);
+                    if (upgrade != null) {
+                        upgrade.setItemStack(stack, world);
+                        return canUpgrade(upgrade);
+                    }
+                }
+                return false;
             }
         });
         addSlot(new Slot(inventory, 3, 106, 32) {
             @Override
             public boolean canInsert(ItemStack stack) {
-                return stack.getItem() instanceof UpgradeItem upgradeItem && canUpgrade(upgradeItem.getUpgrade());
+                if (stack.getItem() instanceof UpgradeItem upgradeItem) {
+                    Upgrade upgrade = upgradeItem.getUpgrade(world);
+                    if (upgrade != null) {
+                        upgrade.setItemStack(stack, world);
+                        return canUpgrade(upgrade);
+                    }
+                }
+                return false;
             }
         });
         addSlot(new Slot(inventory, 4, 67, 57) {
             @Override
             public boolean canInsert(ItemStack stack) {
-                return stack.getItem() instanceof UpgradeItem upgradeItem && canUpgrade(upgradeItem.getUpgrade());
+                if (stack.getItem() instanceof UpgradeItem upgradeItem) {
+                    Upgrade upgrade = upgradeItem.getUpgrade(world);
+                    if (upgrade != null) {
+                        upgrade.setItemStack(stack, world);
+                        return canUpgrade(upgrade);
+                    }
+                }
+                return false;
             }
         });
         addSlot(new Slot(inventory, 5, 93, 57) {
             @Override
             public boolean canInsert(ItemStack stack) {
-                return stack.getItem() instanceof UpgradeItem upgradeItem && canUpgrade(upgradeItem.getUpgrade());
+                if (stack.getItem() instanceof UpgradeItem upgradeItem) {
+                    Upgrade upgrade = upgradeItem.getUpgrade(world);
+                    if (upgrade != null) {
+                        upgrade.setItemStack(stack, world);
+                        return canUpgrade(upgrade);
+                    }
+                }
+                return false;
             }
         });
     }
@@ -188,7 +230,7 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
                 if (!this.insertItem(originalStack, blockInputStart, blockInputEnd, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (originalStack.getItem() instanceof UpgradeItem upgradeItem && canUpgrade(upgradeItem.getUpgrade())) {
+            } else if (originalStack.getItem() instanceof UpgradeItem upgradeItem && canUpgrade(upgradeItem.getUpgrade(this.world))) {
                 if (!this.insertItem(originalStack, blockUpgradeStart, blockUpgradeEnd, false)) {
                     return ItemStack.EMPTY;
                 }

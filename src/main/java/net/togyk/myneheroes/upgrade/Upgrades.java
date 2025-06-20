@@ -19,6 +19,8 @@ public class Upgrades {
     public static final Upgrade TAKE_OFF_SUIT = registerUpgrade(new AbilityUpgrade(Abilities.TAKE_OFF_SUIT, List.of(ArmorItem.Type.HELMET, ArmorItem.Type.CHESTPLATE, ArmorItem.Type.LEGGINGS, ArmorItem.Type.BOOTS), Identifier.of(MyneHeroes.MOD_ID, "take_off_suit")));
     public static final Upgrade TOOLBELT_3 = registerUpgrade(new AbilityUpgrade(Abilities.TOOLBELT_3, List.of(ArmorItem.Type.LEGGINGS), Identifier.of(MyneHeroes.MOD_ID, "toolbelt_3")));
 
+    public static final Upgrade COLOR = registerUpgrade(new ColorUpgrade(List.of(), Identifier.of(MyneHeroes.MOD_ID, "color")));
+
 
     private static Upgrade registerUpgrade(Upgrade upgrade) {
         if (!UPGRADES.containsKey(upgrade.getId())) {

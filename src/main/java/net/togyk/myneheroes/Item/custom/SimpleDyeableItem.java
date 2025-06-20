@@ -1,19 +1,21 @@
 package net.togyk.myneheroes.Item.custom;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
+import net.togyk.myneheroes.upgrade.ColorUpgrade;
+import net.togyk.myneheroes.upgrade.Upgrade;
+import net.togyk.myneheroes.upgrade.Upgrades;
 
 import java.util.List;
 
-public class SimpleDyeableItem extends Item implements DyeableItem {
+public class SimpleDyeableItem extends UpgradeItem implements DyeableItem {
     private final int defaultColor;
 
     public SimpleDyeableItem(int defaultColor, Settings settings) {
-        super(settings);
+        super(Upgrades.COLOR.copy(), settings);
         this.defaultColor = defaultColor;
     }
-
 
     public int getColor(ItemStack stack, int index) {
         if (layerIsDyeable(index) && index == 0) {

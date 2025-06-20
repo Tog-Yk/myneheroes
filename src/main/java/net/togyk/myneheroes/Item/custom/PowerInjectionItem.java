@@ -1,25 +1,25 @@
 package net.togyk.myneheroes.Item.custom;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.power.Power;
+import net.togyk.myneheroes.power.UpgradablePower;
+import net.togyk.myneheroes.upgrade.Upgrade;
 import net.togyk.myneheroes.util.PowerData;
 import net.togyk.myneheroes.util.ScrollData;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PowerInjectionItem extends Item {
+public class PowerInjectionItem extends Item implements UpgradableItem {
 
     public PowerInjectionItem(Settings settings) {
         super(settings);
@@ -88,5 +88,38 @@ public class PowerInjectionItem extends Item {
             this.use(user.getWorld(),user,context.getHand());
         }
         return super.useOnBlock(context);
+    }
+
+    @Override
+    public boolean canUpgrade(ItemStack stack, Upgrade upgrade) {
+        Power power = this.getPower(stack);
+        return power instanceof UpgradablePower upgradablePower && upgradablePower.canUpgrade(upgrade);
+    }
+
+    @Override
+    public List<Upgrade> getUpgrades(ItemStack stack) {
+        Power power = this.getPower(stack);
+        if (power instanceof UpgradablePower upgradablePower) {
+            return upgradablePower.getUpgrades();
+        }
+        return new ArrayList<>();
+    }
+
+    @Override
+    public void setUpgrades(ItemStack stack, List<Upgrade> upgrades) {
+        Power power = this.getPower(stack);
+        if (power instanceof UpgradablePower upgradablePower) {
+            upgradablePower.setUpgrades(upgrades);
+            this.setPower(stack, power);
+        }
+    }
+
+    @Override
+    public void saveUpgrade(ItemStack stack, Upgrade upgrade) {
+        Power power = this.getPower(stack);
+        if (power instanceof UpgradablePower upgradablePower) {
+            upgradablePower.saveUpgrade(upgrade);
+            this.setPower(stack, power);
+        }
     }
 }

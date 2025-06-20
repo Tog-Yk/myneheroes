@@ -12,7 +12,7 @@ public abstract class Upgrade {
     protected final Identifier id;
 
     private ItemStack holderStack;
-    private NbtCompound itemStack;
+    private NbtCompound itemStack = new NbtCompound();
 
     protected final List<ArmorItem.Type> compatibleTypes;
 
