@@ -4,7 +4,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 
-public class BooleanAbility extends Ability{
+public class BooleanAbility extends Ability {
     private boolean bool = true;
     public BooleanAbility(Identifier id, Settings settings) {
         super(id, 10, settings, (player) -> false);
@@ -14,19 +14,19 @@ public class BooleanAbility extends Ability{
     public void Use(PlayerEntity player) {
         //switch the boolean
         if (getCooldown() == 0) {
-            bool = !bool;
+            this.bool = !this.bool;
             this.setCooldown(this.getMaxCooldown());
         }
-        this.save();
+        this.save(player.getWorld());
     }
 
     public boolean get() {
-        return bool;
+        return this.bool;
     }
 
     @Override
     public NbtCompound writeNbt(NbtCompound nbt) {
-        nbt.putBoolean("bool", this.get());
+        nbt.putBoolean("bool", this.bool);
         return super.writeNbt(nbt);
     }
 

@@ -67,6 +67,8 @@ public class ModItemGroups {
                         entries.add(ModBlocks.METEOR_RADAR);
 
                         entries.add(ModItems.COLORING_COMPOUND);
+
+                        entries.add(ModBlocks.UPGRADE_STATION);
                     }).build());
 
     public static final ItemGroup MYNEHEROES_ARMOR_GROUP = Registry.register(Registries.ITEM_GROUP,

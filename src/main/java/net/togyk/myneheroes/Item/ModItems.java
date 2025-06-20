@@ -8,7 +8,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.*;
 import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.ability.Abilities;
+import net.togyk.myneheroes.upgrade.Upgrades;
 
 import java.util.List;
 
@@ -43,12 +43,12 @@ public class ModItems {
     public static final Item CIRCUIT_BOARD = registerItem("circuit_board",
             new Item(new Item.Settings()));
 
-    public static final Item HUD_UPGRADE = registerItem("hud_upgrade", new UpgradeItem(Abilities.TOGGLE_HUD, 4, ArmorItem.Type.HELMET, new Item.Settings()));
-    public static final Item LAZAR_UPGRADE = registerItem("lazar_upgrade", new UpgradeItem(Abilities.SHOOT_LAZAR, 6, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
-    public static final Item FlY_UPGRADE = registerItem("fly_upgrade", new UpgradeItem(Abilities.ALLOW_FLYING, 6, ArmorItem.Type.BOOTS, new Item.Settings()));
-    public static final Item KINETIC_ENERGY_STORAGE_UPGRADE = registerItem("kinetic_energy_storage_upgrade", new UpgradeItem(Abilities.RELEASE_KINETIC_ENERGY, 3, null, new Item.Settings()));
-    public static final Item TAKE_OFF_SUIT_UPGRADE = registerItem("take_off_suit_upgrade", new UpgradeItem(Abilities.TAKE_OFF_SUIT, 4, null, new Item.Settings()));
-    public static final Item TOOLBELT_3_UPGRADE = registerItem("toolbelt_3_upgrade", new UpgradeWithTooltipItem(Abilities.TOOLBELT_3, 4, ArmorItem.Type.LEGGINGS, Text.translatable("item.myneheroes.toolbelt_3_upgrade.size", 3), new Item.Settings()));
+    public static final Item HUD_UPGRADE = registerItem("hud_upgrade", new UpgradeItem(Upgrades.HUD, new Item.Settings().maxCount(1)));
+    public static final Item LAZAR_UPGRADE = registerItem("lazar_upgrade", new UpgradeItem(Upgrades.LAZAR, new Item.Settings().maxCount(1)));
+    public static final Item FlY_UPGRADE = registerItem("fly_upgrade", new UpgradeItem(Upgrades.FlY, new Item.Settings().maxCount(1)));
+    public static final Item KINETIC_ENERGY_STORAGE_UPGRADE = registerItem("kinetic_energy_storage_upgrade", new UpgradeItem(Upgrades.KINETIC_ENERGY_STORAGE, new Item.Settings().maxCount(1)));
+    public static final Item TAKE_OFF_SUIT_UPGRADE = registerItem("take_off_suit_upgrade", new UpgradeItem(Upgrades.TAKE_OFF_SUIT, new Item.Settings().maxCount(1)));
+    public static final Item TOOLBELT_3_UPGRADE = registerItem("toolbelt_3_upgrade", new UpgradeWithTooltipItem(Upgrades.TOOLBELT_3, Text.translatable("item.myneheroes.toolbelt_3_upgrade.size", 3), new Item.Settings().maxCount(1)));
 
     public static final Item COLORING_COMPOUND = registerItem("coloring_compound",
             new SimpleDyeableItem(-1, new Item.Settings()));

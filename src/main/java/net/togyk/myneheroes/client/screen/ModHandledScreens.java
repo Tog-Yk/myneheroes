@@ -11,5 +11,6 @@ public class ModHandledScreens {
         HandledScreens.register(ModScreenHandlerTypes.ARMOR_LIGHT_LEVELER, ArmorLightLevelerScreen::new);
         HandledScreens.register(ModScreenHandlerTypes.SELECTION_ABILITY, SelectionAbilityScreen::new);
         HandledScreens.register(ModScreenHandlerTypes.TOOLBELT_ABILITY, ToolbeltAbilityScreen::new);
+        HandledScreens.register(ModScreenHandlerTypes.UPGRADE_STATION, UpgradeStationScreen::new);
     }
 }

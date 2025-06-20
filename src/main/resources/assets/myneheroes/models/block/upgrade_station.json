@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "myneheroes:block/upgrade_station_bottom",
+    "east": "myneheroes:block/upgrade_station_side",
+    "north": "myneheroes:block/upgrade_station_side",
+    "particle": "myneheroes:block/upgrade_station_side",
+    "south": "myneheroes:block/upgrade_station_side",
+    "up": "myneheroes:block/upgrade_station_top",
+    "west": "myneheroes:block/upgrade_station_side"
+  }
+}

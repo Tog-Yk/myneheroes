@@ -27,7 +27,7 @@ public class VariableLinkedAbility extends Ability {
                 this.setCooldown(this.getMaxCooldown());
             }
         }
-        this.save();
+        this.save(player.getWorld());
     }
 
     @Override

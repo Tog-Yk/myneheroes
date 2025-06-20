@@ -9,7 +9,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.ability.Ability;
-import net.togyk.myneheroes.power.AbilityHolding;
 
 import java.util.List;
 
@@ -32,12 +31,13 @@ public class AbilityHoldingItem extends Item implements AbilityHolding {
     }
 
     @Override
-    public List<Ability> getAbilities(ItemStack stack) {
+    public List<Ability> getAbilities(ItemStack stack, World world) {
+        ability.setHolder(stack);
         return List.of(this.ability);
     }
 
     @Override
-    public void saveAbility(ItemStack stack, Ability ability) {
+    public void saveAbility(ItemStack stack, World world, Ability ability) {
         this.ability = ability;
     }
 }

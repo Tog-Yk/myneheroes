@@ -29,6 +29,9 @@ public class ModDataComponentTypes {
     public static final ComponentType<Power> POWER =
             register("power", builder -> builder.codec(Power.CODEC));
 
+    public static final ComponentType<NbtCompound> UPGRADES =
+            register("upgrades", builder -> builder.codec(NbtCompound.CODEC));
+
 
     private static <T>ComponentType<T> register(String name, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
         return Registry.register(Registries.DATA_COMPONENT_TYPE, Identifier.of(MyneHeroes.MOD_ID, name),

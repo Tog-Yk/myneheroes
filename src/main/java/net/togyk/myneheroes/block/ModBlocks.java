@@ -3,6 +3,7 @@ package net.togyk.myneheroes.block;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
+import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -50,10 +51,9 @@ public class ModBlocks {
                     .requiresTool()));
 
     public static final Block ARMOR_DYEING_STATION = registerBlock("armor_dyeing_station",
-            new ArmorDyeingBlockEntityBlock(AbstractBlock.Settings.create().strength(2.5f).sounds(BlockSoundGroup.METAL)
-                    .requiresTool()));
+            new ArmorDyeingBlockEntityBlock(AbstractBlock.Settings.create().instrument(NoteBlockInstrument.BASS).strength(2.5F).sounds(BlockSoundGroup.WOOD).burnable()));
     public static final Block ARMOR_LIGHT_LEVELING_STATION = registerBlock("armor_light_leveling_station",
-            new ArmorLightLevelerBlockEntityBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.WOOD).strength(1.5F)));
+            new ArmorLightLevelerBlockEntityBlock(AbstractBlock.Settings.create().instrument(NoteBlockInstrument.BASS).strength(2.5F).sounds(BlockSoundGroup.WOOD).burnable()));
 
     public static final Block KRYPTONITE_BlOCK = registerBlock("kryptonite_block",
             new KryptoniteBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.AMETHYST_BLOCK).mapColor(MapColor.LIME).strength(2.5f)));
@@ -65,7 +65,8 @@ public class ModBlocks {
     public static final Block METEOR_RADAR = registerBlock("meteor_radar",
             new MeteorRadarBlockEntityBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.METAL).mapColor(MapColor.LIME).strength(2.5f)));
 
-
+    public static final Block UPGRADE_STATION = registerBlock("upgrade_station",
+            new UpgradeStationBlockEntityBlock(AbstractBlock.Settings.create().mapColor(MapColor.IRON_GRAY).requiresTool().strength(5.0F, 600.0F).sounds(BlockSoundGroup.METAL).pistonBehavior(PistonBehavior.BLOCK)));
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);

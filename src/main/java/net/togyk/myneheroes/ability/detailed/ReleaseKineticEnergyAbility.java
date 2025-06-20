@@ -34,8 +34,8 @@ public class ReleaseKineticEnergyAbility extends PassiveAbility implements Stock
     }
 
     @Override
-    public void tick() {
-        super.tick();
+    public void tick(PlayerEntity player) {
+        super.tick(player);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class ReleaseKineticEnergyAbility extends PassiveAbility implements Stock
             for (Ability ability : matchingAbilities) {
                 ((StockpileAbility) ability).setCharge(0);
                 ability.setCooldown(this.getMaxCooldown());
-                ability.save();
+                ability.save(player.getWorld());
             }
         }
     }
@@ -105,7 +105,7 @@ public class ReleaseKineticEnergyAbility extends PassiveAbility implements Stock
         if (this.getMaxCharge() != this.getCharge()) {
             this.setCharge((getCharge() + amount * (random.nextFloat(0, 6))));
         }
-        this.save();
+        this.save(player.getWorld());
         return true;
     }
 

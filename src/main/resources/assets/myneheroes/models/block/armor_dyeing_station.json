@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "myneheroes:block/armor_dyeing_station_bottom",
+    "east": "myneheroes:block/armor_dyeing_station_side3",
+    "north": "myneheroes:block/armor_dyeing_station_side3",
+    "particle": "myneheroes:block/armor_dyeing_station_side3",
+    "south": "myneheroes:block/armor_dyeing_station_side1",
+    "up": "myneheroes:block/armor_dyeing_station_top",
+    "west": "myneheroes:block/armor_dyeing_station_side2"
+  }
+}
