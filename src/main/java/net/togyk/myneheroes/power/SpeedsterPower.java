@@ -254,7 +254,7 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
     public boolean canUpgrade(Upgrade upgrade) {
         //this would be: return this.upgrades.size() < 4 && upgrade instanceof ColorUpgrade;
         //but the upgrades don't want to work when there is multiple
-        return this.upgrades.size() < 1 && upgrade instanceof ColorUpgrade;
+        return this.upgrades.size() < 4 && upgrade instanceof ColorUpgrade;
     }
 
     @Override

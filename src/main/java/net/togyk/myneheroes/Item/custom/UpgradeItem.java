@@ -14,6 +14,6 @@ public class UpgradeItem extends Item {
     }
 
     public Upgrade getUpgrade(World world) {
-        return upgrade;
+        return upgrade.copy();
     }
 }
