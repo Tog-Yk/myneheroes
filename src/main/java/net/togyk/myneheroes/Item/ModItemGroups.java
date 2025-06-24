@@ -32,8 +32,8 @@ public class ModItemGroups {
                         entries.add(ModBlocks.TITANIUM_ORE);
                         entries.add(ModBlocks.DEEPSLATE_TITANIUM_ORE);
 
-                        entries.add(ModItems.GOLD_TITANIUM_INGOT);;
-                        entries.add(ModItems.RAW_GOLD_TITANIUM);;
+                        entries.add(ModItems.GOLD_TITANIUM_INGOT);
+                        entries.add(ModItems.RAW_GOLD_TITANIUM);
 
                         entries.add(ModBlocks.GOLD_TITANIUM_BLOCK);
                         entries.add(ModBlocks.RAW_GOLD_TITANIUM_BLOCK);
@@ -106,6 +106,12 @@ public class ModItemGroups {
                         entries.add(ModItems.MARK45_NETHERITE_CHESTPLATE);
                         entries.add(ModItems.MARK45_NETHERITE_LEGGINGS);
                         entries.add(ModItems.MARK45_NETHERITE_BOOTS);
+
+
+                        entries.add(ModItems.SPEEDSTER_GOLD_TITANIUM_HELMET);
+                        entries.add(ModItems.SPEEDSTER_GOLD_TITANIUM_CHESTPLATE);
+                        entries.add(ModItems.SPEEDSTER_GOLD_TITANIUM_LEGGINGS);
+                        entries.add(ModItems.SPEEDSTER_GOLD_TITANIUM_BOOTS);
 
 
                     }).build());

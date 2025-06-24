@@ -13,6 +13,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.server.world.ServerWorld;
@@ -125,7 +126,7 @@ public class StationaryArmorEntity extends ArmorStandEntity {
         Iterable<ItemStack> armorItems = this.getArmorItems();
         for (ItemStack stack : armorItems) {
             if (!stack.isEmpty()) {
-                this.handleArmorTransfer(player, ((AdvancedArmorItem) stack.getItem()).getSlotType(), stack);
+                this.handleArmorTransfer(player, ((ArmorItem) stack.getItem()).getSlotType(), stack);
             }
         }
     }

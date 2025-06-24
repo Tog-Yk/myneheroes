@@ -90,10 +90,25 @@ public class ModArmorMaterials {
                             new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark3_details_2"), "", true),
                             new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark3_glow"), "", true)
                     ),0,0));
+
+    //Speedster pattern
+    public static final RegistryEntry<ArmorMaterial> GOLD_TITANIUM_SPEEDSTER_MATERIAL = registerArmorMaterial("gold_titanium_speedster",
+            () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                map.put(ArmorItem.Type.BOOTS, 2);
+                map.put(ArmorItem.Type.LEGGINGS, 5);
+                map.put(ArmorItem.Type.CHESTPLATE, 7);
+                map.put(ArmorItem.Type.HELMET, 3);
+                map.put(ArmorItem.Type.BODY, 5);
+            }), 20, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, () -> Ingredient.ofItems(ModItems.GOLD_TITANIUM_INGOT),
+                    List.of(
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"speedster_gold_titanium"), "", true),
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"speedster_gold_titanium_details"), "", true),
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"speedster_gold_titanium_details_2"), "", true),
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"speedster_gold_titanium_glow"), "", true)
+                    ),0,0));
     /*
      * Spiderman pattern
      * Kryptonian pattern
-     * Speedster pattern
      * panther pattern
      */
 

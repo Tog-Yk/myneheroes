@@ -139,6 +139,21 @@ public class ModItems {
             new DyeableAdvancedArmorItem(List.of(0xFF49393f, 0xff5d565d, 0xff6e5959, -1443585), List.of(-1, -1, -1, 15), null, ModArmorMaterials.NETHERITE_IRONMAN_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
                     .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(39)).fireproof()));
 
+    //speedster armors
+    //gold_titanium
+    public static Item SPEEDSTER_GOLD_TITANIUM_HELMET = registerItem("speedster_gold_titanium_helmet",
+            new DyeableAdvancedArmorItem(List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x40FFDE3A), List.of(-1, -1, -1, 15), null, ModArmorMaterials.GOLD_TITANIUM_SPEEDSTER_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(31))));
+    public static Item SPEEDSTER_GOLD_TITANIUM_CHESTPLATE = registerItem("speedster_gold_titanium_chestplate",
+            new DyeableAdvancedArmorItem(List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x40FFDE3A), List.of(-1, -1, -1, 15), null, ModArmorMaterials.GOLD_TITANIUM_SPEEDSTER_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(31))));
+    public static Item SPEEDSTER_GOLD_TITANIUM_LEGGINGS = registerItem("speedster_gold_titanium_leggings",
+            new DyeableAdvancedArmorItem(List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x40FFDE3A), List.of(-1, -1, -1, 15), null, ModArmorMaterials.GOLD_TITANIUM_SPEEDSTER_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(31))));
+    public static Item SPEEDSTER_GOLD_TITANIUM_BOOTS = registerItem("speedster_gold_titanium_boots",
+            new DyeableAdvancedArmorItem(List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x40FFDE3A), List.of(-1, -1, -1, 15), null, ModArmorMaterials.GOLD_TITANIUM_SPEEDSTER_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(31))));
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(MyneHeroes.MOD_ID, name), item);
     }

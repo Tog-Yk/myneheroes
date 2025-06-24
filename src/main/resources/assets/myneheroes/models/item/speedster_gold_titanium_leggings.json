@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "myneheroes:item/speedster_gold_titanium_leggings",
+    "layer1": "myneheroes:item/speedster_gold_titanium_details_leggings",
+    "layer2": "myneheroes:item/speedster_gold_titanium_details_2_leggings",
+    "layer3": "myneheroes:item/speedster_gold_titanium_glow_leggings"
+  }
+}
