@@ -48,22 +48,30 @@ public class ModMessages {
                 if (payload.integer() == 0) {
                     if (context.player() != null) {
                         Ability firstAbility = ((PlayerAbilities) context.player()).myneheroes$getFirstAbility();
-                        firstAbility.Use(context.player());
+                        if (firstAbility != null) {
+                            firstAbility.Use(context.player());
+                        }
                     }
                 } else if (payload.integer() == 1) {
                     if (context.player() != null) {
                         Ability secondAbility = ((PlayerAbilities) context.player()).myneheroes$getSecondAbility();
-                        secondAbility.Use(context.player());
+                        if (secondAbility != null) {
+                            secondAbility.Use(context.player());
+                        }
                     }
                 } else if (payload.integer() == 2) {
                     if (context.player() != null) {
                         Ability thirdAbility = ((PlayerAbilities) context.player()).myneheroes$getThirdAbility();
-                        thirdAbility.Use(context.player());
+                        if (thirdAbility != null) {
+                            thirdAbility.Use(context.player());
+                        }
                     }
                 } else if (payload.integer() == 3) {
                     if (context.player() != null) {
                         Ability fourthAbility = ((PlayerAbilities) context.player()).myneheroes$getFourthAbility();
-                        fourthAbility.Use(context.player());
+                        if (fourthAbility != null) {
+                            fourthAbility.Use(context.player());
+                        }
                     }
                 }
             });

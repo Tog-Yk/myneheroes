@@ -23,6 +23,7 @@ public class ModItems {
     public static final Item RAW_GOLD_TITANIUM = registerItem("raw_gold_titanium", new Item(new Item.Settings()));
 
     public static final Item IRON_SUIT_TEMPLATE = registerItem("iron_suit_template",new Item(new Item.Settings()));
+    public static final Item SPEEDSTER_SUIT_TEMPLATE = registerItem("speedster_suit_template",new Item(new Item.Settings()));
 
     public static final Item ARC_REACTOR = registerItem("arc_reactor",new ReactorItem(4000, 3200, 1600, new Item.Settings().maxCount(1)));
 

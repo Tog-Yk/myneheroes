@@ -39,6 +39,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.RAW_GOLD_TITANIUM_BLOCK);
 
                         entries.add(ModItems.IRON_SUIT_TEMPLATE);
+                        entries.add(ModItems.SPEEDSTER_SUIT_TEMPLATE);
 
                         entries.add(ModItems.ARC_REACTOR);
 

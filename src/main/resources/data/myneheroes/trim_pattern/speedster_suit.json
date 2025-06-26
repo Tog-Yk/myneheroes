@@ -1,0 +1,8 @@
+{
+  "asset_id": "myneheroes:speedster_suit",
+  "decal": false,
+  "description": {
+    "translate": "trim_pattern.myneheroes.speedster_suit"
+  },
+  "template_item": "myneheroes:speedster_suit_template"
+}

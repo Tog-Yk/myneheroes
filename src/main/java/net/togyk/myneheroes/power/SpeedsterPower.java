@@ -57,7 +57,7 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
 
                 List<Integer> innerColors = outerColors.stream().map(color -> {
                     if (color != 0x40000000) {
-                        return ColorHelper.Argb.withAlpha(0xF0, ColorHelper.Argb.lerp(0.75F, color, 0xFFFFFF));
+                        return ColorHelper.Argb.withAlpha(0xF0, ColorHelper.Argb.lerp(0.5F, color, 0xFFFFFFFF));
                     } else {
                         return ColorHelper.Argb.withAlpha(0xF0, color);
                     }
@@ -172,7 +172,7 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
                 .addAttributeModifier(EntityAttributes.PLAYER_BLOCK_BREAK_SPEED, Identifier.of(MyneHeroes.MOD_ID, "speedster_power.block_break_speed"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, this::getSpeed)
                 .addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, Identifier.of(MyneHeroes.MOD_ID, "speedster_power.attack_speed"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, this::getSpeed)
                 .addAttributeModifier(EntityAttributes.GENERIC_STEP_HEIGHT, Identifier.of(MyneHeroes.MOD_ID, "speedster_power.step_height"), EntityAttributeModifier.Operation.ADD_VALUE, this::getStepHeight)
-                .addAttributeModifier(EntityAttributes.GENERIC_FALL_DAMAGE_MULTIPLIER, Identifier.of(MyneHeroes.MOD_ID, "speedster_power.step_height"), EntityAttributeModifier.Operation.ADD_VALUE, this::getFallDamageMultiplier)
+                .addAttributeModifier(EntityAttributes.GENERIC_FALL_DAMAGE_MULTIPLIER, Identifier.of(MyneHeroes.MOD_ID, "speedster_power.fall_damage"), EntityAttributeModifier.Operation.ADD_VALUE, this::getFallDamageMultiplier)
                 .addAttributeModifier(EntityAttributes.GENERIC_SAFE_FALL_DISTANCE, Identifier.of(MyneHeroes.MOD_ID, "speedster_power.safe_fall_distance"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, this::getSafeFallDistance);
     }
 

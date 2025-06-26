@@ -41,7 +41,9 @@
         "trims/models/armor/bolt",
         "trims/models/armor/bolt_leggings",
         "myneheroes:trims/models/armor/iron_suit",
-        "myneheroes:trims/models/armor/iron_suit_leggings"
+        "myneheroes:trims/models/armor/iron_suit_leggings",
+        "myneheroes:trims/models/armor/speedster_suit",
+        "myneheroes:trims/models/armor/speedster_suit_leggings"
       ],
       "palette_key": "trims/color_palettes/trim_palette",
       "permutations": {

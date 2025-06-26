@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "myneheroes:gold_titanium_helmet"
+    },
+    {
+      "item": "myneheroes:speedster_suit_template"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "myneheroes:speedster_gold_titanium_helmet"
+  }
+}

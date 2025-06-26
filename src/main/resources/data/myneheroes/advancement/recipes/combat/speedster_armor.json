@@ -3,15 +3,15 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "myneheroes:vibranium_shield"
+        "recipe": "myneheroes:speedster_gold_titanium_chestplate"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_vibranium_ingot": {
+    "has_template": {
       "conditions": {
         "items": [
           {
-            "items": "myneheroes:vibranium_ingot"
+            "items": "myneheroes:speedster_suit_template"
           }
         ]
       },
@@ -21,12 +21,15 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_vibranium_ingot"
+      "has_template"
     ]
   ],
   "rewards": {
     "recipes": [
-      "myneheroes:vibranium_shield"
+      "myneheroes:speedster_gold_titanium_helmet",
+      "myneheroes:speedster_gold_titanium_chestplate",
+      "myneheroes:speedster_gold_titanium_leggings",
+      "myneheroes:speedster_gold_titanium_boots"
     ]
   }
 }
