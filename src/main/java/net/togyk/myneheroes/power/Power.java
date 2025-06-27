@@ -112,6 +112,10 @@ public class Power {
         isDampened = dampened;
     }
 
+    public boolean canStandOnWater() {
+        return false;
+    }
+
     public double getDamageMultiplier() {
         return this.settings.damageMultiplier;
     }

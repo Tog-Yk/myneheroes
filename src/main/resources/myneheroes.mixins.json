@@ -5,6 +5,8 @@
 	"package": "net.togyk.myneheroes.mixin",
 	"mixins": [
 		"ArmorFeatureRendererMixin",
+		"EntityShapeContextAccessor",
+		"FluidBlockMixin",
 		"ForgingScreenHandlerAccessor",
 		"PlayerAbilityMixin",
 		"PlayerAppliedAttributeMixin",

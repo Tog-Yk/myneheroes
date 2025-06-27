@@ -115,6 +115,11 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
         return 1.0D;
     }
 
+    @Override
+    public boolean canStandOnWater() {
+        return this.speedActive && this.getSpeedLevel() > 9 && this.getHolder() != null && (this.getHolder().getVelocity().x != 0 || this.getHolder().getVelocity().z != 0);
+    }
+
     public int getMaxSpeedLevel() {
         return maxSpeedLevel;
     }
