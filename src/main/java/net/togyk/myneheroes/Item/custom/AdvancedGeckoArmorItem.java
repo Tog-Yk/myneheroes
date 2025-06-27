@@ -8,6 +8,7 @@ import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.text.Text;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.client.render.armor.GeckoArmorRenderer;
 import org.jetbrains.annotations.Nullable;
@@ -26,8 +27,8 @@ import java.util.function.Consumer;
 public class AdvancedGeckoArmorItem extends AdvancedArmorItem implements GeoItem {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    public AdvancedGeckoArmorItem(@Nullable Ability suitSpecificAbility, RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
-        super(suitSpecificAbility, material, type, settings);
+    public AdvancedGeckoArmorItem(Text titleText, RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
+        super(titleText, material, type, settings);
     }
 
     @Override

@@ -38,10 +38,10 @@
   "item.myneheroes.vibranium_leggings": "Vibranium Leggings",
   "item.myneheroes.vibranium_boots": "Vibranium Boost",
 
-  "item.myneheroes.mark6_vibranium_helmet": "Mark-6 Vibranium Helmet",
-  "item.myneheroes.mark6_vibranium_chestplate": "Mark-6 Vibranium Chestplate",
-  "item.myneheroes.mark6_vibranium_leggings": "Mark-6 Vibranium Leggings",
-  "item.myneheroes.mark6_vibranium_boots": "Mark-6 Vibranium Boost",
+  "item.myneheroes.mark6_vibranium_helmet": "Advanced Helmet",
+  "item.myneheroes.mark6_vibranium_chestplate": "Advanced Chestplate",
+  "item.myneheroes.mark6_vibranium_leggings": "Advanced Leggings",
+  "item.myneheroes.mark6_vibranium_boots": "Advanced Boost",
 
   "item.myneheroes.titanium_helmet": "Titanium Helmet",
   "item.myneheroes.titanium_chestplate": "Titanium Chestplate",
@@ -53,20 +53,20 @@
   "item.myneheroes.gold_titanium_leggings": "Gold Titanium Leggings",
   "item.myneheroes.gold_titanium_boots": "Gold Titanium Boost",
 
-  "item.myneheroes.mark3_gold_titanium_helmet": "Mark-3 Gold Titanium Helmet",
-  "item.myneheroes.mark3_gold_titanium_chestplate": "Mark-3 Gold Titanium Chestplate",
-  "item.myneheroes.mark3_gold_titanium_leggings": "Mark-3 Gold Titanium Leggings",
-  "item.myneheroes.mark3_gold_titanium_boots": "Mark-3 Gold Titanium Boost",
+  "item.myneheroes.mark3_gold_titanium_helmet": "Advanced Helmet",
+  "item.myneheroes.mark3_gold_titanium_chestplate": "Advanced Chestplate",
+  "item.myneheroes.mark3_gold_titanium_leggings": "Advanced Leggings",
+  "item.myneheroes.mark3_gold_titanium_boots": "Advanced Boost",
 
-  "item.myneheroes.mark45_netherite_helmet": "Mark-45 Netherite Helmet",
-  "item.myneheroes.mark45_netherite_chestplate": "Mark-45 Netherite Chestplate",
-  "item.myneheroes.mark45_netherite_leggings": "Mark-45 Netherite Leggings",
-  "item.myneheroes.mark45_netherite_boots": "Mark-45 Netherite Boost",
+  "item.myneheroes.mark45_netherite_helmet": "Advanced Helmet",
+  "item.myneheroes.mark45_netherite_chestplate": "Advanced Chestplate",
+  "item.myneheroes.mark45_netherite_leggings": "Advanced Leggings",
+  "item.myneheroes.mark45_netherite_boots": "Advanced Boost",
 
-  "item.myneheroes.speedster_gold_titanium_helmet": "Speedster Gold Titanium Helmet",
-  "item.myneheroes.speedster_gold_titanium_chestplate": "Speedster Gold Titanium Chestplate",
-  "item.myneheroes.speedster_gold_titanium_leggings": "Speedster Gold Titanium Leggings",
-  "item.myneheroes.speedster_gold_titanium_boots": "Speedster Gold Titanium Boost",
+  "item.myneheroes.speedster_gold_titanium_helmet": "Advanced Helmet",
+  "item.myneheroes.speedster_gold_titanium_chestplate": "Advanced Chestplate",
+  "item.myneheroes.speedster_gold_titanium_leggings": "Advanced Leggings",
+  "item.myneheroes.speedster_gold_titanium_boots": "Advanced Boost",
 
 
 
@@ -176,5 +176,15 @@
 
   "gamerule.doMeteorSpawning": "Spawn Meteors",
 
-  "effect.myneheroes.kryptonite_poison": "Kryptonite Poison"
+  "effect.myneheroes.kryptonite_poison": "Kryptonite Poison",
+
+  "tag.item.myneheroes.coloring_fuel": "Coloring Fuel",
+  "tag.item.myneheroes.dyes": "Dyes",
+  "tag.item.myneheroes.reactor_fuel": "Reactor Fuel",
+
+  "armor_pattern.myneheroes.heading": "Pattern:",
+  "armor_pattern.myneheroes.mark3_gold_titanium": " Mark-3",
+  "armor_pattern.myneheroes.mark6_vibranium": " Mark-6",
+  "armor_pattern.myneheroes.mark45_netherite": " Mark-45",
+  "armor_pattern.myneheroes.speedster_gold_titanium": " Speedster Gold-Titanium"
 }

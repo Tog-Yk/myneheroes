@@ -4,7 +4,9 @@ import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
@@ -17,8 +19,8 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem implements Dyeab
     private final List<Integer> defaultColors;
     private final List<Integer> defaultLightLevels;
 
-    public DyeableAdvancedArmorItem(List<Integer> defaultColors, List<Integer> lightLevels, @Nullable Ability suitSpecificAbility, RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
-        super(suitSpecificAbility, material, type, settings);
+    public DyeableAdvancedArmorItem(List<Integer> defaultColors, List<Integer> lightLevels, Text titleText, RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
+        super(titleText, material, type, settings);
         this.defaultColors = defaultColors;
         this.defaultLightLevels = lightLevels;
     }
@@ -159,12 +161,13 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem implements Dyeab
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        tooltip.add(Text.literal("Colors:").formatted(Formatting.BLUE));
+        super.appendTooltip(stack, context, tooltip, type);
+        tooltip.add(Text.literal("Colors:").formatted(Formatting.GRAY));
         for (int i = 0; i < defaultColors.size(); i++) {
             if (layerIsDyeable(i)) {
-                tooltip.add(Text.literal(" " + String.valueOf(-1 * getColor(stack, i))));
+                int color = getColor(stack, i);
+                tooltip.add(Text.literal(" " + String.format("0x%06X", color)).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(color))));
             }
         }
-        super.appendTooltip(stack, context, tooltip, type);
     }
 }

@@ -12,8 +12,11 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 import net.minecraft.world.World;
+import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.upgrade.AbilityUpgrade;
@@ -25,11 +28,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdvancedArmorItem extends ArmorItem implements AbilityHolding, UpgradableItem {
-    public AdvancedArmorItem(@Nullable Ability suitSpecificAbility, RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
+    private final Text titleText;
+
+    public AdvancedArmorItem(Text titleText, RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
         super(material, type, settings);
+        this.titleText = titleText;
     }
+
     @Override
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType type) {
+        tooltip.add(Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "heading"))).formatted(Formatting.GRAY));
+        tooltip.add(titleText);
+
         MinecraftClient client = MinecraftClient.getInstance();
         for (Ability ability: this.getAbilities(stack, client.world)) {
             ability.appendTooltip(stack, context, tooltip, type);

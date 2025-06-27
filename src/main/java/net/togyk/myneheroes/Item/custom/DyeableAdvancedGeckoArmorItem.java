@@ -8,6 +8,7 @@ import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.text.Text;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.client.render.armor.DyeableGeckoArmorRenderer;
 import org.jetbrains.annotations.Nullable;
@@ -27,8 +28,8 @@ import java.util.function.Consumer;
 public class DyeableAdvancedGeckoArmorItem extends DyeableAdvancedArmorItem implements GeoItem {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    public DyeableAdvancedGeckoArmorItem(List<Integer> defaultColors, List<Integer> lightLevels, @Nullable Ability suitSpecificAbility, RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
-        super(defaultColors, lightLevels, suitSpecificAbility, material, type, settings);
+    public DyeableAdvancedGeckoArmorItem(List<Integer> defaultColors, List<Integer> lightLevels, Text titleText, RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
+        super(defaultColors, lightLevels, titleText, material, type, settings);
     }
 
     @Override
