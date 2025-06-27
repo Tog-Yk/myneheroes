@@ -30,7 +30,7 @@ public class FluidBlockMixin {
         }
 
 
-        for (Power power : PowerData.getPowers(player)) {
+        for (Power power : PowerData.getPowersWithoutSyncing(player)) {
             if (power.canStandOnWater()) {
                 VoxelShape surface = VoxelShapes.cuboid(0, 0.99, 0, 1, 1, 1);
                 cir.setReturnValue(surface);

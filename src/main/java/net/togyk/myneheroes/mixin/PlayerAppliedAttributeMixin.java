@@ -1,8 +1,12 @@
 package net.togyk.myneheroes.mixin;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.BlockPos;
 import net.togyk.myneheroes.ability.*;
 import net.togyk.myneheroes.damage.ModDamageTypes;
 import net.togyk.myneheroes.power.Power;
@@ -118,6 +122,19 @@ public abstract class PlayerAppliedAttributeMixin {
         } else if (!(player.isInCreativeMode() || player.isSpectator())) {
             player.getAbilities().allowFlying = false;
             player.getAbilities().flying = false;
+        }
+        if (!player.isSpectator()) {
+            for (Power power : PowerData.getPowers(player)) {
+                if (power.isPhasing()) {
+                    BlockPos eyePos = BlockPos.ofFloored(player.getEyePos());
+                    BlockState state = player.getWorld().getBlockState(eyePos);
+
+                    if (!state.isAir() && !state.getCollisionShape(player.getWorld(), eyePos).isEmpty()) {
+                        player.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 21, 0, false, false, false));
+                    }
+                    break;
+                }
+            }
         }
     }
 

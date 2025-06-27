@@ -20,6 +20,10 @@ public class PowerData {
         return ((PlayerPowers) player).myneheroes$getPowers();
     }
 
+    public static List<Power> getPowersWithoutSyncing(PlayerEntity player) {
+        return ((PlayerPowers) player).myneheroes$getPowers();
+    }
+
     public static void setPowers(PlayerEntity player, List<Power> powers) {
         ((PlayerPowers) player).myneheroes$setPowers(powers);
         if (!player.getWorld().isClient) {

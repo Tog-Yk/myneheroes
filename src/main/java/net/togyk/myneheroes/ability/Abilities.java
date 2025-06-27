@@ -191,6 +191,14 @@ public class Abilities {
         return power.canSetBoolean("speedActive", !isActive);
     }));
 
+    public static final Ability TOGGLE_PHASING = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_phasing"), 10, new Ability.Settings(),  (player, power) -> {
+        boolean isPhasing = power.getBoolean("phasing");
+        return power.setBoolean("phasing", !isPhasing);
+    }, (power) -> {
+        boolean isPhasing = power.getBoolean("phasing");
+        return power.canSetBoolean("phasing", !isPhasing);
+    }));
+
     public static final Ability TOOLBELT_3 = registerAbility(new ToolbeltAbility(Identifier.of(MyneHeroes.MOD_ID, "toolbelt_3"), new Ability.Settings(), 3));
 
     private static Ability registerAbility(Ability ability) {

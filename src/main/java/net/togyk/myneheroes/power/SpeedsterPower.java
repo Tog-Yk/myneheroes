@@ -29,6 +29,7 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
     private int trailCooldown = 0;
 
     private boolean speedActive = true;
+    private boolean phasing = false;
 
     private List<Upgrade> upgrades = new ArrayList<>();
 
@@ -117,7 +118,20 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
 
     @Override
     public boolean canStandOnWater() {
-        return this.speedActive && this.getSpeedLevel() > 9 && this.getHolder() != null && (this.getHolder().getVelocity().x != 0 || this.getHolder().getVelocity().z != 0);
+        return this.speedActive && !isDampened() && this.getSpeedLevel() > 9 && this.getHolder() != null && (this.getHolder().getVelocity().x != 0 || this.getHolder().getVelocity().z != 0);
+    }
+
+    @Override
+    public boolean isPhasing() {
+        return phasing && !isDampened();
+    }
+
+    public boolean setPhasing(boolean phasing) {
+        if (this.phasing == phasing) {
+            return false;
+        }
+        this.phasing = phasing;
+        return true;
     }
 
     public int getMaxSpeedLevel() {
@@ -176,6 +190,8 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
     public boolean setBoolean(String name, boolean bool) {
         if (name.equals("speedActive")) {
             return setSpeedActive(bool);
+        } else if (name.equals("phasing")) {
+            return setPhasing(bool);
         }
         return false;
     }
@@ -184,6 +200,8 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
     public boolean getBoolean(String name) {
         if (Objects.equals(name, "speedActive")) {
             return isSpeedActive();
+        } else if (name.equals("phasing")) {
+            return phasing;
         }
         return false;
     }
@@ -202,6 +220,7 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
     @Override
     public NbtCompound writeNbt(NbtCompound nbt) {
         nbt.putBoolean("speedActive", speedActive);
+        nbt.putBoolean("phasing", phasing);
         nbt.putInt("speedLevel", speedLevel);
 
         lastSegment.ifPresent(uuid -> nbt.putUuid("lastSegment", uuid));
@@ -232,6 +251,10 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
 
         if (nbt.contains("speedActive")) {
             speedActive = nbt.getBoolean("speedActive");
+        }
+
+        if (nbt.contains("phasing")) {
+            phasing = nbt.getBoolean("phasing");
         }
 
         if (nbt.contains("speedLevel")) {
@@ -275,8 +298,6 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
 
     @Override
     public boolean canUpgrade(Upgrade upgrade) {
-        //this would be: return this.upgrades.size() < 4 && upgrade instanceof ColorUpgrade;
-        //but the upgrades don't want to work when there is multiple
         return this.upgrades.size() < 4 && upgrade instanceof ColorUpgrade;
     }
 

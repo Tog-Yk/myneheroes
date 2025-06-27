@@ -23,7 +23,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class Power {
@@ -116,6 +115,10 @@ public class Power {
         return false;
     }
 
+    public boolean isPhasing() {
+        return false;
+    }
+
     public double getDamageMultiplier() {
         return this.settings.damageMultiplier;
     }
@@ -152,8 +155,6 @@ public class Power {
     }
 
     public void saveAbility(Ability ability) {
-        List<Identifier> identifiers = this.abilities.stream().filter(Predicate.not(Predicate.isEqual(null))).map(Ability::getId).toList();
-        Identifier id = ability.getId();
     }
 
     public List<Ability> getAbilities() {
