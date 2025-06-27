@@ -5,19 +5,16 @@ import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.power.VariableLinkedPower;
 
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public class VariableLinkedAbility extends Ability {
-    protected final String variableName;
     protected final BiFunction<PlayerEntity, VariableLinkedPower, Boolean> use;
+    protected final Function<VariableLinkedPower, Boolean> usable;
 
-    public VariableLinkedAbility(Identifier id, String variableName, int cooldown, Settings settings, BiFunction<PlayerEntity, VariableLinkedPower, Boolean> use) {
+    public VariableLinkedAbility(Identifier id, int cooldown, Settings settings, BiFunction<PlayerEntity, VariableLinkedPower, Boolean> use, Function<VariableLinkedPower, Boolean> usable) {
         super(id, cooldown, settings, null);
-        this.variableName = variableName;
         this.use = use;
-    }
-
-    public String getVariableName() {
-        return variableName;
+        this.usable = usable;
     }
 
     @Override
@@ -31,7 +28,17 @@ public class VariableLinkedAbility extends Ability {
     }
 
     @Override
+    public boolean Usable() {
+        if (this.getIndirectHolder() instanceof VariableLinkedPower power) {
+            if (this.usable.apply(power)) {
+                return super.Usable();
+            }
+        }
+        return false;
+    }
+
+    @Override
     public VariableLinkedAbility copy() {
-        return new VariableLinkedAbility(id, variableName, maxCooldown, settings, use);
+        return new VariableLinkedAbility(id, maxCooldown, settings, use, usable);
     }
 }

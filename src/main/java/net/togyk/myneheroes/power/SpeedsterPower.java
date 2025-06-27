@@ -123,23 +123,40 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
         return speedLevel;
     }
 
-    public void setSpeedLevel(int level) {
-        this.speedLevel = Math.max(0, Math.min(maxSpeedLevel, level));
+    public boolean setSpeedLevel(int level) {
+        if (level == this.speedLevel || level < 0 || level > this.maxSpeedLevel) {
+            return false;
+        }
+        this.speedLevel = level;
+        return true;
     }
 
     public boolean isSpeedActive() {
         return speedActive;
     }
 
-    public void setSpeedActive(boolean active) {
+    public boolean setSpeedActive(boolean active) {
+        if (active == speedActive) {
+            return false;
+        }
         speedActive = active;
+        return true;
     }
 
     @Override
-    public void setInt(String name, int integer) {
+    public boolean setInt(String name, int integer) {
         if (name.equals("speedLevel")) {
-            setSpeedLevel(integer);
+            return setSpeedLevel(integer);
         }
+        return false;
+    }
+
+    @Override
+    public boolean canSetInt(String name, int integer) {
+        if (name.equals("speedLevel")) {
+            return speedActive;
+        }
+        return false;
     }
 
     @Override
@@ -151,10 +168,11 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
     }
 
     @Override
-    public void setBoolean(String name, boolean bool) {
+    public boolean setBoolean(String name, boolean bool) {
         if (name.equals("speedActive")) {
-            setSpeedActive(bool);
+            return setSpeedActive(bool);
         }
+        return false;
     }
 
     @Override

@@ -167,22 +167,28 @@ public class Abilities {
         return false;
     }));
 
-    public static final Ability SPEED_UP = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_up"), "speedLevel", 10, new Ability.Settings(),  (player, power) -> {
+    public static final Ability SPEED_UP = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_up"), 10, new Ability.Settings(),  (player, power) -> {
         int speed = power.getInt("speedLevel");
-        power.setInt("speedLevel", speed + 1);
-        return true;
+        return power.setInt("speedLevel", speed + 1);
+    }, ( power) -> {
+        int speed = power.getInt("speedLevel");
+        return power.canSetInt("speedLevel", speed + 1);
     }));
 
-    public static final Ability SPEED_DOWN = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_down"), "speedLevel", 10, new Ability.Settings(),  (player, power) -> {
+    public static final Ability SPEED_DOWN = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_down"), 10, new Ability.Settings(),  (player, power) -> {
         int speed = power.getInt("speedLevel");
-        power.setInt("speedLevel", speed - 1);
-        return true;
+        return power.setInt("speedLevel", speed - 1);
+    }, ( power) -> {
+        int speed = power.getInt("speedLevel");
+        return power.canSetInt("speedLevel", speed - 1);
     }));
 
-    public static final Ability TOGGLE_SPEED = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speed"), "speedActive", 10, new Ability.Settings(),  (player, power) -> {
+    public static final Ability TOGGLE_SPEED = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speed"), 10, new Ability.Settings(),  (player, power) -> {
         boolean isActive = power.getBoolean("speedActive");
-        power.setBoolean("speedActive", !isActive);
-        return true;
+        return power.setBoolean("speedActive", !isActive);
+    }, (power) -> {
+        boolean isActive = power.getBoolean("speedActive");
+        return power.canSetBoolean("speedActive", !isActive);
     }));
 
     public static final Ability TOOLBELT_3 = registerAbility(new ToolbeltAbility(Identifier.of(MyneHeroes.MOD_ID, "toolbelt_3"), new Ability.Settings(), 3));
