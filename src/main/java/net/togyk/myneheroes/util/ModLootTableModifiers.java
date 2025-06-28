@@ -1,7 +1,6 @@
 package net.togyk.myneheroes.util;
 
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
@@ -26,7 +25,7 @@ public class ModLootTableModifiers {
                 poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(0.3f))
-                        .with(ItemEntry.builder(ModItems.HUD_UPGRADE))
+                        .with(ItemEntry.builder(ModItems.MECHANICAL_HUD_UPGRADE))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)));
 
                 tableBuilder.pool(poolBuilder.build());

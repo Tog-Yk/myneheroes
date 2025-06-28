@@ -55,7 +55,8 @@ public class ModItemGroups {
 
                         entries.add(ModItems.CIRCUIT_BOARD);
 
-                        entries.add(ModItems.HUD_UPGRADE);
+                        entries.add(ModItems.MECHANICAL_HUD_UPGRADE);
+                        entries.add(ModItems.SPEEDSTER_HUD_UPGRADE);
                         entries.add(ModItems.LAZAR_UPGRADE);
                         entries.add(ModItems.FlY_UPGRADE);
                         entries.add(ModItems.TAKE_OFF_SUIT_UPGRADE);

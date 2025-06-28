@@ -30,7 +30,8 @@ import java.util.*;
 public class Abilities {
     private static final Map<Identifier,Ability> ABILITIES = new HashMap<>();
 
-    public static final Ability TOGGLE_HUD = registerAbility(new MechanicalHudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_hud"), new Ability.Settings()));
+    public static final Ability TOGGLE_MECHANICAL_HUD = registerAbility(new MechanicalHudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_mechanical_hud"), new Ability.Settings()));
+    public static final Ability TOGGLE_SPEEDSTER_HUD = registerAbility(new SpeedsterHudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speedster_hud"), new Ability.Settings()));
     public static final Ability SHOOT_LASER = registerAbility(new Ability(Identifier.of(MyneHeroes.MOD_ID, "shoot_laser"), 10, new Ability.Settings(), (player) -> {
         ItemStack reactorStack = MyneHeroes.getReactorItemClass(player);
         if (!player.getWorld().isClient) {

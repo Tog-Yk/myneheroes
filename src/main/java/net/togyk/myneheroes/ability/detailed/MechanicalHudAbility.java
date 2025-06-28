@@ -129,7 +129,7 @@ public class MechanicalHudAbility extends HudAbility {
 
 
                 drawContext.drawGuiTexture(CONNECTED, 24, 18, 0, 0, reactionInfoX + 20, reactionInfoY -18, 24, 18);
-                drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, reactorItemStack.getName(),reactionInfoX + 48,reactionInfoY -8,0x88FFFF);
+                drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, reactorItemStack.getName(),reactionInfoX + 48,reactionInfoY -8,0xC428EEFF);
                 RenderSystem.enableBlend();
             }
 
@@ -185,26 +185,35 @@ public class MechanicalHudAbility extends HudAbility {
 
                 int y = abilityScreenY + 4;
 
+                RenderSystem.setShaderColor(1, 1, 1, (float) 0xC4 / 255);
+
                 HudOverlay.drawAbility(drawContext, firstAbility, ModKeyBindings.useFirstAbility.isPressed(), abilityScreenX + 6, y);
-                drawContext.drawTextWithShadow(textRenderer, firstAbilityText, abilityScreenX + 6 + 18, y + 4, 0xFFFFFF);
+                drawContext.drawTextWithShadow(textRenderer, firstAbilityText, abilityScreenX + 6 + 18, y + 4, 0xC428EEFF);
+                RenderSystem.enableBlend();
                 y += 18;
 
                 HudOverlay.drawAbility(drawContext, secondAbility, ModKeyBindings.useSecondAbility.isPressed(), abilityScreenX + 6, y);
                 if (secondAbility != null) {
-                    drawContext.drawTextWithShadow(textRenderer, secondAbilityText, abilityScreenX + 6 + 18, y + 4, 0xFFFFFF);
+                    drawContext.drawTextWithShadow(textRenderer, secondAbilityText, abilityScreenX + 6 + 18, y + 4, 0xC428EEFF);
+                    RenderSystem.enableBlend();
                 }
                 y += 18;
 
                 HudOverlay.drawAbility(drawContext, thirdAbility, ModKeyBindings.useThirdAbility.isPressed(), abilityScreenX + 6, y);
                 if (thirdAbility != null) {
-                    drawContext.drawTextWithShadow(textRenderer, thirdAbilityText, abilityScreenX + 6 + 18, y + 4, 0xFFFFFF);
+                    drawContext.drawTextWithShadow(textRenderer, thirdAbilityText, abilityScreenX + 6 + 18, y + 4, 0xC428EEFF);
+                    RenderSystem.enableBlend();
                 }
                 y += 18;
 
                 HudOverlay.drawAbility(drawContext, fourthAbility, ModKeyBindings.useFourthAbility.isPressed(), abilityScreenX + 6, y);
                 if (fourthAbility != null) {
-                    drawContext.drawTextWithShadow(textRenderer, fourthAbilityText, abilityScreenX + 6 + 18, y + 4, 0xFFFFFF);
+                    drawContext.drawTextWithShadow(textRenderer, fourthAbilityText, abilityScreenX + 6 + 18, y + 4, 0xC428EEFF);
+                    RenderSystem.enableBlend();
                 }
+
+                RenderSystem.setShaderColor(1, 1, 1, 1);
+
             }
             RenderSystem.disableBlend();
 

@@ -50,7 +50,7 @@ public class ModModelProvider extends FabricModelProvider {
 
         itemModelGenerator.register(ModItems.ARC_REACTOR, Models.GENERATED);
 
-        itemModelGenerator.register(ModItems.HUD_UPGRADE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.MECHANICAL_HUD_UPGRADE, Models.GENERATED);
         itemModelGenerator.register(ModItems.LAZAR_UPGRADE, Models.GENERATED);
         itemModelGenerator.register(ModItems.FlY_UPGRADE, Models.GENERATED);
         itemModelGenerator.register(ModItems.KINETIC_ENERGY_STORAGE_UPGRADE, Models.GENERATED);

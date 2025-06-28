@@ -24,7 +24,8 @@
 
   "item.myneheroes.coloring_compound": "Coloring Compound",
 
-  "item.myneheroes.hud_upgrade": "Hud Upgrade",
+  "item.myneheroes.mechanical_hud_upgrade": "Hud Upgrade",
+  "item.myneheroes.speedster_hud_upgrade": "Hud Upgrade",
   "item.myneheroes.lazar_upgrade": "Lazar Upgrade",
   "item.myneheroes.fly_upgrade": "Fly Upgrade",
   "item.myneheroes.take_off_suit_upgrade": "Take Off Suit Upgrade",
@@ -96,7 +97,8 @@
   "power.myneheroes.kryptonian": "Kryptonian",
   "power.myneheroes.speedster": "Speedster",
 
-  "ability.myneheroes.toggle_hud": "Toggle Hud",
+  "ability.myneheroes.toggle_mechanical_hud": "Toggle Hud",
+  "ability.myneheroes.toggle_speedster_hud": "Toggle Hud",
   "ability.myneheroes.shoot_laser": "Shoot Laser",
   "ability.myneheroes.allow_flying": "Allow Flying",
   "ability.myneheroes.release_kinetic_energy": "Release Kinetic Energy",

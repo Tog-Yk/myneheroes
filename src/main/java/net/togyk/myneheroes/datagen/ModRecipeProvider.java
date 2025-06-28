@@ -118,7 +118,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         FabricRecipeProvider.conditionsFromItem(Items.IRON_NUGGET))
                 .offerTo(exporter);
 
-        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(Items.STONE_SLAB), RecipeCategory.TOOLS, ModItems.HUD_UPGRADE)
+        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(Items.STONE_SLAB), RecipeCategory.TOOLS, ModItems.MECHANICAL_HUD_UPGRADE)
                 .criterion(FabricRecipeProvider.hasItem(Items.STONE_SLAB),
                         FabricRecipeProvider.conditionsFromItem(Items.STONE_SLAB))
                 .offerTo(exporter);
