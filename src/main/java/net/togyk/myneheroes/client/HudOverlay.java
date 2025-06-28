@@ -30,7 +30,7 @@ public class HudOverlay implements HudRenderCallback {
     @Override
     public void onHudRender(DrawContext drawContext, RenderTickCounter tickCounter) {
         MinecraftClient client = MinecraftClient.getInstance();
-        if (client.player != null) {
+        if (client.player != null && !client.options.hudHidden) {
             boolean hasDrawnAbilities = false;
             boolean hasDrawnPowers = false;
 

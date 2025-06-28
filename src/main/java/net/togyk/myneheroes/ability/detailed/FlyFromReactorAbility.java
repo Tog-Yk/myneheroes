@@ -7,6 +7,7 @@ import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.BooleanAbility;
+import net.togyk.myneheroes.upgrade.Upgrade;
 
 public class FlyFromReactorAbility extends BooleanAbility {
     private final int cost;
@@ -33,7 +34,7 @@ public class FlyFromReactorAbility extends BooleanAbility {
     @Override
     public boolean get() {
         if (super.get()) {
-            if (this.getIndirectHolder() instanceof ItemStack stack && stack.getHolder() instanceof PlayerEntity player) {
+            if (this.getIndirectHolder() instanceof Upgrade upgrade && upgrade.getHolderStack().getHolder() instanceof PlayerEntity player) {
                 ItemStack reactorStack = MyneHeroes.getReactorItemClass(player);
                 if (reactorStack.getItem() instanceof ReactorItem reactor) {
                     int reactorPower = reactor.getStoredPowerOrDefault(reactorStack, 0);
