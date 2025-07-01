@@ -20,7 +20,9 @@ import net.minecraft.world.World;
 import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.ability.detailed.*;
+import net.togyk.myneheroes.ability.detailed.FlyFromReactorAbility;
+import net.togyk.myneheroes.ability.detailed.ReleaseKineticEnergyAbility;
+import net.togyk.myneheroes.client.HudType;
 import net.togyk.myneheroes.entity.LaserEntity;
 import net.togyk.myneheroes.entity.ModEntities;
 import net.togyk.myneheroes.entity.StationaryArmorEntity;
@@ -30,8 +32,8 @@ import java.util.*;
 public class Abilities {
     private static final Map<Identifier,Ability> ABILITIES = new HashMap<>();
 
-    public static final Ability TOGGLE_MECHANICAL_HUD = registerAbility(new MechanicalHudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_mechanical_hud"), new Ability.Settings()));
-    public static final Ability TOGGLE_SPEEDSTER_HUD = registerAbility(new SpeedsterHudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speedster_hud"), new Ability.Settings()));
+    public static final Ability TOGGLE_MECHANICAL_HUD = registerAbility(new HudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_mechanical_hud"), new Ability.Settings(), HudType.MECHANICAL));
+    public static final Ability TOGGLE_SPEEDSTER_HUD = registerAbility(new HudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speedster_hud"), new Ability.Settings(), HudType.SPEEDSTER));
     public static final Ability SHOOT_LASER = registerAbility(new Ability(Identifier.of(MyneHeroes.MOD_ID, "shoot_laser"), 10, new Ability.Settings(), (player) -> {
         ItemStack reactorStack = MyneHeroes.getReactorItemClass(player);
         if (!player.getWorld().isClient) {
@@ -90,7 +92,7 @@ public class Abilities {
         List<ItemStack> armor = new ArrayList<>();
         for (ItemStack stack : player.getArmorItems()) {
             if (stack.getItem() instanceof AdvancedArmorItem item) {
-                List<Identifier> ids = item.getAbilities(stack, player.getWorld()).stream().map(Ability::getId).toList();
+                List<Identifier> ids = item.getAbilities(stack).stream().map(Ability::getId).toList();
                 if (ids.contains(Identifier.of(MyneHeroes.MOD_ID, "take_off_suit"))) {
                     armor.add(stack);
                 }

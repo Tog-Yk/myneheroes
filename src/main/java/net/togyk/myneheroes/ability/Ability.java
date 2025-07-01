@@ -14,7 +14,6 @@ import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.Item.custom.AbilityHolding;
 import net.togyk.myneheroes.upgrade.AbilityUpgrade;
@@ -89,7 +88,7 @@ public class Ability {
         Object holder = this.getHolder();
         if (holder instanceof ItemStack stack) {
             if (stack.getItem() instanceof AbilityHolding holding) {
-                holding.saveAbility(stack, world, this);
+                holding.saveAbility(stack, this);
             }
         } else if (holder instanceof Power power) {
             power.saveAbility(this);

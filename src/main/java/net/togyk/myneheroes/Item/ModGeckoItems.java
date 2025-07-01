@@ -26,16 +26,16 @@ public class ModGeckoItems {
 
     static {
         ModItems.MARK6_VIBRANIUM_HELMET = registerItem("mark6_vibranium_helmet",
-                new DyeableAdvancedGeckoArmorItem(List.of(-12696503, -11241349, -0x574545, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium"))).formatted(Formatting.DARK_BLUE), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
+                new DyeableAdvancedGeckoArmorItem(List.of(-12696503, -11241349, -0x574545, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium"))).setStyle(Style.EMPTY.withColor(-11241349)), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
                         .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(36))));
         ModItems.MARK6_VIBRANIUM_CHESTPLATE = registerItem("mark6_vibranium_chestplate",
-                new DyeableAdvancedGeckoArmorItem(List.of(-12696503, -11241349, -0x574545, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium"))).formatted(Formatting.DARK_BLUE), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
+                new DyeableAdvancedGeckoArmorItem(List.of(-12696503, -11241349, -0x574545, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium"))).setStyle(Style.EMPTY.withColor(-11241349)), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
                         .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(36))));
         ModItems.MARK6_VIBRANIUM_LEGGINGS = registerItem("mark6_vibranium_leggings",
-                new DyeableAdvancedGeckoArmorItem(List.of(-12696503, -11241349, -0x574545, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium"))).formatted(Formatting.DARK_BLUE), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
+                new DyeableAdvancedGeckoArmorItem(List.of(-12696503, -11241349, -0x574545, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium"))).setStyle(Style.EMPTY.withColor(-11241349)), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
                         .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(36))));
         ModItems.MARK6_VIBRANIUM_BOOTS = registerItem("mark6_vibranium_boots",
-                new DyeableAdvancedGeckoArmorItem(List.of(-12696503, -11241349, -0x574545, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium"))).formatted(Formatting.DARK_BLUE), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
+                new DyeableAdvancedGeckoArmorItem(List.of(-12696503, -11241349, -0x574545, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium"))).setStyle(Style.EMPTY.withColor(-11241349)), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
                         .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(36))));
 
         ModItems.MARK3_GOLD_TITANIUM_HELMET = registerItem("mark3_gold_titanium_helmet",

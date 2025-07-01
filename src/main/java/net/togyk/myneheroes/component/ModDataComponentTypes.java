@@ -7,7 +7,6 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.power.Power;
 
 import java.util.List;

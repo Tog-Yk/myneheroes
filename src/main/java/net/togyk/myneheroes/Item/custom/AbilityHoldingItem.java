@@ -31,13 +31,13 @@ public class AbilityHoldingItem extends Item implements AbilityHolding {
     }
 
     @Override
-    public List<Ability> getAbilities(ItemStack stack, World world) {
+    public List<Ability> getAbilities(ItemStack stack) {
         ability.setHolder(stack);
         return List.of(this.ability);
     }
 
     @Override
-    public void saveAbility(ItemStack stack, World world, Ability ability) {
+    public void saveAbility(ItemStack stack, Ability ability) {
         this.ability = ability;
     }
 }

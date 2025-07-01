@@ -81,8 +81,8 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         PlayerInventory inventory = player.getInventory();
         ItemStack helmetStack = player.getEquippedStack(EquipmentSlot.HEAD);
         if (helmetStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-            if (advancedArmorItem.getAbilities(helmetStack, player.getWorld()) != null) {
-                for (Ability ability : advancedArmorItem.getAbilities(helmetStack, player.getWorld())) {
+            if (advancedArmorItem.getAbilities(helmetStack) != null) {
+                for (Ability ability : advancedArmorItem.getAbilities(helmetStack)) {
                     if (!abilityList.contains(ability) && ability != null) {
                         abilityList.add(ability);
                     }
@@ -91,8 +91,8 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         }
         ItemStack chestplateStack = player.getEquippedStack(EquipmentSlot.CHEST);
         if (chestplateStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-            if (advancedArmorItem.getAbilities(chestplateStack, player.getWorld()) != null) {
-                for (Ability ability : advancedArmorItem.getAbilities(chestplateStack, player.getWorld())) {
+            if (advancedArmorItem.getAbilities(chestplateStack) != null) {
+                for (Ability ability : advancedArmorItem.getAbilities(chestplateStack)) {
                     if (!abilityList.contains(ability) && ability != null) {
                         abilityList.add(ability);
                     }
@@ -101,8 +101,8 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         }
         ItemStack leggingsStack = player.getEquippedStack(EquipmentSlot.LEGS);
         if (leggingsStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-            if (advancedArmorItem.getAbilities(leggingsStack, player.getWorld()) != null) {
-                for (Ability ability : advancedArmorItem.getAbilities(leggingsStack, player.getWorld())) {
+            if (advancedArmorItem.getAbilities(leggingsStack) != null) {
+                for (Ability ability : advancedArmorItem.getAbilities(leggingsStack)) {
                     if (!abilityList.contains(ability) && ability != null) {
                         abilityList.add(ability);
                     }
@@ -111,8 +111,8 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         }
         ItemStack bootsStack = player.getEquippedStack(EquipmentSlot.FEET);
         if (bootsStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-            if (advancedArmorItem.getAbilities(bootsStack, player.getWorld()) != null) {
-                for (Ability ability : advancedArmorItem.getAbilities(bootsStack, player.getWorld())) {
+            if (advancedArmorItem.getAbilities(bootsStack) != null) {
+                for (Ability ability : advancedArmorItem.getAbilities(bootsStack)) {
                     if (!abilityList.contains(ability) && ability != null) {
                         abilityList.add(ability);
                     }
@@ -122,8 +122,8 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         for (int i = 0; i < inventory.size(); i++) {
             ItemStack stack = inventory.getStack(i);
             if (stack.getItem() instanceof AbilityHoldingItem abilityHoldingItem) {
-                if (abilityHoldingItem.getAbilities(stack, player.getWorld()) != null) {
-                    for (Ability ability : abilityHoldingItem.getAbilities(stack, player.getWorld())) {
+                if (abilityHoldingItem.getAbilities(stack) != null) {
+                    for (Ability ability : abilityHoldingItem.getAbilities(stack)) {
                         if (!abilityList.contains(ability) && ability != null) {
                             abilityList.add(ability);
                         }

@@ -8,17 +8,21 @@ import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.togyk.myneheroes.client.HudType;
 import net.togyk.myneheroes.util.HudActionResult;
 
 import java.util.List;
 
 public class HudAbility extends BooleanAbility {
-    public HudAbility(Identifier id, Ability.Settings settings) {
+    private final HudType type;
+
+    public HudAbility(Identifier id, Ability.Settings settings, HudType type) {
         super(id, settings);
+        this.type = type;
     }
 
-    public HudActionResult drawHud(DrawContext drawContext, RenderTickCounter tickCounter) {
-        return HudActionResult.NO_HUD_DRAWN;
+    public HudType getType() {
+        return type;
     }
 
     @Override
@@ -33,6 +37,6 @@ public class HudAbility extends BooleanAbility {
 
     @Override
     public HudAbility copy() {
-        return new HudAbility(this.id, settings);
+        return new HudAbility(this.id, settings, type);
     }
 }

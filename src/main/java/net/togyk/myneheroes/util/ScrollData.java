@@ -1,10 +1,9 @@
 package net.togyk.myneheroes.util;
 
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.networking.PlayerAbilityScrollSyncDataPayload;
 
 public class ScrollData {
@@ -47,8 +46,8 @@ public class ScrollData {
     private static void syncData(PlayerEntity player) {
         if (player instanceof ServerPlayerEntity serverPlayer) {
             ServerPlayNetworking.send(serverPlayer, new PlayerAbilityScrollSyncDataPayload(((PlayerAbilities) serverPlayer).myneheroes$getScrolledAbilityOffset(), ((PlayerPowers) serverPlayer).myneheroes$getScrolledPowerOffset()));
-        } else if (player instanceof ClientPlayerEntity clientPlayer) {
-            ClientPlayNetworking.send(new PlayerAbilityScrollSyncDataPayload(((PlayerAbilities) clientPlayer).myneheroes$getScrolledAbilityOffset(), ((PlayerPowers) clientPlayer).myneheroes$getScrolledPowerOffset()));
+        } else {
+            MyneHeroes.LOGGER.info("AAAAA");
         }
     }
 }

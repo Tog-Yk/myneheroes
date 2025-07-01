@@ -37,16 +37,18 @@ public class HudOverlay implements HudRenderCallback {
             List<Ability> abilities = ((PlayerAbilities) client.player).myneheroes$getAbilities();
             List<HudAbility> hudAbilities = getHudAbilities(abilities);
             for (HudAbility ability : hudAbilities) {
-                HudActionResult result = ability.drawHud(drawContext, tickCounter);
+                if (ability.get()) {
+                    HudActionResult result = HudTypeRenderer.drawHud(ability.getType(), drawContext, tickCounter);
 
-                switch (result) {
-                    case ABILITIES_AND_POWER_HUD_DRAWN:
-                        hasDrawnAbilities = true;
-                        hasDrawnPowers = true;
-                    case POWER_HUD_DRAWN:
-                        hasDrawnPowers = true;
-                    case ABILITIES_HUD_DRAWN:
-                        hasDrawnAbilities = true;
+                    switch (result) {
+                        case ABILITIES_AND_POWER_HUD_DRAWN:
+                            hasDrawnAbilities = true;
+                            hasDrawnPowers = true;
+                        case POWER_HUD_DRAWN:
+                            hasDrawnPowers = true;
+                        case ABILITIES_HUD_DRAWN:
+                            hasDrawnAbilities = true;
+                    }
                 }
             }
 

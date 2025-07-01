@@ -52,9 +52,6 @@ public abstract class TrailEntity extends Entity {
         }
     }
 
-    public abstract void render(float entityYaw, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int packedLight, PlayerEntityRenderer playerRenderer);
-
-
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         builder.add(lifetime, -1);

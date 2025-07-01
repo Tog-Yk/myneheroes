@@ -4,17 +4,19 @@
 	"compatibilityLevel": "JAVA_21",
 	"package": "net.togyk.myneheroes.mixin",
 	"mixins": [
-		"ArmorFeatureRendererMixin",
 		"BlockMixin",
 		"EntityShapeContextAccessor",
 		"FluidBlockMixin",
-		"InGameOverlayRendererMixin",
 		"LivingAppliedAttributeMixin",
 		"PlayerAbilityMixin",
 		"PlayerAppliedAttributeMixin",
 		"PlayerPowerMixin",
-		"PlayerSwingMixin",
 		"StationaryConvertItemEntityMixin"
+	],
+	"client": [
+		"ArmorFeatureRendererMixin",
+		"InGameOverlayRendererMixin",
+		"PlayerSwingMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

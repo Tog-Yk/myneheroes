@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.networking.KeybindPayload;
-import net.togyk.myneheroes.util.ScrollData;
+import net.togyk.myneheroes.util.ClientScrollData;
 import net.togyk.myneheroes.util.PlayerAbilities;
 
 public class ModKeybindingHelper {
@@ -57,27 +57,27 @@ public class ModKeybindingHelper {
             }
             if (ModKeyBindings.abilitiesScrollUp.isPressed()) {
                 if (client.player != null){
-                    if (ScrollData.getScrolledAbilitiesOffset(client.player) > 0) {
-                        ScrollData.scrollAbilitiesBack(client.player);
+                    if (ClientScrollData.getScrolledAbilitiesOffset(client.player) > 0) {
+                        ClientScrollData.scrollAbilitiesBack(client.player);
                     }
                 }
             }
             if (ModKeyBindings.abilitiesScrollDown.isPressed()) {
                 if (client.player != null){
-                    if (ScrollData.canScrollAbilitiesFurther(client.player)) {
-                        ScrollData.scrollAbilitiesFurther(client.player);
+                    if (ClientScrollData.canScrollAbilitiesFurther(client.player)) {
+                        ClientScrollData.scrollAbilitiesFurther(client.player);
                     }
                 }
             }
 
             if (ModKeyBindings.powersScrollUp.isPressed()) {
                 if (client.player != null){
-                    ScrollData.scrollPowersFurther(client.player);
+                    ClientScrollData.scrollPowersFurther(client.player);
                 }
             }
             if (ModKeyBindings.powersScrollDown.isPressed()) {
                 if (client.player != null){
-                    ScrollData.scrollPowersBack(client.player);
+                    ClientScrollData.scrollPowersBack(client.player);
                 }
             }
         });

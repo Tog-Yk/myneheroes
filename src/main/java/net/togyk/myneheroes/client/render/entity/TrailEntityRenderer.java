@@ -9,6 +9,10 @@ import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
+import net.togyk.myneheroes.client.render.AfterImageRenderer;
+import net.togyk.myneheroes.client.render.LightningTrailRenderer;
+import net.togyk.myneheroes.entity.trail.AfterimageTrailEntity;
+import net.togyk.myneheroes.entity.trail.LightningTrailEntity;
 import net.togyk.myneheroes.entity.trail.TrailEntity;
 
 import java.util.Optional;
@@ -35,7 +39,11 @@ public class TrailEntityRenderer<T extends TrailEntity> extends EntityRenderer<T
         if (parentUuid.isPresent() && player != null && parentUuid.get().equals(player.getUuid()) && client.options.getPerspective().isFirstPerson() && player.getPos().squaredDistanceTo(entity.getPos()) < 3) {
             return;
         }
-        entity.render(entityYaw, tickDelta, matrixStack, vertexConsumerProvider, packedLight, playerRenderer);
+        if (entity instanceof AfterimageTrailEntity afterimageTrail) {
+            AfterImageRenderer.render(afterimageTrail, entityYaw, tickDelta, matrixStack, vertexConsumerProvider, packedLight, playerRenderer);
+        } else if (entity instanceof LightningTrailEntity lightningTrailEntity) {
+            LightningTrailRenderer.render(lightningTrailEntity, entityYaw, tickDelta, matrixStack, vertexConsumerProvider, packedLight, playerRenderer);
+        }
     }
 
     @Override

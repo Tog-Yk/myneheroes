@@ -1,7 +1,9 @@
-package net.togyk.myneheroes.ability.detailed;
+package net.togyk.myneheroes.client.render.hud;
 
 import com.google.common.base.Predicates;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
@@ -17,7 +19,6 @@ import net.minecraft.util.math.Vec3d;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
-import net.togyk.myneheroes.ability.HudAbility;
 import net.togyk.myneheroes.ability.StockpileAbility;
 import net.togyk.myneheroes.client.HudOverlay;
 import net.togyk.myneheroes.keybind.ModKeyBindings;
@@ -32,7 +33,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class SpeedsterHudAbility extends HudAbility {
+@Environment(EnvType.CLIENT)
+public class SpeedsterHudRenderer {
     //background
     private static final Identifier BACKGROUND = Identifier.of(MyneHeroes.MOD_ID,
             "hud/speedster/background");
@@ -103,14 +105,9 @@ public class SpeedsterHudAbility extends HudAbility {
     private static final Identifier ABILITY_SCREEN_FOURTH_END = Identifier.of(MyneHeroes.MOD_ID,
             "hud/speedster/ability_screen/fourth_end");
 
-    public SpeedsterHudAbility(Identifier id, Settings settings) {
-        super(id, settings);
-    }
-
-    @Override
-    public HudActionResult drawHud(DrawContext drawContext, RenderTickCounter tickCounter) {
+    public static HudActionResult drawHud(DrawContext drawContext, RenderTickCounter tickCounter) {
         MinecraftClient client = MinecraftClient.getInstance();
-        if (this.get() && client.player != null && client.options.getPerspective().isFirstPerson()) {
+        if (client.player != null && client.options.getPerspective().isFirstPerson()) {
             TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
 
             // Enable transparency for textures
@@ -356,10 +353,5 @@ public class SpeedsterHudAbility extends HudAbility {
             }
         }
         return ids;
-    }
-
-    @Override
-    public SpeedsterHudAbility copy() {
-        return new SpeedsterHudAbility(this.id, settings);
     }
 }

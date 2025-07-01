@@ -1,9 +1,12 @@
 package net.togyk.myneheroes.Item;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -13,6 +16,7 @@ import net.togyk.myneheroes.Item.custom.*;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.upgrade.Upgrades;
 
+import java.lang.reflect.Constructor;
 import java.util.List;
 
 public class ModItems {
@@ -74,18 +78,10 @@ public class ModItems {
                     .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(35))));
 
     //mark6 armors
-    public static Item MARK6_VIBRANIUM_HELMET = registerItem("mark6_vibranium_helmet",
-            new DyeableAdvancedArmorItem(List.of(-12696503, -11241349, -0x574545, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium"))).setStyle(Style.EMPTY.withColor(-11241349)), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(37))));
-    public static Item MARK6_VIBRANIUM_CHESTPLATE = registerItem("mark6_vibranium_chestplate",
-            new DyeableAdvancedArmorItem(List.of(-12696503, -11241349, -0x574545, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium"))).setStyle(Style.EMPTY.withColor(-11241349)), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(37))));
-    public static Item MARK6_VIBRANIUM_LEGGINGS = registerItem("mark6_vibranium_leggings",
-            new DyeableAdvancedArmorItem(List.of(-12696503, -11241349, -0x574545, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium"))).setStyle(Style.EMPTY.withColor(-11241349)), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(37))));
-    public static Item MARK6_VIBRANIUM_BOOTS = registerItem("mark6_vibranium_boots",
-            new DyeableAdvancedArmorItem(List.of(-12696503, -11241349, -0x574545, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium"))).setStyle(Style.EMPTY.withColor(-11241349)), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(37))));
+    public static Item MARK6_VIBRANIUM_HELMET = null;
+    public static Item MARK6_VIBRANIUM_CHESTPLATE = null;
+    public static Item MARK6_VIBRANIUM_LEGGINGS = null;
+    public static Item MARK6_VIBRANIUM_BOOTS = null;
 
 
     //titanium armors
@@ -118,46 +114,104 @@ public class ModItems {
                     .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(29))));
 
     //mark6 armors
-    public static Item MARK3_GOLD_TITANIUM_HELMET = registerItem("mark3_gold_titanium_helmet",
-            new DyeableAdvancedArmorItem(List.of(0xFF976A27, 0xffd0a75e, 0xff6e5959, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark3_gold_titanium"))).formatted(Formatting.GOLD), ModArmorMaterials.GOLD_TITANIUM_IRONMAN_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(31))));
-    public static Item MARK3_GOLD_TITANIUM_CHESTPLATE = registerItem("mark3_gold_titanium_chestplate",
-            new DyeableAdvancedArmorItem(List.of(0xFF976A27, 0xffd0a75e, 0xff6e5959, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark3_gold_titanium"))).formatted(Formatting.GOLD), ModArmorMaterials.GOLD_TITANIUM_IRONMAN_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(31))));
-    public static Item MARK3_GOLD_TITANIUM_LEGGINGS = registerItem("mark3_gold_titanium_leggings",
-            new DyeableAdvancedArmorItem(List.of(0xFF976A27, 0xffd0a75e, 0xff6e5959, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark3_gold_titanium"))).formatted(Formatting.GOLD), ModArmorMaterials.GOLD_TITANIUM_IRONMAN_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(31))));
-    public static Item MARK3_GOLD_TITANIUM_BOOTS = registerItem("mark3_gold_titanium_boots",
-            new DyeableAdvancedArmorItem(List.of(0xFF976A27, 0xffd0a75e, 0xff6e5959, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark3_gold_titanium"))).formatted(Formatting.GOLD), ModArmorMaterials.GOLD_TITANIUM_IRONMAN_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(31))));
+    public static Item MARK3_GOLD_TITANIUM_HELMET = null;
+    public static Item MARK3_GOLD_TITANIUM_CHESTPLATE = null;
+    public static Item MARK3_GOLD_TITANIUM_LEGGINGS = null;
+    public static Item MARK3_GOLD_TITANIUM_BOOTS = null;
     //mark45 armors
-    public static Item MARK45_NETHERITE_HELMET = registerItem("mark45_netherite_helmet",
-            new DyeableAdvancedArmorItem(List.of(0xFF49393f, 0xff5d565d, 0xff6e5959, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark45_netherite"))).setStyle(Style.EMPTY.withColor(0xFF49393f)), ModArmorMaterials.NETHERITE_IRONMAN_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(39)).fireproof()));
-    public static Item MARK45_NETHERITE_CHESTPLATE = registerItem("mark45_netherite_chestplate",
-            new DyeableAdvancedArmorItem(List.of(0xFF49393f, 0xff5d565d, 0xff6e5959, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark45_netherite"))).setStyle(Style.EMPTY.withColor(0xFF49393f)), ModArmorMaterials.NETHERITE_IRONMAN_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(39)).fireproof()));
-    public static Item MARK45_NETHERITE_LEGGINGS = registerItem("mark45_netherite_leggings",
-            new DyeableAdvancedArmorItem(List.of(0xFF49393f, 0xff5d565d, 0xff6e5959, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark45_netherite"))).setStyle(Style.EMPTY.withColor(0xFF49393f)), ModArmorMaterials.NETHERITE_IRONMAN_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(39)).fireproof()));
-    public static Item MARK45_NETHERITE_BOOTS = registerItem("mark45_netherite_boots",
-            new DyeableAdvancedArmorItem(List.of(0xFF49393f, 0xff5d565d, 0xff6e5959, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark45_netherite"))).setStyle(Style.EMPTY.withColor(0xFF49393f)), ModArmorMaterials.NETHERITE_IRONMAN_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(39)).fireproof()));
+    public static Item MARK45_NETHERITE_HELMET = null;
+    public static Item MARK45_NETHERITE_CHESTPLATE = null;
+    public static Item MARK45_NETHERITE_LEGGINGS = null;
+    public static Item MARK45_NETHERITE_BOOTS = null;
 
     //speedster armors
     //gold_titanium
-    public static Item SPEEDSTER_GOLD_TITANIUM_HELMET = registerItem("speedster_gold_titanium_helmet",
-            new DyeableAdvancedArmorItem(List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x40FFDE3A), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "speedster_gold_titanium"))).formatted(Formatting.GOLD), ModArmorMaterials.GOLD_TITANIUM_SPEEDSTER_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(31))));
-    public static Item SPEEDSTER_GOLD_TITANIUM_CHESTPLATE = registerItem("speedster_gold_titanium_chestplate",
-            new DyeableAdvancedArmorItem(List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x40FFDE3A), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "speedster_gold_titanium"))).formatted(Formatting.GOLD), ModArmorMaterials.GOLD_TITANIUM_SPEEDSTER_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(31))));
-    public static Item SPEEDSTER_GOLD_TITANIUM_LEGGINGS = registerItem("speedster_gold_titanium_leggings",
-            new DyeableAdvancedArmorItem(List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x40FFDE3A), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "speedster_gold_titanium"))).formatted(Formatting.GOLD), ModArmorMaterials.GOLD_TITANIUM_SPEEDSTER_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(31))));
-    public static Item SPEEDSTER_GOLD_TITANIUM_BOOTS = registerItem("speedster_gold_titanium_boots",
-            new DyeableAdvancedArmorItem(List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x40FFDE3A), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "speedster_gold_titanium"))).formatted(Formatting.GOLD), ModArmorMaterials.GOLD_TITANIUM_SPEEDSTER_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(31))));
+    public static Item SPEEDSTER_GOLD_TITANIUM_HELMET = null;
+    public static Item SPEEDSTER_GOLD_TITANIUM_CHESTPLATE = null;
+    public static Item SPEEDSTER_GOLD_TITANIUM_LEGGINGS = null;
+    public static Item SPEEDSTER_GOLD_TITANIUM_BOOTS = null;
+
+    static {
+        try {
+            Constructor<?> AdvancedArmorClassConstructor = null;
+
+            if (FabricLoader.getInstance().isModLoaded("geckolib")) {
+                try {
+                    Class<?> AdvancedArmorClass = Class.forName("net.togyk.myneheroes.Item.custom.DyeableAdvancedGeckoArmorItem");
+                    AdvancedArmorClassConstructor = AdvancedArmorClass
+                            .getConstructor(List.class, List.class, Text.class, RegistryEntry.class, ArmorItem.Type.class, Item.Settings.class);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    AdvancedArmorClassConstructor = DyeableAdvancedArmorItem.class
+                            .getConstructor(List.class, List.class, Text.class, RegistryEntry.class, ArmorItem.Type.class, Item.Settings.class);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (AdvancedArmorClassConstructor != null) {
+                //mark6 armors
+                MARK6_VIBRANIUM_HELMET = registerItem("mark6_vibranium_helmet",
+                        (Item) AdvancedArmorClassConstructor.newInstance(List.of(-12696503, -11241349, -0x574545, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium"))).setStyle(Style.EMPTY.withColor(-11241349)), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
+                                .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(37))));
+                MARK6_VIBRANIUM_CHESTPLATE = registerItem("mark6_vibranium_chestplate",
+                        (Item) AdvancedArmorClassConstructor.newInstance(List.of(-12696503, -11241349, -0x574545, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium"))).setStyle(Style.EMPTY.withColor(-11241349)), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
+                                .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(37))));
+                MARK6_VIBRANIUM_LEGGINGS = registerItem("mark6_vibranium_leggings",
+                        (Item) AdvancedArmorClassConstructor.newInstance(List.of(-12696503, -11241349, -0x574545, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium"))).setStyle(Style.EMPTY.withColor(-11241349)), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
+                                .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(37))));
+                MARK6_VIBRANIUM_BOOTS = registerItem("mark6_vibranium_boots",
+                        (Item) AdvancedArmorClassConstructor.newInstance(List.of(-12696503, -11241349, -0x574545, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium"))).setStyle(Style.EMPTY.withColor(-11241349)), ModArmorMaterials.VIBRANIUM_IRONMAN_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
+                                .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(37))));
+                //mark6 armors
+                MARK3_GOLD_TITANIUM_HELMET = registerItem("mark3_gold_titanium_helmet",
+                        (Item) AdvancedArmorClassConstructor.newInstance(List.of(0xFF976A27, 0xffd0a75e, 0xff6e5959, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark3_gold_titanium"))).formatted(Formatting.GOLD), ModArmorMaterials.GOLD_TITANIUM_IRONMAN_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
+                                .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(31))));
+                MARK3_GOLD_TITANIUM_CHESTPLATE = registerItem("mark3_gold_titanium_chestplate",
+                        (Item) AdvancedArmorClassConstructor.newInstance(List.of(0xFF976A27, 0xffd0a75e, 0xff6e5959, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark3_gold_titanium"))).formatted(Formatting.GOLD), ModArmorMaterials.GOLD_TITANIUM_IRONMAN_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
+                                .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(31))));
+                MARK3_GOLD_TITANIUM_LEGGINGS = registerItem("mark3_gold_titanium_leggings",
+                        (Item) AdvancedArmorClassConstructor.newInstance(List.of(0xFF976A27, 0xffd0a75e, 0xff6e5959, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark3_gold_titanium"))).formatted(Formatting.GOLD), ModArmorMaterials.GOLD_TITANIUM_IRONMAN_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
+                                .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(31))));
+                MARK3_GOLD_TITANIUM_BOOTS = registerItem("mark3_gold_titanium_boots",
+                        (Item) AdvancedArmorClassConstructor.newInstance(List.of(0xFF976A27, 0xffd0a75e, 0xff6e5959, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark3_gold_titanium"))).formatted(Formatting.GOLD), ModArmorMaterials.GOLD_TITANIUM_IRONMAN_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
+                                .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(31))));
+                //mark45 armors
+                MARK45_NETHERITE_HELMET = registerItem("mark45_netherite_helmet",
+                        (Item) AdvancedArmorClassConstructor.newInstance(List.of(0xFF49393f, 0xff5d565d, 0xff6e5959, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark45_netherite"))).setStyle(Style.EMPTY.withColor(0xFF49393f)), ModArmorMaterials.NETHERITE_IRONMAN_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
+                                .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(39)).fireproof()));
+                MARK45_NETHERITE_CHESTPLATE = registerItem("mark45_netherite_chestplate",
+                        (Item) AdvancedArmorClassConstructor.newInstance(List.of(0xFF49393f, 0xff5d565d, 0xff6e5959, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark45_netherite"))).setStyle(Style.EMPTY.withColor(0xFF49393f)), ModArmorMaterials.NETHERITE_IRONMAN_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
+                                .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(39)).fireproof()));
+                MARK45_NETHERITE_LEGGINGS = registerItem("mark45_netherite_leggings",
+                        (Item) AdvancedArmorClassConstructor.newInstance(List.of(0xFF49393f, 0xff5d565d, 0xff6e5959, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark45_netherite"))).setStyle(Style.EMPTY.withColor(0xFF49393f)), ModArmorMaterials.NETHERITE_IRONMAN_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
+                                .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(39)).fireproof()));
+                MARK45_NETHERITE_BOOTS = registerItem("mark45_netherite_boots",
+                        (Item) AdvancedArmorClassConstructor.newInstance(List.of(0xFF49393f, 0xff5d565d, 0xff6e5959, -1443585), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "mark45_netherite"))).setStyle(Style.EMPTY.withColor(0xFF49393f)), ModArmorMaterials.NETHERITE_IRONMAN_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
+                                .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(39)).fireproof()));
+
+                //speedster armors
+                //gold_titanium
+                SPEEDSTER_GOLD_TITANIUM_HELMET = registerItem("speedster_gold_titanium_helmet",
+                        (Item) AdvancedArmorClassConstructor.newInstance(List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x40FFDE3A), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "speedster_gold_titanium"))).formatted(Formatting.GOLD), ModArmorMaterials.GOLD_TITANIUM_SPEEDSTER_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
+                                .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(31))));
+                SPEEDSTER_GOLD_TITANIUM_CHESTPLATE = registerItem("speedster_gold_titanium_chestplate",
+                        (Item) AdvancedArmorClassConstructor.newInstance(List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x40FFDE3A), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "speedster_gold_titanium"))).formatted(Formatting.GOLD), ModArmorMaterials.GOLD_TITANIUM_SPEEDSTER_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
+                                .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(31))));
+                SPEEDSTER_GOLD_TITANIUM_LEGGINGS = registerItem("speedster_gold_titanium_leggings",
+                        (Item) AdvancedArmorClassConstructor.newInstance(List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x40FFDE3A), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "speedster_gold_titanium"))).formatted(Formatting.GOLD), ModArmorMaterials.GOLD_TITANIUM_SPEEDSTER_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
+                                .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(31))));
+                SPEEDSTER_GOLD_TITANIUM_BOOTS = registerItem("speedster_gold_titanium_boots",
+                        (Item) AdvancedArmorClassConstructor.newInstance(List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x40FFDE3A), List.of(-1, -1, -1, 15), Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "speedster_gold_titanium"))).formatted(Formatting.GOLD), ModArmorMaterials.GOLD_TITANIUM_SPEEDSTER_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
+                                .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(31))));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(MyneHeroes.MOD_ID, name), item);

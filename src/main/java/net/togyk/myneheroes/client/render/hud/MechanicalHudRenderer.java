@@ -1,7 +1,9 @@
-package net.togyk.myneheroes.ability.detailed;
+package net.togyk.myneheroes.client.render.hud;
 
 import com.google.common.base.Predicates;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
@@ -14,13 +16,12 @@ import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
-import net.togyk.myneheroes.util.AbilityUtil;
-import net.togyk.myneheroes.ability.HudAbility;
 import net.togyk.myneheroes.ability.StockpileAbility;
 import net.togyk.myneheroes.client.HudOverlay;
 import net.togyk.myneheroes.keybind.ModKeyBindings;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.StockpilePower;
+import net.togyk.myneheroes.util.AbilityUtil;
 import net.togyk.myneheroes.util.HudActionResult;
 import net.togyk.myneheroes.util.PlayerAbilities;
 import net.togyk.myneheroes.util.PowerData;
@@ -29,7 +30,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class MechanicalHudAbility extends HudAbility {
+@Environment(EnvType.CLIENT)
+public class MechanicalHudRenderer {
     //background
     private static final Identifier BACKGROUND = Identifier.of(MyneHeroes.MOD_ID,
             "hud/mechanical/background");
@@ -84,14 +86,10 @@ public class MechanicalHudAbility extends HudAbility {
     private static final Identifier ABILITY_SCREEN_RIGHT_BOTTOM_CORNER = Identifier.of(MyneHeroes.MOD_ID,
             "hud/mechanical/ability_screen/right_bottom_corner");
 
-    public MechanicalHudAbility(Identifier id, Ability.Settings settings) {
-        super(id, settings);
-    }
 
-    @Override
-    public HudActionResult drawHud(DrawContext drawContext, RenderTickCounter tickCounter) {
+    public static HudActionResult drawHud(DrawContext drawContext, RenderTickCounter tickCounter) {
         MinecraftClient client = MinecraftClient.getInstance();
-        if (this.get() && client.player != null && client.options.getPerspective().isFirstPerson()) {
+        if (client.player != null && client.options.getPerspective().isFirstPerson()) {
 
             // Enable transparency for textures
             RenderSystem.enableBlend();
@@ -294,10 +292,5 @@ public class MechanicalHudAbility extends HudAbility {
             }
         }
         return ids;
-    }
-
-    @Override
-    public MechanicalHudAbility copy() {
-        return new MechanicalHudAbility(this.id, settings);
     }
 }

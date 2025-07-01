@@ -1,6 +1,5 @@
 package net.togyk.myneheroes.Item.custom;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
@@ -22,7 +21,6 @@ import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.upgrade.AbilityUpgrade;
 import net.togyk.myneheroes.upgrade.Upgrade;
 import net.togyk.myneheroes.util.AbilityUtil;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,18 +38,11 @@ public class AdvancedArmorItem extends ArmorItem implements AbilityHolding, Upgr
         tooltip.add(Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "heading"))).formatted(Formatting.GRAY));
         tooltip.add(titleText);
 
-        MinecraftClient client = MinecraftClient.getInstance();
-        for (Ability ability: this.getAbilities(stack, client.world)) {
-            ability.appendTooltip(stack, context, tooltip, type);
-        }
         super.appendTooltip(stack, context, tooltip, type);
     }
 
-    public List<Ability> getAbilities(ItemStack stack, @Nullable World world) {
+    public List<Ability> getAbilities(ItemStack stack) {
         List<Ability> abilities = new ArrayList<>();
-        if (world == null) {
-            return abilities;
-        }
 
         for (Upgrade upgrade : this.getUpgrades(stack)) {
             if (upgrade instanceof AbilityUpgrade abilityUpgrade) {
@@ -67,7 +58,7 @@ public class AdvancedArmorItem extends ArmorItem implements AbilityHolding, Upgr
     }
 
     @Override
-    public void saveAbility(ItemStack stack, World world, Ability ability) {
+    public void saveAbility(ItemStack stack, Ability ability) {
     }
 
     @Override

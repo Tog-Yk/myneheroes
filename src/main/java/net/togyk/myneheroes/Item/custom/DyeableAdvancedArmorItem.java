@@ -8,9 +8,7 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
-import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;

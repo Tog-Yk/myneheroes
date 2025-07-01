@@ -45,9 +45,6 @@ public class MyneHeroes implements ModInitializer {
     public void onInitialize() {
 
         ModItems.registerModItems();
-        if (FabricLoader.getInstance().isModLoaded("geckolib")) {
-            ModGeckoItems.registerModItems();
-        }
 
         ModBlocks.registerModBlocks();
         ModItemGroups.registerItemGroups();
