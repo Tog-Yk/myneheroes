@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:clay"
+    },
+    {
+      "tag": "myneheroes:dyes"
+    },
+    {
+      "tag": "myneheroes:dyes"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "myneheroes:coloring_compound"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "myneheroes:circuit_board"
+    },
+    {
+      "item": "myneheroes:vibranium_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "myneheroes:kinetic_energy_storage_upgrade"
+  }
+}

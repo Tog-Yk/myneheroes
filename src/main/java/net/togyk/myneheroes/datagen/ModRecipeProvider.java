@@ -2,6 +2,7 @@ package net.togyk.myneheroes.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
@@ -16,6 +17,7 @@ import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.block.ModBlocks;
+import net.togyk.myneheroes.util.ModTags;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -85,6 +87,81 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         FabricRecipeProvider.conditionsFromItem(ModItems.IRON_SUIT_TEMPLATE))
                 .offerTo(exporter);
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.SPEEDSTER_SUIT_TEMPLATE, 2)
+                .pattern("#&#")
+                .pattern("#%#")
+                .pattern("###")
+                .input('#', Items.DIAMOND)
+                .input('&', ModItems.SPEEDSTER_SUIT_TEMPLATE)
+                .input('%', Items.COPPER_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.SPEEDSTER_SUIT_TEMPLATE),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.SPEEDSTER_SUIT_TEMPLATE))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.POWER_INJECTION)
+                .pattern("  $")
+                .pattern(" & ")
+                .pattern("#  ")
+                .input('$', ItemTags.STONE_BUTTONS)
+                .input('&', Items.GLASS_PANE)
+                .input('#', Items.IRON_NUGGET)
+                .criterion(FabricRecipeProvider.hasItem(Items.GLASS_PANE),
+                        FabricRecipeProvider.conditionsFromItem(Items.GLASS_PANE))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.VIBRANIUM_SHIELD)
+                .pattern(" # ")
+                .pattern("###")
+                .pattern(" # ")
+                .input('#', ModItems.VIBRANIUM_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.VIBRANIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_INGOT))
+                .offerTo(exporter);
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.A_SYMBOLS_SHIELD)
+                .input(ModItems.VIBRANIUM_SHIELD)
+                .input(Items.RED_DYE)
+                .input(Items.WHITE_DYE)
+                .input(Items.BLUE_DYE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.VIBRANIUM_SHIELD),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_SHIELD))
+                .offerTo(exporter);
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.CARTERS_SHIELD)
+                .input(ModItems.VIBRANIUM_SHIELD)
+                .input(Items.RED_DYE)
+                .input(Items.BLUE_DYE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.VIBRANIUM_SHIELD),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_SHIELD))
+                .offerTo(exporter);
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.COSMIC_SHIELD)
+                .input(ModItems.VIBRANIUM_SHIELD)
+                .input(Items.GOLD_NUGGET)
+                .input(Items.PURPLE_DYE)
+                .input(Items.BLUE_DYE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.VIBRANIUM_SHIELD),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_SHIELD))
+                .offerTo(exporter);
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.CIRCUIT_BOARD)
+                .input(Items.COPPER_INGOT)
+                .input(Items.GOLD_NUGGET)
+                .input(Items.REDSTONE)
+                .criterion(FabricRecipeProvider.hasItem(Items.COPPER_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(Items.COPPER_INGOT))
+                .offerTo(exporter);
+
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.COLORING_COMPOUND)
+                .input(Items.CLAY)
+                .input(ModTags.Items.DYES)
+                .input(ModTags.Items.DYES)
+                .criterion(FabricRecipeProvider.hasItem(Items.CLAY),
+                        FabricRecipeProvider.conditionsFromItem(Items.CLAY))
+                .offerTo(exporter);
+
+        //blocks
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.ARMOR_LIGHT_LEVELING_STATION)
                 .pattern("&%")
                 .pattern("##")
@@ -96,43 +173,76 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         FabricRecipeProvider.conditionsFromItem(Items.GLOWSTONE_DUST))
                 .offerTo(exporter);
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.ARMOR_DYEING_STATION)
-                .pattern("&%$")
-                .pattern("## ")
-                .pattern("## ")
+                .pattern("$$")
+                .pattern("##")
+                .pattern("##")
                 .input('#', ItemTags.PLANKS)
-                .input('&', Items.RED_DYE)
-                .input('%', Items.BLUE_DYE)
-                .input('$', Items.GREEN_DYE)
-                .criterion(FabricRecipeProvider.hasItem(Items.RED_DYE),
-                        FabricRecipeProvider.conditionsFromItem(Items.RED_DYE))
+                .input('$', ModItems.COLORING_COMPOUND)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.COLORING_COMPOUND),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.COLORING_COMPOUND))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.UPGRADE_STATION)
+                .pattern("##")
+                .pattern("&&")
+                .input('#', ItemTags.PLANKS)
+                .input('&', Blocks.IRON_BLOCK)
+                .criterion(FabricRecipeProvider.hasItem(Blocks.IRON_BLOCK),
+                        FabricRecipeProvider.conditionsFromItem(Blocks.IRON_BLOCK))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.METEOR_RADAR)
+                .pattern("###")
+                .pattern("#*#")
+                .pattern("%^%")
+                .input('#', Items.IRON_INGOT)
+                .input('*', ModItems.TITANIUM_INGOT)
+                .input('^', ModItems.CIRCUIT_BOARD)
+                .input('%', Items.REDSTONE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.CIRCUIT_BOARD),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.CIRCUIT_BOARD))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.KRYPTONITE_BlOCK)
+                .pattern("##")
+                .pattern("##")
+                .input('#', ModBlocks.KRYPTONITE_CLUSTER)
+                .criterion(FabricRecipeProvider.hasItem(ModBlocks.KRYPTONITE_CLUSTER),
+                        FabricRecipeProvider.conditionsFromItem(ModBlocks.KRYPTONITE_CLUSTER))
                 .offerTo(exporter);
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.POWER_INJECTION)
-                .pattern("  $")
-                .pattern(" & ")
-                .pattern("#  ")
-                .input('$', ItemTags.STONE_BUTTONS)
-                .input('&', Items.GLASS_PANE)
-                .input('#', Items.IRON_NUGGET)
-                .criterion(FabricRecipeProvider.hasItem(Items.IRON_NUGGET),
-                        FabricRecipeProvider.conditionsFromItem(Items.IRON_NUGGET))
-                .offerTo(exporter);
 
-        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(Items.STONE_SLAB), RecipeCategory.TOOLS, ModItems.MECHANICAL_HUD_UPGRADE)
-                .criterion(FabricRecipeProvider.hasItem(Items.STONE_SLAB),
-                        FabricRecipeProvider.conditionsFromItem(Items.STONE_SLAB))
+        //upgrades
+        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(ModItems.CIRCUIT_BOARD), RecipeCategory.TOOLS, ModItems.MECHANICAL_HUD_UPGRADE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.CIRCUIT_BOARD),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.CIRCUIT_BOARD))
                 .offerTo(exporter);
-        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(Items.STONE_SLAB), RecipeCategory.TOOLS, ModItems.LAZAR_UPGRADE)
-                .criterion(FabricRecipeProvider.hasItem(Items.STONE_SLAB),
-                        FabricRecipeProvider.conditionsFromItem(Items.STONE_SLAB))
+        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(ModItems.CIRCUIT_BOARD), RecipeCategory.TOOLS, ModItems.SPEEDSTER_HUD_UPGRADE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.CIRCUIT_BOARD),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.CIRCUIT_BOARD))
                 .offerTo(exporter);
-        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(Items.STONE_SLAB), RecipeCategory.TOOLS, ModItems.FlY_UPGRADE)
-                .criterion(FabricRecipeProvider.hasItem(Items.STONE_SLAB),
-                        FabricRecipeProvider.conditionsFromItem(Items.STONE_SLAB))
+        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(ModItems.CIRCUIT_BOARD), RecipeCategory.TOOLS, ModItems.LAZAR_UPGRADE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.CIRCUIT_BOARD),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.CIRCUIT_BOARD))
                 .offerTo(exporter);
-        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(ModItems.VIBRANIUM_INGOT), RecipeCategory.TOOLS, ModItems.KINETIC_ENERGY_STORAGE_UPGRADE)
-                .criterion(FabricRecipeProvider.hasItem(ModItems.VIBRANIUM_INGOT),
-                        FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_INGOT))
+        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(ModItems.CIRCUIT_BOARD), RecipeCategory.TOOLS, ModItems.FlY_UPGRADE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.CIRCUIT_BOARD),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.CIRCUIT_BOARD))
+                .offerTo(exporter);
+        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(ModItems.CIRCUIT_BOARD), RecipeCategory.TOOLS, ModItems.TAKE_OFF_SUIT_UPGRADE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.CIRCUIT_BOARD),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.CIRCUIT_BOARD))
+                .offerTo(exporter);
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.KINETIC_ENERGY_STORAGE_UPGRADE)
+                .input(ModItems.CIRCUIT_BOARD)
+                .input(ModItems.VIBRANIUM_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.CIRCUIT_BOARD),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.CIRCUIT_BOARD))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.TOOLBELT_3_UPGRADE)
+                .pattern("###")
+                .pattern("#&#")
+                .input('#', Items.LEATHER)
+                .input('&', Items.IRON_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(Items.LEATHER),
+                        FabricRecipeProvider.conditionsFromItem(Items.LEATHER))
                 .offerTo(exporter);
 
 
@@ -313,6 +423,31 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         FabricRecipeProvider.conditionsFromItem(Items.NETHERITE_BOOTS))
                 .offerTo(exporter);
 
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.SPEEDSTER_GOLD_TITANIUM_HELMET)
+                .input(ModItems.GOLD_TITANIUM_HELMET)
+                .input(ModItems.SPEEDSTER_SUIT_TEMPLATE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_HELMET),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_HELMET))
+                .offerTo(exporter);
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.SPEEDSTER_GOLD_TITANIUM_CHESTPLATE)
+                .input(ModItems.GOLD_TITANIUM_CHESTPLATE)
+                .input(ModItems.SPEEDSTER_SUIT_TEMPLATE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_CHESTPLATE),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_CHESTPLATE))
+                .offerTo(exporter);
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.SPEEDSTER_GOLD_TITANIUM_LEGGINGS)
+                .input(ModItems.GOLD_TITANIUM_LEGGINGS)
+                .input(ModItems.SPEEDSTER_SUIT_TEMPLATE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_LEGGINGS),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_LEGGINGS))
+                .offerTo(exporter);
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.SPEEDSTER_GOLD_TITANIUM_BOOTS)
+                .input(ModItems.GOLD_TITANIUM_BOOTS)
+                .input(ModItems.SPEEDSTER_SUIT_TEMPLATE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_BOOTS),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_BOOTS))
+                .offerTo(exporter);
 
         offerSmithingTrimRecipe(exporter, ModItems.IRON_SUIT_TEMPLATE, Identifier.of(MyneHeroes.MOD_ID, "iron_suit"));
+        offerSmithingTrimRecipe(exporter, ModItems.SPEEDSTER_SUIT_TEMPLATE, Identifier.of(MyneHeroes.MOD_ID, "speedster_suit"));
     }}

@@ -58,7 +58,7 @@ public class ModBlocks {
     public static final Block KRYPTONITE_BlOCK = registerBlock("kryptonite_block",
             new KryptoniteBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.AMETHYST_BLOCK).mapColor(MapColor.LIME).strength(2.5f)));
 
-    public static final Block KRYPTONITE_CLUSTER = registerBlock("kryptonite_crystal",
+    public static final Block KRYPTONITE_CLUSTER = registerBlock("kryptonite_cluster",
             new KryptoniteClusterBlock(AbstractBlock.Settings.create().mapColor(MapColor.LIME).solid().nonOpaque().sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(1.5F).luminance((state) -> 5).pistonBehavior(PistonBehavior.DESTROY)));
 
 

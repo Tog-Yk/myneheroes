@@ -29,10 +29,12 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.GOLD_TITANIUM_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.RAW_GOLD_TITANIUM_BLOCK);
 
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ARMOR_DYEING_STATION);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.KRYPTONITE_BlOCK);
+        blockStateModelGenerator.registerAmethyst(ModBlocks.KRYPTONITE_CLUSTER);
 
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ARMOR_LIGHT_LEVELING_STATION);
-
+        blockStateModelGenerator.registerSimpleState(ModBlocks.ARMOR_DYEING_STATION);
+        blockStateModelGenerator.registerSimpleState(ModBlocks.ARMOR_LIGHT_LEVELING_STATION);
+        blockStateModelGenerator.registerSimpleState(ModBlocks.UPGRADE_STATION);
     }
 
     @Override
@@ -47,13 +49,16 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.RAW_GOLD_TITANIUM, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.IRON_SUIT_TEMPLATE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.SPEEDSTER_SUIT_TEMPLATE, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.ARC_REACTOR, Models.GENERATED);
 
-        itemModelGenerator.register(ModItems.MECHANICAL_HUD_UPGRADE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.CIRCUIT_BOARD, Models.GENERATED);
+
         itemModelGenerator.register(ModItems.LAZAR_UPGRADE, Models.GENERATED);
         itemModelGenerator.register(ModItems.FlY_UPGRADE, Models.GENERATED);
         itemModelGenerator.register(ModItems.KINETIC_ENERGY_STORAGE_UPGRADE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.TAKE_OFF_SUIT_UPGRADE, Models.GENERATED);
 
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_HELMET));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_CHESTPLATE));

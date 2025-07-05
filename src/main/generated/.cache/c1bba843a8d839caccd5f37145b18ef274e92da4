@@ -1,3 +1,13 @@
-// 1.21.1	2025-04-06T17:03:49.2309896	MyneHeroes/Tags for minecraft:block
-b5b32d03f41ee3eba504b6f0a129fc4e136db370 data\minecraft\tags\block\mineable\pickaxe.json
+// 1.21.1	2025-07-05T23:34:14.7202557	MyneHeroes/Tags for minecraft:block
+995a915a65748b75853ab6428a91f21060428c73 data\myneheroes\tags\block\sculk_meteor_core_blocks.json
+e59cb5cb0d67061d9974039a0e77db97dbc453b4 data\myneheroes\tags\block\sculk_meteor_crust_blocks.json
 b5b32d03f41ee3eba504b6f0a129fc4e136db370 data\minecraft\tags\block\needs_iron_tool.json
+29e8a9d10559f53e47af88248b81e7e6973cb7ad data\myneheroes\tags\block\kryptonite_meteor_core_blocks.json
+dd76ee45b7be731384a8fe6d184b58fb652d7937 data\minecraft\tags\block\mineable\axe.json
+998d9daad449f4a8b840b3a6d8f2d47f0fe545a0 data\minecraft\tags\block\mineable\pickaxe.json
+74295db5ec1f4918b4e28b2bc57a0b59e3e69fc6 data\minecraft\tags\block\beacon_base_blocks.json
+8d8626a0c0de550f84f031134f9e5813e7da9886 data\myneheroes\tags\block\meteor_crust_blocks.json
+799b6cc463fdf0b978ae0b506d3b8450a603c3a2 data\myneheroes\tags\block\vibranium_meteor_core_blocks.json
+8d8626a0c0de550f84f031134f9e5813e7da9886 data\myneheroes\tags\block\vibranium_meteor_crust_blocks.json
+a07bad3711d08998f39ba3e834f115df8eeb6442 data\myneheroes\tags\block\meteor_core_blocks.json
+94b22179a40d0e013d83ef36d959987345a5bd11 data\myneheroes\tags\block\kryptonite_meteor_crust_blocks.json

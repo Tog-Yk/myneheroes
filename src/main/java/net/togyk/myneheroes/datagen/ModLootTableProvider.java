@@ -27,5 +27,13 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
         addDrop(ModBlocks.GOLD_TITANIUM_BLOCK);
         addDrop(ModBlocks.RAW_GOLD_TITANIUM_BLOCK);
+
+        addDrop(ModBlocks.KRYPTONITE_CLUSTER);
+
+        addDrop(ModBlocks.ARMOR_DYEING_STATION);
+        addDrop(ModBlocks.ARMOR_LIGHT_LEVELING_STATION);
+        addDrop(ModBlocks.UPGRADE_STATION);
+
+        addDrop(ModBlocks.METEOR_RADAR);
     }
 }

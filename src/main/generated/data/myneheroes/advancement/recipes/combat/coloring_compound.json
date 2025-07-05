@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_glass_pane": {
+    "has_clay": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:glass_pane"
+            "items": "minecraft:clay"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "myneheroes:power_injection"
+        "recipe": "myneheroes:coloring_compound"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_glass_pane"
+      "has_clay"
     ]
   ],
   "rewards": {
     "recipes": [
-      "myneheroes:power_injection"
+      "myneheroes:coloring_compound"
     ]
   }
 }

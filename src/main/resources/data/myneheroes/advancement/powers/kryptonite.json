@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "myneheroes:kryptonite_crystal",
+              "myneheroes:kryptonite_cluster",
               "myneheroes:kryptonite_block"
             ]
           }
@@ -21,7 +21,7 @@
     },
     "icon": {
       "count": 1,
-      "id": "myneheroes:kryptonite_crystal"
+      "id": "myneheroes:kryptonite_cluster"
     },
     "title": {
       "translate": "advancements.myneheroes.powers.kryptonite.title"
