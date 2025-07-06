@@ -69,25 +69,7 @@ public class Abilities {
 
     public static final ReleaseKineticEnergyAbility RELEASE_KINETIC_ENERGY = registerAbility(new ReleaseKineticEnergyAbility(Identifier.of(MyneHeroes.MOD_ID, "release_kinetic_energy"), new Ability.Settings(), 120, 200, 1.0F));
 
-    public static final LaserEyesAbility LASER_EYES = registerAbility(new LaserEyesAbility(Identifier.of(MyneHeroes.MOD_ID, "laser_eyes"), 2, 1000, 4, new Ability.Settings(),  (player) -> {
-        if (!player.getWorld().isClient) {
-            // shoot laser
-            Vec3d look = player.getRotationVec(1.0F);
-
-            LaserEntity projectile = new LaserEntity(ModEntities.LASER, player.getWorld());
-            projectile.setColor(0x55FF0000);
-            projectile.setOwner(player);
-            projectile.setPosition(player.getX(), player.getEyeY(), player.getZ());
-            projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
-            projectile.applyDamageModifier(2.0F);
-
-            player.getWorld().spawnEntity(projectile);
-
-            return true;
-        }
-
-        return false;
-    }, 0xF0FFF0F0, 0x40FF0000));
+    public static final LaserEyesAbility LASER_EYES = registerAbility(new LaserEyesAbility(Identifier.of(MyneHeroes.MOD_ID, "laser_eyes"), 2, 1000, 4, new Ability.Settings(), 0xF0FFF0F0, 0x40FF0000));
 
     public static final Ability TAKE_OFF_SUIT = registerAbility(new Ability(Identifier.of(MyneHeroes.MOD_ID, "take_off_suit"), 10, new Ability.Settings().appearsMultipleTimes(false),  (player) -> {
         List<ItemStack> armor = new ArrayList<>();
@@ -171,7 +153,7 @@ public class Abilities {
         return false;
     }));
 
-    public static final VariableLinkedAbility SPEED_UP = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_up"), 10, new Ability.Settings(),  (player, power) -> {
+    public static final VariableLinkedAbility SPEED_UP = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_up"), 2, new Ability.Settings(),  (player, power) -> {
         int speed = power.getInt("speedLevel");
         return power.setInt("speedLevel", speed + 1);
     }, ( power) -> {
@@ -179,7 +161,7 @@ public class Abilities {
         return power.canSetInt("speedLevel", speed + 1);
     }));
 
-    public static final VariableLinkedAbility SPEED_DOWN = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_down"), 10, new Ability.Settings(),  (player, power) -> {
+    public static final VariableLinkedAbility SPEED_DOWN = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_down"), 2, new Ability.Settings(),  (player, power) -> {
         int speed = power.getInt("speedLevel");
         return power.setInt("speedLevel", speed - 1);
     }, ( power) -> {
@@ -187,7 +169,7 @@ public class Abilities {
         return power.canSetInt("speedLevel", speed - 1);
     }));
 
-    public static final VariableLinkedAbility TOGGLE_SPEED = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speed"), 10, new Ability.Settings(),  (player, power) -> {
+    public static final VariableLinkedAbility TOGGLE_SPEED = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speed"), 2, new Ability.Settings(),  (player, power) -> {
         boolean isActive = power.getBoolean("speedActive");
         return power.setBoolean("speedActive", !isActive);
     }, (power) -> {
@@ -195,10 +177,10 @@ public class Abilities {
         return power.canSetBoolean("speedActive", !isActive);
     }));
 
-    public static final VariableLinkedAbility TOGGLE_PHASING = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_phasing"), 10, new Ability.Settings(),  (player, power) -> {
+    public static final VariableLinkedAbility TOGGLE_PHASING = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_phasing"), 2, new Ability.Settings(),  (player, power) -> {
         boolean isPhasing = power.getBoolean("phasing");
         return power.setBoolean("phasing", !isPhasing);
-    }, (power) -> {
+    }, null, (power) -> {
         boolean isPhasing = power.getBoolean("phasing");
         return power.canSetBoolean("phasing", !isPhasing);
     }));

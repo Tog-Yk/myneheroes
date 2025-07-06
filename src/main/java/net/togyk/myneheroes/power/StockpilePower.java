@@ -90,16 +90,6 @@ public class StockpilePower extends Power {
 
     @Override
     public List<Ability> getAbilities() {
-        List<Ability> abilities = new ArrayList<>();
-        for (Ability ability: this.abilities) {
-            if (ability instanceof StockpileLinkedAbility linkedAbility) {
-                if (this.getCharge() >= linkedAbility.getUnlocksAt()) {
-                    abilities.add(ability);
-                }
-            } else {
-                abilities.add(ability);
-            }
-        }
-        return abilities;
+        return super.getAbilities();
     }
 }

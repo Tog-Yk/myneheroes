@@ -249,7 +249,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
 
     @Override
     public int myneheroes$maxAbilityScroll() {
-        return this.myneheroes$getFilteredAbilities().size() - 4;
+        return Math.max(this.myneheroes$getFilteredAbilities().size() - 4, 0);
     }
 
     @Override

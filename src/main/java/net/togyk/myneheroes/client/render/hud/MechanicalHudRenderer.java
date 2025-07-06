@@ -18,7 +18,7 @@ import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.StockpileAbility;
 import net.togyk.myneheroes.client.HudOverlay;
-import net.togyk.myneheroes.keybind.ModKeyBindings;
+import net.togyk.myneheroes.keybind.ModKeyBinds;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.StockpilePower;
 import net.togyk.myneheroes.util.AbilityUtil;
@@ -160,16 +160,16 @@ public class MechanicalHudRenderer {
                 Ability fourthAbility = ((PlayerAbilities) client.player).myneheroes$getFourthAbility();
                 Text fourthAbilityText = null;
 
-                firstAbilityText = hasChatOpen ? Text.translatable("ability."+firstAbility.getId().toTranslationKey()) : ModKeyBindings.useFirstAbility.getBoundKeyLocalizedText();
+                firstAbilityText = hasChatOpen ? Text.translatable("ability."+firstAbility.getId().toTranslationKey()) : ModKeyBinds.useFirstAbility.getBoundKeyLocalizedText();
                 textLengths.add(textRenderer.getWidth(firstAbilityText));
                 if (secondAbility != null) {
-                    secondAbilityText = hasChatOpen ? Text.translatable("ability."+secondAbility.getId().toTranslationKey()) : ModKeyBindings.useSecondAbility.getBoundKeyLocalizedText();
+                    secondAbilityText = hasChatOpen ? Text.translatable("ability."+secondAbility.getId().toTranslationKey()) : ModKeyBinds.useSecondAbility.getBoundKeyLocalizedText();
                     textLengths.add(textRenderer.getWidth(secondAbilityText));
                     if (thirdAbility != null) {
-                        thirdAbilityText = hasChatOpen ? Text.translatable("ability."+thirdAbility.getId().toTranslationKey()) : ModKeyBindings.useThirdAbility.getBoundKeyLocalizedText();
+                        thirdAbilityText = hasChatOpen ? Text.translatable("ability."+thirdAbility.getId().toTranslationKey()) : ModKeyBinds.useThirdAbility.getBoundKeyLocalizedText();
                         textLengths.add(textRenderer.getWidth(thirdAbilityText));
                         if (fourthAbility != null) {
-                            fourthAbilityText = hasChatOpen ? Text.translatable("ability."+fourthAbility.getId().toTranslationKey()) : ModKeyBindings.useFourthAbility.getBoundKeyLocalizedText();
+                            fourthAbilityText = hasChatOpen ? Text.translatable("ability."+fourthAbility.getId().toTranslationKey()) : ModKeyBinds.useFourthAbility.getBoundKeyLocalizedText();
                             textLengths.add(textRenderer.getWidth(fourthAbilityText));
                         }
                     }
@@ -185,26 +185,26 @@ public class MechanicalHudRenderer {
 
                 RenderSystem.setShaderColor(1, 1, 1, (float) 0xC4 / 255);
 
-                HudOverlay.drawAbility(drawContext, firstAbility, ModKeyBindings.useFirstAbility.isPressed(), abilityScreenX + 6, y);
+                HudOverlay.drawAbility(drawContext, firstAbility, ModKeyBinds.useFirstAbility.isPressed(), abilityScreenX + 6, y);
                 drawContext.drawTextWithShadow(textRenderer, firstAbilityText, abilityScreenX + 6 + 18, y + 4, 0xC428EEFF);
                 RenderSystem.enableBlend();
                 y += 18;
 
-                HudOverlay.drawAbility(drawContext, secondAbility, ModKeyBindings.useSecondAbility.isPressed(), abilityScreenX + 6, y);
+                HudOverlay.drawAbility(drawContext, secondAbility, ModKeyBinds.useSecondAbility.isPressed(), abilityScreenX + 6, y);
                 if (secondAbility != null) {
                     drawContext.drawTextWithShadow(textRenderer, secondAbilityText, abilityScreenX + 6 + 18, y + 4, 0xC428EEFF);
                     RenderSystem.enableBlend();
                 }
                 y += 18;
 
-                HudOverlay.drawAbility(drawContext, thirdAbility, ModKeyBindings.useThirdAbility.isPressed(), abilityScreenX + 6, y);
+                HudOverlay.drawAbility(drawContext, thirdAbility, ModKeyBinds.useThirdAbility.isPressed(), abilityScreenX + 6, y);
                 if (thirdAbility != null) {
                     drawContext.drawTextWithShadow(textRenderer, thirdAbilityText, abilityScreenX + 6 + 18, y + 4, 0xC428EEFF);
                     RenderSystem.enableBlend();
                 }
                 y += 18;
 
-                HudOverlay.drawAbility(drawContext, fourthAbility, ModKeyBindings.useFourthAbility.isPressed(), abilityScreenX + 6, y);
+                HudOverlay.drawAbility(drawContext, fourthAbility, ModKeyBinds.useFourthAbility.isPressed(), abilityScreenX + 6, y);
                 if (fourthAbility != null) {
                     drawContext.drawTextWithShadow(textRenderer, fourthAbilityText, abilityScreenX + 6 + 18, y + 4, 0xC428EEFF);
                     RenderSystem.enableBlend();

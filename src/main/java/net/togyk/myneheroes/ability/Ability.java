@@ -54,6 +54,7 @@ public class Ability {
     public final Identifier disabled_icon;
 
     protected final Function<PlayerEntity, Boolean> use;
+    protected final Function<PlayerEntity, Boolean> hold;
     protected final Settings settings;
 
     public Ability(Identifier id, int cooldown, Settings settings, Function<PlayerEntity, Boolean> use) {
@@ -62,6 +63,17 @@ public class Ability {
         this.disabled_icon = Identifier.of(id.getNamespace(),"textures/ability/"+id.getPath()+"_disabled.png");
         this.maxCooldown = cooldown;
         this.use = use;
+        this.hold = null;
+        this.settings = settings;
+    }
+
+    public Ability(Identifier id, int cooldown, Settings settings, Function<PlayerEntity, Boolean> use, Function<PlayerEntity, Boolean> hold) {
+        this.id = id;
+        this.icon = Identifier.of(id.getNamespace(),"textures/ability/"+id.getPath()+".png");
+        this.disabled_icon = Identifier.of(id.getNamespace(),"textures/ability/"+id.getPath()+"_disabled.png");
+        this.maxCooldown = cooldown;
+        this.use = use;
+        this.hold = hold;
         this.settings = settings;
     }
 
@@ -72,6 +84,21 @@ public class Ability {
             }
         }
         this.save(player.getWorld());
+    }
+
+    public void hold(PlayerEntity player) {
+        if (this.hold != null) {
+            if (this.getCooldown() == 0) {
+                if (this.hold.apply(player)) {
+                    this.setCooldown(this.getMaxCooldown());
+                }
+            }
+            this.save(player.getWorld());
+        }
+    }
+
+    public boolean canHold(PlayerEntity player) {
+        return this.hold != null;
     }
 
     public void tick(PlayerEntity player) {

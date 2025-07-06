@@ -57,7 +57,7 @@ public class ModItemGroups {
 
                         entries.add(ModItems.MECHANICAL_HUD_UPGRADE);
                         entries.add(ModItems.SPEEDSTER_HUD_UPGRADE);
-                        entries.add(ModItems.LAZAR_UPGRADE);
+                        entries.add(ModItems.LASER_UPGRADE);
                         entries.add(ModItems.FlY_UPGRADE);
                         entries.add(ModItems.TAKE_OFF_SUIT_UPGRADE);
                         entries.add(ModItems.KINETIC_ENERGY_STORAGE_UPGRADE);

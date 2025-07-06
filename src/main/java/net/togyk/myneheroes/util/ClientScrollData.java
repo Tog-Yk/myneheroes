@@ -3,14 +3,14 @@ package net.togyk.myneheroes.util;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.togyk.myneheroes.networking.PlayerAbilityScrollSyncDataPayload;
 
 @Environment(EnvType.CLIENT)
 public class ClientScrollData {
+    public static int getMaxAbilityScroll(ClientPlayerEntity player){
+        return ((PlayerAbilities) player).myneheroes$maxAbilityScroll();
+    }
     public static int getScrolledAbilitiesOffset(ClientPlayerEntity player){
         return ((PlayerAbilities) player).myneheroes$getScrolledAbilityOffset();
     }

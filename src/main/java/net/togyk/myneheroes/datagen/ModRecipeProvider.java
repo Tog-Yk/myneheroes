@@ -218,7 +218,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(ModItems.CIRCUIT_BOARD),
                         FabricRecipeProvider.conditionsFromItem(ModItems.CIRCUIT_BOARD))
                 .offerTo(exporter);
-        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(ModItems.CIRCUIT_BOARD), RecipeCategory.TOOLS, ModItems.LAZAR_UPGRADE)
+        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(ModItems.CIRCUIT_BOARD), RecipeCategory.TOOLS, ModItems.LASER_UPGRADE)
                 .criterion(FabricRecipeProvider.hasItem(ModItems.CIRCUIT_BOARD),
                         FabricRecipeProvider.conditionsFromItem(ModItems.CIRCUIT_BOARD))
                 .offerTo(exporter);

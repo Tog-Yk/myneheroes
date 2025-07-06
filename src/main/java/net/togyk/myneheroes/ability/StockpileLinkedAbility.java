@@ -36,6 +36,11 @@ public class StockpileLinkedAbility extends Ability{
     }
 
     @Override
+    public boolean Usable() {
+        return super.Usable() && this.getIndirectHolder() instanceof StockpilePower stockpilePower && stockpilePower.getCharge() >= this.getUnlocksAt();
+    }
+
+    @Override
     public StockpileLinkedAbility copy() {
         return new StockpileLinkedAbility(this.getId(), this.getMaxCooldown(), this.unlocksAt, this.cost, settings, use);
     }

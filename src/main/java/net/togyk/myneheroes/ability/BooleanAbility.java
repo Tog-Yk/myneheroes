@@ -7,7 +7,7 @@ import net.minecraft.util.Identifier;
 public class BooleanAbility extends Ability {
     private boolean bool = true;
     public BooleanAbility(Identifier id, Settings settings) {
-        super(id, 10, settings, (player) -> false);
+        super(id, 2, settings, (player) -> false);
     }
 
     @Override

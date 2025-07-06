@@ -15,14 +15,14 @@ import net.togyk.myneheroes.client.render.block_entity.MeteorRadarBlockEntityRen
 import net.togyk.myneheroes.client.render.entity.ModEntityRenderers;
 import net.togyk.myneheroes.client.screen.ModHandledScreens;
 import net.togyk.myneheroes.keybind.ModKeybindingHelper;
-import net.togyk.myneheroes.keybind.ModKeyBindings;
+import net.togyk.myneheroes.keybind.ModKeyBinds;
 import net.togyk.myneheroes.networking.ModMessages;
 
 public class MyneHeroesClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         HudRenderCallback.EVENT.register(new HudOverlay());
-        ModKeyBindings.registerKeyBinds();
+        ModKeyBinds.registerKeyBinds();
         ModKeybindingHelper.registerModKeybingHelper();
         ModEntityRenderers.registerModEntityRenderers();
 

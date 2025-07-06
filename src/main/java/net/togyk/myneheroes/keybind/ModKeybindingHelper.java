@@ -2,84 +2,145 @@ package net.togyk.myneheroes.keybind;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.player.PlayerEntity;
 import net.togyk.myneheroes.ability.Ability;
-import net.togyk.myneheroes.networking.KeybindPayload;
+import net.togyk.myneheroes.event.MouseScrollCallback;
+import net.togyk.myneheroes.networking.AbilityKeybindPayload;
 import net.togyk.myneheroes.util.ClientScrollData;
 import net.togyk.myneheroes.util.PlayerAbilities;
 
 public class ModKeybindingHelper {
+    private static boolean firstWasPressed = false;
+    private static boolean secondWasPressed = false;
+    private static boolean thirdWasPressed = false;
+    private static boolean fourthWasPressed = false;
+    private static boolean AbilitiesBlockedForScrolling = false;
+
     public static void registerModKeybingHelper() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (ModKeyBindings.useFirstAbility.isPressed()) {
-                if (MinecraftClient.getInstance().player != null){
-                    Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).myneheroes$getFirstAbility();
-                    if (ability != null) {
-                        //to do everything what has to be done on the client side
-                        ability.Use(MinecraftClient.getInstance().player);
-                        //to send a message to the server to do everything what has to be done on the server side
-                        ClientPlayNetworking.send(new KeybindPayload(0));
+            PlayerEntity player = client.player;
+
+            if (player != null) {
+                Ability ability = ((PlayerAbilities) player).myneheroes$getFirstAbility();
+                if (ability != null) {
+                    if (ModKeyBinds.useFirstAbility.isPressed()) {
+                        if (!AbilitiesBlockedForScrolling) {
+                            if (ability.canHold(player)) {
+                                ability.hold(player);
+                                ClientPlayNetworking.send(new AbilityKeybindPayload(0, true));
+                            }
+                        }
+                    } else if (firstWasPressed) {
+                        if (!AbilitiesBlockedForScrolling) {
+                            ability.Use(player);
+                            ClientPlayNetworking.send(new AbilityKeybindPayload(0, false));
+                        } else {
+                            AbilitiesBlockedForScrolling = false;
+                        }
                     }
                 }
-            }
-            if (ModKeyBindings.useSecondAbility.isPressed()) {
-                if (MinecraftClient.getInstance().player != null){
-                    Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).myneheroes$getSecondAbility();
-                    if (ability != null) {
-                        //to do everything what has to be done on the client side
-                        ability.Use(MinecraftClient.getInstance().player);
-                        //to send a message to the server to do everything what has to be done on the server side
-                        ClientPlayNetworking.send(new KeybindPayload(1));
+
+                firstWasPressed = ModKeyBinds.useFirstAbility.isPressed();
+
+
+                ability = ((PlayerAbilities) player).myneheroes$getSecondAbility();
+                if (ability != null) {
+                    if (ModKeyBinds.useSecondAbility.isPressed()) {
+                        if (AbilitiesBlockedForScrolling) {
+                            if (ability.canHold(player)) {
+                                ability.hold(player);
+                                ClientPlayNetworking.send(new AbilityKeybindPayload(1, true));
+                            }
+                        }
+                    } else if (secondWasPressed) {
+                        if (!AbilitiesBlockedForScrolling) {
+                            ability.Use(player);
+                            ClientPlayNetworking.send(new AbilityKeybindPayload(1, false));
+                        } else {
+                            AbilitiesBlockedForScrolling = false;
+                        }
                     }
                 }
-            }
-            if (ModKeyBindings.useThirdAbility.isPressed()) {
-                if (MinecraftClient.getInstance().player != null){
-                    Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).myneheroes$getThirdAbility();
-                    if (ability != null) {
-                        //to do everything what has to be done on the client side
-                        ability.Use(MinecraftClient.getInstance().player);
-                        //to send a message to the server to do everything what has to be done on the server side
-                        ClientPlayNetworking.send(new KeybindPayload(2));
+
+                secondWasPressed = ModKeyBinds.useSecondAbility.isPressed();
+
+
+                ability = ((PlayerAbilities) player).myneheroes$getThirdAbility();
+                if (ability != null) {
+                    if (ModKeyBinds.useThirdAbility.isPressed()) {
+                        if (!AbilitiesBlockedForScrolling) {
+                            if (ability.canHold(player)) {
+                                ability.hold(player);
+                                ClientPlayNetworking.send(new AbilityKeybindPayload(2, true));
+                            }
+                        }
+                    } else if (thirdWasPressed) {
+                        if (!AbilitiesBlockedForScrolling) {
+                            ability.Use(player);
+                            ClientPlayNetworking.send(new AbilityKeybindPayload(2, false));
+                        } else {
+                            AbilitiesBlockedForScrolling = false;
+                        }
                     }
                 }
-            }
-            if (ModKeyBindings.useFourthAbility.isPressed()) {
-                if (MinecraftClient.getInstance().player != null){
-                    Ability ability = ((PlayerAbilities) MinecraftClient.getInstance().player).myneheroes$getFourthAbility();
-                    if (ability != null) {
-                        //to do everything what has to be done on the client side
-                        ability.Use(MinecraftClient.getInstance().player);
-                        //to send a message to the server to do everything what has to be done on the server side
-                        ClientPlayNetworking.send(new KeybindPayload(3));
+
+                thirdWasPressed = ModKeyBinds.useThirdAbility.isPressed();
+
+
+                ability = ((PlayerAbilities) player).myneheroes$getFourthAbility();
+                if (ability != null) {
+                    if (ModKeyBinds.useFourthAbility.isPressed()) {
+                        if (!AbilitiesBlockedForScrolling) {
+                            if (ability.canHold(player)) {
+                                ability.hold(player);
+                                ClientPlayNetworking.send(new AbilityKeybindPayload(3, true));
+                            }
+                        }
+                    } else if (fourthWasPressed) {
+                        if (!AbilitiesBlockedForScrolling) {
+                            ability.Use(player);
+                            ClientPlayNetworking.send(new AbilityKeybindPayload(3, false));
+                        } else {
+                            AbilitiesBlockedForScrolling = false;
+                        }
                     }
                 }
-            }
-            if (ModKeyBindings.abilitiesScrollUp.isPressed()) {
-                if (client.player != null){
-                    if (ClientScrollData.getScrolledAbilitiesOffset(client.player) > 0) {
-                        ClientScrollData.scrollAbilitiesBack(client.player);
-                    }
-                }
-            }
-            if (ModKeyBindings.abilitiesScrollDown.isPressed()) {
-                if (client.player != null){
-                    if (ClientScrollData.canScrollAbilitiesFurther(client.player)) {
-                        ClientScrollData.scrollAbilitiesFurther(client.player);
-                    }
-                }
+
+                fourthWasPressed = ModKeyBinds.useFourthAbility.isPressed();
             }
 
-            if (ModKeyBindings.powersScrollUp.isPressed()) {
+            if (ModKeyBinds.powersScrollUp.isPressed()) {
                 if (client.player != null){
                     ClientScrollData.scrollPowersFurther(client.player);
                 }
             }
-            if (ModKeyBindings.powersScrollDown.isPressed()) {
+            if (ModKeyBinds.powersScrollDown.isPressed()) {
                 if (client.player != null){
                     ClientScrollData.scrollPowersBack(client.player);
                 }
             }
         });
+
+        MouseScrollCallback.EVENT.register((
+                (client, mouseX, mouseY, hScroll, vScroll) -> {
+                    PlayerEntity player = client.player;
+                    if (client.currentScreen == null && player != null) {
+                        if (ModKeyBinds.useFirstAbility.isPressed() || ModKeyBinds.useSecondAbility.isPressed() || ModKeyBinds.useThirdAbility.isPressed() || ModKeyBinds.useFourthAbility.isPressed()) {
+                            if (client.player != null) {
+                                int current = ClientScrollData.getScrolledAbilitiesOffset(client.player);
+                                int maxScroll = ClientScrollData.getMaxAbilityScroll(client.player);
+                                int target = Math.clamp((int) (current + -vScroll), 0, maxScroll);
+                                if (target != current) {
+                                    AbilitiesBlockedForScrolling = true;
+                                    ClientScrollData.setScrolledAbilitiesOffset(client.player, target);
+                                    return true;
+                                }
+                            }
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+        ));
     }
 }

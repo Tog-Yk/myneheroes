@@ -21,7 +21,7 @@ import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.StockpileAbility;
 import net.togyk.myneheroes.client.HudOverlay;
-import net.togyk.myneheroes.keybind.ModKeyBindings;
+import net.togyk.myneheroes.keybind.ModKeyBinds;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.StockpilePower;
 import net.togyk.myneheroes.util.AbilityUtil;
@@ -205,16 +205,16 @@ public class SpeedsterHudRenderer {
                 Ability fourthAbility = ((PlayerAbilities) client.player).myneheroes$getFourthAbility();
                 Text fourthAbilityText = null;
 
-                firstAbilityText = hasChatOpen ? Text.translatable("ability."+firstAbility.getId().toTranslationKey()) : ModKeyBindings.useFirstAbility.getBoundKeyLocalizedText();
+                firstAbilityText = hasChatOpen ? Text.translatable("ability."+firstAbility.getId().toTranslationKey()) : ModKeyBinds.useFirstAbility.getBoundKeyLocalizedText();
                 textLengths.add(textRenderer.getWidth(firstAbilityText));
                 if (secondAbility != null) {
-                    secondAbilityText = hasChatOpen ? Text.translatable("ability."+secondAbility.getId().toTranslationKey()) : ModKeyBindings.useSecondAbility.getBoundKeyLocalizedText();
+                    secondAbilityText = hasChatOpen ? Text.translatable("ability."+secondAbility.getId().toTranslationKey()) : ModKeyBinds.useSecondAbility.getBoundKeyLocalizedText();
                     textLengths.add(textRenderer.getWidth(secondAbilityText));
                     if (thirdAbility != null) {
-                        thirdAbilityText = hasChatOpen ? Text.translatable("ability."+thirdAbility.getId().toTranslationKey()) : ModKeyBindings.useThirdAbility.getBoundKeyLocalizedText();
+                        thirdAbilityText = hasChatOpen ? Text.translatable("ability."+thirdAbility.getId().toTranslationKey()) : ModKeyBinds.useThirdAbility.getBoundKeyLocalizedText();
                         textLengths.add(textRenderer.getWidth(thirdAbilityText));
                         if (fourthAbility != null) {
-                            fourthAbilityText = hasChatOpen ? Text.translatable("ability."+fourthAbility.getId().toTranslationKey()) : ModKeyBindings.useFourthAbility.getBoundKeyLocalizedText();
+                            fourthAbilityText = hasChatOpen ? Text.translatable("ability."+fourthAbility.getId().toTranslationKey()) : ModKeyBinds.useFourthAbility.getBoundKeyLocalizedText();
                             textLengths.add(textRenderer.getWidth(fourthAbilityText));
                         }
                     }
@@ -247,7 +247,7 @@ public class SpeedsterHudRenderer {
 
                 RenderSystem.setShaderColor(1, 1, 1, (float) 0xC4 / 255);
 
-                HudOverlay.drawAbility(drawContext, firstAbility, ModKeyBindings.useFirstAbility.isPressed(), abilityScreenX + abilityScreenWidth - 2 - 16, AbilityY + 2);
+                HudOverlay.drawAbility(drawContext, firstAbility, ModKeyBinds.useFirstAbility.isPressed(), abilityScreenX + abilityScreenWidth - 2 - 16, AbilityY + 2);
                 drawContext.drawTextWithShadow(textRenderer, firstAbilityText, abilityScreenX + abilityScreenWidth - 16 - 18 - textRenderer.getWidth(firstAbilityText), AbilityY + 6, 0xC4FFEB28);
                 RenderSystem.enableBlend();
 
@@ -258,7 +258,7 @@ public class SpeedsterHudRenderer {
                     drawContext.drawGuiTexture(ABILITY_SCREEN_SECOND_EXTENSION, (extension_length + 30), 20, 0, 0, width - 40 - (extension_length + 30), AbilityY, (extension_length + 30), 20);
                     drawContext.drawGuiTexture(ABILITY_SCREEN_SECOND_END, width - 40, AbilityY, 40, 20);
 
-                    HudOverlay.drawAbility(drawContext, secondAbility, ModKeyBindings.useSecondAbility.isPressed(), abilityScreenX + abilityScreenWidth - 2 - 16, AbilityY + 2);
+                    HudOverlay.drawAbility(drawContext, secondAbility, ModKeyBinds.useSecondAbility.isPressed(), abilityScreenX + abilityScreenWidth - 2 - 16, AbilityY + 2);
 
                     drawContext.drawTextWithShadow(textRenderer, secondAbilityText, abilityScreenX + abilityScreenWidth - 16 - 18 - textRenderer.getWidth(secondAbilityText), AbilityY + 6, 0xC4FFEB28);
                     RenderSystem.enableBlend();
@@ -270,7 +270,7 @@ public class SpeedsterHudRenderer {
                     drawContext.drawGuiTexture(ABILITY_SCREEN_THIRD_EXTENSION, (extension_length + 30), 20, 0, 0, width - 40 - (extension_length + 30), AbilityY, (extension_length + 30), 20);
                     drawContext.drawGuiTexture(ABILITY_SCREEN_THIRD_END, width - 40, AbilityY, 40, 20);
 
-                    HudOverlay.drawAbility(drawContext, thirdAbility, ModKeyBindings.useThirdAbility.isPressed(), abilityScreenX + abilityScreenWidth - 2 - 16, AbilityY + 2);
+                    HudOverlay.drawAbility(drawContext, thirdAbility, ModKeyBinds.useThirdAbility.isPressed(), abilityScreenX + abilityScreenWidth - 2 - 16, AbilityY + 2);
 
                     drawContext.drawTextWithShadow(textRenderer, thirdAbilityText, abilityScreenX + abilityScreenWidth - 16 - 18 - textRenderer.getWidth(thirdAbilityText), AbilityY + 6, 0xC4FFEB28);
                     RenderSystem.enableBlend();
@@ -282,7 +282,7 @@ public class SpeedsterHudRenderer {
                     drawContext.drawGuiTexture(ABILITY_SCREEN_FOURTH_EXTENSION, extension_length, 20, 0, 0, width - 40 - extension_length, AbilityY, extension_length, 20);
                     drawContext.drawGuiTexture(ABILITY_SCREEN_FOURTH_END, width - 40, AbilityY, 40, 20);
 
-                    HudOverlay.drawAbility(drawContext, fourthAbility, ModKeyBindings.useFourthAbility.isPressed(), abilityScreenX + abilityScreenWidth - 2 - 16, AbilityY + 2);
+                    HudOverlay.drawAbility(drawContext, fourthAbility, ModKeyBinds.useFourthAbility.isPressed(), abilityScreenX + abilityScreenWidth - 2 - 16, AbilityY + 2);
 
                     drawContext.drawTextWithShadow(textRenderer, fourthAbilityText, abilityScreenX + abilityScreenWidth - 16 - 18 - textRenderer.getWidth(fourthAbilityText), AbilityY + 6, 0xC4FFEB28);
                     RenderSystem.enableBlend();

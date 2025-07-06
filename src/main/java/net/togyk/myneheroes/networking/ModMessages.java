@@ -40,37 +40,53 @@ public class ModMessages {
     public static final Identifier PLAYER_ABILITY_SCROLLED_SYNC_DATA_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "ability_scrolled_sync_data");
 
     public static void registerServerMessages() {
-        PayloadTypeRegistry.playC2S().register(KeybindPayload.ID, KeybindPayload.CODEC);
+        PayloadTypeRegistry.playC2S().register(AbilityKeybindPayload.ID, AbilityKeybindPayload.CODEC);
 
-        ServerPlayNetworking.registerGlobalReceiver(KeybindPayload.ID, (payload, context) -> {
+        ServerPlayNetworking.registerGlobalReceiver(AbilityKeybindPayload.ID, (payload, context) -> {
             context.server().execute(() -> {
                 // logic for pressing a keybind
-                if (payload.integer() == 0) {
+                if (payload.abilityIndex() == 0) {
                     if (context.player() != null) {
                         Ability firstAbility = ((PlayerAbilities) context.player()).myneheroes$getFirstAbility();
                         if (firstAbility != null) {
-                            firstAbility.Use(context.player());
+                            if (payload.isHolding()) {
+                                firstAbility.hold(context.player());
+                            } else {
+                                firstAbility.Use(context.player());
+                            }
                         }
                     }
-                } else if (payload.integer() == 1) {
+                } else if (payload.abilityIndex() == 1) {
                     if (context.player() != null) {
                         Ability secondAbility = ((PlayerAbilities) context.player()).myneheroes$getSecondAbility();
                         if (secondAbility != null) {
-                            secondAbility.Use(context.player());
+                            if (payload.isHolding()) {
+                                secondAbility.hold(context.player());
+                            } else {
+                                secondAbility.Use(context.player());
+                            }
                         }
                     }
-                } else if (payload.integer() == 2) {
+                } else if (payload.abilityIndex() == 2) {
                     if (context.player() != null) {
                         Ability thirdAbility = ((PlayerAbilities) context.player()).myneheroes$getThirdAbility();
                         if (thirdAbility != null) {
-                            thirdAbility.Use(context.player());
+                            if (payload.isHolding()) {
+                                thirdAbility.hold(context.player());
+                            } else {
+                                thirdAbility.Use(context.player());
+                            }
                         }
                     }
-                } else if (payload.integer() == 3) {
+                } else if (payload.abilityIndex() == 3) {
                     if (context.player() != null) {
                         Ability fourthAbility = ((PlayerAbilities) context.player()).myneheroes$getFourthAbility();
                         if (fourthAbility != null) {
-                            fourthAbility.Use(context.player());
+                            if (payload.isHolding()) {
+                                fourthAbility.hold(context.player());
+                            } else {
+                                fourthAbility.Use(context.player());
+                            }
                         }
                     }
                 }

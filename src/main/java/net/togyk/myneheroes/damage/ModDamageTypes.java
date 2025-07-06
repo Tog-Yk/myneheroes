@@ -11,6 +11,9 @@ import net.togyk.myneheroes.MyneHeroes;
 
 public class ModDamageTypes {
     public static final RegistryKey<DamageType> POWERFUL_PUNCH_TYPE_KEY = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Identifier.of(MyneHeroes.MOD_ID, "powered_punch"));
+    public static final RegistryKey<DamageType> LASER_TYPE_KEY = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Identifier.of(MyneHeroes.MOD_ID, "laser"));
+
+
     public static DamageSource of(World world, RegistryKey<DamageType> key, LivingEntity attacker) {
         return new DamageSource(world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(key), attacker);
     }

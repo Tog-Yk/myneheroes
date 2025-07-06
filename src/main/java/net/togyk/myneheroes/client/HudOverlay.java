@@ -16,7 +16,7 @@ import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.util.AbilityUtil;
 import net.togyk.myneheroes.ability.HudAbility;
 import net.togyk.myneheroes.ability.StockpileAbility;
-import net.togyk.myneheroes.keybind.ModKeyBindings;
+import net.togyk.myneheroes.keybind.ModKeyBinds;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.StockpilePower;
 import net.togyk.myneheroes.util.*;
@@ -71,33 +71,33 @@ public class HudOverlay implements HudRenderCallback {
                 y += 10;
 
                 Ability firstAbility = ((PlayerAbilities) client.player).myneheroes$getFirstAbility();
-                drawAbility(drawContext, firstAbility, ModKeyBindings.useFirstAbility.isPressed(), width - 20, y);
+                drawAbility(drawContext, firstAbility, ModKeyBinds.useFirstAbility.isPressed(), width - 20, y);
                 if (firstAbility != null) {
-                    text = hasChatOpen ? Text.translatable("ability."+firstAbility.getId().toTranslationKey()) : ModKeyBindings.useFirstAbility.getBoundKeyLocalizedText();
+                    text = hasChatOpen ? Text.translatable("ability."+firstAbility.getId().toTranslationKey()) : ModKeyBinds.useFirstAbility.getBoundKeyLocalizedText();
                     drawContext.drawTextWithShadow(textRenderer, text, width - 6 - 18 - textRenderer.getWidth(text), y + 4, 0xFFFFFF);
                 }
                 y += 18;
 
                 Ability secondAbility = ((PlayerAbilities) client.player).myneheroes$getSecondAbility();
-                drawAbility(drawContext, secondAbility, ModKeyBindings.useSecondAbility.isPressed(), width - 20, y);
+                drawAbility(drawContext, secondAbility, ModKeyBinds.useSecondAbility.isPressed(), width - 20, y);
                 if (secondAbility != null) {
-                    text = hasChatOpen ? Text.translatable("ability."+secondAbility.getId().toTranslationKey()) : ModKeyBindings.useSecondAbility.getBoundKeyLocalizedText();
+                    text = hasChatOpen ? Text.translatable("ability."+secondAbility.getId().toTranslationKey()) : ModKeyBinds.useSecondAbility.getBoundKeyLocalizedText();
                     drawContext.drawTextWithShadow(textRenderer, text, width - 6 - 18 - textRenderer.getWidth(text), y + 4, 0xFFFFFF);
                 }
                 y += 18;
 
                 Ability thirdAbility = ((PlayerAbilities) client.player).myneheroes$getThirdAbility();
-                drawAbility(drawContext, thirdAbility, ModKeyBindings.useThirdAbility.isPressed(), width - 20, y);
+                drawAbility(drawContext, thirdAbility, ModKeyBinds.useThirdAbility.isPressed(), width - 20, y);
                 if (thirdAbility != null) {
-                    text = hasChatOpen ? Text.translatable("ability."+thirdAbility.getId().toTranslationKey()) : ModKeyBindings.useThirdAbility.getBoundKeyLocalizedText();
+                    text = hasChatOpen ? Text.translatable("ability."+thirdAbility.getId().toTranslationKey()) : ModKeyBinds.useThirdAbility.getBoundKeyLocalizedText();
                     drawContext.drawTextWithShadow(textRenderer, text, width - 6 - 18 - textRenderer.getWidth(text), y + 4, 0xFFFFFF);
                 }
                 y += 18;
 
                 Ability fourthAbility = ((PlayerAbilities) client.player).myneheroes$getFourthAbility();
-                drawAbility(drawContext, fourthAbility, ModKeyBindings.useFourthAbility.isPressed(), width - 20, y);
+                drawAbility(drawContext, fourthAbility, ModKeyBinds.useFourthAbility.isPressed(), width - 20, y);
                 if (fourthAbility != null) {
-                    text = hasChatOpen ? Text.translatable("ability."+fourthAbility.getId().toTranslationKey()) : ModKeyBindings.useFourthAbility.getBoundKeyLocalizedText();
+                    text = hasChatOpen ? Text.translatable("ability."+fourthAbility.getId().toTranslationKey()) : ModKeyBinds.useFourthAbility.getBoundKeyLocalizedText();
                     drawContext.drawTextWithShadow(textRenderer, text, width - 6 - 18 - textRenderer.getWidth(text), y + 4, 0xFFFFFF);
                 }
                 y += 18;

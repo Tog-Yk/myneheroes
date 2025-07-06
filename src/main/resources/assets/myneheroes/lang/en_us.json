@@ -26,7 +26,7 @@
 
   "item.myneheroes.mechanical_hud_upgrade": "Hud Upgrade",
   "item.myneheroes.speedster_hud_upgrade": "Hud Upgrade",
-  "item.myneheroes.lazar_upgrade": "Lazar Upgrade",
+  "item.myneheroes.laser_upgrade": "Laser Upgrade",
   "item.myneheroes.fly_upgrade": "Fly Upgrade",
   "item.myneheroes.take_off_suit_upgrade": "Take Off Suit Upgrade",
   "item.myneheroes.kinetic_energy_storage_upgrade": "Kinetic Energy Storage Upgrade",
@@ -153,6 +153,9 @@
   "death.attack.punched" : "%1$s was slaughtered!",
   "death.attack.punched.item" : "%1$s was slaughtered using %3$s",
 
+  "death.attack.laser" : "%1$s was disintegrated by %2$s",
+  "death.attack.laser.item" : "%1$s was disintegrated by %2$s",
+
 
   "advancements.myneheroes.vibranium.root.title": "An other-worldly metal",
   "advancements.myneheroes.vibranium.root.description": "Acquire vibranium",
@@ -172,7 +175,7 @@
   "advancements.myneheroes.powers.the_man_of_steel.title": "The man of steel",
   "advancements.myneheroes.powers.the_man_of_steel.description": "Be near kryptonite long enough, without being exposed to the sun, to become a kryptonian",
 
-  "entity.myneheroes.laser": "Lazar",
+  "entity.myneheroes.laser": "Laser",
   "entity.myneheroes.stationary_item": "Stationary Item",
   "entity.myneheroes.thrown_item": "Thrown Item",
   "entity.myneheroes.stationary_armor": "Stationary Armor",
