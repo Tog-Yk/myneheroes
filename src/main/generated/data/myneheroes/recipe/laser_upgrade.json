@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "myneheroes:circuit_board"
+  },
+  "result": {
+    "count": 1,
+    "id": "myneheroes:laser_upgrade"
+  }
+}
