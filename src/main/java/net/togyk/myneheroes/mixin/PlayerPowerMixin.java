@@ -102,7 +102,6 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
         PlayerEntity player = (PlayerEntity) (Object) this;
         for (Power power : this.powers) {
             power.removeAttributes(player.getAttributes());
-            power.setHolder(null);
         }
         this.powers = powers;
         for (Power power : powers) {

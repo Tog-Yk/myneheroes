@@ -10,6 +10,7 @@ import net.togyk.myneheroes.block.ModBlockEntityTypes;
 import net.togyk.myneheroes.block.ModBlocks;
 import net.togyk.myneheroes.client.HudOverlay;
 import net.togyk.myneheroes.Item.color.ModColorProvider;
+import net.togyk.myneheroes.client.render.ability.RenderEvent;
 import net.togyk.myneheroes.client.render.block_entity.MeteorRadarBlockEntityRenderer;
 import net.togyk.myneheroes.client.render.entity.ModEntityRenderers;
 import net.togyk.myneheroes.client.screen.ModHandledScreens;
@@ -35,5 +36,7 @@ public class MyneHeroesClient implements ClientModInitializer {
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.KRYPTONITE_CLUSTER, RenderLayer.getCutout());
         BlockEntityRendererFactories.register(ModBlockEntityTypes.METEOR_RADAR_BLOCK_ENTITY, MeteorRadarBlockEntityRenderer::new);
+
+        RenderEvent.registerRenderEvent();
     }
 }

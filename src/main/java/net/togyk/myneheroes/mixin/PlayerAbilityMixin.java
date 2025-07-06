@@ -67,6 +67,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         if (!powerList.isEmpty()) {
             for (Power power : powerList) {
                 if (power != null) {
+                    power.setHolder(player);
                     // Have I told you I am really amazed about your progress and your skills?
                     for (Ability ability : power.getAbilities()) {
                         if (!abilityList.contains(ability) && ability != null) {

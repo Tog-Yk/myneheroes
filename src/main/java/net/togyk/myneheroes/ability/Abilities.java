@@ -21,6 +21,7 @@ import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.detailed.FlyFromReactorAbility;
+import net.togyk.myneheroes.ability.detailed.LaserEyesAbility;
 import net.togyk.myneheroes.ability.detailed.ReleaseKineticEnergyAbility;
 import net.togyk.myneheroes.client.HudType;
 import net.togyk.myneheroes.entity.LaserEntity;
@@ -32,8 +33,8 @@ import java.util.*;
 public class Abilities {
     private static final Map<Identifier,Ability> ABILITIES = new HashMap<>();
 
-    public static final Ability TOGGLE_MECHANICAL_HUD = registerAbility(new HudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_mechanical_hud"), new Ability.Settings(), HudType.MECHANICAL));
-    public static final Ability TOGGLE_SPEEDSTER_HUD = registerAbility(new HudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speedster_hud"), new Ability.Settings(), HudType.SPEEDSTER));
+    public static final HudAbility TOGGLE_MECHANICAL_HUD = registerAbility(new HudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_mechanical_hud"), new Ability.Settings(), HudType.MECHANICAL));
+    public static final HudAbility TOGGLE_SPEEDSTER_HUD = registerAbility(new HudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speedster_hud"), new Ability.Settings(), HudType.SPEEDSTER));
     public static final Ability SHOOT_LASER = registerAbility(new Ability(Identifier.of(MyneHeroes.MOD_ID, "shoot_laser"), 10, new Ability.Settings(), (player) -> {
         ItemStack reactorStack = MyneHeroes.getReactorItemClass(player);
         if (!player.getWorld().isClient) {
@@ -64,11 +65,11 @@ public class Abilities {
         }
         return true;
     }));
-    public static final Ability ALLOW_FLYING = registerAbility(new FlyFromReactorAbility(Identifier.of(MyneHeroes.MOD_ID, "allow_flying"), new Ability.Settings(), 1));
+    public static final FlyFromReactorAbility ALLOW_FLYING = registerAbility(new FlyFromReactorAbility(Identifier.of(MyneHeroes.MOD_ID, "allow_flying"), new Ability.Settings(), 1));
 
-    public static final Ability RELEASE_KINETIC_ENERGY = registerAbility(new ReleaseKineticEnergyAbility(Identifier.of(MyneHeroes.MOD_ID, "release_kinetic_energy"), new Ability.Settings(), 120, 200, 1.0F));
+    public static final ReleaseKineticEnergyAbility RELEASE_KINETIC_ENERGY = registerAbility(new ReleaseKineticEnergyAbility(Identifier.of(MyneHeroes.MOD_ID, "release_kinetic_energy"), new Ability.Settings(), 120, 200, 1.0F));
 
-    public static final Ability LASER_EYES = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "laser_eyes"), 2, 1000, 4, new Ability.Settings(),  (player) -> {
+    public static final LaserEyesAbility LASER_EYES = registerAbility(new LaserEyesAbility(Identifier.of(MyneHeroes.MOD_ID, "laser_eyes"), 2, 1000, 4, new Ability.Settings(),  (player) -> {
         if (!player.getWorld().isClient) {
             // shoot laser
             Vec3d look = player.getRotationVec(1.0F);
@@ -86,7 +87,7 @@ public class Abilities {
         }
 
         return false;
-    }));
+    }, 0xF0FFF0F0, 0x40FF0000));
 
     public static final Ability TAKE_OFF_SUIT = registerAbility(new Ability(Identifier.of(MyneHeroes.MOD_ID, "take_off_suit"), 10, new Ability.Settings().appearsMultipleTimes(false),  (player) -> {
         List<ItemStack> armor = new ArrayList<>();
@@ -118,7 +119,7 @@ public class Abilities {
         return false;
     }));
 
-    public static final Ability FROST_BREATH = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "frost_breath"), 4, 48, 8, new Ability.Settings(),  (player) -> {
+    public static final StockpileLinkedAbility FROST_BREATH = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "frost_breath"), 4, 48, 8, new Ability.Settings(),  (player) -> {
         Vec3d direction = player.getRotationVec(1.0F);
         Vec3d origin = player.getEyePos().add(0, -0.2, 0);
         World world = player.getWorld();
@@ -170,7 +171,7 @@ public class Abilities {
         return false;
     }));
 
-    public static final Ability SPEED_UP = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_up"), 10, new Ability.Settings(),  (player, power) -> {
+    public static final VariableLinkedAbility SPEED_UP = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_up"), 10, new Ability.Settings(),  (player, power) -> {
         int speed = power.getInt("speedLevel");
         return power.setInt("speedLevel", speed + 1);
     }, ( power) -> {
@@ -178,7 +179,7 @@ public class Abilities {
         return power.canSetInt("speedLevel", speed + 1);
     }));
 
-    public static final Ability SPEED_DOWN = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_down"), 10, new Ability.Settings(),  (player, power) -> {
+    public static final VariableLinkedAbility SPEED_DOWN = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_down"), 10, new Ability.Settings(),  (player, power) -> {
         int speed = power.getInt("speedLevel");
         return power.setInt("speedLevel", speed - 1);
     }, ( power) -> {
@@ -186,7 +187,7 @@ public class Abilities {
         return power.canSetInt("speedLevel", speed - 1);
     }));
 
-    public static final Ability TOGGLE_SPEED = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speed"), 10, new Ability.Settings(),  (player, power) -> {
+    public static final VariableLinkedAbility TOGGLE_SPEED = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speed"), 10, new Ability.Settings(),  (player, power) -> {
         boolean isActive = power.getBoolean("speedActive");
         return power.setBoolean("speedActive", !isActive);
     }, (power) -> {
@@ -194,7 +195,7 @@ public class Abilities {
         return power.canSetBoolean("speedActive", !isActive);
     }));
 
-    public static final Ability TOGGLE_PHASING = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_phasing"), 10, new Ability.Settings(),  (player, power) -> {
+    public static final VariableLinkedAbility TOGGLE_PHASING = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_phasing"), 10, new Ability.Settings(),  (player, power) -> {
         boolean isPhasing = power.getBoolean("phasing");
         return power.setBoolean("phasing", !isPhasing);
     }, (power) -> {
@@ -202,9 +203,9 @@ public class Abilities {
         return power.canSetBoolean("phasing", !isPhasing);
     }));
 
-    public static final Ability TOOLBELT_3 = registerAbility(new ToolbeltAbility(Identifier.of(MyneHeroes.MOD_ID, "toolbelt_3"), new Ability.Settings(), 3));
+    public static final ToolbeltAbility TOOLBELT_3 = registerAbility(new ToolbeltAbility(Identifier.of(MyneHeroes.MOD_ID, "toolbelt_3"), new Ability.Settings(), 3));
 
-    private static Ability registerAbility(Ability ability) {
+    private static <T extends Ability> T registerAbility(T ability) {
         if (!ABILITIES.containsKey(ability.id)) {
             ABILITIES.put(ability.id, ability);
             return ability;

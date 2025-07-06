@@ -97,9 +97,9 @@ public class LaserRenderer {
         // Back
         addQuad(matrixStack, vertexConsumer, 0, 0, 0, 0, height, 0, width, height, 0, width, 0, 0, light, r, g, b, a, (float) (width / 0.25), (float) (width / 0.25));
         // Left
-        addQuad(matrixStack, vertexConsumer, 0, 0, 0, 0, 0, length, 0, height, length, 0, height, 0, light, r, g, b, a, (float) (width / 0.25), (float) (width / 0.25));
+        addQuad(matrixStack, vertexConsumer, 0, 0, 0, 0, 0, length, 0, height, length, 0, height, 0, light, r, g, b, a, (float) (length / 0.25), (float) (width / 0.25));
         // Right
-        addQuad(matrixStack, vertexConsumer, width, 0, 0, width, height, 0, width, height, length, width, 0, length, light, r, g, b, a, (float) (width / 0.25), (float) (width / 0.25));
+        addQuad(matrixStack, vertexConsumer, width, 0, 0, width, height, 0, width, height, length, width, 0, length, light, r, g, b, a, (float) (width / 0.25), (float) (length / 0.25));
     }
 
     private void addQuad(
