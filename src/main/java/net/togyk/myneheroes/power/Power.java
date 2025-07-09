@@ -119,6 +119,10 @@ public class Power {
         return false;
     }
 
+    public boolean canWallClimb() {
+        return settings.canWallCrawl && this.holder != null && !this.holder.isOnGround();
+    }
+
     public double getDamageMultiplier() {
         return this.settings.damageMultiplier;
     }
@@ -175,6 +179,8 @@ public class Power {
         public boolean canFly = false;
         public double flyingUnlocksAt = 0.05;
 
+        public boolean canWallCrawl = false;
+
         public double textureInterval = 1.00;
 
         public boolean isDampenedByKryptonite = false;
@@ -222,6 +228,11 @@ public class Power {
 
         public Power.Settings dampenedByMetaDampeners() {
             this.isDampenedByMetaDampeners = true;
+            return this;
+        }
+
+        public Power.Settings canWallCrawl() {
+            this.canWallCrawl = true;
             return this;
         }
     }

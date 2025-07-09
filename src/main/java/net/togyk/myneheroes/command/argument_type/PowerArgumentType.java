@@ -34,7 +34,10 @@ public class PowerArgumentType implements ArgumentType<Identifier> {
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
         for (Identifier id : Powers.getIds()) {
-            builder.suggest(id.toString());
+            String idString = id.toString();
+            if (idString.startsWith(builder.getInput())) {
+                builder.suggest(idString);
+            }
         }
 
         return builder.buildFuture();
@@ -42,7 +45,7 @@ public class PowerArgumentType implements ArgumentType<Identifier> {
 
     @Override
     public Collection<String> getExamples() {
-        return List.of("modid:power", Powers.SPEEDSTER.toString());
+        return List.of("modid:power", Powers.SPEEDSTER.getId().toString());
     }
 
     public static void register() {
