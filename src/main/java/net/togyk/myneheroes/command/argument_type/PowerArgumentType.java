@@ -34,10 +34,7 @@ public class PowerArgumentType implements ArgumentType<Identifier> {
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
         for (Identifier id : Powers.getIds()) {
-            String idString = id.toString();
-            if (idString.startsWith(builder.getInput())) {
-                builder.suggest(idString);
-            }
+            builder.suggest(id.toString());
         }
 
         return builder.buildFuture();

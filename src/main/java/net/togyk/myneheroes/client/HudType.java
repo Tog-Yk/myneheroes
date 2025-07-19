@@ -2,7 +2,8 @@ package net.togyk.myneheroes.client;
 
 public enum HudType {
     MECHANICAL,
-    SPEEDSTER;
+    SPEEDSTER,
+    SPIDER_SENSE;
 
     HudType() {
     }

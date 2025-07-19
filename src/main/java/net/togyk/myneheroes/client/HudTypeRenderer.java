@@ -6,6 +6,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderTickCounter;
 import net.togyk.myneheroes.client.render.hud.MechanicalHudRenderer;
 import net.togyk.myneheroes.client.render.hud.SpeedsterHudRenderer;
+import net.togyk.myneheroes.client.render.hud.SpiderSenseHudRenderer;
 import net.togyk.myneheroes.util.HudActionResult;
 
 @Environment(EnvType.CLIENT)
@@ -17,6 +18,9 @@ public class HudTypeRenderer {
             }
             case SPEEDSTER -> {
                 return SpeedsterHudRenderer.drawHud(drawContext, tickCounter);
+            }
+            case SPIDER_SENSE -> {
+                return SpiderSenseHudRenderer.drawHud(drawContext, tickCounter);
             }
             case null, default -> {
                 return HudActionResult.NO_HUD_DRAWN;

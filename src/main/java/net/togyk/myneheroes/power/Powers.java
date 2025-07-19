@@ -28,6 +28,11 @@ public class Powers {
                     .addAttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH, Identifier.of(MyneHeroes.MOD_ID, "speedster.health"), EntityAttributeModifier.Operation.ADD_VALUE, () -> 2.0D)
     ));
 
+    public static Power SPIDER = registerPower(new Power(Identifier.of(MyneHeroes.MOD_ID, "spider"), 0xFFFF3A3A, List.of(Abilities.SPIDER_SENSE),
+            new Power.Settings().damageMultiplier(3.50).armor(3).canWallCrawl(),
+            new Power.attributeModifiers().addAttributeModifier(EntityAttributes.GENERIC_FALL_DAMAGE_MULTIPLIER, Identifier.of(MyneHeroes.MOD_ID, "spider.fall_damage"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> -1.0D)
+    ));
+
     public static <T extends Power> T registerPower(T power) {
         if (!POWERS.containsKey(power.id)) {
             POWERS.put(power.id, power);
