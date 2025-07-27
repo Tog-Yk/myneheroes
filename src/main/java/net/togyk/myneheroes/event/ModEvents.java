@@ -16,11 +16,15 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.togyk.myneheroes.Item.custom.ThrowableItem;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.ability.PassiveAbility;
 import net.togyk.myneheroes.entity.MeteorEntity;
 import net.togyk.myneheroes.gamerule.ModGamerules;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.Powers;
+import net.togyk.myneheroes.util.PlayerAbilities;
 import net.togyk.myneheroes.util.PowerData;
+import net.togyk.myneheroes.util.SimpleEventResult;
 
 import java.util.List;
 import java.util.Random;
@@ -35,7 +39,26 @@ public class ModEvents {
             ItemStack stack = player.getStackInHand(hand);
             if (player.getWorld() != null && stack.getItem() instanceof ThrowableItem throwableItem) {
                 throwableItem.Throw(player.getWorld(), player, hand);
+            } else {
+                for (Ability ability : ((PlayerAbilities) player).myneheroes$getAbilities()) {
+                    if (ability instanceof PassiveAbility passiveAbility) {
+                        if (passiveAbility.onMissedAttack(player) == SimpleEventResult.SUCCESS) {
+                            break;
+                        }
+                    }
+                }
             }
+        });
+
+        MissedInteractionCallback.EVENT.register(player -> {
+            for (Ability ability : ((PlayerAbilities) player).myneheroes$getAbilities()) {
+                if (ability instanceof PassiveAbility passiveAbility) {
+                    if (passiveAbility.onMissedInteraction(player) == SimpleEventResult.SUCCESS) {
+                        return SimpleEventResult.SUCCESS;
+                    }
+                }
+            }
+            return SimpleEventResult.PASS;
         });
 
         ServerTickEvents.END_SERVER_TICK.register(server -> {

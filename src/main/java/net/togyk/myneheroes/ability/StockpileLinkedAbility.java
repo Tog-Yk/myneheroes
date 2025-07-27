@@ -2,11 +2,11 @@ package net.togyk.myneheroes.ability;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
-import net.togyk.myneheroes.power.StockpilePower;
+import net.togyk.myneheroes.util.StockPile;
 
 import java.util.function.Function;
 
-public class StockpileLinkedAbility extends Ability{
+public class StockpileLinkedAbility extends Ability {
     protected final int unlocksAt;
     protected final int cost;
 
@@ -26,18 +26,18 @@ public class StockpileLinkedAbility extends Ability{
 
     @Override
     public void Use(PlayerEntity player) {
-        if (this.getCooldown() == 0 && this.getIndirectHolder() instanceof StockpilePower power && power.getCharge() >= this.getCost()) {
+        if (this.getCooldown() == 0 && this.getIndirectHolder() instanceof StockPile stockPile && stockPile.getCharge() >= this.getCost()) {
             if (this.use.apply(player)) {
-                power.setCharge(power.getCharge() - this.getCost());
+                stockPile.setCharge(stockPile.getCharge() - this.getCost());
                 this.setCooldown(this.getMaxCooldown());
             }
         }
-        this.save(player.getWorld());
+        this.save();
     }
 
     @Override
     public boolean Usable() {
-        return super.Usable() && this.getIndirectHolder() instanceof StockpilePower stockpilePower && stockpilePower.getCharge() >= this.getUnlocksAt();
+        return super.Usable() && this.getIndirectHolder() instanceof StockPile stockpile && stockpile.getCharge() >= this.getUnlocksAt();
     }
 
     @Override

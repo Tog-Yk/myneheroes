@@ -14,21 +14,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
+import net.togyk.myneheroes.Item.custom.UpgradableItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
-import net.togyk.myneheroes.ability.StockpileAbility;
 import net.togyk.myneheroes.client.HudOverlay;
 import net.togyk.myneheroes.keybind.ModKeyBinds;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.StockpilePower;
-import net.togyk.myneheroes.util.AbilityUtil;
-import net.togyk.myneheroes.util.HudActionResult;
-import net.togyk.myneheroes.util.PlayerAbilities;
-import net.togyk.myneheroes.util.PowerData;
+import net.togyk.myneheroes.upgrade.Upgrade;
+import net.togyk.myneheroes.util.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 @Environment(EnvType.CLIENT)
 public class MechanicalHudRenderer {
@@ -222,50 +221,62 @@ public class MechanicalHudRenderer {
     }
 
     public static void drawEnergyStorage(DrawContext drawContext, RenderTickCounter tickCounter, PlayerEntity player, int x, int y, int width, int height) {
+
         List<Power> powers = PowerData.getPowers(player);
-        List<Power> stockpilePowers = powers.stream().filter(Predicates.instanceOf(StockpilePower.class)).toList();
-        int i;
-        for (i = 0; i < stockpilePowers.size(); i++) {
-            if (stockpilePowers.get(i) instanceof StockpilePower power) {
-                int charge = power.getCharge();
-                int maxCharge = power.getMaxCharge();
+        List<StockPile> stockpiles = new ArrayList<>(powers.stream().filter(Predicates.instanceOf(StockpilePower.class)).map(power -> (StockPile) power).toList());
 
-                float chargePercentile = (float) charge / maxCharge;
+        List<Ability> abilities = ((PlayerAbilities) player).myneheroes$getAbilities();
+        abilities.stream().filter(Predicates.instanceOf(StockPile.class)).forEach(ability -> stockpiles.add((StockPile) ability));
 
-                int currentHeight = (int) ((height - 4) * chargePercentile);
+        Iterable<ItemStack> armorIterator = player.getArmorItems();
+        List<ItemStack> armor = StreamSupport.stream(armorIterator.spliterator(), false)
+                .toList();
 
-                drawContext.drawTexture(power.getChargeIcon(), x + 2 + 18 * i, y + 2 + (height - 4) - currentHeight, 0, (height - 4) - currentHeight, width - 4, currentHeight, 14, 14);
-                drawContext.drawGuiTexture(ENERGY_STORAGE_BACKGROUND, width, height, 0, 0, x + 18 * i, y, width, height);
+        for (ItemStack stack : armor) {
+            if (stack.getItem() instanceof UpgradableItem upgradableItem) {
+                for (Upgrade upgrade : upgradableItem.getUpgrades(stack)) {
+                    if (upgrade instanceof StockPile stockPile) {
+                        stockpiles.add(stockPile);
+                    }
+                }
             }
         }
 
-        List<Ability> abilities = ((PlayerAbilities) player).myneheroes$getAbilities();
-        List<Ability> stockpileAbilities = abilities.stream().filter(Predicates.instanceOf(StockpileAbility.class)).toList();
-        List<Identifier> stockpileAbilitiesIds = filterIds(stockpileAbilities);
-        for (int a = i; a < stockpileAbilitiesIds.size() + i; a++) {
-            Identifier id = stockpileAbilitiesIds.get(a - i);
+        List<ItemStack> inventory = player.getInventory().main;
+
+        for (ItemStack stack : inventory) {
+            if (stack.getItem() instanceof UpgradableItem upgradableItem) {
+                for (Upgrade upgrade : upgradableItem.getUpgrades(stack)) {
+                    if (upgrade instanceof StockPile stockPile) {
+                        stockpiles.add(stockPile);
+                    }
+                }
+            }
+        }
+
+        List<Identifier> stockpileAbilitiesIds = filterIds(stockpiles);
+        for (int a = 0; a < stockpileAbilitiesIds.size(); a++) {
+            Identifier id = stockpileAbilitiesIds.get(a);
             float charge = 0;
             float maxCharge = 0;
 
             Identifier chargeIcon = null;
 
-            for (Ability ability : AbilityUtil.getAbilitiesMatchingId(stockpileAbilities, id)) {
-                if (ability instanceof StockpileAbility stockpileAbility) {
-                    charge += stockpileAbility.getCharge();
-                    maxCharge += stockpileAbility.getMaxCharge();
+            for (StockPile stockPile : AbilityUtil.getStockPilesMatchingId(stockpiles, id)) {
+                charge += stockPile.getCharge();
+                maxCharge += stockPile.getMaxCharge();
 
-                    chargeIcon = stockpileAbility.getChargeIcon();
-                }
+                chargeIcon = stockPile.getChargeIcon();
             }
 
             if (chargeIcon != null) {
 
                 float chargePercentile = charge / maxCharge;
 
-                int currentHeight = (int) ((height - 4) * chargePercentile);
+                int currentHeight = (int) (height * chargePercentile);
 
-                drawContext.drawTexture(chargeIcon, x + 2 + 18 * i, y + 2 + (height - 4) - currentHeight, 0, (height - 4) - currentHeight, width - 4, currentHeight, 14, 14);
-                drawContext.drawGuiTexture(ENERGY_STORAGE_BACKGROUND, width, height, 0, 0, x + 18 * i, y, width, height);
+                drawContext.drawTexture(chargeIcon, x + 2 + 18 * a, y + 2 + (height - 4) - currentHeight, 0, (height - 4) - currentHeight, width - 4, currentHeight, 14, 14);
+                drawContext.drawGuiTexture(ENERGY_STORAGE_BACKGROUND, width, height, 0, 0, x + 18 * a, y, width, height);
             }
         }
     }
@@ -284,9 +295,9 @@ public class MechanicalHudRenderer {
         drawContext.drawGuiTexture(ABILITY_SCREEN_RIGHT_BOTTOM_CORNER, 3, 3, 0, 0, x + width - 3, y + height - 3, 3, 3);
     }
 
-    private static List<Identifier> filterIds(List<Ability> abilities) {
+    private static List<Identifier> filterIds(List<StockPile> stockPiles) {
         List<Identifier> ids = new ArrayList<>();
-        for (Identifier id : abilities.stream().map(Ability::getId).toList()) {
+        for (Identifier id : stockPiles.stream().map(StockPile::getStockPileId).toList()) {
             if (id != null && !ids.contains(id)) {
                 ids.add(id);
             }

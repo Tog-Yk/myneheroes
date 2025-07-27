@@ -31,15 +31,10 @@ public class ToolbeltAbility extends Ability implements ExtendedScreenHandlerFac
     }
 
     @Override
-    public void tick(PlayerEntity player) {
-        super.tick(player);
-    }
-
-    @Override
     public void Use(PlayerEntity player) {
         if (getCooldown() == 0) {
             player.openHandledScreen(this);
-            save(player.getWorld());
+            save();
         }
     }
 
@@ -108,11 +103,11 @@ public class ToolbeltAbility extends Ability implements ExtendedScreenHandlerFac
         player.setStackInHand(Hand.MAIN_HAND, selectedStack);
         inventory.set(index, playerStack);
         this.setInventory(inventory, player.getWorld());
-        this.save(player.getWorld());
+        this.save();
     }
 
     @Override
-    public void setHolder(@Nullable SelectionAbility holder) {
+    public void setHolder(@Nullable AbilityHoldingAbility holder) {
         throw new UnsupportedOperationException();
     }
 

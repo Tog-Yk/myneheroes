@@ -1,48 +1,50 @@
-package net.togyk.myneheroes.upgrade;
+package net.togyk.myneheroes.ability;
 
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.util.Identifier;
-import net.togyk.myneheroes.Item.custom.AbilityHoldingUpgradeItem;
-import net.togyk.myneheroes.Item.custom.UpgradableItem;
-import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.util.AbilityUtil;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
-public class AbilityUpgrade extends Upgrade {
+public class AbilityHoldingAbility extends Ability {
     protected List<Ability> abilities;
 
-    protected AbilityUpgrade(List<Ability> abilities, List<ArmorItem.Type> compatibleTypes, Identifier id) {
-        super(compatibleTypes, id);
+    public AbilityHoldingAbility(Identifier id, int cooldown, Settings settings, List<Ability> abilities, Function<PlayerEntity, Boolean> use, Function<PlayerEntity, Boolean> hold) {
+        super(id, cooldown, settings, use, hold);
         this.abilities = abilities.stream().map(Ability::copy).toList();
     }
-    protected AbilityUpgrade(Ability ability, List<ArmorItem.Type> compatibleTypes, Identifier id) {
-        this(List.of(ability), compatibleTypes, id);
-    }
 
-    public List<Ability> getAbilities() {
-        abilities.forEach(ability -> ability.setHolder(this));
-        return abilities;
+    public AbilityHoldingAbility(Identifier id, int cooldown, Settings settings, List<Ability> abilities, Function<PlayerEntity, Boolean> use) {
+        super(id, cooldown, settings, use);
+        this.abilities = abilities.stream().map(Ability::copy).toList();
     }
 
     public void saveAbility(Ability ability) {
         this.save();
     }
 
-    public void save() {
-        ItemStack stack = this.getHolderStack();
-        if (stack != null) {
-            if (stack.getItem() instanceof UpgradableItem upgradableItem) {
-                upgradableItem.saveUpgrade(stack, this);
-            } else if (stack.getItem() instanceof AbilityHoldingUpgradeItem upgradeItem) {
-                upgradeItem.saveUpgrade(stack, this);
-            }
+    @Override
+    public void tick(PlayerEntity player) {
+        super.tick(player);
+        for (Ability ability : abilities) {
+            ability.setHolder(this);
+            ability.tick(player);
         }
+    }
+
+    @Override
+    public void setHolder(@Nullable AbilityHoldingAbility holder) {
+        throw new UnsupportedOperationException();
+    }
+
+    public List<Ability> getAbilities() {
+        return abilities;
     }
 
     @Override
@@ -50,13 +52,11 @@ public class AbilityUpgrade extends Upgrade {
         NbtList abilitiesNbt = new NbtList();
         for (Ability ability : this.abilities) {
             if (ability != null) {
-                ability.setHolder(this);
                 abilitiesNbt.add(ability.writeNbt(new NbtCompound()));
             }
         }
 
         nbt.put("abilities", abilitiesNbt);
-
         return super.writeNbt(nbt);
     }
 
@@ -77,10 +77,5 @@ public class AbilityUpgrade extends Upgrade {
             }
         }
         this.abilities = abilitiesList;
-    }
-
-    @Override
-    public Upgrade copy() {
-        return new AbilityUpgrade(abilities, compatibleTypes, id);
     }
 }

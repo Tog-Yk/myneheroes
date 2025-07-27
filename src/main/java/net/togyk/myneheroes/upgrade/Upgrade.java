@@ -1,10 +1,15 @@
 package net.togyk.myneheroes.upgrade;
 
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.StackReference;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.screen.slot.Slot;
+import net.minecraft.util.ClickType;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
+import net.togyk.myneheroes.util.ModTags;
 
 import java.util.List;
 
@@ -43,6 +48,10 @@ public abstract class Upgrade {
 
     public ItemStack getItemStack(World world) {
         return ItemStack.fromNbtOrEmpty(world.getRegistryManager(), this.itemStack);
+    }
+
+    public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
+        return false;
     }
 
     public NbtCompound writeNbt(NbtCompound nbt) {

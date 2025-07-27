@@ -12,6 +12,7 @@ import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.client.screen.handeler.*;
 import net.togyk.myneheroes.networking.BlockPosPayload;
+import net.togyk.myneheroes.networking.PassiveScreenAbilityPayload;
 import net.togyk.myneheroes.networking.SelectionScreenAbilityPayload;
 import net.togyk.myneheroes.networking.ToolBeltScreenAbilityPayload;
 
@@ -26,6 +27,9 @@ public class ModScreenHandlerTypes {
 
     public static final ScreenHandlerType<ToolbeltAbilityScreenHandler> TOOLBELT_ABILITY =
             register("toolbelt_ability", ToolbeltAbilityScreenHandler::new, ToolBeltScreenAbilityPayload.CODEC);
+
+    public static final ScreenHandlerType<PassiveSelectionAbilityScreenHandler> PASSIVE_SELECTION_ABILITY =
+            register("passive_selection_ability", PassiveSelectionAbilityScreenHandler::new, PassiveScreenAbilityPayload.CODEC);
 
     public static final ScreenHandlerType<UpgradeStationScreenHandler> UPGRADE_STATION =
             register("upgrade_station", UpgradeStationScreenHandler::new, BlockPosPayload.PACKET_CODEC);

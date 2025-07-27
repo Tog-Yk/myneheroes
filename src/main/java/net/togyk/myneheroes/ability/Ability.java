@@ -13,7 +13,6 @@ import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.Item.custom.AbilityHolding;
 import net.togyk.myneheroes.upgrade.AbilityUpgrade;
@@ -43,7 +42,7 @@ public class Ability {
 
     private Power HolderPower;
     private ItemStack HolderItem;
-    private SelectionAbility HolderAbility;
+    private AbilityHoldingAbility HolderAbility;
     private Upgrade HolderUpgrade;
 
     public final Identifier id;
@@ -83,7 +82,7 @@ public class Ability {
                 this.setCooldown(this.getMaxCooldown());
             }
         }
-        this.save(player.getWorld());
+        this.save();
     }
 
     public void hold(PlayerEntity player) {
@@ -93,7 +92,7 @@ public class Ability {
                     this.setCooldown(this.getMaxCooldown());
                 }
             }
-            this.save(player.getWorld());
+            this.save();
         }
     }
 
@@ -108,10 +107,10 @@ public class Ability {
         if (this.getCooldown() < 0) {
             this.setCooldown(0);
         }
-        this.save(player.getWorld());
+        this.save();
     }
 
-    public void save(World world) {
+    public void save() {
         Object holder = this.getHolder();
         if (holder instanceof ItemStack stack) {
             if (stack.getItem() instanceof AbilityHolding holding) {
@@ -120,7 +119,7 @@ public class Ability {
         } else if (holder instanceof Power power) {
             power.saveAbility(this);
         } else if (holder instanceof SelectionAbility ability) {
-            ability.saveAbility(world, this);
+            ability.saveAbility(this);
         } else if (holder instanceof AbilityUpgrade upgrade) {
             upgrade.saveAbility(this);
         }
@@ -152,7 +151,7 @@ public class Ability {
         this.HolderUpgrade = null;
     }
 
-    public void setHolder(@Nullable SelectionAbility holder) {
+    public void setHolder(@Nullable AbilityHoldingAbility holder) {
         this.HolderItem = null;
         this.HolderPower = null;
         this.HolderAbility = holder;

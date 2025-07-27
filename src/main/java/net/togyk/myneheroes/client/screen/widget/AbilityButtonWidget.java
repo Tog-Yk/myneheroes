@@ -1,6 +1,8 @@
 package net.togyk.myneheroes.client.screen.widget;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
@@ -22,7 +24,14 @@ public class AbilityButtonWidget extends ButtonWidget {
         context.setShaderColor(1.0F, 1.0F, 1.0F, this.alpha);
         RenderSystem.enableBlend();
         RenderSystem.enableDepthTest();
+
         HudOverlay.drawAbility(context, ability, this.isSelected(), getX(), getY());
+        if (this.isSelected()) {
+            TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+            Text text = Text.translatable("ability."+ability.getId().toTranslationKey());
+            context.drawTextWithShadow(textRenderer, text, getX() + 8 - textRenderer.getWidth(text) / 2, getY() + 18, 0xFFFFFFFF);
+        }
+
         RenderSystem.disableBlend();
         RenderSystem.disableDepthTest();
         context.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);

@@ -10,9 +10,12 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.togyk.myneheroes.Item.custom.UpgradableItem;
 import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.upgrade.Upgrade;
 import net.togyk.myneheroes.util.AbilityUtil;
 import net.togyk.myneheroes.ability.HudAbility;
 import net.togyk.myneheroes.ability.StockpileAbility;
@@ -23,6 +26,7 @@ import net.togyk.myneheroes.util.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 @Environment(EnvType.CLIENT)
 public class HudOverlay implements HudRenderCallback {
@@ -129,24 +133,41 @@ public class HudOverlay implements HudRenderCallback {
     }
 
     public static void drawEnergyStorage(DrawContext drawContext, RenderTickCounter tickCounter, PlayerEntity player, int x, int y, int width, int height) {
+        int i = 0;
+
         List<Power> powers = PowerData.getPowers(player);
-        List<Power> stockpilePowers = powers.stream().filter(Predicates.instanceOf(StockpilePower.class)).toList();
-        int i;
-        for (i = 0; i < stockpilePowers.size(); i++) {
-            if (stockpilePowers.get(i) instanceof StockpilePower power) {
-                int charge = power.getCharge();
-                int maxCharge = power.getMaxCharge();
+        List<StockPile> stockpiles = new ArrayList<>(powers.stream().filter(Predicates.instanceOf(StockpilePower.class)).map(power -> (StockPile) power).toList());
 
-                float chargePercentile = (float) charge / maxCharge;
+        List<Ability> abilities = ((PlayerAbilities) player).myneheroes$getAbilities();
+        abilities.stream().filter(Predicates.instanceOf(StockPile.class)).forEach(ability -> stockpiles.add((StockPile) ability));
 
-                int currentHeight = (int) (height * chargePercentile);
+        Iterable<ItemStack> armorIterator = player.getArmorItems();
+        List<ItemStack> armor = StreamSupport.stream(armorIterator.spliterator(), false)
+                .toList();
 
-                drawContext.drawTexture(power.getChargeIcon(), x + 16 * i, y + height - currentHeight, 0, height - currentHeight, width, currentHeight, 14, 14); // yellow rectangle
+        for (ItemStack stack : armor) {
+            if (stack.getItem() instanceof UpgradableItem upgradableItem) {
+                for (Upgrade upgrade : upgradableItem.getUpgrades(stack)) {
+                    if (upgrade instanceof StockPile stockPile) {
+                        stockpiles.add(stockPile);
+                    }
+                }
             }
         }
-        List<Ability> abilities = ((PlayerAbilities) player).myneheroes$getAbilities();
-        List<Ability> stockpileAbilities = abilities.stream().filter(Predicates.instanceOf(StockpileAbility.class)).toList();
-        List<Identifier> stockpileAbilitiesIds = filterIds(stockpileAbilities);
+
+        List<ItemStack> inventory = player.getInventory().main;
+
+        for (ItemStack stack : inventory) {
+            if (stack.getItem() instanceof UpgradableItem upgradableItem) {
+                for (Upgrade upgrade : upgradableItem.getUpgrades(stack)) {
+                    if (upgrade instanceof StockPile stockPile) {
+                        stockpiles.add(stockPile);
+                    }
+                }
+            }
+        }
+
+        List<Identifier> stockpileAbilitiesIds = filterIds(stockpiles);
         for (int a = i; a < stockpileAbilitiesIds.size() + i; a++) {
             Identifier id = stockpileAbilitiesIds.get(a - i);
             float charge = 0;
@@ -154,18 +175,16 @@ public class HudOverlay implements HudRenderCallback {
             
             Identifier chargeIcon = null;
             
-            for (Ability ability : AbilityUtil.getAbilitiesMatchingId(stockpileAbilities, id)) {
-                if (ability instanceof StockpileAbility stockpileAbility) {
-                    charge += stockpileAbility.getCharge();
-                    maxCharge += stockpileAbility.getMaxCharge();
-                    
-                    chargeIcon = stockpileAbility.getChargeIcon();
-                }
+            for (StockPile stockPile : AbilityUtil.getStockPilesMatchingId(stockpiles, id)) {
+                charge += stockPile.getCharge();
+                maxCharge += stockPile.getMaxCharge();
+
+                chargeIcon = stockPile.getChargeIcon();
             }
             
             if (chargeIcon != null) {
 
-                float chargePercentile = (float) charge / maxCharge;
+                float chargePercentile = charge / maxCharge;
 
                 int currentHeight = (int) (height * chargePercentile);
 
@@ -174,9 +193,9 @@ public class HudOverlay implements HudRenderCallback {
         }
     }
     
-    private static List<Identifier> filterIds(List<Ability> abilities) {
+    private static List<Identifier> filterIds(List<StockPile> stockPiles) {
         List<Identifier> ids = new ArrayList<>();
-        for (Identifier id : abilities.stream().map(Ability::getId).toList()) {
+        for (Identifier id : stockPiles.stream().map(StockPile::getStockPileId).toList()) {
             if (id != null && !ids.contains(id)) {
                 ids.add(id);
             }

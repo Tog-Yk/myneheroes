@@ -55,10 +55,14 @@ public class ModModelProvider extends FabricModelProvider {
 
         itemModelGenerator.register(ModItems.CIRCUIT_BOARD, Models.GENERATED);
 
+        itemModelGenerator.register(ModItems.WEB_FLUID, Models.GENERATED);
+
         itemModelGenerator.register(ModItems.LASER_UPGRADE, Models.GENERATED);
         itemModelGenerator.register(ModItems.FlY_UPGRADE, Models.GENERATED);
         itemModelGenerator.register(ModItems.KINETIC_ENERGY_STORAGE_UPGRADE, Models.GENERATED);
         itemModelGenerator.register(ModItems.TAKE_OFF_SUIT_UPGRADE, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.WEB_SHOOTER_UPGRADE, Models.GENERATED);
 
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_HELMET));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_CHESTPLATE));

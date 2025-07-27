@@ -2,10 +2,12 @@ package net.togyk.myneheroes.Item.custom;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.StackReference;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
@@ -121,5 +123,15 @@ public class PowerInjectionItem extends Item implements UpgradableItem {
             upgradablePower.saveUpgrade(upgrade);
             this.setPower(stack, power);
         }
+    }
+
+    @Override
+    public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
+        for (Upgrade upgrade : this.getUpgrades(stack)) {
+            if (upgrade.onClicked(stack, otherStack, slot, clickType, player, cursorStackReference)) {
+                return true;
+            }
+        }
+        return super.onClicked(stack, otherStack, slot, clickType, player, cursorStackReference);
     }
 }

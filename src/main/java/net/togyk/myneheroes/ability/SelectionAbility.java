@@ -10,7 +10,6 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
 import net.togyk.myneheroes.client.screen.handeler.SelectionAbilityScreenHandler;
 import net.togyk.myneheroes.networking.SelectionScreenAbilityPayload;
 import net.togyk.myneheroes.util.AbilityUtil;
@@ -20,57 +19,32 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class SelectionAbility extends Ability implements ExtendedScreenHandlerFactory<SelectionScreenAbilityPayload> {
-    protected List<Ability> abilities;
-
+public class SelectionAbility extends AbilityHoldingAbility implements ExtendedScreenHandlerFactory<SelectionScreenAbilityPayload> {
     public SelectionAbility(Identifier id, Settings settings, List<Ability> abilities) {
-        super(id, 0, settings, null);
-        this.abilities = abilities;
-    }
-
-    @Override
-    public void tick(PlayerEntity player) {
-        super.tick(player);
-        for (Ability ability : abilities) {
-            ability.setHolder(this);
-            ability.tick(player);
-        }
+        super(id, 0, settings, abilities, null);
     }
 
     @Override
     public void Use(PlayerEntity player) {
         if (getCooldown() == 0) {
             player.openHandledScreen(this);
-            save(player.getWorld());
+            save();
         }
     }
 
     public void UseAbility(PlayerEntity player, int index) {
-        Ability ability = this.abilities.get(index);
+        Ability ability = this.getAbilities().get(index);
         ability.Use(player);
         this.setCooldown(ability.getMaxCooldown());
-        this.save(player.getWorld());
+        this.save();
     }
 
     @Override
     public int getMaxCooldown() {
-        if (!abilities.isEmpty()) {
+        if (!this.getAbilities().isEmpty()) {
             return abilities.stream().map(Ability::getMaxCooldown).max(Comparator.naturalOrder()).get();
         }
         return 0;
-    }
-
-    public List<Ability> getAbilities() {
-        return abilities;
-    }
-
-    public void saveAbility(World world, Ability ability) {
-        this.save(world);
-    }
-
-    @Override
-    public void setHolder(@Nullable SelectionAbility holder) {
-        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -86,38 +60,6 @@ public class SelectionAbility extends Ability implements ExtendedScreenHandlerFa
     @Override
     public @Nullable ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
         return new SelectionAbilityScreenHandler(syncId, player, this);
-    }
-
-    @Override
-    public NbtCompound writeNbt(NbtCompound nbt) {
-        NbtList abilitiesNbt = new NbtList();
-        for (Ability ability : this.abilities) {
-            if (ability != null) {
-                abilitiesNbt.add(ability.writeNbt(new NbtCompound()));
-            }
-        }
-
-        nbt.put("abilities", abilitiesNbt);
-        return super.writeNbt(nbt);
-    }
-
-    @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
-
-        NbtList abilitiesNbt = new NbtList();
-        if (nbt.contains("abilities")) {
-            abilitiesNbt = nbt.getList("abilities", NbtElement.COMPOUND_TYPE);
-        }
-
-        List<Ability> abilitiesList = new ArrayList<>();
-        for (NbtElement nbtElement : abilitiesNbt) {
-            if (nbtElement instanceof NbtCompound nbtCompound) {
-                Ability ability = AbilityUtil.nbtToAbility(nbtCompound);
-                abilitiesList.add(ability);
-            }
-        }
-        this.abilities = abilitiesList;
     }
 
     @Override

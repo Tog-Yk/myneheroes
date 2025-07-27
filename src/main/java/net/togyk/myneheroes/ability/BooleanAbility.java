@@ -17,7 +17,7 @@ public class BooleanAbility extends Ability {
             this.bool = !this.bool;
             this.setCooldown(this.getMaxCooldown());
         }
-        this.save(player.getWorld());
+        this.save();
     }
 
     public boolean get() {

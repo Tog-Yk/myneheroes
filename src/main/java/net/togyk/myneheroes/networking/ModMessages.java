@@ -19,6 +19,8 @@ import net.togyk.myneheroes.ability.Abilities;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.SelectionAbility;
 import net.togyk.myneheroes.ability.ToolbeltAbility;
+import net.togyk.myneheroes.ability.PassiveSelectionAbility;
+import net.togyk.myneheroes.event.MissedInteractionCallback;
 import net.togyk.myneheroes.event.MissedSwingCallback;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.Powers;
@@ -36,6 +38,7 @@ public class ModMessages {
     public static final Identifier KEYBIND_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "keybind");
     public static final Identifier LIGHT_LEVELER_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "light_leveler");
     public static final Identifier MISSED_SWING_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "missed_swing");
+    public static final Identifier MISSED_INTERACTION_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "missed_interaction");
     public static final Identifier PLAYER_POWER_SYNC_DATA_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "power_sync_data");
     public static final Identifier PLAYER_ABILITY_SCROLLED_SYNC_DATA_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "ability_scrolled_sync_data");
 
@@ -152,6 +155,15 @@ public class ModMessages {
             });
         });
 
+        PayloadTypeRegistry.playC2S().register(PlayerInteractionPayload.ID, PlayerInteractionPayload.CODEC);
+
+
+        ServerPlayNetworking.registerGlobalReceiver(PlayerInteractionPayload.ID, (payload, context) -> {
+            context.server().execute(() -> {
+                MissedInteractionCallback.EVENT.invoker().onMissedInteraction(context.player());
+            });
+        });
+
 
         PayloadTypeRegistry.playC2S().register(PlayerAbilityScrollSyncDataPayload.ID, PlayerAbilityScrollSyncDataPayload.CODEC);
 
@@ -188,6 +200,18 @@ public class ModMessages {
                 Ability ability = abilities.get(payload.toolbeltIndex());
                 if (Abilities.contains(ability.getId()) && ability instanceof ToolbeltAbility toolbelt) {
                     toolbelt.swapItem(context.player(), payload.index());
+                }
+            });
+        });
+
+        PayloadTypeRegistry.playC2S().register(SelectPassivePayload.ID, SelectPassivePayload.CODEC);
+
+        ServerPlayNetworking.registerGlobalReceiver(SelectPassivePayload.ID, (payload, context) -> {
+            context.server().execute(() -> {
+                List<Ability> abilities = ((PlayerAbilities) context.player()).myneheroes$getFilteredAbilities();
+                Ability ability = abilities.get(payload.abilityIndex());
+                if (Abilities.contains(ability.getId()) && ability instanceof PassiveSelectionAbility passiveSelectionAbility) {
+                    passiveSelectionAbility.setSelectedPassive(payload.index());
                 }
             });
         });

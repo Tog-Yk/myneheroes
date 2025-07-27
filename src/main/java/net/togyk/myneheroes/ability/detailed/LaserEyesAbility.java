@@ -1,9 +1,6 @@
 package net.togyk.myneheroes.ability.detailed;
 
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.nbt.NbtCompound;
@@ -11,7 +8,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -21,7 +17,7 @@ import net.togyk.myneheroes.ability.StockpileLinkedAbility;
 import net.togyk.myneheroes.client.render.LaserRenderer;
 import net.togyk.myneheroes.damage.ModDamageTypes;
 import net.togyk.myneheroes.power.Power;
-import net.togyk.myneheroes.power.StockpilePower;
+import net.togyk.myneheroes.util.StockPile;
 
 public class LaserEyesAbility extends StockpileLinkedAbility {
     private final LaserRenderer laserRenderer = new LaserRenderer();
@@ -49,13 +45,13 @@ public class LaserEyesAbility extends StockpileLinkedAbility {
             this.end = null;
             this.setCooldown(this.getMaxCooldown());
         }
-        this.save(player.getWorld());
+        this.save();
     }
 
     @Override
     public void hold(PlayerEntity player) {
         if (getCooldown() == 0) {
-            if (this.getHolder() instanceof StockpilePower stockpile && stockpile.getCharge() >= this.getCost()) {
+            if (this.getHolder() instanceof StockPile stockpile && stockpile.getCharge() >= this.getCost()) {
                 this.length = Math.min(32, this.length + 2.5F);
 
                 World world = player.getWorld();
@@ -104,7 +100,7 @@ public class LaserEyesAbility extends StockpileLinkedAbility {
 
                 stockpile.setCharge(stockpile.getCharge() - this.getCost());
 
-                this.save(world);
+                this.save();
             }
         }
     }

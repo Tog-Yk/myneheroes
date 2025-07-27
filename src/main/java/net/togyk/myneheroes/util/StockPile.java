@@ -1,11 +1,13 @@
-package net.togyk.myneheroes.ability;
-
+package net.togyk.myneheroes.util;
 
 import net.minecraft.util.Identifier;
 
-public interface StockpileAbility {
+public interface StockPile {
+    Identifier getStockPileId();
+
     float getCharge();
     void setCharge(float charge);
+
     float getMaxCharge();
     Identifier getChargeIcon();
 }

@@ -1,6 +1,8 @@
 package net.togyk.myneheroes.Item.custom;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.StackReference;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
@@ -10,7 +12,9 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
+import net.minecraft.util.ClickType;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
@@ -143,5 +147,15 @@ public class AdvancedArmorItem extends ArmorItem implements AbilityHolding, Upgr
         nbt.put("upgrades", upgradesNbt);
 
         stack.set(ModDataComponentTypes.UPGRADES, nbt);
+    }
+
+    @Override
+    public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
+        for (Upgrade upgrade : this.getUpgrades(stack)) {
+            if (upgrade.onClicked(stack, otherStack, slot, clickType, player, cursorStackReference)) {
+                return true;
+            }
+        }
+        return super.onClicked(stack, otherStack, slot, clickType, player, cursorStackReference);
     }
 }

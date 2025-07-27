@@ -23,6 +23,7 @@ import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.detailed.FlyFromReactorAbility;
 import net.togyk.myneheroes.ability.detailed.LaserEyesAbility;
 import net.togyk.myneheroes.ability.detailed.ReleaseKineticEnergyAbility;
+import net.togyk.myneheroes.ability.detailed.ShootProjectilePassiveAbility;
 import net.togyk.myneheroes.client.HudType;
 import net.togyk.myneheroes.entity.LaserEntity;
 import net.togyk.myneheroes.entity.ModEntities;
@@ -186,6 +187,38 @@ public class Abilities {
     }));
 
     public static final ToolbeltAbility TOOLBELT_3 = registerAbility(new ToolbeltAbility(Identifier.of(MyneHeroes.MOD_ID, "toolbelt_3"), new Ability.Settings(), 3));
+
+    public static final ShootProjectilePassiveAbility<LaserEntity> SHOOT_WEB = registerAbility(new ShootProjectilePassiveAbility<>(Identifier.of(MyneHeroes.MOD_ID, "shoot_web"), 2, 10, new Ability.Settings(), (player, passive) -> {
+        // shoot a laser to be replaced with web later
+        Vec3d look = player.getRotationVec(1.0F);
+
+        LaserEntity projectile = new LaserEntity(ModEntities.LASER, player.getWorld());
+        projectile.setOwner(player);
+        projectile.setPosition(player.getX(), player.getEyeY() - projectile.getHeight(), player.getZ());
+        projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
+        projectile.applyDamageModifier(2.0F);
+        projectile.setColor(0x33FFFFFF);
+        projectile.setInnerColor(0xFFFFFFFF);
+
+        return projectile;
+    }));
+
+    public static final ShootProjectilePassiveAbility<LaserEntity> SHOOT_TASER_WEB = registerAbility(new ShootProjectilePassiveAbility<>(Identifier.of(MyneHeroes.MOD_ID, "shoot_taser_web"), 2, 10, new Ability.Settings(), (player, passive) -> {
+        // shoot a laser to be replaced with web later
+        Vec3d look = player.getRotationVec(1.0F);
+
+        LaserEntity projectile = new LaserEntity(ModEntities.LASER, player.getWorld());
+        projectile.setOwner(player);
+        projectile.setPosition(player.getX(), player.getEyeY() - projectile.getHeight(), player.getZ());
+        projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
+        projectile.applyDamageModifier(2.0F);
+        projectile.setColor(0x3300FFFF);
+        projectile.setInnerColor(0xFFF0FFFF);
+
+        return projectile;
+    }));
+
+    public static final PassiveSelectionAbility WEB_SHOOTER = registerAbility(new PassiveSelectionAbility(Identifier.of(MyneHeroes.MOD_ID, "web_shooter"), new Ability.Settings(), List.of(SHOOT_WEB, SHOOT_TASER_WEB)));
 
     private static <T extends Ability> T registerAbility(T ability) {
         if (!ABILITIES.containsKey(ability.id)) {

@@ -14,12 +14,13 @@ import net.togyk.myneheroes.ability.PassiveAbility;
 import net.togyk.myneheroes.ability.StockpileAbility;
 import net.togyk.myneheroes.damage.ModDamageTypes;
 import net.togyk.myneheroes.util.PlayerAbilities;
+import net.togyk.myneheroes.util.StockPile;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ReleaseKineticEnergyAbility extends PassiveAbility implements StockpileAbility{
+public class ReleaseKineticEnergyAbility extends Ability implements PassiveAbility, StockPile {
     private float charge = 0;
     protected final float maxCharge;
     protected final float rangeMultiplier;
@@ -27,7 +28,7 @@ public class ReleaseKineticEnergyAbility extends PassiveAbility implements Stock
     private final Identifier chargeIcon;
 
     public ReleaseKineticEnergyAbility(Identifier id, Ability.Settings settings, int cooldown, float maxCharge, float rangeMultiplier) {
-        super(id, cooldown, settings);
+        super(id, cooldown, settings, null);
         this.maxCharge = maxCharge;
         this.chargeIcon = Identifier.of(MyneHeroes.MOD_ID,"textures/ability/charge/"+id.getPath()+".png");
         this.rangeMultiplier = rangeMultiplier;
@@ -57,7 +58,7 @@ public class ReleaseKineticEnergyAbility extends PassiveAbility implements Stock
             for (Ability ability : matchingAbilities) {
                 ((StockpileAbility) ability).setCharge(0);
                 ability.setCooldown(this.getMaxCooldown());
-                ability.save(player.getWorld());
+                ability.save();
             }
         }
     }
@@ -105,13 +106,18 @@ public class ReleaseKineticEnergyAbility extends PassiveAbility implements Stock
         if (this.getMaxCharge() != this.getCharge()) {
             this.setCharge((getCharge() + amount * (random.nextFloat(0, 6))));
         }
-        this.save(player.getWorld());
+        this.save();
         return true;
     }
 
     @Override
     public boolean Usable() {
         return true;
+    }
+
+    @Override
+    public Identifier getStockPileId() {
+        return this.getId();
     }
 
     public float getCharge() {

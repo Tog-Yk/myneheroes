@@ -50,6 +50,9 @@ public class ModItems {
     public static final Item CIRCUIT_BOARD = registerItem("circuit_board",
             new Item(new Item.Settings()));
 
+    public static final Item WEB_FLUID = registerItem("web_fluid",
+            new Item(new Item.Settings()));
+
     public static final Item MECHANICAL_HUD_UPGRADE = registerItem("mechanical_hud_upgrade", new UpgradeWithTooltipItem(Upgrades.MECHANICAL_HUD, Text.literal("mechanical").setStyle(Style.EMPTY.withColor(0xC428EEFF)), new Item.Settings().maxCount(1)));
     public static final Item SPEEDSTER_HUD_UPGRADE = registerItem("speedster_hud_upgrade", new UpgradeWithTooltipItem(Upgrades.SPEEDSTER_HUD, Text.literal("speedster").setStyle(Style.EMPTY.withColor(0xC4FFEB28)), new Item.Settings().maxCount(1)));
     public static final Item LASER_UPGRADE = registerItem("laser_upgrade", new UpgradeItem(Upgrades.LASER, new Item.Settings().maxCount(1)));
@@ -57,6 +60,8 @@ public class ModItems {
     public static final Item KINETIC_ENERGY_STORAGE_UPGRADE = registerItem("kinetic_energy_storage_upgrade", new UpgradeItem(Upgrades.KINETIC_ENERGY_STORAGE, new Item.Settings().maxCount(1)));
     public static final Item TAKE_OFF_SUIT_UPGRADE = registerItem("take_off_suit_upgrade", new UpgradeItem(Upgrades.TAKE_OFF_SUIT, new Item.Settings().maxCount(1)));
     public static final Item TOOLBELT_3_UPGRADE = registerItem("toolbelt_3_upgrade", new UpgradeWithTooltipItem(Upgrades.TOOLBELT_3, Text.translatable("item.myneheroes.toolbelt_3_upgrade.size", 3), new Item.Settings().maxCount(1)));
+
+    public static final Item WEB_SHOOTER_UPGRADE = registerItem("web_shooter_upgrade", new AbilityHoldingUpgradeItem(Upgrades.WEB_SHOOTER, new Item.Settings().maxCount(1)));
 
     public static final Item COLORING_COMPOUND = registerItem("coloring_compound",
             new SimpleDyeableItem(-1, new Item.Settings()));

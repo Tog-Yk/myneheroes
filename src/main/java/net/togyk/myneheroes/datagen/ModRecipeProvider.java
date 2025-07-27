@@ -209,6 +209,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .offerTo(exporter);
 
 
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.WEB_FLUID)
+                .input(Items.GLASS_BOTTLE)
+                .input(Items.STRING)
+                .input(Items.STRING)
+                .criterion(FabricRecipeProvider.hasItem(Items.STRING),
+                        FabricRecipeProvider.conditionsFromItem(Items.STRING))
+                .offerTo(exporter);
+
         //upgrades
         StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(ModItems.CIRCUIT_BOARD), RecipeCategory.TOOLS, ModItems.MECHANICAL_HUD_UPGRADE)
                 .criterion(FabricRecipeProvider.hasItem(ModItems.CIRCUIT_BOARD),

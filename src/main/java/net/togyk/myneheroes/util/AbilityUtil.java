@@ -30,6 +30,16 @@ public class AbilityUtil {
         return abilities;
     }
 
+    public static List<StockPile> getStockPilesMatchingId(List<StockPile> stockPiles, Identifier id) {
+        List<StockPile> abilities = new ArrayList<>();
+        for (StockPile stockPile : stockPiles) {
+            if (stockPile != null && stockPile.getStockPileId() == id) {
+                abilities.add(stockPile);
+            }
+        }
+        return abilities;
+    }
+
     public static Ability nbtToAbility(NbtCompound nbt) {
         Identifier abilityId = Identifier.of(nbt.getString("id"));
         Ability ability = Abilities.get(abilityId);

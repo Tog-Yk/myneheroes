@@ -4,18 +4,17 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.ability.Ability;
-import net.togyk.myneheroes.ability.StockpileLinkedAbility;
+import net.togyk.myneheroes.util.StockPile;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class StockpilePower extends Power {
-    private int charge = 0;
-    private final int maxCharge;
+public class StockpilePower extends Power implements StockPile {
+    private float charge = 0;
+    private final float maxCharge;
 
     private final Identifier chargeIcon;
 
-    public StockpilePower(Identifier id, int maxCharge, int color, List<Ability> abilities, Settings settings, attributeModifiers attributeModifiers) {
+    public StockpilePower(Identifier id, float maxCharge, int color, List<Ability> abilities, Settings settings, attributeModifiers attributeModifiers) {
         super(id, color, abilities, settings, attributeModifiers);
         this.maxCharge = maxCharge;
         this.chargeIcon = Identifier.of(id.getNamespace(),"textures/power/charge/"+id.getPath()+".png");;
@@ -29,21 +28,26 @@ public class StockpilePower extends Power {
         }
     }
 
-    public int getCharge() {
+    @Override
+    public Identifier getStockPileId() {
+        return this.getId();
+    }
+
+    public float getCharge() {
         return charge;
     }
 
-    public void setCharge(int charge) {
+    public void setCharge(float charge) {
         this.charge = Math.max(Math.min(charge, this.getMaxCharge()), 0);
     }
 
-    public int getMaxCharge() {
+    public float getMaxCharge() {
         return maxCharge;
     }
 
     @Override
     public NbtCompound writeNbt(NbtCompound nbt) {
-        nbt.putInt("charge", this.getCharge());
+        nbt.putFloat("charge", this.getCharge());
         return super.writeNbt(nbt);
     }
 
@@ -52,7 +56,7 @@ public class StockpilePower extends Power {
         super.readNbt(nbt);
 
         if (nbt.contains("charge")) {
-            this.setCharge(nbt.getInt("charge"));
+            this.setCharge(nbt.getFloat("charge"));
         }
     }
 

@@ -34,6 +34,9 @@
   "item.myneheroes.toolbelt_3_upgrade": "Toolbelt",
   "item.myneheroes.toolbelt_3_upgrade.size": "Size: %1$s",
 
+  "item.myneheroes.web_shooter_upgrade": "Web Shooter",
+  "item.myneheroes.web_fluid": "Web Fluid",
+
   "item.myneheroes.vibranium_helmet": "Vibranium Helmet",
   "item.myneheroes.vibranium_chestplate": "Vibranium Chestplate",
   "item.myneheroes.vibranium_leggings": "Vibranium Leggings",
@@ -113,6 +116,10 @@
   "ability.myneheroes.toggle_phasing": "Toggle Phasing",
 
   "ability.myneheroes.toolbelt_3": "Open Toolbelt",
+
+  "ability.myneheroes.web_shooter": "Web Shooter",
+  "ability.myneheroes.shoot_web": "Web",
+  "ability.myneheroes.shoot_taser_web": "Taser Web",
 
 
   "trim_material.myneheroes.vibranium": "Vibranium",

@@ -59,7 +59,7 @@ public class Power {
     public Power(Identifier id, int color, List<Ability> abilities, Settings settings, attributeModifiers attributeModifiers) {
         this.id = id;
         this.color = color;
-        this.abilities = abilities;
+        this.abilities = abilities.stream().map(Ability::copy).toList();
         this.background = Identifier.of(id.getNamespace(),"textures/power/"+id.getPath()+"_background.png");
         this.disabledBackground = Identifier.of(id.getNamespace(),"textures/power/"+id.getPath()+"_background_disabled.png");
 

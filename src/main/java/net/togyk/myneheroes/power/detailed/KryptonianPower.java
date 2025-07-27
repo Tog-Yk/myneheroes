@@ -10,7 +10,7 @@ import net.togyk.myneheroes.power.StockpilePower;
 import java.util.List;
 
 public class KryptonianPower extends StockpilePower {
-    public KryptonianPower(Identifier id, int maxCharge, int color, List<Ability> abilities, Settings settings, attributeModifiers attributeModifiers) {
+    public KryptonianPower(Identifier id, float maxCharge, int color, List<Ability> abilities, Settings settings, attributeModifiers attributeModifiers) {
         super(id, maxCharge, color, abilities, settings, attributeModifiers);
     }
 
