@@ -3,6 +3,7 @@ package net.togyk.myneheroes.ability;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.Dynamic;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -195,6 +196,18 @@ public class Ability {
         } else {
             return HolderUpgrade;
         }
+    }
+
+    public Entity getEntityHolder() {
+        Object holder = this.getIndirectHolder();
+        if (holder instanceof ItemStack stack) {
+            return stack.getHolder();
+        } else if (holder instanceof Power power) {
+            return power.getHolder();
+        } else if (holder instanceof Upgrade upgrade) {
+            return upgrade.getHolderStack().getHolder();
+        }
+        return null;
     }
 
     public boolean Usable() {

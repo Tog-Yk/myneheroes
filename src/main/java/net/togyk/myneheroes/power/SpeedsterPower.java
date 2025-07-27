@@ -134,6 +134,11 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
         return true;
     }
 
+    @Override
+    public boolean canWallClimb() {
+        return super.canWallClimb() || (isSpeedActive() && this.speedLevel > 5 && this.getHolder().getPitch() <= -50);
+    }
+
     public int getMaxSpeedLevel() {
         return maxSpeedLevel;
     }

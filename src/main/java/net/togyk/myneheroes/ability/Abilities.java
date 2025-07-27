@@ -23,6 +23,7 @@ import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.detailed.FlyFromReactorAbility;
 import net.togyk.myneheroes.ability.detailed.LaserEyesAbility;
 import net.togyk.myneheroes.ability.detailed.ReleaseKineticEnergyAbility;
+import net.togyk.myneheroes.ability.detailed.SpiderSenseHudAbility;
 import net.togyk.myneheroes.ability.detailed.ShootProjectilePassiveAbility;
 import net.togyk.myneheroes.client.HudType;
 import net.togyk.myneheroes.entity.LaserEntity;
@@ -187,6 +188,8 @@ public class Abilities {
     }));
 
     public static final ToolbeltAbility TOOLBELT_3 = registerAbility(new ToolbeltAbility(Identifier.of(MyneHeroes.MOD_ID, "toolbelt_3"), new Ability.Settings(), 3));
+
+    public static final SpiderSenseHudAbility SPIDER_SENSE = registerAbility(new SpiderSenseHudAbility(Identifier.of(MyneHeroes.MOD_ID, "spider_sense"), new Ability.Settings()));
 
     public static final ShootProjectilePassiveAbility<LaserEntity> SHOOT_WEB = registerAbility(new ShootProjectilePassiveAbility<>(Identifier.of(MyneHeroes.MOD_ID, "shoot_web"), 2, 10, new Ability.Settings(), (player, passive) -> {
         // shoot a laser to be replaced with web later

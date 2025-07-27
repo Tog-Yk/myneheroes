@@ -42,7 +42,7 @@ public class PowerArgumentType implements ArgumentType<Identifier> {
 
     @Override
     public Collection<String> getExamples() {
-        return List.of("modid:power", Powers.SPEEDSTER.toString());
+        return List.of("modid:power", Powers.SPEEDSTER.getId().toString());
     }
 
     public static void register() {
