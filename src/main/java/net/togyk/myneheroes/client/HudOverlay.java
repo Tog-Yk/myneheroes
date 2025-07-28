@@ -18,7 +18,6 @@ import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.upgrade.Upgrade;
 import net.togyk.myneheroes.util.AbilityUtil;
 import net.togyk.myneheroes.ability.HudAbility;
-import net.togyk.myneheroes.ability.StockpileAbility;
 import net.togyk.myneheroes.keybind.ModKeyBinds;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.StockpilePower;
@@ -203,10 +202,10 @@ public class HudOverlay implements HudRenderCallback {
         return ids;
     }
 
-    public static void drawAbility(DrawContext drawContext, Ability ability, boolean isDisabled, int x, int y) {
+    public static void drawAbility(DrawContext drawContext, Ability ability, boolean isPressed, int x, int y) {
         if (ability != null) {
-            if (isDisabled) {
-                drawContext.drawTexture(ability.disabled_icon, x, y, 0, 0, 16, 16, 16, 16);
+            if (isPressed) {
+                drawContext.drawTexture(ability.pressed_icon, x, y, 0, 0, 16, 16, 16, 16);
             } else {
                 drawContext.drawTexture(ability.icon, x, y, 0, 0, 16, 16, 16, 16);
             }

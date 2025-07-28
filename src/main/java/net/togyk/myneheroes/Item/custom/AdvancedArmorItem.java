@@ -45,7 +45,7 @@ public class AdvancedArmorItem extends ArmorItem implements AbilityHolding, Upgr
         super.appendTooltip(stack, context, tooltip, type);
     }
 
-    public List<Ability> getAbilities(ItemStack stack) {
+    public List<Ability> getArmorAbilities(ItemStack stack) {
         List<Ability> abilities = new ArrayList<>();
 
         for (Upgrade upgrade : this.getUpgrades(stack)) {

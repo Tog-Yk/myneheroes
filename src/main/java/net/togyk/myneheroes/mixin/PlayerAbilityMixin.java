@@ -6,9 +6,9 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import net.togyk.myneheroes.Item.custom.AbilityHoldingItem;
-import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
+import net.togyk.myneheroes.Item.custom.AbilityHolding;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.power.Power;
@@ -81,9 +81,10 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
 
         PlayerInventory inventory = player.getInventory();
         ItemStack helmetStack = player.getEquippedStack(EquipmentSlot.HEAD);
-        if (helmetStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-            if (advancedArmorItem.getAbilities(helmetStack) != null) {
-                for (Ability ability : advancedArmorItem.getAbilities(helmetStack)) {
+        if (helmetStack.getItem() instanceof AbilityHolding abilityHolding) {
+            if (abilityHolding.getAbilities(helmetStack) != null) {
+                //get the abilities for when the item is equipped
+                for (Ability ability : abilityHolding.getArmorAbilities(helmetStack)) {
                     if (!abilityList.contains(ability) && ability != null) {
                         abilityList.add(ability);
                     }
@@ -91,9 +92,10 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
             }
         }
         ItemStack chestplateStack = player.getEquippedStack(EquipmentSlot.CHEST);
-        if (chestplateStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-            if (advancedArmorItem.getAbilities(chestplateStack) != null) {
-                for (Ability ability : advancedArmorItem.getAbilities(chestplateStack)) {
+        if (chestplateStack.getItem() instanceof AbilityHolding abilityHolding) {
+            if (abilityHolding.getAbilities(chestplateStack) != null) {
+                //get the abilities for when the item is equipped
+                for (Ability ability : abilityHolding.getArmorAbilities(chestplateStack)) {
                     if (!abilityList.contains(ability) && ability != null) {
                         abilityList.add(ability);
                     }
@@ -101,9 +103,10 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
             }
         }
         ItemStack leggingsStack = player.getEquippedStack(EquipmentSlot.LEGS);
-        if (leggingsStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-            if (advancedArmorItem.getAbilities(leggingsStack) != null) {
-                for (Ability ability : advancedArmorItem.getAbilities(leggingsStack)) {
+        if (leggingsStack.getItem() instanceof AbilityHolding abilityHolding) {
+            if (abilityHolding.getAbilities(leggingsStack) != null) {
+                //get the abilities for when the item is equipped
+                for (Ability ability : abilityHolding.getArmorAbilities(leggingsStack)) {
                     if (!abilityList.contains(ability) && ability != null) {
                         abilityList.add(ability);
                     }
@@ -111,9 +114,32 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
             }
         }
         ItemStack bootsStack = player.getEquippedStack(EquipmentSlot.FEET);
-        if (bootsStack.getItem() instanceof AdvancedArmorItem advancedArmorItem) {
-            if (advancedArmorItem.getAbilities(bootsStack) != null) {
-                for (Ability ability : advancedArmorItem.getAbilities(bootsStack)) {
+        if (bootsStack.getItem() instanceof AbilityHolding abilityHolding) {
+            if (abilityHolding.getAbilities(bootsStack) != null) {
+                //get the abilities for when the item is equipped
+                for (Ability ability : abilityHolding.getArmorAbilities(bootsStack)) {
+                    if (!abilityList.contains(ability) && ability != null) {
+                        abilityList.add(ability);
+                    }
+                }
+            }
+        }
+        //get the abilities from the main hand
+        ItemStack mainHandStack = player.getStackInHand(Hand.MAIN_HAND);
+        if (mainHandStack.getItem() instanceof AbilityHolding abilityHolding) {
+            if (abilityHolding.getAbilities(mainHandStack) != null) {
+                for (Ability ability : abilityHolding.getMainHandAbilities(mainHandStack)) {
+                    if (!abilityList.contains(ability) && ability != null) {
+                        abilityList.add(ability);
+                    }
+                }
+            }
+        }
+        //get the abilities from the offhand
+        ItemStack offHandStack = player.getStackInHand(Hand.OFF_HAND);
+        if (offHandStack.getItem() instanceof AbilityHolding abilityHolding) {
+            if (abilityHolding.getAbilities(offHandStack) != null) {
+                for (Ability ability : abilityHolding.getOffHandAbilities(offHandStack)) {
                     if (!abilityList.contains(ability) && ability != null) {
                         abilityList.add(ability);
                     }
@@ -122,9 +148,20 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         }
         for (int i = 0; i < inventory.size(); i++) {
             ItemStack stack = inventory.getStack(i);
-            if (stack.getItem() instanceof AbilityHoldingItem abilityHoldingItem) {
-                if (abilityHoldingItem.getAbilities(stack) != null) {
-                    for (Ability ability : abilityHoldingItem.getAbilities(stack)) {
+            //get the abilities in the hotbar
+            if (i < 9 && stack.getItem() instanceof AbilityHolding abilityHolding) {
+                if (abilityHolding.getAbilities(stack) != null) {
+                    for (Ability ability : abilityHolding.getHotbarAbilities(stack)) {
+                        if (!abilityList.contains(ability) && ability != null) {
+                            abilityList.add(ability);
+                        }
+                    }
+                }
+            }
+            //get the abilities in the inventory
+            if (stack.getItem() instanceof AbilityHolding abilityHolding) {
+                if (abilityHolding.getAbilities(stack) != null) {
+                    for (Ability ability : abilityHolding.getAbilities(stack)) {
                         if (!abilityList.contains(ability) && ability != null) {
                             abilityList.add(ability);
                         }

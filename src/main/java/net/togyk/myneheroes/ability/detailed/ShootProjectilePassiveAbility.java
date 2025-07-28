@@ -54,6 +54,7 @@ public class ShootProjectilePassiveAbility<T extends ProjectileEntity> extends S
                 player.getWorld().spawnEntity(projectile);
                 player.swingHand(Hand.MAIN_HAND);
             }
+            player.swingHand(Hand.MAIN_HAND);
             if (this.getIndirectHolder() instanceof StockPile stockPile) {
                 stockPile.setCharge(stockPile.getCharge() - this.cost);
             }

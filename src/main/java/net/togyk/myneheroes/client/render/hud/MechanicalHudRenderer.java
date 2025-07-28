@@ -273,7 +273,7 @@ public class MechanicalHudRenderer {
 
                 float chargePercentile = charge / maxCharge;
 
-                int currentHeight = (int) (height * chargePercentile);
+                int currentHeight = (int) ((height - 4) * chargePercentile);
 
                 drawContext.drawTexture(chargeIcon, x + 2 + 18 * a, y + 2 + (height - 4) - currentHeight, 0, (height - 4) - currentHeight, width - 4, currentHeight, 14, 14);
                 drawContext.drawGuiTexture(ENERGY_STORAGE_BACKGROUND, width, height, 0, 0, x + 18 * a, y, width, height);

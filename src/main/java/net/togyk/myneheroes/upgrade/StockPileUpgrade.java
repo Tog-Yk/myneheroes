@@ -71,7 +71,7 @@ public class StockPileUpgrade extends AbilityUpgrade implements StockPile {
                     if (!player.isCreative()) {
                         otherStack.decrement(1);
                     }
-                    charge += this.rechargeValue;
+                    charge = Math.clamp(charge + this.rechargeValue, 0, this.maxCharge);
                     this.save();
                     return true;
                 }
