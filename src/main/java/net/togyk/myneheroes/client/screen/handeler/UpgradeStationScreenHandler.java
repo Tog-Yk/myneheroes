@@ -100,7 +100,16 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
     }
 
     private void addBlockUpgrades(SimpleInventory inventory) {
-        addSlot(new Slot(inventory, 0, 67, 7) {
+        addUpgradeSlot(inventory, 0, 67, 7);
+        addUpgradeSlot(inventory, 1, 93, 7);
+        addUpgradeSlot(inventory, 2, 54, 32);
+        addUpgradeSlot(inventory, 3, 106, 32);
+        addUpgradeSlot(inventory, 4, 67, 57);
+        addUpgradeSlot(inventory, 5, 93, 57);
+    }
+
+    private void addUpgradeSlot(SimpleInventory inventory, int index, int x, int y) {
+        addSlot(new Slot(inventory, index, x, y) {
             @Override
             public boolean canInsert(ItemStack stack) {
                 if (stack.getItem() instanceof UpgradeItem upgradeItem) {
@@ -112,70 +121,10 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
                 }
                 return false;
             }
-        });
-        addSlot(new Slot(inventory, 1, 93, 7) {
+
             @Override
-            public boolean canInsert(ItemStack stack) {
-                if (stack.getItem() instanceof UpgradeItem upgradeItem) {
-                    Upgrade upgrade = upgradeItem.getUpgrade();
-                    if (upgrade != null) {
-                        upgrade.setItemStack(stack, world);
-                        return canUpgrade(upgrade);
-                    }
-                }
-                return false;
-            }
-        });
-        addSlot(new Slot(inventory, 2, 54, 32) {
-            @Override
-            public boolean canInsert(ItemStack stack) {
-                if (stack.getItem() instanceof UpgradeItem upgradeItem) {
-                    Upgrade upgrade = upgradeItem.getUpgrade();
-                    if (upgrade != null) {
-                        upgrade.setItemStack(stack, world);
-                        return canUpgrade(upgrade);
-                    }
-                }
-                return false;
-            }
-        });
-        addSlot(new Slot(inventory, 3, 106, 32) {
-            @Override
-            public boolean canInsert(ItemStack stack) {
-                if (stack.getItem() instanceof UpgradeItem upgradeItem) {
-                    Upgrade upgrade = upgradeItem.getUpgrade();
-                    if (upgrade != null) {
-                        upgrade.setItemStack(stack, world);
-                        return canUpgrade(upgrade);
-                    }
-                }
-                return false;
-            }
-        });
-        addSlot(new Slot(inventory, 4, 67, 57) {
-            @Override
-            public boolean canInsert(ItemStack stack) {
-                if (stack.getItem() instanceof UpgradeItem upgradeItem) {
-                    Upgrade upgrade = upgradeItem.getUpgrade();
-                    if (upgrade != null) {
-                        upgrade.setItemStack(stack, world);
-                        return canUpgrade(upgrade);
-                    }
-                }
-                return false;
-            }
-        });
-        addSlot(new Slot(inventory, 5, 93, 57) {
-            @Override
-            public boolean canInsert(ItemStack stack) {
-                if (stack.getItem() instanceof UpgradeItem upgradeItem) {
-                    Upgrade upgrade = upgradeItem.getUpgrade();
-                    if (upgrade != null) {
-                        upgrade.setItemStack(stack, world);
-                        return canUpgrade(upgrade);
-                    }
-                }
-                return false;
+            public int getMaxItemCount(ItemStack stack) {
+                return 1;
             }
         });
     }
@@ -225,6 +174,8 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
                 return ItemStack.EMPTY;
             }
         } else {
+            int countBefore = originalStack.getCount();
+
             // Shift-clicked from player inventory
             if (originalStack.getItem() instanceof UpgradableItem upgradableItem && upgradableItem.canBeUpgraded()) {
                 if (!this.insertItem(originalStack, blockInputStart, blockInputEnd, false)) {
@@ -234,6 +185,11 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
                 if (!this.insertItem(originalStack, blockUpgradeStart, blockUpgradeEnd, false)) {
                     return ItemStack.EMPTY;
                 }
+            }
+
+            // If only partially moved, don't move to hotbar/inventory
+            if (originalStack.getCount() < countBefore && !originalStack.isEmpty()) {
+                return ItemStack.EMPTY;
             } else if (slotIndex < hotbarStart) {
                 // Move from inventory to hotbar
                 if (!this.insertItem(originalStack, hotbarStart, hotbarEnd, false)) {
