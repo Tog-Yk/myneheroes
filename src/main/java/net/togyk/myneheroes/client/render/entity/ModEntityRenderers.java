@@ -20,5 +20,7 @@ public class ModEntityRenderers {
         EntityRendererRegistry.INSTANCE.register(ModEntities.METEOR, MeteorEntityRenderer::new);
         EntityRendererRegistry.INSTANCE.register(ModEntities.LIGHTNING_TRAIL, TrailEntityRenderer::new);
         EntityRendererRegistry.INSTANCE.register(ModEntities.AFTERIMAGE_TRAIL, TrailEntityRenderer::new);
+
+        EntityRendererRegistry.INSTANCE.register(ModEntities.WEB, WebEntityRenderer::new);
     }
 }

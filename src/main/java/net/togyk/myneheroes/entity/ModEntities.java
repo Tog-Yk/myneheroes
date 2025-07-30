@@ -37,6 +37,10 @@ public class ModEntities {
     public static final EntityType<AfterimageTrailEntity> AFTERIMAGE_TRAIL = registerEntity("after_image_trail",
             EntityType.Builder.<AfterimageTrailEntity>create(AfterimageTrailEntity::new, SpawnGroup.MISC));
 
+    public static final EntityType<WebEntity> WEB = registerEntity("web",
+            EntityType.Builder.<WebEntity>create(WebEntity::new, SpawnGroup.MISC)
+                    .dimensions(0.25F, 0.25F));
+
     private static <T extends Entity> EntityType<T> registerEntity(String name, EntityType.Builder<T> type) {
         return Registry.register(Registries.ENTITY_TYPE, Identifier.of(MyneHeroes.MOD_ID, name), type.build());
     }

@@ -1,8 +1,5 @@
 package net.togyk.myneheroes.entity;
 
-import com.google.common.collect.Lists;
-import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
-import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -28,8 +25,6 @@ import net.minecraft.world.World;
 import net.togyk.myneheroes.damage.ModDamageTypes;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
-
 public class LaserEntity extends PersistentProjectileEntity {
     private static final TrackedData<Integer> color = DataTracker.registerData(LaserEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> innerColor = DataTracker.registerData(LaserEntity.class, TrackedDataHandlerRegistry.INTEGER);
@@ -40,7 +35,6 @@ public class LaserEntity extends PersistentProjectileEntity {
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
-        super.onEntityHit(entityHitResult);
         Entity entity = entityHitResult.getEntity();
         float f = (float)this.getVelocity().length();
         double d = this.getDamage();

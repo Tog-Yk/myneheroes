@@ -29,6 +29,7 @@ import net.togyk.myneheroes.client.HudType;
 import net.togyk.myneheroes.entity.LaserEntity;
 import net.togyk.myneheroes.entity.ModEntities;
 import net.togyk.myneheroes.entity.StationaryArmorEntity;
+import net.togyk.myneheroes.entity.WebEntity;
 
 import java.util.*;
 
@@ -191,32 +192,28 @@ public class Abilities {
 
     public static final SpiderSenseHudAbility SPIDER_SENSE = registerAbility(new SpiderSenseHudAbility(Identifier.of(MyneHeroes.MOD_ID, "spider_sense"), new Ability.Settings()));
 
-    public static final ShootProjectilePassiveAbility<LaserEntity> SHOOT_WEB = registerAbility(new ShootProjectilePassiveAbility<>(Identifier.of(MyneHeroes.MOD_ID, "shoot_web"), 2, 10, new Ability.Settings(), (player, passive) -> {
-        // shoot a laser to be replaced with web later
+    public static final ShootProjectilePassiveAbility<WebEntity> SHOOT_WEB = registerAbility(new ShootProjectilePassiveAbility<>(Identifier.of(MyneHeroes.MOD_ID, "shoot_web"), 2, 1, new Ability.Settings(), (player, passive) -> {
         Vec3d look = player.getRotationVec(1.0F);
 
-        LaserEntity projectile = new LaserEntity(ModEntities.LASER, player.getWorld());
+        WebEntity projectile = new WebEntity(player.getWorld());
         projectile.setOwner(player);
         projectile.setPosition(player.getX(), player.getEyeY() - projectile.getHeight(), player.getZ());
         projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
         projectile.applyDamageModifier(2.0F);
-        projectile.setColor(0x33FFFFFF);
-        projectile.setInnerColor(0xFFFFFFFF);
 
         return projectile;
     }));
 
-    public static final ShootProjectilePassiveAbility<LaserEntity> SHOOT_TASER_WEB = registerAbility(new ShootProjectilePassiveAbility<>(Identifier.of(MyneHeroes.MOD_ID, "shoot_taser_web"), 2, 10, new Ability.Settings(), (player, passive) -> {
-        // shoot a laser to be replaced with web later
+    public static final ShootProjectilePassiveAbility<WebEntity> SHOOT_TASER_WEB = registerAbility(new ShootProjectilePassiveAbility<>(Identifier.of(MyneHeroes.MOD_ID, "shoot_taser_web"), 2, 5, new Ability.Settings(), (player, passive) -> {
         Vec3d look = player.getRotationVec(1.0F);
 
-        LaserEntity projectile = new LaserEntity(ModEntities.LASER, player.getWorld());
+        WebEntity projectile = new WebEntity(player.getWorld());
         projectile.setOwner(player);
         projectile.setPosition(player.getX(), player.getEyeY() - projectile.getHeight(), player.getZ());
         projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
         projectile.applyDamageModifier(2.0F);
-        projectile.setColor(0x3300FFFF);
-        projectile.setInnerColor(0xFFF0FFFF);
+
+        projectile.setIsTaser(true);
 
         return projectile;
     }));

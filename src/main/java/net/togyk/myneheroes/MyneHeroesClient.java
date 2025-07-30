@@ -2,6 +2,7 @@ package net.togyk.myneheroes;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
@@ -17,6 +18,8 @@ import net.togyk.myneheroes.client.screen.ModHandledScreens;
 import net.togyk.myneheroes.keybind.ModKeybindingHelper;
 import net.togyk.myneheroes.keybind.ModKeyBinds;
 import net.togyk.myneheroes.networking.ModMessages;
+import net.togyk.myneheroes.particle.ElectricityParticle;
+import net.togyk.myneheroes.particle.ModParticles;
 
 public class MyneHeroesClient implements ClientModInitializer {
     @Override
@@ -38,5 +41,7 @@ public class MyneHeroesClient implements ClientModInitializer {
         BlockEntityRendererFactories.register(ModBlockEntityTypes.METEOR_RADAR_BLOCK_ENTITY, MeteorRadarBlockEntityRenderer::new);
 
         RenderEvent.registerRenderEvent();
+
+        ParticleFactoryRegistry.getInstance().register(ModParticles.ELECTRICITY_PARTICLE, ElectricityParticle.Factory::new);
     }
 }

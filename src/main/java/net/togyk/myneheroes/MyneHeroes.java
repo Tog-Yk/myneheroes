@@ -4,11 +4,9 @@ import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.togyk.myneheroes.Item.ModGeckoItems;
 import net.togyk.myneheroes.Item.ModItemGroups;
 import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
@@ -28,6 +26,7 @@ import net.togyk.myneheroes.entity.data.ModTrackedData;
 import net.togyk.myneheroes.event.ModEvents;
 import net.togyk.myneheroes.gamerule.ModGamerules;
 import net.togyk.myneheroes.networking.ModMessages;
+import net.togyk.myneheroes.particle.ModParticles;
 import net.togyk.myneheroes.util.ModLootTableModifiers;
 import net.togyk.myneheroes.worldgen.ModBiomeModifications;
 import org.slf4j.Logger;
@@ -77,6 +76,8 @@ public class MyneHeroes implements ModInitializer {
         ModCriteria.register();
 
         ModTrackedData.register();
+
+        ModParticles.registerParticles();
     }
     /**
      * Searches the player's inventory for the first matching item.
