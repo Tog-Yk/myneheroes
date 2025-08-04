@@ -31,7 +31,7 @@ public class MeteorEntity extends PersistentProjectileEntity {
     public MeteorEntity(World world, MeteorVariant variant) {
         super(ModEntities.METEOR, world);
         this.setVariant(variant);
-        this.setSize((new Random()).nextFloat(5, 12));
+        this.setSize((new Random()).nextFloat(6, 12));
     }
     public MeteorEntity(World world) {
         super(ModEntities.METEOR, world);

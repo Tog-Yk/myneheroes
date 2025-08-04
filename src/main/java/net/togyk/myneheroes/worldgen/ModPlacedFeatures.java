@@ -1,14 +1,10 @@
 package net.togyk.myneheroes.worldgen;
 
-import net.minecraft.registry.Registerable;
-import net.minecraft.registry.RegistryEntryLookup;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.*;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.YOffset;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.PlacedFeature;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.togyk.myneheroes.MyneHeroes;
 
@@ -17,6 +13,8 @@ import java.util.List;
 public class ModPlacedFeatures {
     public static final RegistryKey<PlacedFeature> VIBRANIUM_ORE_KEY = registerKey("vibranium_ore_placed");
     public static final RegistryKey<PlacedFeature> TITANIUM_ORE_KEY = registerKey("titanium_ore_placed");
+
+    public static final RegistryKey<PlacedFeature> METEOR_KEY = registerKey("meteor_placed");
 
     public static void bootstrap(Registerable<PlacedFeature> context) {
         RegistryEntryLookup<ConfiguredFeature<?, ?>> registryLookup = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
@@ -30,6 +28,12 @@ public class ModPlacedFeatures {
                 modifiersCount(12,
                         //at what y value does it generate
                         HeightRangePlacementModifier.uniform(YOffset.aboveBottom(40), YOffset.fixed(64))));
+
+        /*/doesn't work
+        register(context, METEOR_KEY, registryLookup.getOrThrow(ModConfiguredFeatures.METEOR_KEY),
+                List.of(RandomOffsetPlacementModifier.of(ClampedNormalIntProvider.of(12, 3, 3, 16), ConstantIntProvider.create(0)), HeightmapPlacementModifier.of(Heightmap.Type.WORLD_SURFACE))
+        );
+        //*/
     }
 
     private static RegistryKey<PlacedFeature> registerKey(String name) {

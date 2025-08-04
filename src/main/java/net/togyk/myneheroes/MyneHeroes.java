@@ -29,6 +29,7 @@ import net.togyk.myneheroes.networking.ModMessages;
 import net.togyk.myneheroes.particle.ModParticles;
 import net.togyk.myneheroes.util.ModLootTableModifiers;
 import net.togyk.myneheroes.worldgen.ModBiomeModifications;
+import net.togyk.myneheroes.worldgen.ModFeatures;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -78,6 +79,8 @@ public class MyneHeroes implements ModInitializer {
         ModTrackedData.register();
 
         ModParticles.registerParticles();
+
+        ModFeatures.registerModFeatures();
     }
     /**
      * Searches the player's inventory for the first matching item.

@@ -1,9 +1,7 @@
 package net.togyk.myneheroes.worldgen;
 
-import net.minecraft.registry.Registerable;
-import net.minecraft.registry.RegistryEntryLookup;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
+import com.mojang.serialization.Codec;
+import net.minecraft.registry.*;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.structure.rule.RuleTest;
 import net.minecraft.structure.rule.TagMatchRuleTest;
@@ -18,7 +16,12 @@ public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> VIBRANIUM_ORE_KEY = registerKey("vibranium_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> TITANIUM_ORE_KEY = registerKey("titanium_ore");
 
+    public static final RegistryKey<ConfiguredFeature<?, ?>> METEOR_KEY = registerKey("meteor");
+
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context) {
+
+        RegistryEntryLookup<PlacedFeature> registryLookup = context.getRegistryLookup(RegistryKeys.PLACED_FEATURE);
+
         // all the blocks that will be replaced
         RuleTest stoneOreReplaceables = new TagMatchRuleTest(BlockTags.STONE_ORE_REPLACEABLES);
         RuleTest deepslateOreReplaceables = new TagMatchRuleTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
@@ -36,9 +39,7 @@ public class ModConfiguredFeatures {
         register(context, VIBRANIUM_ORE_KEY, Feature.ORE, new OreFeatureConfig(vibraniumTargets, 4));
         register(context, TITANIUM_ORE_KEY, Feature.ORE, new OreFeatureConfig(titaniumTargets, 9));
 
-
-        RegistryEntryLookup<PlacedFeature> registryLookup = context.getRegistryLookup(RegistryKeys.PLACED_FEATURE);
-
+        register(context, METEOR_KEY, ModFeatures.METEOR_FEATURE, new DefaultFeatureConfig());
     }
 
     private static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name) {

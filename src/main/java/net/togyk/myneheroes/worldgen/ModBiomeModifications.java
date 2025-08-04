@@ -18,6 +18,13 @@ public class ModBiomeModifications {
                 GenerationStep.Feature.UNDERGROUND_ORES,
                 ModPlacedFeatures.TITANIUM_ORE_KEY
         );
-        //add more placed features here
+
+        /*
+        BiomeModifications.addFeature(
+                BiomeSelectors.foundInOverworld(),
+                GenerationStep.Feature.SURFACE_STRUCTURES,
+                ModPlacedFeatures.METEOR_KEY
+        );
+        //add more placed features here */
     }
 }
