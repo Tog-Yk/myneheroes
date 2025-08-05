@@ -12,6 +12,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
+import net.togyk.myneheroes.gamerule.ModGamerules;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.UpgradablePower;
 import net.togyk.myneheroes.upgrade.Upgrade;
@@ -54,10 +55,12 @@ public class PowerInjectionItem extends Item implements UpgradableItem {
                 return TypedActionResult.success(user.getStackInHand(hand));
             }
         } else if (power != null && !powerIds.contains(power.id)) {
-            PowerData.addPower(user, power);
-            this.setPower(user.getStackInHand(hand), null);
-            user.swingHand(hand);
-            return TypedActionResult.success(user.getStackInHand(hand));
+            if (world.getGameRules().getBoolean(ModGamerules.GIVE_POWERS_ABOVE_LIMIT) || powers.size() < world.getGameRules().getInt(ModGamerules.POWER_LIMIT)) {
+                PowerData.addPower(user, power);
+                this.setPower(user.getStackInHand(hand), null);
+                user.swingHand(hand);
+                return TypedActionResult.success(user.getStackInHand(hand));
+            }
         }
         return TypedActionResult.pass(user.getStackInHand(hand));
     }

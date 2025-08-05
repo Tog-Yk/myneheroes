@@ -18,6 +18,7 @@ import net.togyk.myneheroes.Item.custom.ThrowableItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.PassiveAbility;
+import net.togyk.myneheroes.damage.ModDamageTypes;
 import net.togyk.myneheroes.entity.MeteorEntity;
 import net.togyk.myneheroes.gamerule.ModGamerules;
 import net.togyk.myneheroes.power.Power;
@@ -102,14 +103,29 @@ public class ModEvents {
             if (entity instanceof PlayerEntity player && !blocked) {
                 // Check if the damage source is lightning
                 if (source.isOf(DamageTypes.LIGHTNING_BOLT)) {
-                    // Check if the player has the Speed effect
-                    StatusEffectInstance speedEffect = player.getStatusEffect(StatusEffects.SPEED);
-                    if (speedEffect != null && speedEffect.getDuration() > 0) {
-                        Power speedster = Powers.SPEEDSTER.copy();
-                        List<Power> currentPowers = PowerData.getPowers(player);
-                        if (!currentPowers.stream().map(Power::getId).toList().contains(speedster.id)) {
-                            PowerData.addPower(player, speedster);
+                    // Check if the player has reached the limit of powers
+                    if (player.getWorld().getGameRules().getBoolean(ModGamerules.GIVE_POWERS_ABOVE_LIMIT) || PowerData.getPowers(player).size() < player.getWorld().getGameRules().getInt(ModGamerules.POWER_LIMIT)) {
+                        // Check if the player has the Speed effect
+                        StatusEffectInstance speedEffect = player.getStatusEffect(StatusEffects.SPEED);
+                        if (speedEffect != null && speedEffect.getDuration() > 0) {
+                            Power speedster = Powers.SPEEDSTER.copy();
+                            List<Power> currentPowers = PowerData.getPowers(player);
+                            if (!currentPowers.stream().map(Power::getId).toList().contains(speedster.id)) {
+                                PowerData.addPower(player, speedster);
+                            }
                         }
+                    }
+                }
+            }
+        });
+
+        ServerTickEvents.END_SERVER_TICK.register(server -> {
+            int tickCount = server.getTicks();
+            if (tickCount % 20 == 0) {
+                for (PlayerEntity player : server.getPlayerManager().getPlayerList()) {
+                    List<Power> powers = PowerData.getPowers(player);
+                    if (powers.size() > server.getOverworld().getGameRules().getInt(ModGamerules.POWER_LIMIT)) {
+                        player.damage(ModDamageTypes.powerExhaustion(player.getWorld(), null), 2);
                     }
                 }
             }

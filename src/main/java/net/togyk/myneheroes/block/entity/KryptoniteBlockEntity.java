@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import net.togyk.myneheroes.block.ModBlockEntityTypes;
 import net.togyk.myneheroes.block.custom.KryptoniteBlock;
 import net.togyk.myneheroes.effect.ModEffects;
+import net.togyk.myneheroes.gamerule.ModGamerules;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.util.PowerData;
@@ -52,7 +53,10 @@ public class KryptoniteBlockEntity extends BlockEntity {
                     }
                     this.TimeNearBlockPerPlayer.remove(player.getUuid());
                 } else if (!isExposedToSun) {
-                    eligiblePlayers.add(player.getUuid());
+                    // Check if the player has reached the limit of powers
+                    if (player.getWorld().getGameRules().getBoolean(ModGamerules.GIVE_POWERS_ABOVE_LIMIT) || PowerData.getPowers(player).size() < player.getWorld().getGameRules().getInt(ModGamerules.POWER_LIMIT)) {
+                        eligiblePlayers.add(player.getUuid());
+                    }
                 }
             }
 

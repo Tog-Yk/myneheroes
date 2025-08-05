@@ -163,6 +163,8 @@
   "death.attack.laser" : "%1$s was disintegrated by %2$s",
   "death.attack.laser.item" : "%1$s was disintegrated by %2$s",
 
+  "death.attack.power_exhaustion": "%1$s went beyond their limits",
+  "death.attack.power_exhaustion_rare": "%1$s pushed past their mortal limits",
 
   "advancements.myneheroes.vibranium.root.title": "An other-worldly metal",
   "advancements.myneheroes.vibranium.root.description": "Acquire vibranium",

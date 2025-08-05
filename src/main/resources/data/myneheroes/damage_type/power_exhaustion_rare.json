@@ -1,0 +1,6 @@
+{
+  "exhaustion": 0.5,
+  "message_id": "power_exhaustion_rare",
+  "scaling": "never",
+  "effects": "hurt"
+}

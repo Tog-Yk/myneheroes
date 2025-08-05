@@ -21,6 +21,20 @@ public class ModGamerules {
                     GameRuleFactory.createBooleanRule(true)
             );
 
+    public static final GameRules.Key<GameRules.IntRule> POWER_LIMIT =
+            GameRuleRegistry.register(
+                    "powerLimit_MH",
+                    GameRules.Category.PLAYER,
+                    GameRuleFactory.createIntRule(1)
+            );
+
+    public static final GameRules.Key<GameRules.BooleanRule> GIVE_POWERS_ABOVE_LIMIT =
+            GameRuleRegistry.register(
+                    "givePowersAboveLimit_MH",
+                    GameRules.Category.PLAYER,
+                    GameRuleFactory.createBooleanRule(false)
+            );
+
     public static void registerModGamerules() {
         MyneHeroes.LOGGER.info("Registering Gamerules for " + MyneHeroes.MOD_ID);
     }
