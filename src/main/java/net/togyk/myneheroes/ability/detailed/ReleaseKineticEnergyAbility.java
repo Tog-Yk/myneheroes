@@ -40,7 +40,7 @@ public class ReleaseKineticEnergyAbility extends Ability implements PassiveAbili
     }
 
     @Override
-    public void Use(PlayerEntity player) {
+    public void use(PlayerEntity player) {
         int charge = 0;
         List<Ability> abilities = ((PlayerAbilities) player).myneheroes$getAbilities();
         List<Ability> matchingAbilities = new ArrayList<>();

@@ -25,7 +25,7 @@ public class PassiveSelectionAbility extends AbilityHoldingAbility implements Pa
     }
 
     @Override
-    public void Use(PlayerEntity player) {
+    public void use(PlayerEntity player) {
         if (getCooldown() == 0) {
             player.openHandledScreen(this);
             save();

@@ -67,26 +67,28 @@ public class Ability {
         this.settings = settings;
     }
 
-    public Ability(Identifier id, int cooldown, Settings settings, Function<PlayerEntity, Boolean> use, Function<PlayerEntity, Boolean> hold) {
+    public Ability(Identifier id, int cooldown, Settings settings, @Nullable Function<PlayerEntity, Boolean> use, Function<PlayerEntity, Boolean> hold) {
         this.id = id;
         this.icon = Identifier.of(id.getNamespace(),"textures/ability/"+id.getPath()+".png");
-        this.pressed_icon = Identifier.of(id.getNamespace(),"textures/ability/"+id.getPath()+"_disabled.png");
+        this.pressed_icon = Identifier.of(id.getNamespace(),"textures/ability/pressed/"+id.getPath()+".png");
         this.maxCooldown = cooldown;
         this.use = use;
         this.hold = hold;
         this.settings = settings;
     }
 
-    public void Use(PlayerEntity player) {
-        if (this.getCooldown() == 0) {
-            if (this.use.apply(player)) {
-                this.setCooldown(this.getMaxCooldown());
+    public void use(PlayerEntity player) {
+        if (use != null) {
+            if (this.getCooldown() == 0) {
+                if (this.use.apply(player)) {
+                    this.setCooldown(this.getMaxCooldown());
+                }
             }
+            this.save();
         }
-        this.save();
     }
 
-    public void hold(PlayerEntity player) {
+    public void usePressed(PlayerEntity player) {
         if (this.hold != null) {
             if (this.getCooldown() == 0) {
                 if (this.hold.apply(player)) {
@@ -95,6 +97,10 @@ public class Ability {
             }
             this.save();
         }
+    }
+
+    //gets called if the player doesn't press the ability
+    public void useReleased(PlayerEntity player) {
     }
 
     public boolean canHold(PlayerEntity player) {
@@ -234,7 +240,7 @@ public class Ability {
     }
 
     public Ability copy() {
-        return new Ability(id, maxCooldown, settings, use);
+        return new Ability(id, maxCooldown, settings, use, hold);
     }
 
     public static class Settings{

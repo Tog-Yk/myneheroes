@@ -26,7 +26,7 @@ public class VariableLinkedAbility extends Ability {
     }
 
     @Override
-    public void Use(PlayerEntity player) {
+    public void use(PlayerEntity player) {
         if (this.getCooldown() == 0 && this.getIndirectHolder() instanceof VariableLinkedPower power) {
             if (this.use.apply(player, power)) {
                 this.setCooldown(this.getMaxCooldown());
@@ -46,7 +46,7 @@ public class VariableLinkedAbility extends Ability {
     }
 
     @Override
-    public void hold(PlayerEntity player) {
+    public void usePressed(PlayerEntity player) {
         if (this.hold != null) {
             if (this.getCooldown() == 0 && this.getIndirectHolder() instanceof VariableLinkedPower power) {
                 if (this.hold.apply(player, power)) {

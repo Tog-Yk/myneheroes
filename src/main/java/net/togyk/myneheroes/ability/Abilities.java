@@ -79,7 +79,8 @@ public class Abilities {
         for (ItemStack stack : player.getArmorItems()) {
             if (stack.getItem() instanceof AdvancedArmorItem item) {
                 List<Identifier> ids = item.getAbilities(stack).stream().map(Ability::getId).toList();
-                if (ids.contains(Identifier.of(MyneHeroes.MOD_ID, "take_off_suit"))) {
+                List<Identifier> armor_ids = item.getArmorAbilities(stack).stream().map(Ability::getId).toList();
+                if (ids.contains(Identifier.of(MyneHeroes.MOD_ID, "take_off_suit")) || armor_ids.contains(Identifier.of(MyneHeroes.MOD_ID, "take_off_suit"))) {
                     armor.add(stack);
                 }
             }
@@ -104,7 +105,7 @@ public class Abilities {
         return false;
     }));
 
-    public static final StockpileLinkedAbility FROST_BREATH = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "frost_breath"), 4, 48, 8, new Ability.Settings(),  (player) -> {
+    public static final StockpileLinkedAbility FROST_BREATH = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "frost_breath"), 4, 48, 8, new Ability.Settings(), null,  (player) -> {
         Vec3d direction = player.getRotationVec(1.0F);
         Vec3d origin = player.getEyePos().add(0, -0.2, 0);
         World world = player.getWorld();

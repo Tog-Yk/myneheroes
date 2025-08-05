@@ -39,17 +39,17 @@ public class LaserEyesAbility extends StockpileLinkedAbility {
     }
 
     @Override
-    public void Use(PlayerEntity player) {
-        if (this.getCooldown() == 0) {
+    public void useReleased(PlayerEntity player) {
+        if (this.getCooldown() == 0 && this.length != 0) {
             this.length = 0;
             this.end = null;
             this.setCooldown(this.getMaxCooldown());
+            this.save();
         }
-        this.save();
     }
 
     @Override
-    public void hold(PlayerEntity player) {
+    public void usePressed(PlayerEntity player) {
         if (getCooldown() == 0) {
             if (this.getHolder() instanceof StockPile stockpile && stockpile.getCharge() >= this.getCost()) {
                 this.length = Math.min(32, this.length + 2.5F);

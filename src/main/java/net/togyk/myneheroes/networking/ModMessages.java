@@ -50,45 +50,45 @@ public class ModMessages {
                 // logic for pressing a keybind
                 if (payload.abilityIndex() == 0) {
                     if (context.player() != null) {
-                        Ability firstAbility = ((PlayerAbilities) context.player()).myneheroes$getFirstAbility();
-                        if (firstAbility != null) {
-                            if (payload.isHolding()) {
-                                firstAbility.hold(context.player());
-                            } else {
-                                firstAbility.Use(context.player());
+                        Ability ability = ((PlayerAbilities) context.player()).myneheroes$getFirstAbility();
+                        if (ability != null) {
+                            switch (payload.type()) {
+                                case 0: ability.use(context.player());
+                                case 1: ability.usePressed(context.player());
+                                case 2: ability.useReleased(context.player());
                             }
                         }
                     }
                 } else if (payload.abilityIndex() == 1) {
                     if (context.player() != null) {
-                        Ability secondAbility = ((PlayerAbilities) context.player()).myneheroes$getSecondAbility();
-                        if (secondAbility != null) {
-                            if (payload.isHolding()) {
-                                secondAbility.hold(context.player());
-                            } else {
-                                secondAbility.Use(context.player());
+                        Ability ability = ((PlayerAbilities) context.player()).myneheroes$getSecondAbility();
+                        if (ability != null) {
+                            switch (payload.type()) {
+                                case 0: ability.use(context.player());
+                                case 1: ability.usePressed(context.player());
+                                case 2: ability.useReleased(context.player());
                             }
                         }
                     }
                 } else if (payload.abilityIndex() == 2) {
                     if (context.player() != null) {
-                        Ability thirdAbility = ((PlayerAbilities) context.player()).myneheroes$getThirdAbility();
-                        if (thirdAbility != null) {
-                            if (payload.isHolding()) {
-                                thirdAbility.hold(context.player());
-                            } else {
-                                thirdAbility.Use(context.player());
+                        Ability ability = ((PlayerAbilities) context.player()).myneheroes$getThirdAbility();
+                        if (ability != null) {
+                            switch (payload.type()) {
+                                case 0: ability.use(context.player());
+                                case 1: ability.usePressed(context.player());
+                                case 2: ability.useReleased(context.player());
                             }
                         }
                     }
                 } else if (payload.abilityIndex() == 3) {
                     if (context.player() != null) {
-                        Ability fourthAbility = ((PlayerAbilities) context.player()).myneheroes$getFourthAbility();
-                        if (fourthAbility != null) {
-                            if (payload.isHolding()) {
-                                fourthAbility.hold(context.player());
-                            } else {
-                                fourthAbility.Use(context.player());
+                        Ability ability = ((PlayerAbilities) context.player()).myneheroes$getFourthAbility();
+                        if (ability != null) {
+                            switch (payload.type()) {
+                                case 0: ability.use(context.player());
+                                case 1: ability.usePressed(context.player());
+                                case 2: ability.useReleased(context.player());
                             }
                         }
                     }

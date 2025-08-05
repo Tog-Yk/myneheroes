@@ -11,7 +11,7 @@ public class BooleanAbility extends Ability {
     }
 
     @Override
-    public void Use(PlayerEntity player) {
+    public void use(PlayerEntity player) {
         //switch the boolean
         if (getCooldown() == 0) {
             this.bool = !this.bool;

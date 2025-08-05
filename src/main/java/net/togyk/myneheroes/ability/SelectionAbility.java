@@ -3,19 +3,14 @@ package net.togyk.myneheroes.ability;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtList;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.client.screen.handeler.SelectionAbilityScreenHandler;
 import net.togyk.myneheroes.networking.SelectionScreenAbilityPayload;
-import net.togyk.myneheroes.util.AbilityUtil;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -25,7 +20,7 @@ public class SelectionAbility extends AbilityHoldingAbility implements ExtendedS
     }
 
     @Override
-    public void Use(PlayerEntity player) {
+    public void use(PlayerEntity player) {
         if (getCooldown() == 0) {
             player.openHandledScreen(this);
             save();
@@ -34,7 +29,7 @@ public class SelectionAbility extends AbilityHoldingAbility implements ExtendedS
 
     public void UseAbility(PlayerEntity player, int index) {
         Ability ability = this.getAbilities().get(index);
-        ability.Use(player);
+        ability.use(player);
         this.setCooldown(ability.getMaxCooldown());
         this.save();
     }
