@@ -53,7 +53,9 @@ public class PowerData {
     private static void syncData(ServerPlayerEntity player) {
         NbtCompound nbt = new NbtCompound();
         player.writeCustomDataToNbt(nbt);
-        ServerPlayNetworking.send(player, new PlayerPowerSyncDataPayload(nbt));
+        for (ServerPlayerEntity player1 : player.getServer().getPlayerManager().getPlayerList()) {
+            ServerPlayNetworking.send(player1, new PlayerPowerSyncDataPayload(nbt, player.getUuid()));
+        }
         for (Power power : ((PlayerPowers) player).myneheroes$getPowers()) {
             ModCriteria.POWERS_CHANGED_CRITERION.trigger(player, power.getId());
         }

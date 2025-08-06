@@ -20,4 +20,7 @@ public interface PlayerAbilities {
     int myneheroes$maxAbilityScroll();
     void myneheroes$scrollAbilityFurther();
     void myneheroes$scrollAbilityBack();
+
+
+    void myneheroes$setAbilities(List<Ability> abilities);
 }

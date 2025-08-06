@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -40,6 +41,7 @@ public class ModMessages {
     public static final Identifier MISSED_SWING_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "missed_swing");
     public static final Identifier MISSED_INTERACTION_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "missed_interaction");
     public static final Identifier PLAYER_POWER_SYNC_DATA_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "power_sync_data");
+    public static final Identifier PLAYER_ABILITY_SYNC_DATA_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "ability_sync_data");
     public static final Identifier PLAYER_ABILITY_SCROLLED_SYNC_DATA_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "ability_scrolled_sync_data");
 
     public static void registerServerMessages() {
@@ -178,6 +180,7 @@ public class ModMessages {
 
         PayloadTypeRegistry.playS2C().register(PlayerAbilityScrollSyncDataPayload.ID, PlayerAbilityScrollSyncDataPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(PlayerPowerSyncDataPayload.ID, PlayerPowerSyncDataPayload.CODEC);
+        PayloadTypeRegistry.playS2C().register(PlayerAbilitySyncDataPayload.ID, PlayerAbilitySyncDataPayload.CODEC);
 
         PayloadTypeRegistry.playC2S().register(UseSelectedAbilityPayload.ID, UseSelectedAbilityPayload.CODEC);
 
@@ -220,22 +223,34 @@ public class ModMessages {
     public static void registerClientMessages() {
         ClientPlayNetworking.registerGlobalReceiver(PlayerPowerSyncDataPayload.ID, (payload, context) -> {
             context.client().execute(() -> {
-                List<Power> powers = new ArrayList<>();
-                if (payload.nbt().contains(MyneHeroes.MOD_ID)) {
-                    NbtCompound modNbt = payload.nbt().getCompound(MyneHeroes.MOD_ID);
-                    if (modNbt.contains("powers")) {
-                        NbtList powerNbt = modNbt.getList("powers", NbtElement.COMPOUND_TYPE);
-                        for (NbtElement nbtElement : powerNbt) {
-                            if (nbtElement instanceof NbtCompound nbtCompound) {
-                                Identifier powerId = Identifier.of(nbtCompound.getString("id"));
-                                Power power = Powers.get(powerId);
-                                power.readNbt(nbtCompound);
-                                powers.add(power);
+                PlayerEntity target = context.client().world.getPlayerByUuid(payload.playerUuid());
+                if (target != null) {
+                    List<Power> powers = new ArrayList<>();
+                    if (payload.nbt().contains(MyneHeroes.MOD_ID)) {
+                        NbtCompound modNbt = payload.nbt().getCompound(MyneHeroes.MOD_ID);
+                        if (modNbt.contains("powers")) {
+                            NbtList powerNbt = modNbt.getList("powers", NbtElement.COMPOUND_TYPE);
+                            for (NbtElement nbtElement : powerNbt) {
+                                if (nbtElement instanceof NbtCompound nbtCompound) {
+                                    Identifier powerId = Identifier.of(nbtCompound.getString("id"));
+                                    Power power = Powers.get(powerId);
+                                    power.readNbt(nbtCompound);
+                                    powers.add(power);
+                                }
                             }
                         }
                     }
+                    ((PlayerPowers) target).myneheroes$setPowers(powers);
                 }
-                ((PlayerPowers) context.player()).myneheroes$setPowers(powers);
+            });
+        });
+        ClientPlayNetworking.registerGlobalReceiver(PlayerAbilitySyncDataPayload.ID, (payload, context) -> {
+            context.client().execute(() -> {
+                PlayerEntity target = context.client().world.getPlayerByUuid(payload.playerUuid());
+                if (target != null) {
+                    List<Ability> abilities = payload.abilities();
+                    ((PlayerAbilities) target).myneheroes$setAbilities(abilities);
+                }
             });
         });
 

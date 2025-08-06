@@ -1,16 +1,19 @@
 package net.togyk.myneheroes.mixin;
 
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.AbilityHolding;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.networking.PlayerAbilitySyncDataPayload;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.util.ScrollData;
 import net.togyk.myneheroes.util.PlayerAbilities;
@@ -58,6 +61,14 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
             this.scrolledAbilityOffset = this.myneheroes$maxAbilityScroll();
         } else if (scrolledAbilityOffset < 0) {
             this.scrolledAbilityOffset = 0;
+        }
+        //sync the data to other players
+        if (player instanceof ServerPlayerEntity serverPlayer) {
+            for (ServerPlayerEntity player1 : serverPlayer.getServer().getPlayerManager().getPlayerList()) {
+                if (player1 != serverPlayer) {
+                    ServerPlayNetworking.send(player1, new PlayerAbilitySyncDataPayload(this.abilities, player.getUuid()));
+                }
+            }
         }
     }
 
@@ -306,5 +317,9 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
     @Override
     public List<Ability> myneheroes$getAbilities() {
         return abilities;
+    }
+    @Override
+    public void myneheroes$setAbilities(List<Ability> abilities) {
+        this.abilities = abilities;
     }
 }
