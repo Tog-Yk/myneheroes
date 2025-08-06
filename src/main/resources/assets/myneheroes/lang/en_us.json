@@ -72,6 +72,11 @@
   "item.myneheroes.speedster_gold_titanium_leggings": "Advanced Leggings",
   "item.myneheroes.speedster_gold_titanium_boots": "Advanced Boost",
 
+  "item.myneheroes.speedster_vibranium_helmet": "Advanced Helmet",
+  "item.myneheroes.speedster_vibranium_chestplate": "Advanced Chestplate",
+  "item.myneheroes.speedster_vibranium_leggings": "Advanced Leggings",
+  "item.myneheroes.speedster_vibranium_boots": "Advanced Boost",
+
 
 
   "block.myneheroes.vibranium_block": "Vibranium Block",
@@ -202,5 +207,6 @@
   "armor_pattern.myneheroes.mark3_gold_titanium": " Mark-3",
   "armor_pattern.myneheroes.mark6_vibranium": " Mark-6",
   "armor_pattern.myneheroes.mark45_netherite": " Mark-45",
-  "armor_pattern.myneheroes.speedster_gold_titanium": " Speedster Gold-Titanium"
+  "armor_pattern.myneheroes.speedster_gold_titanium": " Speedster Gold-Titanium",
+  "armor_pattern.myneheroes.speedster_vibranium": " Speedster Vibranium"
 }

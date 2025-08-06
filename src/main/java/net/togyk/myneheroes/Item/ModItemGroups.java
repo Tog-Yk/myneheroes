@@ -113,6 +113,11 @@ public class ModItemGroups {
                         entries.add(ModItems.MARK45_NETHERITE_BOOTS);
 
 
+                        entries.add(ModItems.SPEEDSTER_VIBRANIUM_HELMET);
+                        entries.add(ModItems.SPEEDSTER_VIBRANIUM_CHESTPLATE);
+                        entries.add(ModItems.SPEEDSTER_VIBRANIUM_LEGGINGS);
+                        entries.add(ModItems.SPEEDSTER_VIBRANIUM_BOOTS);
+
                         entries.add(ModItems.SPEEDSTER_GOLD_TITANIUM_HELMET);
                         entries.add(ModItems.SPEEDSTER_GOLD_TITANIUM_CHESTPLATE);
                         entries.add(ModItems.SPEEDSTER_GOLD_TITANIUM_LEGGINGS);

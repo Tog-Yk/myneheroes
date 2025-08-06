@@ -56,6 +56,22 @@ public class ModArmorMaterials {
                             new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark6_glow"), "", true)
                     ),0,0));
 
+    //Speedster pattern
+    public static final RegistryEntry<ArmorMaterial> VIBRANIUM_SPEEDSTER_MATERIAL = registerArmorMaterial("vibranium_speedster",
+            () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                map.put(ArmorItem.Type.BOOTS, 3);
+                map.put(ArmorItem.Type.LEGGINGS, 6);
+                map.put(ArmorItem.Type.CHESTPLATE, 8);
+                map.put(ArmorItem.Type.HELMET, 4);
+                map.put(ArmorItem.Type.BODY, 7);
+            }), 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, () -> Ingredient.ofItems(ModItems.VIBRANIUM_INGOT),
+                    List.of(
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"speedster_vibranium"), "", true),
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"speedster_vibranium_details"), "", true),
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"speedster_vibranium_details_2"), "", true),
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"speedster_vibranium_glow"), "", true)
+                    ),0,0));
+
     /*
      * Spiderman pattern
      * Kryptonian pattern

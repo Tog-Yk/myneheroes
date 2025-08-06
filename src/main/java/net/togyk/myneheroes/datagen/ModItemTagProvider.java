@@ -39,6 +39,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.MARK3_GOLD_TITANIUM_HELMET)
                 .add(ModItems.MARK45_NETHERITE_HELMET)
                 .add(ModItems.SPEEDSTER_GOLD_TITANIUM_HELMET)
+                .add(ModItems.SPEEDSTER_VIBRANIUM_HELMET)
         ;
 
         getOrCreateTagBuilder(ItemTags.CHEST_ARMOR)
@@ -52,6 +53,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.MARK3_GOLD_TITANIUM_CHESTPLATE)
                 .add(ModItems.MARK45_NETHERITE_CHESTPLATE)
                 .add(ModItems.SPEEDSTER_GOLD_TITANIUM_CHESTPLATE)
+                .add(ModItems.SPEEDSTER_VIBRANIUM_CHESTPLATE)
         ;
 
         getOrCreateTagBuilder(ItemTags.LEG_ARMOR)
@@ -65,6 +67,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.MARK3_GOLD_TITANIUM_LEGGINGS)
                 .add(ModItems.MARK45_NETHERITE_LEGGINGS)
                 .add(ModItems.SPEEDSTER_GOLD_TITANIUM_LEGGINGS)
+                .add(ModItems.SPEEDSTER_VIBRANIUM_LEGGINGS)
         ;
 
         getOrCreateTagBuilder(ItemTags.FOOT_ARMOR)
@@ -78,6 +81,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.MARK3_GOLD_TITANIUM_BOOTS)
                 .add(ModItems.MARK45_NETHERITE_BOOTS)
                 .add(ModItems.SPEEDSTER_GOLD_TITANIUM_BOOTS)
+                .add(ModItems.SPEEDSTER_VIBRANIUM_BOOTS)
         ;
 
         getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE)
@@ -100,6 +104,11 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.SPEEDSTER_GOLD_TITANIUM_CHESTPLATE)
                 .add(ModItems.SPEEDSTER_GOLD_TITANIUM_LEGGINGS)
                 .add(ModItems.SPEEDSTER_GOLD_TITANIUM_BOOTS)
+
+                .add(ModItems.SPEEDSTER_VIBRANIUM_HELMET)
+                .add(ModItems.SPEEDSTER_VIBRANIUM_CHESTPLATE)
+                .add(ModItems.SPEEDSTER_VIBRANIUM_LEGGINGS)
+                .add(ModItems.SPEEDSTER_VIBRANIUM_BOOTS)
         ;
 
         getOrCreateTagBuilder(ModTags.Items.COLORING_FUEL)

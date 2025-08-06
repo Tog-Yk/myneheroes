@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "myneheroes:item/speedster_vibranium_helmet",
+    "layer1": "myneheroes:item/speedster_vibranium_details_helmet",
+    "layer2": "myneheroes:item/speedster_vibranium_details_2_helmet",
+    "layer3": "myneheroes:item/speedster_vibranium_glow_helmet"
+  }
+}
