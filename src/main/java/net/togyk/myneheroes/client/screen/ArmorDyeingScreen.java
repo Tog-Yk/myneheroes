@@ -3,16 +3,19 @@ package net.togyk.myneheroes.client.screen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.text.TextColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.client.screen.widget.ColorSliderWidget;
 import net.togyk.myneheroes.client.screen.handeler.ArmorDyeingScreenHandler;
+import net.togyk.myneheroes.client.screen.widget.ColorSliderWidget;
 
 import java.util.List;
 
@@ -43,11 +46,29 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
 
         this.playerInventoryTitleY = this.backgroundHeight - 92;
 
-        this.sliderWidgetRed = new ColorSliderWidget("Red", this.x + 96, this.y + 16, 64, 14, 0);
+        this.sliderWidgetRed = new ColorSliderWidget("Red", this.x + 96, this.y + 16, 64, 14, 0) {
+            @Override
+            protected void applyValue() {
+                super.applyValue();
+                slidersChanged();
+            }
+        };
         addDrawableChild(sliderWidgetRed);
-        this.sliderWidgetGreen = new ColorSliderWidget("Green", this.x + 96, this.y + 32, 64, 14, 0);
+        this.sliderWidgetGreen = new ColorSliderWidget("Green", this.x + 96, this.y + 32, 64, 14, 0) {
+            @Override
+            protected void applyValue() {
+                super.applyValue();
+                slidersChanged();
+            }
+        };
         addDrawableChild(sliderWidgetGreen);
-        this.sliderWidgetBlue = new ColorSliderWidget("Blue", this.x + 96, this.y + 49, 64, 14, 0);
+        this.sliderWidgetBlue = new ColorSliderWidget("Blue", this.x + 96, this.y + 49, 64, 14, 0) {
+            @Override
+            protected void applyValue() {
+                super.applyValue();
+                slidersChanged();
+            }
+        };
         addDrawableChild(sliderWidgetBlue);
 
         this.setButton = ButtonWidget.builder(Text.of("set"), button -> {
@@ -56,7 +77,10 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
                     }
                 })
                 .dimensions(this.x + 96, this.y + 66, 31, 14)
+                .tooltip(Tooltip.of(Text.literal(" " + String.format("0x%06X", this.getSelectedColor()))
+                                .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(this.getSelectedColor())))))
                 .build();
+
         addDrawableChild(setButton);
         this.setDefaultButton = ButtonWidget.builder(Text.of("default"), button -> {
                     if (this.handler.canDye()) {
@@ -212,6 +236,12 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
         return color;
     }
 
+    private void slidersChanged() {
+        int rgb = this.getSelectedColor() & 0xFFFFFF;
+        this.setButton.setTooltip(Tooltip.of(Text.literal(String.format("0x%06X", rgb))
+                .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(rgb)))));
+    }
+
     private void onInventoryChange() {
         if (!this.handler.canDye()) {
             this.scrollAmount = 0.0F;
@@ -244,6 +274,7 @@ public class ArmorDyeingScreen extends HandledScreen<ArmorDyeingScreenHandler> {
             this.setDefaultButton.active = true;
 
             this.updateColorSliders();
+            this.slidersChanged();
         }
     }
 

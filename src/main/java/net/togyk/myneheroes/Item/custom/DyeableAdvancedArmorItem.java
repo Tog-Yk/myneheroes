@@ -163,7 +163,7 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem implements Dyeab
         tooltip.add(Text.literal("Colors:").formatted(Formatting.GRAY));
         for (int i = 0; i < defaultColors.size(); i++) {
             if (layerIsDyeable(i)) {
-                int color = getColor(stack, i);
+                int color = getColor(stack, i) & 0xFFFFFF;
                 tooltip.add(Text.literal(" " + String.format("0x%06X", color)).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(color))));
             }
         }
