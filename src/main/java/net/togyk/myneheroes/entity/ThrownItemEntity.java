@@ -1,7 +1,10 @@
 package net.togyk.myneheroes.entity;
 
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ProjectileDeflection;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -14,6 +17,7 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.network.packet.s2c.play.GameStateChangeS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Direction;
@@ -22,20 +26,55 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.MyneHeroes;
+import org.jetbrains.annotations.Nullable;
 
 public class ThrownItemEntity extends PersistentProjectileEntity {
     private static final TrackedData<ItemStack> STACK = DataTracker.registerData(ThrownItemEntity.class, TrackedDataHandlerRegistry.ITEM_STACK);
+    private static final TrackedData<Integer> LOYALTY = DataTracker.registerData(ThrownItemEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Integer> BOUNCES = DataTracker.registerData(ThrownItemEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Boolean> IS_RETURNING = DataTracker.registerData(ThrownItemEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    public int returnTimer;
 
     public ThrownItemEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
         super(entityType, world);
     }
-    public ThrownItemEntity(EntityType<? extends ThrownItemEntity> entityType, World world, LivingEntity owner, ItemStack stack) {
-        super(entityType, owner, world, stack, null);
-        this.setDisplayStack(stack);
-    }
     public ThrownItemEntity(World world, LivingEntity owner, ItemStack stack) {
         super(ModEntities.THROWN_ITEM, owner, world, stack, null);
         this.setDisplayStack(stack);
+        setLoyalty(this.getLoyalty(stack));
+    }
+
+    @Override
+    public void tick() {
+
+        Entity entity = this.getOwner();
+        int loyalty = getLoyalty();
+        if (loyalty > 0 && (this.isReturning() || this.isNoClip()) && entity != null) {
+            if (!this.isOwnerAlive()) {
+                if (!this.getWorld().isClient && this.pickupType == PickupPermission.ALLOWED) {
+                    this.dropStack(this.asItemStack(), 0.1F);
+                }
+
+                this.discard();
+            } else {
+                this.setNoClip(true);
+                Vec3d vec3d = entity.getEyePos().subtract(this.getPos());
+                this.setPos(this.getX(), this.getY() + vec3d.y * 0.015 * (double) loyalty, this.getZ());
+                if (this.getWorld().isClient) {
+                    this.lastRenderY = this.getY();
+                }
+
+                double speedMultiplier = 0.05 * (double) loyalty;
+                this.setVelocity(this.getVelocity().multiply(0.95).add(vec3d.normalize().multiply(speedMultiplier)));
+                if (this.returnTimer == 0) {
+                    this.playSound(SoundEvents.ITEM_TRIDENT_RETURN, 10.0F, 1.0F);
+                }
+
+                ++this.returnTimer;
+            }
+        }
+
+        super.tick();
     }
 
     @Override
@@ -54,6 +93,29 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
         this.getDataTracker().set(STACK, stack);
     }
 
+    public int getLoyalty() {
+        return this.getDataTracker().get(LOYALTY);
+    }
+
+    public void setLoyalty(int loyalty) {
+        this.getDataTracker().set(LOYALTY, loyalty);
+    }
+    public int getBounces() {
+        return this.getDataTracker().get(BOUNCES);
+    }
+
+    public void setBounces(int bounces) {
+        this.getDataTracker().set(BOUNCES, bounces);
+    }
+
+    public boolean isReturning() {
+        return this.getDataTracker().get(IS_RETURNING);
+    }
+
+    public void setReturning(boolean isReturning) {
+        this.getDataTracker().set(IS_RETURNING, isReturning);
+    }
+
     @Override
     public void onTrackedDataSet(TrackedData<?> data) {
         super.onTrackedDataSet(data);
@@ -66,6 +128,9 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(STACK, ItemStack.EMPTY);
+        builder.add(LOYALTY, 0);
+        builder.add(BOUNCES, 5);
+        builder.add(IS_RETURNING, false);
     }
 
     @Override
@@ -74,6 +139,10 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
         if (!this.getDisplayStack().isEmpty()) {
             modNbt.put("item", this.getDisplayStack().encode(this.getRegistryManager()));
         }
+
+        modNbt.putInt("loyalty", this.getLoyalty());
+        modNbt.putInt("bounces", this.getBounces());
+        modNbt.putBoolean("is_returning", this.isReturning());
 
         nbt.put(MyneHeroes.MOD_ID, modNbt);
 
@@ -90,6 +159,18 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
             } else {
                 this.setDisplayStack(ItemStack.EMPTY);
             }
+
+            if (modNbt.contains("loyalty")) {
+                this.setLoyalty(modNbt.getInt("loyalty"));
+            }
+
+            if (modNbt.contains("bounces")) {
+                this.setBounces(modNbt.getInt("bounces"));
+            }
+
+            if (modNbt.contains("is_returning")) {
+                this.setReturning(modNbt.getBoolean("is_returning"));
+            }
         }
 
         super.readCustomDataFromNbt(nbt);
@@ -97,31 +178,37 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
-        // Only bounce if we hit a block
         if (!this.getWorld().isClient) {
-            // Get current velocity vector
-            Vec3d velocity = this.getVelocity();
+            //bounce
+            int bounces = this.getBounces();
+            int loyalty = this.getLoyalty();
+            if (bounces > 0) {
+                // Get current velocity vector
+                Vec3d velocity = this.getVelocity();
 
-            // Get the face of the block that was hit
-            Direction hitSide = blockHitResult.getSide();
-            // Create a unit normal vector from the block face
-            Vec3d normal = new Vec3d(hitSide.getOffsetX(), hitSide.getOffsetY(), hitSide.getOffsetZ());
+                // Get the face of the block that was hit
+                Direction hitSide = blockHitResult.getSide();
+                // Create a unit normal vector from the block face
+                Vec3d normal = new Vec3d(hitSide.getOffsetX(), hitSide.getOffsetY(), hitSide.getOffsetZ());
 
-            // Compute dot product between velocity and the normal
-            double dot = velocity.dotProduct(normal);
+                // Compute dot product between velocity and the normal
+                double dot = velocity.dotProduct(normal);
 
-            // Reflect the velocity: newVelocity = V - 2*(V·N)*N
-            Vec3d reflected = velocity.subtract(normal.multiply(2 * dot));
+                // Reflect the velocity: newVelocity = V - 2*(V·N)*N
+                Vec3d reflected = velocity.subtract(normal.multiply(2 * dot));
 
-            // Apply 90% speed retention (i.e. lose 10% of speed)
-            Vec3d newVelocity = reflected.multiply(0.75);
+                // Apply 90% speed retention (i.e. lose 10% of speed)
+                Vec3d newVelocity = reflected.multiply(0.75);
 
-            //check if the speed is fast enough to still bounce
-            if (newVelocity.lengthSquared() <= 0.15) {
-                super.onBlockHit(blockHitResult);
-            } else {
                 // Set the new velocity on the projectile
                 this.setVelocity(newVelocity);
+
+                //consume a bounce
+                this.setBounces(bounces - 1);
+            } else if (loyalty > 0) {
+                this.setReturning(true);
+            } else {
+                super.onBlockHit(blockHitResult);
             }
         }
     }
@@ -135,6 +222,13 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
             }
         }
     }
+
+
+    @Nullable
+    protected EntityHitResult getEntityCollision(Vec3d currentPosition, Vec3d nextPosition) {
+        return this.isReturning() ? null : super.getEntityCollision(currentPosition, nextPosition);
+    }
+
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
@@ -248,5 +342,23 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
     @Override
     protected void age() {
         this.age++;
+    }
+
+    private int getLoyalty(ItemStack stack) {
+        World var3 = this.getWorld();
+        if (var3 instanceof ServerWorld serverWorld) {
+            return MathHelper.clamp(EnchantmentHelper.getTridentReturnAcceleration(serverWorld, stack, this), 0, 127);
+        } else {
+            return 0;
+        }
+    }
+
+    private boolean isOwnerAlive() {
+        Entity entity = this.getOwner();
+        if (entity != null && entity.isAlive()) {
+            return !(entity instanceof ServerPlayerEntity) || !entity.isSpectator();
+        } else {
+            return false;
+        }
     }
 }

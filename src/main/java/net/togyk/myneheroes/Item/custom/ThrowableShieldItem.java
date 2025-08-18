@@ -1,5 +1,8 @@
 package net.togyk.myneheroes.Item.custom;
 
+import net.fabricmc.fabric.api.item.v1.EnchantingContext;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
@@ -7,6 +10,7 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.ShieldItem;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
@@ -65,5 +69,16 @@ public class ThrowableShieldItem extends ShieldItem implements StationaryItem, T
             return ActionResult.SUCCESS;
         }
         return ActionResult.PASS;
+    }
+
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public boolean canBeEnchantedWith(ItemStack stack, RegistryEntry<Enchantment> enchantment, EnchantingContext context) {
+        return enchantment == Enchantments.LOYALTY || super.canBeEnchantedWith(stack, enchantment, context);
     }
 }
