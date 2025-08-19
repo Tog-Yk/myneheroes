@@ -11,7 +11,7 @@ public class ModGamerules {
             GameRuleRegistry.register(
                     "doMeteorSpawning_MH",
                     GameRules.Category.SPAWNING,
-                    GameRuleFactory.createBooleanRule(true)
+                    GameRuleFactory.createBooleanRule(false)
             );
 
     public static final GameRules.Key<GameRules.BooleanRule> KEEP_POWERS =

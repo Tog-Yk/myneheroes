@@ -6,9 +6,9 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.function.ValueLists;
+import net.minecraft.util.math.random.Random;
 import net.togyk.myneheroes.util.ModTags;
 
-import java.util.Random;
 import java.util.function.IntFunction;
 
 public enum MeteorVariant {
@@ -66,6 +66,18 @@ public enum MeteorVariant {
     }
 
     public static MeteorVariant getRandomVariant(Random random) {
+        int r = random.nextInt(getTotalWeight()) + 1;
+        int cumulative = 0;
+        for (MeteorVariant v : values()) {
+            cumulative += v.weight;
+            if (r <= cumulative) {
+                return v;
+            }
+        }
+        // should never happen if weights > 0
+        return DEFAULT;
+    }
+    public static MeteorVariant getRandomVariant(java.util.Random random) {
         int r = random.nextInt(getTotalWeight()) + 1;
         int cumulative = 0;
         for (MeteorVariant v : values()) {

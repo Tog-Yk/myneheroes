@@ -9,11 +9,10 @@ import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
-import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.entity.MeteorVariant;
 
 
@@ -24,23 +23,53 @@ public class MeteorFeature extends Feature<DefaultFeatureConfig> {
 
     @Override
     public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
-        World world = context.getWorld().toServerWorld();
+        StructureWorldAccess world = context.getWorld();
         BlockPos pos = context.getOrigin();
         Random random = context.getRandom();
 
-        MeteorVariant variant = MeteorVariant.getRandomVariant(new java.util.Random());
+        MeteorVariant variant = MeteorVariant.getRandomVariant(random);
         int radius = random.nextBetween(3, 6);
 
-        createCrater(world, pos, (int) (radius * 2.5), random, variant);
-        createMeteor(world, pos.up(radius/2), radius, random, variant);
-
-        MyneHeroes.LOGGER.info("placed meteor at: {}", pos);
+        //seems to freeze the server
+        createCrater(world, pos, radius, random);
+        createCraterDecoration(world, pos, (int) (radius * 2.5), random, variant);
+        //unknown status
+        createMeteor(world, pos, radius, random, variant);
 
         return true;
     }
 
 
-    private void createCrater(World world, BlockPos origin, int radius, Random random, MeteorVariant variant) {
+
+
+    private void createCrater(StructureWorldAccess world, BlockPos origin, int radius, Random random) {
+        double rx = radius * 1.5 * 1.6;   // X stretch
+        double rz = radius * 1.5 * 1.6;   // Z stretch
+        double ry = radius * 1.5;    // Y smaller
+
+        for (int dx = (int)-rx; dx <= (int)rx; dx++) {
+            for (int dz = (int)-rz; dz <= (int)rz; dz++) {
+                for (int dy = (int)-ry; dy <= ry; dy++) { // only carve downward
+                    // normalized distances
+                    double nx = dx / rx;
+                    double ny = dy / ry;
+                    double nz = dz / rz;
+
+                    double distanceSq = nx*nx + ny*ny + nz*nz;
+
+                    if (distanceSq <= 1.0) {
+                        //add some randomness
+                        if (distanceSq >= 0.5 && random.nextFloat() <= distanceSq) continue;
+
+                        BlockPos pos = origin.add(dx, dy, dz);
+                        world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
+                    }
+                }
+            }
+        }
+    }
+
+    private void createCraterDecoration(StructureWorldAccess world, BlockPos origin, int radius, Random random, MeteorVariant variant) {
 
         // Loop over a square bounding the circle
         for (double x = -radius; x <= radius; x++) {
@@ -58,10 +87,10 @@ public class MeteorFeature extends Feature<DefaultFeatureConfig> {
                         BlockState state = world.getBlockState(pos);
 
                         // Only replace stone‑replaceable blocks
-                        if (state.isIn(BlockTags.SAND)) {
+                        if (state.isIn(BlockTags.SAND) && random.nextFloat() > 0.7F) {
                             world.setBlockState(pos, Blocks.GLASS.getDefaultState(), 2);
                         } else if (state.isIn(BlockTags.BASE_STONE_OVERWORLD) || state.isIn(BlockTags.LOGS) || state.isIn(BlockTags.DIRT)) {
-                            world.setBlockState(pos, this.getRandomBlockFromTag(random, variant.getCrustBlockTag()));
+                            world.setBlockState(pos, this.getRandomBlockFromTag(random, variant.getCrustBlockTag()), 2);
                         }
                     }
                 }
@@ -69,7 +98,7 @@ public class MeteorFeature extends Feature<DefaultFeatureConfig> {
         }
     }
 
-    private void createMeteor(World world, BlockPos origin, int radius, Random random, MeteorVariant variant) {
+    private void createMeteor(StructureWorldAccess world, BlockPos origin, int radius, Random random, MeteorVariant variant) {
 
         // Loop over a square bounding the circle
         for (double x = -radius; x <= radius; x++) {
@@ -86,10 +115,10 @@ public class MeteorFeature extends Feature<DefaultFeatureConfig> {
                     double distSq2 = x*x + z*z + y*y;
                     if (distSq2 > (radius * 0.70)*(radius * 0.70)) {
                         //on the crust
-                        world.setBlockState(pos, this.getRandomBlockFromTag(random, variant.getCrustBlockTag()));
+                        world.setBlockState(pos, this.getRandomBlockFromTag(random, variant.getCrustBlockTag()), 2);
                     } else {
                         //in the core
-                        world.setBlockState(pos, this.getRandomBlockFromTag(random, variant.getCoreBlockTag()));
+                        world.setBlockState(pos, this.getRandomBlockFromTag(random, variant.getCoreBlockTag()), 2);
                     }
                 }
             }

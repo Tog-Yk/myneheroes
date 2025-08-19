@@ -3,6 +3,7 @@ package net.togyk.myneheroes.worldgen;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.*;
@@ -29,11 +30,10 @@ public class ModPlacedFeatures {
                         //at what y value does it generate
                         HeightRangePlacementModifier.uniform(YOffset.aboveBottom(40), YOffset.fixed(64))));
 
-        /*/doesn't work
+
         register(context, METEOR_KEY, registryLookup.getOrThrow(ModConfiguredFeatures.METEOR_KEY),
-                List.of(RandomOffsetPlacementModifier.of(ClampedNormalIntProvider.of(12, 3, 3, 16), ConstantIntProvider.create(0)), HeightmapPlacementModifier.of(Heightmap.Type.WORLD_SURFACE))
+                List.of(RarityFilterPlacementModifier.of(50), SquarePlacementModifier.of(), HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES), BiomePlacementModifier.of())
         );
-        //*/
     }
 
     private static RegistryKey<PlacedFeature> registerKey(String name) {
