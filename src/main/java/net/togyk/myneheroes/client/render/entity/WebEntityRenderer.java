@@ -33,7 +33,7 @@ public class WebEntityRenderer extends ProjectileEntityRenderer<WebEntity> {
         matrixStack.push();
         float size = 0.5f;
 
-        matrixStack.translate(0, size / 2, 0);
+        matrixStack.translate(0, size / 4, 0);
 
         Vec3d direction = entity.getVelocity();
 

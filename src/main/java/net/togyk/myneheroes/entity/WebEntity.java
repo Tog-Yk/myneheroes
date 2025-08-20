@@ -47,13 +47,17 @@ public class WebEntity extends PersistentProjectileEntity {
                 this.getWorld().addParticle(ModParticles.ELECTRICITY_PARTICLE,
                         pos.getX(), pos.getY() + 0.125F, pos.getZ(),
                         0, 0, 0);
-
-                /*/Spawn a colored particle for testing
-                DustParticleEffect options = new DustParticleEffect(new Vector3f(1.0f, 0.0f, 0.0f), 1.0f);
-                this.getWorld().addParticle(options,
-                        pos.getX(), pos.getY() + 0.125F, pos.getZ(),
-                        0.0, 0.0, 0.0);//*/
             }
+        }
+
+        //slow colliding entities down
+        for (Entity entity : this.getWorld().getOtherEntities(this, this.getBoundingBox().expand(0.25), Entity::isAlive)) {
+            Vec3d vec3d = new Vec3d(0.5, 0.3F, 0.5);
+            if (entity instanceof LivingEntity livingEntity && livingEntity.hasStatusEffect(StatusEffects.WEAVING)) {
+                vec3d = new Vec3d(0.75, 0.5, 0.75);
+            }
+
+            entity.slowMovement(null, vec3d);
         }
     }
 
@@ -72,12 +76,28 @@ public class WebEntity extends PersistentProjectileEntity {
             entity.setVelocity(entity.getVelocity().multiply(0.5F));
 
             if (entity instanceof LivingEntity livingEntity) {
-                livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 20, 2));
                 livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 30, 1));
+                //slow entity down
+                Vec3d vec3d = new Vec3d(0.25, 0.05F, 0.25);
+                if (livingEntity.hasStatusEffect(StatusEffects.WEAVING)) {
+                    vec3d = new Vec3d(0.5, 0.25, 0.5);
+                }
+
+                entity.slowMovement(null, vec3d);
             }
         } else {
             entity.setVelocity(entity.getVelocity().multiply(0.75F));
         }
+    }
+
+    @Override
+    public boolean collidesWith(Entity other) {
+        //
+        if (other instanceof LivingEntity livingEntity) {
+            livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 20, 2));
+            return true;
+        }
+        return super.collidesWith(other);
     }
 
     @Override
