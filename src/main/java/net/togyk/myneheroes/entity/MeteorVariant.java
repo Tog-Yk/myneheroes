@@ -12,10 +12,10 @@ import net.togyk.myneheroes.util.ModTags;
 import java.util.function.IntFunction;
 
 public enum MeteorVariant {
-    DEFAULT(0, 6, ModTags.Blocks.METEOR_CORE_BLOCKS, ModTags.Blocks.METEOR_CRUST_BLOCKS),
+    DEFAULT(0, 5, ModTags.Blocks.METEOR_CORE_BLOCKS, ModTags.Blocks.METEOR_CRUST_BLOCKS),
     KRYPTONITE(1, 1, ModTags.Blocks.KRYPTONITE_METEOR_CORE_BLOCKS, ModTags.Blocks.KRYPTONITE_METEOR_CRUST_BLOCKS),
-    SCULK(2, 2, ModTags.Blocks.SCULK_METEOR_CORE_BLOCKS, ModTags.Blocks.SCULK_METEOR_CRUST_BLOCKS),
-    VIBRANIUM(3, 1, ModTags.Blocks.VIBRANIUM_METEOR_CORE_BLOCKS, ModTags.Blocks.VIBRANIUM_METEOR_CRUST_BLOCKS);
+    SCULK(2, 1, ModTags.Blocks.SCULK_METEOR_CORE_BLOCKS, ModTags.Blocks.SCULK_METEOR_CRUST_BLOCKS),
+    VIBRANIUM(3, 2, ModTags.Blocks.VIBRANIUM_METEOR_CORE_BLOCKS, ModTags.Blocks.VIBRANIUM_METEOR_CRUST_BLOCKS);
 
     public static final Codec<MeteorVariant> CODEC = Codec.INT.xmap(
             MeteorVariant::byId,      // decode: int → MeteorVariant

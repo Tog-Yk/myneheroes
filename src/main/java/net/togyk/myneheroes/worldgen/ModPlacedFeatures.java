@@ -32,7 +32,7 @@ public class ModPlacedFeatures {
 
 
         register(context, METEOR_KEY, registryLookup.getOrThrow(ModConfiguredFeatures.METEOR_KEY),
-                List.of(RarityFilterPlacementModifier.of(50), SquarePlacementModifier.of(), HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES), BiomePlacementModifier.of())
+                List.of(RarityFilterPlacementModifier.of(250), SquarePlacementModifier.of(), HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES), BiomePlacementModifier.of())
         );
     }
 
