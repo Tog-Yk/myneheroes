@@ -25,7 +25,7 @@ public class FluidBlockMixin {
             return;
         }
         Entity entity = ((EntityShapeContextAccessor) esc).getEntity();
-        if (!(entity instanceof PlayerEntity player && !player.isSneaking() && entity.getBlockPos().getY() >= pos.getY() + 0.99)) {
+        if (!(entity instanceof PlayerEntity player && !player.isSneaking() && !player.isInFluid() && entity.getBlockPos().getY() >= pos.getY() + 0.99)) {
             return;
         }
 
