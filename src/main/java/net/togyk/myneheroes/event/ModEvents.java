@@ -3,6 +3,7 @@ package net.togyk.myneheroes.event;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.block.Block;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -14,13 +15,17 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
+import net.minecraft.world.World;
 import net.togyk.myneheroes.Item.custom.ThrowableItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.PassiveAbility;
+import net.togyk.myneheroes.block.custom.KryptoniteRadiationBlock;
 import net.togyk.myneheroes.damage.ModDamageTypes;
 import net.togyk.myneheroes.entity.MeteorEntity;
 import net.togyk.myneheroes.gamerule.ModGamerules;
+import net.togyk.myneheroes.persistent_data.ModPersistentData;
+import net.togyk.myneheroes.persistent_data.TimeNearKryptoniteData;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.util.PlayerAbilities;
@@ -28,7 +33,9 @@ import net.togyk.myneheroes.util.PowerData;
 import net.togyk.myneheroes.util.SimpleEventResult;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 public class ModEvents {
 
@@ -130,5 +137,46 @@ public class ModEvents {
                 }
             }
         });
+
+        //decrease kryptonian progress if the player isn't near kryptonite
+        ServerTickEvents.END_SERVER_TICK.register(server -> {
+            TimeNearKryptoniteData timeData = ModPersistentData.getTimeNearKryptonite(server.getOverworld());
+            Map<UUID, Long> timeMap = timeData.getTimeMap();
+            for (PlayerEntity player : server.getPlayerManager().getPlayerList()) {
+                World world = player.getWorld();
+                boolean isExposedToSun = world.isDay() && world.isSkyVisible(player.getBlockPos());
+                if ((!isPlayerNearBlock(player, world, KryptoniteRadiationBlock.class, 7) || isExposedToSun) && timeMap.containsKey(player.getUuid())) {
+                    if (timeMap.get(player.getUuid()) < 1L) {
+                        timeMap.remove(player.getUuid());
+                    } else {
+                        timeMap.put(player.getUuid(), timeMap.get(player.getUuid()) - 1);
+                    }
+                }
+                if (timeMap.containsKey(player.getUuid())) {
+                    MyneHeroes.LOGGER.info(timeMap.get(player.getUuid()).toString());
+                }
+            }
+            timeData.markDirty();
+        });
+    }
+
+
+    public static boolean isPlayerNearBlock(PlayerEntity player, World world, Class<? extends Block> targetBlock, int radius) {
+        BlockPos playerPos = player.getBlockPos();
+
+        for (int x = -radius; x <= radius; x++) {
+            for (int y = -radius; y <= radius; y++) {
+                for (int z = -radius; z <= radius; z++) {
+                    BlockPos checkPos = playerPos.add(x, y, z);
+                    Block block = world.getBlockState(checkPos).getBlock();
+
+                    if (targetBlock.isInstance(block)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }

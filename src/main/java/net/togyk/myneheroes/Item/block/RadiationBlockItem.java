@@ -28,22 +28,7 @@ public class RadiationBlockItem extends BlockItem implements WorldTickableItem {
             List<LivingEntity> entities = world.getEntitiesByClass(LivingEntity.class, area, e -> true);
 
             for (LivingEntity target : entities) {
-                // Entity is exposed to radiation
-                if (target.hasStatusEffect(ModEffects.RADIATION_POISON)) {
-                    StatusEffectInstance effect = target.getStatusEffect(ModEffects.RADIATION_POISON);
-                    if (effect != null) {
-                        int duration = effect.getDuration();
-                        if ((duration + 1) % 24 == 0) {
-                            target.addStatusEffect(new StatusEffectInstance(
-                                    ModEffects.RADIATION_POISON, 47, 0, true, true
-                            ));
-                        }
-                    }
-                } else {
-                    target.addStatusEffect(new StatusEffectInstance(
-                            ModEffects.RADIATION_POISON, 47, 0, true, true
-                    ));
-                }
+                this.applyRadiation(target);
             }
         }
     }
@@ -55,23 +40,26 @@ public class RadiationBlockItem extends BlockItem implements WorldTickableItem {
             List<LivingEntity> entities = world.getEntitiesByClass(LivingEntity.class, area, e -> true);
 
             for (LivingEntity target : entities) {
-                // Entity is exposed to radiation
-                if (target.hasStatusEffect(ModEffects.RADIATION_POISON)) {
-                    StatusEffectInstance effect = target.getStatusEffect(ModEffects.RADIATION_POISON);
-                    if (effect != null) {
-                        int duration = effect.getDuration();
-                        if ((duration + 1) % 24 == 0) {
-                            target.addStatusEffect(new StatusEffectInstance(
-                                    ModEffects.RADIATION_POISON, 47, 0, true, true
-                            ));
-                        }
-                    }
-                } else {
+                this.applyRadiation(target);
+            }
+        }
+    }
+
+    protected void applyRadiation(LivingEntity target) {
+        if (target.hasStatusEffect(ModEffects.RADIATION_POISON)) {
+            StatusEffectInstance effect = target.getStatusEffect(ModEffects.RADIATION_POISON);
+            if (effect != null) {
+                int duration = effect.getDuration();
+                if ((duration + 1) % 24 == 0) {
                     target.addStatusEffect(new StatusEffectInstance(
                             ModEffects.RADIATION_POISON, 47, 0, true, true
                     ));
                 }
             }
+        } else {
+            target.addStatusEffect(new StatusEffectInstance(
+                    ModEffects.RADIATION_POISON, 47, 0, true, true
+            ));
         }
     }
 }

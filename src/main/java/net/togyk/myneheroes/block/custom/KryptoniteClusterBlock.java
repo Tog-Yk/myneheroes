@@ -1,7 +1,6 @@
 package net.togyk.myneheroes.block.custom;
 
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
@@ -20,7 +19,7 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
-public class KryptoniteClusterBlock extends KryptoniteBlock implements Waterloggable {
+public class KryptoniteClusterBlock extends KryptoniteRadiationBlock implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final DirectionProperty FACING = Properties.FACING;
 
@@ -83,10 +82,5 @@ public class KryptoniteClusterBlock extends KryptoniteBlock implements Waterlogg
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(new Property[]{WATERLOGGED, FACING});
-    }
-
-    @Override
-    public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return null;
     }
 }

@@ -11,6 +11,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+import net.togyk.myneheroes.Item.block.KryptoniteRadiationBlockItem;
 import net.togyk.myneheroes.Item.block.RadiationBlockItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.block.custom.*;
@@ -71,10 +72,10 @@ public class ModBlocks {
     public static final Block ARMOR_LIGHT_LEVELING_STATION = registerBlock("armor_light_leveling_station",
             new ArmorLightLevelerBlockEntityBlock(AbstractBlock.Settings.create().instrument(NoteBlockInstrument.BASS).strength(2.5F).sounds(BlockSoundGroup.WOOD).burnable()));
 
-    public static final Block KRYPTONITE_BlOCK = registerBlock("kryptonite_block",
-            new KryptoniteBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.AMETHYST_BLOCK).mapColor(MapColor.LIME).strength(2.5f)));
+    public static final Block KRYPTONITE_BlOCK = registerKryptoniteRadiationBlock("kryptonite_block",
+            new KryptoniteRadiationBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.AMETHYST_BLOCK).mapColor(MapColor.LIME).strength(2.5f)));
 
-    public static final Block KRYPTONITE_CLUSTER = registerBlock("kryptonite_cluster",
+    public static final Block KRYPTONITE_CLUSTER = registerKryptoniteRadiationBlock("kryptonite_cluster",
             new KryptoniteClusterBlock(AbstractBlock.Settings.create().mapColor(MapColor.LIME).solid().nonOpaque().sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(1.5F).luminance((state) -> 5).pistonBehavior(PistonBehavior.DESTROY)));
 
 
@@ -96,6 +97,12 @@ public class ModBlocks {
     private static Block registerRadiationBlock(String name, Block block) {
         Registry.register(Registries.ITEM, Identifier.of(MyneHeroes.MOD_ID, name),
                 new RadiationBlockItem(block, new Item.Settings()));
+        return registerBlockNoItem(name, block);
+    }
+
+    private static Block registerKryptoniteRadiationBlock(String name, Block block) {
+        Registry.register(Registries.ITEM, Identifier.of(MyneHeroes.MOD_ID, name),
+                new KryptoniteRadiationBlockItem(block, new Item.Settings()));
         return registerBlockNoItem(name, block);
     }
 
