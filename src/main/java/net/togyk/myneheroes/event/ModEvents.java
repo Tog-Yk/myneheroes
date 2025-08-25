@@ -152,9 +152,6 @@ public class ModEvents {
                         timeMap.put(player.getUuid(), timeMap.get(player.getUuid()) - 1);
                     }
                 }
-                if (timeMap.containsKey(player.getUuid())) {
-                    MyneHeroes.LOGGER.info(timeMap.get(player.getUuid()).toString());
-                }
             }
             timeData.markDirty();
         });
