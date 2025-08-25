@@ -11,8 +11,10 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
-import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.ability.*;
+import net.togyk.myneheroes.ability.Abilities;
+import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.ability.BooleanAbility;
+import net.togyk.myneheroes.ability.PassiveAbility;
 import net.togyk.myneheroes.damage.ModDamageTypes;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.util.PlayerAbilities;
@@ -174,7 +176,6 @@ public abstract class PlayerAppliedAttributeMixin {
 
                             player.playSound(sound.getStepSound(), sound.getVolume() * 0.75F, sound.getPitch());
 
-                            MyneHeroes.LOGGER.info(String.valueOf(climbSpeed));
                             myneheroes$wallClimbSoundCooldown = (int) (8 / (climbSpeed / 0.09));
                         } else {
                             myneheroes$wallClimbSoundCooldown -= 1;

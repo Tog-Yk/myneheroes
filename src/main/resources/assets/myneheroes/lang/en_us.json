@@ -27,6 +27,12 @@
 
   "item.myneheroes.coloring_compound": "Coloring Compound",
 
+  "item.myneheroes.web_shooter_upgrade": "Web Shooter",
+  "item.myneheroes.web_fluid": "Web Fluid",
+
+  "item.myneheroes.bottle_of_spider_venom": "Bottle Of Spider Venom",
+  "item.myneheroes.bottle_of_radioactive_spider_venom": "Bottle Of Radioactive Spider Venom",
+
   "item.myneheroes.mechanical_hud_upgrade": "Hud Upgrade",
   "item.myneheroes.speedster_hud_upgrade": "Hud Upgrade",
   "item.myneheroes.laser_upgrade": "Laser Upgrade",
@@ -36,9 +42,6 @@
 
   "item.myneheroes.toolbelt_3_upgrade": "Toolbelt",
   "item.myneheroes.toolbelt_3_upgrade.size": "Size: %1$s",
-
-  "item.myneheroes.web_shooter_upgrade": "Web Shooter",
-  "item.myneheroes.web_fluid": "Web Fluid",
 
   "item.myneheroes.vibranium_helmet": "Vibranium Helmet",
   "item.myneheroes.vibranium_chestplate": "Vibranium Chestplate",
@@ -178,6 +181,8 @@
 
   "death.attack.power_exhaustion": "%1$s went beyond their limits",
   "death.attack.power_exhaustion_rare": "%1$s pushed past their mortal limits",
+
+  "death.attack.radiation_poison": "%1$s died from exposure to radiation",
 
   "advancements.myneheroes.vibranium.root.title": "An other-worldly metal",
   "advancements.myneheroes.vibranium.root.description": "Acquire vibranium",

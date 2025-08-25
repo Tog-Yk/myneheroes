@@ -74,6 +74,9 @@ public class ModItemGroups {
                         entries.add(ModItems.WEB_SHOOTER_UPGRADE);
                         entries.add(ModItems.WEB_FLUID);
 
+                        entries.add(ModItems.BOTTLE_OF_SPIDER_VENOM);
+                        entries.add(ModItems.BOTTLE_OF_RADIOACTIVE_SPIDER_VENOM);
+
                         entries.add(ModBlocks.KRYPTONITE_BlOCK);
                         entries.add(ModBlocks.KRYPTONITE_CLUSTER);
 

@@ -1,8 +1,10 @@
 package net.togyk.myneheroes.Item;
 
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -13,6 +15,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.togyk.myneheroes.Item.custom.*;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.upgrade.Upgrades;
 
 import java.lang.reflect.Constructor;
@@ -55,6 +58,12 @@ public class ModItems {
 
     public static final Item WEB_FLUID = registerItem("web_fluid",
             new Item(new Item.Settings()));
+
+    public static final Item BOTTLE_OF_SPIDER_VENOM = registerItem("bottle_of_spider_venom",
+            new PoisonDrinkItem(new Item.Settings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE)));
+
+    public static final Item BOTTLE_OF_RADIOACTIVE_SPIDER_VENOM = registerItem("bottle_of_radioactive_spider_venom",
+            new PowerDrinkItem(Powers.SPIDER, List.of(StatusEffects.NAUSEA), new Item.Settings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE)));
 
     public static final Item MECHANICAL_HUD_UPGRADE = registerItem("mechanical_hud_upgrade", new UpgradeWithTooltipItem(Upgrades.MECHANICAL_HUD, Text.literal("mechanical").setStyle(Style.EMPTY.withColor(0xC428EEFF)), new Item.Settings()));
     public static final Item SPEEDSTER_HUD_UPGRADE = registerItem("speedster_hud_upgrade", new UpgradeWithTooltipItem(Upgrades.SPEEDSTER_HUD, Text.literal("speedster").setStyle(Style.EMPTY.withColor(0xC4FFEB28)), new Item.Settings()));

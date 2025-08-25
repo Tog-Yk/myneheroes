@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "myneheroes:bottle_of_spider_venom"
+    },
+    {
+      "item": "myneheroes:uranium_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "myneheroes:bottle_of_radioactive_spider_venom"
+  }
+}

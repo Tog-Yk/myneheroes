@@ -492,4 +492,12 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         offerSmithingTrimRecipe(exporter, ModItems.IRON_SUIT_TEMPLATE, Identifier.of(MyneHeroes.MOD_ID, "iron_suit"));
         offerSmithingTrimRecipe(exporter, ModItems.SPEEDSTER_SUIT_TEMPLATE, Identifier.of(MyneHeroes.MOD_ID, "speedster_suit"));
+
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.BOTTLE_OF_RADIOACTIVE_SPIDER_VENOM)
+                .input(ModItems.BOTTLE_OF_SPIDER_VENOM)
+                .input(ModItems.URANIUM_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.URANIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.URANIUM_INGOT))
+                .offerTo(exporter);
     }}

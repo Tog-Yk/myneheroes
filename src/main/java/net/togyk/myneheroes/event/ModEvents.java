@@ -3,19 +3,24 @@ package net.togyk.myneheroes.event;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.block.Block;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.CaveSpiderEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.Item.custom.ThrowableItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
@@ -111,16 +116,11 @@ public class ModEvents {
                 // Check if the damage source is lightning
                 if (source.isOf(DamageTypes.LIGHTNING_BOLT)) {
                     // Check if the player has reached the limit of powers
-                    if (player.getWorld().getGameRules().getBoolean(ModGamerules.GIVE_POWERS_ABOVE_LIMIT) || PowerData.getPowers(player).size() < player.getWorld().getGameRules().getInt(ModGamerules.POWER_LIMIT)) {
-                        // Check if the player has the Speed effect
-                        StatusEffectInstance speedEffect = player.getStatusEffect(StatusEffects.SPEED);
-                        if (speedEffect != null && speedEffect.getDuration() > 0) {
-                            Power speedster = Powers.SPEEDSTER.copy();
-                            List<Power> currentPowers = PowerData.getPowers(player);
-                            if (!currentPowers.stream().map(Power::getId).toList().contains(speedster.id)) {
-                                PowerData.addPower(player, speedster);
-                            }
-                        }
+                    // Check if the player has the Speed effect
+                    StatusEffectInstance speedEffect = player.getStatusEffect(StatusEffects.SPEED);
+                    if (speedEffect != null && speedEffect.getDuration() > 0) {
+                        Power speedster = Powers.SPEEDSTER.copy();
+                        PowerData.addUniquePowerToLimit(player, speedster);
                     }
                 }
             }
@@ -154,6 +154,32 @@ public class ModEvents {
                 }
             }
             timeData.markDirty();
+        });
+
+        UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
+            if (hitResult != null) {
+                return ActionResult.PASS;
+            }
+
+            if (!entity.getWorld().isClient && entity instanceof CaveSpiderEntity) {
+                ItemStack handStack = player.getStackInHand(hand);
+                if (!handStack.isEmpty() && handStack.getItem() == Items.GLASS_BOTTLE) {
+                    if (!player.isCreative()) {
+                        handStack.decrement(1);
+                    }
+                    ItemStack bottleStack = ModItems.BOTTLE_OF_SPIDER_VENOM.getDefaultStack();
+                    if (handStack.isEmpty()) {
+                        player.setStackInHand(hand, bottleStack);
+                    } else {
+                        if (!player.giveItemStack(bottleStack)) {
+                            //doesn't fit in the inventory
+                            player.dropItem(bottleStack, false);
+                        }
+                    }
+                    return ActionResult.SUCCESS;
+                }
+            }
+            return ActionResult.PASS;
         });
     }
 

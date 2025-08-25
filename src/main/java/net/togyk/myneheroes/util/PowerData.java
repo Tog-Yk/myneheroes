@@ -6,6 +6,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.advancement.criterion.ModCriteria;
+import net.togyk.myneheroes.gamerule.ModGamerules;
 import net.togyk.myneheroes.networking.PlayerPowerSyncDataPayload;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.Powers;
@@ -41,6 +42,18 @@ public class PowerData {
     public static void addPower(PlayerEntity player, Power power) {
         if (!player.getWorld().isClient) {
             ((PlayerPowers) player).myneheroes$addPower(power);
+            syncData((ServerPlayerEntity) player);
+        }
+    }
+
+    public static void addUniquePowerToLimit(PlayerEntity player, Power power) {
+        if (!player.getWorld().isClient) {
+            List<Power> currentPowers = PowerData.getPowers(player);
+            if (player.getWorld().getGameRules().getBoolean(ModGamerules.GIVE_POWERS_ABOVE_LIMIT) || currentPowers.size() < player.getWorld().getGameRules().getInt(ModGamerules.POWER_LIMIT)) {
+                if (!currentPowers.stream().map(Power::getId).toList().contains(power.id)) {
+                    ((PlayerPowers) player).myneheroes$addPower(power);
+                }
+            }
             syncData((ServerPlayerEntity) player);
         }
     }

@@ -69,11 +69,8 @@ public class KryptoniteRadiationBlock extends Block {
             //create/increase the players time near the block and check if they should become a kryptonian
             for (UUID id : eligiblePlayers) {
                 if (timeMap.getOrDefault(id, 0L) >= 20L * 60 * 480) {
-                    List<Power> currentPowers = PowerData.getPowers(world.getPlayerByUuid(id));
                     Power kryptonianPower = Powers.KRYPTONIAN.copy();
-                    if (kryptonianPower != null && !currentPowers.stream().map(Power::getId).toList().contains(kryptonianPower.id)) {
-                        PowerData.addPower(world.getPlayerByUuid(id), kryptonianPower);
-                    }
+                    PowerData.addUniquePowerToLimit(world.getPlayerByUuid(id), kryptonianPower);
                     timeMap.remove(id);
                 }
                 timeMap.put(id, timeMap.getOrDefault(id, 0L) + 1);

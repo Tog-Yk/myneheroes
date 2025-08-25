@@ -65,6 +65,9 @@ public class ModModelProvider extends FabricModelProvider {
 
         itemModelGenerator.register(ModItems.WEB_FLUID, Models.GENERATED);
 
+        itemModelGenerator.register(ModItems.BOTTLE_OF_SPIDER_VENOM, Models.GENERATED);
+        itemModelGenerator.register(ModItems.BOTTLE_OF_RADIOACTIVE_SPIDER_VENOM, Models.GENERATED);
+
         itemModelGenerator.register(ModItems.LASER_UPGRADE, Models.GENERATED);
         itemModelGenerator.register(ModItems.FlY_UPGRADE, Models.GENERATED);
         itemModelGenerator.register(ModItems.KINETIC_ENERGY_STORAGE_UPGRADE, Models.GENERATED);
