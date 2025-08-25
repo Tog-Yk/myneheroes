@@ -38,6 +38,14 @@ public class ModItemGroups {
                         entries.add(ModBlocks.GOLD_TITANIUM_BLOCK);
                         entries.add(ModBlocks.RAW_GOLD_TITANIUM_BLOCK);
 
+                        entries.add(ModItems.URANIUM_INGOT);
+                        entries.add(ModItems.RAW_URANIUM);
+
+                        entries.add(ModBlocks.URANIUM_BLOCK);
+                        entries.add(ModBlocks.RAW_URANIUM_BLOCK);
+                        entries.add(ModBlocks.URANIUM_ORE);
+                        entries.add(ModBlocks.DEEPSLATE_URANIUM_ORE);
+
                         entries.add(ModItems.IRON_SUIT_TEMPLATE);
                         entries.add(ModItems.SPEEDSTER_SUIT_TEMPLATE);
 

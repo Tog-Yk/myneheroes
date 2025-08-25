@@ -8,6 +8,9 @@
   "item.myneheroes.gold_titanium_ingot": "Gold Titanium Ingot",
   "item.myneheroes.raw_gold_titanium": "Raw Gold Titanium",
 
+  "item.myneheroes.uranium_ingot": "Uranium Ingot",
+  "item.myneheroes.raw_uranium": "Raw Uranium",
+
   "item.myneheroes.iron_suit_template": "Iron Suit Template",
   "item.myneheroes.speedster_suit_template": "Speedster Suit Template",
 
@@ -92,6 +95,11 @@
   "block.myneheroes.gold_titanium_block": "Gold Titanium Block",
   "block.myneheroes.raw_gold_titanium_block": "Raw Gold Titanium Block",
   "block.myneheroes.armor_dyeing_station": "Armor Dyeing Station",
+
+  "block.myneheroes.uranium_block": "Uranium Block",
+  "block.myneheroes.raw_uranium_block": "Raw Uranium Block",
+  "block.myneheroes.uranium_ore": "Uranium Ore",
+  "block.myneheroes.deepslate_uranium_ore": "Deepslate Uranium Ore",
 
   "block.myneheroes.armor_light_leveling_station": "Armor Light Leveling Station",
 

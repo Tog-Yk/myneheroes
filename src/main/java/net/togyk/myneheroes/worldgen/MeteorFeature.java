@@ -89,7 +89,7 @@ public class MeteorFeature extends Feature<DefaultFeatureConfig> {
                         // Only replace stone‑replaceable blocks
                         if (state.isIn(BlockTags.SAND) && random.nextFloat() > 0.7F) {
                             world.setBlockState(pos, Blocks.GLASS.getDefaultState(), 2);
-                        } else if (state.isIn(BlockTags.BASE_STONE_OVERWORLD) || state.isIn(BlockTags.LOGS) || state.isIn(BlockTags.DIRT)) {
+                        } else if (state.isIn(BlockTags.BASE_STONE_OVERWORLD) || state.isIn(BlockTags.LOGS) || state.isIn(BlockTags.DIRT) || state.isIn(BlockTags.SAND)) {
                             world.setBlockState(pos, this.getRandomBlockFromTag(random, variant.getCrustBlockTag()), 2);
                         }
                     }

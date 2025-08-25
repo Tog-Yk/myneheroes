@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class LightningTrailRenderer {
     public static void render(LightningTrailEntity trail, float entityYaw, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int packedLight, PlayerEntityRenderer playerRenderer) {
         LaserRenderer laserRenderer = new LaserRenderer();
-        laserRenderer.setSize(Math.max(0.15F * (1F - (trail.age / (float) trail.getLifetime())) - 0.03F, 0));
+        laserRenderer.setSize(Math.max(0.1F * (1F - (trail.age / (float) trail.getLifetime())) - 0.03F, 0));
 
         List<Vector3f> thisConnectionPoints = trail.getConnectionPoints().stream()
                 .map(vec -> new Vector3f(vec.x, vec.y, vec.z))
@@ -63,7 +63,7 @@ public class LightningTrailRenderer {
 
          */
 
-        laserRenderer.setSize(0.15F * (1F - (trail.age / (float) trail.getLifetime())));
+        laserRenderer.setSize(0.1F * (1F - (trail.age / (float) trail.getLifetime())));
 
         Optional<TrailEntity> optionalConnectedSegment = trail.getConnectedSegment();
         if (optionalConnectedSegment.orElse(null) instanceof LightningTrailEntity connectedSegment) {

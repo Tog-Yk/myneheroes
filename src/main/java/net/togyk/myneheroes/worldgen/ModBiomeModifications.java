@@ -18,11 +18,15 @@ public class ModBiomeModifications {
                 GenerationStep.Feature.UNDERGROUND_ORES,
                 ModPlacedFeatures.TITANIUM_ORE_KEY
         );
-
-        /*
         BiomeModifications.addFeature(
                 BiomeSelectors.foundInOverworld(),
-                GenerationStep.Feature.SURFACE_STRUCTURES,
+                GenerationStep.Feature.UNDERGROUND_ORES,
+                ModPlacedFeatures.URANIUM_ORE_KEY
+        );
+
+        BiomeModifications.addFeature(
+                BiomeSelectors.foundInOverworld(),
+                GenerationStep.Feature.VEGETAL_DECORATION,
                 ModPlacedFeatures.METEOR_KEY
         );
         //add more placed features here */

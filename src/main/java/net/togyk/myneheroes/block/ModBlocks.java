@@ -50,6 +50,21 @@ public class ModBlocks {
             new Block(AbstractBlock.Settings.create().strength(4f)
                     .requiresTool()));
 
+
+    public static final Block URANIUM_BLOCK = registerBlock("uranium_block",
+            new Block(AbstractBlock.Settings.create().strength(4f)
+                    .requiresTool().sounds(BlockSoundGroup.METAL)));
+
+    public static final Block RAW_URANIUM_BLOCK = registerBlock("raw_uranium_block",
+            new Block(AbstractBlock.Settings.create().strength(3f)
+                    .requiresTool()));
+    public static final Block URANIUM_ORE = registerBlock("uranium_ore",
+            new Block(AbstractBlock.Settings.create().strength(3f)
+                    .requiresTool().sounds(BlockSoundGroup.STONE)));
+    public static final Block DEEPSLATE_URANIUM_ORE = registerBlock("deepslate_uranium_ore",
+            new Block(AbstractBlock.Settings.create().strength(3f)
+                    .requiresTool().sounds(BlockSoundGroup.DEEPSLATE)));
+
     public static final Block ARMOR_DYEING_STATION = registerBlock("armor_dyeing_station",
             new ArmorDyeingBlockEntityBlock(AbstractBlock.Settings.create().instrument(NoteBlockInstrument.BASS).strength(2.5F).sounds(BlockSoundGroup.WOOD).burnable()));
     public static final Block ARMOR_LIGHT_LEVELING_STATION = registerBlock("armor_light_leveling_station",

@@ -49,22 +49,22 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
                 if (!upgrades.isEmpty()) {
                     for (Upgrade upgrade : this.upgrades) {
                         if (upgrade instanceof ColorUpgrade colorUpgrade) {
-                            outerColors.add(ColorHelper.Argb.withAlpha(0x40, colorUpgrade.getColor(player.getWorld())));
+                            outerColors.add(ColorHelper.Argb.withAlpha(0x77, colorUpgrade.getColor(player.getWorld())));
                         }
                     }
                 } else {
-                    outerColors = List.of(ColorHelper.Argb.withAlpha(0x40, this.getColor()));
+                    outerColors = List.of(ColorHelper.Argb.withAlpha(0x77, this.getColor()));
                 }
 
                 List<Integer> innerColors = outerColors.stream().map(color -> {
-                    if (color != 0x40000000) {
-                        return ColorHelper.Argb.withAlpha(0xF0, ColorHelper.Argb.lerp(0.5F, color, 0xFFFFFFFF));
+                    if (color != 0x99000000) {
+                        return ColorHelper.Argb.withAlpha(0xFF, ColorHelper.Argb.lerp(1F, color, 0xFFFFFFFF));
                     } else {
-                        return ColorHelper.Argb.withAlpha(0xF0, color);
+                        return ColorHelper.Argb.withAlpha(0xFF, color);
                     }
                 }).toList();
 
-                TrailEntity trail = new LightningTrailEntity(player, lastSegment, 20, 4, 3, outerColors, innerColors);
+                TrailEntity trail = new LightningTrailEntity(player, lastSegment, 20, 6, 3, outerColors, innerColors);
                 trail.setPosition(player.getX(), player.getY(), player.getZ());
                 lastSegment = Optional.of(trail.getUuid());
                 lastSegmentPos = player.getPos();
@@ -303,7 +303,7 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
 
     @Override
     public boolean canUpgrade(Upgrade upgrade) {
-        return this.upgrades.size() < 4 && upgrade instanceof ColorUpgrade;
+        return this.upgrades.size() < 6 && upgrade instanceof ColorUpgrade;
     }
 
     @Override

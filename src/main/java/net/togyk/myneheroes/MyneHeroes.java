@@ -1,15 +1,11 @@
 package net.togyk.myneheroes;
 
 import net.fabricmc.api.ModInitializer;
-
-import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
-import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.gen.GenerationStep;
 import net.togyk.myneheroes.Item.ModItemGroups;
 import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
@@ -33,7 +29,6 @@ import net.togyk.myneheroes.particle.ModParticles;
 import net.togyk.myneheroes.util.ModLootTableModifiers;
 import net.togyk.myneheroes.worldgen.ModBiomeModifications;
 import net.togyk.myneheroes.worldgen.ModFeatures;
-import net.togyk.myneheroes.worldgen.ModPlacedFeatures;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -83,12 +78,6 @@ public class MyneHeroes implements ModInitializer {
         ModTrackedData.register();
 
         ModParticles.registerParticles();
-
-        BiomeModifications.addFeature(
-                BiomeSelectors.foundInOverworld(),
-                GenerationStep.Feature.VEGETAL_DECORATION,
-                ModPlacedFeatures.METEOR_KEY
-        );
 
         ModFeatures.registerModFeatures();
     }

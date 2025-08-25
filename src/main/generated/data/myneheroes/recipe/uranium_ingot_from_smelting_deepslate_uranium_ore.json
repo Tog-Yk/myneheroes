@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.25,
+  "group": "uranium",
+  "ingredient": {
+    "item": "myneheroes:deepslate_uranium_ore"
+  },
+  "result": {
+    "id": "myneheroes:uranium_ingot"
+  }
+}

@@ -28,6 +28,11 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.TITANIUM_ORE)
                 .add(ModBlocks.DEEPSLATE_TITANIUM_ORE)
 
+                .add(ModBlocks.URANIUM_BLOCK)
+                .add(ModBlocks.RAW_URANIUM_BLOCK)
+                .add(ModBlocks.URANIUM_ORE)
+                .add(ModBlocks.DEEPSLATE_URANIUM_ORE)
+
                 .add(ModBlocks.GOLD_TITANIUM_BLOCK)
                 .add(ModBlocks.RAW_GOLD_TITANIUM_BLOCK)
 
@@ -53,6 +58,11 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.RAW_TITANIUM_BLOCK)
                 .add(ModBlocks.TITANIUM_ORE)
                 .add(ModBlocks.DEEPSLATE_TITANIUM_ORE)
+
+                .add(ModBlocks.URANIUM_BLOCK)
+                .add(ModBlocks.RAW_URANIUM_BLOCK)
+                .add(ModBlocks.URANIUM_ORE)
+                .add(ModBlocks.DEEPSLATE_URANIUM_ORE)
 
                 .add(ModBlocks.GOLD_TITANIUM_BLOCK)
                 .add(ModBlocks.RAW_GOLD_TITANIUM_BLOCK)
