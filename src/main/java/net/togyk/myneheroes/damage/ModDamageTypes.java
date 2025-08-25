@@ -16,6 +16,8 @@ public class ModDamageTypes {
     public static final RegistryKey<DamageType> LASER_TYPE_KEY = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Identifier.of(MyneHeroes.MOD_ID, "laser"));
     public static final RegistryKey<DamageType> POWER_EXHAUSTION_TYPE_KEY = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Identifier.of(MyneHeroes.MOD_ID, "power_exhaustion"));
     public static final RegistryKey<DamageType> POWER_EXHAUSTION_RARE_TYPE_KEY = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Identifier.of(MyneHeroes.MOD_ID, "power_exhaustion_rare"));
+    public static final RegistryKey<DamageType> KRYPTONITE_TYPE_KEY = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Identifier.of(MyneHeroes.MOD_ID, "kryptonite"));
+    public static final RegistryKey<DamageType> RADIATION_TYPE_KEY = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Identifier.of(MyneHeroes.MOD_ID, "radiation"));
 
 
     public static DamageSource of(World world, RegistryKey<DamageType> key, LivingEntity attacker) {
@@ -30,5 +32,13 @@ public class ModDamageTypes {
         } else {
             return new DamageSource(world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(POWER_EXHAUSTION_TYPE_KEY), attacker);
         }
+    }
+
+    public static DamageSource kryptonite(World world) {
+        return new DamageSource(world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(KRYPTONITE_TYPE_KEY));
+    }
+
+    public static DamageSource radiation(World world) {
+        return new DamageSource(world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(RADIATION_TYPE_KEY));
     }
 }

@@ -28,8 +28,8 @@ public class ModItems {
     public static final Item GOLD_TITANIUM_INGOT = registerItem("gold_titanium_ingot", new Item(new Item.Settings()));
     public static final Item RAW_GOLD_TITANIUM = registerItem("raw_gold_titanium", new Item(new Item.Settings()));
 
-    public static final Item URANIUM_INGOT = registerItem("uranium_ingot", new Item(new Item.Settings()));
-    public static final Item RAW_URANIUM = registerItem("raw_uranium", new Item(new Item.Settings()));
+    public static final Item URANIUM_INGOT = registerItem("uranium_ingot", new RadiationItem(new Item.Settings()));
+    public static final Item RAW_URANIUM = registerItem("raw_uranium", new RadiationItem(new Item.Settings()));
 
     public static final Item IRON_SUIT_TEMPLATE = registerItem("iron_suit_template",new Item(new Item.Settings()));
     public static final Item SPEEDSTER_SUIT_TEMPLATE = registerItem("speedster_suit_template",new Item(new Item.Settings()));

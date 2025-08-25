@@ -11,6 +11,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+import net.togyk.myneheroes.Item.block.RadiationBlockItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.block.custom.*;
 
@@ -51,18 +52,18 @@ public class ModBlocks {
                     .requiresTool()));
 
 
-    public static final Block URANIUM_BLOCK = registerBlock("uranium_block",
-            new Block(AbstractBlock.Settings.create().strength(4f)
+    public static final Block URANIUM_BLOCK = registerRadiationBlock("uranium_block",
+            new RadiationBlock(AbstractBlock.Settings.create().strength(4f)
                     .requiresTool().sounds(BlockSoundGroup.METAL)));
 
-    public static final Block RAW_URANIUM_BLOCK = registerBlock("raw_uranium_block",
-            new Block(AbstractBlock.Settings.create().strength(3f)
+    public static final Block RAW_URANIUM_BLOCK = registerRadiationBlock("raw_uranium_block",
+            new RadiationBlock(AbstractBlock.Settings.create().strength(3f)
                     .requiresTool()));
-    public static final Block URANIUM_ORE = registerBlock("uranium_ore",
-            new Block(AbstractBlock.Settings.create().strength(3f)
+    public static final Block URANIUM_ORE = registerRadiationBlock("uranium_ore",
+            new RadiationBlock(AbstractBlock.Settings.create().strength(3f)
                     .requiresTool().sounds(BlockSoundGroup.STONE)));
-    public static final Block DEEPSLATE_URANIUM_ORE = registerBlock("deepslate_uranium_ore",
-            new Block(AbstractBlock.Settings.create().strength(3f)
+    public static final Block DEEPSLATE_URANIUM_ORE = registerRadiationBlock("deepslate_uranium_ore",
+            new RadiationBlock(AbstractBlock.Settings.create().strength(3f)
                     .requiresTool().sounds(BlockSoundGroup.DEEPSLATE)));
 
     public static final Block ARMOR_DYEING_STATION = registerBlock("armor_dyeing_station",
@@ -83,9 +84,19 @@ public class ModBlocks {
     public static final Block UPGRADE_STATION = registerBlock("upgrade_station",
             new UpgradeStationBlockEntityBlock(AbstractBlock.Settings.create().mapColor(MapColor.IRON_GRAY).requiresTool().strength(5.0F, 600.0F).sounds(BlockSoundGroup.METAL).pistonBehavior(PistonBehavior.BLOCK)));
 
+    private static Block registerBlockNoItem(String name, Block block) {
+        return Registry.register(Registries.BLOCK, Identifier.of(MyneHeroes.MOD_ID, name), block);
+    }
+
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);
-        return Registry.register(Registries.BLOCK, Identifier.of(MyneHeroes.MOD_ID, name), block);
+        return registerBlockNoItem(name, block);
+    }
+
+    private static Block registerRadiationBlock(String name, Block block) {
+        Registry.register(Registries.ITEM, Identifier.of(MyneHeroes.MOD_ID, name),
+                new RadiationBlockItem(block, new Item.Settings()));
+        return registerBlockNoItem(name, block);
     }
 
     private static void registerBlockItem(String name, Block block) {

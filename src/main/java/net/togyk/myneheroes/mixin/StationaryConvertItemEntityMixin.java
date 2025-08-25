@@ -3,9 +3,11 @@ package net.togyk.myneheroes.mixin;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.togyk.myneheroes.Item.custom.StationaryItem;
+import net.togyk.myneheroes.Item.custom.WorldTickableItem;
 import net.togyk.myneheroes.entity.StationaryItemEntity;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -28,6 +30,19 @@ public class StationaryConvertItemEntityMixin {
         }
     }
 
+    @Inject(
+            method = "tick",
+            at = @At("HEAD")
+    )
+    private void TickWorldTickableItem(CallbackInfo info) {
+        ItemEntity entity = (ItemEntity) (Object) this;
+        ItemStack stack = entity.getStack();
+        if (stack.getItem() instanceof WorldTickableItem worldTickableItem) {
+            worldTickableItem.worldTick(stack, entity.getWorld(), entity);
+        }
+    }
+
+    @Unique
     private static @NotNull StationaryItemEntity getItemEntity(ItemEntity entity, ItemStack stack) {
         StationaryItemEntity newItemEntity = new StationaryItemEntity(entity.getWorld());
         newItemEntity.setPos(entity.getX(), entity.getY(), entity.getZ());

@@ -5,6 +5,7 @@ import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
+import net.togyk.myneheroes.damage.ModDamageTypes;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.util.PowerData;
 
@@ -20,7 +21,7 @@ public class KryptonitePoisonEffect extends StatusEffect {
     @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         if (entity.getHealth() > 1.0F) {
-            entity.damage(entity.getDamageSources().magic(), 1.0F);
+            entity.damage(ModDamageTypes.kryptonite(entity.getWorld()), 1.0F);
         }
 
         return true;
