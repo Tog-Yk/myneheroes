@@ -11,7 +11,6 @@ import net.minecraft.world.World;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.PassiveAbility;
-import net.togyk.myneheroes.ability.StockpileAbility;
 import net.togyk.myneheroes.damage.ModDamageTypes;
 import net.togyk.myneheroes.util.PlayerAbilities;
 import net.togyk.myneheroes.util.StockPile;
@@ -41,11 +40,11 @@ public class ReleaseKineticEnergyAbility extends Ability implements PassiveAbili
 
     @Override
     public void use(PlayerEntity player) {
-        int charge = 0;
+        float charge = 0;
         List<Ability> abilities = ((PlayerAbilities) player).myneheroes$getAbilities();
         List<Ability> matchingAbilities = new ArrayList<>();
         for (Ability ability : abilities) {
-            if (ability.getId() == this.getId() && ability instanceof StockpileAbility stockpileAbility) {
+            if (ability.getId() == this.getId() && ability instanceof StockPile stockpileAbility) {
                 charge += stockpileAbility.getCharge();
                 matchingAbilities.add(ability);
             }
@@ -56,7 +55,7 @@ public class ReleaseKineticEnergyAbility extends Ability implements PassiveAbili
             this.explode(player, (float) (this.rangeMultiplier * Math.sqrt((double) charge / 50)), (float) Math.sqrt((double) charge / 100), (float) Math.sqrt((double) charge / 75));
 
             for (Ability ability : matchingAbilities) {
-                ((StockpileAbility) ability).setCharge(0);
+                ((StockPile) ability).setCharge(0);
                 ability.setCooldown(this.getMaxCooldown());
                 ability.save();
             }
