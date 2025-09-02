@@ -83,7 +83,10 @@ public class ModBlocks {
             new MeteorRadarBlockEntityBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.METAL).mapColor(MapColor.LIME).strength(2.5f)));
 
     public static final Block UPGRADE_STATION = registerBlock("upgrade_station",
-            new UpgradeStationBlockEntityBlock(AbstractBlock.Settings.create().mapColor(MapColor.IRON_GRAY).requiresTool().strength(5.0F, 600.0F).sounds(BlockSoundGroup.METAL).pistonBehavior(PistonBehavior.BLOCK)));
+            new UpgradeStationBlockEntityBlock(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).requiresTool().strength(5.0F, 600.0F).sounds(BlockSoundGroup.METAL).pistonBehavior(PistonBehavior.BLOCK)));
+
+    public static final Block ARMOR_FABRICATOR = registerBlock("armor_fabricator",
+            new ArmorFabricatorBlock(AbstractBlock.Settings.create().mapColor(MapColor.IRON_GRAY).requiresTool().strength(5.0F, 600.0F).sounds(BlockSoundGroup.METAL).pistonBehavior(PistonBehavior.BLOCK)));
 
     private static Block registerBlockNoItem(String name, Block block) {
         return Registry.register(Registries.BLOCK, Identifier.of(MyneHeroes.MOD_ID, name), block);

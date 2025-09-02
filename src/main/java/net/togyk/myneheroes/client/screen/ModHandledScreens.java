@@ -13,5 +13,6 @@ public class ModHandledScreens {
         HandledScreens.register(ModScreenHandlerTypes.TOOLBELT_ABILITY, ToolbeltAbilityScreen::new);
         HandledScreens.register(ModScreenHandlerTypes.PASSIVE_SELECTION_ABILITY, PassiveSelectionAbilityScreen::new);
         HandledScreens.register(ModScreenHandlerTypes.UPGRADE_STATION, UpgradeStationScreen::new);
+        HandledScreens.register(ModScreenHandlerTypes.ARMOR_FABRICATOR, ArmorFabricatorScreen::new);
     }
 }

@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "has_reactor": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "myneheroes:arc_reactor"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_reactor"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "myneheroes:mark3_gold_titanium_helmet",
+      "myneheroes:mark3_gold_titanium_chestplate",
+      "myneheroes:mark3_gold_titanium_leggings",
+      "myneheroes:mark3_gold_titanium_boots"
+    ]
+  }
+}

@@ -26,6 +26,7 @@ import net.togyk.myneheroes.event.ModEvents;
 import net.togyk.myneheroes.gamerule.ModGamerules;
 import net.togyk.myneheroes.networking.ModMessages;
 import net.togyk.myneheroes.particle.ModParticles;
+import net.togyk.myneheroes.recipe.ModRecipes;
 import net.togyk.myneheroes.util.ModLootTableModifiers;
 import net.togyk.myneheroes.worldgen.ModBiomeModifications;
 import net.togyk.myneheroes.worldgen.ModFeatures;
@@ -80,6 +81,8 @@ public class MyneHeroes implements ModInitializer {
         ModParticles.registerParticles();
 
         ModFeatures.registerModFeatures();
+
+        ModRecipes.registerRecipes();
     }
     /**
      * Searches the player's inventory for the first matching item.

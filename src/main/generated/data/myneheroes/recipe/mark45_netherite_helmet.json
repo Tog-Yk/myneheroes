@@ -1,14 +1,9 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "equipment",
-  "ingredients": [
-    {
-      "item": "minecraft:netherite_helmet"
-    },
-    {
-      "item": "myneheroes:iron_suit_template"
-    }
-  ],
+  "type": "myneheroes:armor_fabricating",
+  "group": "armor_fabricating",
+  "ingredient": {
+    "item": "minecraft:netherite_helmet"
+  },
   "result": {
     "count": 1,
     "id": "myneheroes:mark45_netherite_helmet"

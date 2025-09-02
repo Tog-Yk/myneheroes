@@ -182,7 +182,7 @@
   "death.attack.power_exhaustion": "%1$s went beyond their limits",
   "death.attack.power_exhaustion_rare": "%1$s pushed past their mortal limits",
 
-  "death.attack.radiation_poison": "%1$s died from exposure to radiation",
+  "death.attack.radiation": "%1$s died from exposure to radiation",
 
   "advancements.myneheroes.vibranium.root.title": "An other-worldly metal",
   "advancements.myneheroes.vibranium.root.description": "Acquire vibranium",
@@ -222,5 +222,6 @@
   "armor_pattern.myneheroes.mark6_vibranium": " Mark-6",
   "armor_pattern.myneheroes.mark45_netherite": " Mark-45",
   "armor_pattern.myneheroes.speedster_gold_titanium": " Speedster Gold-Titanium",
-  "armor_pattern.myneheroes.speedster_vibranium": " Speedster Vibranium"
+  "armor_pattern.myneheroes.speedster_vibranium": " Speedster Vibranium",
+  "container.myneheroes.armor_fabricator": "Armor Fabricator"
 }

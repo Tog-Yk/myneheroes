@@ -1,14 +1,9 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "equipment",
-  "ingredients": [
-    {
-      "item": "myneheroes:gold_titanium_leggings"
-    },
-    {
-      "item": "myneheroes:speedster_suit_template"
-    }
-  ],
+  "type": "myneheroes:armor_fabricating",
+  "group": "armor_fabricating",
+  "ingredient": {
+    "item": "myneheroes:vibranium_leggings"
+  },
   "result": {
     "count": 1,
     "id": "myneheroes:speedster_vibranium_leggings"

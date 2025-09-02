@@ -365,130 +365,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .offerTo(exporter);
 
         //Advanced Armors
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK6_VIBRANIUM_HELMET)
-                .input(ModItems.VIBRANIUM_HELMET)
-                .input(ModItems.IRON_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(ModItems.VIBRANIUM_HELMET),
-                        FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_HELMET))
-                .offerTo(exporter);
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK6_VIBRANIUM_CHESTPLATE)
-                .input(ModItems.VIBRANIUM_CHESTPLATE)
-                .input(ModItems.IRON_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(ModItems.VIBRANIUM_CHESTPLATE),
-                        FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_CHESTPLATE))
-                .offerTo(exporter);
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK6_VIBRANIUM_LEGGINGS)
-                .input(ModItems.VIBRANIUM_LEGGINGS)
-                .input(ModItems.IRON_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(ModItems.VIBRANIUM_LEGGINGS),
-                        FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_LEGGINGS))
-                .offerTo(exporter);
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK6_VIBRANIUM_BOOTS)
-                .input(ModItems.VIBRANIUM_BOOTS)
-                .input(ModItems.IRON_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(ModItems.VIBRANIUM_BOOTS),
-                        FabricRecipeProvider.conditionsFromItem(ModItems.VIBRANIUM_BOOTS))
-                .offerTo(exporter);
-
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK3_GOLD_TITANIUM_HELMET)
-                .input(ModItems.GOLD_TITANIUM_HELMET)
-                .input(ModItems.IRON_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_HELMET),
-                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_HELMET))
-                .offerTo(exporter);
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK3_GOLD_TITANIUM_CHESTPLATE)
-                .input(ModItems.GOLD_TITANIUM_CHESTPLATE)
-                .input(ModItems.IRON_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_CHESTPLATE),
-                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_CHESTPLATE))
-                .offerTo(exporter);
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK3_GOLD_TITANIUM_LEGGINGS)
-                .input(ModItems.GOLD_TITANIUM_LEGGINGS)
-                .input(ModItems.IRON_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_LEGGINGS),
-                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_LEGGINGS))
-                .offerTo(exporter);
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK3_GOLD_TITANIUM_BOOTS)
-                .input(ModItems.GOLD_TITANIUM_BOOTS)
-                .input(ModItems.IRON_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_BOOTS),
-                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_BOOTS))
-                .offerTo(exporter);
-
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK45_NETHERITE_HELMET)
-                .input(Items.NETHERITE_HELMET)
-                .input(ModItems.IRON_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(Items.NETHERITE_HELMET),
-                        FabricRecipeProvider.conditionsFromItem(Items.NETHERITE_HELMET))
-                .offerTo(exporter);
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK45_NETHERITE_CHESTPLATE)
-                .input(Items.NETHERITE_CHESTPLATE)
-                .input(ModItems.IRON_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(Items.NETHERITE_CHESTPLATE),
-                        FabricRecipeProvider.conditionsFromItem(Items.NETHERITE_CHESTPLATE))
-                .offerTo(exporter);
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK45_NETHERITE_LEGGINGS)
-                .input(Items.NETHERITE_LEGGINGS)
-                .input(ModItems.IRON_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(Items.NETHERITE_LEGGINGS),
-                        FabricRecipeProvider.conditionsFromItem(Items.NETHERITE_LEGGINGS))
-                .offerTo(exporter);
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.MARK45_NETHERITE_BOOTS)
-                .input(Items.NETHERITE_BOOTS)
-                .input(ModItems.IRON_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(Items.NETHERITE_BOOTS),
-                        FabricRecipeProvider.conditionsFromItem(Items.NETHERITE_BOOTS))
-                .offerTo(exporter);
-
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.SPEEDSTER_GOLD_TITANIUM_HELMET)
-                .input(ModItems.GOLD_TITANIUM_HELMET)
-                .input(ModItems.SPEEDSTER_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_HELMET),
-                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_HELMET))
-                .offerTo(exporter);
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.SPEEDSTER_GOLD_TITANIUM_CHESTPLATE)
-                .input(ModItems.GOLD_TITANIUM_CHESTPLATE)
-                .input(ModItems.SPEEDSTER_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_CHESTPLATE),
-                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_CHESTPLATE))
-                .offerTo(exporter);
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.SPEEDSTER_GOLD_TITANIUM_LEGGINGS)
-                .input(ModItems.GOLD_TITANIUM_LEGGINGS)
-                .input(ModItems.SPEEDSTER_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_LEGGINGS),
-                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_LEGGINGS))
-                .offerTo(exporter);
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.SPEEDSTER_GOLD_TITANIUM_BOOTS)
-                .input(ModItems.GOLD_TITANIUM_BOOTS)
-                .input(ModItems.SPEEDSTER_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_BOOTS),
-                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_BOOTS))
-                .offerTo(exporter);
-
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.SPEEDSTER_VIBRANIUM_HELMET)
-                .input(ModItems.GOLD_TITANIUM_HELMET)
-                .input(ModItems.SPEEDSTER_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_HELMET),
-                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_HELMET))
-                .offerTo(exporter);
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.SPEEDSTER_VIBRANIUM_CHESTPLATE)
-                .input(ModItems.GOLD_TITANIUM_CHESTPLATE)
-                .input(ModItems.SPEEDSTER_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_CHESTPLATE),
-                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_CHESTPLATE))
-                .offerTo(exporter);
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.SPEEDSTER_VIBRANIUM_LEGGINGS)
-                .input(ModItems.GOLD_TITANIUM_LEGGINGS)
-                .input(ModItems.SPEEDSTER_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_LEGGINGS),
-                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_LEGGINGS))
-                .offerTo(exporter);
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.SPEEDSTER_VIBRANIUM_BOOTS)
-                .input(ModItems.GOLD_TITANIUM_BOOTS)
-                .input(ModItems.SPEEDSTER_SUIT_TEMPLATE)
-                .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_BOOTS),
-                        FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_BOOTS))
-                .offerTo(exporter);
 
         offerSmithingTrimRecipe(exporter, ModItems.IRON_SUIT_TEMPLATE, Identifier.of(MyneHeroes.MOD_ID, "iron_suit"));
         offerSmithingTrimRecipe(exporter, ModItems.SPEEDSTER_SUIT_TEMPLATE, Identifier.of(MyneHeroes.MOD_ID, "speedster_suit"));
@@ -500,4 +376,31 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(ModItems.URANIUM_INGOT),
                         FabricRecipeProvider.conditionsFromItem(ModItems.URANIUM_INGOT))
                 .offerTo(exporter);
+
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.VIBRANIUM_HELMET, ModItems.MARK6_VIBRANIUM_HELMET).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.VIBRANIUM_CHESTPLATE, ModItems.MARK6_VIBRANIUM_CHESTPLATE).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.VIBRANIUM_LEGGINGS, ModItems.MARK6_VIBRANIUM_LEGGINGS).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.VIBRANIUM_BOOTS, ModItems.MARK6_VIBRANIUM_BOOTS).offerTo(exporter);
+
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.VIBRANIUM_HELMET, ModItems.SPEEDSTER_VIBRANIUM_HELMET).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.VIBRANIUM_CHESTPLATE, ModItems.SPEEDSTER_VIBRANIUM_CHESTPLATE).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.VIBRANIUM_LEGGINGS, ModItems.SPEEDSTER_VIBRANIUM_LEGGINGS).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.VIBRANIUM_BOOTS, ModItems.SPEEDSTER_VIBRANIUM_BOOTS).offerTo(exporter);
+
+
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.GOLD_TITANIUM_HELMET, ModItems.MARK3_GOLD_TITANIUM_HELMET).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.GOLD_TITANIUM_CHESTPLATE, ModItems.MARK3_GOLD_TITANIUM_CHESTPLATE).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.GOLD_TITANIUM_LEGGINGS, ModItems.MARK3_GOLD_TITANIUM_LEGGINGS).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.GOLD_TITANIUM_BOOTS, ModItems.MARK3_GOLD_TITANIUM_BOOTS).offerTo(exporter);
+
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.GOLD_TITANIUM_HELMET, ModItems.SPEEDSTER_GOLD_TITANIUM_HELMET).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.GOLD_TITANIUM_CHESTPLATE, ModItems.SPEEDSTER_GOLD_TITANIUM_CHESTPLATE).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.GOLD_TITANIUM_LEGGINGS, ModItems.SPEEDSTER_GOLD_TITANIUM_LEGGINGS).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.GOLD_TITANIUM_BOOTS, ModItems.SPEEDSTER_GOLD_TITANIUM_BOOTS).offerTo(exporter);
+
+
+        ArmorFabricatingRecipeJsonBuilder.create(Items.NETHERITE_HELMET, ModItems.MARK45_NETHERITE_HELMET).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(Items.NETHERITE_CHESTPLATE, ModItems.MARK45_NETHERITE_CHESTPLATE).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(Items.NETHERITE_LEGGINGS, ModItems.MARK45_NETHERITE_LEGGINGS).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(Items.NETHERITE_BOOTS, ModItems.MARK45_NETHERITE_BOOTS).offerTo(exporter);
     }}

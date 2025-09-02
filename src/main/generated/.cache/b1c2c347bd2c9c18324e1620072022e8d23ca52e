@@ -1,4 +1,4 @@
-// 1.21.1	2025-08-25T22:48:10.1172249	MyneHeroes/Tags for minecraft:item
+// 1.21.1	2025-09-02T19:55:15.6368598	MyneHeroes/Tags for minecraft:item
 cabcc5392542df4fe60a5151fa4c223cdf929d40 data\myneheroes\tags\item\dyes.json
 efc98495b9c87f7a746bea8b59feb4f3e961e7da data\minecraft\tags\item\enchantable\foot_armor.json
 461e40839c900b5ce6df64f685b318ff08019cac data\myneheroes\tags\item\reactor_fuel.json
@@ -8,8 +8,8 @@ d260f3e4651a4dcb581acd4e05a09b84e5d0e36d data\minecraft\tags\item\leg_armor.json
 a748128aba7537e0ff53028b0637fd7a6849f68b data\minecraft\tags\item\head_armor.json
 6f0fe2fa3ee2bd0a70a89cc61c08041d4922d865 data\minecraft\tags\item\enchantable\chest_armor.json
 262498a7c4cd3256d161a73a07a46a6a01602c60 data\minecraft\tags\item\chest_armor.json
-493dc2636e5afad62263a179f7a68d7dff894197 data\myneheroes\tags\item\coloring_fuel.json
 d9ef088c4489a6934d7653008c84322b93df94ba data\minecraft\tags\item\enchantable\leg_armor.json
+493dc2636e5afad62263a179f7a68d7dff894197 data\myneheroes\tags\item\coloring_fuel.json
 249dd8517341f8ab177c99bc1a25b2c0eaae9d2e data\minecraft\tags\item\trim_templates.json
 22caf730911291ac2a8f5cb86c4c4a10210c2dfe data\minecraft\tags\item\enchantable\head_armor.json
 7705b1d8f2dd5d0a4e6ae9880e26bcd528201e0d data\minecraft\tags\item\trim_materials.json

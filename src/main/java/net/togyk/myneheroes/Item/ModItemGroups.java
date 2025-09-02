@@ -85,6 +85,8 @@ public class ModItemGroups {
                         entries.add(ModItems.COLORING_COMPOUND);
 
                         entries.add(ModBlocks.UPGRADE_STATION);
+
+                        entries.add(ModBlocks.ARMOR_FABRICATOR);
                     }).build());
 
     public static final ItemGroup MYNEHEROES_ARMOR_GROUP = Registry.register(Registries.ITEM_GROUP,

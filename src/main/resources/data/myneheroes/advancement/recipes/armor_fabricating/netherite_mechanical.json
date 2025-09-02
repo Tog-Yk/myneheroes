@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "has_reactor": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "myneheroes:arc_reactor"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_reactor"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "myneheroes:mark45_netherite_helmet",
+      "myneheroes:mark45_netherite_chestplate",
+      "myneheroes:mark45_netherite_leggings",
+      "myneheroes:mark45_netherite_boots"
+    ]
+  }
+}

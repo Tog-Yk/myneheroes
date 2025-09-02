@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "has_reactor": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "myneheroes:arc_reactor"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_reactor"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "myneheroes:mark6_vibranium_helmet",
+      "myneheroes:mark6_vibranium_chestplate",
+      "myneheroes:mark6_vibranium_leggings",
+      "myneheroes:mark6_vibranium_boots"
+    ]
+  }
+}

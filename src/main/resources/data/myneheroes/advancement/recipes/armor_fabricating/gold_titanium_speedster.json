@@ -1,0 +1,23 @@
+{
+  "criteria": {
+    "speedster": {
+      "conditions": {
+        "id": "myneheroes:speedster"
+      },
+      "trigger": "myneheroes:powers_changed"
+    }
+  },
+  "requirements": [
+    [
+      "speedster"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "myneheroes:speedster_gold_titanium_helmet",
+      "myneheroes:speedster_gold_titanium_chestplate",
+      "myneheroes:speedster_gold_titanium_leggings",
+      "myneheroes:speedster_gold_titanium_boots"
+    ]
+  }
+}
