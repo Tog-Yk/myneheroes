@@ -150,6 +150,7 @@
 
   "tooltip.myneheroes.hud_active": "Hud: Active",
   "tooltip.myneheroes.hud_inactive": "Hud: Inactive",
+  "tooltip.myneheroes.is_upgrade": "Can be socketed into something",
 
 
   "itemgroup.myneheroes.myneheroes": "MyneHeroes",
