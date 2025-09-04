@@ -75,6 +75,7 @@ public class PassiveSelectionAbilityScreen extends HandledScreen<PassiveSelectio
         }
         if (!buttonClicked) {
             this.handler.selected(-1);
+            this.close();
         }
         return super.mouseClicked(mouseX, mouseY, button);
     }
