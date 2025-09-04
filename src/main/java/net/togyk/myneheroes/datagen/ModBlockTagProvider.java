@@ -40,6 +40,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.KRYPTONITE_CLUSTER)
 
                 .add(ModBlocks.METEOR_RADAR)
+
+                .add(ModBlocks.ARMOR_FABRICATOR)
         ;
 
         getOrCreateTagBuilder(BlockTags.AXE_MINEABLE)

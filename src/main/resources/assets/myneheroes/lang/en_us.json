@@ -113,6 +113,8 @@
 
   "block.myneheroes.upgrade_station": "Upgrade Station",
 
+  "block.myneheroes.armor_fabricator": "Armor Fabricator",
+
   "power.myneheroes.kryptonian": "Kryptonian",
   "power.myneheroes.speedster": "Speedster",
 
@@ -171,6 +173,7 @@
   "container.myneheroes.armor_light_leveler_station": "Armor Light Leveler Station",
   "container.myneheroes.upgrade_station_1": "Upgrade",
   "container.myneheroes.upgrade_station_2": "  Station",
+  "container.myneheroes.armor_fabricator": "Armor Fabricator",
 
 
   "death.attack.punched" : "%1$s was slaughtered!",
@@ -222,6 +225,5 @@
   "armor_pattern.myneheroes.mark6_vibranium": " Mark-6",
   "armor_pattern.myneheroes.mark45_netherite": " Mark-45",
   "armor_pattern.myneheroes.speedster_gold_titanium": " Speedster Gold-Titanium",
-  "armor_pattern.myneheroes.speedster_vibranium": " Speedster Vibranium",
-  "container.myneheroes.armor_fabricator": "Armor Fabricator"
+  "armor_pattern.myneheroes.speedster_vibranium": " Speedster Vibranium"
 }

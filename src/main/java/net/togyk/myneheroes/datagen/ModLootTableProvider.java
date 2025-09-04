@@ -40,5 +40,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.UPGRADE_STATION);
 
         addDrop(ModBlocks.METEOR_RADAR);
+
+        addDrop(ModBlocks.ARMOR_FABRICATOR);
     }
 }

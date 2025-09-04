@@ -209,6 +209,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(ModItems.CIRCUIT_BOARD),
                         FabricRecipeProvider.conditionsFromItem(ModItems.CIRCUIT_BOARD))
                 .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.ARMOR_FABRICATOR)
+                .pattern("###")
+                .pattern("#*#")
+                .pattern("%^%")
+                .input('#', Items.IRON_INGOT)
+                .input('*', Items.GLOW_INK_SAC)
+                .input('^', ModItems.CIRCUIT_BOARD)
+                .input('%', Items.REDSTONE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.CIRCUIT_BOARD),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.CIRCUIT_BOARD))
+                .offerTo(exporter);
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.KRYPTONITE_BlOCK)
                 .pattern("##")
                 .pattern("##")
@@ -332,7 +343,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
 
 
-        //vibranium
+        //gold titanium
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.GOLD_TITANIUM_HELMET)
                 .pattern("###")
                 .pattern("# #")

@@ -40,6 +40,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleState(ModBlocks.ARMOR_DYEING_STATION);
         blockStateModelGenerator.registerSimpleState(ModBlocks.ARMOR_LIGHT_LEVELING_STATION);
         blockStateModelGenerator.registerSimpleState(ModBlocks.UPGRADE_STATION);
+        blockStateModelGenerator.registerSimpleState(ModBlocks.ARMOR_FABRICATOR);
     }
 
     @Override

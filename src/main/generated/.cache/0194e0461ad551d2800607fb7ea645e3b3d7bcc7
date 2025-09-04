@@ -1,4 +1,4 @@
-// 1.21.1	2025-09-02T19:55:15.6378626	MyneHeroes/Recipes
+// 1.21.1	2025-09-03T15:51:28.8973574	MyneHeroes/Recipes
 38caec94c5a099906acb43735ca1d1ee29b8450d data\myneheroes\advancement\recipes\decorations\uranium_block.json
 a10f4eba902c63fc2bab3b8c06d34683b5ef3e67 data\myneheroes\recipe\uranium_ingot_from_smelting_uranium_ore.json
 fdbd42071e054b14c88d18611c56f5a710b6752d data\myneheroes\advancement\recipes\misc\kryptonite_block.json
@@ -146,9 +146,11 @@ dc5f66aa55fc919bef6fbabfbfe50b1f8c855522 data\myneheroes\recipe\kryptonite_block
 a23caab574437ba3208376aec5e3dc1c5abffac3 data\myneheroes\advancement\recipes\misc\vibranium_shield.json
 167a67ec4940ebe3c03bf7a3fc37aecc02dbb9c4 data\myneheroes\advancement\recipes\misc\armor_dyeing_station.json
 91a506e51f1346a648e2f36342a345cb1c0f2113 data\myneheroes\advancement\recipes\misc\titanium_ingot_from_blasting_titanium_ore.json
+079b8a1caeb067569c97b08584a89bb1235eb3b5 data\myneheroes\recipe\armor_fabricator.json
 70bc2a4ab3929fcd7a8646bb7fd9259e9dd96b0e data\myneheroes\recipe\web_fluid.json
 25d27cbae1e0d05e8be3a0599955cf2e2000a762 data\myneheroes\advancement\recipes\misc\gold_titanium_ingot_from_smelting_raw_gold_titanium.json
 13d1891a9a811d0ec1dae917d6741971077bc75a data\myneheroes\recipe\iron_suit_template.json
+17103c917689b75ed2118af5ba5a0b3559bc0c80 data\myneheroes\advancement\recipes\misc\armor_fabricator.json
 ff6909281df45a8386d50dfdd90f78c0153a12e8 data\myneheroes\advancement\recipes\combat\circuit_board.json
 8d159eb7953a5cbf37e1879823eb58234ddd388a data\myneheroes\recipe\uranium_ingot_from_blasting_deepslate_uranium_ore.json
 fb88b4595cc8bbcfe44b25c32225978fa41985ea data\myneheroes\recipe\vibranium_shield.json

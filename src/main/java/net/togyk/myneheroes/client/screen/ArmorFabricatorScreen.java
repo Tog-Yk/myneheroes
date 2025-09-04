@@ -12,6 +12,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
+import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.client.screen.handeler.ArmorFabricatorScreenHandler;
 import net.togyk.myneheroes.recipe.ArmorFabricatingRecipe;
 
@@ -19,12 +20,12 @@ import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class ArmorFabricatorScreen extends HandledScreen<ArmorFabricatorScreenHandler> {
-    private static final Identifier SCROLLER_TEXTURE = Identifier.ofVanilla("container/stonecutter/scroller");
-    private static final Identifier SCROLLER_DISABLED_TEXTURE = Identifier.ofVanilla("container/stonecutter/scroller_disabled");
-    private static final Identifier RECIPE_SELECTED_TEXTURE = Identifier.ofVanilla("container/stonecutter/recipe_selected");
-    private static final Identifier RECIPE_HIGHLIGHTED_TEXTURE = Identifier.ofVanilla("container/stonecutter/recipe_highlighted");
-    private static final Identifier RECIPE_TEXTURE = Identifier.ofVanilla("container/stonecutter/recipe");
-    private static final Identifier TEXTURE = Identifier.ofVanilla("textures/gui/container/stonecutter.png");
+    private static final Identifier SCROLLER_TEXTURE = Identifier.of(MyneHeroes.MOD_ID,"container/armor_fabricator/scroller");
+    private static final Identifier SCROLLER_DISABLED_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "container/armor_fabricator/scroller_disabled");
+    private static final Identifier RECIPE_SELECTED_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "container/armor_fabricator/recipe_selected");
+    private static final Identifier RECIPE_HIGHLIGHTED_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "container/armor_fabricator/recipe_highlighted");
+    private static final Identifier RECIPE_TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "container/armor_fabricator/recipe");
+    private static final Identifier TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/gui/container/armor_fabricator.png");
     private float scrollAmount;
     private boolean mouseClicked;
     private int scrollOffset;
