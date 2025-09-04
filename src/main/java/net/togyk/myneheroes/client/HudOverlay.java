@@ -9,18 +9,21 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.render.RenderTickCounter;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.togyk.myneheroes.Item.custom.AbilityHolding;
 import net.togyk.myneheroes.Item.custom.UpgradableItem;
 import net.togyk.myneheroes.ability.Ability;
-import net.togyk.myneheroes.upgrade.Upgrade;
-import net.togyk.myneheroes.util.AbilityUtil;
 import net.togyk.myneheroes.ability.HudAbility;
 import net.togyk.myneheroes.keybind.ModKeyBinds;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.StockpilePower;
+import net.togyk.myneheroes.upgrade.Upgrade;
 import net.togyk.myneheroes.util.*;
 
 import java.util.ArrayList;
@@ -234,5 +237,129 @@ public class HudOverlay implements HudRenderCallback {
             }
         }
         return abilities;
+    }
+
+    public static List<StockPile> getStockPiles(PlayerEntity player) {
+
+        List<StockPile> stockPiles = new ArrayList<>();
+        List<Power> powerList = PowerData.getPowers(player);
+        if (!powerList.isEmpty()) {
+            for (Power power : powerList) {
+                if (power != null) {
+                    power.setHolder(player);
+                    if (power instanceof StockPile stockPile && !stockPiles.contains(stockPile)) {
+                        stockPiles.add(stockPile);
+                    }
+                }
+            }
+        }
+
+        PlayerInventory inventory = player.getInventory();
+        ItemStack helmetStack = player.getEquippedStack(EquipmentSlot.HEAD);
+        if (helmetStack.getItem() instanceof AbilityHolding abilityHolding) {
+            if (abilityHolding.getAbilities(helmetStack) != null) {
+                //get the abilities for when the item is equipped
+                for (Ability ability : abilityHolding.getArmorAbilities(helmetStack)) {
+                    if (ability.getHolder() instanceof Upgrade && ability.getHolder() instanceof StockPile stockPile) {
+                        if (!stockPiles.contains(stockPile)) {
+                            stockPiles.add(stockPile);
+                        }
+                    }
+                }
+            }
+        }
+        ItemStack chestplateStack = player.getEquippedStack(EquipmentSlot.CHEST);
+        if (chestplateStack.getItem() instanceof AbilityHolding abilityHolding) {
+            if (abilityHolding.getAbilities(chestplateStack) != null) {
+                //get the abilities for when the item is equipped
+                for (Ability ability : abilityHolding.getArmorAbilities(chestplateStack)) {
+                    if (ability.getHolder() instanceof Upgrade && ability.getHolder() instanceof StockPile stockPile) {
+                        if (!stockPiles.contains(stockPile)) {
+                            stockPiles.add(stockPile);
+                        }
+                    }
+                }
+            }
+        }
+        ItemStack leggingsStack = player.getEquippedStack(EquipmentSlot.LEGS);
+        if (leggingsStack.getItem() instanceof AbilityHolding abilityHolding) {
+            if (abilityHolding.getAbilities(leggingsStack) != null) {
+                //get the abilities for when the item is equipped
+                for (Ability ability : abilityHolding.getArmorAbilities(leggingsStack)) {
+                    if (ability.getHolder() instanceof Upgrade && ability.getHolder() instanceof StockPile stockPile) {
+                        if (!stockPiles.contains(stockPile)) {
+                            stockPiles.add(stockPile);
+                        }
+                    }
+                }
+            }
+        }
+        ItemStack bootsStack = player.getEquippedStack(EquipmentSlot.FEET);
+        if (bootsStack.getItem() instanceof AbilityHolding abilityHolding) {
+            if (abilityHolding.getAbilities(bootsStack) != null) {
+                //get the abilities for when the item is equipped
+                for (Ability ability : abilityHolding.getArmorAbilities(bootsStack)) {
+                    if (ability.getHolder() instanceof Upgrade && ability.getHolder() instanceof StockPile stockPile) {
+                        if (!stockPiles.contains(stockPile)) {
+                            stockPiles.add(stockPile);
+                        }
+                    }
+                }
+            }
+        }
+        //get the abilities from the main hand
+        ItemStack mainHandStack = player.getStackInHand(Hand.MAIN_HAND);
+        if (mainHandStack.getItem() instanceof AbilityHolding abilityHolding) {
+            if (abilityHolding.getAbilities(mainHandStack) != null) {
+                for (Ability ability : abilityHolding.getMainHandAbilities(mainHandStack)) {
+                    if (ability.getHolder() instanceof Upgrade && ability.getHolder() instanceof StockPile stockPile) {
+                        if (!stockPiles.contains(stockPile)) {
+                            stockPiles.add(stockPile);
+                        }
+                    }
+                }
+            }
+        }
+        //get the abilities from the offhand
+        ItemStack offHandStack = player.getStackInHand(Hand.OFF_HAND);
+        if (offHandStack.getItem() instanceof AbilityHolding abilityHolding) {
+            if (abilityHolding.getAbilities(offHandStack) != null) {
+                for (Ability ability : abilityHolding.getOffHandAbilities(offHandStack)) {
+                    if (ability.getHolder() instanceof Upgrade && ability.getHolder() instanceof StockPile stockPile) {
+                        if (!stockPiles.contains(stockPile)) {
+                            stockPiles.add(stockPile);
+                        }
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < inventory.size(); i++) {
+            ItemStack stack = inventory.getStack(i);
+            //get the abilities in the hotbar
+            if (i < 9 && stack.getItem() instanceof AbilityHolding abilityHolding) {
+                if (abilityHolding.getAbilities(stack) != null) {
+                    for (Ability ability : abilityHolding.getHotbarAbilities(stack)) {
+                        if (ability.getHolder() instanceof Upgrade && ability.getHolder() instanceof StockPile stockPile) {
+                            if (!stockPiles.contains(stockPile)) {
+                                stockPiles.add(stockPile);
+                            }
+                        }
+                    }
+                }
+            }
+            //get the abilities in the inventory
+            if (stack.getItem() instanceof AbilityHolding abilityHolding) {
+                if (abilityHolding.getAbilities(stack) != null) {
+                    for (Ability ability : abilityHolding.getAbilities(stack)) {
+                        if (ability.getHolder() instanceof Upgrade && ability.getHolder() instanceof StockPile stockPile) {
+                            if (!stockPiles.contains(stockPile)) {
+                                stockPiles.add(stockPile);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return stockPiles;
     }
 }

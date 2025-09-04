@@ -60,6 +60,9 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
                 List<Upgrade> upgrades = upgradableItem.getUpgrades(inputStack);
                 for (Upgrade upgrade : upgrades) {
                     ItemStack stack = upgrade.getItemStack(this.world);
+                    if (stack.getItem() instanceof UpgradeItem upgradeItem) {
+                        upgradeItem.saveUpgrade(stack, upgrade);
+                    }
                     blockEntity.getUpgrades().setStack(upgrades.indexOf(upgrade), stack);
                 }
             }
@@ -73,7 +76,7 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
                 List<Upgrade> upgrades = new ArrayList<>();
                 for (ItemStack stack : blockEntity.getUpgrades().getHeldStacks()) {
                     if (stack.getItem() instanceof UpgradeItem upgradeItem) {
-                        Upgrade upgrade = upgradeItem.getUpgrade();
+                        Upgrade upgrade = upgradeItem.getUpgrade(stack);
                         upgrade.setItemStack(stack, this.world);
 
                         upgrades.add(upgrade);
@@ -113,7 +116,7 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
             @Override
             public boolean canInsert(ItemStack stack) {
                 if (stack.getItem() instanceof UpgradeItem upgradeItem) {
-                    Upgrade upgrade = upgradeItem.getUpgrade();
+                    Upgrade upgrade = upgradeItem.getUpgrade(stack);
                     if (upgrade != null) {
                         upgrade.setItemStack(stack, world);
                         return canUpgrade(upgrade);
@@ -181,7 +184,7 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
                 if (!this.insertItem(originalStack, blockInputStart, blockInputEnd, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (originalStack.getItem() instanceof UpgradeItem upgradeItem && canUpgrade(upgradeItem.getUpgrade())) {
+            } else if (originalStack.getItem() instanceof UpgradeItem upgradeItem && canUpgrade(upgradeItem.getUpgrade(originalStack))) {
                 if (!this.insertItem(originalStack, blockUpgradeStart, blockUpgradeEnd, false)) {
                     return ItemStack.EMPTY;
                 }

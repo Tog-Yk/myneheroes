@@ -13,6 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.togyk.myneheroes.Item.custom.AbilityHoldingUpgradeItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.Item.custom.UpgradableItem;
 import net.togyk.myneheroes.MyneHeroes;
@@ -249,6 +250,12 @@ public class MechanicalHudRenderer {
                 for (Upgrade upgrade : upgradableItem.getUpgrades(stack)) {
                     if (upgrade instanceof StockPile stockPile) {
                         stockpiles.add(stockPile);
+                    }
+                }
+            } else if (stack.getItem() instanceof AbilityHoldingUpgradeItem upgradeItem) {
+                if (upgradeItem.getUpgrade(stack) instanceof StockPile stockpile) {
+                    if (!stockpiles.contains(stockpile)) {
+                        stockpiles.add(stockpile);
                     }
                 }
             }
