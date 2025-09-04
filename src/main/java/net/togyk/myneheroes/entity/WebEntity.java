@@ -52,12 +52,15 @@ public class WebEntity extends PersistentProjectileEntity {
 
         //slow colliding entities down
         for (Entity entity : this.getWorld().getOtherEntities(this, this.getBoundingBox().expand(0.25), Entity::isAlive)) {
-            Vec3d vec3d = new Vec3d(0.5, 0.3F, 0.5);
+            if (entity instanceof WebEntity) {
+                continue;
+            }
+            Vec3d vec3d = new Vec3d(0.5F, 0.3F, 0.5);
             if (entity instanceof LivingEntity livingEntity && livingEntity.hasStatusEffect(StatusEffects.WEAVING)) {
-                vec3d = new Vec3d(0.75, 0.5, 0.75);
+                vec3d = new Vec3d(0.75F, 0.5F, 0.75F);
             }
 
-            entity.slowMovement(null, vec3d);
+            entity.setVelocity(entity.getVelocity().multiply(vec3d));
         }
     }
 
