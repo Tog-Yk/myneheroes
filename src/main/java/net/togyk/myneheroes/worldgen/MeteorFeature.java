@@ -62,7 +62,9 @@ public class MeteorFeature extends Feature<DefaultFeatureConfig> {
                         if (distanceSq >= 0.5 && random.nextFloat() <= distanceSq) continue;
 
                         BlockPos pos = origin.add(dx, dy, dz);
-                        world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
+                        if (!world.getBlockState(pos).isOf(Blocks.WATER)) {
+                            world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
+                        }
                     }
                 }
             }
