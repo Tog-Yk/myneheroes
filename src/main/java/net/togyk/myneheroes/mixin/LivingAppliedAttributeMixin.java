@@ -3,6 +3,7 @@ package net.togyk.myneheroes.mixin;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.util.PowerData;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,6 +21,18 @@ public class LivingAppliedAttributeMixin {
                 if (power.isPhasing()) {
                     cir.setReturnValue(false);
                     break;
+                }
+            }
+        }
+    }
+
+    @Inject(method = "canWalkOnFluid", at = @At("HEAD"), cancellable = true)
+    public void mayWalkOnFluid(FluidState state, CallbackInfoReturnable<Boolean> cir) {
+        Entity entity = (Entity) (Object) this;
+        if (entity instanceof PlayerEntity player && !player.isSneaking()) {
+            for (Power power : PowerData.getPowersWithoutSyncing(player)) {
+                if (power.canStandOnWater()) {
+                    cir.setReturnValue(true);
                 }
             }
         }

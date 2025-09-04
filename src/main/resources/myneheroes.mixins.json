@@ -6,7 +6,6 @@
 	"mixins": [
 		"BlockMixin",
 		"EntityShapeContextAccessor",
-		"FluidBlockMixin",
 		"LivingAppliedAttributeMixin",
 		"PlayerAbilityMixin",
 		"PlayerAppliedAttributeMixin",
