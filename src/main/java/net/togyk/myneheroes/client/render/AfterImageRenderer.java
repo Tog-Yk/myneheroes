@@ -39,6 +39,7 @@ public class AfterImageRenderer {
     private static void renderAfterImage(AfterimageTrailEntity trail, Entity afterImage, float entityYaw, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, PlayerEntityRenderer playerRenderer) {
         if (trail.getParent().isPresent()) {
             matrices.push();
+            matrices.scale(trail.getScale(), trail.getScale(), trail.getScale());
             matrices.multiply(RotationAxis.NEGATIVE_Y.rotation((float) Math.toRadians(entityYaw)));
             if (afterImage instanceof AbstractClientPlayerEntity player) {
                 playerRenderer.render(player, entityYaw, 0, matrices, vertexConsumers, light);
