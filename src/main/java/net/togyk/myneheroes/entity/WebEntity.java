@@ -76,20 +76,20 @@ public class WebEntity extends PersistentProjectileEntity {
 
             entity.getWorld().spawnEntity(trail);
 
-            entity.setVelocity(entity.getVelocity().multiply(0.5F));
-
             if (entity instanceof LivingEntity livingEntity) {
                 livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 30, 1));
-                //slow entity down
-                Vec3d vec3d = new Vec3d(0.25, 0.05F, 0.25);
-                if (livingEntity.hasStatusEffect(StatusEffects.WEAVING)) {
-                    vec3d = new Vec3d(0.5, 0.25, 0.5);
-                }
-
-                entity.slowMovement(null, vec3d);
             }
-        } else {
-            entity.setVelocity(entity.getVelocity().multiply(0.75F));
+        }
+
+        if (entity instanceof LivingEntity livingEntity) {
+            livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 30, 1));
+            //slow entity down
+            Vec3d vec3d = new Vec3d(0.25, 0.05F, 0.25);
+            if (livingEntity.hasStatusEffect(StatusEffects.WEAVING)) {
+                vec3d = new Vec3d(0.5, 0.25, 0.5);
+            }
+
+            entity.setVelocity(entity.getVelocity().multiply(vec3d));
         }
     }
 
