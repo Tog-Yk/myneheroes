@@ -15,7 +15,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.togyk.myneheroes.Item.custom.*;
 import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.upgrade.Upgrades;
 
 import java.lang.reflect.Constructor;
@@ -63,7 +62,7 @@ public class ModItems {
             new PoisonDrinkItem(new Item.Settings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE)));
 
     public static final Item BOTTLE_OF_RADIOACTIVE_SPIDER_VENOM = registerItem("bottle_of_radioactive_spider_venom",
-            new PowerDrinkItem(Powers.SPIDER, List.of(StatusEffects.NAUSEA), new Item.Settings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE)));
+            new SpiderManPowerDrink(List.of(StatusEffects.NAUSEA), new Item.Settings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE)));
 
     public static final Item MECHANICAL_HUD_UPGRADE = registerItem("mechanical_hud_upgrade", new UpgradeWithTooltipItem(Upgrades.MECHANICAL_HUD, Text.literal("mechanical").setStyle(Style.EMPTY.withColor(0xC428EEFF)), new Item.Settings()));
     public static final Item SPEEDSTER_HUD_UPGRADE = registerItem("speedster_hud_upgrade", new UpgradeWithTooltipItem(Upgrades.SPEEDSTER_HUD, Text.literal("speedster").setStyle(Style.EMPTY.withColor(0xC4FFEB28)), new Item.Settings()));

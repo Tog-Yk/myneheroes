@@ -46,11 +46,11 @@ public class PowerDrinkItem extends Item {
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         if (!world.isClient) {
             if (user instanceof PlayerEntity player) {
-                for (RegistryEntry<StatusEffect> effect : sideEffects) {
+                for (RegistryEntry<StatusEffect> effect : getSideEffects()) {
                     player.addStatusEffect(new StatusEffectInstance(effect, 200, 0));
                 }
 
-                PowerData.addUniquePowerToLimit(player, power.copy());
+                PowerData.addUniquePowerToLimit(player, this.getPower(player).copy());
 
                 if (!player.isCreative()) {
                     ItemStack remainder = stack.getRecipeRemainder();
@@ -61,5 +61,13 @@ public class PowerDrinkItem extends Item {
         }
 
         return stack;
+    }
+
+    protected Power getPower(PlayerEntity player) {
+        return power;
+    }
+
+    public List<RegistryEntry<StatusEffect>> getSideEffects() {
+        return sideEffects;
     }
 }

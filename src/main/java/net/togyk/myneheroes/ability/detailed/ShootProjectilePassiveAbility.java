@@ -48,7 +48,7 @@ public class ShootProjectilePassiveAbility<T extends ProjectileEntity> extends S
 
     @Override
     public SimpleEventResult onMissedInteraction(PlayerEntity player) {
-        if (this.get() && this.projectileCooldown == 0 && ((this.getIndirectHolder() instanceof StockPile stockPile && stockPile.getCharge() >= this.getCost()) || this.cost == 0)) {
+        if (this.get() && this.projectileCooldown == 0 && (!(this.getIndirectHolder() instanceof StockPile stockPile) || stockPile.getCharge() >= this.getCost())) {
             if (!player.getWorld().isClient) {
                 T projectile = createProjectile.apply(player, this);
                 player.getWorld().spawnEntity(projectile);

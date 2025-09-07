@@ -20,11 +20,7 @@ import net.minecraft.world.World;
 import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.ability.detailed.FlyFromReactorAbility;
-import net.togyk.myneheroes.ability.detailed.LaserEyesAbility;
-import net.togyk.myneheroes.ability.detailed.ReleaseKineticEnergyAbility;
-import net.togyk.myneheroes.ability.detailed.SpiderSenseHudAbility;
-import net.togyk.myneheroes.ability.detailed.ShootProjectilePassiveAbility;
+import net.togyk.myneheroes.ability.detailed.*;
 import net.togyk.myneheroes.client.HudType;
 import net.togyk.myneheroes.entity.LaserEntity;
 import net.togyk.myneheroes.entity.ModEntities;
@@ -220,6 +216,8 @@ public class Abilities {
     }));
 
     public static final PassiveSelectionAbility WEB_SHOOTER = registerAbility(new PassiveSelectionAbility(Identifier.of(MyneHeroes.MOD_ID, "web_shooter"), new Ability.Settings().appearsMultipleTimes(false), List.of(SHOOT_WEB, SHOOT_TASER_WEB)));
+
+    public static final PassiveSelectionAbility ORGANIC_WEBBING = registerAbility(new PassiveSelectionAbility(Identifier.of(MyneHeroes.MOD_ID, "organic_webbing"), new Ability.Settings().appearsMultipleTimes(false), List.of(SHOOT_WEB, SHOOT_TASER_WEB)));
 
     private static <T extends Ability> T registerAbility(T ability) {
         if (!ABILITIES.containsKey(ability.id)) {
