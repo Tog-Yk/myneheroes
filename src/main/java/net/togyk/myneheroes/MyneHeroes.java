@@ -2,7 +2,6 @@ package net.togyk.myneheroes;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -12,8 +11,6 @@ import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.advancement.criterion.ModCriteria;
 import net.togyk.myneheroes.block.ModBlockEntityTypes;
 import net.togyk.myneheroes.block.ModBlocks;
-import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
-import net.togyk.myneheroes.block.entity.ArmorLightLevelerBlockEntity;
 import net.togyk.myneheroes.client.screen.ModScreenHandlerTypes;
 import net.togyk.myneheroes.command.ModCommands;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
@@ -65,10 +62,6 @@ public class MyneHeroes implements ModInitializer {
         ModLootTableModifiers.modifyLootTables();
 
         ModEffects.registerEffects();
-
-        ItemStorage.SIDED.registerForBlockEntity(ArmorDyeingBlockEntity::getInputInventoryProvider, ModBlockEntityTypes.ARMOR_DYEING_BLOCK_ENTITY);
-        ItemStorage.SIDED.registerForBlockEntity(ArmorDyeingBlockEntity::getInputInventoryProvider, ModBlockEntityTypes.ARMOR_DYEING_BLOCK_ENTITY);
-        ItemStorage.SIDED.registerForBlockEntity(ArmorLightLevelerBlockEntity::getInventoryProvider, ModBlockEntityTypes.ARMOR_LIGHT_LEVELER_BLOCK_ENTITY);
 
         FabricDefaultAttributeRegistry.register(ModEntities.STATIONARY_ITEM, StationaryItemEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.STATIONARY_ARMOR, StationaryArmorEntity.createMobAttributes());

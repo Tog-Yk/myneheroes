@@ -26,7 +26,7 @@ public class ModBiomeModifications {
 
         BiomeModifications.addFeature(
                 BiomeSelectors.foundInOverworld(),
-                GenerationStep.Feature.LOCAL_MODIFICATIONS,
+                GenerationStep.Feature.UNDERGROUND_DECORATION,
                 ModPlacedFeatures.METEOR_KEY
         );
         //add more placed features here */

@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
@@ -47,6 +48,8 @@ public class MeteorFeature extends Feature<DefaultFeatureConfig> {
         double rz = radius * 1.5 * 1.6;   // Z stretch
         double ry = radius * 1.5;    // Y smaller
 
+        boolean isWaterMeteor = world.getBlockState(origin).isOf(Blocks.WATER) && world.getBiome(origin).isIn(BiomeTags.IS_OCEAN);
+
         for (int dx = (int)-rx; dx <= (int)rx; dx++) {
             for (int dz = (int)-rz; dz <= (int)rz; dz++) {
                 for (int dy = (int)-ry; dy <= ry; dy++) { // only carve downward
@@ -63,7 +66,11 @@ public class MeteorFeature extends Feature<DefaultFeatureConfig> {
 
                         BlockPos pos = origin.add(dx, dy, dz);
                         if (!world.getBlockState(pos).isOf(Blocks.WATER)) {
-                            world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
+                            if (isWaterMeteor && world.getSeaLevel() > pos.getY()) {
+                                world.setBlockState(pos, Blocks.WATER.getDefaultState(), 2);
+                            } else {
+                                world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
+                            }
                         }
                     }
                 }
