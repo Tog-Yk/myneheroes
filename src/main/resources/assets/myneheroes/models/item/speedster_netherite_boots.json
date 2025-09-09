@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "myneheroes:item/speedster_netherite_boots",
+    "layer1": "myneheroes:item/speedster_netherite_details_boots",
+    "layer2": "myneheroes:item/speedster_netherite_details_2_boots",
+    "layer3": "myneheroes:item/speedster_netherite_glow_boots"
+  }
+}

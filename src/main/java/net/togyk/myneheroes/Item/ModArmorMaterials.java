@@ -156,6 +156,21 @@ public class ModArmorMaterials {
                             new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark45_details_2"), "", true),
                             new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark45_glow"), "", true)
                     ),0,0));
+
+    public static final RegistryEntry<ArmorMaterial> NETHERITE_SPEEDSTER_MATERIAL = registerArmorMaterial("netherite_speedster",
+            () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                map.put(ArmorItem.Type.BOOTS, 3);
+                map.put(ArmorItem.Type.LEGGINGS, 6);
+                map.put(ArmorItem.Type.CHESTPLATE, 8);
+                map.put(ArmorItem.Type.HELMET, 3);
+                map.put(ArmorItem.Type.BODY, 11);
+            }), 20, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
+                    List.of(
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"speedster_netherite"), "", true),
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"speedster_netherite_details"), "", true),
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"speedster_netherite_details_2"), "", true),
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"speedster_netherite_glow"), "", true)
+                    ),0,0));
     /*
      * Spiderman pattern
      * Kryptonian pattern

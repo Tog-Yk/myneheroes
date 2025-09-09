@@ -136,6 +136,10 @@ public class ModItemGroups {
                         entries.add(ModItems.SPEEDSTER_GOLD_TITANIUM_LEGGINGS);
                         entries.add(ModItems.SPEEDSTER_GOLD_TITANIUM_BOOTS);
 
+                        entries.add(ModItems.SPEEDSTER_NETHERITE_HELMET);
+                        entries.add(ModItems.SPEEDSTER_NETHERITE_CHESTPLATE);
+                        entries.add(ModItems.SPEEDSTER_NETHERITE_LEGGINGS);
+                        entries.add(ModItems.SPEEDSTER_NETHERITE_BOOTS);
 
                     }).build());
 

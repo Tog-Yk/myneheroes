@@ -70,6 +70,11 @@ public class ModColorProvider {
         registerDyeableArmorItem(ModItems.SPEEDSTER_GOLD_TITANIUM_LEGGINGS);
         registerDyeableArmorItem(ModItems.SPEEDSTER_GOLD_TITANIUM_BOOTS);
 
+        registerDyeableArmorItem(ModItems.SPEEDSTER_NETHERITE_HELMET);
+        registerDyeableArmorItem(ModItems.SPEEDSTER_NETHERITE_CHESTPLATE);
+        registerDyeableArmorItem(ModItems.SPEEDSTER_NETHERITE_LEGGINGS);
+        registerDyeableArmorItem(ModItems.SPEEDSTER_NETHERITE_BOOTS);
+
         registerInjectionItem(ModItems.POWER_INJECTION);
 
         registerSimpleDyeableItem(ModItems.COLORING_COMPOUND);

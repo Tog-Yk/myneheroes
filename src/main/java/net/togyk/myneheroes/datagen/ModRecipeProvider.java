@@ -414,4 +414,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         ArmorFabricatingRecipeJsonBuilder.create(Items.NETHERITE_CHESTPLATE, ModItems.MARK45_NETHERITE_CHESTPLATE).offerTo(exporter);
         ArmorFabricatingRecipeJsonBuilder.create(Items.NETHERITE_LEGGINGS, ModItems.MARK45_NETHERITE_LEGGINGS).offerTo(exporter);
         ArmorFabricatingRecipeJsonBuilder.create(Items.NETHERITE_BOOTS, ModItems.MARK45_NETHERITE_BOOTS).offerTo(exporter);
+
+        ArmorFabricatingRecipeJsonBuilder.create(Items.NETHERITE_HELMET, ModItems.SPEEDSTER_NETHERITE_HELMET).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(Items.NETHERITE_CHESTPLATE, ModItems.SPEEDSTER_NETHERITE_CHESTPLATE).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(Items.NETHERITE_LEGGINGS, ModItems.SPEEDSTER_NETHERITE_LEGGINGS).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(Items.NETHERITE_BOOTS, ModItems.SPEEDSTER_NETHERITE_BOOTS).offerTo(exporter);
     }}
