@@ -1,0 +1,11 @@
+{
+  "type": "myneheroes:armor_fabricating",
+  "group": "armor_fabricating",
+  "ingredient": {
+    "item": "minecraft:netherite_boots"
+  },
+  "result": {
+    "count": 1,
+    "id": "myneheroes:speedster_netherite_boots"
+  }
+}
