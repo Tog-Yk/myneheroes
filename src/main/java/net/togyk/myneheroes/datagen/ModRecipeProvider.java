@@ -273,6 +273,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         FabricRecipeProvider.conditionsFromItem(Items.LEATHER))
                 .offerTo(exporter);
 
+        //tutorial items
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.CLARK_KENT_GLASSES)
+                .input(Items.STICK)
+                .input(Items.BLACK_DYE)
+                .criterion(FabricRecipeProvider.hasItem(Items.STICK),
+                        FabricRecipeProvider.conditionsFromItem(Items.STICK))
+                .offerTo(exporter);
+
 
         //simple armor recipes
         //vibranium

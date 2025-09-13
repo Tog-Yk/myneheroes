@@ -87,6 +87,10 @@ public class ModItemGroups {
                         entries.add(ModBlocks.UPGRADE_STATION);
 
                         entries.add(ModBlocks.ARMOR_FABRICATOR);
+
+                        //tutorial items
+                        //TODO: move tutorial items to own creative menu
+                        entries.add(ModItems.CLARK_KENT_GLASSES);
                     }).build());
 
     public static final ItemGroup MYNEHEROES_ARMOR_GROUP = Registry.register(Registries.ITEM_GROUP,

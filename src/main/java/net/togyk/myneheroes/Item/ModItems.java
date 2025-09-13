@@ -15,6 +15,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.togyk.myneheroes.Item.custom.*;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.ability.Abilities;
 import net.togyk.myneheroes.upgrade.Upgrades;
 
 import java.lang.reflect.Constructor;
@@ -155,6 +156,10 @@ public class ModItems {
     public static Item SPEEDSTER_NETHERITE_CHESTPLATE = null;
     public static Item SPEEDSTER_NETHERITE_LEGGINGS = null;
     public static Item SPEEDSTER_NETHERITE_BOOTS = null;
+
+    //tutorial items
+    public static Item CLARK_KENT_GLASSES = registerItem("clark_kent_glasses",
+            new TutorialItem(new Item.Settings().maxCount(1), Abilities.TUTOR_HUD.copy()));
 
     static {
         try {

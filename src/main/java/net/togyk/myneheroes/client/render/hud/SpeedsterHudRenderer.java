@@ -34,6 +34,9 @@ import java.util.stream.StreamSupport;
 
 @Environment(EnvType.CLIENT)
 public class SpeedsterHudRenderer {
+
+    //myneheroes/src/resources/myneheroes/textures/gui/sprites is where the path's relate to.
+
     //background
     private static final Identifier BACKGROUND = Identifier.of(MyneHeroes.MOD_ID,
             "hud/speedster/background");
