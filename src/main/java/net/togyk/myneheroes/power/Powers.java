@@ -37,6 +37,11 @@ public class Powers {
             new Power.attributeModifiers().addAttributeModifier(EntityAttributes.GENERIC_FALL_DAMAGE_MULTIPLIER, Identifier.of(MyneHeroes.MOD_ID, "spider_organic_webbing.fall_damage"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> -1.0D)
     ));
 
+    public static Power WEAPON_X = registerPower(new Power(Identifier.of(MyneHeroes.MOD_ID, "weapon-x"), 0xFFFF3A3A, List.of(Abilities.RAGE),
+            new Power.Settings().damageMultiplier(3.50).armor(3),
+            new Power.attributeModifiers()
+    ));
+
     public static <T extends Power> T registerPower(T power) {
         if (!POWERS.containsKey(power.id)) {
             POWERS.put(power.id, power);

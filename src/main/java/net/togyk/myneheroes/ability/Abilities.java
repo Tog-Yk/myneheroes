@@ -220,6 +220,8 @@ public class Abilities {
 
     public static final PassiveSelectionAbility ORGANIC_WEBBING = registerAbility(new PassiveSelectionAbility(Identifier.of(MyneHeroes.MOD_ID, "organic_webbing"), new Ability.Settings().appearsMultipleTimes(false), List.of(SHOOT_WEB, SHOOT_TASER_WEB)));
 
+    public static final RageAbility RAGE = registerAbility(new RageAbility(Identifier.of(MyneHeroes.MOD_ID, "rage"), new Ability.Settings().appearsMultipleTimes(false), 0.25F));
+
     private static <T extends Ability> T registerAbility(T ability) {
         if (!ABILITIES.containsKey(ability.id)) {
             ABILITIES.put(ability.id, ability);

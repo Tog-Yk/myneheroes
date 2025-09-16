@@ -16,6 +16,7 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.ability.AttributeModifierAbility;
 import net.togyk.myneheroes.util.AbilityUtil;
 import net.togyk.myneheroes.util.PowerUtil;
 import org.jetbrains.annotations.Nullable;
@@ -274,6 +275,17 @@ public class Power {
                 entityAttributeInstance.removeModifier((entry.getValue()).id());
             }
         }
+        //also apply attribute modifiers from abilities
+        for(Ability ability : this.getAbilities()) {
+            if (ability instanceof AttributeModifierAbility modifierAbility) {
+                for(Map.Entry<RegistryEntry<EntityAttribute>, AttributeModifierAbility.AbilityAttributeModifierCreator> entry : modifierAbility.getAttributeModifiers().modifiers.entrySet()) {
+                    EntityAttributeInstance entityAttributeInstance = attributeContainer.getCustomInstance(entry.getKey());
+                    if (entityAttributeInstance != null) {
+                        entityAttributeInstance.removeModifier((entry.getValue()).id());
+                    }
+                }
+            }
+        }
     }
 
     public void applyAttributes(AttributeContainer attributeContainer) {
@@ -282,6 +294,18 @@ public class Power {
             if (entityAttributeInstance != null) {
                 entityAttributeInstance.removeModifier((entry.getValue()).id());
                 entityAttributeInstance.addPersistentModifier((entry.getValue()).createAttributeModifier());
+            }
+        }
+        //also apply attribute modifiers from abilities
+        for(Ability ability : this.getAbilities()) {
+            if (ability instanceof AttributeModifierAbility modifierAbility) {
+                for(Map.Entry<RegistryEntry<EntityAttribute>, AttributeModifierAbility.AbilityAttributeModifierCreator> entry : modifierAbility.getAttributeModifiers().modifiers.entrySet()) {
+                    EntityAttributeInstance entityAttributeInstance = attributeContainer.getCustomInstance(entry.getKey());
+                    if (entityAttributeInstance != null) {
+                        entityAttributeInstance.removeModifier((entry.getValue()).id());
+                        entityAttributeInstance.addPersistentModifier((entry.getValue()).createAttributeModifier());
+                    }
+                }
             }
         }
     }
