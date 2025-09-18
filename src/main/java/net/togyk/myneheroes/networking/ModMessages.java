@@ -16,18 +16,14 @@ import net.minecraft.world.World;
 import net.togyk.myneheroes.Item.custom.DyeableItem;
 import net.togyk.myneheroes.Item.custom.LightableItem;
 import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.ability.Abilities;
-import net.togyk.myneheroes.ability.Ability;
-import net.togyk.myneheroes.ability.SelectionAbility;
-import net.togyk.myneheroes.ability.ToolbeltAbility;
-import net.togyk.myneheroes.ability.PassiveSelectionAbility;
+import net.togyk.myneheroes.ability.*;
+import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
+import net.togyk.myneheroes.block.entity.ArmorLightLevelerBlockEntity;
 import net.togyk.myneheroes.event.MissedInteractionCallback;
 import net.togyk.myneheroes.event.MissedSwingCallback;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.util.PlayerAbilities;
-import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
-import net.togyk.myneheroes.block.entity.ArmorLightLevelerBlockEntity;
 import net.togyk.myneheroes.util.PlayerPowers;
 
 import java.util.ArrayList;
@@ -55,9 +51,18 @@ public class ModMessages {
                         Ability ability = ((PlayerAbilities) context.player()).myneheroes$getFirstAbility();
                         if (ability != null) {
                             switch (payload.type()) {
-                                case 0: ability.use(context.player());
-                                case 1: ability.usePressed(context.player());
-                                case 2: ability.useReleased(context.player());
+                                case 0: {
+                                    ability.use(context.player());
+                                    break;
+                                }
+                                case 1: {
+                                    ability.usePressed(context.player());
+                                    break;
+                                }
+                                case 2: {
+                                    ability.useReleased(context.player());
+                                    break;
+                                }
                             }
                         }
                     }
@@ -66,9 +71,18 @@ public class ModMessages {
                         Ability ability = ((PlayerAbilities) context.player()).myneheroes$getSecondAbility();
                         if (ability != null) {
                             switch (payload.type()) {
-                                case 0: ability.use(context.player());
-                                case 1: ability.usePressed(context.player());
-                                case 2: ability.useReleased(context.player());
+                                case 0: {
+                                    ability.use(context.player());
+                                    break;
+                                }
+                                case 1: {
+                                    ability.usePressed(context.player());
+                                    break;
+                                }
+                                case 2: {
+                                    ability.useReleased(context.player());
+                                    break;
+                                }
                             }
                         }
                     }
@@ -77,9 +91,18 @@ public class ModMessages {
                         Ability ability = ((PlayerAbilities) context.player()).myneheroes$getThirdAbility();
                         if (ability != null) {
                             switch (payload.type()) {
-                                case 0: ability.use(context.player());
-                                case 1: ability.usePressed(context.player());
-                                case 2: ability.useReleased(context.player());
+                                case 0: {
+                                    ability.use(context.player());
+                                    break;
+                                }
+                                case 1: {
+                                    ability.usePressed(context.player());
+                                    break;
+                                }
+                                case 2: {
+                                    ability.useReleased(context.player());
+                                    break;
+                                }
                             }
                         }
                     }
@@ -88,9 +111,18 @@ public class ModMessages {
                         Ability ability = ((PlayerAbilities) context.player()).myneheroes$getFourthAbility();
                         if (ability != null) {
                             switch (payload.type()) {
-                                case 0: ability.use(context.player());
-                                case 1: ability.usePressed(context.player());
-                                case 2: ability.useReleased(context.player());
+                                case 0: {
+                                    ability.use(context.player());
+                                    break;
+                                }
+                                case 1: {
+                                    ability.usePressed(context.player());
+                                    break;
+                                }
+                                case 2: {
+                                    ability.useReleased(context.player());
+                                    break;
+                                }
                             }
                         }
                     }
