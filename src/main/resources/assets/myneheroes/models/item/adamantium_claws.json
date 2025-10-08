@@ -1,0 +1,7 @@
+{
+  "parent" : "myneheroes:item/claws",
+  "textures": {
+  "0": "myneheroes:item/adamantium_claws",
+  "particle": "myneheroes:item/adamantium_claws"
+  }
+}

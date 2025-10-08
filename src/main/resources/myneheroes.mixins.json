@@ -1,24 +1,26 @@
 {
-	"required": true,
-	"minVersion": "0.8",
-	"compatibilityLevel": "JAVA_21",
-	"package": "net.togyk.myneheroes.mixin",
-	"mixins": [
-		"BlockMixin",
-		"EntityShapeContextAccessor",
-		"LivingAppliedAttributeMixin",
-		"PlayerAbilityMixin",
-		"PlayerAppliedAttributeMixin",
-		"PlayerPowerMixin",
-		"StationaryConvertItemEntityMixin"
-	],
-	"client": [
-		"ArmorFeatureRendererMixin",
-		"InGameOverlayRendererMixin",
-		"MouseMixin",
-		"PlayerSwingMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
+  "required": true,
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_21",
+  "package": "net.togyk.myneheroes.mixin",
+  "mixins": [
+    "BlockMixin",
+    "EntityShapeContextAccessor",
+    "ItemFrameEntityMixin",
+    "LivingAppliedAttributeMixin",
+    "PlayerAbilityMixin",
+    "PlayerAppliedAttributeMixin",
+    "PlayerPowerMixin",
+    "ScreenHandlerMixin",
+    "StationaryConvertItemEntityMixin"
+  ],
+  "client": [
+    "ArmorFeatureRendererMixin",
+    "InGameOverlayRendererMixin",
+    "MouseMixin",
+    "PlayerSwingMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
 	}
 }

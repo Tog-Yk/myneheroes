@@ -1,0 +1,69 @@
+{
+	"format_version": "1.21.6",
+	"elements": [
+		{
+			"from": [7, 7, 3],
+			"to": [7, 10, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 7, 7]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 3], "texture": "#0"},
+				"east": {"uv": [7, 0, 0, 3], "texture": "#particle"},
+				"south": {"uv": [0, 0, 0, 3], "texture": "#0"},
+				"west": {"uv": [0, 0, 7, 3], "texture": "#particle"},
+				"up": {"uv": [0, 7, 0, 0], "texture": "#0"},
+				"down": {"uv": [0, 0, 0, 7], "texture": "#0"}
+			}
+		},
+		{
+			"from": [8, 7.25, 3],
+			"to": [8, 10.25, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 7.25, 7]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 3], "texture": "#0"},
+				"east": {"uv": [7, 3, 0, 6], "texture": "#particle"},
+				"south": {"uv": [0, 0, 0, 3], "texture": "#0"},
+				"west": {"uv": [0, 3, 7, 6], "texture": "#particle"},
+				"up": {"uv": [0, 7, 0, 0], "texture": "#0"},
+				"down": {"uv": [0, 0, 0, 7], "texture": "#0"}
+			}
+		},
+		{
+			"from": [9, 7, 3],
+			"to": [9, 10, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, 7, 7]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 3], "texture": "#0"},
+				"east": {"uv": [7, 6, 0, 9], "texture": "#particle"},
+				"south": {"uv": [0, 0, 0, 3], "texture": "#0"},
+				"west": {"uv": [0, 6, 7, 9], "texture": "#particle"},
+				"up": {"uv": [0, 7, 0, 0], "texture": "#0"},
+				"down": {"uv": [0, 0, 0, 7], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [0, 0, -90],
+			"translation": [0.75, -1.75, 1]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [0, 0, -90],
+			"translation": [0.75, -1.75, 1]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 0, -10.25],
+			"translation": [2.75, -0.75, 2.5],
+			"scale": [2, 2, 2]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 0, -10.25],
+			"translation": [2.75, -0.75, 2.5],
+			"scale": [2, 2, 2]
+		},
+		"gui": {
+			"rotation": [-150, 45, -180],
+			"translation": [3, -1, 0],
+			"scale": [2.4, 2.4, 2.4]
+		}
+	}
+}

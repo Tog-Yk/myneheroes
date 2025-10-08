@@ -78,6 +78,11 @@ public class ModItems {
     public static final Item COLORING_COMPOUND = registerItem("coloring_compound",
             new SimpleDyeableItem(-1, new Item.Settings()));
 
+    public static final Item BONE_CLAWS = registerItem("bone_claws",
+            new AbilityLinkedWeapon(new Item.Settings().maxCount(1).attributeModifiers(AbilityLinkedWeapon.createAttributeModifiers(5, -2.4F))));
+    public static final Item ADAMANTIUM_CLAWS = registerItem("adamantium_claws",
+            new AbilityLinkedWeapon(new Item.Settings().maxCount(1).attributeModifiers(AbilityLinkedWeapon.createAttributeModifiers(5, -2.4F))));
+
     //armors
     //vibranium armors
     public static final Item VIBRANIUM_HELMET = registerItem("vibranium_helmet",
