@@ -6,9 +6,9 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import net.togyk.myneheroes.Item.custom.TemporaryWeapon;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.ItemRenderableAbility;
+import net.togyk.myneheroes.util.ModTags;
 
 public class AddOrRemoveDualItemAbility extends Ability implements ItemRenderableAbility {
     private final ItemConvertible itemConvertible;
@@ -34,7 +34,7 @@ public class AddOrRemoveDualItemAbility extends Ability implements ItemRenderabl
                     }
                 } else {
                     //else add items in the empty hands
-                    if (player.getOffHandStack().isEmpty() || player.getOffHandStack().getItem() instanceof TemporaryWeapon) {
+                    if (player.getOffHandStack().isEmpty() || player.getOffHandStack().isIn(ModTags.Items.CAN_BE_REPLACED_BY_TEMPORARY_ITEMS)) {
                         player.setStackInHand(Hand.OFF_HAND, item.asItem().getDefaultStack());
                     }
 
@@ -47,7 +47,7 @@ public class AddOrRemoveDualItemAbility extends Ability implements ItemRenderabl
     }
 
     private void addItemToMainHand(PlayerEntity player, ItemStack stack) {
-        if (player.getMainHandStack().isEmpty() || player.getMainHandStack().getItem() instanceof TemporaryWeapon) {
+        if (player.getMainHandStack().isEmpty() || player.getMainHandStack().isIn(ModTags.Items.CAN_BE_REPLACED_BY_TEMPORARY_ITEMS)) {
             player.setStackInHand(Hand.MAIN_HAND, stack);
             return;
         }

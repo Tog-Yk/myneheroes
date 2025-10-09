@@ -29,6 +29,10 @@ public class ModTags {
         public static final TagKey<Item> COLORING_FUEL = createTag("coloring_fuel");
         public static final TagKey<Item> DYES = createTag("dyes");
 
+        public static final TagKey<Item> CAN_BE_REPLACED_BY_TEMPORARY_ITEMS = createTag("can_be_replaced_by_temporary_items");
+        public static final TagKey<Item> CANT_BE_PLACED_IN_ITEM_FRAME = createTag("cant_be_placed_in_item_frame");
+        public static final TagKey<Item> CANT_BE_PLACED_IN_CHESTS = createTag("cant_be_placed_in_chests");
+
         private static TagKey<Item> createTag(String name) {
             return TagKey.of(RegistryKeys.ITEM, Identifier.of(MyneHeroes.MOD_ID, name));
         }

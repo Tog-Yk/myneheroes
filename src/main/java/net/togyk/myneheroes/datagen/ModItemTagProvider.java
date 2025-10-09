@@ -134,6 +134,21 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(Items.PINK_DYE)
         ;
 
+        getOrCreateTagBuilder(ModTags.Items.CAN_BE_REPLACED_BY_TEMPORARY_ITEMS)
+                .add(ModItems.BONE_CLAWS)
+                .add(ModItems.ADAMANTIUM_CLAWS)
+        ;
+
+        getOrCreateTagBuilder(ModTags.Items.CANT_BE_PLACED_IN_ITEM_FRAME)
+                .add(ModItems.BONE_CLAWS)
+                .add(ModItems.ADAMANTIUM_CLAWS)
+        ;
+
+        getOrCreateTagBuilder(ModTags.Items.CANT_BE_PLACED_IN_CHESTS)
+                .add(ModItems.BONE_CLAWS)
+                .add(ModItems.ADAMANTIUM_CLAWS)
+        ;
+
         getOrCreateTagBuilder(ModTags.Items.REACTOR_FUEL)
                 .add(ModItems.VIBRANIUM_INGOT)
         ;
