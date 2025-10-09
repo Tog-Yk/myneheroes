@@ -82,7 +82,7 @@ public class TemporaryWeapon extends Item implements WorldTickableItem {
     @Override
     public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
         player.getInventory().removeStack(slot.getIndex());
-        return false; // Consume the click, prevent normal behavior
+        return true; // Consume the click, prevent normal behavior
     }
 
     @Override

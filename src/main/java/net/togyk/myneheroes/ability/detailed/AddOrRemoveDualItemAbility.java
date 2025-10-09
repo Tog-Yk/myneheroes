@@ -1,7 +1,6 @@
 package net.togyk.myneheroes.ability.detailed;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
@@ -48,32 +47,22 @@ public class AddOrRemoveDualItemAbility extends Ability implements ItemRenderabl
     }
 
     private void addItemToMainHand(PlayerEntity player, ItemStack stack) {
-        PlayerInventory inv = player.getInventory();
-
-        if (player.getMainHandStack().isEmpty() || player.getOffHandStack().getItem() instanceof TemporaryWeapon) {
+        if (player.getMainHandStack().isEmpty() || player.getMainHandStack().getItem() instanceof TemporaryWeapon) {
             player.setStackInHand(Hand.MAIN_HAND, stack);
             return;
         }
 
 
-        // 2. Try to find empty slot in the hotbar (slots 0–8)
-        for (int i = 0; i < 9; i++) {
-            if (inv.getStack(i).isEmpty() || player.getOffHandStack().getItem() instanceof TemporaryWeapon) {
-                inv.setStack(i, stack);
-                inv.selectedSlot = i; // switch player to that slot
-                player.playerScreenHandler.sendContentUpdates();
-                return;
-            }
-        }
-
         // 3. If no empty hotbar slot → move main-hand item to inventory
-        ItemStack mainHand = player.getMainHandStack();
-        player.setStackInHand(Hand.MAIN_HAND, stack);
-        if (!inv.insertStack(mainHand)) { // try moving it into inventory
-            player.dropItem(mainHand, false);
-        }
+        ItemStack stackInHand = player.getMainHandStack().copyAndEmpty();
 
-        player.playerScreenHandler.sendContentUpdates();
+        player.setStackInHand(Hand.MAIN_HAND, stack);
+
+        // Try to insert into inventory
+        if (!player.getInventory().insertStack(stackInHand)) {
+            player.dropItem(stackInHand, false);
+        }
+        player.dropStack(player.getMainHandStack());
     }
 
     @Override

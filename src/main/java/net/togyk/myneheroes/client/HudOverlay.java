@@ -215,6 +215,8 @@ public class HudOverlay implements HudRenderCallback {
             } else {
                 drawContext.drawTexture(ability.icon, x, y, 0, 0, 16, 16, 16, 16);
             }
+        }
+        if (ability != null) {
             if (ability.getCooldown() != 0) {
                 float cooldownPercentile = (float) ability.getCooldown() / ability.getMaxCooldown();
                 int maxIconLength = 16;

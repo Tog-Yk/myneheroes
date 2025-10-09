@@ -34,8 +34,8 @@ public class Abilities {
     public static void registerAbilitiesAfterItems() {
         MyneHeroes.LOGGER.info("Registering abilities");
 
-        BONE_CLAWS = registerAbility(new AddOrRemoveDualItemAbility(Identifier.of(MyneHeroes.MOD_ID, "bone_claws"), ModItems.BONE_CLAWS, 20, new Ability.Settings().appearsMultipleTimes(false)));
-        ADAMANTIUM_CLAWS = registerAbility(new AddOrRemoveDualItemAbility(Identifier.of(MyneHeroes.MOD_ID, "adamantium_claws"), ModItems.ADAMANTIUM_CLAWS, 20, new Ability.Settings().appearsMultipleTimes(false)));
+        BONE_CLAWS = registerAbility(new AddOrRemoveDualItemAbility(Identifier.of(MyneHeroes.MOD_ID, "bone_claws"), ModItems.BONE_CLAWS, 10, new Ability.Settings().appearsMultipleTimes(false)));
+        ADAMANTIUM_CLAWS = registerAbility(new AddOrRemoveDualItemAbility(Identifier.of(MyneHeroes.MOD_ID, "adamantium_claws"), ModItems.ADAMANTIUM_CLAWS, 10, new Ability.Settings().appearsMultipleTimes(false)));
     }
 
     private static final Map<Identifier,Ability> ABILITIES = new HashMap<>();
