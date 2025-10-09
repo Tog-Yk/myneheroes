@@ -79,9 +79,9 @@ public class ModItems {
             new SimpleDyeableItem(-1, new Item.Settings()));
 
     public static final Item BONE_CLAWS = registerItem("bone_claws",
-            new AbilityLinkedWeapon(new Item.Settings().maxCount(1).attributeModifiers(AbilityLinkedWeapon.createAttributeModifiers(5, -2.4F))));
+            new TemporaryWeapon(new Item.Settings().maxCount(1).attributeModifiers(TemporaryWeapon.createAttributeModifiers(4, -1.2F))));
     public static final Item ADAMANTIUM_CLAWS = registerItem("adamantium_claws",
-            new AbilityLinkedWeapon(new Item.Settings().maxCount(1).attributeModifiers(AbilityLinkedWeapon.createAttributeModifiers(5, -2.4F))));
+            new TemporaryWeapon(new Item.Settings().maxCount(1).attributeModifiers(TemporaryWeapon.createAttributeModifiers(4.5F, -1.2F))));
 
     //armors
     //vibranium armors

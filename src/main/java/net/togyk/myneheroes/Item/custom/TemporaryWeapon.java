@@ -22,9 +22,9 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class AbilityLinkedWeapon extends Item implements WorldTickableItem {
+public class TemporaryWeapon extends Item implements WorldTickableItem {
 
-    public AbilityLinkedWeapon(Settings settings) {
+    public TemporaryWeapon(Settings settings) {
         super(settings);
     }
 

@@ -17,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
@@ -30,6 +31,13 @@ import net.togyk.myneheroes.entity.WebEntity;
 import java.util.*;
 
 public class Abilities {
+    public static void registerAbilitiesAfterItems() {
+        MyneHeroes.LOGGER.info("Registering abilities");
+
+        BONE_CLAWS = registerAbility(new AddOrRemoveDualItemAbility(Identifier.of(MyneHeroes.MOD_ID, "bone_claws"), ModItems.BONE_CLAWS, 20, new Ability.Settings().appearsMultipleTimes(false)));
+        ADAMANTIUM_CLAWS = registerAbility(new AddOrRemoveDualItemAbility(Identifier.of(MyneHeroes.MOD_ID, "adamantium_claws"), ModItems.ADAMANTIUM_CLAWS, 20, new Ability.Settings().appearsMultipleTimes(false)));
+    }
+
     private static final Map<Identifier,Ability> ABILITIES = new HashMap<>();
 
     public static final HudAbility TOGGLE_MECHANICAL_HUD = registerAbility(new HudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_mechanical_hud"), new Ability.Settings(), HudType.MECHANICAL));
@@ -221,6 +229,9 @@ public class Abilities {
     public static final PassiveSelectionAbility ORGANIC_WEBBING = registerAbility(new PassiveSelectionAbility(Identifier.of(MyneHeroes.MOD_ID, "organic_webbing"), new Ability.Settings().appearsMultipleTimes(false), List.of(SHOOT_WEB, SHOOT_TASER_WEB)));
 
     public static final RageAbility RAGE = registerAbility(new RageAbility(Identifier.of(MyneHeroes.MOD_ID, "rage"), new Ability.Settings().appearsMultipleTimes(false), 0.25F));
+
+    public static AddOrRemoveDualItemAbility BONE_CLAWS;
+    public static AddOrRemoveDualItemAbility ADAMANTIUM_CLAWS;
 
     private static <T extends Ability> T registerAbility(T ability) {
         if (!ABILITIES.containsKey(ability.id)) {

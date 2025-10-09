@@ -13,6 +13,10 @@ import java.util.Map;
 import java.util.Set;
 
 public class Powers {
+    public static void registerPowers() {
+        MyneHeroes.LOGGER.info("Registering powers");
+    }
+
     private static final Map<Identifier,Power> POWERS = new HashMap<>();
 
     public static KryptonianPower KRYPTONIAN = registerPower(new KryptonianPower(Identifier.of(MyneHeroes.MOD_ID, "kryptonian"), 10000F, 0xFF9CDB94, List.of(Abilities.FROST_BREATH, Abilities.LASER_EYES),
@@ -37,7 +41,7 @@ public class Powers {
             new Power.attributeModifiers().addAttributeModifier(EntityAttributes.GENERIC_FALL_DAMAGE_MULTIPLIER, Identifier.of(MyneHeroes.MOD_ID, "spider_organic_webbing.fall_damage"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> -1.0D)
     ));
 
-    public static Power WEAPON_X = registerPower(new Power(Identifier.of(MyneHeroes.MOD_ID, "weapon-x"), 0xFFFF3A3A, List.of(Abilities.RAGE),
+    public static Power WEAPON_X = registerPower(new Power(Identifier.of(MyneHeroes.MOD_ID, "weapon-x"), 0xFFFF3A3A, List.of(Abilities.RAGE, Abilities.BONE_CLAWS, Abilities.ADAMANTIUM_CLAWS),
             new Power.Settings().damageMultiplier(3.50).armor(3),
             new Power.attributeModifiers()
     ));

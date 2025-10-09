@@ -5,7 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.togyk.myneheroes.Item.custom.AbilityLinkedWeapon;
+import net.togyk.myneheroes.Item.custom.TemporaryWeapon;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,7 +17,7 @@ public class ItemFrameEntityMixin {
     private void onInteract(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         ItemStack heldItem = player.getStackInHand(hand);
 
-        if (heldItem.getItem() instanceof AbilityLinkedWeapon) {
+        if (heldItem.getItem() instanceof TemporaryWeapon) {
             // Block placing it in the frame
             cir.setReturnValue(ActionResult.FAIL);
         }
