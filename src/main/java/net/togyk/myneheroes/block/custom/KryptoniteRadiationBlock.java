@@ -1,6 +1,5 @@
 package net.togyk.myneheroes.block.custom;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
@@ -8,7 +7,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
 import net.togyk.myneheroes.effect.ModEffects;
 import net.togyk.myneheroes.gamerule.ModGamerules;
 import net.togyk.myneheroes.persistent_data.ModPersistentData;
@@ -22,8 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class KryptoniteRadiationBlock extends Block {
-
+public class KryptoniteRadiationBlock extends RadiationBlock {
     public KryptoniteRadiationBlock(Settings settings) {
         super(settings);
     }
@@ -80,14 +77,8 @@ public class KryptoniteRadiationBlock extends Block {
         }
 
         // Re-schedule tick
-        world.scheduleBlockTick(pos, this, 1);
-    }
-
-    @Override
-    protected void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        super.onBlockAdded(state, world, pos, oldState, notify);
-        if (!world.isClient) {
-            world.scheduleBlockTick(pos, this, 1); // start ticking
+        if (state.get(TICKING)) {
+            world.scheduleBlockTick(pos, this, 24);
         }
     }
 

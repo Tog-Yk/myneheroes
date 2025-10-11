@@ -150,7 +150,7 @@ public class SpeedsterHudRenderer {
             matrixStack.translate((float) width / 5 - 4 + 4.5, height - 20 + 4 + 4.5, 0);
 
 
-            matrixStack.multiply(RotationAxis.POSITIVE_Z.rotation((float) Math.toRadians(client.player.getYaw(0) + 180)));
+            matrixStack.multiply(RotationAxis.POSITIVE_Z.rotation((float) -(Math.toRadians(client.player.getYaw(0) + 180))));
 
             matrixStack.push();
             matrixStack.translate(4.5, 4.5, 0);

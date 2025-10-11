@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -19,6 +20,22 @@ public class RadiationBlock extends Block {
 
     public RadiationBlock(Settings settings) {
         super(settings);
+        this.setDefaultState(this.getStateManager().getDefaultState()
+                .with(TICKING, false));
+    }
+
+    //add properties to the state manager
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(TICKING);
+    }
+
+    @Override
+    protected void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
+        if (!world.isClient && !state.get(TICKING)) {
+            world.scheduleBlockTick(pos, this, 24); // start ticking
+            world.setBlockState(pos, state.with(TICKING, true));
+        }
     }
 
     @Override
@@ -34,25 +51,8 @@ public class RadiationBlock extends Block {
         }
 
         // Re-schedule tick
-        world.scheduleBlockTick(pos, this, 24);
-    }
-
-    @Override
-    protected void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        super.randomTick(state, world, pos, random);
-        if (!state.get(TICKING)) {
-            // schedule tick
+        if (state.get(TICKING)) {
             world.scheduleBlockTick(pos, this, 24);
-            world.setBlockState(pos, state.with(TICKING, true));
-        }
-    }
-
-    @Override
-    protected void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        super.onBlockAdded(state, world, pos, oldState, notify);
-        if (!world.isClient) {
-            world.scheduleBlockTick(pos, this, 24); // start ticking
-            world.setBlockState(pos, state.with(TICKING, true));
         }
     }
 }

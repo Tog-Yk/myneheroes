@@ -2,9 +2,11 @@ package net.togyk.myneheroes.event;
 
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerChunkEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -17,6 +19,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
@@ -26,6 +29,7 @@ import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.PassiveAbility;
 import net.togyk.myneheroes.block.custom.KryptoniteRadiationBlock;
+import net.togyk.myneheroes.block.custom.RadiationBlock;
 import net.togyk.myneheroes.damage.ModDamageTypes;
 import net.togyk.myneheroes.entity.MeteorEntity;
 import net.togyk.myneheroes.gamerule.ModGamerules;
@@ -180,6 +184,28 @@ public class ModEvents {
                 }
             }
             return ActionResult.PASS;
+        });
+
+        ServerChunkEvents.CHUNK_GENERATE.register((serverWorld, chunk) -> {
+            //*
+            ChunkPos chunkPos = chunk.getPos();
+            for (int x = chunkPos.getStartX(); x <= chunkPos.getEndX(); x++) {
+                for (int z = chunkPos.getStartZ(); z <= chunkPos.getEndZ(); z++) {
+                    for (int y = serverWorld.getBottomY(); y <= serverWorld.getTopY(); y++) {
+                        BlockPos pos = new BlockPos(x, y, z);
+                        //*
+                        BlockState state = chunk.getBlockState(pos);
+
+                        if (state.getBlock() instanceof RadiationBlock radiationBlock && !state.get(RadiationBlock.TICKING)) {
+                            // start ticking
+                            serverWorld.scheduleBlockTick(pos, radiationBlock, 24);
+                            chunk.setBlockState(pos, state.with(RadiationBlock.TICKING, true), false);
+                        }
+                        //*/
+                    }
+                }
+            }
+            //*/
         });
     }
 
