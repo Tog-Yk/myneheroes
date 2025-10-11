@@ -3,7 +3,6 @@ package net.togyk.myneheroes.ability;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.util.SimpleEventResult;
 
 public interface PassiveAbility {
@@ -13,6 +12,7 @@ public interface PassiveAbility {
         return true;
     }
 
+    //returns if the player still needs to die
     default boolean onDeath(PlayerEntity player, DamageSource source) {
         return true;
     }
@@ -22,7 +22,6 @@ public interface PassiveAbility {
         return true;
     }
 
-    //returns if the player still needs to attack
     default SimpleEventResult onMissedInteraction(PlayerEntity player) {
         return SimpleEventResult.PASS;
     }

@@ -20,6 +20,7 @@ import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.util.PlayerAbilities;
 import net.togyk.myneheroes.util.PowerData;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -30,6 +31,7 @@ import java.util.List;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerAppliedAttributeMixin {
+    @Unique
     private int myneheroes$wallClimbSoundCooldown = 0;
 
     @ModifyVariable(
@@ -95,23 +97,6 @@ public abstract class PlayerAppliedAttributeMixin {
         boolean shouldCancel = false;
         for (Ability ability : abilities) {
             if (ability instanceof PassiveAbility passiveAbility && !passiveAbility.onDamage(player, target)) {
-                shouldCancel = true;
-            }
-        }
-
-        if (shouldCancel) {
-            ci.cancel();
-        }
-    }
-
-    @Inject(at = @At("HEAD"), method = "onDeath", cancellable = true)
-    private void myneheroes$PassiveAbilityDeathUpdater(DamageSource damageSource, CallbackInfo ci) {
-        PlayerEntity player = (PlayerEntity) (Object) this;
-        List<Ability> abilities = ((PlayerAbilities) player).myneheroes$getAbilities();
-
-        boolean shouldCancel = false;
-        for (Ability ability : abilities) {
-            if (ability instanceof PassiveAbility passiveAbility && !passiveAbility.onDeath(player, damageSource)) {
                 shouldCancel = true;
             }
         }
@@ -189,6 +174,7 @@ public abstract class PlayerAppliedAttributeMixin {
         }
     }
 
+    @Unique
     private boolean myneheroes$mayFly(PlayerEntity player) {
         for (Power power: PowerData.getPowers(player)) {
             if (power.allowFlying(player)) {

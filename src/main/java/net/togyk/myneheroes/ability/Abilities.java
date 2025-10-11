@@ -233,6 +233,8 @@ public class Abilities {
     public static AddOrRemoveDualItemAbility BONE_CLAWS;
     public static AddOrRemoveDualItemAbility ADAMANTIUM_CLAWS;
 
+    public static final ImmortalityAbility IMMORTALITY = registerAbility(new ImmortalityAbility(Identifier.of(MyneHeroes.MOD_ID, "immortality"), 2400, new Ability.Settings().appearsMultipleTimes(true)));
+
     private static <T extends Ability> T registerAbility(T ability) {
         if (!ABILITIES.containsKey(ability.id)) {
             ABILITIES.put(ability.id, ability);

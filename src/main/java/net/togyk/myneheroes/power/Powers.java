@@ -41,7 +41,7 @@ public class Powers {
             new Power.attributeModifiers().addAttributeModifier(EntityAttributes.GENERIC_FALL_DAMAGE_MULTIPLIER, Identifier.of(MyneHeroes.MOD_ID, "spider_organic_webbing.fall_damage"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> -1.0D)
     ));
 
-    public static Power MUTANT_REGENERATION = registerPower(new Power(Identifier.of(MyneHeroes.MOD_ID, "mutant_regeneration"), 0xFFFF3A3A, List.of(Abilities.RAGE, Abilities.BONE_CLAWS, Abilities.ADAMANTIUM_CLAWS),
+    public static Power MUTANT_REGENERATION = registerPower(new Power(Identifier.of(MyneHeroes.MOD_ID, "mutant_regeneration"), 0xFFFF3A3A, List.of(Abilities.RAGE, Abilities.BONE_CLAWS, Abilities.ADAMANTIUM_CLAWS, Abilities.IMMORTALITY),
             new Power.Settings().damageMultiplier(3.50).armor(3),
             new Power.attributeModifiers()
     ));
