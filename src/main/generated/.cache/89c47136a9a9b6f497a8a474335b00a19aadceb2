@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-09T14:38:51.4116145	MyneHeroes/Block Loot Tables
+// 1.21.1	2025-10-11T15:17:45.264208	MyneHeroes/Block Loot Tables
 a39e31b0162e6a3106b7cc9576987120bd3a6408 data\myneheroes\loot_table\blocks\armor_dyeing_station.json
 abefb372136aafcca66d447592c67a55d8fd72da data\myneheroes\loot_table\blocks\raw_vibranium_block.json
 d08dc8c7d5e91f19ae950cc65632f200df2d2ec1 data\myneheroes\loot_table\blocks\raw_uranium_block.json
@@ -14,7 +14,7 @@ f13b2de3a5c9d69a5e484ce3b27a1952bf22005e data\myneheroes\loot_table\blocks\titan
 97ec70fa730af8b0342d328d495be6303ecba493 data\myneheroes\loot_table\blocks\uranium_ore.json
 c7078f3c516d78670dc43ce1994c0508acca974f data\myneheroes\loot_table\blocks\titanium_ore.json
 ea0c08359997c9a556df3d4c62f001900d7073cb data\myneheroes\loot_table\blocks\armor_fabricator.json
-0b113d91f4a40b4afe3e11fd2bd0a95b543ce278 data\myneheroes\loot_table\blocks\deepslate_uranium_ore.json
+5b203c0ebdd1e52a0aeceb6892cb97b9f35fcff1 data\myneheroes\loot_table\blocks\deepslate_uranium_ore.json
 ea3a87df4171bc08041a6a0a08e60e01e93e1753 data\myneheroes\loot_table\blocks\vibranium_ore.json
 30b5fa63830dce80046d7ebc34f671da6359854d data\myneheroes\loot_table\blocks\raw_titanium_block.json
 0350621c38d0021c95c855c266e93fb979d1afcc data\myneheroes\loot_table\blocks\deepslate_titanium_ore.json
