@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ScreenHandlerMixin {
     @Inject(method = "insertItem", at = @At("HEAD"), cancellable = true)
     private void onInsertItem(ItemStack stack, int startIndex, int endIndex, boolean fromLast, CallbackInfoReturnable<Boolean> cir) {
-        if (stack.isIn(ModTags.Items.CANT_BE_PLACED_IN_CHESTS)) {
+        if (stack.isIn(ModTags.Items.CANT_BE_PLACED_IN_INVENTORIES)) {
             // Prevent the item from being shift-clicked or inserted anywhere
             cir.cancel();
         }

@@ -144,7 +144,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.ADAMANTIUM_CLAWS)
         ;
 
-        getOrCreateTagBuilder(ModTags.Items.CANT_BE_PLACED_IN_CHESTS)
+        getOrCreateTagBuilder(ModTags.Items.CANT_BE_PLACED_IN_INVENTORIES)
                 .add(ModItems.BONE_CLAWS)
                 .add(ModItems.ADAMANTIUM_CLAWS)
         ;
