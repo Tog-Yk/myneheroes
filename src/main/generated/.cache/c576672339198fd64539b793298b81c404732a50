@@ -1,9 +1,9 @@
-// 1.21.1	2025-10-11T15:17:45.2662154	MyneHeroes/
+// 1.21.1	2025-10-12T20:08:58.5409114	MyneHeroes/
 e914723568c88959b630e7ce3feee7d9ad52b211 data\myneheroes\worldgen\configured_feature\meteor.json
 2c033ba56d7c69714b78c8f626e4b566f9d0f705 data\myneheroes\worldgen\placed_feature\uranium_ore_placed.json
 a7b2f31f696fdf401a6dcfff5df83bb821f68bba data\myneheroes\trim_material\vibranium.json
 1a23599752659f8a6581f0aaf3708df4765b1112 data\myneheroes\trim_material\gold_titanium.json
-8f8fccc938bec1a0ccdc28be83097361c0651552 data\myneheroes\worldgen\configured_feature\uranium_ore.json
+4a095303c556444f8a4ba40ee163af834e6b0a8a data\myneheroes\worldgen\configured_feature\uranium_ore.json
 9e10547221679ea419d9bf1c8fd903c733de218d data\myneheroes\worldgen\placed_feature\meteor_placed.json
 6586d4aa5f442f265719612b1abc57ed131af63d data\myneheroes\worldgen\placed_feature\titanium_ore_placed.json
 6c2bd261e8c03653452353f42ff70ccfd187d4ec data\myneheroes\worldgen\placed_feature\vibranium_ore_placed.json

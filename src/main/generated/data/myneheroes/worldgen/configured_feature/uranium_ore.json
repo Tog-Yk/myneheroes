@@ -6,7 +6,10 @@
     "targets": [
       {
         "state": {
-          "Name": "myneheroes:uranium_ore"
+          "Name": "myneheroes:uranium_ore",
+          "Properties": {
+            "ticking": "false"
+          }
         },
         "target": {
           "predicate_type": "minecraft:tag_match",
@@ -15,7 +18,10 @@
       },
       {
         "state": {
-          "Name": "myneheroes:deepslate_uranium_ore"
+          "Name": "myneheroes:deepslate_uranium_ore",
+          "Properties": {
+            "ticking": "false"
+          }
         },
         "target": {
           "predicate_type": "minecraft:tag_match",

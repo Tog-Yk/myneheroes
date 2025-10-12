@@ -235,7 +235,7 @@
   "tag.item.myneheroes.dyes": "Dyes",
   "tag.item.myneheroes.reactor_fuel": "Reactor Fuel",
   "tag.item.myneheroes.cant_be_placed_in_item_frame": "Cant be placed in an item frame",
-  "tag.item.myneheroes.cant_be_placed_in_chest": "Cant be placed in another inventory",
+  "tag.item.myneheroes.cant_be_placed_in_chests": "Cant be placed in another inventory",
   "tag.item.myneheroes.can_be_replaced_by_temporary_items": "Can be replaced by temporary",
 
   "armor_pattern.myneheroes.heading": "Pattern:",
