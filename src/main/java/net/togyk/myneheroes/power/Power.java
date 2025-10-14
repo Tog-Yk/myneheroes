@@ -52,17 +52,12 @@ public class Power {
 
     private PlayerEntity holder;
 
-    private final Identifier background;
-    private final Identifier disabledBackground;
-
     protected final attributeModifiers attributeModifiers;
 
     public Power(Identifier id, int color, List<Ability> abilities, Settings settings, attributeModifiers attributeModifiers) {
         this.id = id;
         this.color = color;
         this.abilities = abilities.stream().map(Ability::copy).toList();
-        this.background = Identifier.of(id.getNamespace(),"textures/power/"+id.getPath()+"_background.png");
-        this.disabledBackground = Identifier.of(id.getNamespace(),"textures/power/"+id.getPath()+"_background_disabled.png");
 
         this.settings = settings;
         this.attributeModifiers = attributeModifiers;
@@ -140,12 +135,13 @@ public class Power {
         return color;
     }
 
-    public Identifier getBackground() {
-        if (this.isDampened) {
-            return disabledBackground;
-        } else {
-            return background;
-        }
+    public Identifier getIcon() {
+        Identifier id = this.getId();
+        return Identifier.of(id.getNamespace(),"textures/power/"+id.getPath()+".png");
+    }
+
+    public String getName() {
+        return "power."+this.getId().toTranslationKey();
     }
 
     public void tick(PlayerEntity player) {

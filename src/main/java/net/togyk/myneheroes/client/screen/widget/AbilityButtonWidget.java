@@ -7,7 +7,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 import net.togyk.myneheroes.ability.Ability;
-import net.togyk.myneheroes.client.HudOverlay;
+import net.togyk.myneheroes.client.AbilityOverlayHelper;
 
 public class AbilityButtonWidget extends ButtonWidget {
     private final Ability ability;
@@ -25,7 +25,7 @@ public class AbilityButtonWidget extends ButtonWidget {
         RenderSystem.enableBlend();
         RenderSystem.enableDepthTest();
 
-        HudOverlay.drawAbility(context, ability, this.isSelected(), getX(), getY());
+        AbilityOverlayHelper.drawAbility(context, ability, this.isSelected(), getX(), getY());
         if (this.isSelected()) {
             TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
             Text text = Text.translatable("ability."+ability.getId().toTranslationKey());

@@ -1,6 +1,5 @@
 package net.togyk.myneheroes.client.render.hud;
 
-import com.google.common.base.Predicates;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -13,22 +12,20 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.togyk.myneheroes.Item.custom.AbilityHoldingUpgradeItem;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
-import net.togyk.myneheroes.Item.custom.UpgradableItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
-import net.togyk.myneheroes.client.HudOverlay;
+import net.togyk.myneheroes.client.AbilityOverlayHelper;
+import net.togyk.myneheroes.client.StockpileOverlayHelper;
 import net.togyk.myneheroes.keybind.ModKeyBinds;
-import net.togyk.myneheroes.power.Power;
-import net.togyk.myneheroes.power.StockpilePower;
-import net.togyk.myneheroes.upgrade.Upgrade;
-import net.togyk.myneheroes.util.*;
+import net.togyk.myneheroes.util.AbilityUtil;
+import net.togyk.myneheroes.util.HudActionResult;
+import net.togyk.myneheroes.util.PlayerAbilities;
+import net.togyk.myneheroes.util.StockPile;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.StreamSupport;
 
 @Environment(EnvType.CLIENT)
 public class MechanicalHudRenderer {
@@ -136,7 +133,7 @@ public class MechanicalHudRenderer {
 
             //energy storage
             drawContext.drawGuiTexture(ENERGY_STORAGE_SIDE, 6, 120, 0, 0, width / 32, height/2 - 60,6,120);
-            drawEnergyStorage(drawContext, tickCounter, client.player, width / 32 + 12, height/2 - 60, 14, 120);
+            StockpileOverlayHelper.drawStockpilesWithBackground(drawContext, client.player, ENERGY_STORAGE_BACKGROUND, width / 32 + 12, height/2 - 60, 14, 120, 2, 2);
 
             //sight
             drawContext.drawGuiTexture(SIGHT, 64, 64, 0, 0, width/3 * 2 - 32, height/2 - 64, 64, 64);
@@ -152,24 +149,20 @@ public class MechanicalHudRenderer {
 
 
                 List<Integer> textLengths = new ArrayList<>();
-                Text firstAbilityText;
                 Ability secondAbility = ((PlayerAbilities) client.player).myneheroes$getSecondAbility();
-                Text secondAbilityText = null;
                 Ability thirdAbility = ((PlayerAbilities) client.player).myneheroes$getThirdAbility();
-                Text thirdAbilityText = null;
                 Ability fourthAbility = ((PlayerAbilities) client.player).myneheroes$getFourthAbility();
-                Text fourthAbilityText = null;
 
-                firstAbilityText = hasChatOpen ? Text.translatable("ability."+firstAbility.getId().toTranslationKey()) : ModKeyBinds.useFirstAbility.getBoundKeyLocalizedText();
+                Text firstAbilityText = hasChatOpen ? Text.translatable("ability."+firstAbility.getId().toTranslationKey()) : ModKeyBinds.useFirstAbility.getBoundKeyLocalizedText();
                 textLengths.add(textRenderer.getWidth(firstAbilityText));
                 if (secondAbility != null) {
-                    secondAbilityText = hasChatOpen ? Text.translatable("ability."+secondAbility.getId().toTranslationKey()) : ModKeyBinds.useSecondAbility.getBoundKeyLocalizedText();
+                    Text secondAbilityText = hasChatOpen ? Text.translatable("ability."+secondAbility.getId().toTranslationKey()) : ModKeyBinds.useSecondAbility.getBoundKeyLocalizedText();
                     textLengths.add(textRenderer.getWidth(secondAbilityText));
                     if (thirdAbility != null) {
-                        thirdAbilityText = hasChatOpen ? Text.translatable("ability."+thirdAbility.getId().toTranslationKey()) : ModKeyBinds.useThirdAbility.getBoundKeyLocalizedText();
+                        Text thirdAbilityText = hasChatOpen ? Text.translatable("ability."+thirdAbility.getId().toTranslationKey()) : ModKeyBinds.useThirdAbility.getBoundKeyLocalizedText();
                         textLengths.add(textRenderer.getWidth(thirdAbilityText));
                         if (fourthAbility != null) {
-                            fourthAbilityText = hasChatOpen ? Text.translatable("ability."+fourthAbility.getId().toTranslationKey()) : ModKeyBinds.useFourthAbility.getBoundKeyLocalizedText();
+                            Text fourthAbilityText = hasChatOpen ? Text.translatable("ability."+fourthAbility.getId().toTranslationKey()) : ModKeyBinds.useFourthAbility.getBoundKeyLocalizedText();
                             textLengths.add(textRenderer.getWidth(fourthAbilityText));
                         }
                     }
@@ -177,90 +170,32 @@ public class MechanicalHudRenderer {
 
                 int abilityScreenWidth = 6 + 18 + textLengths.stream().max(Comparator.naturalOrder()).get() + 6;
                 int abilityScreenHeight = 4 + textLengths.size() * 18 + 2;
+                boolean hasAbilityBeforeFirst = ((PlayerAbilities) client.player).myneheroes$getAbilityBeforeFirst() != null;
+                if (hasAbilityBeforeFirst) {
+                    abilityScreenHeight += 10;
+                }
+                boolean hasFifthAbility = ((PlayerAbilities) client.player).myneheroes$getFifthAbility() != null;
+                if (hasFifthAbility) {
+                    abilityScreenHeight += 10;
+                }
                 int abilityScreenX = width/3 * 2 + 28;
-                int abilityScreenY = height/2 - 50 - abilityScreenHeight;
+                int abilityScreenY = height/2 - 50 - abilityScreenHeight + (hasFifthAbility ? 10 : 0);
                 drawAbilityScreen(drawContext, abilityScreenX, abilityScreenY, abilityScreenWidth, abilityScreenHeight);
 
-                int y = abilityScreenY + 4;
-
-                RenderSystem.setShaderColor(1, 1, 1, (float) 0xC4 / 255);
-
-                HudOverlay.drawAbility(drawContext, firstAbility, ModKeyBinds.useFirstAbility.isPressed(), abilityScreenX + 6, y);
-                drawContext.drawTextWithShadow(textRenderer, firstAbilityText, abilityScreenX + 6 + 18, y + 4, 0xC428EEFF);
-                RenderSystem.enableBlend();
-                y += 18;
-
-                HudOverlay.drawAbility(drawContext, secondAbility, ModKeyBinds.useSecondAbility.isPressed(), abilityScreenX + 6, y);
-                if (secondAbility != null) {
-                    drawContext.drawTextWithShadow(textRenderer, secondAbilityText, abilityScreenX + 6 + 18, y + 4, 0xC428EEFF);
-                    RenderSystem.enableBlend();
-                }
-                y += 18;
-
-                HudOverlay.drawAbility(drawContext, thirdAbility, ModKeyBinds.useThirdAbility.isPressed(), abilityScreenX + 6, y);
-                if (thirdAbility != null) {
-                    drawContext.drawTextWithShadow(textRenderer, thirdAbilityText, abilityScreenX + 6 + 18, y + 4, 0xC428EEFF);
-                    RenderSystem.enableBlend();
-                }
-                y += 18;
-
-                HudOverlay.drawAbility(drawContext, fourthAbility, ModKeyBinds.useFourthAbility.isPressed(), abilityScreenX + 6, y);
-                if (fourthAbility != null) {
-                    drawContext.drawTextWithShadow(textRenderer, fourthAbilityText, abilityScreenX + 6 + 18, y + 4, 0xC428EEFF);
-                    RenderSystem.enableBlend();
-                }
-
-                RenderSystem.setShaderColor(1, 1, 1, 1);
+                AbilityOverlayHelper.drawAbilities(client.player, drawContext, false, 0xC428EEFF, abilityScreenX + 6, abilityScreenY + 4 + (hasAbilityBeforeFirst ? 0 : -10));
 
             }
             RenderSystem.disableBlend();
 
 
-            return HudActionResult.ABILITIES_HUD_DRAWN;
+            return HudActionResult.ABILITIES_AND_STOCKPILE_HUD_DRAWN;
         }
         return HudActionResult.NO_HUD_DRAWN;
     }
 
     public static void drawEnergyStorage(DrawContext drawContext, RenderTickCounter tickCounter, PlayerEntity player, int x, int y, int width, int height) {
 
-        List<Power> powers = PowerData.getPowers(player);
-        List<StockPile> stockpiles = new ArrayList<>(powers.stream().filter(Predicates.instanceOf(StockpilePower.class)).map(power -> (StockPile) power).toList());
-
-        List<Ability> abilities = ((PlayerAbilities) player).myneheroes$getAbilities();
-        abilities.stream().filter(Predicates.instanceOf(StockPile.class)).forEach(ability -> stockpiles.add((StockPile) ability));
-
-        Iterable<ItemStack> armorIterator = player.getArmorItems();
-        List<ItemStack> armor = StreamSupport.stream(armorIterator.spliterator(), false)
-                .toList();
-
-        for (ItemStack stack : armor) {
-            if (stack.getItem() instanceof UpgradableItem upgradableItem) {
-                for (Upgrade upgrade : upgradableItem.getUpgrades(stack)) {
-                    if (upgrade instanceof StockPile stockPile) {
-                        stockpiles.add(stockPile);
-                    }
-                }
-            }
-        }
-
-        List<ItemStack> inventory = player.getInventory().main;
-
-        for (ItemStack stack : inventory) {
-            if (stack.getItem() instanceof UpgradableItem upgradableItem) {
-                for (Upgrade upgrade : upgradableItem.getUpgrades(stack)) {
-                    if (upgrade instanceof StockPile stockPile) {
-                        stockpiles.add(stockPile);
-                    }
-                }
-            } else if (stack.getItem() instanceof AbilityHoldingUpgradeItem upgradeItem) {
-                if (upgradeItem.getUpgrade(stack) instanceof StockPile stockpile) {
-                    if (!stockpiles.contains(stockpile)) {
-                        stockpiles.add(stockpile);
-                    }
-                }
-            }
-        }
-
+        List<StockPile> stockpiles = StockpileOverlayHelper.getStockPiles(player);
         List<Identifier> stockpileAbilitiesIds = filterIds(stockpiles);
         for (int a = 0; a < stockpileAbilitiesIds.size(); a++) {
             Identifier id = stockpileAbilitiesIds.get(a);

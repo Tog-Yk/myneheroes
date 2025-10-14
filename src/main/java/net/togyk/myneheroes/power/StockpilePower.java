@@ -75,9 +75,8 @@ public class StockpilePower extends Power implements StockPile {
         return chargeIcon;
     }
 
-    @Override
-    public Identifier getBackground() {
-        Identifier initialBG = super.getBackground();
+    public Identifier getIcon() {
+        Identifier initialBG = super.getIcon();
         String path = initialBG.getPath().substring(0, initialBG.getPath().length() - ".png".length());
         return Identifier.of(initialBG.getNamespace(),  path + (int) (((double) this.getCharge() / this.getMaxCharge()) / settings.textureInterval) + ".png");
     }

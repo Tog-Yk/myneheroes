@@ -14,8 +14,8 @@ import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.Item.custom.AbilityHolding;
+import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.upgrade.AbilityUpgrade;
 import net.togyk.myneheroes.upgrade.Upgrade;
 import net.togyk.myneheroes.util.AbilityUtil;
@@ -50,17 +50,12 @@ public class Ability {
     protected final int maxCooldown;
     private int cooldown;
 
-    public final Identifier icon;
-    public final Identifier pressed_icon;
-
     protected final Function<PlayerEntity, Boolean> use;
     protected final Function<PlayerEntity, Boolean> hold;
     protected final Settings settings;
 
     public Ability(Identifier id, int cooldown, Settings settings, Function<PlayerEntity, Boolean> use) {
         this.id = id;
-        this.icon = Identifier.of(id.getNamespace(),"textures/ability/"+id.getPath()+".png");
-        this.pressed_icon = Identifier.of(id.getNamespace(),"textures/ability/pressed/"+id.getPath()+".png");
         this.maxCooldown = cooldown;
         this.use = use;
         this.hold = null;
@@ -69,8 +64,6 @@ public class Ability {
 
     public Ability(Identifier id, int cooldown, Settings settings, @Nullable Function<PlayerEntity, Boolean> use, Function<PlayerEntity, Boolean> hold) {
         this.id = id;
-        this.icon = Identifier.of(id.getNamespace(),"textures/ability/"+id.getPath()+".png");
-        this.pressed_icon = Identifier.of(id.getNamespace(),"textures/ability/pressed/"+id.getPath()+".png");
         this.maxCooldown = cooldown;
         this.use = use;
         this.hold = hold;
@@ -230,6 +223,15 @@ public class Ability {
         if (nbt.contains("cooldown")) {
             this.cooldown = nbt.getInt("cooldown");
         }
+    }
+
+    public Identifier getIcon() {
+        Identifier id = this.getId();
+        return Identifier.of(id.getNamespace(),"textures/ability/"+id.getPath()+".png");
+    }
+
+    public String getName() {
+        return "ability."+this.getId().toTranslationKey();
     }
 
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType type) {
