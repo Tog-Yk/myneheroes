@@ -61,9 +61,9 @@ public abstract class PlayerPowerMixin implements PlayerPowers {
                         Power power = Powers.get(powerId);
                         if (power != null) {
                             power.readNbt(nbtCompound);
+                            power.setHolder(player);
+                            powers.add(power);
                         }
-                        power.setHolder(player);
-                        powers.add(power);
                     }
                 }
             }
