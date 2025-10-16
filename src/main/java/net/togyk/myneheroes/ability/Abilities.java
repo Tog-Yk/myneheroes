@@ -36,6 +36,22 @@ public class Abilities {
 
         BONE_CLAWS = registerAbility(new AddOrRemoveDualItemAbility(Identifier.of(MyneHeroes.MOD_ID, "bone_claws"), ModItems.BONE_CLAWS, 10, new Ability.Settings().appearsMultipleTimes(false)));
         ADAMANTIUM_CLAWS = registerAbility(new AddOrRemoveDualItemAbility(Identifier.of(MyneHeroes.MOD_ID, "adamantium_claws"), ModItems.ADAMANTIUM_CLAWS, 10, new Ability.Settings().appearsMultipleTimes(false)));
+
+        for (Ability ability : ABILITIES.values()) {
+            if (ability != null) {
+                Ability copy = ability.copy();
+                if (ability.getClass() != copy.getClass()) {
+                    //not overridden the copy method correctly
+                    throw new UnsupportedOperationException(
+                            "Subclass of Ability must override copy() method: " + ability.getClass().getName()
+                    );
+                }
+            } else {
+                throw new UnsupportedOperationException(
+                        "An Ability can't be null"
+                );
+            }
+        }
     }
 
     private static final Map<Identifier,Ability> ABILITIES = new HashMap<>();
@@ -240,7 +256,7 @@ public class Abilities {
             ABILITIES.put(ability.id, ability);
             return ability;
         } else {
-            MyneHeroes.LOGGER.error("There already exist an power with the id of {}", ability.id);
+            MyneHeroes.LOGGER.error("There already exist an ability with the id of {}", ability.id);
         }
         return null;
     }
