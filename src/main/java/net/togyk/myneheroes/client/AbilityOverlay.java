@@ -59,8 +59,7 @@ public class AbilityOverlay implements HudRenderCallback {
             }
             if (!hasDrawnAbilities) {
                 //draw Ability Hud
-                drawContext.drawGuiTexture(ABILITIES_BACKGROUND, 0, 21, 22, 106);
-                AbilityOverlayHelper.drawAbilities(client.player, drawContext, false, 3, 24, 4);
+                AbilityOverlayHelper.drawAbilitiesWithBackground(client.player, drawContext, false, 0, 21, 4, ABILITIES_BACKGROUND, 22, 106, 3, 3);
             }
             if (!hasDrawnStockpiles) {
                 StockpileOverlayHelper.drawStockpilesWithBackground(drawContext, client.player, STOCKPILE_BACKGROUND, 21, 21, 6, 56, 0, 3, 3, 50, -1);

@@ -19,6 +19,8 @@ public class ModKeybindingHelper {
     private static boolean fourthWasPressed = false;
     private static boolean AbilitiesBlockedForScrolling = false;
 
+    private static int powerScrollCooldown = 0;
+
     public static void registerModKeybingHelper() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             PlayerEntity player = client.player;
@@ -131,12 +133,18 @@ public class ModKeybindingHelper {
                         ability.useReleased(player);
                     }
                 }
+                if (powerScrollCooldown == 0) {
 
-                if (ModKeyBinds.powersScrollUp.isPressed()) {
-                    ClientScrollData.scrollPowersFurther(client.player);
-                }
-                if (ModKeyBinds.powersScrollDown.isPressed()) {
-                    ClientScrollData.scrollPowersBack(client.player);
+                    if (ModKeyBinds.powersScrollUp.isPressed()) {
+                        ClientScrollData.scrollPowersFurther(client.player);
+                        powerScrollCooldown = 5;
+                    }
+                    if (ModKeyBinds.powersScrollDown.isPressed()) {
+                        ClientScrollData.scrollPowersBack(client.player);
+                        powerScrollCooldown = 5;
+                    }
+                } else {
+                    powerScrollCooldown--;
                 }
             }
         });

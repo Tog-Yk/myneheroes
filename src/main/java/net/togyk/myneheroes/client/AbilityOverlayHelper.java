@@ -8,12 +8,32 @@ import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.util.Window;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.ItemRenderableAbility;
 import net.togyk.myneheroes.keybind.ModKeyBinds;
 import net.togyk.myneheroes.util.PlayerAbilities;
 
 public class AbilityOverlayHelper {
+    public static void drawAbilitiesWithBackground(PlayerEntity player, DrawContext drawContext, boolean textLeftOfAbilities, int startX, int startY, Identifier identifier, int width, int height, int offsetX, int offsetY) {
+        drawAbilitiesWithBackground(player, drawContext, textLeftOfAbilities, 0xFFFFFFFF, startX, startY, 2, identifier, width, height, offsetX, offsetY);
+    }
+
+    public static void drawAbilitiesWithBackground(PlayerEntity player, DrawContext drawContext, boolean textLeftOfAbilities, int startX, int startY, int spacing, Identifier identifier, int width, int height, int offsetX, int offsetY) {
+        drawAbilitiesWithBackground(player, drawContext, textLeftOfAbilities, 0xFFFFFFFF, startX, startY, spacing, identifier, width, height, offsetX, offsetY);
+    }
+
+    public static void drawAbilitiesWithBackground(PlayerEntity player, DrawContext drawContext, int textColor, boolean textLeftOfAbilities, int startX, int startY, Identifier identifier, int width, int height, int offsetX, int offsetY) {
+        drawAbilitiesWithBackground(player, drawContext, textLeftOfAbilities, textColor, startX, startY, 2, identifier, width, height, offsetX, offsetY);
+    }
+
+    public static void drawAbilitiesWithBackground(PlayerEntity player, DrawContext drawContext, boolean textLeftOfAbilities, int textColor, int startX, int startY, int spacing, Identifier identifier, int width, int height, int offsetX, int offsetY) {
+        drawAbilities(player, drawContext, textLeftOfAbilities, textColor, startX + offsetX, startY + offsetY, spacing);
+        if (!((PlayerAbilities) player).myneheroes$getAbilities().isEmpty()) {
+            drawContext.drawGuiTexture(identifier, startX, startY, width, height);
+        }
+    }
+
     public static void drawAbilities(PlayerEntity player, DrawContext drawContext, boolean textLeftOfAbilities, int startX, int startY) {
         drawAbilities(player, drawContext, textLeftOfAbilities, 0xFFFFFFFF, startX, startY, 2);
     }

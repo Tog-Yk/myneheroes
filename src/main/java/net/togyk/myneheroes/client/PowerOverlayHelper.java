@@ -23,7 +23,7 @@ public class PowerOverlayHelper {
         drawPowerInfoWithBackground(drawContext, player, x, y, 2, 0);
     }
     public static void drawPowerInfoWithBackground(DrawContext drawContext, PlayerEntity player, int x, int y, int spaceHorizontal, int spaceVertical) {
-        drawPowerInfoWithBackground(drawContext, player, x, y, 22, POWER_INFO_BACKGROUND_LEFT, 19, POWER_INFO_BACKGROUND_MIDDLE, 3, 0, POWER_INFO_BACKGROUND_RIGHT, 3, 3, 3, 4, spaceHorizontal, spaceVertical);
+        drawPowerInfoWithBackground(drawContext, player, x, y, 22, POWER_INFO_BACKGROUND_LEFT, 19, POWER_INFO_BACKGROUND_MIDDLE, 6, 0, POWER_INFO_BACKGROUND_RIGHT, 3, 3, 3, 4, spaceHorizontal, spaceVertical);
     }
 
     public static void drawPowerInfoWithBackground(DrawContext drawContext, PlayerEntity player, int x, int y, int height, Identifier leftTexture, int leftWidth, Identifier middleTexture, int middleStandardWidth, int middleMinimalWidth, Identifier rightTexture, int rightWidth, int offsetX, int offsetY, int bufferX, int spaceHorizontal, int spaceVertical) {
@@ -47,7 +47,9 @@ public class PowerOverlayHelper {
         List<Power> powers = ((PlayerPowers) player).myneheroes$getPowers();
         Power power = PowerOverlayHelper.getSelectedPower(player);
 
-        drawContext.drawTexture(power.getIcon(), x, y, 0, 0, 16, 16, 16, 16);
+        if (power != null) {
+            drawContext.drawTexture(power.getIcon(), x, y, 0, 0, 16, 16, 16, 16);
+        }
 
         if (powers.size() > 1) {
             PowerOverlayHelper.drawPowerName(drawContext, power, x + 18, y);
