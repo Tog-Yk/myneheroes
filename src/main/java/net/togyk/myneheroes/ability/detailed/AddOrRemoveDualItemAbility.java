@@ -1,6 +1,7 @@
 package net.togyk.myneheroes.ability.detailed;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
@@ -52,6 +53,18 @@ public class AddOrRemoveDualItemAbility extends Ability implements ItemRenderabl
             return;
         }
 
+        PlayerInventory inv = player.getInventory();
+
+        // 2. Try to find empty slot in the hotbar (slots 0–8)
+        for (int i = 0; i < 9; i++) {
+            if (inv.getStack(i).isEmpty() || player.getMainHandStack().isIn(ModTags.Items.CAN_BE_REPLACED_BY_TEMPORARY_ITEMS)) {
+                inv.setStack(i, stack);
+                inv.selectedSlot = i; // switch player to that slot
+                player.playerScreenHandler.sendContentUpdates();
+                player.setStackInHand(Hand.MAIN_HAND, stack);
+                return;
+            }
+        }
 
         // 3. If no empty hotbar slot → move main-hand item to inventory
         ItemStack stackInHand = player.getMainHandStack().copyAndEmpty();
@@ -59,7 +72,7 @@ public class AddOrRemoveDualItemAbility extends Ability implements ItemRenderabl
         player.setStackInHand(Hand.MAIN_HAND, stack);
 
         // Try to insert into inventory
-        if (!player.getInventory().insertStack(stackInHand)) {
+        if (!inv.insertStack(stackInHand)) {
             player.dropItem(stackInHand, false);
         }
         player.dropStack(player.getMainHandStack());
