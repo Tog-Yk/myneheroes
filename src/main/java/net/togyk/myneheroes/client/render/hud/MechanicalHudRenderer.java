@@ -153,16 +153,16 @@ public class MechanicalHudRenderer {
                 Ability thirdAbility = ((PlayerAbilities) client.player).myneheroes$getThirdAbility();
                 Ability fourthAbility = ((PlayerAbilities) client.player).myneheroes$getFourthAbility();
 
-                Text firstAbilityText = hasChatOpen ? Text.translatable("ability."+firstAbility.getId().toTranslationKey()) : ModKeyBinds.useFirstAbility.getBoundKeyLocalizedText();
+                Text firstAbilityText = hasChatOpen ? firstAbility.getName() : ModKeyBinds.useFirstAbility.getBoundKeyLocalizedText();
                 textLengths.add(textRenderer.getWidth(firstAbilityText));
                 if (secondAbility != null) {
-                    Text secondAbilityText = hasChatOpen ? Text.translatable("ability."+secondAbility.getId().toTranslationKey()) : ModKeyBinds.useSecondAbility.getBoundKeyLocalizedText();
+                    Text secondAbilityText = hasChatOpen ? secondAbility.getName() : ModKeyBinds.useSecondAbility.getBoundKeyLocalizedText();
                     textLengths.add(textRenderer.getWidth(secondAbilityText));
                     if (thirdAbility != null) {
-                        Text thirdAbilityText = hasChatOpen ? Text.translatable("ability."+thirdAbility.getId().toTranslationKey()) : ModKeyBinds.useThirdAbility.getBoundKeyLocalizedText();
+                        Text thirdAbilityText = hasChatOpen ? thirdAbility.getName() : ModKeyBinds.useThirdAbility.getBoundKeyLocalizedText();
                         textLengths.add(textRenderer.getWidth(thirdAbilityText));
                         if (fourthAbility != null) {
-                            Text fourthAbilityText = hasChatOpen ? Text.translatable("ability."+fourthAbility.getId().toTranslationKey()) : ModKeyBinds.useFourthAbility.getBoundKeyLocalizedText();
+                            Text fourthAbilityText = hasChatOpen ? fourthAbility.getName() : ModKeyBinds.useFourthAbility.getBoundKeyLocalizedText();
                             textLengths.add(textRenderer.getWidth(fourthAbilityText));
                         }
                     }
@@ -182,7 +182,7 @@ public class MechanicalHudRenderer {
                 int abilityScreenY = height/2 - 50 - abilityScreenHeight + (hasFifthAbility ? 10 : 0);
                 drawAbilityScreen(drawContext, abilityScreenX, abilityScreenY, abilityScreenWidth, abilityScreenHeight);
 
-                AbilityOverlayHelper.drawAbilities(client.player, drawContext, false, 0xC428EEFF, abilityScreenX + 6, abilityScreenY + 4 + (hasAbilityBeforeFirst ? 0 : -10));
+                AbilityOverlayHelper.drawAbilities(client.player, drawContext, 0xC428EEFF, false, abilityScreenX + 6, abilityScreenY + 4 + (hasAbilityBeforeFirst ? 0 : -10));
 
             }
             RenderSystem.disableBlend();

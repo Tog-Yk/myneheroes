@@ -12,12 +12,9 @@ public class StockpilePower extends Power implements StockPile {
     private float charge = 0;
     private final float maxCharge;
 
-    private final Identifier chargeIcon;
-
     public StockpilePower(Identifier id, float maxCharge, int color, List<Ability> abilities, Settings settings, attributeModifiers attributeModifiers) {
         super(id, color, abilities, settings, attributeModifiers);
         this.maxCharge = maxCharge;
-        this.chargeIcon = Identifier.of(id.getNamespace(),"textures/power/charge/"+id.getPath()+".png");;
     }
 
     @Override
@@ -67,23 +64,22 @@ public class StockpilePower extends Power implements StockPile {
 
     @Override
     public double getArmor() {
-        double armor = super.getArmor() * (float) (Math.sqrt((double) this.getCharge() / this.getMaxCharge()));
-        return armor;
+        return super.getArmor() * (float) (Math.sqrt((double) this.getCharge() / this.getMaxCharge()));
     }
 
     public Identifier getChargeIcon() {
-        return chargeIcon;
+        return Identifier.of(id.getNamespace(),"textures/power/charge/"+id.getPath()+".png");
     }
 
     public Identifier getIcon() {
-        Identifier initialBG = super.getIcon();
-        String path = initialBG.getPath().substring(0, initialBG.getPath().length() - ".png".length());
-        return Identifier.of(initialBG.getNamespace(),  path + (int) (((double) this.getCharge() / this.getMaxCharge()) / settings.textureInterval) + ".png");
+        Identifier initialIcon = super.getIcon();
+        String path = initialIcon.getPath().substring(0, initialIcon.getPath().length() - ".png".length());
+        return Identifier.of(initialIcon.getNamespace(),  path + "/" + this.getId().getPath() + (int) (((double) this.getCharge() / this.getMaxCharge()) / settings.textureInterval) + ".png");
     }
 
     @Override
     public boolean allowFlying(PlayerEntity player) {
-        return settings.canFly ? this.getCharge() >= (this.getMaxCharge() * settings.flyingUnlocksAt) : false;
+        return settings.canFly && this.getCharge() >= (this.getMaxCharge() * settings.flyingUnlocksAt);
     }
 
     @Override

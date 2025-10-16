@@ -21,10 +21,6 @@ public class AbilityOverlay implements HudRenderCallback {
     private static final Identifier ABILITIES_BACKGROUND = Identifier.of(MyneHeroes.MOD_ID, "hud/general/abilities_background");
     private static final Identifier STOCKPILE_BACKGROUND = Identifier.of(MyneHeroes.MOD_ID, "hud/general/stockpile_background");
 
-    private static final Identifier POWER_INFO_BACKGROUND_LEFT = Identifier.of(MyneHeroes.MOD_ID, "hud/general/power_info_background_left");
-    private static final Identifier POWER_INFO_BACKGROUND_MIDDLE = Identifier.of(MyneHeroes.MOD_ID, "hud/general/power_info_background_middle");
-    private static final Identifier POWER_INFO_BACKGROUND_RIGHT = Identifier.of(MyneHeroes.MOD_ID, "hud/general/power_info_background_right");
-
     @Override
     public void onHudRender(DrawContext drawContext, RenderTickCounter tickCounter) {
         MinecraftClient client = MinecraftClient.getInstance();
@@ -61,24 +57,19 @@ public class AbilityOverlay implements HudRenderCallback {
                     }
                 }
             }
-
-            int width = drawContext.getScaledWindowWidth();
-            int height = drawContext.getScaledWindowHeight();
-
             if (!hasDrawnAbilities) {
                 //draw Ability Hud
-                drawContext.drawGuiTexture(ABILITIES_BACKGROUND, 0, 0, 22, 106);
-                AbilityOverlayHelper.drawAbilities(client.player, drawContext, false, 3, 3, 4);
+                drawContext.drawGuiTexture(ABILITIES_BACKGROUND, 0, 21, 22, 106);
+                AbilityOverlayHelper.drawAbilities(client.player, drawContext, false, 3, 24, 4);
             }
             if (!hasDrawnStockpiles) {
-                StockpileOverlayHelper.drawStockpilesWithBackground(drawContext, client.player, STOCKPILE_BACKGROUND, 21, 0, 6, 56, 0, 3, 3, 50, -1);
+                StockpileOverlayHelper.drawStockpilesWithBackground(drawContext, client.player, STOCKPILE_BACKGROUND, 21, 21, 6, 56, 0, 3, 3, 50, -1);
             }
             if (!hasDrawnPowers) {
-                PowerOverlayHelper.drawPowerInfo(drawContext, client.player, 0, 0);
+                PowerOverlayHelper.drawPowerInfoWithBackground(drawContext, client.player, 0, 0);
             }
         }
     }
-
 
     public static List<HudAbility> getHudAbilities(List<Ability> abilityList) {
         List<HudAbility> abilities = new ArrayList<>();

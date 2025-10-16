@@ -230,8 +230,8 @@ public class Ability {
         return Identifier.of(id.getNamespace(),"textures/ability/"+id.getPath()+".png");
     }
 
-    public String getName() {
-        return "ability."+this.getId().toTranslationKey();
+    public Text getName() {
+        return Text.translatable("ability."+this.getId().toTranslationKey());
     }
 
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType type) {

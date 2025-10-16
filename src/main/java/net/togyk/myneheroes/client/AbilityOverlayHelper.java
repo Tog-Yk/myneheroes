@@ -61,7 +61,7 @@ public class AbilityOverlayHelper {
 
         Ability fourthAbility = ((PlayerAbilities) player).myneheroes$getFourthAbility();
         if (hasChatOpen) {
-            drawAbilityWithName(drawContext, fourthAbility, textLeftOfAbilities, ModKeyBinds.useFourthAbility.isPressed(), startX, y);
+            drawAbilityWithName(drawContext, fourthAbility, textLeftOfAbilities, textColor, ModKeyBinds.useFourthAbility.isPressed(), startX, y);
         } else {
             drawAbilityWithText(drawContext, fourthAbility, ModKeyBinds.useFourthAbility.getBoundKeyLocalizedText(), textLeftOfAbilities, textColor, ModKeyBinds.useFourthAbility.isPressed(), startX, y);
         }
@@ -74,10 +74,13 @@ public class AbilityOverlayHelper {
     public static void drawAbilityWithName(DrawContext drawContext, Ability ability, boolean nameLeftOfAbility, boolean isPressed, int x, int y) {
         drawAbilityWithName(drawContext, ability, nameLeftOfAbility, 0xFFFFFFFF, isPressed, x, y);
     }
-
     public static void drawAbilityWithName(DrawContext drawContext, Ability ability, boolean nameLeftOfAbility, int nameColor, boolean isPressed, int x, int y) {
+        drawAbilityWithName(drawContext, ability, nameLeftOfAbility, nameColor, isPressed, x, y, nameLeftOfAbility ? -2 : 18, 4);
+    }
+
+    public static void drawAbilityWithName(DrawContext drawContext, Ability ability, boolean nameLeftOfAbility, int nameColor, boolean isPressed, int x, int y, int textOffsetX, int textOffsetY) {
         if (ability != null) {
-            drawAbilityWithText(drawContext, ability, Text.translatable(ability.getName()), nameLeftOfAbility, nameColor, isPressed, x, y);
+            drawAbilityWithText(drawContext, ability, ability.getName(), nameLeftOfAbility, nameColor, isPressed, x, y, textOffsetX, textOffsetY);
         }
     }
 
@@ -87,13 +90,17 @@ public class AbilityOverlayHelper {
     }
 
     public static void drawAbilityWithText(DrawContext drawContext, Ability ability, Text text, boolean textLeftOfAbility, int textColor, boolean isPressed, int x, int y) {
+        drawAbilityWithText(drawContext, ability, text, textLeftOfAbility, textColor, isPressed, x, y, textLeftOfAbility ? 8 : 12, 10);
+    }
+
+    public static void drawAbilityWithText(DrawContext drawContext, Ability ability, Text text, boolean textLeftOfAbility, int textColor, boolean isPressed, int x, int y, int textOffestX, int textOffsetY) {
         if (ability != null) {
             RenderSystem.enableBlend();
             drawAbility(drawContext, ability, isPressed, x, y);
 
             TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-            int textX = textLeftOfAbility ? x - 4 - textRenderer.getWidth(text) : x + 20;
-            drawContext.drawTextWithShadow(textRenderer, text, textX, y + 4, textColor);
+            int textX = textLeftOfAbility ? x + textOffestX - 4 - textRenderer.getWidth(text) : x + textOffestX;
+            drawContext.drawTextWithShadow(textRenderer, text, textX, y + textOffsetY, textColor);
         }
     }
 

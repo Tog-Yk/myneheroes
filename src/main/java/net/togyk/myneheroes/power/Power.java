@@ -13,6 +13,7 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
@@ -140,8 +141,8 @@ public class Power {
         return Identifier.of(id.getNamespace(),"textures/power/"+id.getPath()+".png");
     }
 
-    public String getName() {
-        return "power."+this.getId().toTranslationKey();
+    public Text getName() {
+        return Text.translatable("power."+this.getId().toTranslationKey());
     }
 
     public void tick(PlayerEntity player) {
