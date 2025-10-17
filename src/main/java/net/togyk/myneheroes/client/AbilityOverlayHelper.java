@@ -28,10 +28,10 @@ public class AbilityOverlayHelper {
     }
 
     public static void drawAbilitiesWithBackground(PlayerEntity player, DrawContext drawContext, boolean textLeftOfAbilities, int textColor, int startX, int startY, int spacing, Identifier identifier, int width, int height, int offsetX, int offsetY) {
-        drawAbilities(player, drawContext, textLeftOfAbilities, textColor, startX + offsetX, startY + offsetY, spacing);
         if (!((PlayerAbilities) player).myneheroes$getAbilities().isEmpty()) {
             drawContext.drawGuiTexture(identifier, startX, startY, width, height);
         }
+        drawAbilities(player, drawContext, textLeftOfAbilities, textColor, startX + offsetX, startY + offsetY, spacing);
     }
 
     public static void drawAbilities(PlayerEntity player, DrawContext drawContext, boolean textLeftOfAbilities, int startX, int startY) {
