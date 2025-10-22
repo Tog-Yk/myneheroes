@@ -25,6 +25,7 @@ public class ModDataComponentTypes {
     public static final ComponentType<NbtCompound> ABILITIES =
             register("abilities", builder -> builder.codec(NbtCompound.CODEC));
 
+    //Currently crashes the game when a component is set to null
     public static final ComponentType<Power> POWER =
             register("power", builder -> builder.codec(Power.CODEC));
 

@@ -1,18 +1,16 @@
 package net.togyk.myneheroes.upgrade;
 
 import net.minecraft.item.ArmorItem;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Abilities;
+import net.togyk.myneheroes.registry.ModRegistries;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Upgrades {
-    private static final Map<Identifier, Upgrade> UPGRADES = new HashMap<>();
-
     public static final AbilityUpgrade MECHANICAL_HUD = registerUpgrade(new AbilityUpgrade(Abilities.TOGGLE_MECHANICAL_HUD, List.of(ArmorItem.Type.HELMET), Identifier.of(MyneHeroes.MOD_ID, "mechanical_hud")));
     public static final AbilityUpgrade SPEEDSTER_HUD = registerUpgrade(new AbilityUpgrade(Abilities.TOGGLE_SPEEDSTER_HUD, List.of(ArmorItem.Type.HELMET), Identifier.of(MyneHeroes.MOD_ID, "speedster_hud")));
     public static final AbilityUpgrade LASER = registerUpgrade(new AbilityUpgrade(Abilities.SHOOT_LASER, List.of(ArmorItem.Type.CHESTPLATE), Identifier.of(MyneHeroes.MOD_ID, "lazar")));
@@ -27,17 +25,11 @@ public class Upgrades {
 
 
     private static <T extends Upgrade> T registerUpgrade(T upgrade) {
-        if (!UPGRADES.containsKey(upgrade.getId())) {
-            UPGRADES.put(upgrade.getId(), upgrade);
-            return upgrade;
-        } else {
-            MyneHeroes.LOGGER.error("There already exist an upgrade with the id of {}", upgrade.getId());
-            return null;
-        }
+        return Registry.register(ModRegistries.UPGRADE, upgrade.id, upgrade);
     }
 
     public static Upgrade get(Identifier id) {
-        Upgrade upgrade = UPGRADES.getOrDefault(id, null);
+        Upgrade upgrade = ModRegistries.UPGRADE.get(id);
         if (upgrade != null) {
             return upgrade.copy();
         }
@@ -45,6 +37,6 @@ public class Upgrades {
     }
 
     public static boolean contains(Identifier id) {
-        return UPGRADES.containsKey(id);
+        return ModRegistries.UPGRADE.containsId(id);
     }
 }

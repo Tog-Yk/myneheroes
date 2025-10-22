@@ -7,6 +7,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundCategory;
@@ -27,8 +28,11 @@ import net.togyk.myneheroes.entity.LaserEntity;
 import net.togyk.myneheroes.entity.ModEntities;
 import net.togyk.myneheroes.entity.StationaryArmorEntity;
 import net.togyk.myneheroes.entity.WebEntity;
+import net.togyk.myneheroes.registry.ModRegistries;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Abilities {
     public static void registerAbilitiesAfterItems() {
@@ -37,7 +41,7 @@ public class Abilities {
         BONE_CLAWS = registerAbility(new AddOrRemoveDualItemAbility(Identifier.of(MyneHeroes.MOD_ID, "bone_claws"), ModItems.BONE_CLAWS, 10, new Ability.Settings().appearsMultipleTimes(false)));
         ADAMANTIUM_CLAWS = registerAbility(new AddOrRemoveDualItemAbility(Identifier.of(MyneHeroes.MOD_ID, "adamantium_claws"), ModItems.ADAMANTIUM_CLAWS, 10, new Ability.Settings().appearsMultipleTimes(false)));
 
-        for (Ability ability : ABILITIES.values()) {
+        for (Ability ability : ModRegistries.ABILITY.stream().toList()) {
             if (ability != null) {
                 Ability copy = ability.copy();
                 if (ability.getClass() != copy.getClass()) {
@@ -53,8 +57,6 @@ public class Abilities {
             }
         }
     }
-
-    private static final Map<Identifier,Ability> ABILITIES = new HashMap<>();
 
     public static final HudAbility TOGGLE_MECHANICAL_HUD = registerAbility(new HudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_mechanical_hud"), new Ability.Settings(), HudType.MECHANICAL));
     public static final HudAbility TOGGLE_SPEEDSTER_HUD = registerAbility(new HudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speedster_hud"), new Ability.Settings(), HudType.SPEEDSTER));
@@ -252,17 +254,11 @@ public class Abilities {
     public static final ImmortalityAbility IMMORTALITY = registerAbility(new ImmortalityAbility(Identifier.of(MyneHeroes.MOD_ID, "immortality"), 2400, new Ability.Settings().appearsMultipleTimes(true)));
 
     private static <T extends Ability> T registerAbility(T ability) {
-        if (!ABILITIES.containsKey(ability.id)) {
-            ABILITIES.put(ability.id, ability);
-            return ability;
-        } else {
-            MyneHeroes.LOGGER.error("There already exist an ability with the id of {}", ability.id);
-        }
-        return null;
+        return Registry.register(ModRegistries.ABILITY, ability.id, ability);
     }
 
     public static Ability get(Identifier id) {
-        Ability ability = ABILITIES.getOrDefault(id, null);
+        Ability ability = ModRegistries.ABILITY.get(id);
         if (ability != null) {
             return ability.copy();
         }
@@ -270,6 +266,6 @@ public class Abilities {
     }
 
     public static boolean contains(Identifier id) {
-        return ABILITIES.containsKey(id);
+        return ModRegistries.ABILITY.containsId(id);
     }
 }

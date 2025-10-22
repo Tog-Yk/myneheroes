@@ -2,22 +2,20 @@ package net.togyk.myneheroes.power;
 
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Abilities;
 import net.togyk.myneheroes.power.detailed.KryptonianPower;
+import net.togyk.myneheroes.registry.ModRegistries;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class Powers {
     public static void registerPowers() {
         MyneHeroes.LOGGER.info("Registering powers");
     }
-
-    private static final Map<Identifier,Power> POWERS = new HashMap<>();
 
     public static KryptonianPower KRYPTONIAN = registerPower(new KryptonianPower(Identifier.of(MyneHeroes.MOD_ID, "kryptonian"), 10000F, 0xFF9CDB94, List.of(Abilities.FROST_BREATH, Abilities.LASER_EYES),
             new Power.Settings().damageMultiplier(5.00).armor(10.0F).textureInterval(0.25).flyingUnlocksAt(0.05).dampenedByKryptonite(),
@@ -47,17 +45,11 @@ public class Powers {
     ));
 
     public static <T extends Power> T registerPower(T power) {
-        if (!POWERS.containsKey(power.id)) {
-            POWERS.put(power.id, power);
-            return power;
-        } else {
-            MyneHeroes.LOGGER.error("There already exist an power with the id of {}",power.id);
-        }
-        return null;
+        return Registry.register(ModRegistries.POWER, power.id, power);
     }
 
     public static Power get(Identifier id) {
-        Power power = POWERS.getOrDefault(id, null);
+        Power power = ModRegistries.POWER.get(id);
         if (power != null) {
             return power.copy();
         } else {
@@ -66,13 +58,10 @@ public class Powers {
     }
 
     public static boolean containsId(Identifier id) {
-        return POWERS.containsKey(id);
-    }
-    public static boolean containsPower(Power power) {
-        return POWERS.containsValue(power);
+        return ModRegistries.POWER.containsId(id);
     }
 
     public static Set<Identifier> getIds() {
-        return POWERS.keySet();
+        return ModRegistries.POWER.getIds();
     }
 }
