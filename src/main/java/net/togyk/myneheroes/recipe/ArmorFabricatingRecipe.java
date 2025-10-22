@@ -77,6 +77,6 @@ public record ArmorFabricatingRecipe(String group, Ingredient ingredient, ItemSt
     }
 
     public ItemStack createIcon() {
-        return new ItemStack(ModBlocks.ARMOR_FABRICATOR);
+        return ModBlocks.ARMOR_FABRICATOR.asItem().getDefaultStack();
     }
 }

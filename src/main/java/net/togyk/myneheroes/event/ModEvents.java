@@ -7,13 +7,13 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.CaveSpiderEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
@@ -23,7 +23,6 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
-import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.Item.custom.ThrowableItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
@@ -37,6 +36,9 @@ import net.togyk.myneheroes.persistent_data.ModPersistentData;
 import net.togyk.myneheroes.persistent_data.TimeNearKryptoniteData;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.Powers;
+import net.togyk.myneheroes.recipe.EntityInteractionRecipe;
+import net.togyk.myneheroes.recipe.EntityInteractionRecipeInput;
+import net.togyk.myneheroes.recipe.ModRecipes;
 import net.togyk.myneheroes.util.PlayerAbilities;
 import net.togyk.myneheroes.util.PowerData;
 import net.togyk.myneheroes.util.SimpleEventResult;
@@ -165,19 +167,28 @@ public class ModEvents {
                 return ActionResult.PASS;
             }
 
-            if (!entity.getWorld().isClient && entity instanceof CaveSpiderEntity) {
+            if (!entity.getWorld().isClient) {
                 ItemStack handStack = player.getStackInHand(hand);
-                if (!handStack.isEmpty() && handStack.getItem() == Items.GLASS_BOTTLE) {
-                    if (!player.isCreative()) {
-                        handStack.decrement(1);
-                    }
-                    ItemStack bottleStack = ModItems.BOTTLE_OF_SPIDER_VENOM.getDefaultStack();
-                    if (handStack.isEmpty()) {
-                        player.setStackInHand(hand, bottleStack);
-                    } else {
-                        if (!player.giveItemStack(bottleStack)) {
-                            //doesn't fit in the inventory
-                            player.dropItem(bottleStack, false);
+                if (!handStack.isEmpty()) {
+                    EntityInteractionRecipeInput recipeInput = createRecipeInput(handStack, entity.getType());
+
+                    List<RecipeEntry<EntityInteractionRecipe>> recipes = player.getWorld().getRecipeManager().getAllMatches(ModRecipes.ENTITY_INTERACTION_TYPE, recipeInput, player.getWorld());
+                    if (!recipes.isEmpty()) {
+                        Random random = new Random();
+                        EntityInteractionRecipe recipeEntry = recipes.get(random.nextInt(0, recipes.size())).value();
+
+                        if (!player.isCreative()) {
+                            handStack.decrement(1);
+                        }
+
+                        ItemStack resultStack = recipeEntry.craft(recipeInput, player.getWorld().getRegistryManager());
+                        if (handStack.isEmpty()) {
+                            player.setStackInHand(hand, resultStack);
+                        } else {
+                            if (!player.giveItemStack(resultStack)) {
+                                //doesn't fit in the inventory
+                                player.dropItem(resultStack, false);
+                            }
                         }
                     }
                     return ActionResult.SUCCESS;
@@ -207,6 +218,10 @@ public class ModEvents {
             }
             //*/
         });
+    }
+
+    private static EntityInteractionRecipeInput createRecipeInput(ItemStack stack, EntityType<?> entityType) {
+        return new EntityInteractionRecipeInput(stack, entityType);
     }
 
 

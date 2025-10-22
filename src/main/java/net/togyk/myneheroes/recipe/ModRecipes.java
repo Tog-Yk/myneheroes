@@ -12,6 +12,9 @@ public class ModRecipes {
     public static final RecipeType<ArmorFabricatingRecipe> ARMOR_FABRICATING_TYPE = registerType("armor_fabricating");
     public static final RecipeSerializer<ArmorFabricatingRecipe> ARMOR_FABRICAING_SERIALIZER = registerSerializer("armor_fabricating", new ArmorFabricatingRecipe.Serializer());
 
+    public static final RecipeType<EntityInteractionRecipe> ENTITY_INTERACTION_TYPE = registerType("entity_interaction");
+    public static final RecipeSerializer<EntityInteractionRecipe> ENTITY_INTERACTION_SERIALIZER = registerSerializer("entity_interaction", new EntityInteractionRecipe.Serializer());
+
     static <T extends Recipe<?>> RecipeType<T> registerType(final String id) {
         return Registry.register(Registries.RECIPE_TYPE, Identifier.of(MyneHeroes.MOD_ID, id), new RecipeType<T>() {
             public String toString() {

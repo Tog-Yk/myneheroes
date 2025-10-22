@@ -14,10 +14,10 @@ public record ArmorFabricatingRecipeJsonBuilder(Item ingredient, Item result) {
     }
 
     public void offerTo(RecipeExporter exporter, Identifier recipeId) {
-        exporter.accept(recipeId, new ArmorFabricatingRecipe("armor_fabricating", Ingredient.ofItems(ingredient), result.getDefaultStack()), null);
+        exporter.accept(recipeId, new ArmorFabricatingRecipe("", Ingredient.ofItems(ingredient), result.getDefaultStack()), null);
     }
 
     public void offerTo(RecipeExporter exporter) {
-        exporter.accept(Registries.ITEM.getId(result), new ArmorFabricatingRecipe("armor_fabricating", Ingredient.ofItems(ingredient), result.getDefaultStack()), null);
+        exporter.accept(Registries.ITEM.getId(result), new ArmorFabricatingRecipe("", Ingredient.ofItems(ingredient), result.getDefaultStack()), null);
     }
 }

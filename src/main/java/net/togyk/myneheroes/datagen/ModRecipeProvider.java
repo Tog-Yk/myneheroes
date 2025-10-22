@@ -7,6 +7,7 @@ import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
@@ -427,4 +428,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         ArmorFabricatingRecipeJsonBuilder.create(Items.NETHERITE_CHESTPLATE, ModItems.SPEEDSTER_NETHERITE_CHESTPLATE).offerTo(exporter);
         ArmorFabricatingRecipeJsonBuilder.create(Items.NETHERITE_LEGGINGS, ModItems.SPEEDSTER_NETHERITE_LEGGINGS).offerTo(exporter);
         ArmorFabricatingRecipeJsonBuilder.create(Items.NETHERITE_BOOTS, ModItems.SPEEDSTER_NETHERITE_BOOTS).offerTo(exporter);
+
+        //Entity interaction Recipes
+        EntityInteractionRecipeJsonBuilder.create(Items.GLASS_BOTTLE, EntityType.CAVE_SPIDER, ModItems.BOTTLE_OF_SPIDER_VENOM).offerTo(exporter);
     }}

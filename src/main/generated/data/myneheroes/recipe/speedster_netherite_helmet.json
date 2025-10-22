@@ -1,6 +1,5 @@
 {
   "type": "myneheroes:armor_fabricating",
-  "group": "armor_fabricating",
   "ingredient": {
     "item": "minecraft:netherite_helmet"
   },

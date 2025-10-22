@@ -1,0 +1,11 @@
+{
+  "type": "myneheroes:entity_interaction",
+  "entity": "minecraft:cave_spider",
+  "ingredient": {
+    "item": "minecraft:glass_bottle"
+  },
+  "result": {
+    "count": 1,
+    "id": "myneheroes:bottle_of_spider_venom"
+  }
+}
