@@ -244,5 +244,7 @@
   "armor_pattern.myneheroes.mark45_netherite": " Mark-45",
   "armor_pattern.myneheroes.speedster_gold_titanium": " Speedster Gold-Titanium",
   "armor_pattern.myneheroes.speedster_vibranium": " Speedster Vibranium",
-  "armor_pattern.myneheroes.speedster_netherite": " Speedster Netherite"
+  "armor_pattern.myneheroes.speedster_netherite": " Speedster Netherite",
+
+  "recipe_category.myneheroes.entity_interaction": "Entity Interaction"
 }

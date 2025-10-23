@@ -23,7 +23,10 @@
 		],
 		"client": [
 			"net.togyk.myneheroes.MyneHeroesClient"
-		]
+		],
+        "rei_client": [
+          "net.togyk.myneheroes.compat.rei.ModREIClient"
+        ]
 	},
 	"mixins": [
 		"myneheroes.mixins.json"

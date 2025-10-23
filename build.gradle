@@ -23,6 +23,10 @@ repositories {
 			includeGroup("software.bernie.geckolib")
 		}
 	}
+
+    maven {
+        url "https://maven.shedaniel.me"
+    }
 }
 
 fabricApi {
@@ -39,6 +43,12 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	modCompileOnly "software.bernie.geckolib:geckolib-fabric-${project.minecraft_version}:${project.geckolib_version}"
+
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:16.0.777"
+    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:16.0.777"
+
+    modApi "dev.architectury:architectury-fabric:13.0.8"
+    modApi "me.shedaniel.cloth:cloth-config-fabric:15.0.140"
 }
 
 processResources {
