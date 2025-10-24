@@ -8,10 +8,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.registry.tag.TagKey;
-import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.damage.ModDamageTypes;
 import net.togyk.myneheroes.power.Power;
-import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.registry.ModRegistries;
 import net.togyk.myneheroes.util.ModTags;
 import net.togyk.myneheroes.util.PowerData;
@@ -51,10 +49,19 @@ public class RadiationPoisonEffect extends StatusEffect {
     public void onRemoved(AttributeContainer attributeContainer) {
         if (player != null) {
             Random random = new Random();
-            if (random.nextFloat() <= 1f) {
-                MyneHeroes.LOGGER.info(String.valueOf(Powers.MUTANT_REGENERATION.isIn(ModTags.Powers.RADIATION_OBTAINABLE)));
+            if (random.nextFloat() <= 0.05f) {
+                float rarity = random.nextFloat();
+                Power power = null;
+                if (rarity <= 0.05F) {
+                    power = getRandomPowerFromTag(random, ModTags.Powers.RARE_RADIATION_OBTAINABLE);
+                }
+                if (rarity <= 0.25F && power == null) {
+                    power = getRandomPowerFromTag(random, ModTags.Powers.COMMON_RADIATION_OBTAINABLE);
+                }
+                if (power == null){
+                    power = getRandomPowerFromTag(random, ModTags.Powers.OFTEN_RADIATION_OBTAINABLE);
+                }
 
-                Power power = getRandomPowerFromTag(random, ModTags.Powers.RADIATION_OBTAINABLE);
                 if (power != null) {
                     PowerData.addUniquePowerToLimit(player, power);
                 }
@@ -63,7 +70,7 @@ public class RadiationPoisonEffect extends StatusEffect {
         super.onRemoved(attributeContainer);
     }
 
-
+    //this file got pushed 2 commits earlier
     private Power getRandomPowerFromTag(Random random, TagKey<Power> tag) {
         // Get all the powers in the tag
         Optional<RegistryEntryList.Named<Power>> tagEntryList = ModRegistries.POWER.getEntryList(tag);

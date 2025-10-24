@@ -5,8 +5,10 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.registry.RegistryWrapper;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.power.Power;
+import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.registry.ModRegistryKeys;
 import net.togyk.myneheroes.upgrade.Upgrade;
+import net.togyk.myneheroes.util.ModTags;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -28,6 +30,39 @@ public class ModTagProviders {
 
         @Override
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+            getOrCreateTagBuilder(ModTags.Powers.MUTANT)
+                    .addTag(ModTags.Powers.RARE_MUTANT)
+                    .addTag(ModTags.Powers.COMMON_MUTANT)
+                    .addTag(ModTags.Powers.OFTEN_MUTANT)
+            ;
+
+            getOrCreateTagBuilder(ModTags.Powers.RARE_MUTANT)
+
+            ;
+            getOrCreateTagBuilder(ModTags.Powers.COMMON_MUTANT)
+
+            ;
+            getOrCreateTagBuilder(ModTags.Powers.OFTEN_MUTANT)
+                    .add(Powers.MUTANT_REGENERATION)
+            ;
+
+            getOrCreateTagBuilder(ModTags.Powers.RADIATION_OBTAINABLE)
+                    .addTag(ModTags.Powers.RARE_RADIATION_OBTAINABLE)
+                    .addTag(ModTags.Powers.COMMON_RADIATION_OBTAINABLE)
+                    .addTag(ModTags.Powers.OFTEN_RADIATION_OBTAINABLE)
+            ;
+
+            getOrCreateTagBuilder(ModTags.Powers.RARE_RADIATION_OBTAINABLE)
+                    .addTag(ModTags.Powers.RARE_MUTANT)
+            ;
+
+            getOrCreateTagBuilder(ModTags.Powers.COMMON_RADIATION_OBTAINABLE)
+                    .addTag(ModTags.Powers.COMMON_MUTANT)
+            ;
+
+            getOrCreateTagBuilder(ModTags.Powers.OFTEN_RADIATION_OBTAINABLE)
+                    .addTag(ModTags.Powers.OFTEN_MUTANT)
+            ;
         }
     }
 

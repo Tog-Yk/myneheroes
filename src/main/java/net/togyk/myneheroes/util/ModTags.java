@@ -57,6 +57,14 @@ public class ModTags {
     }
 
     public static class Powers {
+        public static final TagKey<Power> RADIATION_OBTAINABLE = createTag("radiation_obtainable");
+        public static final TagKey<Power> RARE_RADIATION_OBTAINABLE = createTag("rare_radiation_obtainable");
+        public static final TagKey<Power> COMMON_RADIATION_OBTAINABLE = createTag("common_radiation_obtainable");
+        public static final TagKey<Power> OFTEN_RADIATION_OBTAINABLE = createTag("often_radiation_obtainable");
+        public static final TagKey<Power> MUTANT = createTag("mutant");
+        public static final TagKey<Power> RARE_MUTANT = createTag("rare_mutant");
+        public static final TagKey<Power> COMMON_MUTANT = createTag("common_mutant");
+        public static final TagKey<Power> OFTEN_MUTANT = createTag("often_mutant");
 
         private static TagKey<Power> createTag(String name) {
             return TagKey.of(ModRegistryKeys.POWER, Identifier.of(MyneHeroes.MOD_ID, name));
