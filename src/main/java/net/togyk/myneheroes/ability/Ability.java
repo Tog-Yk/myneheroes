@@ -12,16 +12,20 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
+import net.minecraft.registry.entry.RegistryEntryList;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.AbilityHolding;
 import net.togyk.myneheroes.power.Power;
+import net.togyk.myneheroes.registry.ModRegistries;
 import net.togyk.myneheroes.upgrade.AbilityUpgrade;
 import net.togyk.myneheroes.upgrade.Upgrade;
 import net.togyk.myneheroes.util.AbilityUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 public class Ability {
@@ -265,5 +269,14 @@ public class Ability {
 
     public Identifier getId() {
         return id;
+    }
+
+    public final boolean isIn(TagKey<Ability> tag) {
+        Optional<RegistryEntryList.Named<Ability>> registryEntries = ModRegistries.ABILITY.getEntryList(tag);
+        if (registryEntries.isPresent()) {
+            List<Identifier> ids = registryEntries.get().stream().map(entry -> entry.value().getId()).toList();
+            return ids.contains(this.getId());
+        }
+        return false;
     }
 }
