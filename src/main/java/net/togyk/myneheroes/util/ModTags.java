@@ -7,6 +7,10 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.power.Power;
+import net.togyk.myneheroes.registry.ModRegistryKeys;
+import net.togyk.myneheroes.upgrade.Upgrade;
 
 public class ModTags {
     public static class Blocks {
@@ -42,6 +46,27 @@ public class ModTags {
 
         private static TagKey<EntityType<?>> createTag(String name) {
             return TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MyneHeroes.MOD_ID, name));
+        }
+    }
+
+    public static class Abilities {
+
+        private static TagKey<Ability> createTag(String name) {
+            return TagKey.of(ModRegistryKeys.ABILITY, Identifier.of(MyneHeroes.MOD_ID, name));
+        }
+    }
+
+    public static class Powers {
+
+        private static TagKey<Power> createTag(String name) {
+            return TagKey.of(ModRegistryKeys.POWER, Identifier.of(MyneHeroes.MOD_ID, name));
+        }
+    }
+
+    public static class Upgrades {
+
+        private static TagKey<Upgrade> createTag(String name) {
+            return TagKey.of(ModRegistryKeys.UPGRADE, Identifier.of(MyneHeroes.MOD_ID, name));
         }
     }
 }

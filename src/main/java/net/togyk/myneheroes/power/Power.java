@@ -13,11 +13,14 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.entry.RegistryEntryList;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.AttributeModifierAbility;
+import net.togyk.myneheroes.registry.ModRegistries;
 import net.togyk.myneheroes.util.AbilityUtil;
 import net.togyk.myneheroes.util.PowerUtil;
 import org.jetbrains.annotations.Nullable;
@@ -25,6 +28,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class Power {
@@ -316,5 +320,14 @@ public class Power {
 
     public Power copy() {
         return new Power(this.id, color, List.copyOf(this.abilities), settings, attributeModifiers);
+    }
+
+    public final boolean isIn(TagKey<Power> tag) {
+        Optional<RegistryEntryList.Named<Power>> registryEntries = ModRegistries.POWER.getEntryList(tag);
+        if (registryEntries.isPresent()) {
+            List<Identifier> ids = registryEntries.get().stream().map(entry -> entry.value().getId()).toList();
+            return ids.contains(this.getId());
+        }
+        return false;
     }
 }

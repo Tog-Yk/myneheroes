@@ -21,6 +21,9 @@ public class MyneHeroesDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(ModModelProvider::new);
         pack.addProvider(ModRecipeProvider::new);
         pack.addProvider(ModRegistryDataGenerator::new);
+        pack.addProvider(ModTagProviders.ModAbilityTagProvider::new);
+        pack.addProvider(ModTagProviders.ModPowerTagProvider::new);
+        pack.addProvider(ModTagProviders.ModUpgradeTagProvider::new);
     }
 
 
