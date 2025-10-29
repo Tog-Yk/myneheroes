@@ -56,7 +56,7 @@ public class EntityInteractionCategory implements DisplayCategory<EntityInteract
         //entity widget
         EntityType<?> type = display.getEntityType();
 
-        widgets.add(new ReiEntityWidget(type, new Point(startPoint.x + 79, startPoint.y + 42), 54, 54));
+        widgets.add(new ReiEntityWidget(type, new Point(startPoint.x + 80, startPoint.y + 42), 54, 54));
 
         return widgets;
     }
