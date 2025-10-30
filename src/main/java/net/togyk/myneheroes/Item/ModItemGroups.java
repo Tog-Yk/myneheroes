@@ -9,6 +9,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.block.ModBlocks;
+import net.togyk.myneheroes.resourcepack.ModResourcePacks;
 
 public class ModItemGroups {
     public static final ItemGroup MYNEHEROES_GROUP = Registry.register(Registries.ITEM_GROUP,
@@ -88,9 +89,11 @@ public class ModItemGroups {
 
                         entries.add(ModBlocks.ARMOR_FABRICATOR);
 
-                        //tutorial items
-                        //TODO: move tutorial items to own creative menu
-                        entries.add(ModItems.CLARK_KENT_GLASSES);
+                        //only add when datapack is enabled
+                        //shibashi's shenanigans items
+                        if (ModResourcePacks.SHIBASHIS_SHENANIGANS) {
+                            entries.add(ModItems.CLARK_KENT_GLASSES);
+                        }
                     }).build());
 
     public static final ItemGroup MYNEHEROES_ARMOR_GROUP = Registry.register(Registries.ITEM_GROUP,

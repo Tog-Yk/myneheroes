@@ -246,5 +246,8 @@
   "armor_pattern.myneheroes.speedster_vibranium": " Speedster Vibranium",
   "armor_pattern.myneheroes.speedster_netherite": " Speedster Netherite",
 
-  "recipe_category.myneheroes.entity_interaction": "Entity Interaction"
+  "recipe_category.myneheroes.entity_interaction": "Entity Interaction",
+
+  "dataPack.myneheroes.shibashis_shenanigans": "Shibashi's shenanigans",
+  "dataPack.myneheroes.shibashis_shenanigans.description": "Experimental or unstable additions made by Shibashi"
 }
