@@ -91,7 +91,7 @@ public class ModItemGroups {
 
                         //only add when datapack is enabled
                         //shibashi's shenanigans items
-                        if (ModResourcePacks.SHIBASHIS_SHENANIGANS) {
+                        if (ModResourcePacks.SHIBASHIS_SHENANIGANS.isActive()) {
                             entries.add(ModItems.CLARK_KENT_GLASSES);
                         }
                     }).build());
