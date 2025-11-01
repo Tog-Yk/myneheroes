@@ -240,6 +240,8 @@ public class WebSwingEntity extends PersistentProjectileEntity {
 
         builder.add(hitEntity, Optional.empty());
         builder.add(relativePos, new Vec3d(0, 0, 0));
+
+        builder.add(age, 0);
     }
 
     @Override
