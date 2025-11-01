@@ -61,12 +61,15 @@ public class SwingWebEntityRenderer extends ProjectileEntityRenderer<WebSwingEnt
         //render connection to the owner
         Entity owner = entity.getOwner();
         if (owner != null) {
-            Vec3d start = entity.getPos();
+            Vec3d start = entity.getBoundingBox().getCenter();
             Vec3d end = owner.getBoundingBox().getCenter().add(0.1D, 0, 0.1D);
 
             CrossBeamRenderer beamRenderer = new CrossBeamRenderer(Identifier.of(MyneHeroes.MOD_ID, "textures/entity/projectiles/web_string.png"));
 
-            beamRenderer.render(matrixStack, vertexConsumers, new Vec3d(0, 0, 0), end.subtract(start), 1.0F, 0xFFFFFFFF);
+            beamRenderer.setSize(0.25F/ 2F);
+            beamRenderer.setTextureSize(0.25F/ 2F);
+
+            beamRenderer.render(matrixStack, vertexConsumers, new Vec3d(0, entity.getBoundingBox().getLengthY() / 2D, 0), end.subtract(start), light, 1.0F, 0xFFFFFFFF);
         }
     }
 

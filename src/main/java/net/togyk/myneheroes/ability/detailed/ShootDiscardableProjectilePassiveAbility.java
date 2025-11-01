@@ -12,7 +12,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.util.SimpleEventResult;
 import net.togyk.myneheroes.util.StockPile;
@@ -34,12 +33,11 @@ public class ShootDiscardableProjectilePassiveAbility<T extends ProjectileEntity
     public SimpleEventResult onMissedInteraction(PlayerEntity player) {
         if (this.get() && this.projectileCooldown == 0 && (!(this.getIndirectHolder() instanceof StockPile stockPile) || stockPile.getCharge() >= this.getCost())) {
             if (!player.getWorld().isClient) {
-                Vec3d look = player.getRotationVec(1.0F);
-
                 T projectile = createProjectile.apply(player, this);
 
                 player.getWorld().spawnEntity(projectile);
                 shotEntities.add(projectile.getUuid());
+                this.save();
 
                 player.swingHand(Hand.MAIN_HAND);
             }
@@ -56,8 +54,13 @@ public class ShootDiscardableProjectilePassiveAbility<T extends ProjectileEntity
     @Override
     public SimpleEventResult onMissedAttack(PlayerEntity player) {
         if (!this.shotEntities.isEmpty()) {
-            this.shotEntities.stream().map(uuid -> this.getEntityByUuid(uuid, player.getBlockPos(), player.getWorld())).filter(Optional::isPresent).map(Optional::get).forEach(Entity::discard);
-            this.shotEntities = new ArrayList<>();
+            UUID firstShotEntityUuid = this.shotEntities.getFirst();
+
+            Optional<Entity> firstShotEntity = this.getEntityByUuid(firstShotEntityUuid, player.getBlockPos(), player.getWorld());
+            firstShotEntity.ifPresent(Entity::discard);
+
+            this.shotEntities.remove(firstShotEntityUuid);
+            this.save();
 
             return SimpleEventResult.SUCCESS;
         }

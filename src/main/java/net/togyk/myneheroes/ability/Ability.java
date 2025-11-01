@@ -124,6 +124,8 @@ public class Ability {
             power.saveAbility(this);
         } else if (holder instanceof SelectionAbility ability) {
             ability.saveAbility(this);
+        } else if (holder instanceof PassiveSelectionAbility ability) {
+            ability.saveAbility(this);
         } else if (holder instanceof AbilityUpgrade upgrade) {
             upgrade.saveAbility(this);
         }
