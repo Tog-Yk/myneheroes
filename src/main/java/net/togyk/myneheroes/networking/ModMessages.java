@@ -39,6 +39,7 @@ public class ModMessages {
     public static final Identifier PLAYER_POWER_SYNC_DATA_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "power_sync_data");
     public static final Identifier PLAYER_ABILITY_SYNC_DATA_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "ability_sync_data");
     public static final Identifier PLAYER_ABILITY_SCROLLED_SYNC_DATA_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "ability_scrolled_sync_data");
+    public static final Identifier PLAYER_JUMPING_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "player_jumping");
 
     public static void registerServerMessages() {
         PayloadTypeRegistry.playC2S().register(AbilityKeybindPayload.ID, AbilityKeybindPayload.CODEC);
@@ -248,6 +249,14 @@ public class ModMessages {
                 if (Abilities.contains(ability.getId()) && ability instanceof PassiveSelectionAbility passiveSelectionAbility) {
                     passiveSelectionAbility.setSelectedPassive(payload.index());
                 }
+            });
+        });
+
+        PayloadTypeRegistry.playC2S().register(PlayerJumpWatcherPayload.ID, PlayerJumpWatcherPayload.CODEC);
+
+        ServerPlayNetworking.registerGlobalReceiver(PlayerJumpWatcherPayload.ID, (payload, context) -> {
+            context.server().execute(() -> {
+                ((PlayerAbilities) context.player()).myneheroes$setIsHoldingJump(payload.jumping());
             });
         });
     }

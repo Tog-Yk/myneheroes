@@ -22,5 +22,6 @@ public class ModEntityRenderers {
         EntityRendererRegistry.INSTANCE.register(ModEntities.AFTERIMAGE_TRAIL, TrailEntityRenderer::new);
 
         EntityRendererRegistry.INSTANCE.register(ModEntities.WEB, WebEntityRenderer::new);
+        EntityRendererRegistry.INSTANCE.register(ModEntities.SWING_WEB, SwingWebEntityRenderer::new);
     }
 }

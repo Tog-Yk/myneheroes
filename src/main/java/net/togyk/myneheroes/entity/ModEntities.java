@@ -41,6 +41,10 @@ public class ModEntities {
             EntityType.Builder.<WebEntity>create(WebEntity::new, SpawnGroup.MISC)
                     .dimensions(0.25F, 0.25F));
 
+    public static final EntityType<WebSwingEntity> SWING_WEB = registerEntity("swing_web",
+            EntityType.Builder.<WebSwingEntity>create(WebSwingEntity::new, SpawnGroup.MISC)
+                    .dimensions(0.25F, 0.25F));
+
     private static <T extends Entity> EntityType<T> registerEntity(String name, EntityType.Builder<T> type) {
         return Registry.register(Registries.ENTITY_TYPE, Identifier.of(MyneHeroes.MOD_ID, name), type.build());
     }

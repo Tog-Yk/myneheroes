@@ -1,5 +1,7 @@
 package net.togyk.myneheroes.event;
 
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerChunkEvents;
@@ -7,6 +9,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -32,6 +35,7 @@ import net.togyk.myneheroes.block.custom.RadiationBlock;
 import net.togyk.myneheroes.damage.ModDamageTypes;
 import net.togyk.myneheroes.entity.MeteorEntity;
 import net.togyk.myneheroes.gamerule.ModGamerules;
+import net.togyk.myneheroes.networking.PlayerJumpWatcherPayload;
 import net.togyk.myneheroes.persistent_data.ModPersistentData;
 import net.togyk.myneheroes.persistent_data.TimeNearKryptoniteData;
 import net.togyk.myneheroes.power.Power;
@@ -217,6 +221,18 @@ public class ModEvents {
                 }
             }
             //*/
+        });
+
+
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            if (client.player != null) {
+                KeyBinding jumpKey = client.options.jumpKey;
+                boolean isHoldingJumping = jumpKey.isPressed();
+
+                ((PlayerAbilities) client.player).myneheroes$setIsHoldingJump(isHoldingJumping);
+                PlayerJumpWatcherPayload payload = new PlayerJumpWatcherPayload(isHoldingJumping);
+                ClientPlayNetworking.send(payload);
+            }
         });
     }
 

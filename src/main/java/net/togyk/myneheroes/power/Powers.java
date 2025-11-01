@@ -34,7 +34,7 @@ public class Powers {
             new Power.Settings().damageMultiplier(3.50).armor(3).canWallCrawl(),
             new Power.attributeModifiers().addAttributeModifier(EntityAttributes.GENERIC_FALL_DAMAGE_MULTIPLIER, Identifier.of(MyneHeroes.MOD_ID, "spider.fall_damage"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> -1.0D)
     ));
-    public static Power SPIDER_ORGANIC_WEBBING = registerPower(new Power(Identifier.of(MyneHeroes.MOD_ID, "spider_organic_webbing"), 0xFFFF3A3A, List.of(Abilities.SPIDER_SENSE, Abilities.WEB_SHOOTER),
+    public static Power SPIDER_ORGANIC_WEBBING = registerPower(new Power(Identifier.of(MyneHeroes.MOD_ID, "spider_organic_webbing"), 0xFFFF3A3A, List.of(Abilities.SPIDER_SENSE, Abilities.ORGANIC_WEBBING),
             new Power.Settings().damageMultiplier(3.50).armor(3).canWallCrawl(),
             new Power.attributeModifiers().addAttributeModifier(EntityAttributes.GENERIC_FALL_DAMAGE_MULTIPLIER, Identifier.of(MyneHeroes.MOD_ID, "spider_organic_webbing.fall_damage"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> -1.0D)
     ));

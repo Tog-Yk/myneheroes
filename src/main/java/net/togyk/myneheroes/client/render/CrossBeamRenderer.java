@@ -8,26 +8,28 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
-import net.togyk.myneheroes.MyneHeroes;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
-public class LaserRenderer {
-    public static final Identifier TEXTURE_INNER = Identifier.of(MyneHeroes.MOD_ID, "textures/entity/projectiles/laser_inner.png");
-    public static final Identifier TEXTURE_OUTER = Identifier.of(MyneHeroes.MOD_ID, "textures/entity/projectiles/laser_outer.png");
+public class CrossBeamRenderer {
+    public final Identifier TEXTURE;
 
     private float size = 0.25F;
+
+    public CrossBeamRenderer(Identifier texture) {
+        TEXTURE = texture;
+    }
 
     public void render(
             MatrixStack matrixStack, VertexConsumerProvider vertexConsumers,
             Vec3d start, Vec3d end,
-            float alpha, int innerColor, int outerColor
+            float alpha, int color
     ) {
         matrixStack.push();
         matrixStack.translate(start.getX(), start.getY(), start.getZ());
 
         float length = (float) Math.sqrt(Math.pow(start.x - end.x, 2) + Math.pow(start.y - end.y, 2) + Math.pow(start.z - end.z, 2)) + size;
-        render(matrixStack, vertexConsumers, new Vec3d(end.x - start.x, end.y - start.y, end.z - start.z), length, alpha, innerColor, outerColor);
+        render(matrixStack, vertexConsumers, new Vec3d(end.x - start.x, end.y - start.y, end.z - start.z), length, alpha, color);
 
         matrixStack.pop();
     }
@@ -37,7 +39,7 @@ public class LaserRenderer {
     public void render(
             MatrixStack matrixStack, VertexConsumerProvider vertexConsumers,
             Vec3d direction, float length,
-            float alpha, int innerColor, int outerColor
+            float alpha, int color
     ) {
         matrixStack.push();
 
@@ -54,15 +56,7 @@ public class LaserRenderer {
 
         matrixStack.translate(-size / 2, -size / 2, -size / 2);
 
-        matrixStack.push();
-        matrixStack.translate(size/5, size / 5, size / 5);
-
-        matrixStack.scale( 0.6F, 0.6F, ((length - size * 0.4F) / length));
-
-        renderBeam(matrixStack, vertexConsumers, 15728880, size, size, length, alpha, innerColor, TEXTURE_INNER);
-        matrixStack.pop();
-
-        renderBeam(matrixStack, vertexConsumers, (int) (15728880 * 0.8), size, size, length, alpha, outerColor, TEXTURE_OUTER);
+        renderBeam(matrixStack, vertexConsumers, (int) (15728880 * 0.8), size, size, length, alpha, color, TEXTURE);
 
         matrixStack.pop();
         matrixStack.pop();
@@ -73,10 +67,10 @@ public class LaserRenderer {
             float width, float height, float length,
             float alpha, int color, Identifier texture
     ) {
-        drawBox(matrixStack, vertexConsumers, light, width, height, length, alpha, color, texture);
+        drawCross(matrixStack, vertexConsumers, light, width, height, length, alpha, color, texture);
     }
 
-    private void drawBox(
+    private void drawCross(
             MatrixStack matrixStack, VertexConsumerProvider vertexConsumers, int light,
             float width, float height, float length,
             float alpha, int color, Identifier texture
@@ -88,18 +82,20 @@ public class LaserRenderer {
         float g = (color >> 8 & 0xFF) / 255.0f;
         float b = (color & 0xFF) / 255.0f;
 
+        float spacing = width * 0.25F;
+
         // Bottom face
-        addQuad(matrixStack, vertexConsumer, 0, 0, 0, width, 0, 0, width, 0, length, 0, 0, length, light, r, g, b, a, width / 0.25F, length / 0.25F);
+        addQuad(matrixStack, vertexConsumer, 0, spacing, 0, width, spacing, 0, width, spacing, length, 0, spacing, length, light, r, g, b, a, width / 0.25F, length / 0.25F);
         // Top face
-        addQuad(matrixStack, vertexConsumer, 0, height, 0, width, height, 0, width, height, length, 0, height, length, light, r, g, b, a, width / 0.25F, length / 0.25F);
+        addQuad(matrixStack, vertexConsumer, 0, height - spacing, 0, width, height - spacing, 0, width, height - spacing, length, 0, height - spacing, length, light, r, g, b, a, width / 0.25F, length / 0.25F);
         // Front
-        addQuad(matrixStack, vertexConsumer, 0, 0, length, width, 0, length, width, height, length, 0, height, length, light, r, g, b, a, width / 0.25F, height / 0.25F);
+        addQuad(matrixStack, vertexConsumer, 0, 0, length - spacing, width, 0, length - spacing, width, height, length - spacing, 0, height, length - spacing, light, r, g, b, a, width / 0.25F, height / 0.25F);
         // Back
-        addQuad(matrixStack, vertexConsumer, 0, 0, 0, 0, height, 0, width, height, 0, width, 0, 0, light, r, g, b, a, width / 0.25F, height / 0.25F);
+        addQuad(matrixStack, vertexConsumer, 0, 0, spacing, 0, height, spacing, width, height, spacing, width, 0, spacing, light, r, g, b, a, width / 0.25F, height / 0.25F);
         // Left
-        addQuad(matrixStack, vertexConsumer, 0, 0, length, 0, height, length, 0, height, 0, 0, 0, 0, light, r, g, b, a, width / 0.25F, length / 0.25F);
+        addQuad(matrixStack, vertexConsumer, spacing, height, 0, spacing, 0, 0,spacing, 0, length, spacing, height, length, light, r, g, b, a, width / 0.25F, length / 0.25F);
         // Right
-        addQuad(matrixStack, vertexConsumer, width, 0, 0, width, height, 0, width, height, length, width, 0, length, light, r, g, b, a, width / 0.25F, length / 0.25F);
+        addQuad(matrixStack, vertexConsumer, width - spacing, 0, 0, width - spacing, height, 0, width - spacing, height, length, width - spacing, 0, length, light, r, g, b, a, width / 0.25F, length / 0.25F);
     }
 
     private void addQuad(

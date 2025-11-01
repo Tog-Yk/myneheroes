@@ -15,11 +15,12 @@ import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.networking.PlayerAbilitySyncDataPayload;
 import net.togyk.myneheroes.power.Power;
-import net.togyk.myneheroes.util.ScrollData;
 import net.togyk.myneheroes.util.PlayerAbilities;
 import net.togyk.myneheroes.util.PowerData;
+import net.togyk.myneheroes.util.ScrollData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -31,10 +32,16 @@ import java.util.List;
 public abstract class PlayerAbilityMixin implements PlayerAbilities {
     @Shadow public abstract void playSound(SoundEvent sound, float volume, float pitch);
 
+    @Unique
     private List<Ability> abilities = new ArrayList<>();
+    @Unique
     private boolean isDirty = false;
 
+    @Unique
     private int scrolledAbilityOffset = 0;
+
+    @Unique
+    private boolean isHoldingJump = false;
 
 
     @Inject(at = @At("HEAD"), method = "tick")
@@ -321,5 +328,15 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
     @Override
     public void myneheroes$setAbilities(List<Ability> abilities) {
         this.abilities = abilities;
+    }
+
+    @Override
+    public boolean myneheroes$isHoldingJump() {
+        return isHoldingJump;
+    }
+
+    @Override
+    public void myneheroes$setIsHoldingJump(boolean jumping) {
+        this.isHoldingJump = jumping;
     }
 }

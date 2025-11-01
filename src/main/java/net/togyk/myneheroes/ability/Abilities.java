@@ -24,10 +24,7 @@ import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.detailed.*;
 import net.togyk.myneheroes.client.HudType;
-import net.togyk.myneheroes.entity.LaserEntity;
-import net.togyk.myneheroes.entity.ModEntities;
-import net.togyk.myneheroes.entity.StationaryArmorEntity;
-import net.togyk.myneheroes.entity.WebEntity;
+import net.togyk.myneheroes.entity.*;
 import net.togyk.myneheroes.registry.ModRegistries;
 
 import java.util.ArrayList;
@@ -242,9 +239,19 @@ public class Abilities {
         return projectile;
     }));
 
-    public static final PassiveSelectionAbility WEB_SHOOTER = registerAbility(new PassiveSelectionAbility(Identifier.of(MyneHeroes.MOD_ID, "web_shooter"), new Ability.Settings().appearsMultipleTimes(false), List.of(SHOOT_WEB, SHOOT_TASER_WEB)));
+    public static final ShootDiscardableProjectilePassiveAbility<WebSwingEntity> SHOOT_SWING_WEB = registerAbility(new ShootDiscardableProjectilePassiveAbility<>(Identifier.of(MyneHeroes.MOD_ID, "shoot_swing_web"), 2, 5, new Ability.Settings(), (player, passive) -> {
+        Vec3d look = player.getRotationVec(1.0F);
 
-    public static final PassiveSelectionAbility ORGANIC_WEBBING = registerAbility(new PassiveSelectionAbility(Identifier.of(MyneHeroes.MOD_ID, "organic_webbing"), new Ability.Settings().appearsMultipleTimes(false), List.of(SHOOT_WEB, SHOOT_TASER_WEB)));
+        WebSwingEntity projectile = new WebSwingEntity(player.getWorld(), player);
+        projectile.setPosition(player.getX(), player.getEyeY() - projectile.getHeight(), player.getZ());
+        projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
+
+        return projectile;
+    }));
+
+    public static final PassiveSelectionAbility WEB_SHOOTER = registerAbility(new PassiveSelectionAbility(Identifier.of(MyneHeroes.MOD_ID, "web_shooter"), new Ability.Settings().appearsMultipleTimes(false), List.of(SHOOT_WEB, SHOOT_SWING_WEB, SHOOT_TASER_WEB)));
+
+    public static final PassiveSelectionAbility ORGANIC_WEBBING = registerAbility(new PassiveSelectionAbility(Identifier.of(MyneHeroes.MOD_ID, "organic_webbing"), new Ability.Settings().appearsMultipleTimes(false), List.of(SHOOT_WEB, SHOOT_SWING_WEB)));
 
     public static final RageAbility RAGE = registerAbility(new RageAbility(Identifier.of(MyneHeroes.MOD_ID, "rage"), new Ability.Settings().appearsMultipleTimes(false), 0.25F));
 

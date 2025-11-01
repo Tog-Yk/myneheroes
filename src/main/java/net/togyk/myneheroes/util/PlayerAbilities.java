@@ -23,4 +23,7 @@ public interface PlayerAbilities {
 
 
     void myneheroes$setAbilities(List<Ability> abilities);
+
+    void myneheroes$setIsHoldingJump(boolean jumping);
+    boolean myneheroes$isHoldingJump();
 }
