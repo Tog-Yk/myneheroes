@@ -15,6 +15,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.Item.custom.DyeableItem;
 import net.togyk.myneheroes.Item.custom.LightableItem;
+import net.togyk.myneheroes.Item.custom.UpgradableItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.*;
 import net.togyk.myneheroes.block.entity.ArmorDyeingBlockEntity;
@@ -40,6 +41,7 @@ public class ModMessages {
     public static final Identifier PLAYER_ABILITY_SYNC_DATA_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "ability_sync_data");
     public static final Identifier PLAYER_ABILITY_SCROLLED_SYNC_DATA_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "ability_scrolled_sync_data");
     public static final Identifier PLAYER_JUMPING_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "player_jumping");
+    public static final Identifier SAVE_UPGRADE_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "save_upgrade");
 
     public static void registerServerMessages() {
         PayloadTypeRegistry.playC2S().register(AbilityKeybindPayload.ID, AbilityKeybindPayload.CODEC);
@@ -257,6 +259,18 @@ public class ModMessages {
         ServerPlayNetworking.registerGlobalReceiver(PlayerJumpWatcherPayload.ID, (payload, context) -> {
             context.server().execute(() -> {
                 ((PlayerAbilities) context.player()).myneheroes$setIsHoldingJump(payload.jumping());
+            });
+        });
+
+        PayloadTypeRegistry.playC2S().register(SaveUpgradePayload.ID, SaveUpgradePayload.CODEC);
+
+        ServerPlayNetworking.registerGlobalReceiver(SaveUpgradePayload.ID, (payload, context) -> {
+            context.server().execute(() -> {
+               PlayerEntity player = context.player();
+               ItemStack stack = player.getInventory().getStack(payload.slot());
+               if (stack.getItem() instanceof UpgradableItem upgradable) {
+                   upgradable.saveUpgrade(stack, payload.upgrade());
+               }
             });
         });
     }

@@ -1,5 +1,6 @@
 package net.togyk.myneheroes.Item.custom;
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
@@ -22,6 +23,7 @@ import net.minecraft.world.World;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
+import net.togyk.myneheroes.networking.SaveUpgradePayload;
 import net.togyk.myneheroes.upgrade.AbilityUpgrade;
 import net.togyk.myneheroes.upgrade.Upgrade;
 import net.togyk.myneheroes.util.AbilityUtil;
@@ -153,6 +155,8 @@ public class AdvancedArmorItem extends ArmorItem implements AbilityHolding, Upgr
     public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
         for (Upgrade upgrade : this.getUpgrades(stack)) {
             if (upgrade.onClicked(stack, otherStack, slot, clickType, player, cursorStackReference)) {
+                //sync to server
+                ClientPlayNetworking.send(new SaveUpgradePayload(slot.getIndex(), upgrade));
                 return true;
             }
         }
