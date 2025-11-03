@@ -15,6 +15,7 @@ public class CrossBeamRenderer {
     public final Identifier TEXTURE;
 
     private float size = 0.25F;
+    private float textureSize = 0.25F;
 
     public CrossBeamRenderer(Identifier texture) {
         TEXTURE = texture;
@@ -23,13 +24,13 @@ public class CrossBeamRenderer {
     public void render(
             MatrixStack matrixStack, VertexConsumerProvider vertexConsumers,
             Vec3d start, Vec3d end,
-            float alpha, int color
+            int light, float alpha, int color
     ) {
         matrixStack.push();
         matrixStack.translate(start.getX(), start.getY(), start.getZ());
 
         float length = (float) Math.sqrt(Math.pow(start.x - end.x, 2) + Math.pow(start.y - end.y, 2) + Math.pow(start.z - end.z, 2)) + size;
-        render(matrixStack, vertexConsumers, new Vec3d(end.x - start.x, end.y - start.y, end.z - start.z), length, alpha, color);
+        render(matrixStack, vertexConsumers, new Vec3d(end.x - start.x, end.y - start.y, end.z - start.z), length, light, alpha, color);
 
         matrixStack.pop();
     }
@@ -39,7 +40,7 @@ public class CrossBeamRenderer {
     public void render(
             MatrixStack matrixStack, VertexConsumerProvider vertexConsumers,
             Vec3d direction, float length,
-            float alpha, int color
+            int light, float alpha, int color
     ) {
         matrixStack.push();
 
@@ -56,7 +57,7 @@ public class CrossBeamRenderer {
 
         matrixStack.translate(-size / 2, -size / 2, -size / 2);
 
-        renderBeam(matrixStack, vertexConsumers, (int) (15728880 * 0.8), size, size, length, alpha, color, TEXTURE);
+        renderBeam(matrixStack, vertexConsumers, light, size, size, length, alpha, color, TEXTURE);
 
         matrixStack.pop();
         matrixStack.pop();
@@ -85,17 +86,17 @@ public class CrossBeamRenderer {
         float spacing = width * 0.25F;
 
         // Bottom face
-        addQuad(matrixStack, vertexConsumer, 0, spacing, 0, width, spacing, 0, width, spacing, length, 0, spacing, length, light, r, g, b, a, width / 0.25F, length / 0.25F);
+        addQuad(matrixStack, vertexConsumer, 0, spacing, 0, width, spacing, 0, width, spacing, length, 0, spacing, length, light, r, g, b, a, width / getTextureSize(), length / getTextureSize());
         // Top face
-        addQuad(matrixStack, vertexConsumer, 0, height - spacing, 0, width, height - spacing, 0, width, height - spacing, length, 0, height - spacing, length, light, r, g, b, a, width / 0.25F, length / 0.25F);
+        addQuad(matrixStack, vertexConsumer, 0, height - spacing, 0, width, height - spacing, 0, width, height - spacing, length, 0, height - spacing, length, light, r, g, b, a, width / getTextureSize(), length / getTextureSize());
         // Front
-        addQuad(matrixStack, vertexConsumer, 0, 0, length - spacing, width, 0, length - spacing, width, height, length - spacing, 0, height, length - spacing, light, r, g, b, a, width / 0.25F, height / 0.25F);
+        addQuad(matrixStack, vertexConsumer, 0, 0, length - spacing, width, 0, length - spacing, width, height, length - spacing, 0, height, length - spacing, light, r, g, b, a, width / getTextureSize(), height / getTextureSize());
         // Back
-        addQuad(matrixStack, vertexConsumer, 0, 0, spacing, 0, height, spacing, width, height, spacing, width, 0, spacing, light, r, g, b, a, width / 0.25F, height / 0.25F);
+        addQuad(matrixStack, vertexConsumer, 0, 0, spacing, 0, height, spacing, width, height, spacing, width, 0, spacing, light, r, g, b, a, width / getTextureSize(), height / getTextureSize());
         // Left
-        addQuad(matrixStack, vertexConsumer, spacing, height, 0, spacing, 0, 0,spacing, 0, length, spacing, height, length, light, r, g, b, a, width / 0.25F, length / 0.25F);
+        addQuad(matrixStack, vertexConsumer, spacing, height, 0, spacing, 0, 0,spacing, 0, length, spacing, height, length, light, r, g, b, a, width / getTextureSize(), length / getTextureSize());
         // Right
-        addQuad(matrixStack, vertexConsumer, width - spacing, 0, 0, width - spacing, height, 0, width - spacing, height, length, width - spacing, 0, length, light, r, g, b, a, width / 0.25F, length / 0.25F);
+        addQuad(matrixStack, vertexConsumer, width - spacing, 0, 0, width - spacing, height, 0, width - spacing, height, length, width - spacing, 0, length, light, r, g, b, a, width / getTextureSize(), length / getTextureSize());
     }
 
     private void addQuad(
@@ -142,5 +143,13 @@ public class CrossBeamRenderer {
 
     public float getSize() {
         return size;
+    }
+
+    public void setTextureSize(float size) {
+        this.textureSize = size;
+    }
+
+    public float getTextureSize() {
+        return textureSize;
     }
 }

@@ -1,10 +1,16 @@
 package net.togyk.myneheroes.upgrade;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.Dynamic;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.screen.slot.Slot;
@@ -12,11 +18,28 @@ import net.minecraft.util.ClickType;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.registry.ModRegistries;
+import net.togyk.myneheroes.util.AbilityUtil;
 
 import java.util.List;
 import java.util.Optional;
 
 public abstract class Upgrade {
+    public static final Codec<Upgrade> CODEC = Codec.PASSTHROUGH
+            .xmap(
+                    dynamic -> AbilityUtil.nbtToUpgrade((NbtCompound) dynamic.convert(NbtOps.INSTANCE).getValue()),
+                    upgrade -> new Dynamic<>(NbtOps.INSTANCE, upgrade.writeNbt(new NbtCompound()))
+            );
+
+    public static final PacketCodec<ByteBuf, Upgrade> PACKET_CODEC = new PacketCodec<>() {
+        public Upgrade decode(ByteBuf buf) {
+            return AbilityUtil.nbtToUpgrade(PacketCodecs.NBT_COMPOUND.decode(buf));
+        }
+
+        public void encode(ByteBuf buf, Upgrade upgrade) {
+            PacketCodecs.NBT_COMPOUND.encode(buf, upgrade.writeNbt(new NbtCompound()));
+        }
+    };
+
     protected final Identifier id;
 
     private ItemStack holderStack;

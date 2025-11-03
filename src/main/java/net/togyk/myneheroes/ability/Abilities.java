@@ -239,7 +239,7 @@ public class Abilities {
         return projectile;
     }));
 
-    public static final ShootDiscardableProjectilePassiveAbility<WebSwingEntity> SHOOT_SWING_WEB = registerAbility(new ShootDiscardableProjectilePassiveAbility<>(Identifier.of(MyneHeroes.MOD_ID, "shoot_swing_web"), 2, 5, new Ability.Settings(), (player, passive) -> {
+    public static final ShootDiscardableProjectilePassiveAbility<WebSwingEntity> SHOOT_SWING_WEB = registerAbility(new ShootDiscardableProjectilePassiveAbility<>(Identifier.of(MyneHeroes.MOD_ID, "shoot_swing_web"), 2, 2, new Ability.Settings(), (player, passive) -> {
         Vec3d look = player.getRotationVec(1.0F);
 
         WebSwingEntity projectile = new WebSwingEntity(player.getWorld(), player);
