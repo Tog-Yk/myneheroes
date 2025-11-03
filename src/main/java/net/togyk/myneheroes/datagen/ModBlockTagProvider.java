@@ -121,5 +121,9 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(Blocks.DEEPSLATE)
                 .add(Blocks.BLACKSTONE)
         ;
+
+        getOrCreateTagBuilder(ModTags.Blocks.RADIATION_GOES_THROUGH)
+                .add(Blocks.AIR)
+        ;
     }
 }

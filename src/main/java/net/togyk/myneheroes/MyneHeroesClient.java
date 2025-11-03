@@ -11,10 +11,10 @@ import net.togyk.myneheroes.Item.color.ModColorProvider;
 import net.togyk.myneheroes.block.ModBlockEntityTypes;
 import net.togyk.myneheroes.block.ModBlocks;
 import net.togyk.myneheroes.client.AbilityOverlay;
-import net.togyk.myneheroes.client.render.ability.RenderEvent;
 import net.togyk.myneheroes.client.render.block_entity.MeteorRadarBlockEntityRenderer;
 import net.togyk.myneheroes.client.render.entity.ModEntityRenderers;
 import net.togyk.myneheroes.client.screen.ModHandledScreens;
+import net.togyk.myneheroes.event.ModClientEvents;
 import net.togyk.myneheroes.keybind.ModKeyBinds;
 import net.togyk.myneheroes.keybind.ModKeybindingHelper;
 import net.togyk.myneheroes.networking.ModMessages;
@@ -40,7 +40,7 @@ public class MyneHeroesClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.KRYPTONITE_CLUSTER, RenderLayer.getCutout());
         BlockEntityRendererFactories.register(ModBlockEntityTypes.METEOR_RADAR_BLOCK_ENTITY, MeteorRadarBlockEntityRenderer::new);
 
-        RenderEvent.registerRenderEvent();
+        ModClientEvents.registerEvents();
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.ELECTRICITY_PARTICLE, ElectricityParticle.Factory::new);
     }

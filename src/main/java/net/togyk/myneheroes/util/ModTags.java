@@ -23,6 +23,8 @@ public class ModTags {
         public static final TagKey<Block> VIBRANIUM_METEOR_CRUST_BLOCKS = createTag("vibranium_meteor_crust_blocks");
         public static final TagKey<Block> VIBRANIUM_METEOR_CORE_BLOCKS = createTag("vibranium_meteor_core_blocks");
 
+        public static final TagKey<Block> RADIATION_GOES_THROUGH = createTag("radiation_goes_trough");
+
         private static TagKey<Block> createTag(String name) {
             return TagKey.of(RegistryKeys.BLOCK, Identifier.of(MyneHeroes.MOD_ID, name));
         }
