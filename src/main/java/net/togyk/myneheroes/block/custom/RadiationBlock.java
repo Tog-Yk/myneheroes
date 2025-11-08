@@ -67,30 +67,38 @@ public class RadiationBlock extends Block {
     }
 
     public void radiateEntitiesInRangeUsingDFS(World world, BlockPos origin, int range) {
-        radiateEntitiesInRangeUsingDFS(world, origin, origin, range, new HashSet<>());
+        radiateEntitiesInRangeUsingDFS(world, origin, origin, range, new HashSet<>(), new HashSet<>());
     }
 
-    public void radiateEntitiesInRangeUsingDFS(World world, BlockPos origin, BlockPos pos, int range, Set<BlockPos> visited) {
+    public void radiateEntitiesInRangeUsingDFS(World world, BlockPos origin, BlockPos pos, int range, Set<BlockPos> visited, Set<LivingEntity> visitedEntities) {
         visited.add(pos);
-        radiateEntitiesInRange(world, pos, 0);
+        radiateEntitiesInRange(world, pos, 0, visitedEntities);
         for (Direction dir : Direction.values()) {
             BlockPos next = pos.offset(dir);
             if (next.isWithinDistance(origin, range) && !visited.contains(next) && world.getBlockState(next).isIn(ModTags.Blocks.RADIATION_GOES_THROUGH)) {
-                radiateEntitiesInRangeUsingDFS(world, origin, next, range, visited);
+                radiateEntitiesInRangeUsingDFS(world, origin, next, range, visited, visitedEntities);
             }
         }
     }
 
     public void radiateEntitiesInRange(World world, BlockPos pos, int range) {
+        radiateEntitiesInRange(world, pos, range, new HashSet<>());
+    }
+
+    public void radiateEntitiesInRange(World world, BlockPos pos, int range, Set<LivingEntity> excludedEntities) {
         Box area = new Box(pos).expand(range); // radiation radius
         List<LivingEntity> entities = world.getEntitiesByClass(LivingEntity.class, area, e -> true);
 
         for (LivingEntity entity : entities) {
             // Entity is exposed to radiation
-            if (this.canGiveEffect(entity)) {
-                entity.addStatusEffect(new StatusEffectInstance(
-                        this.getEffect(), 72, 0, true, true
-                ));
+            if (!excludedEntities.contains(entity)) {
+                this.onEntityFound(entity);
+                if (this.canGiveEffect(entity)) {
+                    entity.addStatusEffect(new StatusEffectInstance(
+                            this.getEffect(), 72, 0, true, true
+                    ));
+                }
+                excludedEntities.add(entity);
             }
         }
     }
@@ -101,5 +109,8 @@ public class RadiationBlock extends Block {
 
     public int getRange() {
         return 5;
+    }
+
+    public void onEntityFound(LivingEntity entity) {
     }
 }
