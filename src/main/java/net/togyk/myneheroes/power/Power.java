@@ -136,6 +136,11 @@ public class Power {
         return settings.canFly;
     }
 
+
+    public Text getInjectionName() {
+        return this.settings.injectionName;
+    }
+
     public int getColor() {
         return color;
     }
@@ -189,6 +194,8 @@ public class Power {
         public boolean isDampenedByRunes = false;
         public boolean isDampenedByMetaDampeners = false;
 
+        public Text injectionName;
+
         public Settings() {
         }
 
@@ -235,6 +242,21 @@ public class Power {
 
         public Power.Settings canWallCrawl() {
             this.canWallCrawl = true;
+            return this;
+        }
+
+        public Power.Settings InjectionName(Text text) {
+            this.injectionName = text;
+            return this;
+        }
+
+        public Power.Settings TranslatableInjectionName(String key) {
+            this.injectionName = Text.translatable(key);
+            return this;
+        }
+
+        public Power.Settings InjectionName(String text) {
+            this.injectionName = Text.literal(text);
             return this;
         }
     }

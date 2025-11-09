@@ -45,7 +45,7 @@ public class Powers {
     ));
 
     public static Power SUPER_SOLDIER = registerPower(new Power(Identifier.of(MyneHeroes.MOD_ID, "super_soldier"), 0xFF73DAD6, List.of(),
-            new Power.Settings().damageMultiplier(1.50).armor(5),
+            new Power.Settings().TranslatableInjectionName("item.myneheroes.super_soldier_serum").damageMultiplier(1.50).armor(5),
             new Power.attributeModifiers()
                     .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, Identifier.of(MyneHeroes.MOD_ID, "super_soldier.speed"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> 0.25D)
                     .addAttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH, Identifier.of(MyneHeroes.MOD_ID, "super_soldier.health"), EntityAttributeModifier.Operation.ADD_VALUE, () -> 4.0D)

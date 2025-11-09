@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "myneheroes:power_injection"
+    },
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "minecraft:dragon_breath"
+    },
+    {
+      "item": "minecraft:ghast_tear"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "myneheroes:power_injection",
+    "components": {
+      "myneheroes:power": {
+        "id": "myneheroes:super_soldier"
+      }
+    }
+  }
+}

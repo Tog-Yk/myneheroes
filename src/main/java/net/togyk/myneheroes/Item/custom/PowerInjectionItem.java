@@ -117,6 +117,19 @@ public class PowerInjectionItem extends Item implements UpgradableItem {
     }
 
     @Override
+    public Text getName(ItemStack stack) {
+        Power power = this.getPower(stack);
+        if (power != null) {
+            Text name = power.getInjectionName();
+            if (name != null) {
+                return name;
+            }
+        }
+        //default
+        return super.getName(stack);
+    }
+
+    @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (user.isSneaking()) {
             this.use(user.getWorld(),user,hand);
