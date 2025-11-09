@@ -18,7 +18,7 @@ public class Powers {
     }
 
     public static KryptonianPower KRYPTONIAN = registerPower(new KryptonianPower(Identifier.of(MyneHeroes.MOD_ID, "kryptonian"), 10000F, 0xFF9CDB94, List.of(Abilities.FROST_BREATH, Abilities.LASER_EYES),
-            new Power.Settings().damageMultiplier(5.00).armor(10.0F).textureInterval(0.25).flyingUnlocksAt(0.05).dampenedByKryptonite(),
+            new Power.Settings().damageMultiplier(2.50).armor(10.0F).textureInterval(0.25).flyingUnlocksAt(0.05).dampenedByKryptonite(),
             new Power.attributeModifiers()
                     .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, Identifier.of(MyneHeroes.MOD_ID, "kryptonian.speed"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> 0.6D)
                     .addAttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH, Identifier.of(MyneHeroes.MOD_ID, "kryptonian.health"), EntityAttributeModifier.Operation.ADD_VALUE, () -> 20.0D)
@@ -31,17 +31,24 @@ public class Powers {
     ));
 
     public static Power SPIDER = registerPower(new Power(Identifier.of(MyneHeroes.MOD_ID, "spider"), 0xFFFF3A3A, List.of(Abilities.SPIDER_SENSE),
-            new Power.Settings().damageMultiplier(3.50).armor(3).canWallCrawl(),
+            new Power.Settings().damageMultiplier(1.55).armor(3).canWallCrawl(),
             new Power.attributeModifiers().addAttributeModifier(EntityAttributes.GENERIC_FALL_DAMAGE_MULTIPLIER, Identifier.of(MyneHeroes.MOD_ID, "spider.fall_damage"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> -1.0D)
     ));
     public static Power SPIDER_ORGANIC_WEBBING = registerPower(new Power(Identifier.of(MyneHeroes.MOD_ID, "spider_organic_webbing"), 0xFFFF3A3A, List.of(Abilities.SPIDER_SENSE, Abilities.ORGANIC_WEBBING),
-            new Power.Settings().damageMultiplier(3.50).armor(3).canWallCrawl(),
+            new Power.Settings().damageMultiplier(1.55).armor(3).canWallCrawl(),
             new Power.attributeModifiers().addAttributeModifier(EntityAttributes.GENERIC_FALL_DAMAGE_MULTIPLIER, Identifier.of(MyneHeroes.MOD_ID, "spider_organic_webbing.fall_damage"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> -1.0D)
     ));
 
-    public static Power MUTANT_REGENERATION = registerPower(new Power(Identifier.of(MyneHeroes.MOD_ID, "mutant_regeneration"), 0xFFFF3A3A, List.of(Abilities.RAGE, Abilities.BONE_CLAWS, Abilities.ADAMANTIUM_CLAWS, Abilities.IMMORTALITY),
-            new Power.Settings().damageMultiplier(3.50).armor(3),
+    public static Power MUTANT_REGENERATION = registerPower(new Power(Identifier.of(MyneHeroes.MOD_ID, "mutant_regeneration"), 0xFF0BAA0B, List.of(Abilities.RAGE, Abilities.BONE_CLAWS, Abilities.ADAMANTIUM_CLAWS, Abilities.IMMORTALITY),
+            new Power.Settings().damageMultiplier(1.25).armor(3),
             new Power.attributeModifiers()
+    ));
+
+    public static Power SUPER_SOLDIER = registerPower(new Power(Identifier.of(MyneHeroes.MOD_ID, "super_soldier"), 0xFF73DAD6, List.of(),
+            new Power.Settings().damageMultiplier(1.50).armor(5),
+            new Power.attributeModifiers()
+                    .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, Identifier.of(MyneHeroes.MOD_ID, "super_soldier.speed"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> 0.25D)
+                    .addAttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH, Identifier.of(MyneHeroes.MOD_ID, "super_soldier.health"), EntityAttributeModifier.Operation.ADD_VALUE, () -> 4.0D)
     ));
 
     public static <T extends Power> T registerPower(T power) {
