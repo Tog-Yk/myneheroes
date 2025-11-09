@@ -190,8 +190,9 @@ public class ModEvents {
                                 player.dropItem(resultStack, false);
                             }
                         }
+
+                        return ActionResult.SUCCESS;
                     }
-                    return ActionResult.SUCCESS;
                 }
             }
             return ActionResult.PASS;
