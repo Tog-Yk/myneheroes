@@ -7,14 +7,20 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.togyk.myneheroes.Item.custom.PowerInjectionItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.block.ModBlocks;
+import net.togyk.myneheroes.power.Power;
+import net.togyk.myneheroes.registry.ModRegistries;
 import net.togyk.myneheroes.resourcepack.ModResourcePacks;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModItemGroups {
     public static final ItemGroup MYNEHEROES_GROUP = Registry.register(Registries.ITEM_GROUP,
             Identifier.of(MyneHeroes.MOD_ID, "myneheroes"),
-            FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.VIBRANIUM_INGOT))
+            FabricItemGroup.builder().icon(ModItems.VIBRANIUM_INGOT::getDefaultStack)
                     .displayName(Text.translatable("itemgroup.myneheroes.myneheroes"))
                     .entries((displayContext, entries) -> {
                         entries.add(ModItems.VIBRANIUM_INGOT);
@@ -98,7 +104,7 @@ public class ModItemGroups {
 
     public static final ItemGroup MYNEHEROES_ARMOR_GROUP = Registry.register(Registries.ITEM_GROUP,
             Identifier.of(MyneHeroes.MOD_ID, "myneheroes_armor"),
-            FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.VIBRANIUM_CHESTPLATE))
+            FabricItemGroup.builder().icon(ModItems.VIBRANIUM_CHESTPLATE::getDefaultStack)
                     .displayName(Text.translatable("itemgroup.myneheroes.myneheroes_armor"))
                     .entries((displayContext, entries) -> {
                         entries.add(ModItems.VIBRANIUM_HELMET);
@@ -147,6 +153,23 @@ public class ModItemGroups {
                         entries.add(ModItems.SPEEDSTER_NETHERITE_CHESTPLATE);
                         entries.add(ModItems.SPEEDSTER_NETHERITE_LEGGINGS);
                         entries.add(ModItems.SPEEDSTER_NETHERITE_BOOTS);
+
+                    }).build());
+
+    public static final ItemGroup MYNEHEROES_POWER_GROUP = Registry.register(Registries.ITEM_GROUP,
+            Identifier.of(MyneHeroes.MOD_ID, "myneheroes_power"),
+            FabricItemGroup.builder().icon(ModItems.POWER_INJECTION::getDefaultStack)
+                    .displayName(Text.translatable("itemgroup.myneheroes.myneheroes_power"))
+                    .entries((displayContext, entries) -> {
+                        List<ItemStack> addedStacks = new ArrayList<>();
+                        for (Power power : ModRegistries.POWER.stream().toList()) {
+                            PowerInjectionItem item = (PowerInjectionItem) ModItems.POWER_INJECTION;
+                            ItemStack stack = item.getDefaultStack();
+
+                            item.setPower(stack, power);
+
+                            entries.add(stack);
+                        }
 
                     }).build());
 
