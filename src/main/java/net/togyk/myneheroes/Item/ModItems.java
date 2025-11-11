@@ -34,8 +34,8 @@ public class ModItems {
     public static final Item URANIUM_INGOT = registerItem("uranium_ingot", new RadiationItem(new Item.Settings()));
     public static final Item RAW_URANIUM = registerItem("raw_uranium", new RadiationItem(new Item.Settings()));
 
-    public static final Item IRON_SUIT_TEMPLATE = registerItem("iron_suit_template",new Item(new Item.Settings()));
-    public static final Item SPEEDSTER_SUIT_TEMPLATE = registerItem("speedster_suit_template",new Item(new Item.Settings()));
+    public static final Item IRON_SUIT_TEMPLATE = registerItem("iron_suit_template", new ModSmithingTemplateItem(true, Identifier.of(MyneHeroes.MOD_ID, "iron_suit"), new Item.Settings()));
+    public static final Item SPEEDSTER_SUIT_TEMPLATE = registerItem("speedster_suit_template", new ModSmithingTemplateItem(true, Identifier.of(MyneHeroes.MOD_ID, "speedster_suit"), new Item.Settings()));
 
     public static final Item ARC_REACTOR = registerItem("arc_reactor",new ReactorItem(4000, 3200, 1600, new Item.Settings().maxCount(1)));
 
