@@ -42,5 +42,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.METEOR_RADAR);
 
         addDrop(ModBlocks.ARMOR_FABRICATOR);
+
+        addDrop(ModBlocks.HEART_SHAPED_HERB);
     }
 }

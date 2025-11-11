@@ -78,6 +78,9 @@ public class ModItems {
     public static final Item COLORING_COMPOUND = registerItem("coloring_compound",
             new SimpleDyeableItem(-1, new Item.Settings()));
 
+    public static final Item HEART_SHAPED_HERB_MIX = registerItem("heart_shaped_herb_mix",
+            new ReversablePowerDrinkItem(Identifier.of(MyneHeroes.MOD_ID, "avatar_of_bast"), List.of(), new Item.Settings().recipeRemainder(Items.BOWL).maxCount(1)));
+
     public static final Item BONE_CLAWS = registerItem("bone_claws",
             new TemporaryWeapon(new Item.Settings().maxCount(1).attributeModifiers(TemporaryWeapon.createAttributeModifiers(4, -1.2F))));
     public static final Item ADAMANTIUM_CLAWS = registerItem("adamantium_claws",

@@ -38,6 +38,9 @@ public class MyneHeroesClient implements ClientModInitializer {
         ModPredicates.registerModPredicates();
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.KRYPTONITE_CLUSTER, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.HEART_SHAPED_HERB, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.POTTED_HEART_SHAPED_HERB, RenderLayer.getCutout());
+
         BlockEntityRendererFactories.register(ModBlockEntityTypes.METEOR_RADAR_BLOCK_ENTITY, MeteorRadarBlockEntityRenderer::new);
 
         ModClientEvents.registerEvents();

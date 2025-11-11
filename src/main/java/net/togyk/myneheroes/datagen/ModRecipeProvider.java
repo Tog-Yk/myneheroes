@@ -274,6 +274,12 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         FabricRecipeProvider.conditionsFromItem(Items.LEATHER))
                 .offerTo(exporter);
 
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.HEART_SHAPED_HERB_MIX)
+                .input(Items.BOWL)
+                .input(ModBlocks.HEART_SHAPED_HERB)
+                .criterion(FabricRecipeProvider.hasItem(ModBlocks.HEART_SHAPED_HERB),
+                        FabricRecipeProvider.conditionsFromItem(ModBlocks.HEART_SHAPED_HERB))
+                .offerTo(exporter);
 
         //simple armor recipes
         //vibranium

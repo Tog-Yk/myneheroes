@@ -41,6 +41,8 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleState(ModBlocks.ARMOR_LIGHT_LEVELING_STATION);
         blockStateModelGenerator.registerSimpleState(ModBlocks.UPGRADE_STATION);
         blockStateModelGenerator.registerSimpleState(ModBlocks.ARMOR_FABRICATOR);
+
+        blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.HEART_SHAPED_HERB, ModBlocks.POTTED_HEART_SHAPED_HERB, BlockStateModelGenerator.TintType.NOT_TINTED);
     }
 
     @Override
@@ -75,6 +77,8 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.TAKE_OFF_SUIT_UPGRADE, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.WEB_SHOOTER_UPGRADE, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.HEART_SHAPED_HERB_MIX, Models.GENERATED);
 
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_HELMET));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_CHESTPLATE));

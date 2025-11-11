@@ -43,19 +43,20 @@ public class PowerInjectionItem extends Item implements UpgradableItem {
             Power power = this.getPower(stack);
 
             List<Power> powers = PowerData.getPowers(player);
+            List<Power> injectablePowers = powers.stream().filter(Power::isInjectable).toList();
             List<Identifier> powerIds = new ArrayList<>();
-            if (!powers.isEmpty()) {
-                powerIds = powers.stream().map(Power::getId).toList();
+            if (!injectablePowers.isEmpty()) {
+                powerIds = injectablePowers.stream().map(Power::getId).toList();
             }
-            if (power == null && !powers.isEmpty()) {
+            if (power == null && !injectablePowers.isEmpty()) {
                 int scrolled = ScrollData.getScrolledPowersOffset(player);
-                if (powers.size() > scrolled) {
-                    Power usersPower = powers.get(scrolled);
+                if (injectablePowers.size() > scrolled) {
+                    Power usersPower = injectablePowers.get(scrolled);
                     this.setPower(stack, usersPower);
                     PowerData.removePower(player, usersPower);
                 }
             } else if (power != null && !powerIds.contains(power.id)) {
-                if (world.getGameRules().getBoolean(ModGamerules.GIVE_POWERS_ABOVE_LIMIT) || powers.size() < world.getGameRules().getInt(ModGamerules.POWER_LIMIT)) {
+                if (world.getGameRules().getBoolean(ModGamerules.GIVE_POWERS_ABOVE_LIMIT) || injectablePowers.size() < world.getGameRules().getInt(ModGamerules.POWER_LIMIT)) {
                     PowerData.addPower(player, power);
                     this.setPower(stack, null);
                 }

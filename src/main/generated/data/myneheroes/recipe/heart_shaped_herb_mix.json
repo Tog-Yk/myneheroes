@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "myneheroes:heart_shaped_herb"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "myneheroes:heart_shaped_herb_mix"
+  }
+}

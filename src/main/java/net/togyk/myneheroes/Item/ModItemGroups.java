@@ -14,9 +14,6 @@ import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.registry.ModRegistries;
 import net.togyk.myneheroes.resourcepack.ModResourcePacks;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ModItemGroups {
     public static final ItemGroup MYNEHEROES_GROUP = Registry.register(Registries.ITEM_GROUP,
             Identifier.of(MyneHeroes.MOD_ID, "myneheroes"),
@@ -95,6 +92,9 @@ public class ModItemGroups {
 
                         entries.add(ModBlocks.ARMOR_FABRICATOR);
 
+                        entries.add(ModBlocks.HEART_SHAPED_HERB);
+                        entries.add(ModItems.HEART_SHAPED_HERB_MIX);
+
                         //only add when datapack is enabled
                         //shibashi's shenanigans items
                         if (ModResourcePacks.SHIBASHIS_SHENANIGANS.isActive()) {
@@ -161,16 +161,18 @@ public class ModItemGroups {
             FabricItemGroup.builder().icon(ModItems.POWER_INJECTION::getDefaultStack)
                     .displayName(Text.translatable("itemgroup.myneheroes.myneheroes_power"))
                     .entries((displayContext, entries) -> {
-                        List<ItemStack> addedStacks = new ArrayList<>();
                         for (Power power : ModRegistries.POWER.stream().toList()) {
-                            PowerInjectionItem item = (PowerInjectionItem) ModItems.POWER_INJECTION;
-                            ItemStack stack = item.getDefaultStack();
+                            if (power.isInjectable()) {
+                                PowerInjectionItem item = (PowerInjectionItem) ModItems.POWER_INJECTION;
+                                ItemStack stack = item.getDefaultStack();
 
-                            item.setPower(stack, power);
+                                item.setPower(stack, power);
 
-                            entries.add(stack);
+                                entries.add(stack);
+                            }
                         }
 
+                        entries.add(ModItems.HEART_SHAPED_HERB_MIX);
                     }).build());
 
 

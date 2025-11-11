@@ -51,6 +51,13 @@ public class Powers {
                     .addAttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH, Identifier.of(MyneHeroes.MOD_ID, "super_soldier.health"), EntityAttributeModifier.Operation.ADD_VALUE, () -> 4.0D)
     ));
 
+    public static Power AVATAR_OF_BAST = registerPower(new Power(Identifier.of(MyneHeroes.MOD_ID, "avatar_of_bast"), 0xFF9585E6, List.of(),
+            new Power.Settings().damageMultiplier(1.50).armor(5).notInjectable(),
+            new Power.attributeModifiers()
+                    .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, Identifier.of(MyneHeroes.MOD_ID, "avatar_of_bast.speed"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> 0.25D)
+                    .addAttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH, Identifier.of(MyneHeroes.MOD_ID, "avatar_of_bast.health"), EntityAttributeModifier.Operation.ADD_VALUE, () -> 4.0D)
+    ));
+
     public static <T extends Power> T registerPower(T power) {
         return Registry.register(ModRegistries.POWER, power.id, power);
     }

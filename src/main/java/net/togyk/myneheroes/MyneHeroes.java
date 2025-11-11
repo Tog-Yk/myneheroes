@@ -2,6 +2,7 @@ package net.togyk.myneheroes;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -83,6 +84,8 @@ public class MyneHeroes implements ModInitializer {
         ModRecipes.registerRecipes();
 
         ModResourcePacks.registerResourcePacks();
+
+        ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(ModBlocks.HEART_SHAPED_HERB, 0.35f);
     }
     /**
      * Searches the player's inventory for the first matching item.

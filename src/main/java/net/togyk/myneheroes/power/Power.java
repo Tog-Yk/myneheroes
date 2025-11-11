@@ -137,6 +137,10 @@ public class Power {
     }
 
 
+    public boolean isInjectable() {
+        return this.settings.injectable;
+    }
+
     public Text getInjectionName() {
         return this.settings.injectionName;
     }
@@ -194,6 +198,7 @@ public class Power {
         public boolean isDampenedByRunes = false;
         public boolean isDampenedByMetaDampeners = false;
 
+        public boolean injectable = true;
         public Text injectionName;
 
         public Settings() {
@@ -242,6 +247,11 @@ public class Power {
 
         public Power.Settings canWallCrawl() {
             this.canWallCrawl = true;
+            return this;
+        }
+
+        public Power.Settings notInjectable() {
+            this.injectable = false;
             return this;
         }
 

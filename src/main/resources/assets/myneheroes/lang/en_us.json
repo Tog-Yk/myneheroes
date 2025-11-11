@@ -37,6 +37,7 @@
   "item.myneheroes.adamantium_claws": "Adamantium Claws",
 
   "item.myneheroes.super_soldier_serum": "Super Soldier Serum",
+  "item.myneheroes.heart_shaped_herb_mix": "Heart Shaped Herb Mix",
 
   "item.myneheroes.mechanical_hud_upgrade": "Hud Upgrade",
   "item.myneheroes.speedster_hud_upgrade": "Hud Upgrade",
@@ -125,12 +126,15 @@
 
   "block.myneheroes.armor_fabricator": "Armor Fabricator",
 
+  "block.myneheroes.heart_shaped_herb": "Heart Shaped Herb",
+
   "power.myneheroes.kryptonian": "Kryptonian",
   "power.myneheroes.speedster": "Speedster",
   "power.myneheroes.spider": "Spider",
   "power.myneheroes.spider_organic_webbing": "Spider",
   "power.myneheroes.mutant_regeneration": "Regeneration",
   "power.myneheroes.super_soldier": "Super Soldier",
+  "power.myneheroes.avatar_of_bast": "Avatar Of Bast",
 
   "ability.myneheroes.toggle_mechanical_hud": "Toggle Hud",
   "ability.myneheroes.toggle_speedster_hud": "Toggle Hud",

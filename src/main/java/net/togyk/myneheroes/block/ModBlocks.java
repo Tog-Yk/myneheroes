@@ -1,10 +1,10 @@
 package net.togyk.myneheroes.block;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.MapColor;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -18,17 +18,21 @@ import net.togyk.myneheroes.block.custom.*;
 
 public class ModBlocks {
     public static final Block VIBRANIUM_BLOCK = registerBlock("vibranium_block",
-            new Block(AbstractBlock.Settings.create().strength(4f)
+            new HeartShapedHerbGrowingBlock(4,
+                    AbstractBlock.Settings.create().strength(4f)
                     .requiresTool().sounds(BlockSoundGroup.METAL)));
 
     public static final Block RAW_VIBRANIUM_BLOCK = registerBlock("raw_vibranium_block",
-            new Block(AbstractBlock.Settings.create().strength(3f)
+            new HeartShapedHerbGrowingBlock(4,
+                    AbstractBlock.Settings.create().strength(3f)
                     .requiresTool()));
     public static final Block VIBRANIUM_ORE = registerBlock("vibranium_ore",
-            new Block(AbstractBlock.Settings.create().strength(3f)
+            new HeartShapedHerbGrowingBlock(4,
+                    AbstractBlock.Settings.create().strength(3f)
                     .requiresTool().sounds(BlockSoundGroup.STONE)));
     public static final Block DEEPSLATE_VIBRANIUM_ORE = registerBlock("deepslate_vibranium_ore",
-            new Block(AbstractBlock.Settings.create().strength(3f)
+            new HeartShapedHerbGrowingBlock(4,
+                    AbstractBlock.Settings.create().strength(3f)
                     .requiresTool().sounds(BlockSoundGroup.DEEPSLATE)));
 
     public static final Block TITANIUM_BLOCK = registerBlock("titanium_block",
@@ -87,6 +91,22 @@ public class ModBlocks {
 
     public static final Block ARMOR_FABRICATOR = registerBlock("armor_fabricator",
             new ArmorFabricatorBlock(AbstractBlock.Settings.create().mapColor(MapColor.IRON_GRAY).requiresTool().strength(2.5F).sounds(BlockSoundGroup.METAL).pistonBehavior(PistonBehavior.BLOCK)));
+
+    public static final Block HEART_SHAPED_HERB = registerBlock("heart_shaped_herb",
+            new FlowerBlock(
+                    StatusEffects.SPEED,
+                    8.0F,
+                    AbstractBlock.Settings.create()
+                            .mapColor(MapColor.DARK_GREEN)
+                            .noCollision()
+                            .breakInstantly()
+                            .sounds(BlockSoundGroup.GRASS)
+                            .offset(AbstractBlock.OffsetType.XZ)
+                            .pistonBehavior(PistonBehavior.DESTROY)
+            ));
+
+    public static final Block POTTED_HEART_SHAPED_HERB = registerBlockNoItem("potted_heart_shaped_herb",
+            new FlowerPotBlock(ModBlocks.HEART_SHAPED_HERB, FabricBlockSettings.copy(Blocks.POTTED_ALLIUM)));
 
     private static Block registerBlockNoItem(String name, Block block) {
         return Registry.register(Registries.BLOCK, Identifier.of(MyneHeroes.MOD_ID, name), block);
