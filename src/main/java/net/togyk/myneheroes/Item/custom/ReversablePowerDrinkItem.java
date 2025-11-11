@@ -4,44 +4,18 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsage;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.power.Power;
-import net.togyk.myneheroes.registry.ModRegistries;
 import net.togyk.myneheroes.util.PowerData;
 
 import java.util.List;
 
-public class PowerDrinkItem extends Item {
-    private final Identifier power;
-    private final List<RegistryEntry<StatusEffect>> sideEffects;
-
-    public PowerDrinkItem(Identifier power, List<RegistryEntry<StatusEffect>> sideEffects, Settings settings) {
-        super(settings);
-        this.power = power;
-        this.sideEffects = sideEffects;
-    }
-
-    @Override
-    public UseAction getUseAction(ItemStack stack) {
-        return UseAction.DRINK;
-    }
-
-    @Override
-    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
-        return 32;
-    }
-
-    @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        return ItemUsage.consumeHeldItem(world, user, hand);
+public class ReversablePowerDrinkItem extends PowerDrinkItem {
+    public ReversablePowerDrinkItem(Identifier power, List<RegistryEntry<StatusEffect>> sideEffects, Settings settings) {
+        super(power, sideEffects, settings);
     }
 
     @Override
@@ -51,8 +25,15 @@ public class PowerDrinkItem extends Item {
                 for (RegistryEntry<StatusEffect> effect : getSideEffects()) {
                     player.addStatusEffect(new StatusEffectInstance(effect, 200, 0));
                 }
+                Power power = this.getPower(player);
 
-                PowerData.addUniquePowerToLimit(player, this.getPower(player).copy());
+                List<Power> powers = PowerData.getPowers(player);
+                if (powers.stream().map(Power::getId).toList().contains(power.getId())) {
+                    int index = powers.stream().map(Power::getId).toList().indexOf(power.getId());
+                    PowerData.removePower(player, powers.get(index));
+                } else {
+                    PowerData.addUniquePowerToLimit(player, power.copy());
+                }
 
                 if (!player.isCreative()) {
                     ItemStack remainder = stack.getRecipeRemainder();
@@ -71,13 +52,5 @@ public class PowerDrinkItem extends Item {
         }
 
         return stack;
-    }
-
-    protected Power getPower(PlayerEntity player) {
-        return ModRegistries.POWER.get(this.power);
-    }
-
-    public List<RegistryEntry<StatusEffect>> getSideEffects() {
-        return sideEffects;
     }
 }
