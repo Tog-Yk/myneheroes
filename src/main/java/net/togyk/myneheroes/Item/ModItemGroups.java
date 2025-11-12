@@ -95,9 +95,9 @@ public class ModItemGroups {
                         entries.add(ModBlocks.HEART_SHAPED_HERB);
                         entries.add(ModItems.HEART_SHAPED_HERB_MIX);
 
-                        entries.add(ModBlocks.ADAMANTIUM_BLOCK);
                         entries.add(ModItems.ADAMANTIUM_UPGRADE);
                         entries.add(ModItems.ADAMANTIUM_INGOT);
+                        entries.add(ModBlocks.ADAMANTIUM_BLOCK);
 
                         entries.add(ModItems.ADAMANTIUM_SWORD);
                         entries.add(ModItems.ADAMANTIUM_SHOVEL);

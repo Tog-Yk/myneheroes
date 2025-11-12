@@ -255,6 +255,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         FabricRecipeProvider.conditionsFromItem(Items.NETHERITE_SCRAP))
                 .offerTo(exporter);
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ADAMANTIUM_UPGRADE, 2)
+                .pattern("#&#")
+                .pattern("#%#")
+                .pattern("###")
+                .input('#', Items.DIAMOND)
+                .input('&', ModItems.ADAMANTIUM_UPGRADE)
+                .input('%', Items.END_STONE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_UPGRADE),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_UPGRADE))
+                .offerTo(exporter);
+
         //upgrades
         StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(ModItems.CIRCUIT_BOARD), RecipeCategory.TOOLS, ModItems.MECHANICAL_HUD_UPGRADE)
                 .criterion(FabricRecipeProvider.hasItem(ModItems.CIRCUIT_BOARD),

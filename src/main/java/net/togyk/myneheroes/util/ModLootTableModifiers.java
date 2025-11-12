@@ -37,6 +37,15 @@ public class ModLootTableModifiers {
                         .with(ItemEntry.builder(ModItems.TAKE_OFF_SUIT_UPGRADE).weight(3).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f))));
 
                 tableBuilder.pool(poolBuilder.build());
+            } else if (LootTables.END_CITY_TREASURE_CHEST.equals(key)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .conditionally(RandomChanceLootCondition.builder(0.4f))
+                        .with(ItemEntry.builder(ModItems.ADAMANTIUM_UPGRADE).weight(4))
+                        .with(ItemEntry.builder(ModItems.ADAMANTIUM_INGOT).weight(1))
+                        ;
+
+                tableBuilder.pool(poolBuilder.build());
             }
         });
     }
