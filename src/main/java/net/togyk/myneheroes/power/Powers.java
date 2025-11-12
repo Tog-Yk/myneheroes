@@ -6,6 +6,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Abilities;
+import net.togyk.myneheroes.power.detailed.AdamantiumUpgradablePower;
 import net.togyk.myneheroes.power.detailed.KryptonianPower;
 import net.togyk.myneheroes.registry.ModRegistries;
 
@@ -39,8 +40,8 @@ public class Powers {
             new Power.attributeModifiers().addAttributeModifier(EntityAttributes.GENERIC_FALL_DAMAGE_MULTIPLIER, Identifier.of(MyneHeroes.MOD_ID, "spider_organic_webbing.fall_damage"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> -1.0D)
     ));
 
-    public static Power MUTANT_REGENERATION = registerPower(new Power(Identifier.of(MyneHeroes.MOD_ID, "mutant_regeneration"), 0xFF0BAA0B, List.of(Abilities.RAGE, Abilities.BONE_CLAWS, Abilities.ADAMANTIUM_CLAWS, Abilities.IMMORTALITY),
-            new Power.Settings().damageMultiplier(1.25).armor(3),
+    public static Power MUTANT_REGENERATION = registerPower(new AdamantiumUpgradablePower(Identifier.of(MyneHeroes.MOD_ID, "mutant_regeneration"), 0xFF0BAA0B, List.of(Abilities.RAGE, Abilities.BONE_CLAWS, Abilities.IMMORTALITY), List.of(Abilities.RAGE, Abilities.ADAMANTIUM_CLAWS, Abilities.IMMORTALITY),
+            5D, new Power.Settings().damageMultiplier(1.25).armor(3),
             new Power.attributeModifiers()
     ));
 

@@ -72,7 +72,7 @@ public class Power {
         nbt.putString("id", this.id.toString());
 
         NbtList abilitiesNbt = new NbtList();
-        for (Ability ability : this.abilities) {
+        for (Ability ability : this.getAbilities()) {
             if (ability != null) {
                 ability.setHolder(this);
                 abilitiesNbt.add(ability.writeNbt(new NbtCompound()));
@@ -96,7 +96,7 @@ public class Power {
                 abilitiesList.add(ability);
             }
         }
-        this.abilities = abilitiesList;
+        saveAbilitiesDoNotAdd(abilitiesList);
     }
 
 
@@ -172,11 +172,37 @@ public class Power {
     public void saveAbility(Ability ability) {
     }
 
+    public void saveAbilityDoNotAdd(Ability ability) {
+        List<Ability> abilities = this.getAbilities();
+        List<Identifier> ids = abilities.stream().map(Ability::getId).toList();
+
+        if (ids.contains(ability.getId())) {
+            int index = ids.indexOf(ability.getId());
+            abilities.get(index).readNbt(ability.writeNbt(new NbtCompound()));
+        }
+    }
+
+    public void saveAbilitiesDoNotAdd(List<Ability> abilities) {
+        List<Ability> currentAbilities = this.getAbilities();
+        List<Identifier> ids = currentAbilities.stream().map(Ability::getId).toList();
+
+        for (Ability ability : abilities) {
+            if (ids.contains(ability.getId())) {
+                int index = ids.indexOf(ability.getId());
+                currentAbilities.get(index).readNbt(ability.writeNbt(new NbtCompound()));
+            }
+        }
+    }
+
     public List<Ability> getAbilities() {
         if (!this.isDampened()) {
             return this.abilities;
         }
         return new ArrayList<>();
+    }
+
+    public void setAbilities(List<Ability> abilities) {
+        this.abilities = abilities;
     }
 
     public boolean isDampenedByKryptonite() {

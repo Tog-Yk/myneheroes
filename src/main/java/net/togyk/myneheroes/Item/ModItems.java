@@ -14,6 +14,7 @@ import net.minecraft.util.Util;
 import net.togyk.myneheroes.Item.custom.*;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Abilities;
+import net.togyk.myneheroes.power.detailed.AdamantiumUpgradablePower;
 import net.togyk.myneheroes.upgrade.Upgrades;
 
 import java.lang.reflect.Constructor;
@@ -100,6 +101,17 @@ public class ModItems {
             new AxeItem(ModToolMaterial.ADAMANTIUM, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterial.ADAMANTIUM, 5, -3.0F))));
     public static final Item ADAMANTIUM_HOE = registerItem("adamantium_hoe",
             new HoeItem(ModToolMaterial.ADAMANTIUM, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterial.ADAMANTIUM, -4, 0.0F))));
+
+    public static final Item ADAMANTIUM_INJECTION = registerItem("adamantium_injection",
+            new PowerUpgradeItem<>(AdamantiumUpgradablePower.class,
+                (power, stack) -> !power.hasAdamantium(),
+                (power, stack) -> {
+                    power.setAdamantium(true);
+                    return true;
+                },
+                new Item.Settings().recipeRemainder(ModItems.POWER_INJECTION)
+            )
+    );
 
     //armors
     //vibranium armors
