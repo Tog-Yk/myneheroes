@@ -39,6 +39,17 @@
   "item.myneheroes.super_soldier_serum": "Super Soldier Serum",
   "item.myneheroes.heart_shaped_herb_mix": "Heart Shaped Herb Mix",
 
+  "item.myneheroes.adamantium_upgrade_smithing_template": "Smithing Template",
+  "item.myneheroes.smithing_template.adamantium_upgrade.applies_to": "Diamond Equipment",
+  "item.myneheroes.smithing_template.adamantium_upgrade.ingredients": "Adamantium Ingot",
+  "item.myneheroes.adamantium_ingot": "Adamantium Ingot",
+
+  "item.myneheroes.adamantium_sword": "Adamantium Sword",
+  "item.myneheroes.adamantium_shovel": "Adamantium Shovel",
+  "item.myneheroes.adamantium_pickaxe": "Adamantium Pickaxe",
+  "item.myneheroes.adamantium_axe": "Adamantium Axe",
+  "item.myneheroes.adamantium_hoe": "Adamantium Hoe",
+
   "item.myneheroes.mechanical_hud_upgrade": "Hud Upgrade",
   "item.myneheroes.speedster_hud_upgrade": "Hud Upgrade",
   "item.myneheroes.laser_upgrade": "Laser Upgrade",
@@ -63,6 +74,11 @@
   "item.myneheroes.titanium_chestplate": "Titanium Chestplate",
   "item.myneheroes.titanium_leggings": "Titanium Leggings",
   "item.myneheroes.titanium_boots": "Titanium Boost",
+
+  "item.myneheroes.adamantium_helmet": "Adamantium Helmet",
+  "item.myneheroes.adamantium_chestplate": "Adamantium Chestplate",
+  "item.myneheroes.adamantium_leggings": "Adamantium Leggings",
+  "item.myneheroes.adamantium_boots": "Adamantium Boost",
 
   "item.myneheroes.gold_titanium_helmet": "Gold Titanium Helmet",
   "item.myneheroes.gold_titanium_chestplate": "Gold Titanium Chestplate",
@@ -127,6 +143,8 @@
   "block.myneheroes.armor_fabricator": "Armor Fabricator",
 
   "block.myneheroes.heart_shaped_herb": "Heart Shaped Herb",
+
+  "block.myneheroes.adamantium_block": "Adamantium Block",
 
   "power.myneheroes.kryptonian": "Kryptonian",
   "power.myneheroes.speedster": "Speedster",
@@ -259,5 +277,7 @@
   "recipe_category.myneheroes.entity_interaction": "Entity Interaction",
 
   "dataPack.myneheroes.shibashis_shenanigans": "Shibashi's shenanigans",
-  "dataPack.myneheroes.shibashis_shenanigans.description": "Experimental or unstable additions made by Shibashi"
+  "dataPack.myneheroes.shibashis_shenanigans.description": "Experimental or unstable additions made by Shibashi",
+
+  "upgrade.myneheroes.adamantium_upgrade" : "Adamantium Upgrade"
 }

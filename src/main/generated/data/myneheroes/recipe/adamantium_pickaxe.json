@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "myneheroes:adamantium_ingot"
+  },
+  "base": {
+    "item": "minecraft:diamond_pickaxe"
+  },
+  "result": {
+    "count": 1,
+    "id": "myneheroes:adamantium_pickaxe"
+  },
+  "template": {
+    "item": "myneheroes:adamantium_upgrade_smithing_template"
+  }
+}

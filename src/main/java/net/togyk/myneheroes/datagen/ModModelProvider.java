@@ -43,6 +43,8 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleState(ModBlocks.ARMOR_FABRICATOR);
 
         blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.HEART_SHAPED_HERB, ModBlocks.POTTED_HEART_SHAPED_HERB, BlockStateModelGenerator.TintType.NOT_TINTED);
+
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ADAMANTIUM_BLOCK);
     }
 
     @Override
@@ -80,6 +82,15 @@ public class ModModelProvider extends FabricModelProvider {
 
         itemModelGenerator.register(ModItems.HEART_SHAPED_HERB_MIX, Models.GENERATED);
 
+        itemModelGenerator.register(ModItems.ADAMANTIUM_UPGRADE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ADAMANTIUM_INGOT, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.ADAMANTIUM_SWORD, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.ADAMANTIUM_SHOVEL, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.ADAMANTIUM_PICKAXE, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.ADAMANTIUM_AXE, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.ADAMANTIUM_HOE, Models.HANDHELD);
+
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_HELMET));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_CHESTPLATE));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_LEGGINGS));
@@ -96,5 +107,11 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.GOLD_TITANIUM_CHESTPLATE));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.GOLD_TITANIUM_LEGGINGS));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.GOLD_TITANIUM_BOOTS));
+
+
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.ADAMANTIUM_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.ADAMANTIUM_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.ADAMANTIUM_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.ADAMANTIUM_BOOTS));
     }
 }

@@ -28,6 +28,17 @@ public class ModArmorMaterials {
             }), 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, () -> Ingredient.ofItems(ModItems.TITANIUM_INGOT),
                     List.of(new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID, "titanium"))), 0,0));
 
+    //adamantium armor
+    public static final RegistryEntry<ArmorMaterial> ADAMANTIUM_MATERIAL = registerArmorMaterial("adamantium",
+            () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                map.put(ArmorItem.Type.BOOTS, 3);
+                map.put(ArmorItem.Type.LEGGINGS, 7);
+                map.put(ArmorItem.Type.CHESTPLATE, 10);
+                map.put(ArmorItem.Type.HELMET, 4);
+                map.put(ArmorItem.Type.BODY, 13);
+            }), 20, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> Ingredient.ofItems(ModItems.ADAMANTIUM_INGOT),
+                    List.of(new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID, "adamantium"))), 0,0));
+
 
     //vibranium armors
     public static final RegistryEntry<ArmorMaterial> VIBRANIUM_MATERIAL = registerArmorMaterial("vibranium",

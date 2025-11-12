@@ -63,7 +63,8 @@
         "netherite_darker": "trims/color_palettes/netherite_darker",
         "vibranium": "myneheroes:trims/color_palettes/vibranium",
         "titanium": "myneheroes:trims/color_palettes/titanium",
-        "gold_titanium": "myneheroes:trims/color_palettes/gold_titanium"
+        "gold_titanium": "myneheroes:trims/color_palettes/gold_titanium",
+        "adamantium": "myneheroes:trims/color_palettes/adamantium"
       }
     }
   ]

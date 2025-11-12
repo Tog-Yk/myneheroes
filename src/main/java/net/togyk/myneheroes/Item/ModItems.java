@@ -2,9 +2,7 @@ package net.togyk.myneheroes.Item;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -84,7 +82,24 @@ public class ModItems {
     public static final Item BONE_CLAWS = registerItem("bone_claws",
             new TemporaryWeapon(new Item.Settings().maxCount(1).attributeModifiers(TemporaryWeapon.createAttributeModifiers(4, -1.2F))));
     public static final Item ADAMANTIUM_CLAWS = registerItem("adamantium_claws",
-            new TemporaryWeapon(new Item.Settings().maxCount(1).attributeModifiers(TemporaryWeapon.createAttributeModifiers(4.5F, -1.2F))));
+            new TemporaryWeapon(new Item.Settings().fireproof().maxCount(1).attributeModifiers(TemporaryWeapon.createAttributeModifiers(4.5F, -1.2F))));
+
+    public static final Item ADAMANTIUM_UPGRADE = registerItem("adamantium_upgrade_smithing_template",
+            new ModSmithingTemplateItem(false, Identifier.of(MyneHeroes.MOD_ID, "adamantium_upgrade"), new Item.Settings()));
+
+    public static final Item ADAMANTIUM_INGOT = registerItem("adamantium_ingot",
+            new Item(new Item.Settings().fireproof()));
+
+    public static final Item ADAMANTIUM_SWORD = registerItem("adamantium_sword",
+            new SwordItem(ModToolMaterial.ADAMANTIUM, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterial.ADAMANTIUM, 3, -2.4F))));
+    public static final Item ADAMANTIUM_SHOVEL = registerItem("adamantium_shovel",
+            new ShovelItem(ModToolMaterial.ADAMANTIUM, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterial.ADAMANTIUM, 1, -3.0F))));
+    public static final Item ADAMANTIUM_PICKAXE = registerItem("adamantium_pickaxe",
+            new PickaxeItem(ModToolMaterial.ADAMANTIUM, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterial.ADAMANTIUM, 3, -2.8F))));
+    public static final Item ADAMANTIUM_AXE = registerItem("adamantium_axe",
+            new AxeItem(ModToolMaterial.ADAMANTIUM, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterial.ADAMANTIUM, 5, -3.0F))));
+    public static final Item ADAMANTIUM_HOE = registerItem("adamantium_hoe",
+            new HoeItem(ModToolMaterial.ADAMANTIUM, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterial.ADAMANTIUM, -4, 0.0F))));
 
     //armors
     //vibranium armors
@@ -129,6 +144,20 @@ public class ModItems {
                     .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(29))));
     public static final Item GOLD_TITANIUM_BOOTS = registerItem("gold_titanium_boots",
             new ArmorItem(ModArmorMaterials.GOLD_TITANIUM_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(29))));
+
+    //adamantium armor
+    public static final Item ADAMANTIUM_HELMET = registerItem("adamantium_helmet",
+            new ArmorItem(ModArmorMaterials.ADAMANTIUM_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings().fireproof()
+                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(29))));
+    public static final Item ADAMANTIUM_CHESTPLATE = registerItem("adamantium_chestplate",
+            new ArmorItem(ModArmorMaterials.ADAMANTIUM_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings().fireproof()
+                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(29))));
+    public static final Item ADAMANTIUM_LEGGINGS = registerItem("adamantium_leggings",
+            new ArmorItem(ModArmorMaterials.ADAMANTIUM_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings().fireproof()
+                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(29))));
+    public static final Item ADAMANTIUM_BOOTS = registerItem("adamantium_boots",
+            new ArmorItem(ModArmorMaterials.ADAMANTIUM_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings().fireproof()
                     .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(29))));
 
 

@@ -21,6 +21,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.VIBRANIUM_INGOT)
                 .add(ModItems.TITANIUM_INGOT)
                 .add(ModItems.GOLD_TITANIUM_INGOT)
+                .add(ModItems.ADAMANTIUM_INGOT)
         ;
 
         getOrCreateTagBuilder(ItemTags.TRIM_TEMPLATES)
@@ -32,6 +33,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.VIBRANIUM_HELMET)
                 .add(ModItems.TITANIUM_HELMET)
                 .add(ModItems.GOLD_TITANIUM_HELMET)
+                .add(ModItems.ADAMANTIUM_HELMET)
         ;
 
         getOrCreateTagBuilder(ItemTags.HEAD_ARMOR_ENCHANTABLE)
@@ -46,6 +48,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.VIBRANIUM_CHESTPLATE)
                 .add(ModItems.TITANIUM_CHESTPLATE)
                 .add(ModItems.GOLD_TITANIUM_CHESTPLATE)
+                .add(ModItems.ADAMANTIUM_CHESTPLATE)
         ;
 
         getOrCreateTagBuilder(ItemTags.CHEST_ARMOR_ENCHANTABLE)
@@ -60,6 +63,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.VIBRANIUM_LEGGINGS)
                 .add(ModItems.TITANIUM_LEGGINGS)
                 .add(ModItems.GOLD_TITANIUM_LEGGINGS)
+                .add(ModItems.ADAMANTIUM_LEGGINGS)
         ;
 
         getOrCreateTagBuilder(ItemTags.LEG_ARMOR_ENCHANTABLE)
@@ -74,6 +78,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.VIBRANIUM_BOOTS)
                 .add(ModItems.TITANIUM_BOOTS)
                 .add(ModItems.GOLD_TITANIUM_BOOTS)
+                .add(ModItems.ADAMANTIUM_BOOTS)
         ;
 
         getOrCreateTagBuilder(ItemTags.FOOT_ARMOR_ENCHANTABLE)
@@ -82,6 +87,26 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.MARK45_NETHERITE_BOOTS)
                 .add(ModItems.SPEEDSTER_GOLD_TITANIUM_BOOTS)
                 .add(ModItems.SPEEDSTER_VIBRANIUM_BOOTS)
+        ;
+
+        getOrCreateTagBuilder(ItemTags.SWORDS)
+                .add(ModItems.ADAMANTIUM_SWORD)
+        ;
+
+        getOrCreateTagBuilder(ItemTags.SHOVELS)
+                .add(ModItems.ADAMANTIUM_SHOVEL)
+        ;
+
+        getOrCreateTagBuilder(ItemTags.PICKAXES)
+                .add(ModItems.ADAMANTIUM_PICKAXE)
+        ;
+
+        getOrCreateTagBuilder(ItemTags.AXES)
+                .add(ModItems.ADAMANTIUM_AXE)
+        ;
+
+        getOrCreateTagBuilder(ItemTags.HOES)
+                .add(ModItems.ADAMANTIUM_HOE)
         ;
 
         getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE)

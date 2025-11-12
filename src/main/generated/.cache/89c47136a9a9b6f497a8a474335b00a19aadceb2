@@ -1,8 +1,9 @@
-// 1.21.1	2025-11-10T00:48:12.0991225	MyneHeroes/Block Loot Tables
+// 1.21.1	2025-11-12T11:45:17.6190974	MyneHeroes/Block Loot Tables
 a39e31b0162e6a3106b7cc9576987120bd3a6408 data\myneheroes\loot_table\blocks\armor_dyeing_station.json
 abefb372136aafcca66d447592c67a55d8fd72da data\myneheroes\loot_table\blocks\raw_vibranium_block.json
 d08dc8c7d5e91f19ae950cc65632f200df2d2ec1 data\myneheroes\loot_table\blocks\raw_uranium_block.json
 0d25b5a85b885082e428813f3251c5e419cc5507 data\myneheroes\loot_table\blocks\gold_titanium_block.json
+116e80f9ed0049be701c377c257c6bb8e9de7e97 data\myneheroes\loot_table\blocks\adamantium_block.json
 72989647fa6e95081aedda212fab75b36e349062 data\myneheroes\loot_table\blocks\armor_light_leveling_station.json
 af776c8a5cc255f6f8b59612b6ae145aa81bf233 data\myneheroes\loot_table\blocks\kryptonite_cluster.json
 fc0aa42f38ed1ea10c157a35f88522cc3bc70eec data\myneheroes\loot_table\blocks\raw_gold_titanium_block.json

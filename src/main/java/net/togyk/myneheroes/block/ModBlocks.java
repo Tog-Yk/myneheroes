@@ -108,6 +108,9 @@ public class ModBlocks {
     public static final Block POTTED_HEART_SHAPED_HERB = registerBlockNoItem("potted_heart_shaped_herb",
             new FlowerPotBlock(ModBlocks.HEART_SHAPED_HERB, FabricBlockSettings.copy(Blocks.POTTED_ALLIUM)));
 
+    public static final Block ADAMANTIUM_BLOCK = registerBlock("adamantium_block",
+            new Block(FabricBlockSettings.copy(Blocks.NETHERITE_BLOCK).mapColor(MapColor.DULL_PINK)));
+
     private static Block registerBlockNoItem(String name, Block block) {
         return Registry.register(Registries.BLOCK, Identifier.of(MyneHeroes.MOD_ID, name), block);
     }

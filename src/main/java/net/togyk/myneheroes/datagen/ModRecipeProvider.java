@@ -3,10 +3,7 @@ package net.togyk.myneheroes.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Blocks;
-import net.minecraft.data.server.recipe.RecipeExporter;
-import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.*;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
@@ -238,6 +235,26 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         FabricRecipeProvider.conditionsFromItem(Items.STRING))
                 .offerTo(exporter);
 
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.HEART_SHAPED_HERB_MIX)
+                .input(Items.BOWL)
+                .input(ModBlocks.HEART_SHAPED_HERB)
+                .criterion(FabricRecipeProvider.hasItem(ModBlocks.HEART_SHAPED_HERB),
+                        FabricRecipeProvider.conditionsFromItem(ModBlocks.HEART_SHAPED_HERB))
+                .offerTo(exporter);
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ADAMANTIUM_INGOT)
+                .input(ModItems.TITANIUM_INGOT)
+                .input(ModItems.TITANIUM_INGOT)
+                .input(ModItems.TITANIUM_INGOT)
+                .input(ModItems.TITANIUM_INGOT)
+                .input(Items.NETHERITE_SCRAP)
+                .input(Items.NETHERITE_SCRAP)
+                .input(Items.NETHERITE_SCRAP)
+                .input(Items.NETHERITE_SCRAP)
+                .criterion(FabricRecipeProvider.hasItem(Items.NETHERITE_SCRAP),
+                        FabricRecipeProvider.conditionsFromItem(Items.NETHERITE_SCRAP))
+                .offerTo(exporter);
+
         //upgrades
         StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(ModItems.CIRCUIT_BOARD), RecipeCategory.TOOLS, ModItems.MECHANICAL_HUD_UPGRADE)
                 .criterion(FabricRecipeProvider.hasItem(ModItems.CIRCUIT_BOARD),
@@ -274,12 +291,38 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         FabricRecipeProvider.conditionsFromItem(Items.LEATHER))
                 .offerTo(exporter);
 
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.HEART_SHAPED_HERB_MIX)
-                .input(Items.BOWL)
-                .input(ModBlocks.HEART_SHAPED_HERB)
-                .criterion(FabricRecipeProvider.hasItem(ModBlocks.HEART_SHAPED_HERB),
-                        FabricRecipeProvider.conditionsFromItem(ModBlocks.HEART_SHAPED_HERB))
-                .offerTo(exporter);
+        //tools
+        SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(ModItems.ADAMANTIUM_UPGRADE), Ingredient.ofItems(Items.DIAMOND_SWORD), Ingredient.ofItems(ModItems.ADAMANTIUM_INGOT),
+                        RecipeCategory.COMBAT,
+                        ModItems.ADAMANTIUM_SWORD)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_INGOT))
+                .offerTo(exporter, "adamantium_sword");
+        SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(ModItems.ADAMANTIUM_UPGRADE), Ingredient.ofItems(Items.DIAMOND_SHOVEL), Ingredient.ofItems(ModItems.ADAMANTIUM_INGOT),
+                        RecipeCategory.COMBAT,
+                        ModItems.ADAMANTIUM_SHOVEL)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_INGOT))
+                .offerTo(exporter, "adamantium_shovel");
+        SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(ModItems.ADAMANTIUM_UPGRADE), Ingredient.ofItems(Items.DIAMOND_PICKAXE), Ingredient.ofItems(ModItems.ADAMANTIUM_INGOT),
+                        RecipeCategory.COMBAT,
+                        ModItems.ADAMANTIUM_PICKAXE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_INGOT))
+                .offerTo(exporter, "adamantium_pickaxe");
+        SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(ModItems.ADAMANTIUM_UPGRADE), Ingredient.ofItems(Items.DIAMOND_AXE), Ingredient.ofItems(ModItems.ADAMANTIUM_INGOT),
+                        RecipeCategory.COMBAT,
+                        ModItems.ADAMANTIUM_AXE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_INGOT))
+                .offerTo(exporter, "adamantium_axe");
+        SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(ModItems.ADAMANTIUM_UPGRADE), Ingredient.ofItems(Items.DIAMOND_HOE), Ingredient.ofItems(ModItems.ADAMANTIUM_INGOT),
+                        RecipeCategory.COMBAT,
+                        ModItems.ADAMANTIUM_HOE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_INGOT))
+                .offerTo(exporter, "adamantium_hoe");
+
 
         //simple armor recipes
         //vibranium
@@ -381,6 +424,32 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(ModItems.GOLD_TITANIUM_INGOT),
                         FabricRecipeProvider.conditionsFromItem(ModItems.GOLD_TITANIUM_INGOT))
                 .offerTo(exporter);
+
+        //adamantium
+        SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(ModItems.ADAMANTIUM_UPGRADE), Ingredient.ofItems(Items.DIAMOND_HELMET), Ingredient.ofItems(ModItems.ADAMANTIUM_INGOT),
+                RecipeCategory.COMBAT,
+                ModItems.ADAMANTIUM_HELMET)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_INGOT))
+                .offerTo(exporter, "adamantium_helmet");
+        SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(ModItems.ADAMANTIUM_UPGRADE), Ingredient.ofItems(Items.DIAMOND_CHESTPLATE), Ingredient.ofItems(ModItems.ADAMANTIUM_INGOT),
+                RecipeCategory.COMBAT,
+                ModItems.ADAMANTIUM_CHESTPLATE)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_INGOT))
+                .offerTo(exporter, "adamantium_chestplate");
+        SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(ModItems.ADAMANTIUM_UPGRADE), Ingredient.ofItems(Items.DIAMOND_LEGGINGS), Ingredient.ofItems(ModItems.ADAMANTIUM_INGOT),
+                RecipeCategory.COMBAT,
+                ModItems.ADAMANTIUM_LEGGINGS)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_INGOT))
+                .offerTo(exporter, "adamantium_leggings");
+        SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(ModItems.ADAMANTIUM_UPGRADE), Ingredient.ofItems(Items.DIAMOND_BOOTS), Ingredient.ofItems(ModItems.ADAMANTIUM_INGOT),
+                RecipeCategory.COMBAT,
+                ModItems.ADAMANTIUM_BOOTS)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_INGOT))
+                .offerTo(exporter, "adamantium_boots");
 
         //Advanced Armors
 

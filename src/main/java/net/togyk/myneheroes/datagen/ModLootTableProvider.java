@@ -44,5 +44,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.ARMOR_FABRICATOR);
 
         addDrop(ModBlocks.HEART_SHAPED_HERB);
+
+        addDrop(ModBlocks.ADAMANTIUM_BLOCK);
     }
 }

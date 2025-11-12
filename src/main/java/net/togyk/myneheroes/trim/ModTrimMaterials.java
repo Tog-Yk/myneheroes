@@ -27,6 +27,9 @@ public class ModTrimMaterials {
     public static final RegistryKey<ArmorTrimMaterial> GOLD_TITANIUM = RegistryKey.of(RegistryKeys.TRIM_MATERIAL,
             Identifier.of(MyneHeroes.MOD_ID, "gold_titanium"));
 
+    public static final RegistryKey<ArmorTrimMaterial> ADAMANTIUM = RegistryKey.of(RegistryKeys.TRIM_MATERIAL,
+            Identifier.of(MyneHeroes.MOD_ID, "adamantium"));
+
     //register more Keys here
 
     public static void bootstrap(Registerable<ArmorTrimMaterial> registerable) {
@@ -38,6 +41,9 @@ public class ModTrimMaterials {
 
         register(registerable, GOLD_TITANIUM, Registries.ITEM.getEntry(ModItems.GOLD_TITANIUM_INGOT),
                 Style.EMPTY.withColor(TextColor.parse("#976a27").getOrThrow()), 0.6f);
+
+        register(registerable, ADAMANTIUM, Registries.ITEM.getEntry(ModItems.ADAMANTIUM_INGOT),
+                Style.EMPTY.withColor(TextColor.parse("#b5abc5").getOrThrow()), 1.0f);
 
         //register more bootstraps here
     }

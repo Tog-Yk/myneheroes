@@ -1,0 +1,9 @@
+{
+  "asset_name": "adamantium",
+  "description": {
+    "color": "#B5ABC5",
+    "translate": "trim_material.myneheroes.adamantium"
+  },
+  "ingredient": "myneheroes:adamantium_ingot",
+  "item_model_index": 1.0
+}

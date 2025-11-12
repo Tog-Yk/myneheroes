@@ -95,6 +95,16 @@ public class ModItemGroups {
                         entries.add(ModBlocks.HEART_SHAPED_HERB);
                         entries.add(ModItems.HEART_SHAPED_HERB_MIX);
 
+                        entries.add(ModBlocks.ADAMANTIUM_BLOCK);
+                        entries.add(ModItems.ADAMANTIUM_UPGRADE);
+                        entries.add(ModItems.ADAMANTIUM_INGOT);
+
+                        entries.add(ModItems.ADAMANTIUM_SWORD);
+                        entries.add(ModItems.ADAMANTIUM_SHOVEL);
+                        entries.add(ModItems.ADAMANTIUM_PICKAXE);
+                        entries.add(ModItems.ADAMANTIUM_AXE);
+                        entries.add(ModItems.ADAMANTIUM_HOE);
+
                         //only add when datapack is enabled
                         //shibashi's shenanigans items
                         if (ModResourcePacks.SHIBASHIS_SHENANIGANS.isActive()) {
@@ -121,6 +131,11 @@ public class ModItemGroups {
                         entries.add(ModItems.GOLD_TITANIUM_CHESTPLATE);
                         entries.add(ModItems.GOLD_TITANIUM_LEGGINGS);
                         entries.add(ModItems.GOLD_TITANIUM_BOOTS);
+
+                        entries.add(ModItems.ADAMANTIUM_HELMET);
+                        entries.add(ModItems.ADAMANTIUM_CHESTPLATE);
+                        entries.add(ModItems.ADAMANTIUM_LEGGINGS);
+                        entries.add(ModItems.ADAMANTIUM_BOOTS);
 
 
                         entries.add(ModItems.MARK6_VIBRANIUM_HELMET);
