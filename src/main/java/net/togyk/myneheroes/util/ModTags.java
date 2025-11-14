@@ -69,6 +69,8 @@ public class ModTags {
         public static final TagKey<Power> COMMON_MUTANT = createTag("common_mutant");
         public static final TagKey<Power> OFTEN_MUTANT = createTag("often_mutant");
 
+        public static final TagKey<Power> SPIDER = createTag("spider");
+
         private static TagKey<Power> createTag(String name) {
             return TagKey.of(ModRegistryKeys.POWER, Identifier.of(MyneHeroes.MOD_ID, name));
         }

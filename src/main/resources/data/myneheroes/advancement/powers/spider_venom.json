@@ -1,0 +1,35 @@
+{
+  "parent": "myneheroes:powers/transferring_powers",
+  "criteria": {
+    "spider_venom": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "myneheroes:bottle_of_spider_venom"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.myneheroes.powers.spider_venom.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "myneheroes:bottle_of_spider_venom"
+    },
+    "title": {
+      "translate": "advancements.myneheroes.powers.spider_venom.title"
+    }
+  },
+  "requirements": [
+    [
+      "spider_venom"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

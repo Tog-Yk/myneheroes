@@ -1,0 +1,29 @@
+{
+  "parent": "myneheroes:powers/spider_venom",
+  "criteria": {
+    "spider": {
+      "conditions": {
+        "tag": "myneheroes:spider"
+      },
+      "trigger": "myneheroes:powers_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.myneheroes.powers.spider.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:cobweb"
+    },
+    "title": {
+      "translate": "advancements.myneheroes.powers.spider.title"
+    }
+  },
+  "requirements": [
+    [
+      "spider"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

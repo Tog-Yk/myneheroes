@@ -1,0 +1,29 @@
+{
+  "parent": "myneheroes:powers/transferring_powers",
+  "criteria": {
+    "mutant": {
+      "conditions": {
+        "tag": "myneheroes:mutant"
+      },
+      "trigger": "myneheroes:powers_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.myneheroes.powers.mutant.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "myneheroes:uranium_ingot"
+    },
+    "title": {
+      "translate": "advancements.myneheroes.powers.mutant.title"
+    }
+  },
+  "requirements": [
+    [
+      "mutant"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

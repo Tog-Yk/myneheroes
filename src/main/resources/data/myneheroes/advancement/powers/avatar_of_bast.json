@@ -1,0 +1,29 @@
+{
+  "parent": "myneheroes:powers/heart_shaped_herb",
+  "criteria": {
+    "avatar_of_bast": {
+      "conditions": {
+        "id": "myneheroes:avatar_of_bast"
+      },
+      "trigger": "myneheroes:powers_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.myneheroes.powers.avatar_of_bast.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "myneheroes:heart_shaped_herb_mix"
+    },
+    "title": {
+      "translate": "advancements.myneheroes.powers.avatar_of_bast.title"
+    }
+  },
+  "requirements": [
+    [
+      "avatar_of_bast"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "myneheroes:powers/transferring_powers",
+  "criteria": {
+    "heart_shaped_herb": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "myneheroes:heart_shaped_herb"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.myneheroes.powers.heart_shaped_herb.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "myneheroes:heart_shaped_herb"
+    },
+    "title": {
+      "translate": "advancements.myneheroes.powers.heart_shaped_herb.title"
+    }
+  },
+  "requirements": [
+    [
+      "heart_shaped_herb"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

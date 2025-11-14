@@ -1,0 +1,29 @@
+{
+  "parent": "myneheroes:powers/transferring_powers",
+  "criteria": {
+    "super_soldier": {
+      "conditions": {
+        "id": "myneheroes:super_soldier"
+      },
+      "trigger": "myneheroes:powers_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.myneheroes.powers.super_soldier.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "myneheroes:a_symbols_shield"
+    },
+    "title": {
+      "translate": "advancements.myneheroes.powers.super_soldier.title"
+    }
+  },
+  "requirements": [
+    [
+      "super_soldier"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -244,11 +244,29 @@
   "advancements.myneheroes.powers.the_fastest_man_alive.title": "The fastest man alive",
   "advancements.myneheroes.powers.the_fastest_man_alive.description": "Be struck by lighting while having speed and become a speedster",
 
-  "advancements.myneheroes.powers.kryptonite.title": "Man’s Greatest Weakness",
+  "advancements.myneheroes.powers.kryptonite.title": "Man’s greatest weakness",
   "advancements.myneheroes.powers.kryptonite.description": "Find kryptonite in a meteor",
 
   "advancements.myneheroes.powers.the_man_of_steel.title": "The man of steel",
   "advancements.myneheroes.powers.the_man_of_steel.description": "Be near kryptonite long enough, without being exposed to the sun, to become a kryptonian",
+
+  "advancements.myneheroes.powers.super_soldier.title": "Super soldier",
+  "advancements.myneheroes.powers.super_soldier.description": "Craft the super soldier serum and become a super soldier",
+
+  "advancements.myneheroes.powers.mutant.title": "Human evolution",
+  "advancements.myneheroes.powers.mutant.description": "Have radiation change your dna",
+
+  "advancements.myneheroes.powers.spider_venom.title": "A poisoned drink",
+  "advancements.myneheroes.powers.spider_venom.description": "Milk a spider for it's venom",
+
+  "advancements.myneheroes.powers.spider.title": "With great power...",
+  "advancements.myneheroes.powers.spider.description": "Drink a weird cocktail from spider venom and uranium",
+
+  "advancements.myneheroes.powers.heart_shaped_herb.title": "Powerful flowers",
+  "advancements.myneheroes.powers.heart_shaped_herb.description": "Find a flower growing near vibranium",
+
+  "advancements.myneheroes.powers.avatar_of_bast.title": "Praise the ancestors",
+  "advancements.myneheroes.powers.avatar_of_bast.description": "Drink a heart shaped herb",
 
   "entity.myneheroes.laser": "Laser",
   "entity.myneheroes.stationary_item": "Stationary Item",

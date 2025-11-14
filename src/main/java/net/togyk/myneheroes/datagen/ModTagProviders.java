@@ -63,6 +63,11 @@ public class ModTagProviders {
             getOrCreateTagBuilder(ModTags.Powers.OFTEN_RADIATION_OBTAINABLE)
                     .addTag(ModTags.Powers.OFTEN_MUTANT)
             ;
+
+            getOrCreateTagBuilder(ModTags.Powers.SPIDER)
+                    .add(Powers.SPIDER)
+                    .add(Powers.SPIDER_ORGANIC_WEBBING)
+            ;
         }
     }
 
