@@ -29,6 +29,6 @@ jobs:
           for branch in 1.21 1.21.1 1.21.10
           do
             git checkout $branch || continue
-            git merge main --no-ff --no-edit || true
+            git merge master --no-ff --no-edit || true
             git push origin $branch || true
           done
