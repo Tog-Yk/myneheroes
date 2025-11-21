@@ -13,6 +13,8 @@ jobs:
       contents: write
       pull-requests: write
       checks: write
+    env:
+      GH_TOKEN: ${{ github.token }}
     steps:
       - name: Checkout master
         uses: actions/checkout@v4
