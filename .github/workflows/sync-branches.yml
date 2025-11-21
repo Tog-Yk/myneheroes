@@ -28,7 +28,8 @@ jobs:
         run: |
           for branch in 1.21 1.21.1 1.21.10
           do
-            git checkout $branch || continue
-            git merge master --no-ff --no-edit || true
-            git push origin $branch || true
+            echo "Syncing master -> $BRANCH"
+            git checkout $branch
+            git merge origin/master --no-ff --no-edit || exit 1
+            git push origin $branch
           done
