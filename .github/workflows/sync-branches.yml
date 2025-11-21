@@ -28,8 +28,23 @@ jobs:
         run: |
           for branch in 1.21 1.21.1 1.21.10
           do
-            echo "Syncing master -> $BRANCH"
+            echo "Syncing master -> $branch"
             git checkout $branch
-            git merge origin/master --no-ff --no-edit || exit 1
-            git push origin $branch
+            if git merge origin/master --no-ff --no-edit; then
+              echo "Merge succeeded, pushing..."
+              git push origin $branch
+            else
+              echo "Merge conflict in $branch, creating PR..."
+
+              git merge --abort
+
+              # Create PR from master into that branch
+              gh pr create \
+                --base $branch \
+                --head master \
+                --title "Sync master → $branch (conflict resolution required)" \
+                --body "Automatic merge failed. Please resolve the conflicts in this Pull Request." \
+                || echo "PR already exists or failed."
+
+            fi
           done
