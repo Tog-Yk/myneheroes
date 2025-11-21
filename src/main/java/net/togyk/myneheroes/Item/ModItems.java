@@ -91,6 +91,13 @@ public class ModItems {
     public static final Item ADAMANTIUM_INGOT = registerItem("adamantium_ingot",
             new Item(new Item.Settings().fireproof()));
 
+    public static final Item IRON_KATANA = registerItem("iron_katana",
+            new KatanaItem(ModToolMaterial.ADAMANTIUM, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.IRON, 3, -1.4F))));
+
+
+    public static final Item ADAMANTIUM_KATANA = registerItem("adamantium_katana",
+            new KatanaItem(ModToolMaterial.ADAMANTIUM, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterial.ADAMANTIUM, 3, -1.4F))));
+
     public static final Item ADAMANTIUM_SWORD = registerItem("adamantium_sword",
             new SwordItem(ModToolMaterial.ADAMANTIUM, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterial.ADAMANTIUM, 3, -2.4F))));
     public static final Item ADAMANTIUM_SHOVEL = registerItem("adamantium_shovel",

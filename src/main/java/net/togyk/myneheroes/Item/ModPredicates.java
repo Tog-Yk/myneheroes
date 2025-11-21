@@ -23,5 +23,8 @@ public class ModPredicates {
         registerShieldBlocking(ModItems.A_SYMBOLS_SHIELD);
         registerShieldBlocking(ModItems.COSMIC_SHIELD);
         registerShieldBlocking(ModItems.CARTERS_SHIELD);
+
+        registerShieldBlocking(ModItems.IRON_KATANA);
+        registerShieldBlocking(ModItems.ADAMANTIUM_KATANA);
     }
 }

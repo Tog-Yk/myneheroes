@@ -90,6 +90,8 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         ;
 
         getOrCreateTagBuilder(ItemTags.SWORDS)
+                .add(ModItems.IRON_KATANA)
+                .add(ModItems.ADAMANTIUM_KATANA)
                 .add(ModItems.ADAMANTIUM_SWORD)
         ;
 
