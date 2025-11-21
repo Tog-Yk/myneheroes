@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "myneheroes:adamantium_ingot"
+    },
+    "$": {
+      "item": "minecraft:gold_ingot"
+    },
+    "/": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "# ",
+    "#$",
+    "/ "
+  ],
+  "result": {
+    "count": 1,
+    "id": "myneheroes:adamantium_katana"
+  }
+}
