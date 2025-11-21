@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-13T09:36:17.5960591	MyneHeroes/Tags for minecraft:item
+// 1.21.1	2025-11-21T14:22:30.5895335	MyneHeroes/Tags for minecraft:item
 0491ed542b4a19da710b313c109ac79cd65eff7f data\minecraft\tags\item\pickaxes.json
 cabcc5392542df4fe60a5151fa4c223cdf929d40 data\myneheroes\tags\item\dyes.json
 efc98495b9c87f7a746bea8b59feb4f3e961e7da data\minecraft\tags\item\enchantable\foot_armor.json
@@ -19,5 +19,5 @@ d9ef088c4489a6934d7653008c84322b93df94ba data\minecraft\tags\item\enchantable\le
 c4d096c67a7cf7d819e413bc98c26999527867dc data\minecraft\tags\item\axes.json
 4595974f592add333b601320961f6a2df8490423 data\minecraft\tags\item\trim_materials.json
 1e55cb775deaaacf66d76f3d2a62ea1468bfd582 data\minecraft\tags\item\shovels.json
-c186a62e1568bf5f7c47e2f4c1b708eae4a79f0b data\minecraft\tags\item\swords.json
+2803f607106c7e8cf9c85be79441ca19c8ac9cd3 data\minecraft\tags\item\swords.json
 ac6f1ba84cae8a236913185b523ddf73fab9f0f0 data\minecraft\tags\item\hoes.json

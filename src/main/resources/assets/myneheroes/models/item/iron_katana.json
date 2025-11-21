@@ -1,0 +1,9 @@
+{
+	"parent" : "myneheroes:item/adamantium_katana",
+    "textures": {
+        "layer0": "myneheroes:item/iron_katana"
+    },
+    "overrides": [
+        {"predicate": {"myneheroes:blocking": 1}, "model": "myneheroes:item/iron_katana_blocking"}
+    ]
+}
