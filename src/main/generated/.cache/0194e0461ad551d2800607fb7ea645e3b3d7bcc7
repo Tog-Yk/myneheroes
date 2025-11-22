@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-21T14:22:30.590485	MyneHeroes/Recipes
+// 1.21	2025-11-21T13:53:10.1253561	MyneHeroes/Recipes
 a10f4eba902c63fc2bab3b8c06d34683b5ef3e67 data\myneheroes\recipe\uranium_ingot_from_smelting_uranium_ore.json
 255e651694f0864d4dd44ec4ade41707c208a904 data\myneheroes\recipe\mark3_gold_titanium_leggings.json
 8541e7d2147b512d4c00a721b7c1b03fb041e7bd data\myneheroes\advancement\recipes\combat\adamantium_axe.json
@@ -30,8 +30,8 @@ c84bb9c5fb9b40f6f359a128d29484c489f9279c data\myneheroes\recipe\upgrade_station.
 7571b617991f4324857de09408efe227f8729863 data\myneheroes\recipe\titanium_boots.json
 3a706b8be41bc782587ca28df5b131ced55c3ca0 data\myneheroes\advancement\recipes\misc\raw_titanium.json
 440642fb21945feca9d86f640317b9e0487a37fa data\myneheroes\recipe\vibranium_helmet.json
-c4efb1665c4305bd607c6cb7f3eff2bf72cf934b data\myneheroes\advancement\recipes\combat\adamantium_katana_mirrored.json
 40ce51767c2e5a97a250244096856a2b6a6587e2 data\myneheroes\advancement\recipes\combat\a_symbols_shield.json
+c4efb1665c4305bd607c6cb7f3eff2bf72cf934b data\myneheroes\advancement\recipes\combat\adamantium_katana_mirrored.json
 8880d98baf96102c22e86cba5243addc9d92194a data\myneheroes\recipe\gold_titanium_boots.json
 256148c6d77b2475f347afc9f5442e0a92bb6b1a data\myneheroes\advancement\recipes\misc\iron_suit_template.json
 dbf48b325dec96a23f1cc80b98e9321c091fdfa2 data\myneheroes\recipe\vibranium_leggings.json
