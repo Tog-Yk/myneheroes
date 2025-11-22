@@ -2,7 +2,6 @@ package net.togyk.myneheroes.ability;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -61,7 +60,7 @@ public class Abilities {
     public static final HudAbility TUTOR_HUD = registerAbility(new HudAbility(Identifier.of(MyneHeroes.MOD_ID, "tutor_hud"), new Ability.Settings(), HudType.TUTOR));
     public static final Ability SHOOT_LASER = registerAbility(new Ability(Identifier.of(MyneHeroes.MOD_ID, "shoot_laser"), 10, new Ability.Settings(), (player) -> {
         ItemStack reactorStack = MyneHeroes.getReactorItemClass(player);
-        if (!player.getEntityWorld().isClient()) {
+        if (!player.getWorld().isClient) {
             if (reactorStack.getItem() instanceof ReactorItem reactor) {
                 int reactorPower = reactor.getStoredPowerOrDefault(reactorStack, 0);
                 if (reactorPower >= 50) {
@@ -69,7 +68,7 @@ public class Abilities {
                     // shoot a laser
                     Vec3d look = player.getRotationVec(1.0F);
 
-                    LaserEntity projectile = new LaserEntity(ModEntities.LASER, player.getEntityWorld());
+                    LaserEntity projectile = new LaserEntity(ModEntities.LASER, player.getWorld());
                     projectile.setOwner(player);
                     projectile.setPosition(player.getX(), player.getEyeY() - projectile.getHeight(), player.getZ());
                     projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
@@ -77,7 +76,7 @@ public class Abilities {
                     projectile.setColor(0x3300FFFF);
                     projectile.setInnerColor(0xFFF0FFFF);
 
-                    player.getEntityWorld().spawnEntity(projectile);
+                    player.getWorld().spawnEntity(projectile);
                     player.swingHand(Hand.MAIN_HAND);
 
                 } else {
@@ -97,13 +96,7 @@ public class Abilities {
 
     public static final Ability TAKE_OFF_SUIT = registerAbility(new Ability(Identifier.of(MyneHeroes.MOD_ID, "take_off_suit"), 10, new Ability.Settings().appearsMultipleTimes(false),  (player) -> {
         List<ItemStack> armor = new ArrayList<>();
-
-        List<ItemStack> armorItems = new ArrayList<>();
-        for(EquipmentSlot slot : EquipmentSlot.values()) {
-            armorItems.add(player.getEquippedStack(slot));
-        }
-
-        for (ItemStack stack : armorItems) {
+        for (ItemStack stack : player.getArmorItems()) {
             if (stack.getItem() instanceof AdvancedArmorItem item) {
                 List<Identifier> ids = item.getAbilities(stack).stream().map(Ability::getId).toList();
                 List<Identifier> armor_ids = item.getArmorAbilities(stack).stream().map(Ability::getId).toList();
@@ -113,8 +106,8 @@ public class Abilities {
             }
         }
         if (armor.size() == 4) {
-            if (!player.getEntityWorld().isClient()) {
-                StationaryArmorEntity entity = new StationaryArmorEntity(ModEntities.STATIONARY_ARMOR, player.getEntityWorld());
+            if (!player.getWorld().isClient()) {
+                StationaryArmorEntity entity = new StationaryArmorEntity(ModEntities.STATIONARY_ARMOR, player.getWorld());
                 entity.setPosition(player.getX(), player.getY(), player.getZ());
                 entity.setAngles(player.getYaw(), player.getPitch());
                 entity.setVelocity(player.getVelocity());
@@ -123,7 +116,7 @@ public class Abilities {
                     entity.equipStack(((AdvancedArmorItem) stack.getItem()).getSlotType(), stack.copyAndEmpty());
                 }
 
-                player.getEntityWorld().spawnEntity(entity);
+                player.getWorld().spawnEntity(entity);
                 return true;
             }
         } else {
@@ -135,13 +128,13 @@ public class Abilities {
     public static final StockpileLinkedAbility FROST_BREATH = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "frost_breath"), 4, 48, 8, new Ability.Settings(), null,  (player) -> {
         Vec3d direction = player.getRotationVec(1.0F);
         Vec3d origin = player.getEyePos().add(0, -0.2, 0);
-        World world = player.getEntityWorld();
+        World world = player.getWorld();
         Random random = new Random();
         for (int i = 0; i < 6; i++) {
             double speedX = (random.nextDouble()) * direction.x / 2;
             double speedY = (random.nextDouble()) * direction.y / 2;
             double speedZ = (random.nextDouble()) * direction.z / 2;
-            world.addParticleClient(ParticleTypes.SNOWFLAKE,
+            world.addParticle(ParticleTypes.SNOWFLAKE,
                     origin.getX(),
                     origin.getY(),
                     origin.getZ(),
@@ -223,7 +216,7 @@ public class Abilities {
     public static final ShootProjectilePassiveAbility<WebEntity> SHOOT_WEB = registerAbility(new ShootProjectilePassiveAbility<>(Identifier.of(MyneHeroes.MOD_ID, "shoot_web"), 2, 1, new Ability.Settings(), (player, passive) -> {
         Vec3d look = player.getRotationVec(1.0F);
 
-        WebEntity projectile = new WebEntity(player.getEntityWorld());
+        WebEntity projectile = new WebEntity(player.getWorld());
         projectile.setOwner(player);
         projectile.setPosition(player.getX(), player.getEyeY() - projectile.getHeight(), player.getZ());
         projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
@@ -235,7 +228,7 @@ public class Abilities {
     public static final ShootProjectilePassiveAbility<WebEntity> SHOOT_TASER_WEB = registerAbility(new ShootProjectilePassiveAbility<>(Identifier.of(MyneHeroes.MOD_ID, "shoot_taser_web"), 2, 5, new Ability.Settings(), (player, passive) -> {
         Vec3d look = player.getRotationVec(1.0F);
 
-        WebEntity projectile = new WebEntity(player.getEntityWorld());
+        WebEntity projectile = new WebEntity(player.getWorld());
         projectile.setOwner(player);
         projectile.setPosition(player.getX(), player.getEyeY() - projectile.getHeight(), player.getZ());
         projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
@@ -249,7 +242,7 @@ public class Abilities {
     public static final ShootDiscardableProjectilePassiveAbility<WebSwingEntity> SHOOT_SWING_WEB = registerAbility(new ShootDiscardableProjectilePassiveAbility<>(Identifier.of(MyneHeroes.MOD_ID, "shoot_swing_web"), 2, 2, new Ability.Settings(), (player, passive) -> {
         Vec3d look = player.getRotationVec(1.0F);
 
-        WebSwingEntity projectile = new WebSwingEntity(player.getEntityWorld(), player);
+        WebSwingEntity projectile = new WebSwingEntity(player.getWorld(), player);
         projectile.setPosition(player.getX(), player.getEyeY() - projectile.getHeight(), player.getZ());
         projectile.setVelocity(look.x, look.y, look.z, 3.0F, 0.0F);
 
