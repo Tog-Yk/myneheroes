@@ -111,12 +111,12 @@ public class ModItems {
 
     public static final Item ADAMANTIUM_INJECTION = registerItem("adamantium_injection",
             new PowerUpgradeItem<>(AdamantiumUpgradablePower.class,
-                (power, stack) -> !power.hasAdamantium(),
-                (power, stack) -> {
-                    power.setAdamantium(true);
-                    return true;
-                },
-                new Item.Settings().recipeRemainder(ModItems.POWER_INJECTION)
+                    (power, stack) -> !power.hasAdamantium(),
+                    (power, stack) -> {
+                        power.setAdamantium(true);
+                        return true;
+                    },
+                    new Item.Settings().recipeRemainder(ModItems.POWER_INJECTION)
             )
     );
 

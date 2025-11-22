@@ -481,26 +481,26 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         //adamantium
         SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(ModItems.ADAMANTIUM_UPGRADE), Ingredient.ofItems(Items.DIAMOND_HELMET), Ingredient.ofItems(ModItems.ADAMANTIUM_INGOT),
-                RecipeCategory.COMBAT,
-                ModItems.ADAMANTIUM_HELMET)
+                        RecipeCategory.COMBAT,
+                        ModItems.ADAMANTIUM_HELMET)
                 .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_INGOT),
                         FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_INGOT))
                 .offerTo(exporter, "adamantium_helmet");
         SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(ModItems.ADAMANTIUM_UPGRADE), Ingredient.ofItems(Items.DIAMOND_CHESTPLATE), Ingredient.ofItems(ModItems.ADAMANTIUM_INGOT),
-                RecipeCategory.COMBAT,
-                ModItems.ADAMANTIUM_CHESTPLATE)
+                        RecipeCategory.COMBAT,
+                        ModItems.ADAMANTIUM_CHESTPLATE)
                 .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_INGOT),
                         FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_INGOT))
                 .offerTo(exporter, "adamantium_chestplate");
         SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(ModItems.ADAMANTIUM_UPGRADE), Ingredient.ofItems(Items.DIAMOND_LEGGINGS), Ingredient.ofItems(ModItems.ADAMANTIUM_INGOT),
-                RecipeCategory.COMBAT,
-                ModItems.ADAMANTIUM_LEGGINGS)
+                        RecipeCategory.COMBAT,
+                        ModItems.ADAMANTIUM_LEGGINGS)
                 .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_INGOT),
                         FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_INGOT))
                 .offerTo(exporter, "adamantium_leggings");
         SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(ModItems.ADAMANTIUM_UPGRADE), Ingredient.ofItems(Items.DIAMOND_BOOTS), Ingredient.ofItems(ModItems.ADAMANTIUM_INGOT),
-                RecipeCategory.COMBAT,
-                ModItems.ADAMANTIUM_BOOTS)
+                        RecipeCategory.COMBAT,
+                        ModItems.ADAMANTIUM_BOOTS)
                 .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_INGOT),
                         FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_INGOT))
                 .offerTo(exporter, "adamantium_boots");
