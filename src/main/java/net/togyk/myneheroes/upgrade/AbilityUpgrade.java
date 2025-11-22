@@ -1,7 +1,7 @@
 package net.togyk.myneheroes.upgrade;
 
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
@@ -17,11 +17,11 @@ import java.util.List;
 public class AbilityUpgrade extends Upgrade {
     protected List<Ability> abilities;
 
-    protected AbilityUpgrade(List<Ability> abilities, List<EquipmentType> compatibleTypes, Identifier id) {
+    protected AbilityUpgrade(List<Ability> abilities, List<ArmorItem.Type> compatibleTypes, Identifier id) {
         super(compatibleTypes, id);
         this.abilities = abilities.stream().map(Ability::copy).toList();
     }
-    protected AbilityUpgrade(Ability ability, List<EquipmentType> compatibleTypes, Identifier id) {
+    protected AbilityUpgrade(Ability ability, List<ArmorItem.Type> compatibleTypes, Identifier id) {
         this(List.of(ability), compatibleTypes, id);
     }
 
@@ -64,7 +64,10 @@ public class AbilityUpgrade extends Upgrade {
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
 
-        NbtList abilitiesNbt = nbt.getListOrEmpty("abilities");
+        NbtList abilitiesNbt = new NbtList();
+        if (nbt.contains("abilities")) {
+            abilitiesNbt = nbt.getList("abilities", NbtElement.COMPOUND_TYPE);
+        }
 
         List<Ability> abilitiesList = new ArrayList<>();
         for (NbtElement nbtElement : abilitiesNbt) {
