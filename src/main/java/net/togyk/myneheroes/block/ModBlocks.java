@@ -1,6 +1,5 @@
 package net.togyk.myneheroes.block;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
@@ -80,7 +79,7 @@ public class ModBlocks {
             new KryptoniteRadiationBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.AMETHYST_BLOCK).mapColor(MapColor.LIME).strength(2.5f)));
 
     public static final Block KRYPTONITE_CLUSTER = registerKryptoniteRadiationBlock("kryptonite_cluster",
-            new KryptoniteClusterBlock(AbstractBlock.Settings.create().mapColor(MapColor.LIME).solid().nonOpaque().sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(1.5F).luminance((state) -> 5).pistonBehavior(PistonBehavior.DESTROY)));
+            new KryptoniteClusterBlock(7.0F, 10.0F, AbstractBlock.Settings.create().mapColor(MapColor.LIME).solid().nonOpaque().sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(1.5F).luminance((state) -> 5).pistonBehavior(PistonBehavior.DESTROY)));
 
 
     public static final Block METEOR_RADAR = registerBlock("meteor_radar",
@@ -106,10 +105,10 @@ public class ModBlocks {
             ));
 
     public static final Block POTTED_HEART_SHAPED_HERB = registerBlockNoItem("potted_heart_shaped_herb",
-            new FlowerPotBlock(ModBlocks.HEART_SHAPED_HERB, FabricBlockSettings.copy(Blocks.POTTED_ALLIUM)));
+            new FlowerPotBlock(ModBlocks.HEART_SHAPED_HERB, AbstractBlock.Settings.copy(Blocks.POTTED_ALLIUM)));
 
     public static final Block ADAMANTIUM_BLOCK = registerBlock("adamantium_block",
-            new Block(FabricBlockSettings.copy(Blocks.NETHERITE_BLOCK).mapColor(MapColor.DULL_PINK)));
+            new Block(AbstractBlock.Settings.copy(Blocks.NETHERITE_BLOCK).mapColor(MapColor.DULL_PINK)));
 
     private static Block registerBlockNoItem(String name, Block block) {
         return Registry.register(Registries.BLOCK, Identifier.of(MyneHeroes.MOD_ID, name), block);
