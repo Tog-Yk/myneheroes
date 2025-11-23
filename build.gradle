@@ -1,13 +1,13 @@
 plugins {
-	id 'fabric-loom' version "1.11.7"
-	id 'maven-publish'
+    id 'fabric-loom' version '1.10.5'
+    id 'maven-publish'
 }
 
 version = project.mod_version
 group = project.maven_group
 
 base {
-	archivesName = project.archives_base_name
+    archivesName = project.archives_base_name
 }
 
 repositories {
@@ -30,7 +30,7 @@ repositories {
 }
 
 fabricApi {
-	configureDataGeneration()
+    configureDataGeneration()
 }
 
 dependencies {
@@ -41,6 +41,8 @@ dependencies {
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    modCompileOnly "software.bernie.geckolib:geckolib-fabric-${project.minecraft_version}:${project.geckolib_version}"
 
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:16.0.777"
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:16.0.777"

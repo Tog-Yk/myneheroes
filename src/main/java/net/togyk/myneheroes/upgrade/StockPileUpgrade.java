@@ -2,9 +2,9 @@ package net.togyk.myneheroes.upgrade;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.ClickType;
@@ -24,11 +24,11 @@ public class StockPileUpgrade extends AbilityUpgrade implements StockPile {
     private final Item rechargeItem;
     private final float rechargeValue;
 
-    protected StockPileUpgrade(Ability ability, float maxCharge, Item rechargeItem, float rechargeValue, List<EquipmentType> compatibleTypes, Identifier id) {
+    protected StockPileUpgrade(Ability ability, float maxCharge, Item rechargeItem, float rechargeValue, List<ArmorItem.Type> compatibleTypes, Identifier id) {
         this(List.of(ability), maxCharge, rechargeItem, rechargeValue, compatibleTypes, id);
     }
 
-    protected StockPileUpgrade(List<Ability> abilities, float maxCharge, Item rechargeItem, float rechargeValue, List<EquipmentType> compatibleTypes, Identifier id) {
+    protected StockPileUpgrade(List<Ability> abilities, float maxCharge, Item rechargeItem, float rechargeValue, List<ArmorItem.Type> compatibleTypes, Identifier id) {
         super(abilities, compatibleTypes, id);
         this.maxCharge = maxCharge;
         this.chargeIcon = Identifier.of(MyneHeroes.MOD_ID,"textures/upgrade/charge/"+id.getPath()+".png");
@@ -90,8 +90,8 @@ public class StockPileUpgrade extends AbilityUpgrade implements StockPile {
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
 
-        if (nbt.getFloat("charge").isPresent()) {
-            this.charge = nbt.getFloat("charge").get();
+        if (nbt.contains("charge")) {
+            this.charge = nbt.getFloat("charge");
         }
     }
 

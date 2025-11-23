@@ -40,11 +40,6 @@ public class ModTags {
         public static final TagKey<Item> CANT_BE_PLACED_IN_ITEM_FRAME = createTag("cant_be_placed_in_item_frame");
         public static final TagKey<Item> CANT_BE_PLACED_IN_INVENTORIES = createTag("cant_be_placed_in_inventories");
 
-        public static final TagKey<Item> CAN_REPAIR_TITANIUM = createTag("can_repair_titanium");
-        public static final TagKey<Item> CAN_REPAIR_ADAMANTIUM = createTag("can_repair_adamantium");
-        public static final TagKey<Item> CAN_REPAIR_VIBRANIUM = createTag("can_repair_vibranium");
-        public static final TagKey<Item> CAN_REPAIR_GOLD_TITANIUM = createTag("can_repair_gold_titanium");
-
         private static TagKey<Item> createTag(String name) {
             return TagKey.of(RegistryKeys.ITEM, Identifier.of(MyneHeroes.MOD_ID, name));
         }

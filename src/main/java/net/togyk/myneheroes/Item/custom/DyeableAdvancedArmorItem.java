@@ -1,11 +1,9 @@
 package net.togyk.myneheroes.Item.custom;
 
-import net.minecraft.component.type.TooltipDisplayComponent;
-import net.minecraft.item.Item;
+import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.equipment.ArmorMaterial;
-import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
@@ -14,13 +12,12 @@ import net.togyk.myneheroes.component.ModDataComponentTypes;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class DyeableAdvancedArmorItem extends AdvancedArmorItem implements DyeableItem, LightableItem {
     private final List<Integer> defaultColors;
     private final List<Integer> defaultLightLevels;
 
-    public DyeableAdvancedArmorItem(List<Integer> defaultColors, List<Integer> lightLevels, Text titleText, ArmorMaterial material, EquipmentType type, Item.Settings settings) {
+    public DyeableAdvancedArmorItem(List<Integer> defaultColors, List<Integer> lightLevels, Text titleText, RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
         super(titleText, material, type, settings);
         this.defaultColors = defaultColors;
         this.defaultLightLevels = lightLevels;
@@ -92,7 +89,11 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem implements Dyeab
     }
 
     public boolean layerIsDyeable(int index) {
-        return true;
+        //getting the layer
+        List<ArmorMaterial.Layer> layers = getMaterial().value().layers();
+        ArmorMaterial.Layer layer = layers.get(index);
+
+        return layer.isDyeable();
     }
 
     public boolean layerIsDyed(ItemStack stack, int index) {
@@ -157,13 +158,13 @@ public class DyeableAdvancedArmorItem extends AdvancedArmorItem implements Dyeab
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
-        super.appendTooltip(stack, context, displayComponent, textConsumer, type);
-        textConsumer.accept(Text.literal("Colors:").formatted(Formatting.GRAY));
+    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+        super.appendTooltip(stack, context, tooltip, type);
+        tooltip.add(Text.literal("Colors:").formatted(Formatting.GRAY));
         for (int i = 0; i < defaultColors.size(); i++) {
             if (layerIsDyeable(i)) {
                 int color = getColor(stack, i) & 0xFFFFFF;
-                textConsumer.accept(Text.literal(" " + String.format("0x%06X", color)).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(color))));
+                tooltip.add(Text.literal(" " + String.format("0x%06X", color)).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(color))));
             }
         }
     }

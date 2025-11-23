@@ -1,7 +1,7 @@
 package net.togyk.myneheroes.upgrade;
 
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ColorUpgrade extends Upgrade {
 
-    protected ColorUpgrade(List<EquipmentType> compatibleTypes, Identifier id) {
+    protected ColorUpgrade(List<ArmorItem.Type> compatibleTypes, Identifier id) {
         super(compatibleTypes, id);
     }
 

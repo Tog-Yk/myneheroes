@@ -1,5 +1,6 @@
 package net.togyk.myneheroes.block;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
@@ -19,20 +20,20 @@ public class ModBlocks {
     public static final Block VIBRANIUM_BLOCK = registerBlock("vibranium_block",
             new HeartShapedHerbGrowingBlock(4,
                     AbstractBlock.Settings.create().strength(4f)
-                    .requiresTool().sounds(BlockSoundGroup.METAL)));
+                            .requiresTool().sounds(BlockSoundGroup.METAL)));
 
     public static final Block RAW_VIBRANIUM_BLOCK = registerBlock("raw_vibranium_block",
             new HeartShapedHerbGrowingBlock(4,
                     AbstractBlock.Settings.create().strength(3f)
-                    .requiresTool()));
+                            .requiresTool()));
     public static final Block VIBRANIUM_ORE = registerBlock("vibranium_ore",
             new HeartShapedHerbGrowingBlock(4,
                     AbstractBlock.Settings.create().strength(3f)
-                    .requiresTool().sounds(BlockSoundGroup.STONE)));
+                            .requiresTool().sounds(BlockSoundGroup.STONE)));
     public static final Block DEEPSLATE_VIBRANIUM_ORE = registerBlock("deepslate_vibranium_ore",
             new HeartShapedHerbGrowingBlock(4,
                     AbstractBlock.Settings.create().strength(3f)
-                    .requiresTool().sounds(BlockSoundGroup.DEEPSLATE)));
+                            .requiresTool().sounds(BlockSoundGroup.DEEPSLATE)));
 
     public static final Block TITANIUM_BLOCK = registerBlock("titanium_block",
             new Block(AbstractBlock.Settings.create().strength(4f)
@@ -79,7 +80,7 @@ public class ModBlocks {
             new KryptoniteRadiationBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.AMETHYST_BLOCK).mapColor(MapColor.LIME).strength(2.5f)));
 
     public static final Block KRYPTONITE_CLUSTER = registerKryptoniteRadiationBlock("kryptonite_cluster",
-            new KryptoniteClusterBlock(7.0F, 10.0F, AbstractBlock.Settings.create().mapColor(MapColor.LIME).solid().nonOpaque().sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(1.5F).luminance((state) -> 5).pistonBehavior(PistonBehavior.DESTROY)));
+            new KryptoniteClusterBlock(AbstractBlock.Settings.create().mapColor(MapColor.LIME).solid().nonOpaque().sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(1.5F).luminance((state) -> 5).pistonBehavior(PistonBehavior.DESTROY)));
 
 
     public static final Block METEOR_RADAR = registerBlock("meteor_radar",
@@ -105,10 +106,10 @@ public class ModBlocks {
             ));
 
     public static final Block POTTED_HEART_SHAPED_HERB = registerBlockNoItem("potted_heart_shaped_herb",
-            new FlowerPotBlock(ModBlocks.HEART_SHAPED_HERB, AbstractBlock.Settings.copy(Blocks.POTTED_ALLIUM)));
+            new FlowerPotBlock(ModBlocks.HEART_SHAPED_HERB, FabricBlockSettings.copy(Blocks.POTTED_ALLIUM)));
 
     public static final Block ADAMANTIUM_BLOCK = registerBlock("adamantium_block",
-            new Block(AbstractBlock.Settings.copy(Blocks.NETHERITE_BLOCK).mapColor(MapColor.DULL_PINK)));
+            new Block(FabricBlockSettings.copy(Blocks.NETHERITE_BLOCK).mapColor(MapColor.DULL_PINK)));
 
     private static Block registerBlockNoItem(String name, Block block) {
         return Registry.register(Registries.BLOCK, Identifier.of(MyneHeroes.MOD_ID, name), block);
