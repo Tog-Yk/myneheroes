@@ -20,20 +20,20 @@ public class ModBlocks {
     public static final Block VIBRANIUM_BLOCK = registerBlock("vibranium_block",
             new HeartShapedHerbGrowingBlock(4,
                     AbstractBlock.Settings.create().strength(4f)
-                    .requiresTool().sounds(BlockSoundGroup.METAL)));
+                            .requiresTool().sounds(BlockSoundGroup.METAL)));
 
     public static final Block RAW_VIBRANIUM_BLOCK = registerBlock("raw_vibranium_block",
             new HeartShapedHerbGrowingBlock(4,
                     AbstractBlock.Settings.create().strength(3f)
-                    .requiresTool()));
+                            .requiresTool()));
     public static final Block VIBRANIUM_ORE = registerBlock("vibranium_ore",
             new HeartShapedHerbGrowingBlock(4,
                     AbstractBlock.Settings.create().strength(3f)
-                    .requiresTool().sounds(BlockSoundGroup.STONE)));
+                            .requiresTool().sounds(BlockSoundGroup.STONE)));
     public static final Block DEEPSLATE_VIBRANIUM_ORE = registerBlock("deepslate_vibranium_ore",
             new HeartShapedHerbGrowingBlock(4,
                     AbstractBlock.Settings.create().strength(3f)
-                    .requiresTool().sounds(BlockSoundGroup.DEEPSLATE)));
+                            .requiresTool().sounds(BlockSoundGroup.DEEPSLATE)));
 
     public static final Block TITANIUM_BLOCK = registerBlock("titanium_block",
             new Block(AbstractBlock.Settings.create().strength(4f)

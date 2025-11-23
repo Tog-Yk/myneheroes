@@ -51,7 +51,7 @@ public class ModArmorMaterials {
             }), 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, () -> Ingredient.ofItems(ModItems.VIBRANIUM_INGOT),
                     List.of(new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID, "vibranium"))), 2.0F,0.05F));
 
-        //Ironman pattern
+    //Ironman pattern
     public static final RegistryEntry<ArmorMaterial> VIBRANIUM_IRONMAN_MATERIAL = registerArmorMaterial("vibranium_ironman",
             () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
                 map.put(ArmorItem.Type.BOOTS, 3);

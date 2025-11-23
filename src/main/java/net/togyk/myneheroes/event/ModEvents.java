@@ -117,8 +117,8 @@ public class ModEvents {
             }
         });
 
-        ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
-            if (entity instanceof PlayerEntity player) {
+        ServerLivingEntityEvents.AFTER_DAMAGE.register((entity, source, originalAmount, actualAmount, blocked) -> {
+            if (entity instanceof PlayerEntity player && !blocked) {
                 // Check if the damage source is lightning
                 if (source.isOf(DamageTypes.LIGHTNING_BOLT)) {
                     // Check if the player has reached the limit of powers
@@ -130,7 +130,6 @@ public class ModEvents {
                     }
                 }
             }
-            return true;
         });
 
         ServerTickEvents.END_SERVER_TICK.register(server -> {
@@ -199,7 +198,7 @@ public class ModEvents {
             return ActionResult.PASS;
         });
 
-        ServerChunkEvents.CHUNK_LOAD.register((serverWorld, chunk) -> {
+        ServerChunkEvents.CHUNK_GENERATE.register((serverWorld, chunk) -> {
             //*
             ChunkPos chunkPos = chunk.getPos();
             for (int x = chunkPos.getStartX(); x <= chunkPos.getEndX(); x++) {
