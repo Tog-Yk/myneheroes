@@ -20,6 +20,16 @@ public class ModItemGroups {
             FabricItemGroup.builder().icon(ModItems.VIBRANIUM_INGOT::getDefaultStack)
                     .displayName(Text.translatable("itemgroup.myneheroes.myneheroes"))
                     .entries((displayContext, entries) -> {
+                        entries.add(ModBlocks.ARMOR_DYEING_STATION);
+                        entries.add(ModBlocks.ARMOR_LIGHT_LEVELING_STATION);
+                        entries.add(ModBlocks.UPGRADE_STATION);
+                        entries.add(ModBlocks.ARMOR_FABRICATOR);
+
+                        entries.add(ModBlocks.METEOR_RADAR);
+
+                        entries.add(ModBlocks.KRYPTONITE_CLUSTER);
+                        entries.add(ModBlocks.KRYPTONITE_BlOCK);
+
                         entries.add(ModItems.VIBRANIUM_INGOT);
                         entries.add(ModItems.RAW_VIBRANIUM);
 
@@ -50,20 +60,45 @@ public class ModItemGroups {
                         entries.add(ModBlocks.URANIUM_ORE);
                         entries.add(ModBlocks.DEEPSLATE_URANIUM_ORE);
 
+                        entries.add(ModItems.ADAMANTIUM_INGOT);
+                        entries.add(ModBlocks.ADAMANTIUM_BLOCK);
+
+
+                        entries.add(ModItems.ADAMANTIUM_KATANA);
+
+                        entries.add(ModItems.ADAMANTIUM_SWORD);
+                        entries.add(ModItems.ADAMANTIUM_SHOVEL);
+                        entries.add(ModItems.ADAMANTIUM_PICKAXE);
+                        entries.add(ModItems.ADAMANTIUM_AXE);
+                        entries.add(ModItems.ADAMANTIUM_HOE);
+
+                        entries.add(ModItems.IRON_KATANA);
+
+                        entries.add(ModItems.ADAMANTIUM_UPGRADE);
                         entries.add(ModItems.IRON_SUIT_TEMPLATE);
                         entries.add(ModItems.SPEEDSTER_SUIT_TEMPLATE);
 
-                        entries.add(ModItems.ARC_REACTOR);
-
-                        entries.add(ModItems.POWER_INJECTION);
-
-                        entries.add(ModBlocks.ARMOR_DYEING_STATION);
-                        entries.add(ModBlocks.ARMOR_LIGHT_LEVELING_STATION);
 
                         entries.add(ModItems.VIBRANIUM_SHIELD);
                         entries.add(ModItems.A_SYMBOLS_SHIELD);
                         entries.add(ModItems.COSMIC_SHIELD);
                         entries.add(ModItems.CARTERS_SHIELD);
+
+
+                        entries.add(ModItems.POWER_INJECTION);
+
+                        entries.add(ModItems.WEB_FLUID);
+                        entries.add(ModItems.COLORING_COMPOUND);
+                        entries.add(ModItems.ARC_REACTOR);
+
+                        entries.add(ModBlocks.HEART_SHAPED_HERB);
+                        entries.add(ModItems.HEART_SHAPED_HERB_MIX);
+
+                        entries.add(ModItems.BOTTLE_OF_SPIDER_VENOM);
+                        entries.add(ModItems.BOTTLE_OF_RADIOACTIVE_SPIDER_VENOM);
+
+                        entries.add(ModItems.TOOLBELT_3_UPGRADE);
+                        entries.add(ModItems.WEB_SHOOTER_UPGRADE);
 
                         entries.add(ModItems.CIRCUIT_BOARD);
 
@@ -73,38 +108,6 @@ public class ModItemGroups {
                         entries.add(ModItems.FlY_UPGRADE);
                         entries.add(ModItems.TAKE_OFF_SUIT_UPGRADE);
                         entries.add(ModItems.KINETIC_ENERGY_STORAGE_UPGRADE);
-
-                        entries.add(ModItems.TOOLBELT_3_UPGRADE);
-                        entries.add(ModItems.WEB_SHOOTER_UPGRADE);
-                        entries.add(ModItems.WEB_FLUID);
-
-                        entries.add(ModItems.BOTTLE_OF_SPIDER_VENOM);
-                        entries.add(ModItems.BOTTLE_OF_RADIOACTIVE_SPIDER_VENOM);
-
-                        entries.add(ModBlocks.KRYPTONITE_BlOCK);
-                        entries.add(ModBlocks.KRYPTONITE_CLUSTER);
-
-                        entries.add(ModBlocks.METEOR_RADAR);
-
-                        entries.add(ModItems.COLORING_COMPOUND);
-
-                        entries.add(ModBlocks.UPGRADE_STATION);
-
-                        entries.add(ModBlocks.ARMOR_FABRICATOR);
-
-                        entries.add(ModBlocks.HEART_SHAPED_HERB);
-                        entries.add(ModItems.HEART_SHAPED_HERB_MIX);
-
-                        entries.add(ModItems.ADAMANTIUM_UPGRADE);
-                        entries.add(ModItems.ADAMANTIUM_INGOT);
-                        entries.add(ModBlocks.ADAMANTIUM_BLOCK);
-
-                        entries.add(ModItems.ADAMANTIUM_SWORD);
-                        entries.add(ModItems.ADAMANTIUM_SHOVEL);
-                        entries.add(ModItems.ADAMANTIUM_PICKAXE);
-                        entries.add(ModItems.ADAMANTIUM_AXE);
-                        entries.add(ModItems.ADAMANTIUM_HOE);
-
                         //only add when datapack is enabled
                         //shibashi's shenanigans items
                         if (ModResourcePacks.SHIBASHIS_SHENANIGANS.isActive()) {
