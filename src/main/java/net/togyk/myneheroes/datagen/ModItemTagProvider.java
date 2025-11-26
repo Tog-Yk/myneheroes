@@ -179,5 +179,15 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ModTags.Items.REACTOR_FUEL)
                 .add(ModItems.VIBRANIUM_INGOT)
         ;
+
+        getOrCreateTagBuilder(ModTags.Items.SHIELDS)
+                .add(ModItems.VIBRANIUM_SHIELD)
+                .add(ModItems.A_SYMBOLS_SHIELD)
+                .add(ModItems.CARTERS_SHIELD)
+                .add(ModItems.COSMIC_SHIELD)
+
+                .add(ModItems.IRON_KATANA)
+                .add(ModItems.ADAMANTIUM_KATANA)
+        ;
     }
 }

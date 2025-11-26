@@ -126,6 +126,10 @@ public class PowerInjectionItem extends Item implements UpgradableItem {
                 return name;
             }
         }
+        if (power == null) {
+            //translatable name for empty
+            return Text.translatable(this.getTranslationKey(stack) + ".empty");
+        }
         //default
         return super.getName(stack);
     }
