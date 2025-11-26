@@ -51,9 +51,9 @@ public class HeartShapedHerbGrowingBlock extends Block {
 
     private List<BlockPos> findGrassInBox(World world, Box box) {
         List<BlockPos> posList = new ArrayList<>();
-        for (double x = box.minX; x <= box.maxX; x++) {
-            for (double y = box.minY; y <= box.maxY; y++) {
-                for (double z = box.minZ; z <= box.maxZ; z++) {
+        for (double x = box.minX; x < box.maxX; x++) {
+            for (double y = box.minY; y < box.maxY; y++) {
+                for (double z = box.minZ; z < box.maxZ; z++) {
                     BlockPos pos = new BlockPos((int) x, (int) y, (int) z);
                     if (world.getBlockState(pos).isOf(Blocks.GRASS_BLOCK)) {
                         posList.add(pos);
