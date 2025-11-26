@@ -26,6 +26,13 @@ public class KatanaItem extends ShieldItem {
     }
 
     @Override
+    public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
+        if (user instanceof PlayerEntity player) {
+            player.getItemCooldownManager().set(this, 40);
+        }
+    }
+
+    @Override
     public boolean canMine(BlockState state, World world, BlockPos pos, PlayerEntity miner) {
         return !miner.isCreative();
     }
@@ -39,5 +46,9 @@ public class KatanaItem extends ShieldItem {
     @Override
     public void postDamageEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         stack.damage(1, attacker, EquipmentSlot.MAINHAND);
+    }
+
+    public void onBlocked(PlayerEntity player, float amount) {
+        player.getItemCooldownManager().set(this, 120);
     }
 }
