@@ -175,7 +175,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .pattern("/ ")
                 .input('#', Items.IRON_INGOT)
                 .input('$', Items.GOLD_INGOT)
-                .input('/', Items.STRING)
+                .input('/', Items.STICK)
                 .criterion(FabricRecipeProvider.hasItem(Items.IRON_INGOT),
                         FabricRecipeProvider.conditionsFromItem(Items.IRON_INGOT))
                 .offerTo(exporter);
@@ -185,7 +185,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .pattern(" /")
                 .input('#', Items.IRON_INGOT)
                 .input('$', Items.GOLD_INGOT)
-                .input('/', Items.STRING)
+                .input('/', Items.STICK)
                 .criterion(FabricRecipeProvider.hasItem(Items.IRON_INGOT),
                         FabricRecipeProvider.conditionsFromItem(Items.IRON_INGOT))
                 .offerTo(exporter, "iron_katana_mirrored");
@@ -196,7 +196,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .pattern("/ ")
                 .input('#', ModItems.ADAMANTIUM_INGOT)
                 .input('$', Items.GOLD_INGOT)
-                .input('/', Items.STRING)
+                .input('/', Items.STICK)
                 .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_INGOT),
                         FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_INGOT))
                 .offerTo(exporter);
@@ -206,7 +206,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .pattern(" /")
                 .input('#', ModItems.ADAMANTIUM_INGOT)
                 .input('$', Items.GOLD_INGOT)
-                .input('/', Items.STRING)
+                .input('/', Items.STICK)
                 .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_INGOT),
                         FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_INGOT))
                 .offerTo(exporter, "adamantium_katana_mirrored");
