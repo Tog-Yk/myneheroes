@@ -49,6 +49,7 @@ public class KatanaItem extends ShieldItem {
     }
 
     public void onBlocked(PlayerEntity player, float amount) {
+        player.stopUsingItem();
         player.getItemCooldownManager().set(this, 120);
     }
 }
