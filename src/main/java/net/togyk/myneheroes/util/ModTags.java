@@ -40,6 +40,8 @@ public class ModTags {
         public static final TagKey<Item> CANT_BE_PLACED_IN_ITEM_FRAME = createTag("cant_be_placed_in_item_frame");
         public static final TagKey<Item> CANT_BE_PLACED_IN_INVENTORIES = createTag("cant_be_placed_in_inventories");
 
+        public static final TagKey<Item> SHIELDS = createTag("shields");
+
         private static TagKey<Item> createTag(String name) {
             return TagKey.of(RegistryKeys.ITEM, Identifier.of(MyneHeroes.MOD_ID, name));
         }
