@@ -18,7 +18,8 @@
   "client": [
     "ArmorFeatureRendererMixin",
     "InGameOverlayRendererMixin",
-    "MouseMixin"
+    "MouseMixin",
+    "PlayerSwingMixin"
   ],
   "injectors": {
     "defaultRequire": 1
