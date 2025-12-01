@@ -10,6 +10,7 @@ import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.DyeableAdvancedGeckoArmorItem;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.loading.math.MolangQueries;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 public class DyeableGeckoArmorRenderer extends GeoArmorRenderer<DyeableAdvancedGeckoArmorItem> {
@@ -18,6 +19,7 @@ public class DyeableGeckoArmorRenderer extends GeoArmorRenderer<DyeableAdvancedG
     public DyeableGeckoArmorRenderer() {
         super(new DyeableGeckoArmorModel());
     }
+
 
     @Override
     public Identifier getTextureLocation(DyeableAdvancedGeckoArmorItem animatable) {
@@ -37,7 +39,7 @@ public class DyeableGeckoArmorRenderer extends GeoArmorRenderer<DyeableAdvancedG
 
         int renderColor = getRenderColor(animatable, partialTick, packedLight).argbInt();
         int packedOverlay = getPackedOverlay(animatable, 0, partialTick);
-        BakedGeoModel model = getGeoModel().getBakedModel(getGeoModel().getModelResource(animatable));
+        BakedGeoModel model = getGeoModel().getBakedModel(getGeoModel().getModelResource(animatable, this));
 
         if (renderType == null)
             renderType = getRenderType(animatable, getTextureLocation(animatable), bufferSource, partialTick);
@@ -71,6 +73,8 @@ public class DyeableGeckoArmorRenderer extends GeoArmorRenderer<DyeableAdvancedG
         poseStack.pop();
 
         renderFinal(poseStack, animatable, model, bufferSource, buffer, partialTick, packedLight, packedOverlay, renderColor);
+        doPostRenderCleanup();
         this.index = 0;
+        MolangQueries.clearActor();
     }
 }
