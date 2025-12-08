@@ -168,49 +168,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         FabricRecipeProvider.conditionsFromItem(Items.CLAY))
                 .offerTo(exporter);
 
-
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.IRON_KATANA)
-                .pattern("# ")
-                .pattern("#$")
-                .pattern("/ ")
-                .input('#', Items.IRON_INGOT)
-                .input('$', Items.GOLD_INGOT)
-                .input('/', Items.STICK)
-                .criterion(FabricRecipeProvider.hasItem(Items.IRON_INGOT),
-                        FabricRecipeProvider.conditionsFromItem(Items.IRON_INGOT))
-                .offerTo(exporter);
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.IRON_KATANA)
-                .pattern(" #")
-                .pattern("$#")
-                .pattern(" /")
-                .input('#', Items.IRON_INGOT)
-                .input('$', Items.GOLD_INGOT)
-                .input('/', Items.STICK)
-                .criterion(FabricRecipeProvider.hasItem(Items.IRON_INGOT),
-                        FabricRecipeProvider.conditionsFromItem(Items.IRON_INGOT))
-                .offerTo(exporter, "iron_katana_mirrored");
-
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.ADAMANTIUM_KATANA)
-                .pattern("# ")
-                .pattern("#$")
-                .pattern("/ ")
-                .input('#', ModItems.ADAMANTIUM_INGOT)
-                .input('$', Items.GOLD_INGOT)
-                .input('/', Items.STICK)
-                .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_INGOT),
-                        FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_INGOT))
-                .offerTo(exporter);
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.ADAMANTIUM_KATANA)
-                .pattern(" #")
-                .pattern("$#")
-                .pattern(" /")
-                .input('#', ModItems.ADAMANTIUM_INGOT)
-                .input('$', Items.GOLD_INGOT)
-                .input('/', Items.STICK)
-                .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_INGOT),
-                        FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_INGOT))
-                .offerTo(exporter, "adamantium_katana_mirrored");
-
         //blocks
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.ARMOR_LIGHT_LEVELING_STATION)
                 .pattern("&%")
@@ -346,6 +303,144 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .offerTo(exporter);
 
         //tools
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.WOODEN_KATANA)
+                .pattern("# ")
+                .pattern("#$")
+                .pattern("/ ")
+                .input('#', ItemTags.PLANKS)
+                .input('$', Items.GOLD_INGOT)
+                .input('/', Items.STICK)
+                .criterion(FabricRecipeProvider.hasItem(Items.OAK_PLANKS),
+                        FabricRecipeProvider.conditionsFromItem(Items.OAK_PLANKS))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.WOODEN_KATANA)
+                .pattern(" #")
+                .pattern("$#")
+                .pattern(" /")
+                .input('#', ItemTags.PLANKS)
+                .input('$', Items.GOLD_INGOT)
+                .input('/', Items.STICK)
+                .criterion(FabricRecipeProvider.hasItem(Items.OAK_PLANKS),
+                        FabricRecipeProvider.conditionsFromItem(Items.OAK_PLANKS))
+                .offerTo(exporter, "wooden_katana_mirrored");
+
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.STONE_KATANA)
+                .pattern("# ")
+                .pattern("#$")
+                .pattern("/ ")
+                .input('#', Items.COBBLESTONE)
+                .input('$', Items.GOLD_INGOT)
+                .input('/', Items.STICK)
+                .criterion(FabricRecipeProvider.hasItem(Items.COBBLESTONE),
+                        FabricRecipeProvider.conditionsFromItem(Items.COBBLESTONE))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.STONE_KATANA)
+                .pattern(" #")
+                .pattern("$#")
+                .pattern(" /")
+                .input('#', Items.COBBLESTONE)
+                .input('$', Items.GOLD_INGOT)
+                .input('/', Items.STICK)
+                .criterion(FabricRecipeProvider.hasItem(Items.COBBLESTONE),
+                        FabricRecipeProvider.conditionsFromItem(Items.COBBLESTONE))
+                .offerTo(exporter, "stone_katana_mirrored");
+
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.IRON_KATANA)
+                .pattern("# ")
+                .pattern("#$")
+                .pattern("/ ")
+                .input('#', Items.IRON_INGOT)
+                .input('$', Items.GOLD_INGOT)
+                .input('/', Items.STICK)
+                .criterion(FabricRecipeProvider.hasItem(Items.IRON_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(Items.IRON_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.IRON_KATANA)
+                .pattern(" #")
+                .pattern("$#")
+                .pattern(" /")
+                .input('#', Items.IRON_INGOT)
+                .input('$', Items.GOLD_INGOT)
+                .input('/', Items.STICK)
+                .criterion(FabricRecipeProvider.hasItem(Items.IRON_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(Items.IRON_INGOT))
+                .offerTo(exporter, "iron_katana_mirrored");
+
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.GOLD_KATANA)
+                .pattern("# ")
+                .pattern("#$")
+                .pattern("/ ")
+                .input('#', Items.GOLD_INGOT)
+                .input('$', Items.GOLD_INGOT)
+                .input('/', Items.STICK)
+                .criterion(FabricRecipeProvider.hasItem(Items.IRON_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(Items.IRON_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.GOLD_KATANA)
+                .pattern(" #")
+                .pattern("$#")
+                .pattern(" /")
+                .input('#', Items.GOLD_INGOT)
+                .input('$', Items.GOLD_INGOT)
+                .input('/', Items.STICK)
+                .criterion(FabricRecipeProvider.hasItem(Items.GOLD_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(Items.GOLD_INGOT))
+                .offerTo(exporter, "gold_katana_mirrored");
+
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.DIAMOND_KATANA)
+                .pattern("# ")
+                .pattern("#$")
+                .pattern("/ ")
+                .input('#', Items.DIAMOND)
+                .input('$', Items.GOLD_INGOT)
+                .input('/', Items.STICK)
+                .criterion(FabricRecipeProvider.hasItem(Items.DIAMOND),
+                        FabricRecipeProvider.conditionsFromItem(Items.DIAMOND))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.DIAMOND_KATANA)
+                .pattern(" #")
+                .pattern("$#")
+                .pattern(" /")
+                .input('#', Items.DIAMOND)
+                .input('$', Items.GOLD_INGOT)
+                .input('/', Items.STICK)
+                .criterion(FabricRecipeProvider.hasItem(Items.DIAMOND),
+                        FabricRecipeProvider.conditionsFromItem(Items.DIAMOND))
+                .offerTo(exporter, "diamond_katana_mirrored");
+
+        SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.ofItems(ModItems.DIAMOND_KATANA), Ingredient.ofItems(ModItems.NETHERITE_KATANA),
+                        RecipeCategory.COMBAT,
+                        ModItems.NETHERITE_KATANA)
+                .criterion(FabricRecipeProvider.hasItem(Items.NETHERITE_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(Items.NETHERITE_INGOT))
+                .offerTo(exporter, "netherite_katana");
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.ADAMANTIUM_KATANA)
+                .pattern("# ")
+                .pattern("#$")
+                .pattern("/ ")
+                .input('#', ModItems.ADAMANTIUM_INGOT)
+                .input('$', Items.GOLD_INGOT)
+                .input('/', Items.STICK)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.ADAMANTIUM_KATANA)
+                .pattern(" #")
+                .pattern("$#")
+                .pattern(" /")
+                .input('#', ModItems.ADAMANTIUM_INGOT)
+                .input('$', Items.GOLD_INGOT)
+                .input('/', Items.STICK)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.ADAMANTIUM_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.ADAMANTIUM_INGOT))
+                .offerTo(exporter, "adamantium_katana_mirrored");
+
+
         SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(ModItems.ADAMANTIUM_UPGRADE), Ingredient.ofItems(Items.DIAMOND_SWORD), Ingredient.ofItems(ModItems.ADAMANTIUM_INGOT),
                         RecipeCategory.COMBAT,
                         ModItems.ADAMANTIUM_SWORD)

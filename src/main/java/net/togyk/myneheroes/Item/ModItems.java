@@ -91,8 +91,18 @@ public class ModItems {
     public static final Item ADAMANTIUM_INGOT = registerItem("adamantium_ingot",
             new Item(new Item.Settings().fireproof()));
 
+    public static final Item WOODEN_KATANA = registerItem("wooden_katana",
+            new KatanaItem(ToolMaterials.WOOD, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.WOOD, 3, -1.4F))));
+    public static final Item STONE_KATANA = registerItem("stone_katana",
+            new KatanaItem(ToolMaterials.STONE, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.STONE, 3, -1.4F))));
     public static final Item IRON_KATANA = registerItem("iron_katana",
-            new KatanaItem(ModToolMaterial.ADAMANTIUM, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.IRON, 3, -1.4F))));
+            new KatanaItem(ToolMaterials.IRON, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.IRON, 3, -1.4F))));
+    public static final Item GOLD_KATANA = registerItem("gold_katana",
+            new KatanaItem(ToolMaterials.GOLD, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.GOLD, 3, -1.4F))));
+    public static final Item DIAMOND_KATANA = registerItem("diamond_katana",
+            new KatanaItem(ToolMaterials.DIAMOND, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.DIAMOND, 3, -1.4F))));
+    public static final Item NETHERITE_KATANA = registerItem("netherite_katana",
+            new KatanaItem(ToolMaterials.NETHERITE, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.NETHERITE, 3, -1.4F))));
 
 
     public static final Item ADAMANTIUM_KATANA = registerItem("adamantium_katana",
