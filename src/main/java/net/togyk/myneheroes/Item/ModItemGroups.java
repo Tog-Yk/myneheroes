@@ -62,6 +62,7 @@ public class ModItemGroups {
 
                         entries.add(ModItems.ADAMANTIUM_INGOT);
                         entries.add(ModBlocks.ADAMANTIUM_BLOCK);
+                        entries.add(ModItems.ADAMANTIUM_INJECTION);
 
 
                         entries.add(ModItems.ADAMANTIUM_KATANA);
