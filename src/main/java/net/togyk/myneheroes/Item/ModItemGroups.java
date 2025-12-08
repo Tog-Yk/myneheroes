@@ -72,7 +72,12 @@ public class ModItemGroups {
                         entries.add(ModItems.ADAMANTIUM_AXE);
                         entries.add(ModItems.ADAMANTIUM_HOE);
 
+                        entries.add(ModItems.WOODEN_KATANA);
+                        entries.add(ModItems.STONE_KATANA);
                         entries.add(ModItems.IRON_KATANA);
+                        entries.add(ModItems.GOLD_KATANA);
+                        entries.add(ModItems.DIAMOND_KATANA);
+                        entries.add(ModItems.NETHERITE_KATANA);
 
                         entries.add(ModItems.ADAMANTIUM_UPGRADE);
                         entries.add(ModItems.IRON_SUIT_TEMPLATE);

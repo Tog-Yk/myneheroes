@@ -1,0 +1,18 @@
+{
+	"parent" : "myneheroes:item/adamantium_katana_blocking",
+    "textures": {
+        "layer0": "myneheroes:item/wooden_katana"
+    },
+    "display": {
+        "firstperson_righthand": {
+            "rotation": [-15.5, -60.75, 61.25],
+            "translation": [-1.5, 6.5, 2.75],
+            "scale": [0.7, 0.7, 0.7]
+        },
+        "firstperson_lefthand": {
+            "rotation": [160, 50, 100],
+            "translation": [0, 6.5, 2.75],
+            "scale": [0.7, 0.7, 0.7]
+        }
+    }
+}

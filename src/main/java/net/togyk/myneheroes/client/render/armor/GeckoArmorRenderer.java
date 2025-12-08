@@ -11,6 +11,7 @@ import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.AdvancedGeckoArmorItem;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.loading.math.MolangQueries;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.util.Color;
 
@@ -51,7 +52,7 @@ public class GeckoArmorRenderer extends GeoArmorRenderer<AdvancedGeckoArmorItem>
 
         int renderColor = getRenderColor(animatable, partialTick, packedLight).argbInt();
         int packedOverlay = getPackedOverlay(animatable, 0, partialTick);
-        BakedGeoModel model = getGeoModel().getBakedModel(getGeoModel().getModelResource(animatable));
+        BakedGeoModel model = getGeoModel().getBakedModel(getGeoModel().getModelResource(animatable, this));
 
         if (renderType == null)
             renderType = getRenderType(animatable, getTextureLocation(animatable), bufferSource, partialTick);
@@ -82,6 +83,8 @@ public class GeckoArmorRenderer extends GeoArmorRenderer<AdvancedGeckoArmorItem>
         poseStack.pop();
 
         renderFinal(poseStack, animatable, model, bufferSource, buffer, partialTick, packedLight, packedOverlay, renderColor);
+        doPostRenderCleanup();
         this.index = 0;
+        MolangQueries.clearActor();
     }
 }

@@ -90,9 +90,15 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         ;
 
         getOrCreateTagBuilder(ItemTags.SWORDS)
-                .add(ModItems.IRON_KATANA)
-                .add(ModItems.ADAMANTIUM_KATANA)
                 .add(ModItems.ADAMANTIUM_SWORD)
+        ;
+
+        getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE)
+                .addTag(ModTags.Items.KATANAS)
+        ;
+
+        getOrCreateTagBuilder(ItemTags.SWORD_ENCHANTABLE)
+                .addTag(ModTags.Items.KATANAS)
         ;
 
         getOrCreateTagBuilder(ItemTags.SHOVELS)
@@ -186,7 +192,16 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.CARTERS_SHIELD)
                 .add(ModItems.COSMIC_SHIELD)
 
+                .addTag(ModTags.Items.KATANAS)
+        ;
+
+        getOrCreateTagBuilder(ModTags.Items.KATANAS)
+                .add(ModItems.WOODEN_KATANA)
+                .add(ModItems.STONE_KATANA)
                 .add(ModItems.IRON_KATANA)
+                .add(ModItems.GOLD_KATANA)
+                .add(ModItems.DIAMOND_KATANA)
+                .add(ModItems.NETHERITE_KATANA)
                 .add(ModItems.ADAMANTIUM_KATANA)
         ;
     }
