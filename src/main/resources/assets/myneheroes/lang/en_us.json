@@ -45,7 +45,12 @@
   "item.myneheroes.smithing_template.adamantium_upgrade.ingredients": "Adamantium Ingot",
   "item.myneheroes.adamantium_ingot": "Adamantium Ingot",
 
+  "item.myneheroes.wooden_katana": "Wooden Katana",
+  "item.myneheroes.stone_katana": "Stone Katana",
   "item.myneheroes.iron_katana": "Iron Katana",
+  "item.myneheroes.gold_katana": "Gold Katana",
+  "item.myneheroes.diamond_katana": "Diamond Katana",
+  "item.myneheroes.netherite_katana": "Netherite Katana",
   "item.myneheroes.adamantium_katana": "Adamantium Katana",
 
   "item.myneheroes.adamantium_sword": "Adamantium Sword",
