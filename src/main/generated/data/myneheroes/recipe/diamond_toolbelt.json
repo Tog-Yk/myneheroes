@@ -3,18 +3,19 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "minecraft:leather"
+      "item": "minecraft:diamond"
     },
     "&": {
-      "item": "minecraft:iron_ingot"
+      "item": "myneheroes:iron_toolbelt"
     }
   },
   "pattern": [
-    "###",
-    "#&#"
+    " # ",
+    "#&#",
+    " # "
   ],
   "result": {
     "count": 1,
-    "id": "myneheroes:toolbelt_3_upgrade"
+    "id": "myneheroes:diamond_toolbelt"
   }
 }

@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.togyk.myneheroes.Item.ModArmorRenderers;
 import net.togyk.myneheroes.Item.ModPredicates;
 import net.togyk.myneheroes.Item.color.ModColorProvider;
 import net.togyk.myneheroes.block.ModBlockEntityTypes;
@@ -46,5 +47,7 @@ public class MyneHeroesClient implements ClientModInitializer {
         ModClientEvents.registerEvents();
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.ELECTRICITY_PARTICLE, ElectricityParticle.Factory::new);
+
+        ModArmorRenderers.registerArmorRenderers();
     }
 }

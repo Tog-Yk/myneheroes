@@ -5,6 +5,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.client.render.ToolbeltModel;
 import net.togyk.myneheroes.entity.ModEntities;
 
 @Environment(EnvType.CLIENT)
@@ -23,5 +24,8 @@ public class ModEntityRenderers {
 
         EntityRendererRegistry.INSTANCE.register(ModEntities.WEB, WebEntityRenderer::new);
         EntityRendererRegistry.INSTANCE.register(ModEntities.SWING_WEB, SwingWebEntityRenderer::new);
+
+
+        EntityModelLayerRegistry.registerModelLayer(ToolbeltModel.TOOLBELT, ToolbeltModel::getTexturedModelData);
     }
 }
