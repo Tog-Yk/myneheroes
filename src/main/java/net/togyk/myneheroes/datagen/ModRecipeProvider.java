@@ -293,7 +293,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(ModItems.CIRCUIT_BOARD),
                         FabricRecipeProvider.conditionsFromItem(ModItems.CIRCUIT_BOARD))
                 .offerTo(exporter);
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.TOOLBELT_3_UPGRADE)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.TOOLBELT)
                 .pattern("###")
                 .pattern("#&#")
                 .input('#', Items.LEATHER)
@@ -301,6 +301,32 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(Items.LEATHER),
                         FabricRecipeProvider.conditionsFromItem(Items.LEATHER))
                 .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.IRON_TOOLBELT)
+                .pattern(" # ")
+                .pattern("#&#")
+                .pattern(" # ")
+                .input('#', Items.IRON_INGOT)
+                .input('&', ModItems.TOOLBELT)
+                .criterion(FabricRecipeProvider.hasItem(Items.IRON_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(Items.IRON_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.DIAMOND_TOOLBELT)
+                .pattern(" # ")
+                .pattern("#&#")
+                .pattern(" # ")
+                .input('#', Items.DIAMOND)
+                .input('&', ModItems.IRON_TOOLBELT)
+                .criterion(FabricRecipeProvider.hasItem(Items.DIAMOND),
+                        FabricRecipeProvider.conditionsFromItem(Items.DIAMOND))
+                .offerTo(exporter);
+
+        SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.ofItems(ModItems.DIAMOND_TOOLBELT), Ingredient.ofItems(Items.NETHERITE_INGOT),
+                        RecipeCategory.COMBAT,
+                        ModItems.NETHERITE_TOOLBELT)
+                .criterion(FabricRecipeProvider.hasItem(Items.NETHERITE_INGOT),
+                        FabricRecipeProvider.conditionsFromItem(Items.NETHERITE_INGOT))
+                .offerTo(exporter, "netherite_toolbelt_upgrade");
+
 
         //tools
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.WOODEN_KATANA)
