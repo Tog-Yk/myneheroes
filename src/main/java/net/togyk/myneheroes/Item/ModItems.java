@@ -1,6 +1,7 @@
 package net.togyk.myneheroes.Item;
 
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
@@ -64,13 +65,16 @@ public class ModItems {
     public static final Item BOTTLE_OF_RADIOACTIVE_SPIDER_VENOM = registerItem("bottle_of_radioactive_spider_venom",
             new SpiderManPowerDrink(List.of(StatusEffects.NAUSEA), new Item.Settings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE)));
 
-    public static final Item MECHANICAL_HUD_UPGRADE = registerItem("mechanical_hud_upgrade", new UpgradeWithTooltipItem(Upgrades.MECHANICAL_HUD, Text.literal("mechanical").setStyle(Style.EMPTY.withColor(0xC428EEFF)), new Item.Settings()));
-    public static final Item SPEEDSTER_HUD_UPGRADE = registerItem("speedster_hud_upgrade", new UpgradeWithTooltipItem(Upgrades.SPEEDSTER_HUD, Text.literal("speedster").setStyle(Style.EMPTY.withColor(0xC4FFEB28)), new Item.Settings()));
+    public static final Item MECHANICAL_HUD_UPGRADE = registerItem("mechanical_hud_upgrade", new UpgradeItem(Upgrades.MECHANICAL_HUD, Text.literal("mechanical").setStyle(Style.EMPTY.withColor(0xC428EEFF)), new Item.Settings()));
+    public static final Item SPEEDSTER_HUD_UPGRADE = registerItem("speedster_hud_upgrade", new UpgradeItem(Upgrades.SPEEDSTER_HUD, Text.literal("speedster").setStyle(Style.EMPTY.withColor(0xC4FFEB28)), new Item.Settings()));
     public static final Item LASER_UPGRADE = registerItem("laser_upgrade", new UpgradeItem(Upgrades.LASER, new Item.Settings()));
     public static final Item FlY_UPGRADE = registerItem("fly_upgrade", new UpgradeItem(Upgrades.FlY, new Item.Settings()));
     public static final Item KINETIC_ENERGY_STORAGE_UPGRADE = registerItem("kinetic_energy_storage_upgrade", new UpgradeItem(Upgrades.KINETIC_ENERGY_STORAGE, new Item.Settings()));
     public static final Item TAKE_OFF_SUIT_UPGRADE = registerItem("take_off_suit_upgrade", new UpgradeItem(Upgrades.TAKE_OFF_SUIT, new Item.Settings()));
-    public static final Item TOOLBELT_3_UPGRADE = registerItem("toolbelt_3_upgrade", new UpgradeWithTooltipItem(Upgrades.TOOLBELT_3, Text.translatable("item.myneheroes.toolbelt_3_upgrade.size", 3), new Item.Settings().maxCount(1)));
+    public static final Item TOOLBELT = registerItem("toolbelt", new EquipableUpgradeItem(Upgrades.TOOLBELT_3, EquipmentSlot.LEGS, Text.translatable("item.myneheroes.toolbelt_upgrade.size", 3), new Item.Settings().maxCount(1)));
+    public static final Item IRON_TOOLBELT = registerItem("iron_toolbelt", new EquipableUpgradeItem(Upgrades.TOOLBELT_4, EquipmentSlot.LEGS, Text.translatable("item.myneheroes.toolbelt_upgrade.size", 4), new Item.Settings().maxCount(1)));
+    public static final Item DIAMOND_TOOLBELT = registerItem("diamond_toolbelt", new EquipableUpgradeItem(Upgrades.TOOLBELT_6, EquipmentSlot.LEGS, Text.translatable("item.myneheroes.toolbelt_upgrade.size", 6), new Item.Settings().maxCount(1)));
+    public static final Item NETHERITE_TOOLBELT = registerItem("netherite_toolbelt", new EquipableUpgradeItem(Upgrades.TOOLBELT_8, EquipmentSlot.LEGS, Text.translatable("item.myneheroes.toolbelt_upgrade.size", 8), new Item.Settings().maxCount(1)));
 
     public static final Item WEB_SHOOTER_UPGRADE = registerItem("web_shooter_upgrade", new AbilityHoldingUpgradeItem(Upgrades.WEB_SHOOTER, new Item.Settings().maxCount(1)));
 

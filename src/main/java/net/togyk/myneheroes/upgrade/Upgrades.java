@@ -18,6 +18,9 @@ public class Upgrades {
     public static final AbilityUpgrade KINETIC_ENERGY_STORAGE = registerUpgrade(new AbilityUpgrade(Abilities.RELEASE_KINETIC_ENERGY, List.of(ArmorItem.Type.HELMET, ArmorItem.Type.CHESTPLATE, ArmorItem.Type.LEGGINGS, ArmorItem.Type.BOOTS), Identifier.of(MyneHeroes.MOD_ID, "kinetic_energy_storage")));
     public static final AbilityUpgrade TAKE_OFF_SUIT = registerUpgrade(new AbilityUpgrade(Abilities.TAKE_OFF_SUIT, List.of(ArmorItem.Type.HELMET, ArmorItem.Type.CHESTPLATE, ArmorItem.Type.LEGGINGS, ArmorItem.Type.BOOTS), Identifier.of(MyneHeroes.MOD_ID, "take_off_suit")));
     public static final AbilityUpgrade TOOLBELT_3 = registerUpgrade(new AbilityUpgrade(Abilities.TOOLBELT_3, List.of(ArmorItem.Type.LEGGINGS), Identifier.of(MyneHeroes.MOD_ID, "toolbelt_3")));
+    public static final AbilityUpgrade TOOLBELT_4 = registerUpgrade(new AbilityUpgrade(Abilities.TOOLBELT_4, List.of(ArmorItem.Type.LEGGINGS), Identifier.of(MyneHeroes.MOD_ID, "toolbelt_4")));
+    public static final AbilityUpgrade TOOLBELT_6 = registerUpgrade(new AbilityUpgrade(Abilities.TOOLBELT_6, List.of(ArmorItem.Type.LEGGINGS), Identifier.of(MyneHeroes.MOD_ID, "toolbelt_6")));
+    public static final AbilityUpgrade TOOLBELT_8 = registerUpgrade(new AbilityUpgrade(Abilities.TOOLBELT_8, List.of(ArmorItem.Type.LEGGINGS), Identifier.of(MyneHeroes.MOD_ID, "toolbelt_8")));
 
     public static final StockPileUpgrade WEB_SHOOTER = registerUpgrade(new StockPileUpgrade(Abilities.WEB_SHOOTER, 250, ModItems.WEB_FLUID, 125, List.of(ArmorItem.Type.CHESTPLATE), Identifier.of(MyneHeroes.MOD_ID, "web_shooter")));
 

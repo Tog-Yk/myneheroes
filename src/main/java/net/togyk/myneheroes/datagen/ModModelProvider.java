@@ -78,6 +78,11 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.KINETIC_ENERGY_STORAGE_UPGRADE, Models.GENERATED);
         itemModelGenerator.register(ModItems.TAKE_OFF_SUIT_UPGRADE, Models.GENERATED);
 
+        itemModelGenerator.register(ModItems.TOOLBELT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.IRON_TOOLBELT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.DIAMOND_TOOLBELT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.NETHERITE_TOOLBELT, Models.GENERATED);
+
         itemModelGenerator.register(ModItems.WEB_SHOOTER_UPGRADE, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.HEART_SHAPED_HERB_MIX, Models.GENERATED);

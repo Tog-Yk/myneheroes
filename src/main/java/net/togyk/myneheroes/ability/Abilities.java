@@ -210,6 +210,9 @@ public class Abilities {
     }));
 
     public static final ToolbeltAbility TOOLBELT_3 = registerAbility(new ToolbeltAbility(Identifier.of(MyneHeroes.MOD_ID, "toolbelt_3"), new Ability.Settings(), 3));
+    public static final ToolbeltAbility TOOLBELT_4 = registerAbility(new ToolbeltAbility(Identifier.of(MyneHeroes.MOD_ID, "toolbelt_4"), new Ability.Settings(), 4));
+    public static final ToolbeltAbility TOOLBELT_6 = registerAbility(new ToolbeltAbility(Identifier.of(MyneHeroes.MOD_ID, "toolbelt_6"), new Ability.Settings(), 6));
+    public static final ToolbeltAbility TOOLBELT_8 = registerAbility(new ToolbeltAbility(Identifier.of(MyneHeroes.MOD_ID, "toolbelt_8"), new Ability.Settings(), 8));
 
     public static final SpiderSenseHudAbility SPIDER_SENSE = registerAbility(new SpiderSenseHudAbility(Identifier.of(MyneHeroes.MOD_ID, "spider_sense"), new Ability.Settings()));
 
