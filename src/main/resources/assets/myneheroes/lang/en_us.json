@@ -68,8 +68,11 @@
   "item.myneheroes.take_off_suit_upgrade": "Take Off Suit Upgrade",
   "item.myneheroes.kinetic_energy_storage_upgrade": "Kinetic Energy Storage Upgrade",
 
-  "item.myneheroes.toolbelt_3_upgrade": "Toolbelt",
-  "item.myneheroes.toolbelt_3_upgrade.size": "Size: %1$s",
+  "item.myneheroes.toolbelt": "Toolbelt",
+  "item.myneheroes.iron_toolbelt": "Iron Toolbelt",
+  "item.myneheroes.diamond_toolbelt": "Diamond Toolbelt",
+  "item.myneheroes.netherite_toolbelt": "Netherite Toolbelt",
+  "item.myneheroes.toolbelt_upgrade.size": "Size: %1$s",
 
   "item.myneheroes.vibranium_helmet": "Vibranium Helmet",
   "item.myneheroes.vibranium_chestplate": "Vibranium Chestplate",
