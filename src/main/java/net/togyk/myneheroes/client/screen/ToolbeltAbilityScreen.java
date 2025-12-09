@@ -49,7 +49,8 @@ public class ToolbeltAbilityScreen extends HandledScreen<ToolbeltAbilityScreenHa
             int amount = (int) (circumference / 32);
             for (i = initialI; i < initialI + amount && i < abilities.size(); i++) {
 
-                double angle = 2 * Math.PI * (i - initialI) / Math.min(amount, abilities.size() - initialI) - 0.5*Math.PI;
+                double extraAngle = (0.25*Math.PI * (radius / 24D - 1)) % (2*Math.PI);
+                double angle = 2*Math.PI * (i - initialI) / Math.min(amount, abilities.size() - initialI) - 0.5*Math.PI + extraAngle;
                 int xOffset = (int) (Math.cos(angle) * radius);
                 int yOffset = (int) (Math.sin(angle) * radius);
 
