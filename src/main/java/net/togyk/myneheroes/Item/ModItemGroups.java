@@ -29,6 +29,8 @@ public class ModItemGroups {
 
                         entries.add(ModBlocks.KRYPTONITE_CLUSTER);
                         entries.add(ModBlocks.KRYPTONITE_BlOCK);
+                        entries.add(ModBlocks.KRYPTONITE_BRICKS);
+                        entries.add(ModBlocks.POLISHED_KRYPTONITE);
 
                         entries.add(ModItems.VIBRANIUM_INGOT);
                         entries.add(ModItems.RAW_VIBRANIUM);

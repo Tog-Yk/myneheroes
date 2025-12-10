@@ -34,6 +34,8 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.DEEPSLATE_URANIUM_ORE, oreDrops(ModBlocks.DEEPSLATE_URANIUM_ORE, ModItems.RAW_URANIUM));
 
         addDrop(ModBlocks.KRYPTONITE_CLUSTER);
+        addDrop(ModBlocks.KRYPTONITE_BRICKS);
+        addDrop(ModBlocks.POLISHED_KRYPTONITE);
 
         addDrop(ModBlocks.ARMOR_DYEING_STATION);
         addDrop(ModBlocks.ARMOR_LIGHT_LEVELING_STATION);
