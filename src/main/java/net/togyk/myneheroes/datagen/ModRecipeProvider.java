@@ -225,6 +225,20 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(ModBlocks.KRYPTONITE_CLUSTER),
                         FabricRecipeProvider.conditionsFromItem(ModBlocks.KRYPTONITE_CLUSTER))
                 .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.POLISHED_KRYPTONITE, 4)
+                .pattern("##")
+                .pattern("##")
+                .input('#', ModBlocks.KRYPTONITE_BlOCK)
+                .criterion(FabricRecipeProvider.hasItem(ModBlocks.KRYPTONITE_BlOCK),
+                        FabricRecipeProvider.conditionsFromItem(ModBlocks.KRYPTONITE_BlOCK))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.KRYPTONITE_BRICKS, 4)
+                .pattern("##")
+                .pattern("##")
+                .input('#', ModBlocks.POLISHED_KRYPTONITE)
+                .criterion(FabricRecipeProvider.hasItem(ModBlocks.POLISHED_KRYPTONITE),
+                        FabricRecipeProvider.conditionsFromItem(ModBlocks.POLISHED_KRYPTONITE))
+                .offerTo(exporter);
 
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.WEB_FLUID)

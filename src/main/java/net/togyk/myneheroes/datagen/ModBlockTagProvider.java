@@ -37,6 +37,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.RAW_GOLD_TITANIUM_BLOCK)
 
                 .add(ModBlocks.KRYPTONITE_BlOCK)
+                .add(ModBlocks.KRYPTONITE_BRICKS)
+                .add(ModBlocks.POLISHED_KRYPTONITE)
                 .add(ModBlocks.KRYPTONITE_CLUSTER)
 
                 .add(ModBlocks.METEOR_RADAR)
