@@ -35,6 +35,8 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DEEPSLATE_URANIUM_ORE);
 
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.KRYPTONITE_BlOCK);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.KRYPTONITE_BRICKS);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.POLISHED_KRYPTONITE);
         blockStateModelGenerator.registerAmethyst(ModBlocks.KRYPTONITE_CLUSTER);
 
         blockStateModelGenerator.registerSimpleState(ModBlocks.ARMOR_DYEING_STATION);
