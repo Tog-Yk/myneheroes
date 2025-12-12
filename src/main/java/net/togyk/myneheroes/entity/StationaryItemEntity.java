@@ -88,7 +88,7 @@ public class StationaryItemEntity extends LivingEntity implements Ownable {
         //Method Is not called properly
         if (!this.getWorld().isClient && player.getStackInHand(hand).isEmpty()) {
             if (this.getItem().getItem() instanceof StationaryItem item) {
-                if (!item.hasToBeOwnerToPickup() || isOwner(player) && item.tryPickup(player, hand)) {
+                if (!item.hasToBeOwnerToPickup(this.getItem()) || isOwner(player) && item.tryPickup(player, hand)) {
                     player.setStackInHand(hand, this.getItem().copyAndEmpty());
                 }
             }

@@ -142,6 +142,26 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.SPEEDSTER_VIBRANIUM_CHESTPLATE)
                 .add(ModItems.SPEEDSTER_VIBRANIUM_LEGGINGS)
                 .add(ModItems.SPEEDSTER_VIBRANIUM_BOOTS)
+
+                .add(ModItems.MJOLNIR)
+
+                .add(ModItems.VIBRANIUM_SHIELD)
+                .add(ModItems.A_SYMBOLS_SHIELD)
+                .add(ModItems.CARTERS_SHIELD)
+                .add(ModItems.COSMIC_SHIELD)
+        ;
+
+        getOrCreateTagBuilder(ItemTags.TRIDENT_ENCHANTABLE)
+                .addTag(ModTags.Items.ONLY_LOYALTY)
+        ;
+
+        getOrCreateTagBuilder(ModTags.Items.ONLY_LOYALTY)
+                .add(ModItems.MJOLNIR)
+
+                .add(ModItems.VIBRANIUM_SHIELD)
+                .add(ModItems.A_SYMBOLS_SHIELD)
+                .add(ModItems.CARTERS_SHIELD)
+                .add(ModItems.COSMIC_SHIELD)
         ;
 
         getOrCreateTagBuilder(ModTags.Items.COLORING_FUEL)

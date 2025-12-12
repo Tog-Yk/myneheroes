@@ -20,19 +20,28 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.Item.ModItems;
+import net.togyk.myneheroes.Item.custom.ThrowableItem;
 import net.togyk.myneheroes.MyneHeroes;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
 public class ThrownItemEntity extends PersistentProjectileEntity {
     private static final TrackedData<ItemStack> STACK = DataTracker.registerData(ThrownItemEntity.class, TrackedDataHandlerRegistry.ITEM_STACK);
     private static final TrackedData<Integer> LOYALTY = DataTracker.registerData(ThrownItemEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> BOUNCES = DataTracker.registerData(ThrownItemEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Boolean> IS_RETURNING = DataTracker.registerData(ThrownItemEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Boolean> LANDED = DataTracker.registerData(ThrownItemEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Vector3f> GROUNDED_OFFSET = DataTracker.registerData(ThrownItemEntity.class, TrackedDataHandlerRegistry.VECTOR3F);
+
+    private static final TrackedData<Float> WIDTH = DataTracker.registerData(ThrownItemEntity.class, TrackedDataHandlerRegistry.FLOAT);
+    private static final TrackedData<Float> HEIGHT = DataTracker.registerData(ThrownItemEntity.class, TrackedDataHandlerRegistry.FLOAT);
+
     public int returnTimer;
 
     public ThrownItemEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
@@ -42,6 +51,16 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
         super(ModEntities.THROWN_ITEM, owner, world, stack, null);
         this.setDisplayStack(stack);
         setLoyalty(this.getLoyalty(stack));
+    }
+
+    public ThrownItemEntity(World world, LivingEntity owner, ItemStack stack, float width, float height) {
+        this(world, owner, stack);
+        this.getDataTracker().set(WIDTH, width);
+        this.getDataTracker().set(HEIGHT, height);
+        setBoundingBox(new Box(-width / 2, 0, -width / 2, width / 2, height, width / 2));
+    }
+    public ThrownItemEntity(World world, LivingEntity owner, ItemStack stack, float size) {
+        this(world, owner, stack, size, size);
     }
 
     @Override
@@ -116,6 +135,30 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
         this.getDataTracker().set(IS_RETURNING, isReturning);
     }
 
+    public boolean landed() {
+        return this.getDataTracker().get(LANDED);
+    }
+
+    public void setLanded(boolean isReturning) {
+        this.getDataTracker().set(LANDED, isReturning);
+    }
+
+    public Vector3f getGroundedOffset() {
+        return this.getDataTracker().get(GROUNDED_OFFSET);
+    }
+
+    public void setGroundedOffset(Vector3f groundedOffset) {
+        this.getDataTracker().set(GROUNDED_OFFSET, groundedOffset);
+    }
+
+    public float getItemWidth() {
+        return this.getDataTracker().get(WIDTH);
+    }
+
+    public float getItemHeight() {
+        return this.getDataTracker().get(HEIGHT);
+    }
+
     @Override
     public void onTrackedDataSet(TrackedData<?> data) {
         super.onTrackedDataSet(data);
@@ -131,6 +174,11 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
         builder.add(LOYALTY, 0);
         builder.add(BOUNCES, 5);
         builder.add(IS_RETURNING, false);
+        builder.add(LANDED, false);
+        builder.add(GROUNDED_OFFSET, new Vector3f());
+
+        builder.add(WIDTH, this.getWidth());
+        builder.add(HEIGHT, this.getHeight());
     }
 
     @Override
@@ -143,6 +191,19 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
         modNbt.putInt("loyalty", this.getLoyalty());
         modNbt.putInt("bounces", this.getBounces());
         modNbt.putBoolean("is_returning", this.isReturning());
+        modNbt.putBoolean("landed", this.landed());
+
+        Vector3f vector3f = this.getGroundedOffset();
+        NbtCompound vec = new NbtCompound();
+        vec.putFloat("x", vector3f.x);
+        vec.putFloat("y", vector3f.y);
+        vec.putFloat("z", vector3f.z);
+        modNbt.put("groundedOffset", vec);
+
+        //dimensions
+        DataTracker dataTracker = this.getDataTracker();
+        modNbt.putFloat("dimensions_width", dataTracker.get(WIDTH));
+        modNbt.putFloat("dimensions_height", dataTracker.get(HEIGHT));
 
         nbt.put(MyneHeroes.MOD_ID, modNbt);
 
@@ -171,6 +232,28 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
             if (modNbt.contains("is_returning")) {
                 this.setReturning(modNbt.getBoolean("is_returning"));
             }
+
+            if (modNbt.contains("landed")) {
+                this.setLanded(modNbt.getBoolean("landed"));
+            }
+
+            if (modNbt.contains("groundedOffset")) {
+                NbtCompound vec = modNbt.getCompound("groundedOffset");
+                Vector3f vector3f = new Vector3f(vec.getFloat("x"), vec.getFloat("y"), vec.getFloat("z"));
+                this.setGroundedOffset(vector3f);
+            }
+
+            DataTracker dataTracker = this.getDataTracker();
+
+            if (nbt.contains("dimensions_width")) {
+                dataTracker.set(WIDTH, nbt.getFloat("dimensions_width"));
+            }
+            if (nbt.contains("dimensions_height")) {
+                dataTracker.set(HEIGHT, nbt.getFloat("dimensions_height"));
+            }
+            float width = this.getItemWidth();
+            float height = this.getItemHeight();
+            setBoundingBox(new Box(-width / 2, 0, -width / 2, width / 2, height, width / 2));
         }
 
         super.readCustomDataFromNbt(nbt);
@@ -209,6 +292,12 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
                 this.setReturning(true);
             } else {
                 super.onBlockHit(blockHitResult);
+                setLanded(true);
+
+                //todo fix snapping to block side
+                if (this.getDisplayStack().getItem() instanceof ThrowableItem throwableItem) {
+                    this.setGroundedOffset(throwableItem.getGroundedOffset(this, blockHitResult.getSide()));
+                }
             }
         }
     }
