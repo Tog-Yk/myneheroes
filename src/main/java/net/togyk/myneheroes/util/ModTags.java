@@ -43,6 +43,8 @@ public class ModTags {
         public static final TagKey<Item> SHIELDS = createTag("shields");
         public static final TagKey<Item> KATANAS = createTag("katanas");
 
+        public static final TagKey<Item> ONLY_LOYALTY = createTag("only_loyalty");
+
         private static TagKey<Item> createTag(String name) {
             return TagKey.of(RegistryKeys.ITEM, Identifier.of(MyneHeroes.MOD_ID, name));
         }
