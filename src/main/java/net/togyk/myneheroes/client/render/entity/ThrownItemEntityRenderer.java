@@ -1,11 +1,12 @@
 package net.togyk.myneheroes.client.render.entity;
 
+import net.minecraft.client.item.ItemModelManager;
 import net.minecraft.client.render.LightmapTextureManager;
-import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.OverlayTexture;
+import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.ProjectileEntityRenderer;
-import net.minecraft.client.render.item.ItemRenderer;
-import net.minecraft.client.render.model.BakedModel;
+import net.minecraft.client.render.state.CameraRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,47 +16,66 @@ import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LightType;
-import net.minecraft.world.World;
 import net.togyk.myneheroes.Item.custom.ThrowableItem;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.client.render.entity.states.ThrownItemEntityRendererState;
 import net.togyk.myneheroes.entity.ThrownItemEntity;
 import org.joml.Vector3f;
 
-import static net.minecraft.client.render.entity.ItemEntityRenderer.renderStack;
 
-
-public class ThrownItemEntityRenderer extends ProjectileEntityRenderer<ThrownItemEntity> {
+public class ThrownItemEntityRenderer extends ProjectileEntityRenderer<ThrownItemEntity, ThrownItemEntityRendererState> {
     public static final Identifier TEXTURE = Identifier.of(MyneHeroes.MOD_ID, "textures/entity/projectiles/thrown_item.png");
-    private final ItemRenderer itemRenderer;
+    private final ItemModelManager itemModelManager;
     private final Random random = Random.create();
 
     public ThrownItemEntityRenderer(EntityRendererFactory.Context context) {
         super(context);
-        this.itemRenderer = context.getItemRenderer();
+        this.itemModelManager = context.getItemModelManager();
     }
 
     @Override
-    public Identifier getTexture(ThrownItemEntity entity) {
+    public Identifier getTexture(ThrownItemEntityRendererState state) {
         return TEXTURE;
     }
 
     @Override
-    public void render(ThrownItemEntity entity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
+    public ThrownItemEntityRendererState createRenderState() {
+        return new ThrownItemEntityRendererState();
+    }
+
+    @Override
+    public void updateRenderState(ThrownItemEntity entity, ThrownItemEntityRendererState state, float f) {
+        super.updateRenderState(entity, state, f);
+        state.velocity = entity.getVelocity();
+        state.groundedOffset = entity.getGroundedOffset();
+        state.blockPos = entity.getBlockPos();
+        state.landed = entity.landed();
+
+        BlockPos lightPos = state.blockPos;
+        if (state.groundedOffset.y < 0) {
+            lightPos = lightPos.down();
+        }
+        state.light = LightmapTextureManager.pack(entity.getEntityWorld().getLightLevel(LightType.BLOCK, lightPos), entity.getEntityWorld().getLightLevel(LightType.SKY, lightPos));
+        state.update(entity, entity.getDisplayStack(), this.itemModelManager);
+    }
+
+    @Override
+    public void render(ThrownItemEntityRendererState state, MatrixStack matrixStack, OrderedRenderCommandQueue queue, CameraRenderState cameraRenderState) {
         matrixStack.push();
-        Item item = entity.getDisplayStack().getItem();
+        Item item = state.displayStack.getItem();
 
         // Calculate rotation angles based on current velocity:
         if (item instanceof ThrowableItem throwable) {
             matrixStack.translate(0.0F, 0, 0.0F);
 
             //groundOffset
-            if (entity.landed() && entity.getGroundedOffset() != null) {
-                Vector3f groundOffset = entity.getGroundedOffset();
+            if (state.landed && state.groundedOffset != null) {
+                Vector3f groundOffset = state.groundedOffset;
                 matrixStack.translate(groundOffset.x, groundOffset.y, groundOffset.z);
             }
 
             if (throwable.getAnimationType() != ThrowableItem.AnimationType.FACE) {
-                Vec3d velocity = entity.getVelocity();
+                Vec3d velocity = state.velocity;
 
                 float yaw = getRad(velocity.x, velocity.z);
                 matrixStack.multiply(RotationAxis.POSITIVE_Y.rotation(yaw/*yaw*/));
@@ -63,7 +83,7 @@ public class ThrownItemEntityRenderer extends ProjectileEntityRenderer<ThrownIte
                 double zx = Math.sqrt(Math.pow(velocity.x, 2) + Math.pow(velocity.z, 2));
 
                 float followStrength = 1;
-                if (zx == 0 && !entity.landed()) {
+                if (zx == 0 && !state.landed) {
                     followStrength = (float) (Math.sqrt(Math.min(throwable.getFollowAnimationMaxSpeed(), velocity.lengthSquared()) / throwable.getFollowAnimationMaxSpeed()));
                 }
 
@@ -105,28 +125,18 @@ public class ThrownItemEntityRenderer extends ProjectileEntityRenderer<ThrownIte
             }
 
             matrixStack.push();
-            if (!entity.landed()) {
+            if (!state.landed) {
                 switch (throwable.getSpinType()) {
-                    case POS_PITCH -> matrixStack.multiply(RotationAxis.NEGATIVE_Y.rotation((float) (entity.age / Math.PI)));
-                    case NEG_PITCH -> matrixStack.multiply(RotationAxis.POSITIVE_Y.rotation((float) (entity.age / Math.PI)));
-                    case POS_YAW -> matrixStack.multiply(RotationAxis.POSITIVE_X.rotation((float) (entity.age / Math.PI)));
-                    case NEG_YAW -> matrixStack.multiply(RotationAxis.NEGATIVE_X.rotation((float) (entity.age / Math.PI)));
-                    case POS_ROLL -> matrixStack.multiply(RotationAxis.NEGATIVE_Z.rotation((float) (entity.age / Math.PI)));
-                    case NEG_ROLL -> matrixStack.multiply(RotationAxis.POSITIVE_Z.rotation((float) (entity.age / Math.PI)));
+                    case POS_PITCH -> matrixStack.multiply(RotationAxis.NEGATIVE_Y.rotation((float) (state.age / Math.PI)));
+                    case NEG_PITCH -> matrixStack.multiply(RotationAxis.POSITIVE_Y.rotation((float) (state.age / Math.PI)));
+                    case POS_YAW -> matrixStack.multiply(RotationAxis.POSITIVE_X.rotation((float) (state.age / Math.PI)));
+                    case NEG_YAW -> matrixStack.multiply(RotationAxis.NEGATIVE_X.rotation((float) (state.age / Math.PI)));
+                    case POS_ROLL -> matrixStack.multiply(RotationAxis.NEGATIVE_Z.rotation((float) (state.age / Math.PI)));
+                    case NEG_ROLL -> matrixStack.multiply(RotationAxis.POSITIVE_Z.rotation((float) (state.age / Math.PI)));
                 }
             }
 
-            ItemStack itemStack = entity.getDisplayStack();
-            this.random.setSeed(getSeed(itemStack));
-            BakedModel bakedModel = this.itemRenderer.getModel(itemStack, entity.getWorld(), null, entity.getId());
-            boolean bl = bakedModel.hasDepth();
-            BlockPos lightPos = entity.getBlockPos();
-            if (entity.getGroundedOffset().y < 0) {
-                lightPos = lightPos.down();
-            }
-            World world = entity.getWorld();
-            int light = LightmapTextureManager.pack(world.getLightLevel(LightType.BLOCK, lightPos), world.getLightLevel(LightType.SKY, lightPos));
-            renderStack(this.itemRenderer, matrixStack, vertexConsumerProvider, light, itemStack, bakedModel, bl, this.random);
+            state.itemRenderState.render(matrixStack, queue, state.light, OverlayTexture.DEFAULT_UV, state.outlineColor);
 
             matrixStack.pop();
 

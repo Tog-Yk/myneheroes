@@ -1,25 +1,26 @@
 package net.togyk.myneheroes.Item.custom;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.equipment.ArmorMaterial;
+import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.ClickType;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
-import net.minecraft.world.World;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
@@ -27,24 +28,30 @@ import net.togyk.myneheroes.networking.SaveUpgradePayload;
 import net.togyk.myneheroes.upgrade.AbilityUpgrade;
 import net.togyk.myneheroes.upgrade.Upgrade;
 import net.togyk.myneheroes.util.AbilityUtil;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
-public class AdvancedArmorItem extends ArmorItem implements AbilityHolding, UpgradableItem {
+public class AdvancedArmorItem extends Item implements AbilityHolding, UpgradableItem {
     private final Text titleText;
+    private final EquipmentType type;
+    private final ArmorMaterial material;
 
-    public AdvancedArmorItem(Text titleText, RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
-        super(material, type, settings);
+    public AdvancedArmorItem(Text titleText, ArmorMaterial material, EquipmentType type, Item.Settings settings) {
+        super(settings.armor(material, type));
         this.titleText = titleText;
+        this.type = type;
+        this.material = material;
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType type) {
-        tooltip.add(Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "heading"))).formatted(Formatting.GRAY));
-        tooltip.add(titleText);
+    public void appendTooltip(ItemStack stack, TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
+        textConsumer.accept(Text.translatable(Util.createTranslationKey("armor_pattern", Identifier.of(MyneHeroes.MOD_ID, "heading"))).formatted(Formatting.GRAY));
+        textConsumer.accept(titleText);
 
-        super.appendTooltip(stack, context, tooltip, type);
+        super.appendTooltip(stack, context, displayComponent, textConsumer, type);
     }
 
     public List<Ability> getArmorAbilities(ItemStack stack) {
@@ -71,10 +78,7 @@ public class AdvancedArmorItem extends ArmorItem implements AbilityHolding, Upgr
     public void saveUpgrade(ItemStack stack, Upgrade upgrade) {
         NbtCompound nbt = stack.getOrDefault(ModDataComponentTypes.UPGRADES, new NbtCompound());
 
-        NbtList upgradesNbt = new NbtList();
-        if (nbt.contains("upgrades")) {
-            upgradesNbt = nbt.getList("upgrades", NbtElement.COMPOUND_TYPE);
-        }
+        NbtList upgradesNbt = nbt.getListOrEmpty("upgrades");
 
         //getting a list of all the id to replace the correct one
         List<Upgrade> upgrades = this.getUpgrades(stack);
@@ -98,15 +102,15 @@ public class AdvancedArmorItem extends ArmorItem implements AbilityHolding, Upgr
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        super.inventoryTick(stack, world, entity, slot, selected);
+    public void inventoryTick(ItemStack stack, ServerWorld world, Entity entity, @Nullable EquipmentSlot slot) {
+        super.inventoryTick(stack, world, entity, slot);
         stack.setHolder(entity);
     }
 
     @Override
     public boolean canUpgrade(ItemStack stack, Upgrade upgrade) {
         boolean hasUpgrade = hasUpgrade(stack, upgrade);
-        boolean canBePutInSlot = upgrade.getCompatibleTypes().contains(this.getType());
+        boolean canBePutInSlot = upgrade.getCompatibleTypes().contains(this.type);
         return !hasUpgrade && canBePutInSlot;
     }
 
@@ -118,10 +122,7 @@ public class AdvancedArmorItem extends ArmorItem implements AbilityHolding, Upgr
     public List<Upgrade> getUpgrades(ItemStack stack) {
         NbtCompound nbt = stack.getOrDefault(ModDataComponentTypes.UPGRADES, new NbtCompound());
 
-        NbtList upgradesNbt = new NbtList();
-        if (nbt.contains("upgrades")) {
-            upgradesNbt = nbt.getList("upgrades", NbtElement.COMPOUND_TYPE);
-        }
+        NbtList upgradesNbt = nbt.getListOrEmpty("upgrades");
 
         List<Upgrade> upgradeList = new ArrayList<>();
         for (NbtElement nbtElement : upgradesNbt) {
@@ -161,5 +162,13 @@ public class AdvancedArmorItem extends ArmorItem implements AbilityHolding, Upgr
             }
         }
         return super.onClicked(stack, otherStack, slot, clickType, player, cursorStackReference);
+    }
+
+    public EquipmentSlot getSlotType() {
+        return this.type.getEquipmentSlot();
+    }
+
+    public ArmorMaterial getMaterial() {
+        return material;
     }
 }

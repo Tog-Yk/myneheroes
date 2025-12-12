@@ -1,40 +1,49 @@
 package net.togyk.myneheroes.client.render.entity;
 
+import net.minecraft.client.item.ItemModelManager;
 import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModel;
-import net.minecraft.client.render.item.ItemRenderer;
-import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.render.model.json.ModelTransformationMode;
+import net.minecraft.client.render.state.CameraRenderState;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.togyk.myneheroes.client.render.entity.states.StationaryItemEntityRendererState;
 import net.togyk.myneheroes.entity.StationaryItemEntity;
 
-public class StationaryItemEntityRenderer<T extends StationaryItemEntity, M extends EntityModel<T>> extends LivingEntityRenderer<T, M> {
-    private final ItemRenderer itemRenderer;
+public class StationaryItemEntityRenderer<T extends StationaryItemEntity, M extends EntityModel<StationaryItemEntityRendererState>> extends LivingEntityRenderer<T, StationaryItemEntityRendererState, M> {
+    private final ItemModelManager itemModelManager;
 
     public StationaryItemEntityRenderer(EntityRendererFactory.Context context) {
         super(context, null, 0.0F);
-        this.itemRenderer = context.getItemRenderer();
-    }
-
-
-    @Override
-    public Identifier getTexture(T entity) {
-        return null;
+        this.itemModelManager = context.getItemModelManager();
+        this.shadowRadius = 0.15F;
+        this.shadowOpacity = 0.75F;
     }
 
     @Override
-    public void render(T stationaryItemEntity, float f, float g, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+    public StationaryItemEntityRendererState createRenderState() {
+        return new StationaryItemEntityRendererState();
+    }
+
+    @Override
+    public void updateRenderState(T entity, StationaryItemEntityRendererState state, float f) {
+        super.updateRenderState(entity, state, f);
+        state.update(entity, entity.getItem(), this.itemModelManager);
+    }
+
+    @Override
+    public void render(StationaryItemEntityRendererState state, MatrixStack matrices, OrderedRenderCommandQueue queue, CameraRenderState cameraRenderState) {
         matrices.push();
-        ItemStack stack = stationaryItemEntity.getEquippedStack(null);
-        BakedModel model = this.itemRenderer.getModel(stack, stationaryItemEntity.getWorld(), null, stationaryItemEntity.getId());
-        float k = model.getTransformation().getTransformation(ModelTransformationMode.GROUND).scale.y();
-        matrices.translate(0.0F, 0.25F * k, 0.0F);
-        itemRenderer.renderItem(stack, ModelTransformationMode.GROUND, false, matrices, vertexConsumers, light, OverlayTexture.DEFAULT_UV, model);
+        if (!state.itemRenderState.isEmpty()) {
+            state.itemRenderState.render(matrices, queue, state.light, OverlayTexture.DEFAULT_UV, state.outlineColor);
+        }
         matrices.pop();
+    }
+
+    @Override
+    public Identifier getTexture(StationaryItemEntityRendererState state) {
+        return null;
     }
 }

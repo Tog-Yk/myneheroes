@@ -51,7 +51,7 @@ public class AbilityHoldingUpgradeItem extends UpgradeItem implements AbilityHol
 
         Upgrade upgrade = super.getUpgrade(stack);
         if (nbt.contains("upgrade")) {
-            upgrade = AbilityUtil.nbtToUpgrade(nbt.getCompound("upgrade"));
+            upgrade = AbilityUtil.nbtToUpgrade(nbt.getCompound("upgrade").get());
         }
         upgrade.setHolderStack(stack);
         return upgrade;

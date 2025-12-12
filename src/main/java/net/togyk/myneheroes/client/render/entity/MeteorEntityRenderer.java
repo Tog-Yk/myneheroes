@@ -1,24 +1,23 @@
 package net.togyk.myneheroes.client.render.entity;
 
 import com.google.common.collect.Maps;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.ProjectileEntityRenderer;
-import net.minecraft.client.render.item.ItemRenderer;
+import net.minecraft.client.render.state.CameraRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.client.render.entity.states.MeteorEntityRendererState;
 import net.togyk.myneheroes.entity.MeteorEntity;
 import net.togyk.myneheroes.entity.MeteorVariant;
 
 import java.util.Map;
 
-public class MeteorEntityRenderer extends ProjectileEntityRenderer<MeteorEntity> {
+public class MeteorEntityRenderer extends ProjectileEntityRenderer<MeteorEntity, MeteorEntityRendererState> {
     protected MeteorEntityModel model;
     private static final Map<MeteorVariant, Identifier> ID_BY_VARIANT =
             Util.make(Maps.newEnumMap(MeteorVariant.class), map -> {
@@ -38,18 +37,23 @@ public class MeteorEntityRenderer extends ProjectileEntityRenderer<MeteorEntity>
     }
 
     @Override
-    public Identifier getTexture(MeteorEntity entity) {
-        return ID_BY_VARIANT.get(entity.getVariant());
+    public MeteorEntityRendererState createRenderState() {
+        return null;
     }
 
     @Override
-    public void render(MeteorEntity entity, float y, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light) {
+    protected Identifier getTexture(MeteorEntityRendererState state) {
+        return ID_BY_VARIANT.get(state.variant);
+    }
+    @Override
+    public void render(MeteorEntityRendererState meteorState, MatrixStack matrixStack, OrderedRenderCommandQueue orderedRenderCommandQueue, CameraRenderState cameraRenderState) {
+
         matrixStack.push();
 
-        float size = entity.getSize();
+        float size = meteorState.size;
         matrixStack.scale(size, size, size);
 
-        Vec3d velocity = entity.getVelocity();
+        Vec3d velocity = meteorState.velocity;
         float yaw = getRad(velocity.x, velocity.z);
         matrixStack.multiply(RotationAxis.POSITIVE_Y.rotation(yaw/*yaw*/));
 
@@ -59,11 +63,10 @@ public class MeteorEntityRenderer extends ProjectileEntityRenderer<MeteorEntity>
         matrixStack.multiply(RotationAxis.NEGATIVE_X.rotation(pitch/*pitch*/));
 
         matrixStack.push();
-        matrixStack.multiply(RotationAxis.POSITIVE_Z.rotation((float) (entity.age + tickDelta) / 20/*yaw*/));
+        matrixStack.multiply(RotationAxis.POSITIVE_Z.rotation((float) (meteorState.age) / 20/*yaw*/));
         matrixStack.translate(0, -1.5, 0);
 
-        VertexConsumer consumer = ItemRenderer.getDirectItemGlintConsumer(vertexConsumerProvider, this.model.getLayer(this.getTexture(entity)), false, false);
-        this.model.render(matrixStack, consumer, light, OverlayTexture.DEFAULT_UV);
+        super.render(meteorState, matrixStack, orderedRenderCommandQueue, cameraRenderState);
 
         matrixStack.pop();
 

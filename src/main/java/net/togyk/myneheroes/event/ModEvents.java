@@ -56,8 +56,8 @@ public class ModEvents {
         MissedSwingCallback.EVENT.register((PlayerEntity player, Hand hand) -> {
             // Create an arrow entity. (This example does not consume inventory arrows.)
             ItemStack stack = player.getStackInHand(hand);
-            if (player.getWorld() != null && stack.getItem() instanceof ThrowableItem throwableItem) {
-                throwableItem.Throw(player.getWorld(), player, hand);
+            if (player.getEntityWorld() != null && stack.getItem() instanceof ThrowableItem throwableItem) {
+                throwableItem.Throw(player.getEntityWorld(), player, hand);
             } else {
                 for (Ability ability : ((PlayerAbilities) player).myneheroes$getAbilities()) {
                     if (ability instanceof PassiveAbility passiveAbility) {
@@ -111,14 +111,14 @@ public class ModEvents {
         });
 
         ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, aliveAfterTeleport) -> {
-            if (aliveAfterTeleport || newPlayer.getServer().getOverworld().getGameRules().getBoolean(ModGamerules.KEEP_POWERS)) {
+            if (aliveAfterTeleport || newPlayer.getEntityWorld().getServer().getOverworld().getGameRules().getBoolean(ModGamerules.KEEP_POWERS)) {
                 List<Power> oldPowers = PowerData.getPowers(oldPlayer);
                 PowerData.setPowers(newPlayer, oldPowers);
             }
         });
 
-        ServerLivingEntityEvents.AFTER_DAMAGE.register((entity, source, originalAmount, actualAmount, blocked) -> {
-            if (entity instanceof PlayerEntity player && !blocked) {
+        ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
+            if (entity instanceof PlayerEntity player) {
                 // Check if the damage source is lightning
                 if (source.isOf(DamageTypes.LIGHTNING_BOLT)) {
                     // Check if the player has reached the limit of powers
@@ -130,15 +130,16 @@ public class ModEvents {
                     }
                 }
             }
+            return true;
         });
 
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             int tickCount = server.getTicks();
             if (tickCount % 20 == 0) {
-                for (PlayerEntity player : server.getPlayerManager().getPlayerList()) {
+                for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
                     List<Power> powers = PowerData.getPowers(player);
                     if (powers.size() > server.getOverworld().getGameRules().getInt(ModGamerules.POWER_LIMIT)) {
-                        player.damage(ModDamageTypes.powerExhaustion(player.getWorld(), null), 2);
+                        player.damage(player.getEntityWorld(), ModDamageTypes.powerExhaustion(player.getEntityWorld(), null), 2);
                     }
                 }
             }
@@ -167,12 +168,12 @@ public class ModEvents {
                 return ActionResult.PASS;
             }
 
-            if (!entity.getWorld().isClient) {
+            if (!entity.getEntityWorld().isClient()) {
                 ItemStack handStack = player.getStackInHand(hand);
                 if (!handStack.isEmpty()) {
                     EntityInteractionRecipeInput recipeInput = createRecipeInput(handStack, entity.getType());
 
-                    List<RecipeEntry<EntityInteractionRecipe>> recipes = player.getWorld().getRecipeManager().getAllMatches(ModRecipes.ENTITY_INTERACTION_TYPE, recipeInput, player.getWorld());
+                    List<RecipeEntry<EntityInteractionRecipe>> recipes = player.getEntityWorld().getRecipeManager().getAllMatches(ModRecipes.ENTITY_INTERACTION_TYPE, recipeInput, player.getWorld());
                     if (!recipes.isEmpty()) {
                         Random random = new Random();
                         EntityInteractionRecipe recipeEntry = recipes.get(random.nextInt(0, recipes.size())).value();
@@ -181,7 +182,7 @@ public class ModEvents {
                             handStack.decrement(1);
                         }
 
-                        ItemStack resultStack = recipeEntry.craft(recipeInput, player.getWorld().getRegistryManager());
+                        ItemStack resultStack = recipeEntry.craft(recipeInput, player.getEntityWorld().getRegistryManager());
                         if (handStack.isEmpty()) {
                             player.setStackInHand(hand, resultStack);
                         } else {
@@ -198,7 +199,7 @@ public class ModEvents {
             return ActionResult.PASS;
         });
 
-        ServerChunkEvents.CHUNK_GENERATE.register((serverWorld, chunk) -> {
+        ServerChunkEvents.CHUNK_LOAD.register((serverWorld, chunk) -> {
             //*
             ChunkPos chunkPos = chunk.getPos();
             for (int x = chunkPos.getStartX(); x <= chunkPos.getEndX(); x++) {
