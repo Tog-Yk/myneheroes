@@ -92,6 +92,8 @@ public class ModItemGroups {
                         entries.add(ModItems.COSMIC_SHIELD);
                         entries.add(ModItems.CARTERS_SHIELD);
 
+                        entries.add(ModItems.MJOLNIR);
+
 
                         entries.add(ModItems.POWER_INJECTION);
 

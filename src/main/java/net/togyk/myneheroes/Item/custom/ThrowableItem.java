@@ -4,9 +4,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.entity.ThrownItemEntity;
+import org.joml.Vector3f;
 
 public interface ThrowableItem {
      default void Throw(World world, PlayerEntity player, Hand hand) {
@@ -25,5 +27,40 @@ public interface ThrowableItem {
              player.getWorld().spawnEntity(projectile);
              stack.decrement(1);
          }
+     }
+
+     default Vector3f getGroundedOffset(ThrownItemEntity entity, Direction hitSide) {
+         return new Vector3f(0, 0, 0);
+     }
+
+     default float getFollowAnimationMaxSpeed() {
+         return 2;
+     }
+
+     default AnimationType getAnimationType() {
+         return AnimationType.FOLLOW;
+     }
+
+     default Direction getFollowDirection() {
+         return Direction.NORTH;
+     }
+
+     default SpinType getSpinType() {
+         return SpinType.NONE;
+     }
+
+     enum AnimationType {
+         FOLLOW,
+         FACE
+     }
+
+     enum SpinType {
+         NONE,
+         POS_PITCH,
+         NEG_PITCH,
+         POS_YAW,
+         NEG_YAW,
+         POS_ROLL,
+         NEG_ROLL,
      }
 }

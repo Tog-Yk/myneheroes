@@ -11,7 +11,8 @@ import net.togyk.myneheroes.util.ModTags;
 import java.util.function.Supplier;
 
 public enum ModToolMaterial implements ToolMaterial {
-    ADAMANTIUM (ModTags.Blocks.INCORRECT_FOR_ADAMANTIUM_TOOL, 2131, 9.0F, 4.5F, 14, () -> Ingredient.ofItems(Items.NETHERITE_INGOT));
+    ADAMANTIUM (ModTags.Blocks.INCORRECT_FOR_ADAMANTIUM_TOOL, 2131, 9.0F, 4.5F, 14, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)),
+    MJOLNIR (ModTags.Blocks.INCORRECT_FOR_ADAMANTIUM_TOOL, 2131, 9.0F, 4.5F, 14, () -> Ingredient.ofItems(Items.NETHERITE_INGOT));
 
     private final TagKey<Block> inverseTag;
     private final int itemDurability;
