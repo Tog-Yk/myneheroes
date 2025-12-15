@@ -17,6 +17,9 @@ public class ModEntities {
     public static final EntityType<StationaryItemEntity> STATIONARY_ITEM = registerEntity("stationary_item",
             EntityType.Builder.<StationaryItemEntity>create(StationaryItemEntity::new, SpawnGroup.MISC).dimensions(0.75F, 0.4F));
 
+    public static final EntityType<CallableStationaryItemEntity> CALLABLE_STATIONARY_ITEM = registerEntity("callable_stationary_item",
+            EntityType.Builder.<CallableStationaryItemEntity>create(CallableStationaryItemEntity::new, SpawnGroup.MISC).dimensions(0.75F, 0.4F));
+
     public static final EntityType<ThrownItemEntity> THROWN_ITEM = registerEntity("thrown_item",
             EntityType.Builder.<ThrownItemEntity>create(ThrownItemEntity::new, SpawnGroup.MISC).dimensions(0.75F, 0.4F));
 
@@ -44,6 +47,9 @@ public class ModEntities {
     public static final EntityType<WebSwingEntity> SWING_WEB = registerEntity("swing_web",
             EntityType.Builder.<WebSwingEntity>create(WebSwingEntity::new, SpawnGroup.MISC)
                     .dimensions(0.25F, 0.25F));
+
+    public static final EntityType<CallableThrownItemEntity> CALLABLE_THROWN_ITEM = registerEntity("callable_thrown_item",
+            EntityType.Builder.<CallableThrownItemEntity>create(CallableThrownItemEntity::new, SpawnGroup.MISC).dimensions(0.75F, 0.4F));
 
     private static <T extends Entity> EntityType<T> registerEntity(String name, EntityType.Builder<T> type) {
         return Registry.register(Registries.ENTITY_TYPE, Identifier.of(MyneHeroes.MOD_ID, name), type.build());

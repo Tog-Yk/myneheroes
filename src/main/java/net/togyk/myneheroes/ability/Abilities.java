@@ -270,6 +270,26 @@ public class Abilities {
 
     public static final ImmortalityAbility IMMORTALITY = registerAbility(new ImmortalityAbility(Identifier.of(MyneHeroes.MOD_ID, "immortality"), 2400, new Ability.Settings().appearsMultipleTimes(true)));
 
+    public static final Ability CALL_ITEMS = registerAbility(new Ability(Identifier.of(MyneHeroes.MOD_ID, "call_items"), 60, new Ability.Settings(), (player) -> {
+        World world = player.getWorld();
+        Box box = new Box(player.getBlockPos()).expand(6*16);
+        List<CallableThrownItemEntity> callables = world.getEntitiesByClass(CallableThrownItemEntity.class, box, entity -> entity.callable(player));
+        if (!callables.isEmpty()) {
+            for (CallableThrownItemEntity entity : callables) {
+                entity.call(player);
+            }
+            return true;
+        }
+        List<CallableStationaryItemEntity> callableStationary = world.getEntitiesByClass(CallableStationaryItemEntity.class, box, entity -> entity.callable(player));
+        if (!callableStationary.isEmpty()) {
+            for (CallableStationaryItemEntity entity : callableStationary) {
+                entity.call(player);
+            }
+            return true;
+        }
+        return false;
+    }));
+
     private static <T extends Ability> T registerAbility(T ability) {
         return Registry.register(ModRegistries.ABILITY, ability.id, ability);
     }

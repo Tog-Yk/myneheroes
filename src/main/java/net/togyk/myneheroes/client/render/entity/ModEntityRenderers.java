@@ -14,7 +14,9 @@ public class ModEntityRenderers {
         MyneHeroes.LOGGER.info("Registering Mod Entities for " + MyneHeroes.MOD_ID);
         EntityRendererRegistry.INSTANCE.register(ModEntities.LASER, LaserEntityRenderer::new);
         EntityRendererRegistry.INSTANCE.register(ModEntities.STATIONARY_ITEM, StationaryItemEntityRenderer::new);
+        EntityRendererRegistry.INSTANCE.register(ModEntities.CALLABLE_STATIONARY_ITEM, StationaryItemEntityRenderer::new);
         EntityRendererRegistry.INSTANCE.register(ModEntities.THROWN_ITEM, ThrownItemEntityRenderer::new);
+        EntityRendererRegistry.INSTANCE.register(ModEntities.CALLABLE_THROWN_ITEM, ThrownItemEntityRenderer::new);
         EntityRendererRegistry.INSTANCE.register(ModEntities.STATIONARY_ARMOR, StationaryArmorEntityRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(MeteorEntityModel.METEOR, MeteorEntityModel::getTexturedModelData);
