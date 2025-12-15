@@ -70,6 +70,7 @@ public class MyneHeroes implements ModInitializer {
         ModEffects.registerEffects();
 
         FabricDefaultAttributeRegistry.register(ModEntities.STATIONARY_ITEM, StationaryItemEntity.createAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.CALLABLE_STATIONARY_ITEM, StationaryItemEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.STATIONARY_ARMOR, StationaryArmorEntity.createMobAttributes());
 
         ModCommands.registerModCommands();

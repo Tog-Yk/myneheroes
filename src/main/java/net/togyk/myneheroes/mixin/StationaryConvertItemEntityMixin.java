@@ -21,8 +21,8 @@ public class StationaryConvertItemEntityMixin {
     private void ConversionOnTick(CallbackInfo info) {
         ItemEntity entity = (ItemEntity) (Object) this;
         ItemStack stack = entity.getStack();
-        if (!entity.getWorld().isClient() && stack.getItem() instanceof StationaryItem) {
-            StationaryItemEntity newItemEntity = getItemEntity(entity, stack);
+        if (!entity.getWorld().isClient() && stack.getItem() instanceof StationaryItem item) {
+            StationaryItemEntity newItemEntity = item.createEntity(entity, stack);
 
             entity.getWorld().spawnEntity(newItemEntity);
 

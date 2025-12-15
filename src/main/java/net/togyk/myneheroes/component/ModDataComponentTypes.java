@@ -6,10 +6,12 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Uuids;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.power.Power;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.function.UnaryOperator;
 
 public class ModDataComponentTypes {
@@ -31,6 +33,12 @@ public class ModDataComponentTypes {
 
     public static final ComponentType<NbtCompound> UPGRADES =
             register("upgrades", builder -> builder.codec(NbtCompound.CODEC));
+
+    public static final ComponentType<List<UUID>> MARKED_ENTITIES =
+            register("marked_entities", builder -> builder.codec(Codec.list(Uuids.CODEC)));
+
+    public static final ComponentType<Integer> TIMER =
+            register("timer", builder -> builder.codec(Codec.INT));
 
 
     private static <T>ComponentType<T> register(String name, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
