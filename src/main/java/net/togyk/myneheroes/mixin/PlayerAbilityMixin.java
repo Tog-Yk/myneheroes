@@ -12,6 +12,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.AbilityHolding;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.ability.Abilities;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.networking.PlayerAbilitySyncDataPayload;
 import net.togyk.myneheroes.power.Power;
@@ -186,6 +187,11 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
                     }
                 }
             }
+        }
+
+        Ability ability = Abilities.CALL_ITEMS.copy();
+        if (!abilityList.contains(ability) && ability != null) {
+            abilityList.add(ability);
         }
         return abilityList;
     }
