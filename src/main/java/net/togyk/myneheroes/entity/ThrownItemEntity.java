@@ -47,20 +47,28 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
     public ThrownItemEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
         super(entityType, world);
     }
-    public ThrownItemEntity(World world, LivingEntity owner, ItemStack stack) {
-        super(ModEntities.THROWN_ITEM, owner, world, stack, null);
+    public ThrownItemEntity(EntityType<? extends ThrownItemEntity> entityType, World world, LivingEntity owner, ItemStack stack) {
+        super(entityType, owner, world, stack, null);
         this.setDisplayStack(stack);
         setLoyalty(this.getLoyalty(stack));
     }
+    public ThrownItemEntity(World world, LivingEntity owner, ItemStack stack) {
+        this(ModEntities.THROWN_ITEM, world, owner, stack);
+    }
+
+    public ThrownItemEntity(World world, LivingEntity owner, ItemStack stack, float size) {
+        this(world, owner, stack, size, size);
+    }
 
     public ThrownItemEntity(World world, LivingEntity owner, ItemStack stack, float width, float height) {
-        this(world, owner, stack);
+        this(ModEntities.THROWN_ITEM, world, owner, stack, width, height);
+    }
+
+    public ThrownItemEntity(EntityType<? extends ThrownItemEntity> entityType, World world, LivingEntity owner, ItemStack stack, float width, float height) {
+        this(entityType, world, owner, stack);
         this.getDataTracker().set(WIDTH, width);
         this.getDataTracker().set(HEIGHT, height);
         setBoundingBox(new Box(-width / 2, 0, -width / 2, width / 2, height, width / 2));
-    }
-    public ThrownItemEntity(World world, LivingEntity owner, ItemStack stack, float size) {
-        this(world, owner, stack, size, size);
     }
 
     @Override
@@ -68,7 +76,7 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
 
         Entity entity = this.getOwner();
         int loyalty = getLoyalty();
-        if (loyalty > 0 && (this.isReturning() || this.isNoClip()) && entity != null) {
+        if ((this.isReturning() || this.isNoClip()) && entity != null) {
             if (!this.isOwnerAlive()) {
                 if (!this.getWorld().isClient && this.pickupType == PickupPermission.ALLOWED) {
                     this.dropStack(this.asItemStack(), 0.1F);
@@ -78,12 +86,12 @@ public class ThrownItemEntity extends PersistentProjectileEntity {
             } else {
                 this.setNoClip(true);
                 Vec3d vec3d = entity.getEyePos().subtract(this.getPos());
-                this.setPos(this.getX(), this.getY() + vec3d.y * 0.015 * (double) loyalty, this.getZ());
+                this.setPos(this.getX(), this.getY() + vec3d.y * 0.015 * (double) Math.max(loyalty, 1), this.getZ());
                 if (this.getWorld().isClient) {
                     this.lastRenderY = this.getY();
                 }
 
-                double speedMultiplier = 0.05 * (double) loyalty;
+                double speedMultiplier = 0.05 * (double) Math.max(loyalty, 1);
                 this.setVelocity(this.getVelocity().multiply(0.95).add(vec3d.normalize().multiply(speedMultiplier)));
                 if (this.returnTimer == 0) {
                     this.playSound(SoundEvents.ITEM_TRIDENT_RETURN, 10.0F, 1.0F);
