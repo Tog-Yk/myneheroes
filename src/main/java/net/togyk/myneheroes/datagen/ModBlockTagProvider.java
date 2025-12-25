@@ -90,6 +90,22 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(Blocks.GILDED_BLACKSTONE)
         ;
 
+        getOrCreateTagBuilder(ModTags.Blocks.NOT_METEOR_REPLACEABLE)
+                //Air
+                .add(Blocks.AIR)
+                //Liquids
+                .add(
+                        Blocks.WATER, Blocks.LAVA, Blocks.BUBBLE_COLUMN
+                )
+                //Technical / invisible / rare blocks
+                .add(
+                        Blocks.BARRIER, Blocks.COMMAND_BLOCK, Blocks.REPEATING_COMMAND_BLOCK,
+                        Blocks.CHAIN_COMMAND_BLOCK, Blocks.STRUCTURE_BLOCK, Blocks.JIGSAW
+                )
+                //Bedrock
+                .add(Blocks.BEDROCK)
+        ;
+
         getOrCreateTagBuilder(ModTags.Blocks.METEOR_CORE_BLOCKS)
                 .add(Blocks.COBBLED_DEEPSLATE)
                 .add(Blocks.GILDED_BLACKSTONE)
