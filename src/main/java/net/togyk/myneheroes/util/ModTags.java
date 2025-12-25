@@ -14,6 +14,8 @@ import net.togyk.myneheroes.upgrade.Upgrade;
 
 public class ModTags {
     public static class Blocks {
+        public static final TagKey<Block> NOT_METEOR_REPLACEABLE = createTag("not_meteor_replaceable");
+
         public static final TagKey<Block> METEOR_CORE_BLOCKS = createTag("meteor_core_blocks");
         public static final TagKey<Block> METEOR_CRUST_BLOCKS = createTag("meteor_crust_blocks");
         public static final TagKey<Block> KRYPTONITE_METEOR_CRUST_BLOCKS = createTag("kryptonite_meteor_crust_blocks");

@@ -18,6 +18,7 @@ import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.entity.CallableThrownItemEntity;
 import net.togyk.myneheroes.entity.MeteorVariant;
 import net.togyk.myneheroes.entity.ModEntities;
+import net.togyk.myneheroes.util.ModTags;
 
 
 public class MjolnirFeature extends Feature<DefaultFeatureConfig> {
@@ -67,11 +68,14 @@ public class MjolnirFeature extends Feature<DefaultFeatureConfig> {
                         if (distanceSq >= 0.5 && random.nextFloat() <= distanceSq) continue;
 
                         BlockPos pos = origin.add(dx, dy, dz);
-                        if (!world.getBlockState(pos).isOf(Blocks.WATER)) {
-                            if (isWaterMeteor && world.getSeaLevel() > pos.getY()) {
-                                world.setBlockState(pos, Blocks.WATER.getDefaultState(), 2);
-                            } else {
-                                world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
+                        BlockState state = world.getBlockState(pos);
+                        if (!state.isIn(ModTags.Blocks.NOT_METEOR_REPLACEABLE)) {
+                            if (!state.isOf(Blocks.WATER)) {
+                                if (isWaterMeteor && world.getSeaLevel() > pos.getY()) {
+                                    world.setBlockState(pos, Blocks.WATER.getDefaultState(), 2);
+                                } else {
+                                    world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
+                                }
                             }
                         }
                     }
@@ -97,11 +101,13 @@ public class MjolnirFeature extends Feature<DefaultFeatureConfig> {
                         BlockPos pos = origin.add((int) x, (int) y, (int) z);
                         BlockState state = world.getBlockState(pos);
 
-                        // Only replace stone‑replaceable blocks
-                        if (state.isIn(BlockTags.SAND) && random.nextFloat() > 0.7F) {
-                            world.setBlockState(pos, Blocks.GLASS.getDefaultState(), 2);
-                        } else if (state.isIn(BlockTags.BASE_STONE_OVERWORLD) || state.isIn(BlockTags.LOGS) || state.isIn(BlockTags.DIRT) || state.isIn(BlockTags.SAND)) {
-                            world.setBlockState(pos, getRandomBlockFromTag(random, variant.getCrustBlockTag()), 2);
+                        // Only replace replaceable blocks
+                        if (!state.isIn(ModTags.Blocks.NOT_METEOR_REPLACEABLE)) {
+                            if (state.isIn(BlockTags.SAND) && random.nextFloat() > 0.7F) {
+                                world.setBlockState(pos, Blocks.GLASS.getDefaultState(), 2);
+                            } else {
+                                world.setBlockState(pos, getRandomBlockFromTag(random, variant.getCrustBlockTag()), 2);
+                            }
                         }
                     }
                 }
@@ -121,7 +127,9 @@ public class MjolnirFeature extends Feature<DefaultFeatureConfig> {
 
             world.spawnEntity(mjolnir);
         }
-        world.setBlockState(origin, getRandomBlockFromTag(random, MeteorVariant.DEFAULT.getCrustBlockTag()), 2);
+        if (!world.getBlockState(origin).isOf(Blocks.BEDROCK)) {//No Bedrock breaking
+            world.setBlockState(origin, getRandomBlockFromTag(random, MeteorVariant.DEFAULT.getCrustBlockTag()), 2);
+        }
     }
 
 
