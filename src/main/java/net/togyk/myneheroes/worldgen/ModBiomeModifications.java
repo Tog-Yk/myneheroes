@@ -15,6 +15,7 @@ public class ModBiomeModifications {
     public static final RegistryKey<PlacedFeature> URANIUM_ORE_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(MyneHeroes.MOD_ID, "uranium_ore_placed"));
 
     public static final RegistryKey<PlacedFeature> METEOR_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(MyneHeroes.MOD_ID, "meteor_placed"));
+    public static final RegistryKey<PlacedFeature> MJOLNIR_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(MyneHeroes.MOD_ID, "mjolnir_placed"));
 
     public static void registerModBiomeModifications(){
         MyneHeroes.LOGGER.info("Registering Biome Modifacations for " + MyneHeroes.MOD_ID);
@@ -39,6 +40,10 @@ public class ModBiomeModifications {
                 GenerationStep.Feature.UNDERGROUND_DECORATION,
                 METEOR_KEY
         );
-        //add more placed features here */
+        BiomeModifications.addFeature(
+                BiomeSelectors.foundInOverworld(),
+                GenerationStep.Feature.UNDERGROUND_DECORATION,
+                MJOLNIR_KEY
+        );
     }
 }
