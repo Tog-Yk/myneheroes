@@ -15,4 +15,5 @@ public class ModFeatures {
 
 
     public static final Feature<DefaultFeatureConfig> METEOR_FEATURE = Registry.register(Registries.FEATURE, Identifier.of(MyneHeroes.MOD_ID, "meteor_feature"), new MeteorFeature(Codec.unit(DefaultFeatureConfig.INSTANCE)));
+    public static final Feature<DefaultFeatureConfig> MJOLNIR_FEATURE = Registry.register(Registries.FEATURE, Identifier.of(MyneHeroes.MOD_ID, "mjolnir_feature"), new MjolnirFeature(Codec.unit(DefaultFeatureConfig.INSTANCE)));
 }

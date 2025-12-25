@@ -1,9 +1,9 @@
 {
-  "feature": "myneheroes:meteor",
+  "feature": "myneheroes:mjolnir",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 313
+      "chance": 1250
     },
     {
       "type": "minecraft:in_square"
