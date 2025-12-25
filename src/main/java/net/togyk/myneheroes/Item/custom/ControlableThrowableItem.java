@@ -39,15 +39,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ContolableThrowableItem extends SwordItem implements StationaryItem, ThrowableItem {
-    public ContolableThrowableItem(ToolMaterial material, Settings settings) {
+public class ControlableThrowableItem extends SwordItem implements StationaryItem, ThrowableItem {
+    public ControlableThrowableItem(ToolMaterial material, Settings settings) {
         super(material, settings);
     }
 
     @Override
     public void Throw(World world, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
-        if (stack.getItem() instanceof ContolableThrowableItem) {
+        if (stack.getItem() instanceof ControlableThrowableItem) {
             Vec3d look = player.getRotationVec(1.0F);
 
             ItemStack projectileStack = stack.copy();
