@@ -36,7 +36,7 @@ public class MeteorFeature extends Feature<DefaultFeatureConfig> {
         createCrater(world, pos, radius, random);
         createCraterDecoration(world, pos, (int) (radius * 2.5), random, variant);
         //unknown status
-        createMeteor(world, pos, radius, random, variant);
+        createMeteor(world, pos.down(), radius, random, variant);
 
         return true;
     }
