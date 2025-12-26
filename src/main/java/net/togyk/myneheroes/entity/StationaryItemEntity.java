@@ -4,9 +4,14 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Arm;
@@ -14,15 +19,18 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.Item.custom.StationaryItem;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public class StationaryItemEntity extends LivingEntity implements Ownable {
     private ItemStack item = ItemStack.EMPTY;
-    @Nullable
-    private UUID ownerUuid;
+    private static final TrackedData<Optional<UUID>> ownerUuid = DataTracker.registerData(StationaryItemEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
     @Nullable
     private Entity owner;
+
+    private static final TrackedData<Vector3f> followDirection = DataTracker.registerData(StationaryItemEntity.class, TrackedDataHandlerRegistry.VECTOR3F);
 
     public StationaryItemEntity(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
@@ -96,15 +104,35 @@ public class StationaryItemEntity extends LivingEntity implements Ownable {
         return super.interact(player, hand);
     }
 
+    public Vector3f getFollowDirection() {
+        return this.getDataTracker().get(followDirection);
+    }
+
+    public void setFollowDirection(Vector3f followDirection) {
+        this.getDataTracker().set(this.followDirection, followDirection);
+    }
+
+    public UUID getOwnerUuid() {
+        return this.getDataTracker().get(ownerUuid).orElse(null);
+    }
+
+    public void setOwnerUuid(@Nullable UUID uuid) {
+        this.getDataTracker().set(ownerUuid, Optional.ofNullable(uuid));
+    }
+
     @Override
     public NbtCompound writeNbt(NbtCompound nbt) {
         nbt.put("item", item.encodeAllowEmpty(this.getRegistryManager()));
 
-        if (this.ownerUuid != null) {
-            nbt.putUuid("owner", this.ownerUuid);
+        if (this.getOwnerUuid() != null) {
+            nbt.putUuid("owner", this.getOwnerUuid());
         } else if (this.owner != null) {
             nbt.putUuid("owner", this.owner.getUuid());
         }
+
+        Vector3f vec3d = this.getFollowDirection();
+        nbt.put("follow_direction", this.toNbtList(vec3d.x, vec3d.y, vec3d.z));
+
         return super.writeNbt(nbt);
     }
 
@@ -117,8 +145,12 @@ public class StationaryItemEntity extends LivingEntity implements Ownable {
         }
 
         if (nbt.containsUuid("owner")) {
-            this.ownerUuid = nbt.getUuid("owner");
+            this.setOwnerUuid(nbt.getUuid("owner"));
             this.owner = null;
+        }
+        if (nbt.contains("follow_direction")) {
+            NbtList nbtList2 = nbt.getList("follow_direction", NbtElement.FLOAT_TYPE);
+            this.setFollowDirection(new Vector3f(nbtList2.getFloat(0), nbtList2.getFloat(1), nbtList2.getFloat(2)));
         }
     }
 
@@ -127,10 +159,10 @@ public class StationaryItemEntity extends LivingEntity implements Ownable {
         if (this.owner != null && !this.owner.isRemoved()) {
             return this.owner;
         } else {
-            if (this.ownerUuid != null) {
+            if (this.getOwnerUuid() != null) {
                 World world = this.getWorld();
                 if (world instanceof ServerWorld serverWorld) {
-                    this.owner = serverWorld.getEntity(this.ownerUuid);
+                    this.owner = serverWorld.getEntity(this.getOwnerUuid());
                     return this.owner;
                 }
             }
@@ -140,17 +172,15 @@ public class StationaryItemEntity extends LivingEntity implements Ownable {
     }
 
     public boolean isOwner(Entity entity) {
-        return (owner != null && ownerUuid != null) || owner == entity || ownerUuid == entity.getUuid();
+        return (owner != null && this.getOwnerUuid() != null) || owner == entity || this.getOwnerUuid() == entity.getUuid();
     }
 
-    @Nullable
     public void setOwner(@Nullable Entity entity) {
         this.owner = entity;
     }
 
-    @Nullable
-    public void setOwnerUuid(UUID entity) {
-        this.ownerUuid = entity;
+    public void setOwnerUuid(Optional<UUID> entity) {
+        this.getDataTracker().set(ownerUuid, entity);
     }
 
     public static DefaultAttributeContainer.Builder createAttributes() {
@@ -161,12 +191,14 @@ public class StationaryItemEntity extends LivingEntity implements Ownable {
     }
 
     @Override
-    public int getDespawnCounter() {
-        return super.getDespawnCounter();
+    public boolean damage(DamageSource source, float amount) {
+        return false;
     }
 
     @Override
-    public boolean damage(DamageSource source, float amount) {
-        return false;
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(ownerUuid, Optional.empty());
+        builder.add(followDirection, new Vector3f());
     }
 }
