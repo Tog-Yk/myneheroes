@@ -15,10 +15,11 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import net.togyk.myneheroes.Item.ModItems;
-import net.togyk.myneheroes.entity.CallableThrownItemEntity;
 import net.togyk.myneheroes.entity.MeteorVariant;
 import net.togyk.myneheroes.entity.ModEntities;
+import net.togyk.myneheroes.entity.StationaryItemEntity;
 import net.togyk.myneheroes.util.ModTags;
+import org.joml.Vector3f;
 
 
 public class MjolnirFeature extends Feature<DefaultFeatureConfig> {
@@ -118,12 +119,12 @@ public class MjolnirFeature extends Feature<DefaultFeatureConfig> {
     private void placeMjolnir(StructureWorldAccess world, BlockPos origin, int radius, Random random) {
         // Loop over a square bounding the circle
         //todo make entity Stationary Item that follows a direction
-        CallableThrownItemEntity mjolnir = ModEntities.CALLABLE_THROWN_ITEM.create(world.toServerWorld());
+        StationaryItemEntity mjolnir = ModEntities.STATIONARY_ITEM.create(world.toServerWorld());
         if (mjolnir != null) {
-            mjolnir.setDisplayStack(ModItems.MJOLNIR.getDefaultStack());
+            mjolnir.setItem(ModItems.MJOLNIR.getDefaultStack());
             mjolnir.setPosition(origin.getX() + 0.5, origin.getY() + 1.1, origin.getZ() + 0.5);
-            mjolnir.setVelocity(getRandomFloatBetween(random, -0.5f, 0.5f), -1, getRandomFloatBetween(random, -0.5f, 0.5f));
-            mjolnir.setBounces(0);
+            Vector3f followDirection = new Vector3f(getRandomFloatBetween(random, -0.5f, 0.5f), -1, getRandomFloatBetween(random, -0.5f, 0.5f));
+            mjolnir.setFollowDirection(followDirection);
 
             world.spawnEntity(mjolnir);
         }

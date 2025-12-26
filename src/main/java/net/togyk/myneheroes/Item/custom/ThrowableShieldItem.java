@@ -15,7 +15,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.togyk.myneheroes.entity.StationaryItemEntity;
 import net.togyk.myneheroes.entity.ThrownItemEntity;
 
 public class ThrowableShieldItem extends ShieldItem implements StationaryItem, ThrowableItem {
@@ -53,22 +52,7 @@ public class ThrowableShieldItem extends ShieldItem implements StationaryItem, T
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        World world = context.getWorld();
-        PlayerEntity player = context.getPlayer();
-
-        if (!world.isClient() && player.isSneaking()) {
-            StationaryItemEntity entity = new StationaryItemEntity(world);
-            entity.setItem(context.getStack().copyAndEmpty());
-            entity.setOwner(player);
-            Vec3d hitPos = context.getHitPos();
-            Vec3d SideVec = Vec3d.of(context.getSide().getVector()).multiply(0.4);
-
-            entity.setPosition(hitPos.add(SideVec));
-
-            world.spawnEntity(entity);
-            return ActionResult.SUCCESS;
-        }
-        return ActionResult.PASS;
+        return place(context);
     }
 
 
@@ -83,7 +67,7 @@ public class ThrowableShieldItem extends ShieldItem implements StationaryItem, T
     }
 
     @Override
-    public SpinType getSpinType() {
-        return SpinType.POS_PITCH;
+    public SpinInfo.SpinType getThrownSpinType() {
+        return SpinInfo.SpinType.POS_PITCH;
     }
 }
