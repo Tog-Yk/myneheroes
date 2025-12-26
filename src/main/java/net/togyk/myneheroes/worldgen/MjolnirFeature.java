@@ -118,7 +118,6 @@ public class MjolnirFeature extends Feature<DefaultFeatureConfig> {
 
     private void placeMjolnir(StructureWorldAccess world, BlockPos origin, int radius, Random random) {
         // Loop over a square bounding the circle
-        //todo make entity Stationary Item that follows a direction
         StationaryItemEntity mjolnir = ModEntities.STATIONARY_ITEM.create(world.toServerWorld());
         if (mjolnir != null) {
             mjolnir.setItem(ModItems.MJOLNIR.getDefaultStack());
