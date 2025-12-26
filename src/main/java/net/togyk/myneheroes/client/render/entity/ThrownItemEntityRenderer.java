@@ -16,6 +16,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
+import net.togyk.myneheroes.Item.custom.SpinInfo;
 import net.togyk.myneheroes.Item.custom.ThrowableItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.entity.ThrownItemEntity;
@@ -54,7 +55,7 @@ public class ThrownItemEntityRenderer extends ProjectileEntityRenderer<ThrownIte
                 matrixStack.translate(groundOffset.x, groundOffset.y, groundOffset.z);
             }
 
-            if (throwable.getAnimationType() != ThrowableItem.AnimationType.FACE) {
+            if (throwable.getThrownAnimationType() != SpinInfo.AnimationType.FACE) {
                 Vec3d velocity = entity.getVelocity();
 
                 float yaw = getRad(velocity.x, velocity.z);
@@ -71,7 +72,7 @@ public class ThrownItemEntityRenderer extends ProjectileEntityRenderer<ThrownIte
                 matrixStack.multiply(RotationAxis.NEGATIVE_X.rotation(pitch * followStrength/*pitch*/));
             }
 
-            switch (throwable.getFollowDirection()) {
+            switch (throwable.getThrownFollowDirection()) {
 
                 case NORTH -> {
                     // Already facing north
@@ -106,7 +107,7 @@ public class ThrownItemEntityRenderer extends ProjectileEntityRenderer<ThrownIte
 
             matrixStack.push();
             if (!entity.landed()) {
-                switch (throwable.getSpinType()) {
+                switch (throwable.getThrownSpinType()) {
                     case POS_PITCH -> matrixStack.multiply(RotationAxis.NEGATIVE_Y.rotation((float) (entity.age / Math.PI)));
                     case NEG_PITCH -> matrixStack.multiply(RotationAxis.POSITIVE_Y.rotation((float) (entity.age / Math.PI)));
                     case POS_YAW -> matrixStack.multiply(RotationAxis.POSITIVE_X.rotation((float) (entity.age / Math.PI)));

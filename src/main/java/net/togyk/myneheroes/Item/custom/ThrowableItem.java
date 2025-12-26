@@ -37,30 +37,15 @@ public interface ThrowableItem {
          return 2;
      }
 
-     default AnimationType getAnimationType() {
-         return AnimationType.FOLLOW;
-     }
+    default SpinInfo.AnimationType getThrownAnimationType() {
+        return SpinInfo.AnimationType.FOLLOW;
+    }
 
-     default Direction getFollowDirection() {
-         return Direction.NORTH;
-     }
+    default Direction getThrownFollowDirection() {
+        return Direction.NORTH;
+    }
 
-     default SpinType getSpinType() {
-         return SpinType.NONE;
-     }
-
-     enum AnimationType {
-         FOLLOW,
-         FACE
-     }
-
-     enum SpinType {
-         NONE,
-         POS_PITCH,
-         NEG_PITCH,
-         POS_YAW,
-         NEG_YAW,
-         POS_ROLL,
-         NEG_ROLL,
-     }
+    default SpinInfo.SpinType getThrownSpinType() {
+        return SpinInfo.SpinType.NONE;
+    }
 }

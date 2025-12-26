@@ -7,6 +7,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -39,7 +40,7 @@ public class CallableStationaryItemEntity extends StationaryItemEntity {
 
                 this.discard();
             } else {
-                this.noClip = false;
+                this.noClip = true;
                 Vec3d vec3d = entity.getEyePos().subtract(this.getPos());
                 this.setPos(this.getX(), this.getY() + vec3d.y * 0.015 * (double) Math.max(loyalty, 1), this.getZ());
                 if (this.getWorld().isClient) {
@@ -47,12 +48,17 @@ public class CallableStationaryItemEntity extends StationaryItemEntity {
                 }
 
 
-                double speedMultiplier = 0.05 * (double) Math.max(loyalty, 1);
+                double speedMultiplier = 0.15 * (double) Math.max(loyalty, 1);
                 this.setVelocity(this.getVelocity().multiply(0.95).add(vec3d.normalize().multiply(speedMultiplier)));
             }
         }
 
         super.tick();
+    }
+
+    @Override
+    protected double getGravity() {
+        return this.isReturning() ? 0 : super.getGravity();
     }
 
     @Override
@@ -82,11 +88,10 @@ public class CallableStationaryItemEntity extends StationaryItemEntity {
         return !this.isReturning() && (this.getOwner() != null || this.isDiscovered());
     }
 
-    public boolean call(LivingEntity caller) {
-        if (!this.callable(caller)) return false;
+    public void call(LivingEntity caller) {
+        if (!this.callable(caller)) return;
 
         this.setReturning(true);
-        return true;
     }
 
     @Override
@@ -120,6 +125,25 @@ public class CallableStationaryItemEntity extends StationaryItemEntity {
             return !(entity instanceof ServerPlayerEntity) || !entity.isSpectator();
         } else {
             return false;
+        }
+    }
+
+    @Override
+    public void onPlayerCollision(PlayerEntity player) {
+        super.onPlayerCollision(player);
+
+        // Only allow the owner to pick it up — and only while returning
+        if (!this.isReturning()) return;
+        if (player != this.getOwner()) return;
+
+        ItemStack stack = this.getItem();
+        if (stack.isEmpty()) return;
+
+        // Try to give the item to the player
+        if (player.getInventory().insertStack(stack.copy())) {
+            // Pickup sound + trigger pickup animation
+            player.sendPickup(this, stack.getCount());
+            this.discard();
         }
     }
 }
