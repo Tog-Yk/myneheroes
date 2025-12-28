@@ -12,6 +12,8 @@ public class ModKeyBinds {
     public static KeyBinding useThirdAbility;
     public static KeyBinding useFourthAbility;
 
+    public static KeyBinding scrollAbilitiesWithoutUsing;
+
     public static KeyBinding powersScrollUp;
     public static KeyBinding powersScrollDown;
 
@@ -39,6 +41,12 @@ public class ModKeyBinds {
                 "key.myneheroes.use_fourth_ability", //translatable key
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_B, // Default key of: B
+                "key.category.myneheroes" // keybind category
+        ));
+        scrollAbilitiesWithoutUsing = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.myneheroes.scroll_abilities_without_using", //translatable key
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_LEFT_ALT, // Default key of: Left Alt
                 "key.category.myneheroes" // keybind category
         ));
         powersScrollUp = KeyBindingHelper.registerKeyBinding(new KeyBinding(
