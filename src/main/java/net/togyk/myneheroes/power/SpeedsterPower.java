@@ -18,7 +18,10 @@ import net.togyk.myneheroes.upgrade.ColorUpgrade;
 import net.togyk.myneheroes.upgrade.Upgrade;
 import net.togyk.myneheroes.util.AbilityUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public class SpeedsterPower extends Power implements VariableLinkedPower, UpgradablePower {
     private int speedLevel = 0;
@@ -126,12 +129,11 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
         return phasing && !isDampened();
     }
 
-    public boolean setPhasing(boolean phasing) {
+    public void setPhasing(boolean phasing) {
         if (this.phasing == phasing) {
-            return false;
+            return;
         }
         this.phasing = phasing;
-        return true;
     }
 
     @Override
@@ -147,68 +149,51 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
         return speedLevel;
     }
 
-    public boolean setSpeedLevel(int level) {
+    public void setSpeedLevel(int level) {
         if (level == this.speedLevel || level < 0 || level > this.maxSpeedLevel) {
-            return false;
+            return;
         }
         this.speedLevel = level;
-        return true;
     }
 
     public boolean isSpeedActive() {
         return speedActive;
     }
 
-    public boolean setSpeedActive(boolean active) {
+    public void setSpeedActive(boolean active) {
         if (active == speedActive) {
-            return false;
+            return;
         }
         speedActive = active;
-        return true;
     }
 
     @Override
-    public boolean setInt(String name, int integer) {
+    public Object get(String name) {
         if (name.equals("speedLevel")) {
-            return setSpeedLevel(integer);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canSetInt(String name, int integer) {
-        if (name.equals("speedLevel")) {
-            return speedActive;
-        }
-        return false;
-    }
-
-    @Override
-    public int getInt(String name) {
-        if (name.equals("speedLevel")) {
-            return getSpeedLevel();
-        }
-        return 0;
-    }
-
-    @Override
-    public boolean setBoolean(String name, boolean bool) {
-        if (name.equals("speedActive")) {
-            return setSpeedActive(bool);
+            return this.getSpeedLevel();
+        } else if (name.equals("speedActive")) {
+            return this.isSpeedActive();
         } else if (name.equals("phasing")) {
-            return setPhasing(bool);
+            return this.phasing;
         }
-        return false;
+        return null;
+    }
+
+
+    @Override
+    public boolean canSet(String name, Object variable) {
+        return (name.equals("speedActive") && variable instanceof Boolean) || (name.equals("phasing") && variable instanceof Boolean) || this.isSpeedActive() && (name.equals("speedLevel") && variable instanceof Integer);
     }
 
     @Override
-    public boolean getBoolean(String name) {
-        if (Objects.equals(name, "speedActive")) {
-            return isSpeedActive();
-        } else if (name.equals("phasing")) {
-            return phasing;
+    public void set(String name, Object variable) {
+        if (name.equals("speedLevel") && variable instanceof Integer level) {
+            this.setSpeedLevel(level);
+        } else if (name.equals("speedActive") && variable instanceof Boolean active) {
+            this.setSpeedActive(active);
+        } else if (name.equals("phasing") && variable instanceof Boolean phasing) {
+            this.setPhasing(phasing);
         }
-        return false;
     }
 
     @Override
