@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.ability.ActivationTimedAbility;
 import net.togyk.myneheroes.ability.ItemRenderableAbility;
 import net.togyk.myneheroes.keybind.ModKeyBinds;
 import net.togyk.myneheroes.util.PlayerAbilities;
@@ -135,7 +136,14 @@ public class AbilityOverlayHelper {
                 drawContext.fill(x, y, x + 16, y + 16, 0x33000066);
             }
             //Todo add the cooldown bar rising when holding the ability
-            if (ability.getCooldown() != 0) {
+            if (ability instanceof ActivationTimedAbility timedAbility && timedAbility.isActivated()) {
+                if (timedAbility.getActivatedTime() != 0) {
+                    float activatedTimePercentile = (float) timedAbility.getActivatedTime() / timedAbility.getMaxActivatedTime();
+                    int maxIconLength = 16;
+                    int currentActivatedTimeLength = (int) ((maxIconLength - 1) * activatedTimePercentile) + 1;
+                    drawContext.fill(x, y + maxIconLength - currentActivatedTimeLength, x + 16, y + maxIconLength, 0x88000066);
+                }
+            } else if (ability.getCooldown() != 0) {
                 float cooldownPercentile = (float) ability.getCooldown() / ability.getMaxCooldown();
                 int maxIconLength = 16;
                 int currentCooldownLength = (int) (maxIconLength * cooldownPercentile);
