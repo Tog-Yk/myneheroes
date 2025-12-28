@@ -5,7 +5,6 @@ import net.fabricmc.fabric.api.item.v1.EnchantingContext;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -39,15 +38,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ContolableThrowableItem extends SwordItem implements StationaryItem, ThrowableItem {
-    public ContolableThrowableItem(ToolMaterial material, Settings settings) {
+public class ControlableThrowableItem extends SwordItem implements StationaryItem, ThrowableItem {
+    public ControlableThrowableItem(ToolMaterial material, Settings settings) {
         super(material, settings);
     }
 
     @Override
     public void Throw(World world, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
-        if (stack.getItem() instanceof ContolableThrowableItem) {
+        if (stack.getItem() instanceof ControlableThrowableItem) {
             Vec3d look = player.getRotationVec(1.0F);
 
             ItemStack projectileStack = stack.copy();
@@ -67,35 +66,13 @@ public class ContolableThrowableItem extends SwordItem implements StationaryItem
     }
 
     @Override
-    public StationaryItemEntity createEntity(ItemEntity entity, ItemStack stack) {
-        StationaryItemEntity newItemEntity = new CallableStationaryItemEntity(entity.getWorld());
-        newItemEntity.setPos(entity.getX(), entity.getY(), entity.getZ());
-        if (entity.getOwner() != null) {
-            newItemEntity.setOwner(entity.getOwner());
-        }
-        newItemEntity.setItem(stack);
-        newItemEntity.setVelocity(entity.getVelocity());
-        return newItemEntity;
+    public StationaryItemEntity createBaseEntity(World world, ItemStack stack) {
+        return new CallableStationaryItemEntity(world);
     }
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        World world = context.getWorld();
-        PlayerEntity player = context.getPlayer();
-
-        if (!world.isClient() && player.isSneaking()) {
-            StationaryItemEntity entity = new StationaryItemEntity(world);
-            entity.setItem(context.getStack().copyAndEmpty());
-            entity.setOwner(player);
-            Vec3d hitPos = context.getHitPos();
-            Vec3d SideVec = Vec3d.of(context.getSide().getVector()).multiply(0.4);
-
-            entity.setPosition(hitPos.add(SideVec));
-
-            world.spawnEntity(entity);
-            return ActionResult.SUCCESS;
-        }
-        return ActionResult.PASS;
+        return place(context);
     }
 
     @Override
@@ -110,7 +87,18 @@ public class ContolableThrowableItem extends SwordItem implements StationaryItem
     }
 
     @Override
-    public Direction getFollowDirection() {
+    public Direction getThrownFollowDirection() {
+        return Direction.DOWN;
+    }
+
+    @Override
+    public boolean willFaceWhenPlaced(PlayerEntity player, Hand hand) {
+        //todo only when player is worthy
+        return true;
+    }
+
+    @Override
+    public Direction getStationaryFaceDirection() {
         return Direction.DOWN;
     }
 

@@ -14,12 +14,16 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.togyk.myneheroes.Item.ModItems;
 import net.togyk.myneheroes.entity.MeteorVariant;
+import net.togyk.myneheroes.entity.ModEntities;
+import net.togyk.myneheroes.entity.StationaryItemEntity;
 import net.togyk.myneheroes.util.ModTags;
+import org.joml.Vector3f;
 
 
-public class MeteorFeature extends Feature<DefaultFeatureConfig> {
-    public MeteorFeature(Codec<DefaultFeatureConfig> configCodec) {
+public class MjolnirFeature extends Feature<DefaultFeatureConfig> {
+    public MjolnirFeature(Codec<DefaultFeatureConfig> configCodec) {
         super(configCodec);
     }
 
@@ -29,14 +33,13 @@ public class MeteorFeature extends Feature<DefaultFeatureConfig> {
         BlockPos pos = context.getOrigin();
         Random random = context.getRandom();
 
-        MeteorVariant variant = MeteorVariant.getRandomVariant(random);
-        int radius = random.nextBetween(3, 6);
+        int radius = random.nextBetween(3, 4);
 
         //seems to freeze the server
         createCrater(world, pos, radius, random);
-        createCraterDecoration(world, pos, (int) (radius * 2.5), random, variant);
+        createCraterDecoration(world, pos, (int) (radius * 2.5), random, MeteorVariant.DEFAULT);
         //unknown status
-        createMeteor(world, pos.down(), radius, random, variant);
+        placeMjolnir(world, pos.down(radius), radius, random);
 
         return true;
     }
@@ -95,7 +98,7 @@ public class MeteorFeature extends Feature<DefaultFeatureConfig> {
 
                 // For each layer down to form the bowl
                 for (double y = -depth; y <= depth; y++) {
-                    if (random.nextFloat() > 0.7F) {
+                    if (random.nextFloat() > 0.5F) {
                         BlockPos pos = origin.add((int) x, (int) y, (int) z);
                         BlockState state = world.getBlockState(pos);
 
@@ -113,37 +116,24 @@ public class MeteorFeature extends Feature<DefaultFeatureConfig> {
         }
     }
 
-    private void createMeteor(StructureWorldAccess world, BlockPos origin, int radius, Random random, MeteorVariant variant) {
-
+    private void placeMjolnir(StructureWorldAccess world, BlockPos origin, int radius, Random random) {
         // Loop over a square bounding the circle
-        for (double x = -radius; x <= radius; x++) {
-            for (double z = -radius; z <= radius; z++) {
-                double distSq = x*x + z*z;
-                if (distSq > radius*radius) continue; // outside circle
+        StationaryItemEntity mjolnir = ModEntities.STATIONARY_ITEM.create(world.toServerWorld());
+        if (mjolnir != null) {
+            mjolnir.setItem(ModItems.MJOLNIR.getDefaultStack());
+            mjolnir.setPosition(origin.getX() + 0.5, origin.getY() + 1.1, origin.getZ() + 0.5);
+            Vector3f followDirection = new Vector3f(getRandomFloatBetween(random, -0.5f, 0.5f), -1, getRandomFloatBetween(random, -0.5f, 0.5f));
+            mjolnir.setFollowDirection(followDirection);
 
-                // Compute crater depth by circle equation (hemisphere)
-                double depth = Math.sqrt(radius*radius - distSq);
-
-                // For each layer down to form the bowl
-                for (double y = -depth; y <= depth; y++) {
-                    BlockPos pos = origin.add((int) x, (int) y, (int) z);
-                    if (world.getBlockState(pos).isOf(Blocks.BEDROCK)) continue; //No Bedrock breaking
-
-                    double distSq2 = x*x + z*z + y*y;
-                    if (distSq2 > (radius * 0.70)*(radius * 0.70)) {
-                        //on the crust
-                        world.setBlockState(pos, this.getRandomBlockFromTag(random, variant.getCrustBlockTag()), 2);
-                    } else {
-                        //in the core
-                        world.setBlockState(pos, this.getRandomBlockFromTag(random, variant.getCoreBlockTag()), 2);
-                    }
-                }
-            }
+            world.spawnEntity(mjolnir);
+        }
+        if (!world.getBlockState(origin).isOf(Blocks.BEDROCK)) {//No Bedrock breaking
+            world.setBlockState(origin, getRandomBlockFromTag(random, MeteorVariant.DEFAULT.getCrustBlockTag()), 2);
         }
     }
 
 
-    public BlockState getRandomBlockFromTag(Random random, TagKey<Block> tag) {
+    public static BlockState getRandomBlockFromTag(Random random, TagKey<Block> tag) {
         // Get all the blocks in the tag
         var tagEntryList = Registries.BLOCK.getEntryList(tag);
 
@@ -157,5 +147,9 @@ public class MeteorFeature extends Feature<DefaultFeatureConfig> {
         }
 
         return Blocks.DEEPSLATE.getDefaultState();
+    }
+
+    private static float getRandomFloatBetween(Random random, float min, float max) {
+        return random.nextFloat() * (max - min + 1) + min;
     }
 }
