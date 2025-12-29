@@ -125,7 +125,7 @@ public class PassiveSelectionAbility extends AbilityHoldingAbility implements Pa
     }
 
     @Override
-    public Ability copy() {
+    public PassiveSelectionAbility copy() {
         return new PassiveSelectionAbility(id, settings, abilities);
     }
 }

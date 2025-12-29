@@ -49,84 +49,41 @@ public class ModMessages {
         ServerPlayNetworking.registerGlobalReceiver(AbilityKeybindPayload.ID, (payload, context) -> {
             context.server().execute(() -> {
                 // logic for pressing a keybind
+                Ability ability = null;
                 if (payload.abilityIndex() == 0) {
                     if (context.player() != null) {
-                        Ability ability = ((PlayerAbilities) context.player()).myneheroes$getFirstAbility();
-                        if (ability != null) {
-                            switch (payload.type()) {
-                                case 0: {
-                                    ability.use(context.player());
-                                    break;
-                                }
-                                case 1: {
-                                    ability.usePressed(context.player());
-                                    break;
-                                }
-                                case 2: {
-                                    ability.useReleased(context.player());
-                                    break;
-                                }
-                            }
-                        }
+                        ability = ((PlayerAbilities) context.player()).myneheroes$getFirstAbility();
                     }
                 } else if (payload.abilityIndex() == 1) {
                     if (context.player() != null) {
-                        Ability ability = ((PlayerAbilities) context.player()).myneheroes$getSecondAbility();
-                        if (ability != null) {
-                            switch (payload.type()) {
-                                case 0: {
-                                    ability.use(context.player());
-                                    break;
-                                }
-                                case 1: {
-                                    ability.usePressed(context.player());
-                                    break;
-                                }
-                                case 2: {
-                                    ability.useReleased(context.player());
-                                    break;
-                                }
-                            }
-                        }
+                        ability = ((PlayerAbilities) context.player()).myneheroes$getSecondAbility();
                     }
                 } else if (payload.abilityIndex() == 2) {
                     if (context.player() != null) {
-                        Ability ability = ((PlayerAbilities) context.player()).myneheroes$getThirdAbility();
-                        if (ability != null) {
-                            switch (payload.type()) {
-                                case 0: {
-                                    ability.use(context.player());
-                                    break;
-                                }
-                                case 1: {
-                                    ability.usePressed(context.player());
-                                    break;
-                                }
-                                case 2: {
-                                    ability.useReleased(context.player());
-                                    break;
-                                }
-                            }
-                        }
+                        ability = ((PlayerAbilities) context.player()).myneheroes$getThirdAbility();
                     }
                 } else if (payload.abilityIndex() == 3) {
                     if (context.player() != null) {
-                        Ability ability = ((PlayerAbilities) context.player()).myneheroes$getFourthAbility();
-                        if (ability != null) {
-                            switch (payload.type()) {
-                                case 0: {
-                                    ability.use(context.player());
-                                    break;
-                                }
-                                case 1: {
-                                    ability.usePressed(context.player());
-                                    break;
-                                }
-                                case 2: {
-                                    ability.useReleased(context.player());
-                                    break;
-                                }
-                            }
+                        ability = ((PlayerAbilities) context.player()).myneheroes$getFourthAbility();
+                    }
+                }
+                if (ability != null) {
+                    switch (payload.type()) {
+                        case 0: {
+                            ability.use(context.player());
+                            break;
+                        }
+                        case 1: {
+                            ability.usePressed(context.player());
+                            break;
+                        }
+                        case 2: {
+                            ability.notPressed(context.player());
+                            break;
+                        }
+                        case 3: {
+                            ability.useReleased(context.player());
+                            break;
                         }
                     }
                 }

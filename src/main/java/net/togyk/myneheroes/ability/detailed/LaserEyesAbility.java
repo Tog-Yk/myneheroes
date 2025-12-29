@@ -17,7 +17,6 @@ import net.togyk.myneheroes.ability.StockpileLinkedAbility;
 import net.togyk.myneheroes.client.render.LaserRenderer;
 import net.togyk.myneheroes.damage.ModDamageTypes;
 import net.togyk.myneheroes.power.Power;
-import net.togyk.myneheroes.util.StockPile;
 
 public class LaserEyesAbility extends StockpileLinkedAbility {
     private final LaserRenderer laserRenderer = new LaserRenderer();
@@ -27,10 +26,19 @@ public class LaserEyesAbility extends StockpileLinkedAbility {
     private Vec3d end;
     private float length = 0;
 
-    public LaserEyesAbility(Identifier id, int cooldown, int unlocksAt, int cost, Settings settings, int color, int innerColor) {
-        super(id, cooldown, unlocksAt, cost, settings, null);
+    public LaserEyesAbility(Identifier id, int cooldown, int unlocksAt, int cost, Settings settings, int color, int innerColor, int maxHoldTime) {
+        super(id, cooldown, unlocksAt, cost, settings, null, null, maxHoldTime);
+        this.hold = this::useLaserEyes;
         this.color = color;
         this.innerColor = innerColor;
+    }
+
+    public LaserEyesAbility(Identifier id, int unlocksAt, int cost, Settings settings, int color, int innerColor, int maxHoldTime) {
+        this(id, maxHoldTime, unlocksAt, cost, settings, color, innerColor, maxHoldTime);
+    }
+
+    public LaserEyesAbility(Identifier id, int unlocksAt, int cost, Settings settings, int color, int innerColor) {
+        this(id, 2, unlocksAt, cost, settings, color, innerColor, 0);
     }
 
     @Override
@@ -40,73 +48,60 @@ public class LaserEyesAbility extends StockpileLinkedAbility {
 
     @Override
     public void useReleased(PlayerEntity player) {
-        if (this.getCooldown() == 0 && this.length != 0) {
-            this.length = 0;
-            this.end = null;
-            this.setCooldown(this.getMaxCooldown());
-            this.save();
-        }
+        this.length = 0;
+        this.end = null;
+        this.setCooldown(Math.max(this.getHoldTime() * (this.getMaxCooldown() / this.getMaxHoldTime()), this.getCooldown()));
+        super.useReleased(player);
     }
 
-    @Override
-    public void usePressed(PlayerEntity player) {
-        if (getCooldown() == 0) {
-            if (this.getHolder() instanceof StockPile stockpile && stockpile.getCharge() >= this.getCost()) {
-                this.length = Math.min(32, this.length + 2.5F);
+    public boolean useLaserEyes(PlayerEntity player) {
+        this.length = Math.min(32, this.length + 2.5F);
 
-                World world = player.getWorld();
+        World world = player.getWorld();
 
-                Vec3d start = player.getEyePos().add(0, 0, 0);
-                Vec3d look = player.getRotationVec(1.0F);
-                Vec3d end = start.add(look.multiply(this.length));
+        Vec3d start = player.getEyePos().add(0, 0, 0);
+        Vec3d look = player.getRotationVec(1.0F);
+        Vec3d end = start.add(look.multiply(this.length));
 
 
-                BlockHitResult blockHit = world.raycast(new RaycastContext(
-                        start,
-                        end,
-                        RaycastContext.ShapeType.OUTLINE,
-                        RaycastContext.FluidHandling.NONE,
-                        player
-                ));
+        BlockHitResult blockHit = world.raycast(new RaycastContext(
+                start,
+                end,
+                RaycastContext.ShapeType.OUTLINE,
+                RaycastContext.FluidHandling.NONE,
+                player
+        ));
 
-                // Damage first hit entity
-                Box box = player.getBoundingBox()
-                        .stretch(look.multiply(this.length))
-                        .expand(1.0); // optional buffer
+        // Damage first hit entity
+        Box box = player.getBoundingBox()
+                .stretch(look.multiply(this.length))
+                .expand(1.0); // optional buffer
 
-                EntityHitResult entityHit = ProjectileUtil.raycast(
-                        player,
-                        start,
-                        end,
-                        box,
-                        entity -> !entity.isSpectator() && entity.isAttackable(),
-                        this.length * this.length
-                );
+        EntityHitResult entityHit = ProjectileUtil.raycast(
+                player,
+                start,
+                end,
+                box,
+                entity -> !entity.isSpectator() && entity.isAttackable(),
+                this.length * this.length
+        );
 
 
-                if (entityHit != null && (blockHit.getType() == HitResult.Type.MISS ||
-                        start.squaredDistanceTo(entityHit.getPos()) < start.squaredDistanceTo(blockHit.getPos()))) {
-                    // Damage entity
-                    Entity hitEntity = entityHit.getEntity();
-                    hitEntity.damage(ModDamageTypes.of(player.getWorld(), ModDamageTypes.LASER_TYPE_KEY, player), 5.0F);
+        if (entityHit != null && (blockHit.getType() == HitResult.Type.MISS ||
+                start.squaredDistanceTo(entityHit.getPos()) < start.squaredDistanceTo(blockHit.getPos()))) {
+            // Damage entity
+            Entity hitEntity = entityHit.getEntity();
+            hitEntity.damage(ModDamageTypes.of(player.getWorld(), ModDamageTypes.LASER_TYPE_KEY, player), 5.0F);
 
-                    end = entityHit.getPos();
-                } else if (blockHit.getType() == HitResult.Type.BLOCK) {
+            end = entityHit.getPos();
+        } else if (blockHit.getType() == HitResult.Type.BLOCK) {
 
-                    end = blockHit.getPos();
-                }
-
-                this.end = end;
-
-                stockpile.setCharge(stockpile.getCharge() - this.getCost());
-
-                this.save();
-            }
+            end = blockHit.getPos();
         }
-    }
 
-    @Override
-    public boolean canHold(PlayerEntity player) {
+        this.end = end;
+
+        this.save();
         return true;
     }
 
@@ -171,6 +166,6 @@ public class LaserEyesAbility extends StockpileLinkedAbility {
 
     @Override
     public LaserEyesAbility copy() {
-        return new LaserEyesAbility(id, maxCooldown, unlocksAt, cost, settings, innerColor, color);
+        return new LaserEyesAbility(id, maxCooldown, unlocksAt, cost, settings, innerColor, color, maxHoldTime);
     }
 }
