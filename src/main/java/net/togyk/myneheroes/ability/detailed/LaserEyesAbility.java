@@ -47,11 +47,11 @@ public class LaserEyesAbility extends StockpileLinkedAbility {
     }
 
     @Override
-    public void useReleased(PlayerEntity player) {
+    public void released(PlayerEntity player) {
         this.length = 0;
         this.end = null;
         this.setCooldown(Math.max(this.getHoldTime() * (this.getMaxCooldown() / this.getMaxHoldTime()), this.getCooldown()));
-        super.useReleased(player);
+        super.released(player);
     }
 
     public boolean useLaserEyes(PlayerEntity player) {

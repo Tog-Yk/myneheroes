@@ -31,7 +31,7 @@ public class ToolbeltAbility extends Ability implements ExtendedScreenHandlerFac
     }
 
     @Override
-    public void use(PlayerEntity player) {
+    public void pressed(PlayerEntity player) {
         if (getCooldown() == 0) {
             player.openHandledScreen(this);
             save();

@@ -33,7 +33,7 @@ public class StockpileLinkedAbility extends Ability {
     }
 
     @Override
-    public void use(PlayerEntity player) {
+    public void pressed(PlayerEntity player) {
         if (use != null) {
             if (this.getCooldown() == 0 && this.getIndirectHolder() instanceof StockPile stockPile && stockPile.getCharge() >= this.getCost()) {
                 if (this.use.apply(player)) {
@@ -46,7 +46,7 @@ public class StockpileLinkedAbility extends Ability {
     }
 
     @Override
-    public void usePressed(PlayerEntity player) {
+    public void held(PlayerEntity player) {
         if (hold != null) {
             if (this.getCooldown() == 0 && this.getIndirectHolder() instanceof StockPile stockPile && stockPile.getCharge() >= this.getCost()) {
                 int holdTime = this.getHoldTime();
@@ -56,7 +56,7 @@ public class StockpileLinkedAbility extends Ability {
                 }
                 if (holdTime >= this.getMaxHoldTime()) {
                     this.setCooldown(this.getMaxCooldown());
-                    this.useReleased(player);
+                    this.released(player);
                     return;
                 } else {
                     this.setHoldTime(holdTime + 1);

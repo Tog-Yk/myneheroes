@@ -20,7 +20,7 @@ public class SelectionAbility extends AbilityHoldingAbility implements ExtendedS
     }
 
     @Override
-    public void use(PlayerEntity player) {
+    public void pressed(PlayerEntity player) {
         if (getCooldown() == 0) {
             player.openHandledScreen(this);
             save();
@@ -29,7 +29,7 @@ public class SelectionAbility extends AbilityHoldingAbility implements ExtendedS
 
     public void UseAbility(PlayerEntity player, int index) {
         Ability ability = this.getAbilities().get(index);
-        ability.use(player);
+        ability.pressed(player);
         this.setCooldown(ability.getMaxCooldown());
         this.save();
     }
