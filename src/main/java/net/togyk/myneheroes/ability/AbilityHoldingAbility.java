@@ -15,14 +15,17 @@ import java.util.function.Function;
 public class AbilityHoldingAbility extends Ability {
     protected List<Ability> abilities;
 
-    public AbilityHoldingAbility(Identifier id, int cooldown, Settings settings, List<Ability> abilities, Function<PlayerEntity, Boolean> use, Function<PlayerEntity, Boolean> hold) {
-        super(id, cooldown, settings, use, hold);
+    public AbilityHoldingAbility(Identifier id, int cooldown, Settings settings, List<Ability> abilities, Function<PlayerEntity, Boolean> use, Function<PlayerEntity, Boolean> hold, int maxHoldTime) {
+        super(id, cooldown, settings, use, hold, maxHoldTime);
         this.abilities = abilities.stream().map(Ability::copy).toList();
     }
 
+    public AbilityHoldingAbility(Identifier id, int cooldown, Settings settings, List<Ability> abilities, Function<PlayerEntity, Boolean> use, Function<PlayerEntity, Boolean> hold) {
+        this(id, cooldown, settings, abilities, use, hold, 0);
+    }
+
     public AbilityHoldingAbility(Identifier id, int cooldown, Settings settings, List<Ability> abilities, Function<PlayerEntity, Boolean> use) {
-        super(id, cooldown, settings, use);
-        this.abilities = abilities.stream().map(Ability::copy).toList();
+        this(id, cooldown, settings, abilities, use, null);
     }
 
     public void saveAbility(Ability ability) {
@@ -77,5 +80,10 @@ public class AbilityHoldingAbility extends Ability {
             }
         }
         this.abilities = abilitiesList;
+    }
+
+    @Override
+    public AbilityHoldingAbility copy() {
+        return new AbilityHoldingAbility(id, maxCooldown, settings, abilities, use, hold, maxHoldTime);
     }
 }

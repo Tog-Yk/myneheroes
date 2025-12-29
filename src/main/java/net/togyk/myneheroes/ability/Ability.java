@@ -53,25 +53,30 @@ public class Ability {
     public final Identifier id;
     protected final int maxCooldown;
     private int cooldown;
+    protected final int maxHoldTime;
+    private int holdTime = 0;
 
     protected final Function<PlayerEntity, Boolean> use;
-    protected final Function<PlayerEntity, Boolean> hold;
+    protected Function<PlayerEntity, Boolean> hold;
     protected final Settings settings;
 
-    public Ability(Identifier id, int cooldown, Settings settings, Function<PlayerEntity, Boolean> use) {
-        this.id = id;
-        this.maxCooldown = cooldown;
-        this.use = use;
-        this.hold = null;
-        this.settings = settings;
-    }
 
-    public Ability(Identifier id, int cooldown, Settings settings, @Nullable Function<PlayerEntity, Boolean> use, Function<PlayerEntity, Boolean> hold) {
+
+    public Ability(Identifier id, int cooldown, Settings settings, @Nullable Function<PlayerEntity, Boolean> use, Function<PlayerEntity, Boolean> hold, int maxHoldTime) {
         this.id = id;
         this.maxCooldown = cooldown;
         this.use = use;
         this.hold = hold;
+        this.maxHoldTime = maxHoldTime;
         this.settings = settings;
+    }
+
+    public Ability(Identifier id, int cooldown, Settings settings, @Nullable Function<PlayerEntity, Boolean> use, Function<PlayerEntity, Boolean> hold) {
+        this(id, cooldown, settings, use, hold, 0);
+    }
+
+    public Ability(Identifier id, int cooldown, Settings settings, Function<PlayerEntity, Boolean> use) {
+        this(id, cooldown, settings, use, null);
     }
 
     public void use(PlayerEntity player) {
@@ -88,6 +93,21 @@ public class Ability {
     public void usePressed(PlayerEntity player) {
         if (this.hold != null) {
             if (this.getCooldown() == 0) {
+                int holdTime = this.getHoldTime();
+                if (holdTime > this.getMaxHoldTime()) {
+                    this.setHoldTime(this.getMaxCooldown());
+                    this.save();
+                }
+                if (holdTime >= this.getMaxHoldTime()) {
+                    this.setCooldown(this.getMaxCooldown());
+                    this.notPressed(player);
+                    return;
+                } else {
+                    this.setHoldTime(holdTime + 1);
+                    this.save();
+                }
+
+
                 if (this.hold.apply(player)) {
                     this.setCooldown(this.getMaxCooldown());
                 }
@@ -96,12 +116,17 @@ public class Ability {
         }
     }
 
-    //gets called if the player doesn't press the ability
     public void useReleased(PlayerEntity player) {
+        this.setHoldTime(0);
+        this.save();
+    }
+
+    //gets called if the player doesn't press the ability
+    public void notPressed(PlayerEntity player) {
     }
 
     public boolean canHold(PlayerEntity player) {
-        return this.hold != null;
+        return this.hold != null && this.cooldown == 0 && (this.getMaxHoldTime() == 0 || this.getHoldTime() < this.getMaxHoldTime());
     }
 
     public void tick(PlayerEntity player) {
@@ -141,6 +166,18 @@ public class Ability {
 
     public int getMaxCooldown() {
         return maxCooldown;
+    }
+
+    public int getHoldTime() {
+        return holdTime;
+    }
+
+    public void setHoldTime(int holdTime) {
+        this.holdTime = holdTime;
+    }
+
+    public int getMaxHoldTime() {
+        return maxHoldTime;
     }
 
     public void setHolder(@Nullable ItemStack holder) {
@@ -222,12 +259,16 @@ public class Ability {
     public NbtCompound writeNbt(NbtCompound nbt) {
         nbt.putString("id", this.id.toString());
         nbt.putInt("cooldown", this.cooldown);
+        nbt.putInt("hold_time", this.getHoldTime());
         return nbt;
     }
 
     public void readNbt(NbtCompound nbt) {
         if (nbt.contains("cooldown")) {
             this.cooldown = nbt.getInt("cooldown");
+        }
+        if (nbt.contains("hold_time")) {
+            this.setHoldTime(nbt.getInt("hold_time"));
         }
     }
 
@@ -248,7 +289,7 @@ public class Ability {
     }
 
     public Ability copy() {
-        return new Ability(id, maxCooldown, settings, use, hold);
+        return new Ability(id, maxCooldown, settings, use, hold, maxHoldTime);
     }
 
     public static class Settings{
