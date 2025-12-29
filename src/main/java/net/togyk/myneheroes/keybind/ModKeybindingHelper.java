@@ -44,9 +44,12 @@ public class ModKeybindingHelper {
                     } else if (firstWasPressed) {
                         if (AbilitiesBlockedForScrolling) {
                             AbilitiesBlockedForScrolling = false;
+                        } else {
+                            ability.useReleased(player);
+                            ClientPlayNetworking.send(new AbilityKeybindPayload(0, 3));
                         }
                     } else {
-                        ability.useReleased(player);
+                        ability.notPressed(player);
                         ClientPlayNetworking.send(new AbilityKeybindPayload(0, 2));
                     }
                 }
@@ -72,9 +75,12 @@ public class ModKeybindingHelper {
                     } else if (secondWasPressed) {
                         if (AbilitiesBlockedForScrolling)  {
                             AbilitiesBlockedForScrolling = false;
+                        } else {
+                            ability.useReleased(player);
+                            ClientPlayNetworking.send(new AbilityKeybindPayload(1, 3));
                         }
                     } else {
-                        ability.useReleased(player);
+                        ability.notPressed(player);
                         ClientPlayNetworking.send(new AbilityKeybindPayload(1, 2));
                     }
                 }
@@ -100,9 +106,12 @@ public class ModKeybindingHelper {
                     } else if (thirdWasPressed) {
                         if (AbilitiesBlockedForScrolling) {
                             AbilitiesBlockedForScrolling = false;
+                        } else {
+                            ability.useReleased(player);
+                            ClientPlayNetworking.send(new AbilityKeybindPayload(2, 3));
                         }
                     } else {
-                        ability.useReleased(player);
+                        ability.notPressed(player);
                         ClientPlayNetworking.send(new AbilityKeybindPayload(2, 2));
                     }
                 }
@@ -128,9 +137,12 @@ public class ModKeybindingHelper {
                     } else if (fourthWasPressed) {
                         if (AbilitiesBlockedForScrolling) {
                             AbilitiesBlockedForScrolling = false;
+                        } else {
+                            ability.useReleased(player);
+                            ClientPlayNetworking.send(new AbilityKeybindPayload(3, 3));
                         }
                     } else {
-                        ability.useReleased(player);
+                        ability.notPressed(player);
                         ClientPlayNetworking.send(new AbilityKeybindPayload(3, 2));
                     }
                 }
@@ -142,7 +154,7 @@ public class ModKeybindingHelper {
                 for (int i = 0; i < abilities.size(); i++) {
                     if (i < ((PlayerAbilities) player).myneheroes$getScrolledAbilityOffset() || i > ((PlayerAbilities) player).myneheroes$getScrolledAbilityOffset() + 3) {
                         ability = abilities.get(i);
-                        ability.useReleased(player);
+                        ability.notPressed(player);
                     }
                 }
                 if (powerScrollCooldown == 0) {
@@ -169,7 +181,7 @@ public class ModKeybindingHelper {
                 for (int i = 0; i < abilities.size(); i++) {
                     if (i < ((PlayerAbilities) player).myneheroes$getScrolledAbilityOffset() || i > ((PlayerAbilities) player).myneheroes$getScrolledAbilityOffset() + 3) {
                         Ability ability = abilities.get(i);
-                        ability.useReleased(player);
+                        ability.notPressed(player);
                     }
                 }
             }

@@ -92,7 +92,7 @@ public class Abilities {
 
     public static final ReleaseKineticEnergyAbility RELEASE_KINETIC_ENERGY = registerAbility(new ReleaseKineticEnergyAbility(Identifier.of(MyneHeroes.MOD_ID, "release_kinetic_energy"), new Ability.Settings(), 120, 200, 1.0F));
 
-    public static final LaserEyesAbility LASER_EYES = registerAbility(new LaserEyesAbility(Identifier.of(MyneHeroes.MOD_ID, "laser_eyes"), 2, 1000, 4, new Ability.Settings(), 0xF0FFF0F0, 0x40FF0000));
+    public static final LaserEyesAbility LASER_EYES = registerAbility(new LaserEyesAbility(Identifier.of(MyneHeroes.MOD_ID, "laser_eyes"), 1000, 4, new Ability.Settings(), 0xF0FFF0F0, 0x40FF0000, 100));
 
     public static final Ability TAKE_OFF_SUIT = registerAbility(new Ability(Identifier.of(MyneHeroes.MOD_ID, "take_off_suit"), 10, new Ability.Settings().appearsMultipleTimes(false),  (player) -> {
         List<ItemStack> armor = new ArrayList<>();
@@ -125,7 +125,7 @@ public class Abilities {
         return false;
     }));
 
-    public static final StockpileLinkedAbility FROST_BREATH = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "frost_breath"), 4, 48, 8, new Ability.Settings(), null,  (player) -> {
+    public static final StockpileLinkedAbility FROST_BREATH = registerAbility(new StockpileLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "frost_breath"), 10, 48, 8, new Ability.Settings(), null,  (player) -> {
         Vec3d direction = player.getRotationVec(1.0F);
         Vec3d origin = player.getEyePos().add(0, -0.2, 0);
         World world = player.getWorld();

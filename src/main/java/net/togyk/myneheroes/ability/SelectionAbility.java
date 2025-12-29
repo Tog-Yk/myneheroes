@@ -58,7 +58,7 @@ public class SelectionAbility extends AbilityHoldingAbility implements ExtendedS
     }
 
     @Override
-    public Ability copy() {
+    public SelectionAbility copy() {
         return new SelectionAbility(id, settings, abilities);
     }
 }

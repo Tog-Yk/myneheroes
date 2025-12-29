@@ -11,15 +11,17 @@ public class StockpileLinkedAbility extends Ability {
     protected final int unlocksAt;
     protected final int cost;
 
-    public StockpileLinkedAbility(Identifier id, int cooldown, int unlocksAt, int cost, Ability.Settings settings, Function<PlayerEntity, Boolean> use) {
-        super(id, cooldown, settings, use);
+    public StockpileLinkedAbility(Identifier id, int cooldown, int unlocksAt, int cost, Ability.Settings settings, @Nullable Function<PlayerEntity, Boolean> use, Function<PlayerEntity, Boolean> hold, int maxHoldTime) {
+        super(id, cooldown, settings, use, hold, maxHoldTime);
         this.unlocksAt = unlocksAt;
         this.cost = cost;
     }
     public StockpileLinkedAbility(Identifier id, int cooldown, int unlocksAt, int cost, Ability.Settings settings, @Nullable Function<PlayerEntity, Boolean> use, Function<PlayerEntity, Boolean> hold) {
-        super(id, cooldown, settings, use, hold);
-        this.unlocksAt = unlocksAt;
-        this.cost = cost;
+        this(id, cooldown, unlocksAt, cost, settings, use, hold, 0);
+    }
+
+    public StockpileLinkedAbility(Identifier id, int cooldown, int unlocksAt, int cost, Ability.Settings settings, Function<PlayerEntity, Boolean> use) {
+        this(id, unlocksAt, cost, cooldown, settings, use, null, 0);
     }
 
     public int getUnlocksAt() {
@@ -47,6 +49,21 @@ public class StockpileLinkedAbility extends Ability {
     public void usePressed(PlayerEntity player) {
         if (hold != null) {
             if (this.getCooldown() == 0 && this.getIndirectHolder() instanceof StockPile stockPile && stockPile.getCharge() >= this.getCost()) {
+                int holdTime = this.getHoldTime();
+                if (holdTime > this.getMaxHoldTime()) {
+                    this.setHoldTime(this.getMaxCooldown());
+                    this.save();
+                }
+                if (holdTime >= this.getMaxHoldTime()) {
+                    this.setCooldown(this.getMaxCooldown());
+                    this.useReleased(player);
+                    return;
+                } else {
+                    this.setHoldTime(holdTime + 1);
+                    this.save();
+                }
+
+
                 if (this.hold.apply(player)) {
                     stockPile.setCharge(stockPile.getCharge() - this.getCost());
                 }
@@ -62,6 +79,6 @@ public class StockpileLinkedAbility extends Ability {
 
     @Override
     public StockpileLinkedAbility copy() {
-        return new StockpileLinkedAbility(this.getId(), this.getMaxCooldown(), this.unlocksAt, this.cost, settings, use, hold);
+        return new StockpileLinkedAbility(this.getId(), this.getMaxCooldown(), this.unlocksAt, this.cost, settings, use, hold, maxHoldTime);
     }
 }
