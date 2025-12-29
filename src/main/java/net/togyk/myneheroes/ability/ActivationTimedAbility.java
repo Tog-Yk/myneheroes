@@ -16,7 +16,7 @@ public class ActivationTimedAbility extends Ability {
 
 
     @Override
-    public void use(PlayerEntity player) {
+    public void pressed(PlayerEntity player) {
         //switch the boolean
         if (this.isActivated()) {
             this.setActivated(false);

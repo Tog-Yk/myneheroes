@@ -20,7 +20,7 @@ public class AddOrRemoveDualItemAbility extends Ability implements ItemRenderabl
     }
 
     @Override
-    public void use(PlayerEntity player) {
+    public void pressed(PlayerEntity player) {
         if (this.getCooldown() == 0) {
             if (itemConvertible != null) {
                 Item item = itemConvertible.asItem();

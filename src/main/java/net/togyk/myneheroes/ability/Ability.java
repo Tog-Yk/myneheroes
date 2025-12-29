@@ -79,7 +79,7 @@ public class Ability {
         this(id, cooldown, settings, use, null);
     }
 
-    public void use(PlayerEntity player) {
+    public void pressed(PlayerEntity player) {
         if (use != null) {
             if (this.getCooldown() == 0) {
                 if (this.use.apply(player)) {
@@ -90,7 +90,7 @@ public class Ability {
         }
     }
 
-    public void usePressed(PlayerEntity player) {
+    public void held(PlayerEntity player) {
         if (this.hold != null) {
             if (this.getCooldown() == 0) {
                 int holdTime = this.getHoldTime();
@@ -116,7 +116,7 @@ public class Ability {
         }
     }
 
-    public void useReleased(PlayerEntity player) {
+    public void released(PlayerEntity player) {
         this.setHoldTime(0);
         this.save();
     }
