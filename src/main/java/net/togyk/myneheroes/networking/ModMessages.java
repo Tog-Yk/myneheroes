@@ -70,11 +70,11 @@ public class ModMessages {
                 if (ability != null) {
                     switch (payload.type()) {
                         case 0: {
-                            ability.use(context.player());
+                            ability.pressed(context.player());
                             break;
                         }
                         case 1: {
-                            ability.usePressed(context.player());
+                            ability.held(context.player());
                             break;
                         }
                         case 2: {
@@ -82,7 +82,7 @@ public class ModMessages {
                             break;
                         }
                         case 3: {
-                            ability.useReleased(context.player());
+                            ability.released(context.player());
                             break;
                         }
                     }

@@ -37,7 +37,7 @@ public class ShootProjectilePassiveAbility<T extends ProjectileEntity> extends S
     }
 
     @Override
-    public void use(PlayerEntity player) {
+    public void pressed(PlayerEntity player) {
         //switch the boolean
         if (getCooldown() == 0) {
             this.bool = !this.bool;

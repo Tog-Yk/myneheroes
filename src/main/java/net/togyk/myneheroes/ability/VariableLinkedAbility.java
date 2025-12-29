@@ -21,7 +21,7 @@ public class VariableLinkedAbility extends Ability {
     }
 
     @Override
-    public void use(PlayerEntity player) {
+    public void pressed(PlayerEntity player) {
         if (this.getCooldown() == 0 && this.getIndirectHolder() instanceof VariableLinkedPower power) {
             Object variable = this.operation.apply(power);
             if (power.canSet(this.getVariableName(), variable)) {
