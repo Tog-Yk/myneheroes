@@ -4,30 +4,34 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
+import net.togyk.myneheroes.Item.custom.UpgradeItem;
 import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.client.render.ToolbeltModel;
+import net.togyk.myneheroes.client.render.upgrade.UpgradeModel;
+import net.togyk.myneheroes.client.render.upgrade.UpgradeModelRegistry;
+import net.togyk.myneheroes.upgrade.Upgrade;
+
+import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class ModArmorRenderers {
-
     private static void registerToolbelt(Item item) {
         ArmorRenderer.register(
             (matrixStack, vertexConsumerProvider, stack, livingEntity, equipmentSlot, light, model) -> {
-                BipedEntityModel<LivingEntity> toolbeltModel = new ToolbeltModel(
-                        MinecraftClient.getInstance().getEntityModelLoader()
-                                .getModelPart(ToolbeltModel.TOOLBELT)
-                );
-                model.copyBipedStateTo(toolbeltModel);
+                if (stack.getItem() instanceof UpgradeItem upgradeItem) {
+                    Upgrade upgrade = upgradeItem.getUpgrade(stack);
+                    UpgradeModel upgradeModel = UpgradeModelRegistry.get(upgrade, MinecraftClient.getInstance().getEntityModelLoader());
+                    if (model != null) {
+                        model.copyBipedStateTo(upgradeModel);
 
-                Identifier itemId = Registries.ITEM.getId(item);
-                Identifier texture = Identifier.of(itemId.getNamespace(), "textures/models/toolbelt/" + itemId.getPath() + ".png");
+                        upgradeModel.setEquipmentSlotVisible(equipmentSlot);
+                        Identifier texture = upgradeModel.getTexture(upgrade);
 
-                ArmorRenderer.renderPart(matrixStack, vertexConsumerProvider, light, stack, toolbeltModel, texture);
+                        ArmorRenderer.renderPart(matrixStack, vertexConsumerProvider, light, stack, upgradeModel, texture);
+                    }
+                }
         }, item);
     }
 
