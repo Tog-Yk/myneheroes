@@ -93,18 +93,20 @@ public class Ability {
     public void held(PlayerEntity player) {
         if (this.hold != null) {
             if (this.getCooldown() == 0) {
-                int holdTime = this.getHoldTime();
-                if (holdTime > this.getMaxHoldTime()) {
-                    this.setHoldTime(this.getMaxCooldown());
-                    this.save();
-                }
-                if (holdTime >= this.getMaxHoldTime()) {
-                    this.setCooldown(this.getMaxCooldown());
-                    this.notPressed(player);
-                    return;
-                } else {
-                    this.setHoldTime(holdTime + 1);
-                    this.save();
+                if (this.getMaxHoldTime() != 0) {
+                    int holdTime = this.getHoldTime();
+                    if (holdTime > this.getMaxHoldTime()) {
+                        this.setHoldTime(this.getMaxCooldown());
+                        this.save();
+                    }
+                    if (holdTime >= this.getMaxHoldTime()) {
+                        this.setCooldown(this.getMaxCooldown());
+                        this.released(player);
+                        return;
+                    } else {
+                        this.setHoldTime(holdTime + 1);
+                        this.save();
+                    }
                 }
 
 
@@ -118,6 +120,9 @@ public class Ability {
 
     public void released(PlayerEntity player) {
         this.setHoldTime(0);
+        if (this.cooldownWhenReleased()) {
+            this.setCooldown((this.getMaxCooldown()));
+        }
         this.save();
     }
 
@@ -256,6 +261,10 @@ public class Ability {
         return settings.usable;
     }
 
+    public boolean cooldownWhenReleased() {
+        return settings.cooldownWhenReleased;
+    }
+
     public NbtCompound writeNbt(NbtCompound nbt) {
         nbt.putString("id", this.id.toString());
         nbt.putInt("cooldown", this.cooldown);
@@ -295,6 +304,7 @@ public class Ability {
     public static class Settings{
         public boolean appearsMultipleTimes = true;
         public boolean usable = true;
+        public boolean cooldownWhenReleased = false;
 
         public Settings() {
         }
@@ -306,6 +316,11 @@ public class Ability {
 
         public Ability.Settings usable(boolean bl) {
             this.usable = bl;
+            return this;
+        }
+
+        public Ability.Settings cooldownWhenReleased(boolean bl) {
+            this.cooldownWhenReleased = bl;
             return this;
         }
     }

@@ -49,18 +49,20 @@ public class StockpileLinkedAbility extends Ability {
     public void held(PlayerEntity player) {
         if (hold != null) {
             if (this.getCooldown() == 0 && this.getIndirectHolder() instanceof StockPile stockPile && stockPile.getCharge() >= this.getCost()) {
-                int holdTime = this.getHoldTime();
-                if (holdTime > this.getMaxHoldTime()) {
-                    this.setHoldTime(this.getMaxCooldown());
-                    this.save();
-                }
-                if (holdTime >= this.getMaxHoldTime()) {
-                    this.setCooldown(this.getMaxCooldown());
-                    this.released(player);
-                    return;
-                } else {
-                    this.setHoldTime(holdTime + 1);
-                    this.save();
+                if (this.getMaxHoldTime() != 0) {
+                    int holdTime = this.getHoldTime();
+                    if (holdTime > this.getMaxHoldTime()) {
+                        this.setHoldTime(this.getMaxCooldown());
+                        this.save();
+                    }
+                    if (holdTime >= this.getMaxHoldTime()) {
+                        this.setCooldown(this.getMaxCooldown());
+                        this.released(player);
+                        return;
+                    } else {
+                        this.setHoldTime(holdTime + 1);
+                        this.save();
+                    }
                 }
 
 
