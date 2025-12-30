@@ -6,8 +6,8 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.util.Identifier;
-import net.togyk.myneheroes.Item.custom.AbilityHoldingUpgradeItem;
 import net.togyk.myneheroes.Item.custom.UpgradableItem;
+import net.togyk.myneheroes.Item.custom.UpgradeHolding;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.util.AbilityUtil;
 
@@ -39,8 +39,8 @@ public class AbilityUpgrade extends Upgrade {
         if (stack != null) {
             if (stack.getItem() instanceof UpgradableItem upgradableItem) {
                 upgradableItem.saveUpgrade(stack, this);
-            } else if (stack.getItem() instanceof AbilityHoldingUpgradeItem upgradeItem) {
-                upgradeItem.saveUpgrade(stack, this);
+            } else if (stack.getItem() instanceof UpgradeHolding upgradeHolding) {
+                upgradeHolding.saveUpgrade(stack, this);
             }
         }
     }
