@@ -3,13 +3,16 @@ package net.togyk.myneheroes.Item.custom;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.upgrade.Upgrade;
+import net.togyk.myneheroes.util.AbilityUtil;
 
 import java.util.List;
 
-public class UpgradeItem extends Item {
+public class UpgradeItem extends Item implements UpgradeHolding {
     private final Upgrade upgrade;
     private final Text tooltip;
 
@@ -25,10 +28,14 @@ public class UpgradeItem extends Item {
     }
 
     public Upgrade getUpgrade(ItemStack stack) {
-        return upgrade.copy();
-    }
+        NbtCompound nbt = stack.getOrDefault(ModDataComponentTypes.UPGRADES, new NbtCompound());
 
-    public void saveUpgrade(ItemStack stack, Upgrade upgrade) {
+        Upgrade upgrade = this.upgrade.copy();
+        if (nbt.contains("upgrade")) {
+            upgrade = AbilityUtil.nbtToUpgrade(nbt.getCompound("upgrade"));
+        }
+        upgrade.setHolderStack(stack);
+        return upgrade;
     }
 
     @Override

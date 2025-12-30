@@ -15,16 +15,9 @@ import net.togyk.myneheroes.util.AbilityUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbilityHoldingUpgradeItem extends UpgradeItem implements AbilityHolding {
+public class AbilityHoldingUpgradeItem extends UpgradeItem implements AbilityHolding, UpgradeHolding {
     public AbilityHoldingUpgradeItem(Upgrade upgrade, Settings settings) {
         super(upgrade, settings);
-    }
-
-    public void saveUpgrade(ItemStack stack, Upgrade upgrade) {
-        NbtCompound nbt = new NbtCompound();
-        nbt.put("upgrade", upgrade.writeNbt(new NbtCompound()));
-
-        stack.set(ModDataComponentTypes.UPGRADES, nbt);
     }
 
     @Override
