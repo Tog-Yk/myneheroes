@@ -29,7 +29,7 @@ public class ModArmorRenderers {
                 if (stack.getItem() instanceof UpgradeItem upgradeItem) {
                     Upgrade upgrade = upgradeItem.getUpgrade(stack);
                     UpgradeModel upgradeModel = UpgradeModelRegistry.get(upgrade, MinecraftClient.getInstance().getEntityModelLoader());
-                    if (contextModel != null) {
+                    if (upgradeModel != null && contextModel != null) {
                         contextModel.copyBipedStateTo(upgradeModel);
 
                         upgradeModel.setEquipmentSlotVisible(equipmentSlot);
@@ -65,7 +65,7 @@ public class ModArmorRenderers {
                         List<Upgrade> upgrades = armor.getUpgrades(stack);
                         for (Upgrade upgrade: upgrades) {
                             UpgradeModel upgradeModel = UpgradeModelRegistry.get(upgrade, MinecraftClient.getInstance().getEntityModelLoader());
-                            if (contextModel != null) {
+                            if (upgradeModel != null && contextModel != null) {
                                 contextModel.copyBipedStateTo(upgradeModel);
 
                                 upgradeModel.setEquipmentSlotVisible(equipmentSlot);
@@ -104,7 +104,7 @@ public class ModArmorRenderers {
                         List<Upgrade> upgrades = armor.getUpgrades(stack);
                         for (Upgrade upgrade: upgrades) {
                             UpgradeModel upgradeModel = UpgradeModelRegistry.get(upgrade, MinecraftClient.getInstance().getEntityModelLoader());
-                            if (contextModel != null) {
+                            if (upgradeModel != null && contextModel != null) {
                                 contextModel.copyBipedStateTo(upgradeModel);
 
                                 upgradeModel.setEquipmentSlotVisible(equipmentSlot);
