@@ -34,6 +34,10 @@ public class UpgradeModelRegistry {
     }
 
     public static UpgradeModel get(Upgrade upgrade, EntityModelLoader loader) {
-        return MODELS.getOrDefault(upgrade.getId(), null).apply(loader);
+        Function<EntityModelLoader, UpgradeModel> modelProvider = MODELS.getOrDefault(upgrade.getId(), null);
+        if (modelProvider != null) {
+            return modelProvider.apply(loader);
+        }
+        return null;
     }
 }
