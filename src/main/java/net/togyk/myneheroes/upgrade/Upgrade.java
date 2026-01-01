@@ -95,6 +95,11 @@ public abstract class Upgrade {
 
     public abstract Upgrade copy();
 
+
+    public List<Identifier> getMutuallyExclusiveUpgrades() {
+        return MutuallyExclusiveUpgrades.get(this);
+    }
+
     public final boolean isIn(TagKey<Upgrade> tag) {
         Optional<RegistryEntryList.Named<Upgrade>> registryEntries = ModRegistries.UPGRADE.getEntryList(tag);
         if (registryEntries.isPresent()) {
