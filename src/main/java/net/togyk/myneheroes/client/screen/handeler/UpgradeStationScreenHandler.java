@@ -148,7 +148,22 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
     }
 
     public boolean canUpgrade(Upgrade upgrade) {
-        return !this.blockEntity.getInput().isEmpty() && this.blockEntity.getInput().getStack(0).getItem() instanceof UpgradableItem upgradableItem && upgradableItem.canUpgrade(this.blockEntity.getInput().getStack(0), upgrade);
+        ItemStack stack = this.blockEntity.getInput().getStack(0);
+        return !this.blockEntity.getInput().isEmpty()
+                && stack.getItem() instanceof UpgradableItem upgradableItem
+                && upgradableItem.canUpgrade(stack, upgrade)
+                && !hasMutuallyExclusiveUpgrades(stack, upgrade);
+    }
+
+    public final boolean hasMutuallyExclusiveUpgrades(ItemStack stack, Upgrade upgrade) {
+        if (stack.getItem() instanceof UpgradableItem upgradeItem) {
+            for (Upgrade currentUpgrade : upgradeItem.getUpgrades(stack)) {
+                if (upgrade.getMutuallyExclusiveUpgrades().contains(currentUpgrade.getId())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
