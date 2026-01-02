@@ -43,7 +43,7 @@ public class ModTrimMaterials {
                 Style.EMPTY.withColor(TextColor.parse("#976a27").getOrThrow()), 0.6f);
 
         register(registerable, ADAMANTIUM, Registries.ITEM.getEntry(ModItems.ADAMANTIUM_INGOT),
-                Style.EMPTY.withColor(TextColor.parse("#b5abc5").getOrThrow()), 1.0f);
+                Style.EMPTY.withColor(TextColor.parse("#e6ebec").getOrThrow()), 0.2f);
 
         //register more bootstraps here
     }
