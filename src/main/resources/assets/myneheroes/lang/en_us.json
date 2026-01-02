@@ -207,6 +207,7 @@
   "trim_material.myneheroes.vibranium": "Vibranium",
   "trim_material.myneheroes.titanium": "Titanium",
   "trim_material.myneheroes.gold_titanium": "Gold Titanium",
+  "trim_material.myneheroes.adamantium": "Adamantium",
 
   "trim_pattern.myneheroes.iron_suit": "Iron Suit",
   "trim_pattern.myneheroes.speedster_suit": "Speedster Suit",
@@ -321,8 +322,11 @@
   "dataPack.myneheroes.shibashis_shenanigans.description": "Experimental or unstable additions made by Shibashi",
   "gui.myneheroes.shibashis_shenanigans.fulltext" : "Hello world",
 
-  "dataPack.myneheroes.whiter_adamantium": "Whiter adamantium",
-  "dataPack.myneheroes.whiter_adamantium.description": "Turns the adamantium more white",
+  "dataPack.myneheroes.alternative_adamantium": "Alternative adamantium",
+  "dataPack.myneheroes.alternative_adamantium.description": "Turns the adamantium more blue",
+
+  "dataPack.myneheroes.distinct_adamantium": "Distinct adamantium",
+  "dataPack.myneheroes.distinct_adamantium.description": "Turns the adamantium purple",
 
   "upgrade.myneheroes.adamantium_upgrade" : "Adamantium Upgrade"
 }
