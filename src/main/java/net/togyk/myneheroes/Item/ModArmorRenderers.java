@@ -149,5 +149,10 @@ public class ModArmorRenderers {
         registerDyeableAdvancedArmor(ModItems.SPEEDSTER_VIBRANIUM_CHESTPLATE);
         registerDyeableAdvancedArmor(ModItems.SPEEDSTER_VIBRANIUM_LEGGINGS);
         registerDyeableAdvancedArmor(ModItems.SPEEDSTER_VIBRANIUM_BOOTS);
+
+        registerDyeableAdvancedArmor(ModItems.SPEEDSTER_NETHERITE_HELMET);
+        registerDyeableAdvancedArmor(ModItems.SPEEDSTER_NETHERITE_CHESTPLATE);
+        registerDyeableAdvancedArmor(ModItems.SPEEDSTER_NETHERITE_LEGGINGS);
+        registerDyeableAdvancedArmor(ModItems.SPEEDSTER_NETHERITE_BOOTS);
     }
 }
