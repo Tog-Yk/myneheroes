@@ -10,11 +10,18 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.togyk.myneheroes.Item.custom.StationaryItem;
+import net.togyk.myneheroes.util.PlayerAbilities;
+
+import java.util.Random;
 
 public class CallableStationaryItemEntity extends StationaryItemEntity {
     private static final TrackedData<Boolean> DISCOVERED = DataTracker.registerData(CallableStationaryItemEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -29,6 +36,25 @@ public class CallableStationaryItemEntity extends StationaryItemEntity {
 
     @Override
     public void tick() {
+        if (!this.isDiscovered()) {
+            PlayerEntity closestPlayer = this.getWorld().getClosestPlayer(this, 4D);
+            if (closestPlayer instanceof ServerPlayerEntity serverPlayer) {
+                if (((PlayerAbilities) serverPlayer).myneheroes$isWorthy()) {
+                    Random random = new Random();
+                    if (random.nextFloat() <= 0.25F) {
+                        serverPlayer.getServerWorld().spawnParticles(
+                                ParticleTypes.ENCHANT,          // particle type
+                                this.getX(),                  // x
+                                this.getY() + this.getHeight() / 2,           // y (center-ish of the body)
+                                this.getZ(),                  // z
+                                1,                             // count
+                                0.5, 0.5, 0.5,                  // spread (x, y, z)
+                                1                             // speed
+                        );
+                    }
+                }
+            }
+        }
 
         Entity entity = this.getOwner();
         int loyalty = getLoyalty(this.getItem());
@@ -145,5 +171,28 @@ public class CallableStationaryItemEntity extends StationaryItemEntity {
             player.sendPickup(this, stack.getCount());
             this.discard();
         }
+    }
+
+    @Override
+    public boolean canPickup(ServerPlayerEntity player, StationaryItem item) {
+        return super.canPickup(player, item) && ((PlayerAbilities) player).myneheroes$isWorthy();
+    }
+
+    @Override
+    public void onPickup(ServerPlayerEntity player) {
+        if (!((PlayerAbilities) player).myneheroes$discoveredIsWorthy()) {
+            ((PlayerAbilities) player).myneheroes$discoverIsWorthy(true);
+        }
+        super.onPickup(player);
+    }
+
+    @Override
+    public void onCantPickup(ServerPlayerEntity player) {
+        PlayerAbilities abilities = (PlayerAbilities) player;
+        if (!abilities.myneheroes$isWorthy()) {
+            int worthiness = abilities.myneheroes$getWorthinessScore();
+            player.sendMessage(Text.literal("It doesn't seem to deem you worthy! Your current Worthiness is: ").append(Text.literal(String.valueOf(worthiness))).formatted(Formatting.RED), true);
+        }
+        super.onCantPickup(player);
     }
 }
