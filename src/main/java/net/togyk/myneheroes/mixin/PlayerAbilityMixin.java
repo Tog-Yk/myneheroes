@@ -1,13 +1,19 @@
 package net.togyk.myneheroes.mixin;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.entry.RegistryEntryList;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.AbilityHolding;
@@ -15,7 +21,9 @@ import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Abilities;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.networking.PlayerAbilitySyncDataPayload;
+import net.togyk.myneheroes.networking.WorthinessPayload;
 import net.togyk.myneheroes.power.Power;
+import net.togyk.myneheroes.util.ModTags;
 import net.togyk.myneheroes.util.PlayerAbilities;
 import net.togyk.myneheroes.util.PowerData;
 import net.togyk.myneheroes.util.ScrollData;
@@ -28,6 +36,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerAbilityMixin implements PlayerAbilities {
@@ -44,6 +53,11 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
     @Unique
     private boolean isHoldingJump = false;
 
+    @Unique
+    private boolean discoveredIsWorthy = false;
+    @Unique
+    private int clientWorthiness = 0;
+
 
     @Inject(at = @At("HEAD"), method = "tick")
     private void tick(CallbackInfo info) {
@@ -51,6 +65,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         if (this.isDirty) {
             if (!player.getWorld().isClient()) {
                 ScrollData.setScrolledAbilitiesOffset(player, scrolledAbilityOffset);
+                ServerPlayNetworking.send(((ServerPlayerEntity) player), new WorthinessPayload(myneheroes$discoveredIsWorthy(), this.myneheroes$getWorthinessScore()));
             }
             this.isDirty = false;
         }
@@ -189,9 +204,11 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
             }
         }
 
-        Ability ability = Abilities.CALL_ITEMS.copy();
-        if (!abilityList.contains(ability) && ability != null) {
-            abilityList.add(ability);
+        if (myneheroes$isWorthy() && myneheroes$discoveredIsWorthy()) {
+            Ability ability = Abilities.CALL_ITEMS.copy();
+            if (!abilityList.contains(ability) && ability != null) {
+                abilityList.add(ability);
+            }
         }
         return abilityList;
     }
@@ -278,6 +295,9 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
             if (modNbt.contains("scrolled_ability_offset")) {
                 this.scrolledAbilityOffset = modNbt.getInt("scrolled_ability_offset");
             }
+            if (modNbt.contains("discoverd_is_worthy")) {
+                this.discoveredIsWorthy = modNbt.getBoolean("discoverd_is_worthy");
+            }
         }
         this.isDirty = true;
     }
@@ -289,6 +309,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         }
 
         modNbt.putInt("scrolled_ability_offset",this.scrolledAbilityOffset);
+        modNbt.putBoolean("discoverd_is_worthy",this.discoveredIsWorthy);
 
         nbt.put(MyneHeroes.MOD_ID,modNbt);
     }
@@ -344,5 +365,63 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
     @Override
     public void myneheroes$setIsHoldingJump(boolean jumping) {
         this.isHoldingJump = jumping;
+    }
+
+    @Override
+    public boolean myneheroes$isWorthy() {
+        return myneheroes$getWorthinessScore() > 0;
+    }
+
+    @Override
+    public int myneheroes$getWorthinessScore() {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        if (player instanceof ServerPlayerEntity serverPlayer) {
+
+            int killedNonFarmableMonsters = killedEntities(serverPlayer, ModTags.Entity.SMALL_MONSTERS);
+            int killedMediumMonsters = killedEntities(serverPlayer, ModTags.Entity.MEDIUM_MONSTERS);
+            int killedLargeMonsters = killedEntities(serverPlayer, ModTags.Entity.LARGE_MONSTERS);
+
+            int raidsDefended = serverPlayer.getStatHandler().getStat(Stats.CUSTOM.getOrCreateStat(Stats.RAID_WIN));
+
+            int killedFriendly = killedEntities(serverPlayer, ModTags.Entity.FRIENDLY);
+            int killedPets = killedEntities(serverPlayer, ModTags.Entity.PETS);
+            //int TeammatesBetrayed
+
+            return (killedNonFarmableMonsters + 5*killedMediumMonsters + 20*killedLargeMonsters) + 40*raidsDefended - (6*killedFriendly + 60*killedPets) -300;
+        }
+        return clientWorthiness;
+    }
+
+    @Unique
+    private int killedEntities(ServerPlayerEntity player, TagKey<EntityType<?>> tag) {
+        Optional<RegistryEntryList.Named<EntityType<?>>> tagEntryList = Registries.ENTITY_TYPE.getEntryList(tag);
+        int killed = 0;
+
+        if (tagEntryList.isPresent()) {
+            RegistryEntryList.Named<EntityType<?>> entries = tagEntryList.get();
+            for (RegistryEntry<EntityType<?>> type : entries) {
+                killed += player.getStatHandler().getStat(Stats.KILLED.getOrCreateStat(type.value()));
+            }
+        }
+
+        return killed;
+    }
+
+    @Override
+    public boolean myneheroes$discoveredIsWorthy() {
+        return this.discoveredIsWorthy;
+    }
+
+    @Override
+    public void myneheroes$discoverIsWorthy(boolean discover) {
+        this.discoveredIsWorthy = discover;
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        if (player instanceof ServerPlayerEntity serverPlayer) {
+            ServerPlayNetworking.send(serverPlayer, new WorthinessPayload(discover, myneheroes$getWorthinessScore()));
+        }
+    }
+
+    public void myneheroes$setClientWorthiness(int score) {
+        this.clientWorthiness = score;
     }
 }

@@ -26,4 +26,10 @@ public interface PlayerAbilities {
 
     void myneheroes$setIsHoldingJump(boolean jumping);
     boolean myneheroes$isHoldingJump();
+
+    int myneheroes$getWorthinessScore();
+    boolean myneheroes$isWorthy();
+    boolean myneheroes$discoveredIsWorthy();
+    void myneheroes$discoverIsWorthy(boolean discover);
+    void myneheroes$setClientWorthiness(int score);
 }
