@@ -53,6 +53,12 @@ public class ModTags {
     }
 
     public static class Entity {
+        public static final TagKey<EntityType<?>> SMALL_MONSTERS = createTag("small_monsters");
+        public static final TagKey<EntityType<?>> MEDIUM_MONSTERS = createTag("medium_monsters");
+        public static final TagKey<EntityType<?>> LARGE_MONSTERS = createTag("large_monsters");
+
+        public static final TagKey<EntityType<?>> FRIENDLY = createTag("friendly");
+        public static final TagKey<EntityType<?>> PETS = createTag("pets");
 
         private static TagKey<EntityType<?>> createTag(String name) {
             return TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MyneHeroes.MOD_ID, name));

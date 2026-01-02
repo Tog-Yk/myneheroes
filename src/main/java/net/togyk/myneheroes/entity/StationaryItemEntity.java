@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Arm;
@@ -94,14 +95,29 @@ public class StationaryItemEntity extends LivingEntity implements Ownable {
     @Override
     public ActionResult interact(PlayerEntity player, Hand hand) {
         //Method Is not called properly
-        if (!this.getWorld().isClient && player.getStackInHand(hand).isEmpty()) {
+        if (player.getStackInHand(hand).isEmpty() && player instanceof ServerPlayerEntity serverPlayer) {
             if (this.getItem().getItem() instanceof StationaryItem item) {
-                if (!item.hasToBeOwnerToPickup(this.getItem()) || isOwner(player) && item.tryPickup(player, hand)) {
-                    player.setStackInHand(hand, this.getItem().copyAndEmpty());
+                if (item.tryPickup(player, hand)) {
+                    if (this.canPickup(serverPlayer, item)) {
+                        player.setStackInHand(hand, this.getItem().copyAndEmpty());
+                        this.onPickup(serverPlayer);
+                    } else {
+                        this.onCantPickup(serverPlayer);
+                    }
                 }
             }
         }
         return super.interact(player, hand);
+    }
+
+    public boolean canPickup(ServerPlayerEntity player, StationaryItem item) {
+        return !item.hasToBeOwnerToPickup(this.getItem()) || isOwner(player);
+    }
+
+    public void onPickup(ServerPlayerEntity serverPlayer) {
+    }
+
+    public void onCantPickup(ServerPlayerEntity serverPlayer) {
     }
 
     public Vector3f getFollowDirection() {

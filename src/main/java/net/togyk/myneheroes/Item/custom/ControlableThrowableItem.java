@@ -67,7 +67,9 @@ public class ControlableThrowableItem extends SwordItem implements StationaryIte
 
     @Override
     public StationaryItemEntity createBaseEntity(World world, ItemStack stack) {
-        return new CallableStationaryItemEntity(world);
+        CallableStationaryItemEntity entity = new CallableStationaryItemEntity(world);
+        entity.setDiscovered(true);
+        return entity;
     }
 
     @Override

@@ -42,6 +42,7 @@ public class ModMessages {
     public static final Identifier PLAYER_ABILITY_SCROLLED_SYNC_DATA_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "ability_scrolled_sync_data");
     public static final Identifier PLAYER_JUMPING_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "player_jumping");
     public static final Identifier SAVE_UPGRADE_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "save_upgrade");
+    public static final Identifier WORTHINESS_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "worthiness");
 
     public static void registerServerMessages() {
         PayloadTypeRegistry.playC2S().register(AbilityKeybindPayload.ID, AbilityKeybindPayload.CODEC);
@@ -230,6 +231,8 @@ public class ModMessages {
                }
             });
         });
+
+        PayloadTypeRegistry.playS2C().register(WorthinessPayload.ID, WorthinessPayload.CODEC);
     }
 
     public static void registerClientMessages() {
@@ -270,6 +273,13 @@ public class ModMessages {
             context.client().execute(() -> {
                 ((PlayerAbilities) context.player()).myneheroes$setScrolledAbilityOffset(payload.scrolledAbilities());
                 ((PlayerPowers) context.player()).myneheroes$setScrolledPowerOffset(payload.scrolledPowers());
+            });
+        });
+
+        ClientPlayNetworking.registerGlobalReceiver(WorthinessPayload.ID, (payload, context) -> {
+            context.client().execute(() -> {
+                ((PlayerAbilities) context.player()).myneheroes$discoverIsWorthy(payload.isWorthy());
+                ((PlayerAbilities) context.player()).myneheroes$setClientWorthiness(payload.worthiness());
             });
         });
     }
