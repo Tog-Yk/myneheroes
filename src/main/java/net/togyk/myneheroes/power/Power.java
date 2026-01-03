@@ -23,6 +23,7 @@ import net.togyk.myneheroes.ability.AttributeModifierAbility;
 import net.togyk.myneheroes.registry.ModRegistries;
 import net.togyk.myneheroes.util.AbilityUtil;
 import net.togyk.myneheroes.util.PowerUtil;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -209,7 +210,51 @@ public class Power {
         return settings.isDampenedByKryptonite;
     }
 
-    public static class Settings{
+    public boolean overridesBaseSkin() {
+        return this.settings.overridesSkin;
+    }
+
+    public boolean appliesSkin() {
+        return this.settings.appliesSkin;
+    }
+
+    public int getSkinOpacity() {
+        return 0xFF;
+    }
+
+    @NotNull
+    public Identifier getBaseSkin() {
+        Identifier id = this.getId();
+        return Identifier.of(id.getNamespace(), "textures/entity/skins/" + id.getPath() + "/base.png");
+    }
+
+    @NotNull
+    public Identifier getTintableSkin() {
+        Identifier id = this.getId();
+        return Identifier.of(id.getNamespace(), "textures/entity/skins/" + id.getPath() + "/tintable.png");
+    }
+
+    public int getTintableSkinColor() {
+        return this.settings.tintableSkinColor;
+    }
+
+    @NotNull
+    public Identifier getEmmisiveSkin() {
+        Identifier id = this.getId();
+        return Identifier.of(id.getNamespace(), "textures/entity/skins/" + id.getPath() + "/emmisive.png");
+    }
+
+    @NotNull
+    public Identifier getEmmisiveTintableSkin() {
+        Identifier id = this.getId();
+        return Identifier.of(id.getNamespace(), "textures/entity/skins/" + id.getPath() + "/emmisive_tintable.png");
+    }
+
+    public int getEmmisiveTintableSkinColor() {
+        return this.settings.emmisiveTintableSkinColor;
+    }
+
+    public static class Settings {
         public double damageMultiplier = 1.00;
         public double armor = 1.00;
 
@@ -226,6 +271,11 @@ public class Power {
 
         public boolean injectable = true;
         public Text injectionName;
+
+        public boolean overridesSkin = false;
+        public boolean appliesSkin = false;
+        public int tintableSkinColor = 0xFFFFFF;
+        public int emmisiveTintableSkinColor = 0xFFFFFF;
 
         public Settings() {
         }
@@ -293,6 +343,29 @@ public class Power {
 
         public Power.Settings InjectionName(String text) {
             this.injectionName = Text.literal(text);
+            return this;
+        }
+
+        public Power.Settings appliesSkin() {
+            this.appliesSkin = true;
+            return this;
+        }
+
+        public Power.Settings overridesSkin() {
+            this.appliesSkin = true;
+            this.overridesSkin = true;
+            return this;
+        }
+
+        public Power.Settings tintableSkinColor(int rgb) {
+            this.appliesSkin = true;
+            this.tintableSkinColor = rgb;
+            return this;
+        }
+
+        public Power.Settings emmisiveTintableSkinColor(int rgb) {
+            this.appliesSkin = true;
+            this.emmisiveTintableSkinColor = rgb;
             return this;
         }
     }

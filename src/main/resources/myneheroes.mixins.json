@@ -24,9 +24,12 @@
     "StationaryConvertItemEntityMixin"
   ],
   "client": [
+    "AbstractClientPlayerMixin",
     "ArmorFeatureRendererMixin",
+    "EntityRendererFeatureAccessor",
     "InGameOverlayRendererMixin",
     "MouseMixin",
+    "PlayerRendererMixin",
     "PlayerSwingMixin"
   ],
   "injectors": {
