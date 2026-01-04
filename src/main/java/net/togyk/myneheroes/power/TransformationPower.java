@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 
 public class TransformationPower extends Power implements VariableLinkedPower {
     private int transformationTime = 0;
-    private final int maxTransformationTime;
+    protected final int maxTransformationTime;
     private boolean transforming = true;
 
     protected final transformationAttributeModifiers attributeModifiers;
@@ -172,6 +172,27 @@ public class TransformationPower extends Power implements VariableLinkedPower {
                     if (entityAttributeInstance != null) {
                         entityAttributeInstance.removeModifier((entry.getValue()).id());
                         entityAttributeInstance.addPersistentModifier((entry.getValue()).createAttributeModifier());
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void removeAttributes(AttributeContainer attributeContainer) {
+        for(Map.Entry<RegistryEntry<EntityAttribute>, PowerAttributeModifierCreator> entry : this.getAttributeModifiers().modifiers.entrySet()) {
+            EntityAttributeInstance entityAttributeInstance = attributeContainer.getCustomInstance(entry.getKey());
+            if (entityAttributeInstance != null) {
+                entityAttributeInstance.removeModifier((entry.getValue()).id());
+            }
+        }
+        //also apply attribute modifiers from abilities
+        for(Ability ability : this.getAbilities()) {
+            if (ability instanceof AttributeModifierAbility modifierAbility) {
+                for(Map.Entry<RegistryEntry<EntityAttribute>, AttributeModifierAbility.AbilityAttributeModifierCreator> entry : modifierAbility.getAttributeModifiers().modifiers.entrySet()) {
+                    EntityAttributeInstance entityAttributeInstance = attributeContainer.getCustomInstance(entry.getKey());
+                    if (entityAttributeInstance != null) {
+                        entityAttributeInstance.removeModifier((entry.getValue()).id());
                     }
                 }
             }
