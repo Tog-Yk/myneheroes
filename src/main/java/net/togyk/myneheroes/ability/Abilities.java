@@ -280,6 +280,15 @@ public class Abilities {
         return false;
     }));
 
+    public static final VariableLinkedAbility TRANSFORM = registerAbility(new VariableLinkedAbility(Identifier.of(MyneHeroes.MOD_ID, "transform"), "transforming",
+            power -> {
+                if (power.get("transforming") instanceof Boolean transforming) {
+                    return !transforming;
+                }
+                return false;
+            }, 60, new Ability.Settings()
+    ));
+
     private static <T extends Ability> T registerAbility(T ability) {
         return Registry.register(ModRegistries.ABILITY, ability.id, ability);
     }
