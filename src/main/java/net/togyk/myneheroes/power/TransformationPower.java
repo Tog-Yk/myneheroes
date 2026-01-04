@@ -33,10 +33,14 @@ public class TransformationPower extends Power implements VariableLinkedPower {
         if (this.isTransforming()) {
             if (this.getTransformationTime() < this.getMaxTransformationTime()) {
                 this.setTransformationTime(this.getTransformationTime() + 1);
+            } else {
+                this.setTransformationTime(this.getMaxTransformationTime());
             }
         } else {
             if (this.getTransformationTime() > 0) {
                 this.setTransformationTime(this.getTransformationTime() - 1);
+            } else {
+                this.setTransformationTime(0);
             }
         }
         super.tick(player);
