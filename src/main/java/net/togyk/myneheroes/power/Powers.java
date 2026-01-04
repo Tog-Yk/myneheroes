@@ -59,9 +59,9 @@ public class Powers {
                     .addAttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH, Identifier.of(MyneHeroes.MOD_ID, "avatar_of_bast.health"), EntityAttributeModifier.Operation.ADD_VALUE, () -> 4.0D)
     ));
 
-    public static Power HULK = registerPower(new Power(Identifier.of(MyneHeroes.MOD_ID, "hulk"), 0xFF9585E6, List.of(Abilities.RAGE),
-            new Power.Settings().damageMultiplier(2).armor(8).overridesSkin().tintableSkinColor(0x95b561),
-            new Power.attributeModifiers()
+    public static TransformationPower HULK = registerPower(new TransformationPower(Identifier.of(MyneHeroes.MOD_ID, "hulk"), 40, 0xFF95B561, List.of(Abilities.RAGE, Abilities.TRANSFORM),
+            new Power.Settings().damageMultiplier(2).armor(8).overridesSkin().tintableSkinColor(0x95B561),
+            new TransformationPower.transformationAttributeModifiers()
                     .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, Identifier.of(MyneHeroes.MOD_ID, "hulk.speed"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> 0.2D)
                     .addAttributeModifier(EntityAttributes.GENERIC_SCALE, Identifier.of(MyneHeroes.MOD_ID, "hulk.speed"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> 0.5D)
                     .addAttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH, Identifier.of(MyneHeroes.MOD_ID, "hulk.health"), EntityAttributeModifier.Operation.ADD_VALUE, () -> 4.0D)

@@ -171,6 +171,7 @@
   "power.myneheroes.mutant_regeneration": "Regeneration",
   "power.myneheroes.super_soldier": "Super Soldier",
   "power.myneheroes.avatar_of_bast": "Avatar Of Bast",
+  "power.myneheroes.hulk": "Hulk",
 
   "ability.myneheroes.toggle_mechanical_hud": "Toggle Hud",
   "ability.myneheroes.toggle_speedster_hud": "Toggle Hud",
@@ -202,6 +203,8 @@
   "ability.myneheroes.adamantium_claws": "Adamantium Claws",
 
   "ability.myneheroes.call_items": "Call Items",
+
+  "ability.myneheroes.transform": "Transform",
 
 
   "trim_material.myneheroes.vibranium": "Vibranium",
