@@ -40,6 +40,12 @@ public class ModDataComponentTypes {
     public static final ComponentType<Integer> TIMER =
             register("timer", builder -> builder.codec(Codec.INT));
 
+    public static final ComponentType<Boolean> IS_OPENING =
+            register("is_opening", builder -> builder.codec(Codec.BOOL));
+
+    public static final ComponentType<Integer> OPENING_TIME =
+            register("opening_time", builder -> builder.codec(Codec.INT));
+
 
     private static <T>ComponentType<T> register(String name, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
         return Registry.register(Registries.DATA_COMPONENT_TYPE, Identifier.of(MyneHeroes.MOD_ID, name),

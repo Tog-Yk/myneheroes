@@ -197,8 +197,8 @@ public class ModItems {
     //mark6 armors
     // mark6 armors
     public static final Item MARK6_VIBRANIUM_HELMET = registerItem("mark6_vibranium_helmet",
-            new DyeableAdvancedArmorItem(
-                    List.of(-12696503, -11241349, -0x574545, -1443585),
+            new DyeableAdvancedArmorWithFaceplateItem(
+                    List.of(-12696503, -11241349, -0x574545, -1443585), 15,
                     List.of(-1, -1, -1, 15),
                     Text.translatable(Util.createTranslationKey("armor_pattern",
                                     Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium")))
@@ -246,8 +246,8 @@ public class ModItems {
 
     // mark3 armors
     public static final Item MARK3_GOLD_TITANIUM_HELMET = registerItem("mark3_gold_titanium_helmet",
-            new DyeableAdvancedArmorItem(
-                    List.of(0xFF976A27, 0xffd0a75e, 0xff6e5959, -1443585),
+            new DyeableAdvancedArmorWithFaceplateItem(
+                    List.of(0xFF976A27, 0xffd0a75e, 0xff6e5959, -1443585), 15,
                     List.of(-1, -1, -1, 15),
                     Text.translatable(Util.createTranslationKey("armor_pattern",
                                     Identifier.of(MyneHeroes.MOD_ID, "mark3_gold_titanium")))
@@ -295,8 +295,8 @@ public class ModItems {
 
     // mark45 armors
     public static final Item MARK45_NETHERITE_HELMET = registerItem("mark45_netherite_helmet",
-            new DyeableAdvancedArmorItem(
-                    List.of(0xFF49393f, 0xff5d565d, 0xff6e5959, -1443585),
+            new DyeableAdvancedArmorWithFaceplateItem(
+                    List.of(0xFF49393f, 0xff5d565d, 0xff6e5959, -1443585), 15,
                     List.of(-1, -1, -1, 15),
                     Text.translatable(Util.createTranslationKey("armor_pattern",
                                     Identifier.of(MyneHeroes.MOD_ID, "mark45_netherite")))
