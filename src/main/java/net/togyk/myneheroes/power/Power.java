@@ -254,6 +254,18 @@ public class Power {
         return this.settings.emmisiveTintableSkinColor;
     }
 
+    public boolean canSuperJump() {
+        return this.settings.canSuperJump;
+    }
+
+    public int getJumpChargesNeeded() {
+        return this.settings.jumpChargesNeeded;
+    }
+
+    public double getSuperJumpStrength() {
+        return this.settings.superJumpStrength;
+    }
+
     public static class Settings {
         public double damageMultiplier = 1.00;
         public double armor = 1.00;
@@ -276,6 +288,10 @@ public class Power {
         public boolean appliesSkin = false;
         public int tintableSkinColor = 0xFFFFFF;
         public int emmisiveTintableSkinColor = 0xFFFFFF;
+
+        public boolean canSuperJump = false;
+        public int jumpChargesNeeded = 2;
+        public double superJumpStrength = 1.0D;
 
         public Settings() {
         }
@@ -366,6 +382,23 @@ public class Power {
         public Power.Settings emmisiveTintableSkinColor(int rgb) {
             this.appliesSkin = true;
             this.emmisiveTintableSkinColor = rgb;
+            return this;
+        }
+
+        public Power.Settings canSuperJump() {
+            this.canSuperJump = true;
+            return this;
+        }
+
+        public Power.Settings jumpChargesNeeded(int charges) {
+            this.canSuperJump = true;
+            this.jumpChargesNeeded = charges;
+            return this;
+        }
+
+        public Power.Settings jumpStrength(double strength) {
+            this.canSuperJump = true;
+            this.superJumpStrength = strength;
             return this;
         }
     }

@@ -131,6 +131,16 @@ public class TransformationPower extends Power implements VariableLinkedPower {
         }
     }
 
+    @Override
+    public boolean allowFlying(PlayerEntity player) {
+        return super.allowFlying(player) && this.getTransformationProgress() == 1.0D;
+    }
+
+    @Override
+    public boolean canSuperJump() {
+        return super.canSuperJump() && this.getTransformationProgress() == 1.0D;
+    }
+
     public static class transformationAttributeModifiers extends Power.attributeModifiers {
         private final Map<RegistryEntry<EntityAttribute>, PowerAttributeModifierCreator> modifiers = new Object2ObjectOpenHashMap();
 
