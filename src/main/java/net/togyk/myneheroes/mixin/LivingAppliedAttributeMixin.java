@@ -96,7 +96,7 @@ public class LivingAppliedAttributeMixin {
             if (!canSuperJump(player)) return;
             int neededJumps = getJumpChargeNeeded(player);
 
-            if (player.isOnGround()) {
+            if (player.isOnGround() && !player.isSneaking()) {
                 if (neededJumps <= this.jumps) {
                     float strength = 1.0f;
 
