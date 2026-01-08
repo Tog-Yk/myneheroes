@@ -65,6 +65,8 @@ public class Powers {
                     .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, Identifier.of(MyneHeroes.MOD_ID, "hulk.speed"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> 0.2D)
                     .addAttributeModifier(EntityAttributes.GENERIC_SCALE, Identifier.of(MyneHeroes.MOD_ID, "hulk.scale"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> 0.5D)
                     .addAttributeModifier(EntityAttributes.GENERIC_ARMOR, Identifier.of(MyneHeroes.MOD_ID, "hulk.armor"), EntityAttributeModifier.Operation.ADD_VALUE, () -> 10.0D)
+                    .addAttributeModifier(EntityAttributes.GENERIC_FALL_DAMAGE_MULTIPLIER, Identifier.of(MyneHeroes.MOD_ID, "hulk.fall_damage"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> -0.5D)
+                    .addAttributeModifier(EntityAttributes.GENERIC_SAFE_FALL_DISTANCE, Identifier.of(MyneHeroes.MOD_ID, "hulk.safe_fall_distance"), EntityAttributeModifier.Operation.ADD_VALUE, () -> 5D)
     ));
 
     public static <T extends Power> T registerPower(T power) {
