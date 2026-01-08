@@ -5,20 +5,31 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.Vec3d;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.PassiveAbility;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.util.PlayerAbilities;
 import net.togyk.myneheroes.util.PowerData;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mixin(LivingEntity.class)
 public class LivingAppliedAttributeMixin {
+    @Unique
+    private int jumps = 0;
+    @Unique
+    private int jumpResetTimer = 0;
+
+    @Unique
     @Inject(method = "isInsideWall", at = @At("HEAD"), cancellable = true)
     private void ignoreInsideWall(CallbackInfoReturnable<Boolean> cir) {
         Entity entity = (Entity)(Object)this;
@@ -62,5 +73,87 @@ public class LivingAppliedAttributeMixin {
                 cir.setReturnValue(true);
             }
         }
+    }
+
+    @Inject(at = @At("HEAD"), method = "tick", cancellable = true)
+    private void myneheroes$resetJumpCharge(CallbackInfo ci) {
+        if (jumpResetTimer > 0) {
+            jumpResetTimer -= 1;
+            if (jumpResetTimer <= 0 && jumps > 0) {
+                LivingEntity entity = (LivingEntity) (Object) this;
+                entity.playSound(SoundEvents.BLOCK_NOTE_BLOCK_BASS.value(), 1.0F, 1.0F);
+                this.jumps = 0;
+            }
+        } else {
+            this.jumpResetTimer = 0;
+        }
+    }
+
+    @Inject(at = @At("HEAD"), method = "jump", cancellable = true)
+    private void myneheroes$SuperJump(CallbackInfo ci) {
+        LivingEntity entity = (LivingEntity) (Object) this;
+        if (entity instanceof PlayerEntity player) {
+            if (!canSuperJump(player)) return;
+            int neededJumps = getJumpChargeNeeded(player);
+
+            if (player.isOnGround()) {
+                if (neededJumps <= this.jumps) {
+                    float strength = 1.0f;
+
+                    double vertical = 0.4 + (1 * strength); // height
+                    double forward = 1.5 * strength;          // distance
+
+                    Vec3d look = player.getRotationVec(1.0F);
+
+                    Vec3d velocity = new Vec3d(
+                            look.x * forward,
+                            vertical,
+                            look.z * forward
+                    );
+
+                    player.setVelocity(velocity);
+                    player.velocityModified = true;
+
+                    this.jumps = 0;
+                    ci.cancel();
+                } else {
+                    player.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 0.5F, 0.25F);
+                    this.jumps += 1;
+                    this.jumpResetTimer = 40;
+                }
+            }
+        }
+    }
+
+    @Unique
+    private boolean canSuperJump(PlayerEntity player) {
+        for (Power power : PowerData.getPowers(player)) {
+            if (power.canSuperJump()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Unique
+    private int getJumpChargeNeeded(PlayerEntity player) {
+        List<Integer> charges = new ArrayList<>();
+        for (Power power : PowerData.getPowers(player)) {
+            if (power.canSuperJump()) {
+                charges.add(power.getJumpChargesNeeded());
+            }
+        }
+        return charges.stream().min(Integer::compareTo).orElse(0);
+    }
+
+    @Unique
+    private double getJumpStrength(PlayerEntity player) {
+        List<Double> strengths = new ArrayList<>();
+        for (Power power : PowerData.getPowers(player)) {
+            if (power.canSuperJump()) {
+                strengths.add(power.getSuperJumpStrength());
+            }
+        }
+        return strengths.stream().max(Double::compareTo).orElse(1.0);
     }
 }

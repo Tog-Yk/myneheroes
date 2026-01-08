@@ -60,7 +60,7 @@ public class Powers {
     ));
 
     public static DyeableTransformationPower HULK = registerPower(new DyeableTransformationPower(Identifier.of(MyneHeroes.MOD_ID, "hulk"), 40, 0xFF95B561, false, List.of(Abilities.RAGE, Abilities.TRANSFORM),
-            new Power.Settings().damageMultiplier(2).armor(8).overridesSkin().tintableSkinColor(0x95B561),
+            new Power.Settings().damageMultiplier(2).armor(8).overridesSkin().tintableSkinColor(0x95B561).canSuperJump(),
             new DyeableTransformationPower.transformationAttributeModifiers()
                     .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, Identifier.of(MyneHeroes.MOD_ID, "hulk.speed"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> 0.2D)
                     .addAttributeModifier(EntityAttributes.GENERIC_SCALE, Identifier.of(MyneHeroes.MOD_ID, "hulk.scale"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> 0.5D)
