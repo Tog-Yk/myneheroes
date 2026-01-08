@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.client.render.armor.AdvancedArmorModel;
+import net.togyk.myneheroes.client.render.armor.AdvancedHelmetWithFaceplateModel;
 import net.togyk.myneheroes.client.render.upgrade.ToolbeltModel;
 import net.togyk.myneheroes.client.render.upgrade.UpgradeModel;
 import net.togyk.myneheroes.entity.ModEntities;
@@ -34,5 +35,6 @@ public class ModEntityRenderers {
         EntityModelLayerRegistry.registerModelLayer(UpgradeModel.UPGRADE, UpgradeModel::getTexturedModelData);
 
         EntityModelLayerRegistry.registerModelLayer(AdvancedArmorModel.ADVANCED_ARMOR, AdvancedArmorModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(AdvancedHelmetWithFaceplateModel.ADVANCED_HELMET_W_FACEPLATE, AdvancedHelmetWithFaceplateModel::getTexturedModelData);
     }
 }
