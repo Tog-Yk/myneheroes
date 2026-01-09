@@ -12,5 +12,6 @@ public interface AbilityHolding {
     default List<Ability> getHotbarAbilities(ItemStack stack) {return new ArrayList<>();}
     default List<Ability> getMainHandAbilities(ItemStack stack) {return new ArrayList<>();}
     default List<Ability> getOffHandAbilities(ItemStack stack) {return new ArrayList<>();}
+    default List<Ability> getAccessoriesAbilities(ItemStack stack) {return new ArrayList<>();}
     void saveAbility(ItemStack stack, Ability ability);
 }
