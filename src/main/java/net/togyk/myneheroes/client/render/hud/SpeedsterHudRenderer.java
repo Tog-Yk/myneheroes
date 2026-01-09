@@ -161,7 +161,7 @@ public class SpeedsterHudRenderer {
             int reactionInfoX = 12;
             int reactionInfoY = height / 2 - ((20 + textRenderer.fontHeight) / 2);
 
-            ItemStack reactorItemStack = MyneHeroes.getReactorItemClass(client.player);
+            ItemStack reactorItemStack = MyneHeroes.getItemClass(client.player, ReactorItem.class);
             if (reactorItemStack != ItemStack.EMPTY && reactorItemStack.getItem() instanceof ReactorItem reactorItem) {
 
                 float fuelPercentile = (float) reactorItem.getStoredFuelOrDefault(reactorItemStack) / reactorItem.getMaxFuel();

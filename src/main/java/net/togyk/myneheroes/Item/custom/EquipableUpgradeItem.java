@@ -53,6 +53,21 @@ public class EquipableUpgradeItem extends UpgradeItem implements Equipment, Abil
     }
 
     @Override
+    public List<Ability> getAccessoriesAbilities(ItemStack stack) {
+        List<Ability> abilities = new ArrayList<>();
+
+        Upgrade upgrade = this.getUpgrade(stack);
+        if (upgrade instanceof AbilityUpgrade abilityUpgrade) {
+            for (Ability ability : abilityUpgrade.getAbilities()) {
+                ability.setHolder(upgrade);
+                abilities.add(ability);
+            }
+        }
+
+        return abilities;
+    }
+
+    @Override
     public void saveAbility(ItemStack stack, Ability ability) {
     }
 }

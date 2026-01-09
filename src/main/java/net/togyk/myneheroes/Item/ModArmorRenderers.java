@@ -19,6 +19,7 @@ import net.togyk.myneheroes.Item.custom.DyeableAdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.DyeableAdvancedArmorWithFaceplateItem;
 import net.togyk.myneheroes.Item.custom.UpgradeItem;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.client.render.ReactorModel;
 import net.togyk.myneheroes.client.render.armor.AdvancedArmorModel;
 import net.togyk.myneheroes.client.render.armor.AdvancedHelmetWithFaceplateModel;
 import net.togyk.myneheroes.client.render.upgrade.UpgradeModel;
@@ -31,8 +32,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 @Environment(EnvType.CLIENT)
-public class ModArmorRenderers {
-    private static void registerToolbelt(Item item) {
+public class ModArmorRenderers {private static void registerUpgrade(Item item) {
         ArmorRenderer.register(
             (matrixStack, vertexConsumerProvider, stack, livingEntity, equipmentSlot, light, contextModel) -> {
                 if (stack.getItem() instanceof UpgradeItem upgradeItem) {
@@ -48,6 +48,21 @@ public class ModArmorRenderers {
                     }
                 }
         }, item);
+    }
+
+    private static void registerArcReactor(Item item) {
+        ArmorRenderer.register(
+                (matrixStack, vertexConsumerProvider, stack, livingEntity, equipmentSlot, light, contextModel) -> {
+                    ReactorModel reactorModel = new ReactorModel(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(ReactorModel.REACTOR));
+                    if (contextModel != null) {
+                        contextModel.copyBipedStateTo(reactorModel);
+
+                        reactorModel.setEquipmentSlotVisible(equipmentSlot);
+                        Identifier texture = reactorModel.getTexture(stack);
+
+                        ArmorRenderer.renderPart(matrixStack, vertexConsumerProvider, light, stack, reactorModel, texture);
+                    }
+                }, item);
     }
 
     private static <M extends AdvancedArmorModel> void registerArmor(Item item, Function<EntityModelLayer, M> modelProvider, EntityModelLayer part, BiConsumer<M, ItemStack> prepareModel, HexConsumer<M, Integer, ItemStack, MatrixStack, VertexConsumerProvider, Integer> drawLayer) {
@@ -139,10 +154,12 @@ public class ModArmorRenderers {
     public static void registerArmorRenderers() {
         MyneHeroes.LOGGER.info("Registering Armor Renderers for " + MyneHeroes.MOD_ID);
 
-        registerToolbelt(ModItems.TOOLBELT);
-        registerToolbelt(ModItems.IRON_TOOLBELT);
-        registerToolbelt(ModItems.DIAMOND_TOOLBELT);
-        registerToolbelt(ModItems.NETHERITE_TOOLBELT);
+        registerUpgrade(ModItems.TOOLBELT);
+        registerUpgrade(ModItems.IRON_TOOLBELT);
+        registerUpgrade(ModItems.DIAMOND_TOOLBELT);
+        registerUpgrade(ModItems.NETHERITE_TOOLBELT);
+
+        registerArcReactor(ModItems.ARC_REACTOR);
 
         registerDyeableAdvancedHelmetWithFaceplate(ModItems.MARK6_VIBRANIUM_HELMET);
         registerDyeableAdvancedArmor(ModItems.MARK6_VIBRANIUM_CHESTPLATE);
