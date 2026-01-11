@@ -8,6 +8,7 @@ import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.registry.ModRegistryKeys;
 import net.togyk.myneheroes.upgrade.Upgrade;
+import net.togyk.myneheroes.upgrade.Upgrades;
 import net.togyk.myneheroes.util.ModTags;
 
 import java.util.concurrent.CompletableFuture;
@@ -78,6 +79,9 @@ public class ModTagProviders {
 
         @Override
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+            getOrCreateTagBuilder(ModTags.Upgrades.KINETIC_ENERGY)
+                    .add(Upgrades.KINETIC_ENERGY_STORAGE)
+            ;
         }
     }
 }

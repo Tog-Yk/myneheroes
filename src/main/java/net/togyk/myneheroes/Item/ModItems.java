@@ -198,7 +198,7 @@ public class ModItems {
     // mark6 armors
     public static final Item MARK6_VIBRANIUM_HELMET = registerItem("mark6_vibranium_helmet",
             new DyeableAdvancedArmorWithFaceplateItem(
-                    List.of(-12696503, -11241349, -0x574545, -1443585), 15,
+                    List.of(-12696503, -11241349, -0x574545, -1443585, 0xFFEC8EFF), 15,
                     List.of(-1, -1, -1, 15),
                     Text.translatable(Util.createTranslationKey("armor_pattern",
                                     Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium")))
@@ -210,7 +210,7 @@ public class ModItems {
 
     public static final Item MARK6_VIBRANIUM_CHESTPLATE = registerItem("mark6_vibranium_chestplate",
             new DyeableAdvancedArmorItem(
-                    List.of(-12696503, -11241349, -0x574545, -1443585),
+                    List.of(-12696503, -11241349, -0x574545, -1443585, 0xFFEC8EFF),
                     List.of(-1, -1, -1, 15),
                     Text.translatable(Util.createTranslationKey("armor_pattern",
                                     Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium")))
@@ -222,7 +222,7 @@ public class ModItems {
 
     public static final Item MARK6_VIBRANIUM_LEGGINGS = registerItem("mark6_vibranium_leggings",
             new DyeableAdvancedArmorItem(
-                    List.of(-12696503, -11241349, -0x574545, -1443585),
+                    List.of(-12696503, -11241349, -0x574545, -1443585, 0xFFEC8EFF),
                     List.of(-1, -1, -1, 15),
                     Text.translatable(Util.createTranslationKey("armor_pattern",
                                     Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium")))
@@ -234,7 +234,7 @@ public class ModItems {
 
     public static final Item MARK6_VIBRANIUM_BOOTS = registerItem("mark6_vibranium_boots",
             new DyeableAdvancedArmorItem(
-                    List.of(-12696503, -11241349, -0x574545, -1443585),
+                    List.of(-12696503, -11241349, -0x574545, -1443585, 0xFFEC8EFF),
                     List.of(-1, -1, -1, 15),
                     Text.translatable(Util.createTranslationKey("armor_pattern",
                                     Identifier.of(MyneHeroes.MOD_ID, "mark6_vibranium")))
@@ -345,7 +345,7 @@ public class ModItems {
     // speedster — vibranium
     public static final Item SPEEDSTER_VIBRANIUM_HELMET = registerItem("speedster_vibranium_helmet",
             new DyeableAdvancedArmorItem(
-                    List.of(-12696503, -11241349, -11241349, 0x40FFDE3A),
+                    List.of(-12696503, -11241349, -11241349, 0x77FFDE3A, 0xFFEC8EFF),
                     List.of(-1, -1, -1, 15),
                     Text.translatable(Util.createTranslationKey("armor_pattern",
                                     Identifier.of(MyneHeroes.MOD_ID, "speedster_vibranium")))
@@ -357,7 +357,7 @@ public class ModItems {
 
     public static final Item SPEEDSTER_VIBRANIUM_CHESTPLATE = registerItem("speedster_vibranium_chestplate",
             new DyeableAdvancedArmorItem(
-                    List.of(-12696503, -11241349, -11241349, 0x40FFDE3A),
+                    List.of(-12696503, -11241349, -11241349, 0x77FFDE3A, 0xFFEC8EFF),
                     List.of(-1, -1, -1, 15),
                     Text.translatable(Util.createTranslationKey("armor_pattern",
                                     Identifier.of(MyneHeroes.MOD_ID, "speedster_vibranium")))
@@ -369,7 +369,7 @@ public class ModItems {
 
     public static final Item SPEEDSTER_VIBRANIUM_LEGGINGS = registerItem("speedster_vibranium_leggings",
             new DyeableAdvancedArmorItem(
-                    List.of(-12696503, -11241349, -11241349, 0x40FFDE3A),
+                    List.of(-12696503, -11241349, -11241349, 0x77FFDE3A, 0xFFEC8EFF),
                     List.of(-1, -1, -1, 15),
                     Text.translatable(Util.createTranslationKey("armor_pattern",
                                     Identifier.of(MyneHeroes.MOD_ID, "speedster_vibranium")))
@@ -381,7 +381,7 @@ public class ModItems {
 
     public static final Item SPEEDSTER_VIBRANIUM_BOOTS = registerItem("speedster_vibranium_boots",
             new DyeableAdvancedArmorItem(
-                    List.of(-12696503, -11241349, -11241349, 0x40FFDE3A),
+                    List.of(-12696503, -11241349, -11241349, 0x77FFDE3A, 0xFFEC8EFF),
                     List.of(-1, -1, -1, 15),
                     Text.translatable(Util.createTranslationKey("armor_pattern",
                                     Identifier.of(MyneHeroes.MOD_ID, "speedster_vibranium")))
@@ -394,7 +394,7 @@ public class ModItems {
     // speedster — gold titanium
     public static final Item SPEEDSTER_GOLD_TITANIUM_HELMET = registerItem("speedster_gold_titanium_helmet",
             new DyeableAdvancedArmorItem(
-                    List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x40FFDE3A),
+                    List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x77FFDE3A),
                     List.of(-1, -1, -1, 15),
                     Text.translatable(Util.createTranslationKey("armor_pattern",
                                     Identifier.of(MyneHeroes.MOD_ID, "speedster_gold_titanium")))
@@ -406,7 +406,7 @@ public class ModItems {
 
     public static final Item SPEEDSTER_GOLD_TITANIUM_CHESTPLATE = registerItem("speedster_gold_titanium_chestplate",
             new DyeableAdvancedArmorItem(
-                    List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x40FFDE3A),
+                    List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x77FFDE3A),
                     List.of(-1, -1, -1, 15),
                     Text.translatable(Util.createTranslationKey("armor_pattern",
                                     Identifier.of(MyneHeroes.MOD_ID, "speedster_gold_titanium")))
@@ -418,7 +418,7 @@ public class ModItems {
 
     public static final Item SPEEDSTER_GOLD_TITANIUM_LEGGINGS = registerItem("speedster_gold_titanium_leggings",
             new DyeableAdvancedArmorItem(
-                    List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x40FFDE3A),
+                    List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x77FFDE3A),
                     List.of(-1, -1, -1, 15),
                     Text.translatable(Util.createTranslationKey("armor_pattern",
                                     Identifier.of(MyneHeroes.MOD_ID, "speedster_gold_titanium")))
@@ -430,7 +430,7 @@ public class ModItems {
 
     public static final Item SPEEDSTER_GOLD_TITANIUM_BOOTS = registerItem("speedster_gold_titanium_boots",
             new DyeableAdvancedArmorItem(
-                    List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x40FFDE3A),
+                    List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e, 0x77FFDE3A),
                     List.of(-1, -1, -1, 15),
                     Text.translatable(Util.createTranslationKey("armor_pattern",
                                     Identifier.of(MyneHeroes.MOD_ID, "speedster_gold_titanium")))
@@ -443,7 +443,7 @@ public class ModItems {
     // speedster — netherite
     public static final Item SPEEDSTER_NETHERITE_HELMET = registerItem("speedster_netherite_helmet",
             new DyeableAdvancedArmorItem(
-                    List.of(0xFF49393f, 0xff5d565d, 0xff6e5959, 0x40FFDE3A),
+                    List.of(0xFF49393f, 0xff5d565d, 0xff6e5959, 0x77FFDE3A),
                     List.of(-1, -1, -1, 15),
                     Text.translatable(Util.createTranslationKey("armor_pattern",
                                     Identifier.of(MyneHeroes.MOD_ID, "speedster_netherite")))
@@ -455,7 +455,7 @@ public class ModItems {
 
     public static final Item SPEEDSTER_NETHERITE_CHESTPLATE = registerItem("speedster_netherite_chestplate",
             new DyeableAdvancedArmorItem(
-                    List.of(0xFF49393f, 0xff5d565d, 0xff6e5959, 0x40FFDE3A),
+                    List.of(0xFF49393f, 0xff5d565d, 0xff6e5959, 0x77FFDE3A),
                     List.of(-1, -1, -1, 15),
                     Text.translatable(Util.createTranslationKey("armor_pattern",
                                     Identifier.of(MyneHeroes.MOD_ID, "speedster_netherite")))
@@ -467,7 +467,7 @@ public class ModItems {
 
     public static final Item SPEEDSTER_NETHERITE_LEGGINGS = registerItem("speedster_netherite_leggings",
             new DyeableAdvancedArmorItem(
-                    List.of(0xFF49393f, 0xff5d565d, 0xff6e5959, 0x40FFDE3A),
+                    List.of(0xFF49393f, 0xff5d565d, 0xff6e5959, 0x77FFDE3A),
                     List.of(-1, -1, -1, 15),
                     Text.translatable(Util.createTranslationKey("armor_pattern",
                                     Identifier.of(MyneHeroes.MOD_ID, "speedster_netherite")))
@@ -479,7 +479,7 @@ public class ModItems {
 
     public static final Item SPEEDSTER_NETHERITE_BOOTS = registerItem("speedster_netherite_boots",
             new DyeableAdvancedArmorItem(
-                    List.of(0xFF49393f, 0xff5d565d, 0xff6e5959, 0x40FFDE3A),
+                    List.of(0xFF49393f, 0xff5d565d, 0xff6e5959, 0x77FFDE3A),
                     List.of(-1, -1, -1, 15),
                     Text.translatable(Util.createTranslationKey("armor_pattern",
                                     Identifier.of(MyneHeroes.MOD_ID, "speedster_netherite")))

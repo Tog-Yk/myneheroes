@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:adamantium_shovel"
+        "recipe": "myneheroes:adamantium_shovel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:adamantium_shovel"
+      "myneheroes:adamantium_shovel"
     ]
   }
 }

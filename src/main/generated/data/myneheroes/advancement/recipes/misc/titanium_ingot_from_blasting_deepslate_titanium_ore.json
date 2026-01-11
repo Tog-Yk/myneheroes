@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:titanium_ingot_from_blasting_deepslate_titanium_ore"
+        "recipe": "myneheroes:titanium_ingot_from_blasting_deepslate_titanium_ore"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:titanium_ingot_from_blasting_deepslate_titanium_ore"
+      "myneheroes:titanium_ingot_from_blasting_deepslate_titanium_ore"
     ]
   }
 }

@@ -1,28 +1,28 @@
-// 1.21.1	2026-01-02T19:45:07.6649716	MyneHeroes/Tags for minecraft:item
+// 1.21.1	2026-01-10T22:42:11.5131689	MyneHeroes/Tags for minecraft:item
 0491ed542b4a19da710b313c109ac79cd65eff7f data\minecraft\tags\item\pickaxes.json
 cabcc5392542df4fe60a5151fa4c223cdf929d40 data\myneheroes\tags\item\dyes.json
+a2b4500576571bc0efbd54c71ad4926ab50e8e60 data\minecraft\tags\item\enchantable\foot_armor.json
 461e40839c900b5ce6df64f685b318ff08019cac data\myneheroes\tags\item\reactor_fuel.json
 a994165527905405021b9715807262570f71bf73 data\minecraft\tags\item\foot_armor.json
+0e891bbcfddeb80329b9af36246d169a8bb5c3a9 data\myneheroes\tags\item\cant_be_placed_in_inventories.json
 d9008dce6f72b3dd405f0a19f6f56a6282cbedaa data\minecraft\tags\item\enchantable\durability.json
 bda311a3efa509520c84991797192e2475b653c0 data\myneheroes\tags\item\katanas.json
 4f54cb6db57b9222521a15b5e1254d5fc8d24662 data\minecraft\tags\item\leg_armor.json
 58e927c48225c63c0a6bcf8878b7379bf3daea16 data\minecraft\tags\item\head_armor.json
 658b5046b5d3e583990237a5789ac1470627e34a data\minecraft\tags\item\enchantable\trident.json
+45e9dd8198f523db80474118edeb8fccd36be19d data\minecraft\tags\item\enchantable\chest_armor.json
 0e891bbcfddeb80329b9af36246d169a8bb5c3a9 data\myneheroes\tags\item\can_be_replaced_by_temporary_items.json
 72f14203f934558b537fc5de72cd03d48d36582a data\myneheroes\tags\item\shields.json
 25ffef8292429a43c820ef2f6a5b29d8fded0f3f data\minecraft\tags\item\chest_armor.json
 60b9dba906529927763f04788ec39dfe83cd8cb0 data\minecraft\tags\item\enchantable\leg_armor.json
 493dc2636e5afad62263a179f7a68d7dff894197 data\myneheroes\tags\item\coloring_fuel.json
 963d215183240441fbce7e59f7cd63a9f5cea57f data\myneheroes\tags\item\only_loyalty.json
-249dd8517341f8ab177c99bc1a25b2c0eaae9d2e data\minecraft\tags\item\trim_templates.json
-4595974f592add333b601320961f6a2df8490423 data\minecraft\tags\item\trim_materials.json
-ac6f1ba84cae8a236913185b523ddf73fab9f0f0 data\minecraft\tags\item\hoes.json
-a2b4500576571bc0efbd54c71ad4926ab50e8e60 data\minecraft\tags\item\enchantable\foot_armor.json
-0e891bbcfddeb80329b9af36246d169a8bb5c3a9 data\myneheroes\tags\item\cant_be_placed_in_inventories.json
-45e9dd8198f523db80474118edeb8fccd36be19d data\minecraft\tags\item\enchantable\chest_armor.json
 0e891bbcfddeb80329b9af36246d169a8bb5c3a9 data\myneheroes\tags\item\cant_be_placed_in_item_frame.json
 771f98093a7eaa5c71f8cae3a095ed9430b93436 data\minecraft\tags\item\enchantable\sword.json
+249dd8517341f8ab177c99bc1a25b2c0eaae9d2e data\minecraft\tags\item\trim_templates.json
 d3ae51277ba820d8458fb295222943d868299511 data\minecraft\tags\item\enchantable\head_armor.json
 c4d096c67a7cf7d819e413bc98c26999527867dc data\minecraft\tags\item\axes.json
+4595974f592add333b601320961f6a2df8490423 data\minecraft\tags\item\trim_materials.json
 1e55cb775deaaacf66d76f3d2a62ea1468bfd582 data\minecraft\tags\item\shovels.json
 c186a62e1568bf5f7c47e2f4c1b708eae4a79f0b data\minecraft\tags\item\swords.json
+ac6f1ba84cae8a236913185b523ddf73fab9f0f0 data\minecraft\tags\item\hoes.json
