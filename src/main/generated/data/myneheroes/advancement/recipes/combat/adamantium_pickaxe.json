@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:adamantium_pickaxe"
+        "recipe": "myneheroes:adamantium_pickaxe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:adamantium_pickaxe"
+      "myneheroes:adamantium_pickaxe"
     ]
   }
 }

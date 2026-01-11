@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:adamantium_leggings"
+        "recipe": "myneheroes:adamantium_leggings"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:adamantium_leggings"
+      "myneheroes:adamantium_leggings"
     ]
   }
 }

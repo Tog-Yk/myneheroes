@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:stone_katana_mirrored"
+        "recipe": "myneheroes:stone_katana_mirrored"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:stone_katana_mirrored"
+      "myneheroes:stone_katana_mirrored"
     ]
   }
 }

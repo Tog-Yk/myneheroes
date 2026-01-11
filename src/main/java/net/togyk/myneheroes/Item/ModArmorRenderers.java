@@ -9,23 +9,28 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.ColorHelper;
 import net.togyk.myneheroes.Item.custom.AdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.DyeableAdvancedArmorItem;
 import net.togyk.myneheroes.Item.custom.DyeableAdvancedArmorWithFaceplateItem;
 import net.togyk.myneheroes.Item.custom.UpgradeItem;
 import net.togyk.myneheroes.MyneHeroes;
+import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.client.render.ReactorModel;
 import net.togyk.myneheroes.client.render.armor.AdvancedArmorModel;
 import net.togyk.myneheroes.client.render.armor.AdvancedHelmetWithFaceplateModel;
 import net.togyk.myneheroes.client.render.upgrade.UpgradeModel;
 import net.togyk.myneheroes.client.render.upgrade.UpgradeModelRegistry;
+import net.togyk.myneheroes.upgrade.AbilityUpgrade;
 import net.togyk.myneheroes.upgrade.Upgrade;
 import net.togyk.myneheroes.util.HexConsumer;
+import net.togyk.myneheroes.util.ModTags;
+import net.togyk.myneheroes.util.StockPile;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -106,25 +111,76 @@ public class ModArmorRenderers {private static void registerUpgrade(Item item) {
 
     private static void registerAdvancedArmor(Item item) {
         registerArmor(item, AdvancedArmorModel::new, AdvancedArmorModel.ADVANCED_ARMOR,
-                (armorModel, layer, stack, matrixStack, vertexConsumerProvider, light) -> {
-                    Identifier texture = armorModel.getTexture(stack, layer);
+                (armorModel, layerIndex, stack, matrixStack, vertexConsumerProvider, light) -> {
+                    Identifier texture = armorModel.getTexture(stack, layerIndex);
 
-                    VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumerProvider, RenderLayer.getArmorCutoutNoCull(texture), stack.hasGlint());
-                    armorModel.render(matrixStack, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 0xFFFFFFFF);
+                    int alpha = 0xFF;
+
+                    if (stack.getItem() instanceof AdvancedArmorItem armorItem) {
+                        ArmorMaterial.Layer layer = armorItem.getMaterial().value().layers().get(layerIndex);
+                        String layerName = layer.getTexture(true).getPath().substring("textures/models/armor/".length(), layer.getTexture(true).getPath().length() - "_layer_2.png".length());
+                        if (layerName.endsWith("kinetic_energy")) {
+                            List<Upgrade> upgrades = armorItem.getUpgrades(stack);
+                            List<Upgrade> kineticEnergyUpgrades = upgrades.stream().filter(upgrade -> upgrade instanceof StockPile && upgrade.isIn(ModTags.Upgrades.KINETIC_ENERGY)).toList();
+                            if (!kineticEnergyUpgrades.isEmpty()) {
+                                float charge = 1.0F;
+                                for (Upgrade upgrade : kineticEnergyUpgrades) {
+                                    StockPile stockPile = (StockPile) upgrade;
+                                    charge = charge * stockPile.getCharge() / stockPile.getMaxCharge();
+                                }
+
+                                alpha = (int) (0xFF * charge);
+                            } else {
+                                alpha = 0;
+                            }
+                        }
+                    }
+
+                    VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityTranslucent(texture));
+
+                    armorModel.render(matrixStack, vertexConsumer, light, OverlayTexture.DEFAULT_UV, ColorHelper.Argb.withAlpha(alpha, 0xFFFFFF));
                 }
         );
     }
 
     private static void registerDyeableAdvancedArmor(Item item) {
         registerArmor(item, AdvancedArmorModel::new, AdvancedArmorModel.ADVANCED_ARMOR,
-                (armorModel, layer, stack, matrixStack, vertexConsumerProvider, light) -> {
+                (armorModel, layerIndex, stack, matrixStack, vertexConsumerProvider, light) -> {
                     if (stack.getItem() instanceof DyeableAdvancedArmorItem armorItem) {
-                        int armor_light = armorItem.layerIsLightable(stack, layer) ? (armorItem.getLightLevel(stack, layer) / 15) * 15728880 : light;
-                        int color = armorItem.layerIsDyed(stack, layer) ? armorItem.getColor(stack, layer) : 0xFFFFFFFF;
-                        Identifier texture = armorModel.getTexture(stack, layer);
+                        int armor_light = armorItem.layerIsLightable(stack, layerIndex) ? (armorItem.getLightLevel(stack, layerIndex) / 15) * 15728880 : light;
+                        int color = armorItem.layerIsDyed(stack, layerIndex) ? armorItem.getColor(stack, layerIndex) : 0xFFFFFFFF;
+                        Identifier texture = armorModel.getTexture(stack, layerIndex);
 
-                        VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumerProvider, RenderLayer.getArmorCutoutNoCull(texture), stack.hasGlint());
-                        armorModel.render(matrixStack, vertexConsumer, armor_light, OverlayTexture.DEFAULT_UV, color);
+                        int alpha = 0xFF;
+
+                        ArmorMaterial.Layer layer = armorItem.getMaterial().value().layers().get(layerIndex);
+                        String layerName = layer.getTexture(true).getPath().substring("textures/models/armor/".length(), layer.getTexture(true).getPath().length() - "_layer_2.png".length());
+                        if (layerName.endsWith("kinetic_energy")) {
+                            List<Upgrade> upgrades = armorItem.getUpgrades(stack);
+                            List<Upgrade> kineticEnergyUpgrades = upgrades.stream().filter(upgrade -> upgrade.isIn(ModTags.Upgrades.KINETIC_ENERGY)).toList();
+                            if (!kineticEnergyUpgrades.isEmpty()) {
+                                float charge = 1.0F;
+                                for (Upgrade upgrade : kineticEnergyUpgrades) {
+                                    if (upgrade instanceof StockPile stockPile) {
+                                        charge = charge * stockPile.getCharge() / stockPile.getMaxCharge();
+                                    } else if (upgrade instanceof AbilityUpgrade abilityUpgrade) {
+                                        for (Ability ability : abilityUpgrade.getAbilities()) {
+                                            if (ability instanceof StockPile stockPile) {
+                                                charge = charge * stockPile.getCharge() / stockPile.getMaxCharge();
+                                            }
+                                        }
+                                    }
+                                }
+
+                                alpha = (int) (0xFF * charge);
+                            } else {
+                                alpha = 0;
+                            }
+                        }
+
+                        VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityTranslucent(texture));
+
+                        armorModel.render(matrixStack, vertexConsumer, armor_light, OverlayTexture.DEFAULT_UV, ColorHelper.Argb.withAlpha(alpha, color));
                     }
                 }
         );
@@ -137,15 +193,42 @@ public class ModArmorRenderers {private static void registerUpgrade(Item item) {
                         armorModel.setFaceplateOpenProgress(armorItem.getOpenProgress(stack));
                     }
                 },
-                (armorModel, layer, stack, matrixStack, vertexConsumerProvider, light) -> {
+                (armorModel, layerIndex, stack, matrixStack, vertexConsumerProvider, light) -> {
                     if (stack.getItem() instanceof DyeableAdvancedArmorItem armorItem) {
+                        int armor_light = armorItem.layerIsLightable(stack, layerIndex) ? (armorItem.getLightLevel(stack, layerIndex) / 15) * 15728880 : light;
+                        int color = armorItem.layerIsDyed(stack, layerIndex) ? armorItem.getColor(stack, layerIndex) : 0xFFFFFFFF;
+                        Identifier texture = armorModel.getTexture(stack, layerIndex);
 
-                        int armor_light = armorItem.layerIsLightable(stack, layer) ? (armorItem.getLightLevel(stack, layer) / 15) * 15728880 : light;
-                        int color = armorItem.layerIsDyed(stack, layer) ? armorItem.getColor(stack, layer) : 0xFFFFFFFF;
-                        Identifier texture = armorModel.getTexture(stack, layer);
+                        int alpha = 0xFF;
 
-                        VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumerProvider, RenderLayer.getArmorCutoutNoCull(texture), stack.hasGlint());
-                        armorModel.render(matrixStack, vertexConsumer, armor_light, OverlayTexture.DEFAULT_UV, color);
+                        ArmorMaterial.Layer layer = armorItem.getMaterial().value().layers().get(layerIndex);
+                        String layerName = layer.getTexture(true).getPath().substring("textures/models/armor/".length(), layer.getTexture(true).getPath().length() - "_layer_2.png".length());
+                        if (layerName.endsWith("kinetic_energy")) {
+                            List<Upgrade> upgrades = armorItem.getUpgrades(stack);
+                            List<Upgrade> kineticEnergyUpgrades = upgrades.stream().filter(upgrade -> upgrade.isIn(ModTags.Upgrades.KINETIC_ENERGY)).toList();
+                            if (!kineticEnergyUpgrades.isEmpty()) {
+                                float charge = 1.0F;
+                                for (Upgrade upgrade : kineticEnergyUpgrades) {
+                                    if (upgrade instanceof StockPile stockPile) {
+                                        charge = charge * stockPile.getCharge() / stockPile.getMaxCharge();
+                                    } else if (upgrade instanceof AbilityUpgrade abilityUpgrade) {
+                                        for (Ability ability : abilityUpgrade.getAbilities()) {
+                                            if (ability instanceof StockPile stockPile) {
+                                                charge = charge * stockPile.getCharge() / stockPile.getMaxCharge();
+                                            }
+                                        }
+                                    }
+                                }
+
+                                alpha = (int) (0xFF * charge);
+                            } else {
+                                alpha = 0;
+                            }
+                        }
+
+                        VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityTranslucent(texture));
+
+                        armorModel.render(matrixStack, vertexConsumer, armor_light, OverlayTexture.DEFAULT_UV, ColorHelper.Argb.withAlpha(alpha, color));
                     }
                 }
         );

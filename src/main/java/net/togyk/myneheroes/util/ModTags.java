@@ -90,6 +90,7 @@ public class ModTags {
     }
 
     public static class Upgrades {
+        public static final TagKey<Upgrade> KINETIC_ENERGY = createTag("kinetic_energy");
 
         private static TagKey<Upgrade> createTag(String name) {
             return TagKey.of(ModRegistryKeys.UPGRADE, Identifier.of(MyneHeroes.MOD_ID, name));

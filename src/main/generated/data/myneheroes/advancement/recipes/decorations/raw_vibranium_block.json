@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:raw_vibranium_block"
+        "recipe": "myneheroes:raw_vibranium_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:raw_vibranium_block"
+      "myneheroes:raw_vibranium_block"
     ]
   }
 }
