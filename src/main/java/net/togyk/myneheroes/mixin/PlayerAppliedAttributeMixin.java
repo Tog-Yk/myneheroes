@@ -1,5 +1,6 @@
 package net.togyk.myneheroes.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -18,6 +19,7 @@ import net.togyk.myneheroes.ability.PassiveAbility;
 import net.togyk.myneheroes.damage.ModDamageTypes;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.util.PlayerAbilities;
+import net.togyk.myneheroes.util.PlayerHoverFlightControl;
 import net.togyk.myneheroes.util.PowerData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -30,9 +32,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerAppliedAttributeMixin {
+public abstract class PlayerAppliedAttributeMixin implements PlayerHoverFlightControl {
     @Unique
     private int myneheroes$wallClimbSoundCooldown = 0;
+    @Unique
+    private boolean myneheroes$isHoverFlying = false;
 
     @ModifyVariable(
             method = "attack",
@@ -110,13 +114,6 @@ public abstract class PlayerAppliedAttributeMixin {
     private void myneheroes$tick(CallbackInfo info) {
         PlayerEntity player = (PlayerEntity) (Object) this;
 
-        if (myneheroes$mayFly(player)) {
-            player.getAbilities().allowFlying = true;
-        } else if (!(player.isInCreativeMode() || player.isSpectator())) {
-            player.getAbilities().allowFlying = false;
-            player.getAbilities().flying = false;
-        }
-
         List<Power> powers = PowerData.getPowers(player);
 
         if (!player.isSpectator()) {
@@ -174,8 +171,50 @@ public abstract class PlayerAppliedAttributeMixin {
         }
     }
 
+    @Inject(at = @At("HEAD"), method = "tickMovement")
+    private void moveHoverFlight(CallbackInfo info) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        if (myneheroes$isHoverFlying() && player.isOnGround()) {
+            myneheroes$isHoverFlying = false;
+        }
+        if (myneheroes$isHoverFlying()) {
+            if (!myneheroes$canHoverFly()) {
+                myneheroes$setHoverFlying(false);
+                return;
+            }
+            if (player.isSprinting()) {
+                //Add do a barrel roll like movement
+                Vec3d look = player.getRotationVector();
+                double speed = 1D;
+                player.setVelocity(look.multiply(speed));
+            } else {
+                // Zero gravity while hovering
+                player.setVelocity(player.getVelocity().multiply(1, 0, 1));
+            }
+
+            if (((LivingEntityJumpAccessor) player).myneheroes$jumping()) {
+                player.setVelocity(player.getVelocity().add(0, 0.3, 0));
+            }
+            if (player.isSneaking()) {
+                player.setVelocity(player.getVelocity().add(0, -0.3, 0));
+            }
+            player.fallDistance = 0;
+        }
+    }
+
     @Unique
-    private boolean myneheroes$mayFly(PlayerEntity player) {
+    public boolean myneheroes$isHoverFlying() {
+        return this.myneheroes$isHoverFlying;
+    }
+
+    @Unique
+    public void myneheroes$setHoverFlying(boolean flying) {
+        this.myneheroes$isHoverFlying = flying;
+    }
+
+    @Unique
+    public boolean myneheroes$canHoverFly() {
+        PlayerEntity player = (PlayerEntity) (Object) this;
         for (Power power: PowerData.getPowers(player)) {
             if (power.allowFlying(player)) {
                 return true;
@@ -188,4 +227,17 @@ public abstract class PlayerAppliedAttributeMixin {
         }
         return false;
     }
+
+    @ModifyReturnValue(method = "getOffGroundSpeed", at = @At("RETURN"))
+    protected float modifyOffGroundSpeed(float original) {
+        if (myneheroes$isHoverFlying()) {
+            return 0.05F;
+        }
+        return original;
+    }
+
+    //updatePose
+    //updateSwimming
+    //getVelocityMultiplier
+    //shouldSwimInFluids
 }
