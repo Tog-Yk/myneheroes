@@ -59,7 +59,7 @@ public class Abilities {
     public static final HudAbility TOGGLE_SPEEDSTER_HUD = registerAbility(new HudAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_speedster_hud"), new Ability.Settings(), HudType.SPEEDSTER));
     public static final HudAbility TUTOR_HUD = registerAbility(new HudAbility(Identifier.of(MyneHeroes.MOD_ID, "tutor_hud"), new Ability.Settings(), HudType.TUTOR));
     public static final Ability SHOOT_LASER = registerAbility(new Ability(Identifier.of(MyneHeroes.MOD_ID, "shoot_laser"), 10, new Ability.Settings(), (player) -> {
-        ItemStack reactorStack = MyneHeroes.getReactorItemClass(player);
+        ItemStack reactorStack = MyneHeroes.getItemClass(player, ReactorItem.class);
         if (!player.getWorld().isClient) {
             if (reactorStack.getItem() instanceof ReactorItem reactor) {
                 int reactorPower = reactor.getStoredPowerOrDefault(reactorStack, 0);

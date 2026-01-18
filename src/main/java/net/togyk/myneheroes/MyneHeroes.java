@@ -2,13 +2,14 @@ package net.togyk.myneheroes;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.togyk.myneheroes.Item.ModItemGroups;
 import net.togyk.myneheroes.Item.ModItems;
-import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.ability.Abilities;
 import net.togyk.myneheroes.advancement.criterion.ModCriteria;
 import net.togyk.myneheroes.block.ModBlockEntityTypes;
@@ -28,6 +29,7 @@ import net.togyk.myneheroes.particle.ModParticles;
 import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.recipe.ModRecipes;
 import net.togyk.myneheroes.resourcepack.ModResourcePacks;
+import net.togyk.myneheroes.util.AccessoryUtil;
 import net.togyk.myneheroes.util.ModLootTableModifiers;
 import net.togyk.myneheroes.worldgen.ModBiomeModifications;
 import net.togyk.myneheroes.worldgen.ModFeatures;
@@ -91,14 +93,22 @@ public class MyneHeroes implements ModInitializer {
     /**
      * Searches the player's inventory for the first matching item.
      *
-     * @param player The player to search in.
+     * @param player    The player to search in.
+     * @param itemClass The class of Item it searches for
      * @return The matching ItemStack, or an empty ItemStack if not found.
      */
-    public static ItemStack getReactorItemClass(PlayerEntity player) {
+    public static ItemStack getItemClass(PlayerEntity player, Class<? extends Item> itemClass) {
+        if (FabricLoader.getInstance().isModLoaded("accessories")) {
+            for (ItemStack stack : AccessoryUtil.getAccessoryItems(player)) {
+                if (itemClass.isInstance(stack.getItem())) {
+                    return stack;
+                }
+            }
+        }
         PlayerInventory inventory = player.getInventory();
         for (int i = 0; i < inventory.size(); i++) {
             ItemStack stack = inventory.getStack(i);
-            if (stack.getItem() instanceof ReactorItem) {
+            if (itemClass.isInstance(stack.getItem())) {
                 return stack;
             }
         }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:adamantium_axe"
+        "recipe": "myneheroes:adamantium_axe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:adamantium_axe"
+      "myneheroes:adamantium_axe"
     ]
   }
 }

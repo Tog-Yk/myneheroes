@@ -109,7 +109,7 @@ public class MechanicalHudRenderer {
 
             drawContext.drawGuiTexture(BATTERY_CASING, 18, 30, 0, 0, reactionInfoX, reactionInfoY -30, 18, 30);
 
-            ItemStack reactorItemStack = MyneHeroes.getReactorItemClass(client.player);
+            ItemStack reactorItemStack = MyneHeroes.getItemClass(client.player, ReactorItem.class);
             if (reactorItemStack != ItemStack.EMPTY && reactorItemStack.getItem() instanceof ReactorItem reactorItem) {
 
                 float fuelPercentile = (float) reactorItem.getStoredFuelOrDefault(reactorItemStack) / reactorItem.getMaxFuel();

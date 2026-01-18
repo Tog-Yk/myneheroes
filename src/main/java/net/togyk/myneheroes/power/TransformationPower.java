@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 
 public class TransformationPower extends Power implements VariableLinkedPower {
     private int transformationTime = 0;
-    private final int maxTransformationTime;
+    protected final int maxTransformationTime;
     private boolean transforming = true;
 
     protected final transformationAttributeModifiers attributeModifiers;
@@ -33,10 +33,14 @@ public class TransformationPower extends Power implements VariableLinkedPower {
         if (this.isTransforming()) {
             if (this.getTransformationTime() < this.getMaxTransformationTime()) {
                 this.setTransformationTime(this.getTransformationTime() + 1);
+            } else {
+                this.setTransformationTime(this.getMaxTransformationTime());
             }
         } else {
             if (this.getTransformationTime() > 0) {
                 this.setTransformationTime(this.getTransformationTime() - 1);
+            } else {
+                this.setTransformationTime(0);
             }
         }
         super.tick(player);
@@ -127,6 +131,16 @@ public class TransformationPower extends Power implements VariableLinkedPower {
         }
     }
 
+    @Override
+    public boolean allowFlying(PlayerEntity player) {
+        return super.allowFlying(player) && this.getTransformationProgress() == 1.0D;
+    }
+
+    @Override
+    public boolean canSuperJump() {
+        return super.canSuperJump() && this.getTransformationProgress() == 1.0D;
+    }
+
     public static class transformationAttributeModifiers extends Power.attributeModifiers {
         private final Map<RegistryEntry<EntityAttribute>, PowerAttributeModifierCreator> modifiers = new Object2ObjectOpenHashMap();
 
@@ -168,6 +182,27 @@ public class TransformationPower extends Power implements VariableLinkedPower {
                     if (entityAttributeInstance != null) {
                         entityAttributeInstance.removeModifier((entry.getValue()).id());
                         entityAttributeInstance.addPersistentModifier((entry.getValue()).createAttributeModifier());
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void removeAttributes(AttributeContainer attributeContainer) {
+        for(Map.Entry<RegistryEntry<EntityAttribute>, PowerAttributeModifierCreator> entry : this.getAttributeModifiers().modifiers.entrySet()) {
+            EntityAttributeInstance entityAttributeInstance = attributeContainer.getCustomInstance(entry.getKey());
+            if (entityAttributeInstance != null) {
+                entityAttributeInstance.removeModifier((entry.getValue()).id());
+            }
+        }
+        //also apply attribute modifiers from abilities
+        for(Ability ability : this.getAbilities()) {
+            if (ability instanceof AttributeModifierAbility modifierAbility) {
+                for(Map.Entry<RegistryEntry<EntityAttribute>, AttributeModifierAbility.AbilityAttributeModifierCreator> entry : modifierAbility.getAttributeModifiers().modifiers.entrySet()) {
+                    EntityAttributeInstance entityAttributeInstance = attributeContainer.getCustomInstance(entry.getKey());
+                    if (entityAttributeInstance != null) {
+                        entityAttributeInstance.removeModifier((entry.getValue()).id());
                     }
                 }
             }

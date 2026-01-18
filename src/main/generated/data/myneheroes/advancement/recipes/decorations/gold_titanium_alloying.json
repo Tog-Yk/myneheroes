@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:gold_titanium_alloying"
+        "recipe": "myneheroes:gold_titanium_alloying"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:gold_titanium_alloying"
+      "myneheroes:gold_titanium_alloying"
     ]
   }
 }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:raw_gold_titanium_block"
+        "recipe": "myneheroes:raw_gold_titanium_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:raw_gold_titanium_block"
+      "myneheroes:raw_gold_titanium_block"
     ]
   }
 }

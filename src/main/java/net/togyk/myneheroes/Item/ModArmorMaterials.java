@@ -64,7 +64,8 @@ public class ModArmorMaterials {
                             new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark6"), "", true),
                             new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark6_details"), "", true),
                             new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark6_details_2"), "", true),
-                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark6_glow"), "", true)
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark6_glow"), "", true),
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"mark6_kinetic_energy"), "", true)
                     ),0,0));
 
     //Speedster pattern
@@ -80,7 +81,8 @@ public class ModArmorMaterials {
                             new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"speedster_vibranium"), "", true),
                             new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"speedster_vibranium_details"), "", true),
                             new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"speedster_vibranium_details_2"), "", true),
-                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"speedster_vibranium_glow"), "", true)
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"speedster_vibranium_glow"), "", true),
+                            new ArmorMaterial.Layer(Identifier.of(MyneHeroes.MOD_ID,"speedster_vibranium_kinetic_energy"), "", true)
                     ),0,0));
 
     /*

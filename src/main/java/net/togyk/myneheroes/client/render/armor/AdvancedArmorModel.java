@@ -4,6 +4,9 @@ package net.togyk.myneheroes.client.render.armor;// Made with Blockbench 5.0.4
 
 
 import com.google.common.collect.ImmutableList;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
@@ -17,16 +20,21 @@ import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.DyeableAdvancedArmorItem;
 import net.togyk.myneheroes.MyneHeroes;
 
+@Environment(EnvType.CLIENT)
 public class AdvancedArmorModel extends BipedEntityModel<LivingEntity> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final EntityModelLayer ADVANCED_ARMOR = new EntityModelLayer(Identifier.of(MyneHeroes.MOD_ID, "advanced_armor"), "main");
-    private final ModelPart leftBoot;
-    private final ModelPart rightBoot;
+    public final ModelPart leftBoot;
+    public final ModelPart rightBoot;
 
     public AdvancedArmorModel(ModelPart root) {
         super(root);
         this.leftBoot = root.getChild("left_boot");
         this.rightBoot = root.getChild("right_boot");
+    }
+
+    public AdvancedArmorModel(EntityModelLayer layer) {
+        this(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(layer));
     }
 
     @Override
@@ -108,16 +116,16 @@ public class AdvancedArmorModel extends BipedEntityModel<LivingEntity> {
         modelPartData.addChild(
                 "right_boot",
                 ModelPartBuilder.create()
-                        .uv(0, 48).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, dilation)
-                        .uv(0, 64).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, dilation.add(0.5F)),
+                        .uv(0, 48).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, dilation.add(0.1F))
+                        .uv(0, 64).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, dilation.add(0.6F)),
                 ModelTransform.pivot(2.0F, 12.0F, 0.0F)
         );
 
         modelPartData.addChild(
                 "left_boot",
                 ModelPartBuilder.create()
-                        .uv(16, 48).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, dilation)
-                        .uv(16, 64).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, dilation.add(0.5F)),
+                        .uv(16, 48).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, dilation.add(0.1F))
+                        .uv(16, 64).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, dilation.add(0.6F)),
                 ModelTransform.pivot(2.0F, 12.0F, 0.0F)
         );
 

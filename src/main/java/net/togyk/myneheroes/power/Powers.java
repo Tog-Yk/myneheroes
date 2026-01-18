@@ -59,12 +59,14 @@ public class Powers {
                     .addAttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH, Identifier.of(MyneHeroes.MOD_ID, "avatar_of_bast.health"), EntityAttributeModifier.Operation.ADD_VALUE, () -> 4.0D)
     ));
 
-    public static TransformationPower HULK = registerPower(new TransformationPower(Identifier.of(MyneHeroes.MOD_ID, "hulk"), 40, 0xFF95B561, List.of(Abilities.RAGE, Abilities.TRANSFORM),
-            new Power.Settings().damageMultiplier(2).armor(8).overridesSkin().tintableSkinColor(0x95B561),
-            new TransformationPower.transformationAttributeModifiers()
+    public static DyeableTransformationPower HULK = registerPower(new DyeableTransformationPower(Identifier.of(MyneHeroes.MOD_ID, "hulk"), 40, 0xFF95B561, false, List.of(Abilities.RAGE, Abilities.TRANSFORM),
+            new Power.Settings().damageMultiplier(2).armor(8).overridesSkin().tintableSkinColor(0x95B561).canSuperJump(),
+            new DyeableTransformationPower.transformationAttributeModifiers()
                     .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, Identifier.of(MyneHeroes.MOD_ID, "hulk.speed"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> 0.2D)
-                    .addAttributeModifier(EntityAttributes.GENERIC_SCALE, Identifier.of(MyneHeroes.MOD_ID, "hulk.speed"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> 0.5D)
-                    .addAttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH, Identifier.of(MyneHeroes.MOD_ID, "hulk.health"), EntityAttributeModifier.Operation.ADD_VALUE, () -> 4.0D)
+                    .addAttributeModifier(EntityAttributes.GENERIC_SCALE, Identifier.of(MyneHeroes.MOD_ID, "hulk.scale"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> 0.5D)
+                    .addAttributeModifier(EntityAttributes.GENERIC_ARMOR, Identifier.of(MyneHeroes.MOD_ID, "hulk.armor"), EntityAttributeModifier.Operation.ADD_VALUE, () -> 10.0D)
+                    .addAttributeModifier(EntityAttributes.GENERIC_FALL_DAMAGE_MULTIPLIER, Identifier.of(MyneHeroes.MOD_ID, "hulk.fall_damage"), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, () -> -0.5D)
+                    .addAttributeModifier(EntityAttributes.GENERIC_SAFE_FALL_DISTANCE, Identifier.of(MyneHeroes.MOD_ID, "hulk.safe_fall_distance"), EntityAttributeModifier.Operation.ADD_VALUE, () -> 5D)
     ));
 
     public static <T extends Power> T registerPower(T power) {

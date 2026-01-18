@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:adamantium_hoe"
+        "recipe": "myneheroes:adamantium_hoe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:adamantium_hoe"
+      "myneheroes:adamantium_hoe"
     ]
   }
 }
