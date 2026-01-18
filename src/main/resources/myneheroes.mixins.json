@@ -16,6 +16,7 @@
     "EntityShapeContextAccessor",
     "ItemFrameEntityMixin",
     "LivingAppliedAttributeMixin",
+    "LivingEntityJumpAccessor",
     "PlayerAbilityMixin",
     "PlayerAppliedAttributeMixin",
     "PlayerPowerMixin",
@@ -26,6 +27,7 @@
   "client": [
     "AbstractClientPlayerMixin",
     "ArmorFeatureRendererMixin",
+    "ClientPlayerToggleHoverFlyingMixin",
     "EntityRendererFeatureAccessor",
     "InGameOverlayRendererMixin",
     "MouseMixin",

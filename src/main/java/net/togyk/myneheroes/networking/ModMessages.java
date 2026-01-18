@@ -25,6 +25,7 @@ import net.togyk.myneheroes.event.MissedSwingCallback;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.util.PlayerAbilities;
+import net.togyk.myneheroes.util.PlayerHoverFlightControl;
 import net.togyk.myneheroes.util.PlayerPowers;
 
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class ModMessages {
     public static final Identifier PLAYER_JUMPING_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "player_jumping");
     public static final Identifier SAVE_UPGRADE_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "save_upgrade");
     public static final Identifier WORTHINESS_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "worthiness");
+    public static final Identifier SET_HOVER_FLYING_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "set_hover_flying");
 
     public static void registerServerMessages() {
         PayloadTypeRegistry.playC2S().register(AbilityKeybindPayload.ID, AbilityKeybindPayload.CODEC);
@@ -233,6 +235,14 @@ public class ModMessages {
         });
 
         PayloadTypeRegistry.playS2C().register(WorthinessPayload.ID, WorthinessPayload.CODEC);
+
+        PayloadTypeRegistry.playC2S().register(SetHoverFlyingPayload.ID, SetHoverFlyingPayload.PACKET_CODEC);
+
+        ServerPlayNetworking.registerGlobalReceiver(SetHoverFlyingPayload.ID, (payload, context) -> {
+            context.server().execute(() -> {
+                ((PlayerHoverFlightControl) context.player()).myneheroes$setHoverFlying(payload.flying());
+            });
+        });
     }
 
     public static void registerClientMessages() {
