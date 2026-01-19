@@ -37,6 +37,14 @@ public abstract class PlayerAppliedAttributeMixin implements PlayerHoverFlightCo
     private int myneheroes$wallClimbSoundCooldown = 0;
     @Unique
     private boolean myneheroes$isHoverFlying = false;
+    @Unique
+    private int myneheroes$hoverTimeRight = 0;
+    @Unique
+    private int myneheroes$hoverTimeLeft = 0;
+    @Unique
+    private int myneheroes$hoverTimeBack = 0;
+    @Unique
+    private boolean isMyneheroes$isHoveringRight = true;
 
     @ModifyVariable(
             method = "attack",
@@ -169,6 +177,76 @@ public abstract class PlayerAppliedAttributeMixin implements PlayerHoverFlightCo
                 }
             }
         }
+
+        Vec3d relativeVelocity = this.getVelocityRelativeToYaw();
+        if (myneheroes$isHoverFlying()) {
+            if (relativeVelocity.x < 0 || (relativeVelocity.x == 0 && isMyneheroes$isHoveringRight)) {
+                if (myneheroes$hoverTimeRight < 15) {
+                    myneheroes$hoverTimeRight++;
+                }
+                if (myneheroes$hoverTimeLeft > 0) {
+                    myneheroes$hoverTimeLeft--;
+                }
+                isMyneheroes$isHoveringRight = true;
+            } else {
+                if (myneheroes$hoverTimeLeft < 15) {
+                    myneheroes$hoverTimeLeft++;
+                }
+                if (myneheroes$hoverTimeRight > 0) {
+                    myneheroes$hoverTimeRight--;
+                }
+                isMyneheroes$isHoveringRight = false;
+            }
+            if (relativeVelocity.z < 0) {
+                if (myneheroes$hoverTimeBack < 15) {
+                    myneheroes$hoverTimeBack++;
+                }
+            } else if (myneheroes$hoverTimeBack > 0) {
+                myneheroes$hoverTimeBack--;
+            }
+        } else {
+            if (myneheroes$hoverTimeRight > 0) {
+                myneheroes$hoverTimeRight--;
+            }
+            if (myneheroes$hoverTimeLeft > 0) {
+                myneheroes$hoverTimeLeft--;
+            }
+            if (myneheroes$hoverTimeBack > 0) {
+                myneheroes$hoverTimeBack--;
+            }
+            isMyneheroes$isHoveringRight = false;
+        }
+    }
+
+    @Unique
+    /**
+     * Converts the player's world-space velocity into player-relative space
+     * based on the player's yaw.
+     *
+     * <p>Coordinate meaning of the returned vector:</p>
+     * <ul>
+     *   <li><b>+Z</b> — moving forward (in the direction the player is facing)</li>
+     *   <li><b>-Z</b> — moving backward</li>
+     *   <li><b>+X</b> — moving right relative to the player's facing direction</li>
+     *   <li><b>-X</b> — moving left</li>
+     *   <li><b>Y</b> — unchanged vertical velocity</li>
+     * </ul>
+     *
+     * @return a {@link Vec3d} representing the player's velocity relative to yaw
+     */
+    private Vec3d getVelocityRelativeToYaw() {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        Vec3d velocity = player.getVelocity();
+
+        float yaw = (float) Math.toRadians(player.getYaw());
+
+        double sin = Math.sin(-yaw);
+        double cos = Math.cos(-yaw);
+
+        double relativeX = velocity.x * cos - velocity.z * sin;
+        double relativeZ = velocity.x * sin + velocity.z * cos;
+
+        return new Vec3d(relativeX, velocity.y, relativeZ);
     }
 
     @Inject(at = @At("HEAD"), method = "tickMovement")
@@ -210,6 +288,26 @@ public abstract class PlayerAppliedAttributeMixin implements PlayerHoverFlightCo
     @Unique
     public void myneheroes$setHoverFlying(boolean flying) {
         this.myneheroes$isHoverFlying = flying;
+    }
+
+    @Unique
+    public float myneheroes$getHoverProgress() {
+        return myneheroes$getHoverProgressRight() + myneheroes$getHoverProgressLeft();
+    }
+
+    @Unique
+    public float myneheroes$getHoverProgressRight() {
+        return this.myneheroes$hoverTimeRight / 15F;
+    }
+
+    @Unique
+    public float myneheroes$getHoverProgressLeft() {
+        return this.myneheroes$hoverTimeLeft / 15F;
+    }
+
+    @Unique
+    public float myneheroes$getHoverProgressBack() {
+        return this.myneheroes$hoverTimeBack / 15F;
     }
 
     @Unique

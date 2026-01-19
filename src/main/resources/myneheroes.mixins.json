@@ -31,6 +31,7 @@
     "EntityRendererFeatureAccessor",
     "InGameOverlayRendererMixin",
     "MouseMixin",
+    "PlayerEntityModelMixin",
     "PlayerRendererMixin",
     "PlayerSwingMixin"
   ],
