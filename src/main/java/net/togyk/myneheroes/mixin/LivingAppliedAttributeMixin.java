@@ -11,11 +11,13 @@ import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.PassiveAbility;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.util.PlayerAbilities;
+import net.togyk.myneheroes.util.PlayerHoverFlightControl;
 import net.togyk.myneheroes.util.PowerData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -155,5 +157,21 @@ public class LivingAppliedAttributeMixin {
             }
         }
         return strengths.stream().max(Double::compareTo).orElse(1.0);
+    }
+
+    @ModifyVariable(
+            method = "updateLimbs*",
+            at = @At("STORE"),
+            ordinal = 0
+    )
+    private float myneheroes$scaleWalkAnim(float original) {
+        LivingEntity entity = (LivingEntity)(Object)this;
+        if (!(entity instanceof PlayerEntity player)) return original;
+
+        float hover = ((PlayerHoverFlightControl) player)
+                .myneheroes$getHoverProgress();
+
+        // Fade walk animation out while hovering
+        return original * (1.0F - hover);
     }
 }
