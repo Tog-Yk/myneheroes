@@ -1,16 +1,19 @@
 package net.togyk.myneheroes.effect;
 
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.registry.tag.TagKey;
+import net.togyk.myneheroes.Item.custom.UpgradableItem;
 import net.togyk.myneheroes.damage.ModDamageTypes;
 import net.togyk.myneheroes.power.Power;
 import net.togyk.myneheroes.registry.ModRegistries;
+import net.togyk.myneheroes.upgrade.Upgrade;
+import net.togyk.myneheroes.upgrade.Upgrades;
 import net.togyk.myneheroes.util.ModTags;
 import net.togyk.myneheroes.util.PowerData;
 
@@ -26,7 +29,15 @@ public class RadiationPoisonEffect extends StatusEffect {
 
     @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
-        entity.damage(ModDamageTypes.radiation(entity.getWorld()), 1.0F);
+        float resistance = this.getResistance(entity);
+        if (resistance != 1.0F) {
+            entity.damage(ModDamageTypes.radiation(entity.getWorld()), 2.0F * (1.0F - resistance));
+
+            Random random = new Random();
+            if (player != null && random.nextFloat() <= 0.005F) {
+                this.givePlayerRandomPower(random, player);
+            }
+        }
 
         return true;
     }
@@ -45,29 +56,22 @@ public class RadiationPoisonEffect extends StatusEffect {
         super.onApplied(entity, amplifier);
     }
 
-    @Override
-    public void onRemoved(AttributeContainer attributeContainer) {
-        if (player != null) {
-            Random random = new Random();
-            if (random.nextFloat() <= 0.05f) {
-                float rarity = random.nextFloat();
-                Power power = null;
-                if (rarity <= 0.05F) {
-                    power = getRandomPowerFromTag(random, ModTags.Powers.RARE_RADIATION_OBTAINABLE);
-                }
-                if (rarity <= 0.25F && power == null) {
-                    power = getRandomPowerFromTag(random, ModTags.Powers.COMMON_RADIATION_OBTAINABLE);
-                }
-                if (power == null){
-                    power = getRandomPowerFromTag(random, ModTags.Powers.OFTEN_RADIATION_OBTAINABLE);
-                }
-
-                if (power != null) {
-                    PowerData.addUniquePowerToLimit(player, power);
-                }
-            }
+    private void givePlayerRandomPower(Random random, PlayerEntity player) {
+        float rarity = random.nextFloat();
+        Power power = null;
+        if (rarity <= 0.05F) {
+            power = getRandomPowerFromTag(random, ModTags.Powers.RARE_RADIATION_OBTAINABLE);
         }
-        super.onRemoved(attributeContainer);
+        if (rarity <= 0.25F && power == null) {
+            power = getRandomPowerFromTag(random, ModTags.Powers.COMMON_RADIATION_OBTAINABLE);
+        }
+        if (power == null){
+            power = getRandomPowerFromTag(random, ModTags.Powers.OFTEN_RADIATION_OBTAINABLE);
+        }
+
+        if (power != null) {
+            PowerData.addUniquePowerToLimit(player, power);
+        }
     }
 
     //this file got pushed 2 commits earlier
@@ -85,5 +89,19 @@ public class RadiationPoisonEffect extends StatusEffect {
         }
 
         return null;
+    }
+
+    private float getResistance(LivingEntity entity) {
+        float resistance = 0;
+
+        for (ItemStack stack : entity.getArmorItems()) {
+            if (stack.getItem() instanceof UpgradableItem item) {
+                if (item.getUpgrades(stack).stream().map(Upgrade::getId).toList().contains(Upgrades.ANTI_RADIATION.getId())) {
+                    resistance += 0.25F;
+                }
+            }
+        }
+
+        return Math.min(resistance, 1.0F);
     }
 }

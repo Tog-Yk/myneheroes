@@ -168,6 +168,15 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         FabricRecipeProvider.conditionsFromItem(Items.CLAY))
                 .offerTo(exporter);
 
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.ANTI_RADIATION_COATING)
+                .input(Items.HONEYCOMB)
+                .input(ModItems.TITANIUM_INGOT)
+                .input(ModItems.TITANIUM_INGOT)
+                .input(ModItems.GOLD_TITANIUM_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(Items.HONEYCOMB),
+                        FabricRecipeProvider.conditionsFromItem(Items.HONEYCOMB))
+                .offerTo(exporter);
+
         //blocks
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.ARMOR_LIGHT_LEVELING_STATION)
                 .pattern("&%")

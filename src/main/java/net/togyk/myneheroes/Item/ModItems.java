@@ -134,6 +134,10 @@ public class ModItems {
             )
     );
 
+    public static final Item ANTI_RADIATION_COATING = registerItem("anti_radiation_coating",
+            new UpgradeItem(Upgrades.ANTI_RADIATION, new Item.Settings())
+    );
+
     //armors
     //vibranium armors
     public static final Item VIBRANIUM_HELMET = registerItem("vibranium_helmet",

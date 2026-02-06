@@ -98,7 +98,9 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.ADAMANTIUM_AXE, Models.HANDHELD);
         itemModelGenerator.register(ModItems.ADAMANTIUM_HOE, Models.HANDHELD);
 
-        itemModelGenerator.register(ModItems.ADAMANTIUM_INJECTION, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.ADAMANTIUM_INJECTION, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.ANTI_RADIATION_COATING, Models.GENERATED);
 
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_HELMET));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.VIBRANIUM_CHESTPLATE));
