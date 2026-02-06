@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "%": {
+      "item": "myneheroes:circuit_board"
+    },
+    "&": {
+      "item": "minecraft:piston"
+    }
+  },
+  "pattern": [
+    "#&#",
+    "#%#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "myneheroes:exo_skeleton"
+  }
+}

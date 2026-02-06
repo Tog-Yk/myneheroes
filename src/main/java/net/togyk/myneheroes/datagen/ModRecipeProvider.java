@@ -168,13 +168,23 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         FabricRecipeProvider.conditionsFromItem(Items.CLAY))
                 .offerTo(exporter);
 
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.ANTI_RADIATION_COATING)
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ANTI_RADIATION_COATING)
                 .input(Items.HONEYCOMB)
                 .input(ModItems.TITANIUM_INGOT)
                 .input(ModItems.TITANIUM_INGOT)
                 .input(ModItems.GOLD_TITANIUM_INGOT)
                 .criterion(FabricRecipeProvider.hasItem(Items.HONEYCOMB),
                         FabricRecipeProvider.conditionsFromItem(Items.HONEYCOMB))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.EXO_SKELETON)
+                .pattern("#&#")
+                .pattern("#%#")
+                .input('#', Items.IRON_INGOT)
+                .input('&', Items.PISTON)
+                .input('%', ModItems.CIRCUIT_BOARD)
+                .criterion(FabricRecipeProvider.hasItem(ModItems.CIRCUIT_BOARD),
+                        FabricRecipeProvider.conditionsFromItem(ModItems.CIRCUIT_BOARD))
                 .offerTo(exporter);
 
         //blocks

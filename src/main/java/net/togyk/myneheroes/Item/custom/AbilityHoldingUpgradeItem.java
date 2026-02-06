@@ -24,7 +24,7 @@ public class AbilityHoldingUpgradeItem extends UpgradeItem implements AbilityHol
     public List<Ability> getAbilities(ItemStack stack) {
         List<Ability> abilities = new ArrayList<>();
 
-        Upgrade upgrade = this.getUpgrade(stack);
+        Upgrade upgrade = this.getUpgrade(stack, null);
         if (upgrade instanceof AbilityUpgrade abilityUpgrade) {
             for (Ability ability : abilityUpgrade.getAbilities()) {
                 ability.setHolder(upgrade);
@@ -39,10 +39,10 @@ public class AbilityHoldingUpgradeItem extends UpgradeItem implements AbilityHol
     public void saveAbility(ItemStack stack, Ability ability) {
     }
 
-    public Upgrade getUpgrade(ItemStack stack) {
+    public Upgrade getUpgrade(ItemStack stack, ItemStack upgradeableStack) {
         NbtCompound nbt = stack.getOrDefault(ModDataComponentTypes.UPGRADES, new NbtCompound());
 
-        Upgrade upgrade = super.getUpgrade(stack);
+        Upgrade upgrade = super.getUpgrade(stack, upgradeableStack);
         if (nbt.contains("upgrade")) {
             upgrade = AbilityUtil.nbtToUpgrade(nbt.getCompound("upgrade"));
         }
@@ -52,7 +52,7 @@ public class AbilityHoldingUpgradeItem extends UpgradeItem implements AbilityHol
 
     @Override
     public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
-        if (this.getUpgrade(stack).onClicked(stack, otherStack, slot, clickType, player, cursorStackReference)) {
+        if (this.getUpgrade(stack, null).onClicked(stack, otherStack, slot, clickType, player, cursorStackReference)) {
             return true;
         }
         return super.onClicked(stack, otherStack, slot, clickType, player, cursorStackReference);

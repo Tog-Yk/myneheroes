@@ -3,6 +3,8 @@ package net.togyk.myneheroes.ability;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
@@ -288,6 +290,21 @@ public class Abilities {
                 return false;
             }, 60, new Ability.Settings()
     ));
+
+
+    public static final SimplePassiveAttributeModifierAbility STRENGTH_BOOST = registerAbility(new SimplePassiveAttributeModifierAbility(Identifier.of(MyneHeroes.MOD_ID, "strength_boost"), new Ability.Settings().usable(false),
+            List.of(
+                    new SimplePassiveAttributeModifierAbility.AttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, ability -> 0.2D),
+                    new SimplePassiveAttributeModifierAbility.AttributeModifier(EntityAttributes.PLAYER_BLOCK_BREAK_SPEED, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, ability -> 0.2D)
+            )
+    ));
+    public static final SimplePassiveAttributeModifierAbility JUMP_BOOST = registerAbility(new SimplePassiveAttributeModifierAbility(Identifier.of(MyneHeroes.MOD_ID, "jump_boost"), new Ability.Settings().usable(false),
+            List.of(
+                    new SimplePassiveAttributeModifierAbility.AttributeModifier(EntityAttributes.GENERIC_JUMP_STRENGTH, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, ability -> 0.2D),
+                    new SimplePassiveAttributeModifierAbility.AttributeModifier(EntityAttributes.GENERIC_FALL_DAMAGE_MULTIPLIER, EntityAttributeModifier.Operation.ADD_VALUE, ability -> -0.25D)
+            )
+    ));
+    public static final SimplePassiveAttributeModifierAbility SPEED_BOOST = registerAbility(new SimplePassiveAttributeModifierAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_boost"), new Ability.Settings().usable(false), EntityAttributes.GENERIC_MOVEMENT_SPEED, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, ability -> 0.2D));
 
     private static <T extends Ability> T registerAbility(T ability) {
         return Registry.register(ModRegistries.ABILITY, ability.id, ability);

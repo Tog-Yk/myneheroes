@@ -76,7 +76,7 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
                 List<Upgrade> upgrades = new ArrayList<>();
                 for (ItemStack stack : blockEntity.getUpgrades().getHeldStacks()) {
                     if (stack.getItem() instanceof UpgradeItem upgradeItem) {
-                        Upgrade upgrade = upgradeItem.getUpgrade(stack);
+                        Upgrade upgrade = upgradeItem.getUpgrade(stack, inputStack);
                         upgrade.setItemStack(stack, this.world);
 
                         upgrades.add(upgrade);
@@ -115,8 +115,9 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
         addSlot(new Slot(inventory, index, x, y) {
             @Override
             public boolean canInsert(ItemStack stack) {
+                ItemStack upgradableStack = blockEntity.getInput().getStack(0);
                 if (stack.getItem() instanceof UpgradeItem upgradeItem) {
-                    Upgrade upgrade = upgradeItem.getUpgrade(stack);
+                    Upgrade upgrade = upgradeItem.getUpgrade(stack, upgradableStack);
                     if (upgrade != null) {
                         upgrade.setItemStack(stack, world);
                         return canUpgrade(upgrade);
@@ -199,7 +200,7 @@ public class UpgradeStationScreenHandler extends ScreenHandler {
                 if (!this.insertItem(originalStack, blockInputStart, blockInputEnd, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (originalStack.getItem() instanceof UpgradeItem upgradeItem && canUpgrade(upgradeItem.getUpgrade(originalStack))) {
+            } else if (originalStack.getItem() instanceof UpgradeItem upgradeItem && canUpgrade(upgradeItem.getUpgrade(originalStack, this.blockEntity.getInput().getStack(0)))) {
                 if (!this.insertItem(originalStack, blockUpgradeStart, blockUpgradeEnd, false)) {
                     return ItemStack.EMPTY;
                 }

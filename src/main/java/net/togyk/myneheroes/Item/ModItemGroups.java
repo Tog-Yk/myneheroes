@@ -107,6 +107,10 @@ public class ModItemGroups {
                         entries.add(ModItems.BOTTLE_OF_SPIDER_VENOM);
                         entries.add(ModItems.BOTTLE_OF_RADIOACTIVE_SPIDER_VENOM);
 
+                        entries.add(ModItems.ANTI_RADIATION_COATING);
+
+                        entries.add(ModItems.EXO_SKELETON);
+
                         entries.add(ModItems.TOOLBELT);
                         entries.add(ModItems.IRON_TOOLBELT);
                         entries.add(ModItems.DIAMOND_TOOLBELT);

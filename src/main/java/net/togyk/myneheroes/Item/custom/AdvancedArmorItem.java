@@ -2,6 +2,11 @@ package net.togyk.myneheroes.Item.custom;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.AttributeContainer;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
 import net.minecraft.item.ArmorItem;
@@ -22,6 +27,8 @@ import net.minecraft.util.Util;
 import net.minecraft.world.World;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.ability.AttributeModifierAbility;
+import net.togyk.myneheroes.ability.SimplePassiveAttributeModifierAbility;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.networking.SaveUpgradePayload;
 import net.togyk.myneheroes.upgrade.AbilityUpgrade;
@@ -30,8 +37,9 @@ import net.togyk.myneheroes.util.AbilityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class AdvancedArmorItem extends ArmorItem implements AbilityHolding, UpgradableItem {
+public class AdvancedArmorItem extends ArmorItem implements AbilityHolding, UpgradableItem, EquipCallbackItem {
     private final Text titleText;
 
     public AdvancedArmorItem(Text titleText, RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
@@ -105,6 +113,8 @@ public class AdvancedArmorItem extends ArmorItem implements AbilityHolding, Upgr
 
     @Override
     public boolean canUpgrade(ItemStack stack, Upgrade upgrade) {
+        if (upgrade == null) return false;
+
         boolean hasUpgrade = hasUpgrade(stack, upgrade);
         boolean canBePutInSlot = upgrade.getCompatibleTypes().contains(this.getType());
         return !hasUpgrade && canBePutInSlot;
@@ -161,5 +171,36 @@ public class AdvancedArmorItem extends ArmorItem implements AbilityHolding, Upgr
             }
         }
         return super.onClicked(stack, otherStack, slot, clickType, player, cursorStackReference);
+    }
+
+    @Override
+    public void onEquipped(LivingEntity entity, ItemStack stack, EquipmentSlot slot) {
+        AttributeContainer attributeContainer = entity.getAttributes();
+        List<SimplePassiveAttributeModifierAbility> attributeModifierAbilities = this.getArmorAbilities(stack).stream().filter(ability -> ability instanceof SimplePassiveAttributeModifierAbility).map(SimplePassiveAttributeModifierAbility.class::cast).toList();
+
+        for (SimplePassiveAttributeModifierAbility ability : attributeModifierAbilities) {
+            for(Map.Entry<RegistryEntry<EntityAttribute>, AttributeModifierAbility.AbilityAttributeModifierCreator> entry : ability.getAttributeModifiers().modifiers.entrySet()) {
+                EntityAttributeInstance entityAttributeInstance = attributeContainer.getCustomInstance(entry.getKey());
+                if (entityAttributeInstance != null) {
+                    entityAttributeInstance.removeModifier((entry.getValue()).id());
+                    entityAttributeInstance.addPersistentModifier((entry.getValue()).createAttributeModifier());
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onUnequipped(LivingEntity entity, ItemStack stack, EquipmentSlot slot) {
+        AttributeContainer attributeContainer = entity.getAttributes();
+        List<SimplePassiveAttributeModifierAbility> attributeModifierAbilities = this.getArmorAbilities(stack).stream().filter(ability -> ability instanceof SimplePassiveAttributeModifierAbility).map(SimplePassiveAttributeModifierAbility.class::cast).toList();
+
+        for (SimplePassiveAttributeModifierAbility ability : attributeModifierAbilities) {
+            for(Map.Entry<RegistryEntry<EntityAttribute>, AttributeModifierAbility.AbilityAttributeModifierCreator> entry : ability.getAttributeModifiers().modifiers.entrySet()) {
+                EntityAttributeInstance entityAttributeInstance = attributeContainer.getCustomInstance(entry.getKey());
+                if (entityAttributeInstance != null) {
+                    entityAttributeInstance.removeModifier((entry.getValue()).id());
+                }
+            }
+        }
     }
 }
