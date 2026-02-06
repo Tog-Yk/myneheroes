@@ -27,7 +27,7 @@ public class UpgradeItem extends Item implements UpgradeHolding {
         this.tooltip = tooltip;
     }
 
-    public Upgrade getUpgrade(ItemStack stack) {
+    public Upgrade getUpgrade(ItemStack stack, ItemStack upgradeableStack) {
         NbtCompound nbt = stack.getOrDefault(ModDataComponentTypes.UPGRADES, new NbtCompound());
 
         Upgrade upgrade = this.upgrade.copy();

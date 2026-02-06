@@ -1,23 +1,32 @@
 package net.togyk.myneheroes.Item;
 
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.AttributeContainer;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.item.Equipment;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.AbilityHolding;
+import net.togyk.myneheroes.Item.custom.EquipCallbackItem;
 import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.ability.AttributeModifierAbility;
 import net.togyk.myneheroes.ability.HudAbility;
+import net.togyk.myneheroes.ability.SimplePassiveAttributeModifierAbility;
 import net.togyk.myneheroes.component.ModDataComponentTypes;
 import net.togyk.myneheroes.util.AbilityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class TutorialItem extends Item implements Equipment, AbilityHolding {
+public class TutorialItem extends Item implements Equipment, AbilityHolding, EquipCallbackItem {
     public HudAbility defaultHudAbility;
 
     public TutorialItem(Settings settings, HudAbility hudAbility) {
@@ -97,6 +106,37 @@ public class TutorialItem extends Item implements Equipment, AbilityHolding {
             nbt.put("abilities", abilitiesNbt);
 
             stack.set(ModDataComponentTypes.ABILITIES, nbt);
+        }
+    }
+
+    @Override
+    public void onEquipped(LivingEntity entity, ItemStack stack, EquipmentSlot slot) {
+        AttributeContainer attributeContainer = entity.getAttributes();
+        List<SimplePassiveAttributeModifierAbility> attributeModifierAbilities = this.getArmorAbilities(stack).stream().filter(ability -> ability instanceof SimplePassiveAttributeModifierAbility).map(SimplePassiveAttributeModifierAbility.class::cast).toList();
+
+        for (SimplePassiveAttributeModifierAbility ability : attributeModifierAbilities) {
+            for(Map.Entry<RegistryEntry<EntityAttribute>, AttributeModifierAbility.AbilityAttributeModifierCreator> entry : ability.getAttributeModifiers().modifiers.entrySet()) {
+                EntityAttributeInstance entityAttributeInstance = attributeContainer.getCustomInstance(entry.getKey());
+                if (entityAttributeInstance != null) {
+                    entityAttributeInstance.removeModifier((entry.getValue()).id());
+                    entityAttributeInstance.addPersistentModifier((entry.getValue()).createAttributeModifier());
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onUnequipped(LivingEntity entity, ItemStack stack, EquipmentSlot slot) {
+        AttributeContainer attributeContainer = entity.getAttributes();
+        List<SimplePassiveAttributeModifierAbility> attributeModifierAbilities = this.getArmorAbilities(stack).stream().filter(ability -> ability instanceof SimplePassiveAttributeModifierAbility).map(SimplePassiveAttributeModifierAbility.class::cast).toList();
+
+        for (SimplePassiveAttributeModifierAbility ability : attributeModifierAbilities) {
+            for(Map.Entry<RegistryEntry<EntityAttribute>, AttributeModifierAbility.AbilityAttributeModifierCreator> entry : ability.getAttributeModifiers().modifiers.entrySet()) {
+                EntityAttributeInstance entityAttributeInstance = attributeContainer.getCustomInstance(entry.getKey());
+                if (entityAttributeInstance != null) {
+                    entityAttributeInstance.removeModifier((entry.getValue()).id());
+                }
+            }
         }
     }
 }

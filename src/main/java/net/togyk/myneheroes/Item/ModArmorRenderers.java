@@ -41,7 +41,7 @@ public class ModArmorRenderers {private static void registerUpgrade(Item item) {
         ArmorRenderer.register(
             (matrixStack, vertexConsumerProvider, stack, livingEntity, equipmentSlot, light, contextModel) -> {
                 if (stack.getItem() instanceof UpgradeItem upgradeItem) {
-                    Upgrade upgrade = upgradeItem.getUpgrade(stack);
+                    Upgrade upgrade = upgradeItem.getUpgrade(stack, null);
                     UpgradeModel upgradeModel = UpgradeModelRegistry.get(upgrade, MinecraftClient.getInstance().getEntityModelLoader());
                     if (upgradeModel != null && contextModel != null) {
                         contextModel.copyBipedStateTo(upgradeModel);

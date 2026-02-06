@@ -96,6 +96,32 @@ public class Upgrades {
             Identifier.of(MyneHeroes.MOD_ID,"anti_radiation")
     ));
 
+    public static final AbilityUpgrade STRENGTH_BOOST = registerUpgrade(new AbilityUpgrade(
+            Abilities.STRENGTH_BOOST,
+            List.of(
+                    ArmorItem.Type.HELMET,
+                    ArmorItem.Type.CHESTPLATE,
+                    ArmorItem.Type.LEGGINGS,
+                    ArmorItem.Type.BOOTS),
+            Identifier.of(MyneHeroes.MOD_ID,"strength_boost")));
+
+    public static final AbilityUpgrade JUMP_BOOST = registerUpgrade(new AbilityUpgrade(
+            Abilities.JUMP_BOOST,
+            List.of(
+                    ArmorItem.Type.HELMET,
+                    ArmorItem.Type.CHESTPLATE,
+                    ArmorItem.Type.LEGGINGS,
+                    ArmorItem.Type.BOOTS),
+            Identifier.of(MyneHeroes.MOD_ID,"jump_boost")));
+
+    public static final AbilityUpgrade SPEED_BOOST = registerUpgrade(new AbilityUpgrade(
+            Abilities.SPEED_BOOST,
+            List.of(
+                    ArmorItem.Type.HELMET,
+                    ArmorItem.Type.CHESTPLATE,
+                    ArmorItem.Type.LEGGINGS,
+                    ArmorItem.Type.BOOTS),
+            Identifier.of(MyneHeroes.MOD_ID,"speed_boost")));
 
     public static final ColorUpgrade COLOR = registerUpgrade(new ColorUpgrade(
             List.of(),

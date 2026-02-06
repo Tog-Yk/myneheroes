@@ -1,12 +1,15 @@
 package net.togyk.myneheroes.mixin;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
+import net.togyk.myneheroes.Item.custom.EquipCallbackItem;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.PassiveAbility;
 import net.togyk.myneheroes.power.Power;
@@ -173,5 +176,21 @@ public class LivingAppliedAttributeMixin {
 
         // Fade walk animation out while hovering
         return original * (1.0F - hover);
+    }
+
+    //EquipCallbackItem items
+    @Inject(method = "onEquipStack", at = @At("HEAD"))
+    private void addAttributes(EquipmentSlot slot, ItemStack oldStack, ItemStack newStack, CallbackInfo ci) {
+        if (ItemStack.areEqual(oldStack, newStack) || !slot.isArmorSlot()) {
+            return;
+        }
+
+        if (oldStack.getItem() instanceof EquipCallbackItem item) {
+            item.onUnequipped((LivingEntity) (Object) this, oldStack, slot);
+        }
+
+        if (newStack.getItem() instanceof EquipCallbackItem item) {
+            item.onEquipped((LivingEntity) (Object) this, newStack, slot);
+        }
     }
 }
