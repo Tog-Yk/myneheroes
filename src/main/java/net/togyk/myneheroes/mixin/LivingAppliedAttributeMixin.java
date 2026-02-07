@@ -1,6 +1,8 @@
 package net.togyk.myneheroes.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -192,5 +194,19 @@ public class LivingAppliedAttributeMixin {
         if (newStack.getItem() instanceof EquipCallbackItem item) {
             item.onEquipped((LivingEntity) (Object) this, newStack, slot);
         }
+    }
+
+    @ModifyReturnValue(
+            method = "isInSwimmingPose",
+            at = @At("RETURN")
+    )
+    private boolean myneheroes$dontSwimWhenFlying(boolean original) {
+        LivingEntity entity = (LivingEntity)(Object)this;
+        if (!(entity instanceof PlayerEntity player)) return original;
+
+        boolean isHoverFlying = ((PlayerHoverFlightControl) player).myneheroes$isHoverFlying();
+
+        // Fade walk animation out while hovering
+        return original && !(isHoverFlying && player.isSprinting() && entity.isInPose(EntityPose.FALL_FLYING));
     }
 }

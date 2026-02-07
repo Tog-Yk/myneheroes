@@ -241,6 +241,7 @@ public class ModMessages {
         ServerPlayNetworking.registerGlobalReceiver(SetHoverFlyingPayload.ID, (payload, context) -> {
             context.server().execute(() -> {
                 ((PlayerHoverFlightControl) context.player()).myneheroes$setHoverFlying(payload.flying());
+                context.player().stopFallFlying();
             });
         });
     }
