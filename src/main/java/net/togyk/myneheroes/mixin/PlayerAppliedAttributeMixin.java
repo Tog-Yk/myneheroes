@@ -8,10 +8,12 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Abilities;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.BooleanAbility;
@@ -26,6 +28,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -37,6 +40,8 @@ public abstract class PlayerAppliedAttributeMixin implements PlayerHoverFlightCo
     private int myneheroes$wallClimbSoundCooldown = 0;
     @Unique
     private boolean myneheroes$isHoverFlying = false;
+    @Unique
+    private int myneheroes$flightTime = 0;
     @Unique
     private int myneheroes$hoverTimeRight = 0;
     @Unique
@@ -204,6 +209,14 @@ public abstract class PlayerAppliedAttributeMixin implements PlayerHoverFlightCo
             } else if (myneheroes$hoverTimeBack > 0) {
                 myneheroes$hoverTimeBack--;
             }
+
+            if (player.isSprinting()) {
+                if (myneheroes$flightTime < 15) {
+                    myneheroes$flightTime++;
+                }
+            } else if (myneheroes$flightTime > 0) {
+                myneheroes$flightTime--;
+            }
         } else {
             if (myneheroes$hoverTimeRight > 0) {
                 myneheroes$hoverTimeRight--;
@@ -214,8 +227,48 @@ public abstract class PlayerAppliedAttributeMixin implements PlayerHoverFlightCo
             if (myneheroes$hoverTimeBack > 0) {
                 myneheroes$hoverTimeBack--;
             }
+            if (myneheroes$flightTime > 0) {
+                myneheroes$flightTime = 0;
+            }
             isMyneheroes$isHoveringRight = false;
         }
+    }
+
+    @Inject(at = @At("HEAD"), method = "readCustomDataFromNbt")
+    private void readFromNbt(NbtCompound nbt, CallbackInfo info) {
+        if (nbt.contains(MyneHeroes.MOD_ID)) {
+            NbtCompound modNbt = nbt.getCompound(MyneHeroes.MOD_ID);
+            if (modNbt.contains("flight_time")) {
+                this.myneheroes$flightTime = modNbt.getInt("scrolled_ability_offset");
+            }
+            if (modNbt.contains("hover_time_right")) {
+                this.myneheroes$hoverTimeRight = modNbt.getInt("hover_time_right");
+            }
+            if (modNbt.contains("hover_time_left")) {
+                this.myneheroes$hoverTimeLeft = modNbt.getInt("hover_time_left");
+            }
+            if (modNbt.contains("hover_time_back")) {
+                this.myneheroes$hoverTimeBack = modNbt.getInt("hover_time_back");
+            }
+            if (modNbt.contains("is_hover_flying")) {
+                this.myneheroes$isHoverFlying = modNbt.getBoolean("is_hover_flying");
+            }
+        }
+    }
+    @Inject(at = @At("HEAD"), method = "writeCustomDataToNbt")
+    private void writeToNbt(NbtCompound nbt, CallbackInfo info) {
+        NbtCompound modNbt = new NbtCompound();
+        if (nbt.contains(MyneHeroes.MOD_ID)) {
+            modNbt = nbt.getCompound(MyneHeroes.MOD_ID);
+        }
+
+        modNbt.putInt("flight_time",this.myneheroes$flightTime);
+        modNbt.putInt("hover_time_right",this.myneheroes$hoverTimeRight);
+        modNbt.putInt("hover_time_left",this.myneheroes$hoverTimeLeft);
+        modNbt.putInt("hover_time_back",this.myneheroes$hoverTimeBack);
+        modNbt.putBoolean("is_hover_flying",this.myneheroes$isHoverFlying);
+
+        nbt.put(MyneHeroes.MOD_ID,modNbt);
     }
 
     @Unique
@@ -311,6 +364,11 @@ public abstract class PlayerAppliedAttributeMixin implements PlayerHoverFlightCo
     }
 
     @Unique
+    public float myneheroes$getFlightProgress() {
+        return this.myneheroes$flightTime / 15F;
+    }
+
+    @Unique
     public boolean myneheroes$canHoverFly() {
         PlayerEntity player = (PlayerEntity) (Object) this;
         for (Power power: PowerData.getPowers(player)) {
@@ -334,8 +392,43 @@ public abstract class PlayerAppliedAttributeMixin implements PlayerHoverFlightCo
         return original;
     }
 
-    //updatePose
-    //updateSwimming
-    //getVelocityMultiplier
-    //shouldSwimInFluids
+    @Redirect(
+            method = "updatePose",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/entity/player/PlayerEntity;isFallFlying()Z"
+            )
+    )
+    private boolean myneheroes$includeHoverFlying(PlayerEntity player) {
+        return player.isFallFlying() || (myneheroes$isHoverFlying() && player.isSprinting());
+    }
+
+    @Redirect(
+            method = "updatePose",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/entity/player/PlayerEntity;isSneaking()Z"
+            )
+    )
+    private boolean myneheroes$excludeHoverFlying(PlayerEntity player) {
+        return player.isSneaking() && !myneheroes$isHoverFlying();
+    }
+
+    @ModifyReturnValue(method = "shouldSwimInFluids", at = @At("RETURN"))
+    public boolean dontSwimWhileFlying(boolean original) {
+        return original && !myneheroes$isHoverFlying();
+    }
+
+    @Inject(method = "updateSwimming", at = @At("HEAD"))
+    private void stopSwimmingWhenFlying(CallbackInfo ci) {
+        if (myneheroes$isHoverFlying()) {
+            PlayerEntity player = (PlayerEntity) (Object) this;
+            player.setSwimming(false);
+        }
+    }
+
+    @ModifyReturnValue(method = "getVelocityMultiplier", at = @At("RETURN"))
+    public float modifyVelocityMultiplier(float original) {
+        return myneheroes$isHoverFlying() ? 1.0F : original;
+    }
 }

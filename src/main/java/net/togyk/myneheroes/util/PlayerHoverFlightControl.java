@@ -8,4 +8,5 @@ public interface PlayerHoverFlightControl {
     float myneheroes$getHoverProgressRight();
     float myneheroes$getHoverProgressLeft();
     float myneheroes$getHoverProgressBack();
+    float myneheroes$getFlightProgress();
 }

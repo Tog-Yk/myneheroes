@@ -13,8 +13,11 @@ import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
+import net.minecraft.util.math.RotationAxis;
+import net.minecraft.util.math.Vec3d;
 import net.togyk.myneheroes.client.render.entity.feature.TintableSkinFeature;
 import net.togyk.myneheroes.power.Power;
+import net.togyk.myneheroes.util.PlayerHoverFlightControl;
 import net.togyk.myneheroes.util.PowerData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -57,6 +60,30 @@ public abstract class PlayerRendererMixin {
             if (!manager.getResource(tintable_emmisive_texture).isEmpty()) {
                 arm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(tintable_emmisive_texture)), 15728880, OverlayTexture.DEFAULT_UV, ColorHelper.Argb.withAlpha(opacity, power.getEmmisiveTintableSkinColor()));
                 sleeve.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(tintable_emmisive_texture)), 15728880, OverlayTexture.DEFAULT_UV, ColorHelper.Argb.withAlpha(opacity, power.getEmmisiveTintableSkinColor()));
+            }
+        }
+    }
+
+    @Inject(
+            method = "setupTransforms(Lnet/minecraft/client/network/AbstractClientPlayerEntity;" +
+                    "Lnet/minecraft/client/util/math/MatrixStack;FFFF)V",
+            at = @At("TAIL")
+    )
+    private void myneheroes$includeHoverFlying(AbstractClientPlayerEntity player, MatrixStack matrixStack, float f, float g, float h, float i, CallbackInfo ci) {
+        float flightProgress = ((PlayerHoverFlightControl) player).myneheroes$getFlightProgress();
+        if (flightProgress != 0) {
+            float pitch = player.getPitch(h);
+
+            matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(((PlayerHoverFlightControl) player).myneheroes$getFlightProgress() * (-90.0F - pitch)));
+
+            Vec3d vec3d = player.getRotationVec(h);
+            Vec3d vec3d2 = player.lerpVelocity(h);
+            double d = vec3d2.horizontalLengthSquared();
+            double e = vec3d.horizontalLengthSquared();
+            if (d > 0.0 && e > 0.0) {
+                double n = (vec3d2.x * vec3d.x + vec3d2.z * vec3d.z) / Math.sqrt(d * e);
+                double o = vec3d2.x * vec3d.z - vec3d2.z * vec3d.x;
+                matrixStack.multiply(RotationAxis.POSITIVE_Y.rotation((float) (Math.signum(o) * Math.acos(n))));
             }
         }
     }
