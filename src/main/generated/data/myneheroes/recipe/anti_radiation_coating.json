@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "myneheroes:titanium_ingot"
+    },
+    {
+      "item": "myneheroes:titanium_ingot"
+    },
+    {
+      "item": "myneheroes:gold_titanium_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "myneheroes:anti_radiation_coating"
+  }
+}

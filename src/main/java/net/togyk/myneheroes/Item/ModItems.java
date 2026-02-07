@@ -134,6 +134,29 @@ public class ModItems {
             )
     );
 
+    public static final Item ANTI_RADIATION_COATING = registerItem("anti_radiation_coating",
+            new UpgradeItem(Upgrades.ANTI_RADIATION, new Item.Settings())
+    );
+
+    public static final Item EXO_SKELETON = registerItem("exo_skeleton",
+            new DynamicUpgradeItem(type -> {
+                switch (type) {
+                    case BODY, CHESTPLATE -> {
+                        return Upgrades.STRENGTH_BOOST;
+                    }
+                    case LEGGINGS -> {
+                        return Upgrades.JUMP_BOOST;
+                    }
+                    case BOOTS -> {
+                        return Upgrades.SPEED_BOOST;
+                    }
+                    case null, default -> {
+                        return null;
+                    }
+                }
+            }, new Item.Settings().maxCount(1))
+    );
+
     //armors
     //vibranium armors
     public static final Item VIBRANIUM_HELMET = registerItem("vibranium_helmet",

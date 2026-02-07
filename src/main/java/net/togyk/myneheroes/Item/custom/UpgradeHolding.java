@@ -14,7 +14,12 @@ public interface UpgradeHolding {
         stack.set(ModDataComponentTypes.UPGRADES, nbt);
     }
 
-    default Upgrade getUpgrade(ItemStack stack) {
+    /**
+     * @param stack the current stack of the UpgradeItem
+     * @param upgradeableStack the stack the Upgrade is (going to be) on. null if this doesn't exist
+     * @return The upgrade of the UpgradeHolding
+     */
+    default Upgrade getUpgrade(ItemStack stack, ItemStack upgradeableStack) {
         NbtCompound nbt = stack.getOrDefault(ModDataComponentTypes.UPGRADES, new NbtCompound());
 
         Upgrade upgrade = null;

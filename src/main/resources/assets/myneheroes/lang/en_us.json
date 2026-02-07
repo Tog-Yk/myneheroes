@@ -63,12 +63,16 @@
 
   "item.myneheroes.adamantium_injection": "Adamantium injection",
 
+  "item.myneheroes.anti_radiation_coating": "Anti-Radiation Coating",
+
   "item.myneheroes.mechanical_hud_upgrade": "Hud Upgrade",
   "item.myneheroes.speedster_hud_upgrade": "Hud Upgrade",
   "item.myneheroes.laser_upgrade": "Laser Upgrade",
   "item.myneheroes.fly_upgrade": "Fly Upgrade",
   "item.myneheroes.take_off_suit_upgrade": "Take Off Suit Upgrade",
   "item.myneheroes.kinetic_energy_storage_upgrade": "Kinetic Energy Storage Upgrade",
+
+  "item.myneheroes.exo_skeleton": "Exo Skeleton",
 
   "item.myneheroes.toolbelt": "Toolbelt",
   "item.myneheroes.iron_toolbelt": "Iron Toolbelt",
