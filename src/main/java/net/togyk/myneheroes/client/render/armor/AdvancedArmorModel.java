@@ -62,14 +62,14 @@ public class AdvancedArmorModel extends BipedEntityModel<LivingEntity> {
         modelPartData.addChild(
                 EntityModelPartNames.HEAD,
                 ModelPartBuilder.create()
-                        .uv(0, 0).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, dilation),
+                        .uv(0, 0).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, dilation.add(0.1F)),
                 ModelTransform.pivot(0.0F, 0.0F + pivotOffsetY, 0.0F)
         );
 
         modelPartData.addChild(
                 EntityModelPartNames.HAT,
                 ModelPartBuilder.create()
-                        .uv(32, 0).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, dilation.add(0.5F)),
+                        .uv(32, 0).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, dilation.add(0.5F).add(0.1F)),
                 ModelTransform.pivot(0.0F, 0.0F + pivotOffsetY, 0.0F)
         );
 

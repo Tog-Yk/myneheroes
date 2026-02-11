@@ -3,7 +3,6 @@ package net.togyk.myneheroes.client.render.armor;// Made with Blockbench 5.0.4
 // Paste this class into your mod and generate all required imports
 
 
-import com.google.common.collect.ImmutableList;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
@@ -55,33 +54,28 @@ public class AdvancedHelmetWithFaceplateModel extends AdvancedArmorModel {
     }
 
 
-    @Override
-    protected Iterable<ModelPart> getBodyParts() {
-        return ImmutableList.of(this.body, this.rightArm, this.leftArm, this.rightLeg, this.leftLeg, this.rightBoot, this.leftBoot, this.hat);
-    }
-
     public static ModelData getModelData(Dilation dilation, float pivotOffsetY) {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
         ModelPartData head = modelPartData.addChild(
                 EntityModelPartNames.HEAD,
                 ModelPartBuilder.create()
-                        .uv(0, 0).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, dilation),
+                        .uv(0, 0).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, dilation.add(0.1F)),
                 ModelTransform.pivot(0.0F, 0.0F + pivotOffsetY, 0.0F)
         );
 
         modelPartData.addChild(
                 EntityModelPartNames.HAT,
                 ModelPartBuilder.create()
-                        .uv(32, 0).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, dilation.add(0.5F)),
+                        .uv(32, 0).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, dilation.add(0.5F).add(0.1F)),
                 ModelTransform.pivot(0.0F, 0.0F + pivotOffsetY, 0.0F)
         );
 
         head.addChild(
                 "faceplate",
                 ModelPartBuilder.create()
-                        .uv(64, 0).cuboid(-4.0F, -2.0F, 0.0F, 8.0F, 8.0F, 8.0F, dilation)
-                        .uv(96, 0).cuboid(-4.0F, -2.0F, 0.0F, 8.0F, 8.0F, 8.0F, dilation.add(0.5F)),
+                        .uv(64, 0).cuboid(-4.0F, -2.0F, 0.0F, 8.0F, 8.0F, 8.0F, dilation.add(0.1F))
+                        .uv(96, 0).cuboid(-4.0F, -2.0F, 0.0F, 8.0F, 8.0F, 8.0F, dilation.add(0.5F).add(0.1F)),
                 ModelTransform.pivot(0.0F, -6F, -4.0F)
         );
 
