@@ -8,20 +8,19 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.render.RenderTickCounter;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.RotationAxis;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.client.AbilityOverlayHelper;
 import net.togyk.myneheroes.client.StockpileOverlayHelper;
 import net.togyk.myneheroes.keybind.ModKeyBinds;
-import net.togyk.myneheroes.util.AbilityUtil;
-import net.togyk.myneheroes.util.HudActionResult;
-import net.togyk.myneheroes.util.PlayerAbilities;
-import net.togyk.myneheroes.util.StockPile;
+import net.togyk.myneheroes.util.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -38,6 +37,8 @@ public class MechanicalHudRenderer {
     //gauge
     private static final Identifier CENTER_LINE_GAUGE = Identifier.of(MyneHeroes.MOD_ID,
             "hud/mechanical/center_line_gauge");
+    private static final Identifier LEVEL_GAUGE_RING = Identifier.of(MyneHeroes.MOD_ID,
+            "hud/mechanical/level_gauge_ring");
     private static final Identifier LEVEL_GAUGE = Identifier.of(MyneHeroes.MOD_ID,
             "hud/mechanical/level_gauge");
 
@@ -101,7 +102,22 @@ public class MechanicalHudRenderer {
 
             //gauge
             drawContext.drawGuiTexture(CENTER_LINE_GAUGE, 30, 30, 0, 0, width/2 - 15, height / 24, 30, 30);
-            drawContext.drawGuiTexture(LEVEL_GAUGE, 30, 30, 0, 0, width/2 - 15, height -70, 30, 30);
+
+            drawContext.drawGuiTexture(LEVEL_GAUGE_RING, 30, 30, 0, 0, width/2 - 15, height -70, 30, 30);
+
+            MatrixStack matrixStack = drawContext.getMatrices();
+            matrixStack.push();
+            matrixStack.translate((float) width /2, height -61, 0);
+
+
+            matrixStack.multiply(RotationAxis.NEGATIVE_Z.rotation((float) -(Math.toRadians(((PlayerHoverFlightControl) client.player).myneheroes$getRoll()))));
+
+            matrixStack.push();
+            matrixStack.translate(-15, -9, 0);
+
+            drawContext.drawGuiTexture(LEVEL_GAUGE, 30, 30, 0, 0, 0, 0, 30, 30);
+            matrixStack.pop();
+            matrixStack.pop();
 
             //reactor info
             int reactionInfoX = width / 32;
