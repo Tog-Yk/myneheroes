@@ -13,6 +13,7 @@
     "BlockMixins$HorizontalConnectingBlockMixin",
     "BlockMixins$LecternBlockMixin",
     "BlockMixins$WallBlockMixin",
+    "EntityAppliedAttributeMixin",
     "EntityShapeContextAccessor",
     "EquipmentMixin",
     "ItemFrameEntityMixin",
@@ -28,6 +29,7 @@
   "client": [
     "AbstractClientPlayerMixin",
     "ArmorFeatureRendererMixin",
+    "CameraMixin",
     "ClientPlayerToggleHoverFlyingMixin",
     "EntityRendererFeatureAccessor",
     "InGameOverlayRendererMixin",
