@@ -49,7 +49,9 @@ public abstract class PlayerAppliedAttributeMixin implements PlayerHoverFlightCo
     @Unique
     private int myneheroes$hoverTimeBack = 0;
     @Unique
-    private boolean isMyneheroes$isHoveringRight = true;
+    private boolean myneheroes$isHoveringRight = true;
+    @Unique
+    private float myneheroes$roll = 0;
 
     @ModifyVariable(
             method = "attack",
@@ -185,14 +187,14 @@ public abstract class PlayerAppliedAttributeMixin implements PlayerHoverFlightCo
 
         Vec3d relativeVelocity = this.getVelocityRelativeToYaw();
         if (myneheroes$isHoverFlying()) {
-            if (relativeVelocity.x < 0 || (relativeVelocity.x == 0 && isMyneheroes$isHoveringRight)) {
+            if (relativeVelocity.x < 0 || (relativeVelocity.x == 0 && myneheroes$isHoveringRight)) {
                 if (myneheroes$hoverTimeRight < 15) {
                     myneheroes$hoverTimeRight++;
                 }
                 if (myneheroes$hoverTimeLeft > 0) {
                     myneheroes$hoverTimeLeft--;
                 }
-                isMyneheroes$isHoveringRight = true;
+                myneheroes$isHoveringRight = true;
             } else {
                 if (myneheroes$hoverTimeLeft < 15) {
                     myneheroes$hoverTimeLeft++;
@@ -200,7 +202,7 @@ public abstract class PlayerAppliedAttributeMixin implements PlayerHoverFlightCo
                 if (myneheroes$hoverTimeRight > 0) {
                     myneheroes$hoverTimeRight--;
                 }
-                isMyneheroes$isHoveringRight = false;
+                myneheroes$isHoveringRight = false;
             }
             if (relativeVelocity.z < 0) {
                 if (myneheroes$hoverTimeBack < 15) {
@@ -216,6 +218,7 @@ public abstract class PlayerAppliedAttributeMixin implements PlayerHoverFlightCo
                 }
             } else if (myneheroes$flightTime > 0) {
                 myneheroes$flightTime--;
+                myneheroes$setRoll(0);
             }
         } else {
             if (myneheroes$hoverTimeRight > 0) {
@@ -229,8 +232,9 @@ public abstract class PlayerAppliedAttributeMixin implements PlayerHoverFlightCo
             }
             if (myneheroes$flightTime > 0) {
                 myneheroes$flightTime = 0;
+                myneheroes$setRoll(0);
             }
-            isMyneheroes$isHoveringRight = false;
+            myneheroes$isHoveringRight = false;
         }
     }
 
@@ -253,6 +257,9 @@ public abstract class PlayerAppliedAttributeMixin implements PlayerHoverFlightCo
             if (modNbt.contains("is_hover_flying")) {
                 this.myneheroes$isHoverFlying = modNbt.getBoolean("is_hover_flying");
             }
+            if (modNbt.contains("roll")) {
+                this.myneheroes$roll = modNbt.getFloat("roll");
+            }
         }
     }
     @Inject(at = @At("HEAD"), method = "writeCustomDataToNbt")
@@ -267,6 +274,7 @@ public abstract class PlayerAppliedAttributeMixin implements PlayerHoverFlightCo
         modNbt.putInt("hover_time_left",this.myneheroes$hoverTimeLeft);
         modNbt.putInt("hover_time_back",this.myneheroes$hoverTimeBack);
         modNbt.putBoolean("is_hover_flying",this.myneheroes$isHoverFlying);
+        modNbt.putFloat("roll",this.myneheroes$roll);
 
         nbt.put(MyneHeroes.MOD_ID,modNbt);
     }
@@ -314,10 +322,16 @@ public abstract class PlayerAppliedAttributeMixin implements PlayerHoverFlightCo
                 return;
             }
             if (player.isSprinting()) {
-                //Add do a barrel roll like movement
+                //rotate based on roll
+                float roll = myneheroes$getRoll();
+                double rotationStrength = 2D;
+                float rotation = (float) (Math.sin(Math.toRadians(-roll)) * Math.abs(Math.sin(Math.toRadians(-roll))) * rotationStrength);
+                player.setYaw(player.getYaw() + rotation);
+
                 Vec3d look = player.getRotationVector();
                 double speed = 1D;
                 player.setVelocity(look.multiply(speed));
+
             } else {
                 // Zero gravity while hovering
                 player.setVelocity(player.getVelocity().multiply(1, 0, 1));
@@ -430,5 +444,13 @@ public abstract class PlayerAppliedAttributeMixin implements PlayerHoverFlightCo
     @ModifyReturnValue(method = "getVelocityMultiplier", at = @At("RETURN"))
     public float modifyVelocityMultiplier(float original) {
         return myneheroes$isHoverFlying() ? 1.0F : original;
+    }
+
+    public float myneheroes$getRoll() {
+        return this.myneheroes$roll;
+    }
+
+    public void myneheroes$setRoll(float roll) {
+        this.myneheroes$roll = roll;
     }
 }

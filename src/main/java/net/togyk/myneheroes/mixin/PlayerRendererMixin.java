@@ -86,5 +86,9 @@ public abstract class PlayerRendererMixin {
                 matrixStack.multiply(RotationAxis.POSITIVE_Y.rotation((float) (Math.signum(o) * Math.acos(n))));
             }
         }
+        float roll = ((PlayerHoverFlightControl) player).myneheroes$getRoll();
+        if (roll != 0) {
+            matrixStack.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees(roll));
+        }
     }
 }

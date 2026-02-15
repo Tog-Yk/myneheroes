@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
 }
 
-version = project.mod_version
+version = "${mod_minecraft_version}+${project.mod_version}"
 group = project.maven_group
 
 base {
@@ -41,7 +41,7 @@ dependencies {
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:16.0.777"
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:16.0.777"
 
-    modCompileOnly("io.wispforest:accessories-fabric:${project.accessories_version}")
+    modCompileOnly("io.wispforest:accessories-fabric:${project.accessories_version}+${project.minecraft_version}")
 
     modApi "dev.architectury:architectury-fabric:13.0.8"
     modApi "me.shedaniel.cloth:cloth-config-fabric:15.0.140"

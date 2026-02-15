@@ -9,4 +9,6 @@ public interface PlayerHoverFlightControl {
     float myneheroes$getHoverProgressLeft();
     float myneheroes$getHoverProgressBack();
     float myneheroes$getFlightProgress();
+    float myneheroes$getRoll();
+    void myneheroes$setRoll(float roll);
 }

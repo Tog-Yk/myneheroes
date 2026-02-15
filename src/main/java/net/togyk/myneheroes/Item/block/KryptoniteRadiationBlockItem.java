@@ -2,42 +2,73 @@ package net.togyk.myneheroes.Item.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.player.PlayerEntity;
-import net.togyk.myneheroes.Item.custom.WorldTickableItem;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.world.World;
 import net.togyk.myneheroes.effect.ModEffects;
+import net.togyk.myneheroes.gamerule.ModGamerules;
+import net.togyk.myneheroes.persistent_data.ModPersistentData;
+import net.togyk.myneheroes.persistent_data.TimeNearKryptoniteData;
 import net.togyk.myneheroes.power.Power;
+import net.togyk.myneheroes.power.Powers;
 import net.togyk.myneheroes.util.PowerData;
 
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
-public class KryptoniteRadiationBlockItem extends RadiationBlockItem implements WorldTickableItem {
+public class KryptoniteRadiationBlockItem extends RadiationBlockItem {
+    public KryptoniteRadiationBlockItem(int range, boolean usesDFS, RegistryEntry<StatusEffect> effect, Block block, Settings settings) {
+        super(range, usesDFS, effect, block, settings);
+    }
+
     public KryptoniteRadiationBlockItem(Block block, Settings settings) {
         super(block, settings);
     }
 
     @Override
-    protected void applyRadiation(LivingEntity target) {
-        if (target instanceof PlayerEntity player) {
-            List<Power> currentPowers = PowerData.getPowers(player);
-            if (this.hasKryptoniteDampenedPower(currentPowers)) {
-                if (target.hasStatusEffect(ModEffects.KRYPTONITE_POISON)) {
-                    StatusEffectInstance effect = target.getStatusEffect(ModEffects.KRYPTONITE_POISON);
-                    if (effect != null) {
-                        int duration = effect.getDuration();
-                        if ((duration + 1) % 24 == 0) {
-                            target.addStatusEffect(new StatusEffectInstance(
-                                    ModEffects.KRYPTONITE_POISON, 47, 0, true, true
-                            ));
-                        }
+    public void onEntityFound(LivingEntity entity) {
+        if (entity instanceof PlayerEntity player) {
+            if (player.getWorld().getGameRules().getBoolean(ModGamerules.GIVE_POWERS_ABOVE_LIMIT) || PowerData.getPowers(player).size() < player.getWorld().getGameRules().getInt(ModGamerules.POWER_LIMIT)) {
+                World world = player.getWorld();
+
+                TimeNearKryptoniteData timeData = ModPersistentData.getTimeNearKryptonite(world.getServer().getOverworld());
+                Map<UUID, Long> timeMap = timeData.getTimeMap();
+
+                UUID id = player.getUuid();
+
+                boolean isExposedToSun = world.isDay() && world.isSkyVisible(player.getBlockPos());
+                List<Power> currentPowers = PowerData.getPowers(player);
+                if (hasKryptoniteDampenedPower(currentPowers)) {
+                    timeMap.remove(player);
+                } else if (!isExposedToSun) {
+
+                    if (timeMap.getOrDefault(id, 0L) >= 20L * 60 * 480) {
+                        Power kryptonianPower = Powers.KRYPTONIAN.copy();
+                        PowerData.addUniquePowerToLimit(world.getPlayerByUuid(id), kryptonianPower);
+                        timeMap.remove(id);
+                    } else {
+                        timeMap.put(id, timeMap.getOrDefault(id, 0L) + 24);
                     }
-                } else {
-                    target.addStatusEffect(new StatusEffectInstance(
-                            ModEffects.KRYPTONITE_POISON, 47, 0, true, true
-                    ));
                 }
             }
         }
+    }
+
+    @Override
+    public boolean canGiveEffect(LivingEntity entity) {
+        return entity instanceof PlayerEntity player && hasKryptoniteDampenedPower(PowerData.getPowers(player));
+    }
+
+    @Override
+    public RegistryEntry<StatusEffect> getEffect() {
+        return ModEffects.KRYPTONITE_POISON;
+    }
+
+    @Override
+    public int getRange() {
+        return 7;
     }
 
     private boolean hasKryptoniteDampenedPower(List<Power> powers) {
