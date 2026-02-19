@@ -22,6 +22,8 @@ public class CameraMixin {
         if (client.player == null) return;
         float roll = ((PlayerHoverFlightControl) client.player).myneheroes$getRoll();
 
+        if (client.options.getPerspective().isFrontView()) {roll = -roll;}
+
         float rollRad = (float) Math.toRadians(roll);
 
         // Apply roll after vanilla yaw/pitch
