@@ -315,6 +315,11 @@
   "tag.item.myneheroes.cant_be_placed_in_item_frame": "Cant be placed in an item frame",
   "tag.item.myneheroes.cant_be_placed_in_inventories": "Cant be placed in another inventory",
   "tag.item.myneheroes.can_be_replaced_by_temporary_items": "Can be replaced by temporary",
+  "tag.item.myneheroes.shields": "Shields",
+  "tag.item.myneheroes.only_loyalty": "Only Loyalty",
+  "tag.item.myneheroes.katanas": "Katanas",
+  "tag.item.accessories.belt": "Belt",
+  "tag.item.accessories.necklace": "necklace",
 
   "armor_pattern.myneheroes.heading": "Pattern:",
   "armor_pattern.myneheroes.mark3_gold_titanium": " Mark-3",
