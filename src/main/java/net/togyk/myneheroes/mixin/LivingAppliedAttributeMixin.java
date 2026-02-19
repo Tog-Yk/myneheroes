@@ -36,7 +36,6 @@ public class LivingAppliedAttributeMixin {
     @Unique
     private int jumpResetTimer = 0;
 
-    @Unique
     @Inject(method = "isInsideWall", at = @At("HEAD"), cancellable = true)
     private void ignoreInsideWall(CallbackInfoReturnable<Boolean> cir) {
         Entity entity = (Entity)(Object)this;
