@@ -35,6 +35,7 @@ public class ModMessages {
     public static final Identifier BLOCKPOS_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "block_pos");
     public static final Identifier COLOR_ITEM_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "color_item");
     public static final Identifier KEYBIND_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "keybind");
+    public static final Identifier ABILITY_SCROLL_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "ability_scroll");
     public static final Identifier LIGHT_LEVELER_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "light_leveler");
     public static final Identifier MISSED_SWING_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "missed_swing");
     public static final Identifier MISSED_INTERACTION_PACKET_ID = Identifier.of(MyneHeroes.MOD_ID, "missed_interaction");
@@ -89,6 +90,34 @@ public class ModMessages {
                             break;
                         }
                     }
+                }
+            });
+        });
+        PayloadTypeRegistry.playC2S().register(AbilityScrollPayload.ID, AbilityScrollPayload.CODEC);
+
+        ServerPlayNetworking.registerGlobalReceiver(AbilityScrollPayload.ID, (payload, context) -> {
+            context.server().execute(() -> {
+                // logic for pressing a keybind
+                Ability ability = null;
+                if (payload.abilityIndex() == 0) {
+                    if (context.player() != null) {
+                        ability = ((PlayerAbilities) context.player()).myneheroes$getFirstAbility();
+                    }
+                } else if (payload.abilityIndex() == 1) {
+                    if (context.player() != null) {
+                        ability = ((PlayerAbilities) context.player()).myneheroes$getSecondAbility();
+                    }
+                } else if (payload.abilityIndex() == 2) {
+                    if (context.player() != null) {
+                        ability = ((PlayerAbilities) context.player()).myneheroes$getThirdAbility();
+                    }
+                } else if (payload.abilityIndex() == 3) {
+                    if (context.player() != null) {
+                        ability = ((PlayerAbilities) context.player()).myneheroes$getFourthAbility();
+                    }
+                }
+                if (ability instanceof ScrollableAbility scrollableAbility) {
+                    scrollableAbility.scroll(payload.mouseX(), payload.mouseY(), payload.vScroll(), payload.hScroll());
                 }
             });
         });

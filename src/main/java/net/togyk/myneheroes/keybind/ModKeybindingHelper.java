@@ -5,8 +5,10 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.togyk.myneheroes.ability.Ability;
+import net.togyk.myneheroes.ability.ScrollableAbility;
 import net.togyk.myneheroes.event.MouseScrollCallback;
 import net.togyk.myneheroes.networking.AbilityKeybindPayload;
+import net.togyk.myneheroes.networking.AbilityScrollPayload;
 import net.togyk.myneheroes.util.ClientScrollData;
 import net.togyk.myneheroes.util.PlayerAbilities;
 
@@ -186,6 +188,43 @@ public class ModKeybindingHelper {
                 }
             }
         });
+
+        MouseScrollCallback.EVENT.register((
+                (client, mouseX, mouseY, hScroll, vScroll) -> {
+                    PlayerEntity player = client.player;
+                    if (client.currentScreen == null && player != null && !AbilitiesBlockedForScrolling) {
+                        if (ModKeyBinds.useFirstAbility.isPressed()) {
+                            Ability ability = ((PlayerAbilities) player).myneheroes$getFirstAbility();
+                            if (ability instanceof ScrollableAbility scrollableAbility) {
+                                ClientPlayNetworking.send(new AbilityScrollPayload(0, mouseX, mouseY, vScroll, hScroll));
+                                if (scrollableAbility.scroll(mouseX, mouseY, vScroll, hScroll)) return true;
+                            }
+                        }
+                        if (ModKeyBinds.useSecondAbility.isPressed()) {
+                            Ability ability = ((PlayerAbilities) player).myneheroes$getSecondAbility();
+                            if (ability instanceof ScrollableAbility scrollableAbility) {
+                                ClientPlayNetworking.send(new AbilityScrollPayload(1, mouseX, mouseY, vScroll, hScroll));
+                                if (scrollableAbility.scroll(mouseX, mouseY, vScroll, hScroll)) return true;
+                            }
+                        }
+                        if (ModKeyBinds.useThirdAbility.isPressed()) {
+                            Ability ability = ((PlayerAbilities) player).myneheroes$getThirdAbility();
+                            if (ability instanceof ScrollableAbility scrollableAbility) {
+                                ClientPlayNetworking.send(new AbilityScrollPayload(2, mouseX, mouseY, vScroll, hScroll));
+                                if (scrollableAbility.scroll(mouseX, mouseY, vScroll, hScroll)) return true;
+                            }
+                        }
+                        if (ModKeyBinds.useFourthAbility.isPressed()) {
+                            Ability ability = ((PlayerAbilities) player).myneheroes$getFourthAbility();
+                            if (ability instanceof ScrollableAbility scrollableAbility) {
+                                ClientPlayNetworking.send(new AbilityScrollPayload(3, mouseX, mouseY, vScroll, hScroll));
+                                return scrollableAbility.scroll(mouseX, mouseY, vScroll, hScroll);
+                            }
+                        }
+                    }
+                    return false;
+                }
+        ));
 
         MouseScrollCallback.EVENT.register((
                 (client, mouseX, mouseY, hScroll, vScroll) -> {

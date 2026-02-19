@@ -206,6 +206,15 @@ public class Abilities {
             },
             2, new Ability.Settings()));
 
+    public static final ToggleOrConfigureVLAbility TOGGLE_OR_CONFIGURE_SPEED = registerAbility(new ToggleOrConfigureVLAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_or_configure_speed"), "speedActive", "speedLevel",
+            (power, hScroll) -> {
+                if (power.get("speedLevel") instanceof Integer level) {
+                    return (int) (level + hScroll);
+                }
+                return 0;
+            },
+            2, new Ability.Settings()));
+
     public static final VariableLinkedActivationTimedAbility TOGGLE_PHASING = registerAbility(new VariableLinkedActivationTimedAbility(Identifier.of(MyneHeroes.MOD_ID, "toggle_phasing"), "phasing", 600, 250, new Ability.Settings()));
 
     public static final ToolbeltAbility TOOLBELT_3 = registerAbility(new ToolbeltAbility(Identifier.of(MyneHeroes.MOD_ID, "toolbelt_3"), new Ability.Settings(), 3));
