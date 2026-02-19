@@ -14,6 +14,7 @@ public class MutuallyExclusiveUpgrades {
 
     static {
         add(List.of(Upgrades.TOOLBELT_3, Upgrades.TOOLBELT_4, Upgrades.TOOLBELT_6, Upgrades.TOOLBELT_8));
+        add(List.of(Upgrades.MECHANICAL_HUD, Upgrades.SPEEDSTER_HUD));
     }
 
     public static List<Identifier> get(Upgrade upgrade) {
