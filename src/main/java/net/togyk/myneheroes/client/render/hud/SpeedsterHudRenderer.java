@@ -8,6 +8,7 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.render.RenderTickCounter;
+import net.minecraft.client.util.Window;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -55,8 +56,12 @@ public class SpeedsterHudRenderer {
             "hud/speedster/border_top/right");
 
     //gauge
-    private static final Identifier CENTER_LINE_GAUGE = Identifier.of(MyneHeroes.MOD_ID,
+    private static final Identifier COMPAS_LINE_GAUGE = Identifier.of(MyneHeroes.MOD_ID,
             "hud/speedster/compas_line_gauge");
+    private static final Identifier COMPAS_GAUGE_BORDER_LEFT = Identifier.of(MyneHeroes.MOD_ID,
+            "hud/speedster/compas_gauge_border_left");
+    private static final Identifier COMPAS_GAUGE_BORDER_RIGHT = Identifier.of(MyneHeroes.MOD_ID,
+            "hud/speedster/compas_gauge_border_right");
     private static final Identifier COMPAS_GAUGE_ARROW = Identifier.of(MyneHeroes.MOD_ID,
             "hud/speedster/compas_gauge_arrow");
     private static final Identifier COMPAS_GAUGE = Identifier.of(MyneHeroes.MOD_ID,
@@ -140,6 +145,18 @@ public class SpeedsterHudRenderer {
             RenderSystem.enableBlend();
 
             //compas gauge
+            int fov = client.options.getFov().getValue();
+
+            easyEnableScissor(width / 2 - fov / 2, height - 50, fov, 20);
+            int yaw = (int) client.player.getYaw(0) % 360;
+            if (yaw < 0) yaw += 360;
+            drawContext.drawGuiTexture(COMPAS_LINE_GAUGE, 360 + 110, 20, yaw - fov/2 + 55, 0, width / 2 - fov/2, height - 50, 360 + 110, 20);
+            RenderSystem.disableScissor();
+
+            drawContext.drawGuiTexture(COMPAS_GAUGE_BORDER_LEFT, 12, 14, 0, 0, width / 2 - fov/2 - 12 - 2, height - 30 - 14, 12, 14);
+            drawContext.drawGuiTexture(COMPAS_GAUGE_BORDER_RIGHT, 12, 14, 0, 0, width / 2 + fov/2 + 2, height - 30 - 14, 12, 14);
+
+
             drawContext.drawGuiTexture(COMPAS_GAUGE, 9, 9, 0, 0, width / 5 - 4, height - 20 + 4, 9, 9);
 
             //rotating
@@ -293,7 +310,7 @@ public class SpeedsterHudRenderer {
             RenderSystem.disableBlend();
 
 
-            return HudActionResult.ABILITIES_HUD_DRAWN;
+            return HudActionResult.ABILITIES_AND_STOCKPILE_HUD_DRAWN;
         }
         return HudActionResult.NO_HUD_DRAWN;
     }
@@ -335,5 +352,12 @@ public class SpeedsterHudRenderer {
             }
         }
         return ids;
+    }
+
+    private static void easyEnableScissor(int x, int y, int width, int height) {
+        Window window = MinecraftClient.getInstance().getWindow();
+        double scale = window.getScaleFactor();
+
+        RenderSystem.enableScissor((int) (x * scale), (int) (window.getHeight() - (y + height) * scale), (int) (width * scale), (int) (height * scale));
     }
 }
