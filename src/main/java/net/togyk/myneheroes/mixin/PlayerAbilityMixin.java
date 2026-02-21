@@ -238,7 +238,7 @@ public abstract class PlayerAbilityMixin implements PlayerAbilities {
         List<Ability> abilityList = new ArrayList<>();
         List<Identifier> ids = new ArrayList<>();
         for (Ability ability : this.abilities) {
-            if (ability.Usable() && !(!ability.appearsMultipleTimes() && ids.contains(ability.getId()))) {
+            if (ability.isHidden() && !(!ability.appearsMultipleTimes() && ids.contains(ability.getId()))) {
                 abilityList.add(ability);
                 ids.add(ability.getId());
             }

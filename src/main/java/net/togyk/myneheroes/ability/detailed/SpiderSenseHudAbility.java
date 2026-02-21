@@ -39,7 +39,7 @@ public class SpiderSenseHudAbility extends HudAbility {
     }
 
     @Override
-    public boolean Usable() {
+    public boolean isHidden() {
         return false;
     }
 

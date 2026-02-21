@@ -18,7 +18,7 @@ public class ImmortalityAbility extends Ability implements PassiveAbility {
     }
 
     @Override
-    public boolean Usable() {
+    public boolean isHidden() {
         return false;
     }
 

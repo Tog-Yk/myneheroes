@@ -110,7 +110,7 @@ public class ReleaseKineticEnergyAbility extends Ability implements PassiveAbili
     }
 
     @Override
-    public boolean Usable() {
+    public boolean isHidden() {
         return true;
     }
 
