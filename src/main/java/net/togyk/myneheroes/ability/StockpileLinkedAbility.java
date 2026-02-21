@@ -75,8 +75,8 @@ public class StockpileLinkedAbility extends Ability {
     }
 
     @Override
-    public boolean Usable() {
-        return super.Usable() && this.getIndirectHolder() instanceof StockPile stockpile && stockpile.getCharge() >= this.getUnlocksAt();
+    public boolean isHidden() {
+        return super.isHidden() && this.getIndirectHolder() instanceof StockPile stockpile && stockpile.getCharge() >= this.getUnlocksAt();
     }
 
     @Override

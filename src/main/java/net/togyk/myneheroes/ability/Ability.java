@@ -257,8 +257,8 @@ public class Ability {
         return null;
     }
 
-    public boolean Usable() {
-        return settings.usable;
+    public boolean isHidden() {
+        return settings.hidden;
     }
 
     public boolean cooldownWhenReleased() {
@@ -303,7 +303,7 @@ public class Ability {
 
     public static class Settings{
         public boolean appearsMultipleTimes = true;
-        public boolean usable = true;
+        public boolean hidden = true;
         public boolean cooldownWhenReleased = false;
 
         public Settings() {
@@ -314,8 +314,8 @@ public class Ability {
             return this;
         }
 
-        public Ability.Settings usable(boolean bl) {
-            this.usable = bl;
+        public Ability.Settings hidden(boolean bl) {
+            this.hidden = bl;
             return this;
         }
 

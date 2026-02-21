@@ -301,19 +301,19 @@ public class Abilities {
     ));
 
 
-    public static final SimplePassiveAttributeModifierAbility STRENGTH_BOOST = registerAbility(new SimplePassiveAttributeModifierAbility(Identifier.of(MyneHeroes.MOD_ID, "strength_boost"), new Ability.Settings().usable(false),
+    public static final SimplePassiveAttributeModifierAbility STRENGTH_BOOST = registerAbility(new SimplePassiveAttributeModifierAbility(Identifier.of(MyneHeroes.MOD_ID, "strength_boost"), new Ability.Settings().hidden(false),
             List.of(
                     new SimplePassiveAttributeModifierAbility.AttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, ability -> 0.2D),
                     new SimplePassiveAttributeModifierAbility.AttributeModifier(EntityAttributes.PLAYER_BLOCK_BREAK_SPEED, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, ability -> 0.2D)
             )
     ));
-    public static final SimplePassiveAttributeModifierAbility JUMP_BOOST = registerAbility(new SimplePassiveAttributeModifierAbility(Identifier.of(MyneHeroes.MOD_ID, "jump_boost"), new Ability.Settings().usable(false),
+    public static final SimplePassiveAttributeModifierAbility JUMP_BOOST = registerAbility(new SimplePassiveAttributeModifierAbility(Identifier.of(MyneHeroes.MOD_ID, "jump_boost"), new Ability.Settings().hidden(false),
             List.of(
                     new SimplePassiveAttributeModifierAbility.AttributeModifier(EntityAttributes.GENERIC_JUMP_STRENGTH, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, ability -> 0.2D),
                     new SimplePassiveAttributeModifierAbility.AttributeModifier(EntityAttributes.GENERIC_FALL_DAMAGE_MULTIPLIER, EntityAttributeModifier.Operation.ADD_VALUE, ability -> -0.25D)
             )
     ));
-    public static final SimplePassiveAttributeModifierAbility SPEED_BOOST = registerAbility(new SimplePassiveAttributeModifierAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_boost"), new Ability.Settings().usable(false), EntityAttributes.GENERIC_MOVEMENT_SPEED, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, ability -> 0.2D));
+    public static final SimplePassiveAttributeModifierAbility SPEED_BOOST = registerAbility(new SimplePassiveAttributeModifierAbility(Identifier.of(MyneHeroes.MOD_ID, "speed_boost"), new Ability.Settings().hidden(false), EntityAttributes.GENERIC_MOVEMENT_SPEED, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, ability -> 0.2D));
 
     private static <T extends Ability> T registerAbility(T ability) {
         return Registry.register(ModRegistries.ABILITY, ability.id, ability);
