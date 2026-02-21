@@ -12,6 +12,7 @@ import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.ActivationTimedAbility;
 import net.togyk.myneheroes.ability.ItemRenderableAbility;
+import net.togyk.myneheroes.ability.VariableLinkedAbility;
 import net.togyk.myneheroes.keybind.ModKeyBinds;
 import net.togyk.myneheroes.util.PlayerAbilities;
 
@@ -152,6 +153,15 @@ public class AbilityOverlayHelper {
                     int maxIconLength = 16;
                     int currentActivatedTimeLength = (int) ((maxIconLength - 1) * activatedTimePercentile) + 1;
                     drawContext.fill(x, y + maxIconLength - currentActivatedTimeLength, x + 16, y + maxIconLength, 0x88000066);
+                }
+            }
+            if (ability instanceof VariableLinkedAbility variableLinkedAbility) {
+                TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+                Object variable = variableLinkedAbility.getVariable();
+
+                if (variable != null) {
+                    Text text = Text.literal(String.valueOf(variable));
+                    drawContext.drawTextWithShadow(textRenderer, text, x, y, 0xFFFFFFFF);
                 }
             }
         }
