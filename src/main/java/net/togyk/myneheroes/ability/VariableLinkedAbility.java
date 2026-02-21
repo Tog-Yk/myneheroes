@@ -33,9 +33,9 @@ public class VariableLinkedAbility extends Ability {
     }
 
     @Override
-    public boolean isHidden() {
+    public boolean isUsable() {
         if (this.getIndirectHolder() instanceof VariableLinkedPower power) {
-            return power.canSet(this.getVariableName(), this.operation.apply(power)) && super.isHidden();
+            return power.canSet(this.getVariableName(), this.operation.apply(power)) && super.isUsable();
         }
         return false;
     }

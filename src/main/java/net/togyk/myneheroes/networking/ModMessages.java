@@ -74,11 +74,15 @@ public class ModMessages {
                 if (ability != null) {
                     switch (payload.type()) {
                         case 0: {
-                            ability.pressed(context.player());
+                            if (ability.isUsable()) {
+                                ability.pressed(context.player());
+                            }
                             break;
                         }
                         case 1: {
-                            ability.held(context.player());
+                            if (ability.isUsable()) {
+                                ability.held(context.player());
+                            }
                             break;
                         }
                         case 2: {
@@ -116,7 +120,7 @@ public class ModMessages {
                         ability = ((PlayerAbilities) context.player()).myneheroes$getFourthAbility();
                     }
                 }
-                if (ability instanceof ScrollableAbility scrollableAbility) {
+                if (ability.isUsable() && ability instanceof ScrollableAbility scrollableAbility) {
                     scrollableAbility.scroll(payload.mouseX(), payload.mouseY(), payload.vScroll(), payload.hScroll());
                 }
             });

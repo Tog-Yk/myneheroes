@@ -110,11 +110,6 @@ public class ReleaseKineticEnergyAbility extends Ability implements PassiveAbili
     }
 
     @Override
-    public boolean isHidden() {
-        return true;
-    }
-
-    @Override
     public Identifier getStockPileId() {
         return this.getId();
     }

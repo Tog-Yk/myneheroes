@@ -30,17 +30,15 @@ public class ModKeybindingHelper {
             if (player != null) {
                 Ability ability = ((PlayerAbilities) player).myneheroes$getFirstAbility();
                 if (ability != null) {
-                    if (ModKeyBinds.useFirstAbility.isPressed()) {
+                    if (ModKeyBinds.useFirstAbility.isPressed() && ability.isUsable()) {
                         if (!AbilitiesBlockedForScrolling) {
                             if (ability.canHold(player)) {
                                 ability.held(player);
                                 ClientPlayNetworking.send(new AbilityKeybindPayload(0, 1));
                             }
                             if (!firstWasPressed) {
-                                if (!AbilitiesBlockedForScrolling) {
-                                    ability.pressed(player);
-                                    ClientPlayNetworking.send(new AbilityKeybindPayload(0, 0));
-                                }
+                                ability.pressed(player);
+                                ClientPlayNetworking.send(new AbilityKeybindPayload(0, 0));
                             }
                         }
                     } else if (firstWasPressed) {
@@ -61,17 +59,15 @@ public class ModKeybindingHelper {
 
                 ability = ((PlayerAbilities) player).myneheroes$getSecondAbility();
                 if (ability != null) {
-                    if (ModKeyBinds.useSecondAbility.isPressed()) {
+                    if (ModKeyBinds.useSecondAbility.isPressed() && ability.isUsable()) {
                         if (!AbilitiesBlockedForScrolling) {
                             if (ability.canHold(player)) {
                                 ability.held(player);
                                 ClientPlayNetworking.send(new AbilityKeybindPayload(1, 1));
                             }
                             if (!secondWasPressed) {
-                                if (!AbilitiesBlockedForScrolling) {
-                                    ability.pressed(player);
-                                    ClientPlayNetworking.send(new AbilityKeybindPayload(1, 0));
-                                }
+                                ability.pressed(player);
+                                ClientPlayNetworking.send(new AbilityKeybindPayload(1, 0));
                             }
                         }
                     } else if (secondWasPressed) {
@@ -92,17 +88,15 @@ public class ModKeybindingHelper {
 
                 ability = ((PlayerAbilities) player).myneheroes$getThirdAbility();
                 if (ability != null) {
-                    if (ModKeyBinds.useThirdAbility.isPressed()) {
-                        if (!AbilitiesBlockedForScrolling) {
+                    if (ModKeyBinds.useThirdAbility.isPressed() && ability.isUsable()) {
+                        if (!AbilitiesBlockedForScrolling && ability.isUsable()) {
                             if (ability.canHold(player)) {
                                 ability.held(player);
                                 ClientPlayNetworking.send(new AbilityKeybindPayload(2, 1));
                             }
                             if (!thirdWasPressed) {
-                                if (!AbilitiesBlockedForScrolling) {
-                                    ability.pressed(player);
-                                    ClientPlayNetworking.send(new AbilityKeybindPayload(2, 0));
-                                }
+                                ability.pressed(player);
+                                ClientPlayNetworking.send(new AbilityKeybindPayload(2, 0));
                             }
                         }
                     } else if (thirdWasPressed) {
@@ -123,17 +117,15 @@ public class ModKeybindingHelper {
 
                 ability = ((PlayerAbilities) player).myneheroes$getFourthAbility();
                 if (ability != null) {
-                    if (ModKeyBinds.useFourthAbility.isPressed()) {
-                        if (!AbilitiesBlockedForScrolling) {
+                    if (ModKeyBinds.useFourthAbility.isPressed() && ability.isUsable()) {
+                        if (!AbilitiesBlockedForScrolling && ability.isUsable()) {
                             if (ability.canHold(player)) {
                                 ability.held(player);
                                 ClientPlayNetworking.send(new AbilityKeybindPayload(3, 1));
                             }
                             if (!fourthWasPressed) {
-                                if (!AbilitiesBlockedForScrolling) {
-                                    ability.pressed(player);
-                                    ClientPlayNetworking.send(new AbilityKeybindPayload(3, 0));
-                                }
+                                ability.pressed(player);
+                                ClientPlayNetworking.send(new AbilityKeybindPayload(3, 0));
                             }
                         }
                     } else if (fourthWasPressed) {
@@ -195,28 +187,28 @@ public class ModKeybindingHelper {
                     if (client.currentScreen == null && player != null && !AbilitiesBlockedForScrolling) {
                         if (ModKeyBinds.useFirstAbility.isPressed()) {
                             Ability ability = ((PlayerAbilities) player).myneheroes$getFirstAbility();
-                            if (ability instanceof ScrollableAbility scrollableAbility) {
+                            if (ability.isUsable() && ability instanceof ScrollableAbility scrollableAbility) {
                                 ClientPlayNetworking.send(new AbilityScrollPayload(0, mouseX, mouseY, vScroll, hScroll));
                                 if (scrollableAbility.scroll(mouseX, mouseY, vScroll, hScroll)) return true;
                             }
                         }
                         if (ModKeyBinds.useSecondAbility.isPressed()) {
                             Ability ability = ((PlayerAbilities) player).myneheroes$getSecondAbility();
-                            if (ability instanceof ScrollableAbility scrollableAbility) {
+                            if (ability.isUsable() && ability instanceof ScrollableAbility scrollableAbility) {
                                 ClientPlayNetworking.send(new AbilityScrollPayload(1, mouseX, mouseY, vScroll, hScroll));
                                 if (scrollableAbility.scroll(mouseX, mouseY, vScroll, hScroll)) return true;
                             }
                         }
                         if (ModKeyBinds.useThirdAbility.isPressed()) {
                             Ability ability = ((PlayerAbilities) player).myneheroes$getThirdAbility();
-                            if (ability instanceof ScrollableAbility scrollableAbility) {
+                            if (ability.isUsable() && ability instanceof ScrollableAbility scrollableAbility) {
                                 ClientPlayNetworking.send(new AbilityScrollPayload(2, mouseX, mouseY, vScroll, hScroll));
                                 if (scrollableAbility.scroll(mouseX, mouseY, vScroll, hScroll)) return true;
                             }
                         }
                         if (ModKeyBinds.useFourthAbility.isPressed()) {
                             Ability ability = ((PlayerAbilities) player).myneheroes$getFourthAbility();
-                            if (ability instanceof ScrollableAbility scrollableAbility) {
+                            if (ability.isUsable() && ability instanceof ScrollableAbility scrollableAbility) {
                                 ClientPlayNetworking.send(new AbilityScrollPayload(3, mouseX, mouseY, vScroll, hScroll));
                                 return scrollableAbility.scroll(mouseX, mouseY, vScroll, hScroll);
                             }

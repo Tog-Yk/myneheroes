@@ -25,7 +25,7 @@ public class RageAbility extends Ability implements AttributeModifierAbility {
 
     @Override
     public boolean isHidden() {
-        return false;
+        return true;
     }
 
 
