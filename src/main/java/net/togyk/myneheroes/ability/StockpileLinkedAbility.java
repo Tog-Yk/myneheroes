@@ -52,7 +52,7 @@ public class StockpileLinkedAbility extends Ability {
                 if (this.getMaxHoldTime() != 0) {
                     int holdTime = this.getHoldTime();
                     if (holdTime > this.getMaxHoldTime()) {
-                        this.setHoldTime(this.getMaxCooldown());
+                        this.setHoldTime(this.getMaxHoldTime());
                         this.save();
                     }
                     if (holdTime >= this.getMaxHoldTime()) {
@@ -75,8 +75,8 @@ public class StockpileLinkedAbility extends Ability {
     }
 
     @Override
-    public boolean isHidden() {
-        return super.isHidden() && this.getIndirectHolder() instanceof StockPile stockpile && stockpile.getCharge() >= this.getUnlocksAt();
+    public boolean isUsable() {
+        return super.isUsable() && this.getIndirectHolder() instanceof StockPile stockpile && stockpile.getCharge() >= this.getUnlocksAt();
     }
 
     @Override

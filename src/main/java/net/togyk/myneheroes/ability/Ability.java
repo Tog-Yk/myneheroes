@@ -261,6 +261,10 @@ public class Ability {
         return settings.hidden;
     }
 
+    public boolean isUsable() {
+        return true;
+    }
+
     public boolean cooldownWhenReleased() {
         return settings.cooldownWhenReleased;
     }
@@ -303,7 +307,7 @@ public class Ability {
 
     public static class Settings{
         public boolean appearsMultipleTimes = true;
-        public boolean hidden = true;
+        public boolean hidden = false;
         public boolean cooldownWhenReleased = false;
 
         public Settings() {

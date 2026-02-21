@@ -78,9 +78,9 @@ public class ToggleOrConfigureVLAbility extends VariableLinkedAbility implements
     }
 
     @Override
-    public boolean isHidden() {
+    public boolean isUsable() {
         if (this.getIndirectHolder() instanceof VariableLinkedPower power) {
-            return power.canSet(this.getToggleVariableName(), this.operation.apply(power)) && settings.hidden;
+            return power.canSet(this.getToggleVariableName(), this.operation.apply(power)) && super.isUsable();
         }
         return false;
     }

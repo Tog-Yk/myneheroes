@@ -133,24 +133,24 @@ public class AbilityOverlayHelper {
             } else {
                 drawContext.drawTexture(ability.getIcon(), x, y, 0, 0, 16, 16, 16, 16);
             }
-            if (isPressed && !ability.canHold(MinecraftClient.getInstance().player)) {
+            if (!ability.isUsable()) {
+                drawContext.fill(x, y, x + 16, y + 16, 0x88333333);
+            } else if (isPressed && !ability.canHold(MinecraftClient.getInstance().player)) {
                 drawContext.fill(x, y, x + 16, y + 16, 0x33000066);
             }
 
+            int maxIconLength = 16;
             if (ability.getCooldown() != 0) {
                 float cooldownPercentile = (float) ability.getCooldown() / ability.getMaxCooldown();
-                int maxIconLength = 16;
                 int currentCooldownLength = (int) (maxIconLength * cooldownPercentile);
                 drawContext.fill(x, y + maxIconLength - currentCooldownLength, x + 16, y + maxIconLength, 0x88BBBBBB);
             } else if (ability.getHoldTime() != 0) {
                 float holdTimePercentile = (float) ability.getHoldTime() / ability.getMaxHoldTime();
-                int maxIconLength = 16;
                 int currentHoldTimeLength = (int) (maxIconLength * holdTimePercentile);
                 drawContext.fill(x, y + maxIconLength - currentHoldTimeLength, x + 16, y + maxIconLength, 0x88BBBBBB);
             } else if (ability instanceof ActivationTimedAbility timedAbility && timedAbility.isActivated()) {
                 if (timedAbility.getActivatedTime() != 0) {
                     float activatedTimePercentile = (float) timedAbility.getActivatedTime() / timedAbility.getMaxActivatedTime();
-                    int maxIconLength = 16;
                     int currentActivatedTimeLength = (int) ((maxIconLength - 1) * activatedTimePercentile) + 1;
                     drawContext.fill(x, y + maxIconLength - currentActivatedTimeLength, x + 16, y + maxIconLength, 0x88000066);
                 }
