@@ -1,24 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "equipment",
-  "key": {
-    "#": {
-      "item": "myneheroes:adamantium_ingot"
-    },
-    "$": {
-      "item": "minecraft:gold_ingot"
-    },
-    "/": {
-      "item": "minecraft:stick"
-    }
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "myneheroes:adamantium_ingot"
   },
-  "pattern": [
-    "# ",
-    "#$",
-    "/ "
-  ],
+  "base": {
+    "item": "myneheroes:diamond_katana"
+  },
   "result": {
     "count": 1,
     "id": "myneheroes:adamantium_katana"
+  },
+  "template": {
+    "item": "myneheroes:adamantium_upgrade_smithing_template"
   }
 }
