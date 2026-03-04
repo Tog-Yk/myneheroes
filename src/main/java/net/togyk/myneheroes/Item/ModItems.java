@@ -76,7 +76,7 @@ public class ModItems {
     public static final Item DIAMOND_TOOLBELT = registerItem("diamond_toolbelt", new EquipableUpgradeItem(Upgrades.TOOLBELT_6, EquipmentSlot.LEGS, Text.translatable("item.myneheroes.toolbelt_upgrade.size", 6), new Item.Settings().maxCount(1)));
     public static final Item NETHERITE_TOOLBELT = registerItem("netherite_toolbelt", new EquipableUpgradeItem(Upgrades.TOOLBELT_8, EquipmentSlot.LEGS, Text.translatable("item.myneheroes.toolbelt_upgrade.size", 8), new Item.Settings().maxCount(1)));
 
-    public static final Item WEB_SHOOTER_UPGRADE = registerItem("web_shooter_upgrade", new AbilityHoldingUpgradeItem(Upgrades.WEB_SHOOTER, new Item.Settings().maxCount(1)));
+    public static final Item WEB_SHOOTER_UPGRADE = registerItem("web_shooter_upgrade", new HotbarAbilityHoldingUpgradeItem(Upgrades.WEB_SHOOTER, new Item.Settings().maxCount(1)));
 
     public static final Item COLORING_COMPOUND = registerItem("coloring_compound",
             new SimpleDyeableItem(-1, new Item.Settings()));
