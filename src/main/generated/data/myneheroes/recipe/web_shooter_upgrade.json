@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:leather"
+    },
+    "%": {
+      "item": "minecraft:glass_bottle"
+    },
+    "&": {
+      "item": "minecraft:sticky_piston"
+    }
+  },
+  "pattern": [
+    " % ",
+    "#&#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "myneheroes:web_shooter_upgrade"
+  }
+}
