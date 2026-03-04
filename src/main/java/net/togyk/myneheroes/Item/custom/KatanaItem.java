@@ -9,14 +9,20 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.togyk.myneheroes.util.ModTags;
 
 import java.util.List;
+import java.util.Optional;
 
 public class KatanaItem extends ToolItem implements Equipment {
     public KatanaItem(ToolMaterial toolMaterial, Settings settings) {
@@ -31,7 +37,13 @@ public class KatanaItem extends ToolItem implements Equipment {
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         if (user instanceof PlayerEntity player) {
-            player.getItemCooldownManager().set(this, 40);
+            TagKey<Item> katanasTag = ModTags.Items.KATANAS;
+            Optional<RegistryEntryList.Named<Item>> katanas = Registries.ITEM.getEntryList(katanasTag);
+            if (katanas.isPresent()) {
+                for (RegistryEntry<Item> katana : katanas.get()) {
+                    player.getItemCooldownManager().set(katana.value(), 40);
+                }
+            }
         }
     }
 
@@ -75,6 +87,13 @@ public class KatanaItem extends ToolItem implements Equipment {
 
     public void onBlocked(PlayerEntity player, float amount) {
         player.stopUsingItem();
-        player.getItemCooldownManager().set(this, 120);
+
+        TagKey<Item> katanasTag = ModTags.Items.KATANAS;
+        Optional<RegistryEntryList.Named<Item>> katanas = Registries.ITEM.getEntryList(katanasTag);
+        if (katanas.isPresent()) {
+            for (RegistryEntry<Item> katana : katanas.get()) {
+                player.getItemCooldownManager().set(katana.value(), 120);
+            }
+        }
     }
 }
