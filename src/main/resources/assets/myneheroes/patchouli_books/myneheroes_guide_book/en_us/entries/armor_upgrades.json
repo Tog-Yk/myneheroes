@@ -1,0 +1,46 @@
+{
+  "name": "Upgrades",
+  "icon": "myneheroes:fly_upgrade",
+  "category": "myneheroes:armor",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "To be able to upgrade your advanced armor with abilities or other attributes you have to craft and apply upgrades.$(br)The way you unlock a pattern varies per pattern."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:upgrade_station",
+      "text": "To apply an upgrade on your advanced armor you have to place your armor inside the upgrade station and surround it with the chosen upgrades."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "myneheroes:mechanical_hud_upgrade,myneheroes:speedster_hud_upgrade",
+      "text": "Craftable by putting a $(l:myneheroes:items)circuit board$(/l)$(br)Helmet upgrade.$(br2)Adds a HUD to the first person when activated."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:anti_radiation_coating",
+      "text": "Wearing armor with this upgrade lowers the amount of damage you take from radiation by 25% each."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:toolbelt",
+      "text": "3 extra storage slots.$(br2)Note:$(br)Can be worn as leggings."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:iron_toolbelt",
+      "text": "4 extra storage slots.$(br2)Note:$(br)Can be worn as leggings.$(br)Be careful when crafting, all items in the original toolbelt will be lost"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:diamond_toolbelt",
+      "text": "6 extra storage slots.$(br2)Note:$(br)Can be worn as leggings.$(br)Be careful when crafting, all items in the original toolbelt will be lost"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "myneheroes:netherite_toolbelt",
+      "text": "8 extra storage slots.$(br2)Note:$(br)Can be worn as leggings.$(br)Be careful when crafting, all items in the original toolbelt will be lost"
+    }
+  ]
+}

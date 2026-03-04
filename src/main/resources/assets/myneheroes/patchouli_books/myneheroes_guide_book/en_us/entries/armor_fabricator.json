@@ -1,0 +1,19 @@
+{
+  "name": "Armor Fabricator",
+  "icon": "myneheroes:armor_fabricator",
+  "category": "myneheroes:armor",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "myneheroes:armor_fabricator",
+      "link_recipe": true,
+      "title": "Armor Fabricator",
+      "text": "You can create Advanced armor with the Armor Fabricator. To do this you should insert a base armor piece and select the pattern you want$(br)Please note that not all materials are compatible enough to be turned into Advanced armor"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:armor_fabricator",
+      "text": "If you want to create any armor with the armor fabricator you must unlock the pattern first.$(br)The method in which you obtain this pattern varies."
+    }
+  ]
+}

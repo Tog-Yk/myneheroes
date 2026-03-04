@@ -1,0 +1,25 @@
+{
+  "name": "Armor Patterns",
+  "icon": "myneheroes:mark6_vibranium_chestplate",
+  "category": "myneheroes:armor",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "To be able to apply a pattern to an armor you need to unlock it first.$(br)The way you unlock a pattern varies per pattern."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "myneheroes:mark6_vibranium_helmet,myneheroes:mark6_vibranium_chestplate,myneheroes:mark6_vibranium_leggings,myneheroes:mark6_vibranium_boots,myneheroes:mark3_gold_titanium_helmet,myneheroes:mark3_gold_titanium_chestplate,myneheroes:mark3_gold_titanium_leggings,myneheroes:mark3_gold_titanium_boots,myneheroes:mark45_netherite_helmet,myneheroes:mark45_netherite_chestplate,myneheroes:mark45_netherite_leggings,myneheroes:mark45_netherite_boots",
+      "link_recipe": true,
+      "title": "Mechanical",
+      "text": "Unlock:$(br)To unlock the mechanical pattern you have to obtain an arc reactor.$(br2)Note:$(br)The helmets have a faceplate you can open/close by right-clicking the item in the inventory."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "myneheroes:speedster_vibranium_helmet,myneheroes:speedster_vibranium_chestplate,myneheroes:speedster_vibranium_leggings,myneheroes:speedster_vibranium_boots,myneheroes:speedster_gold_titanium_helmet,myneheroes:speedster_gold_titanium_chestplate,myneheroes:speedster_gold_titanium_leggings,myneheroes:speedster_gold_titanium_boots,myneheroes:speedster_netherite_helmet,myneheroes:speedster_netherite_chestplate,myneheroes:speedster_netherite_leggings,myneheroes:speedster_netherite_boots",
+      "link_recipe": true,
+      "title": "Speedster",
+      "text": "Unlock:$(br)To unlock the speedster pattern you have to become a speedster."
+    }
+  ]
+}

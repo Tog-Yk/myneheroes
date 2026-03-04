@@ -1,0 +1,18 @@
+{
+  "name": "Adamantium",
+  "icon": "myneheroes:adamantium_upgrade_smithing_template",
+  "category": "myneheroes:items",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "myneheroes:adamantium_upgrade_smithing_template,myneheroes:adamantium_ingot,myneheroes:adamantium_katana,myneheroes:adamantium_block,myneheroes:adamantium_injection,myneheroes:adamantium_sword,myneheroes:adamantium_shovel,myneheroes:adamantium_pickaxe,myneheroes:adamantium_axe,myneheroes:adamantium_hoe,myneheroes:adamantium_helmet,myneheroes:adamantium_chestplate,myneheroes:adamantium_leggings,myneheroes:adamantium_boots",
+      "link_recipe": true,
+      "title": "Adamantium",
+      "text": "You can create adamantium by mixing netherite scrap and titanium. $(br)The upgrade template can be found in end city treasure.$(br2)Once obtained you can upgrade your diamond tools to adamantium"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:adamantium_ingot"
+    }
+  ]
+}

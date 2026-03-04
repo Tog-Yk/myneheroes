@@ -38,6 +38,8 @@
 		"fabric-api": "*"
 	},
 	"suggests": {
+		"accessories": "*",
+		"patchouli": "*",
 		"another-mod": "*"
 	}
 }
