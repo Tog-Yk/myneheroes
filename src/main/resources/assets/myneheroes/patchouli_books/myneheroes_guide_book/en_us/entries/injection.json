@@ -1,0 +1,12 @@
+{
+  "name": "Injections",
+  "icon": "myneheroes:power_injection",
+  "category": "myneheroes:powers",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:power_injection",
+      "text": "To store and transfer powers you need to use an Power Injection"
+    }
+  ]
+}

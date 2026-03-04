@@ -1,0 +1,21 @@
+{
+  "name": "Shields",
+  "icon": "myneheroes:vibranium_shield",
+  "category": "myneheroes:items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "You can create an shield from Vibranium. $(br)You can throw this shield by punching in the air.$(br2)Of course you can recreate the iconic shield we all know and love, or you can grab some of captain carters shields"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:vibranium_shield",
+      "recipe2": "myneheroes:a_symbols_shield"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:carters_shield",
+      "recipe2": "myneheroes:cosmic_shield"
+    }
+  ]
+}

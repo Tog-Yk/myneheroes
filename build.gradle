@@ -23,6 +23,7 @@ repositories {
     maven { url 'https://maven.wispforest.io/releases' }
     maven { url 'https://maven.su5ed.dev/releases' }
     maven { url 'https://maven.fabricmc.net' }
+    maven { url 'https://maven.blamejared.com' }
 }
 
 fabricApi {
@@ -42,6 +43,10 @@ dependencies {
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:16.0.777"
 
     modCompileOnly("io.wispforest:accessories-fabric:${project.accessories_version}+${project.minecraft_version}")
+    modRuntimeOnly("io.wispforest:accessories-fabric:${project.accessories_version}+${project.minecraft_version}")
+
+    modRuntimeOnly "vazkii.patchouli:Patchouli:${project.patchouli_version}"
+
 
     modApi "dev.architectury:architectury-fabric:13.0.8"
     modApi "me.shedaniel.cloth:cloth-config-fabric:15.0.140"
