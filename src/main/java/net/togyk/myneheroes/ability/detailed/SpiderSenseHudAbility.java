@@ -24,13 +24,13 @@ public class SpiderSenseHudAbility extends HudAbility {
             List<LivingEntity> nearbyEntities = player.getWorld().getEntitiesByClass(
                     LivingEntity.class,
                     player.getBoundingBox().expand(5),
-                    (entity) -> !entity.isRemoved() && (entity instanceof Monster || entity instanceof PlayerEntity && entity != player)
+                    (entity) -> !entity.isRemoved() && (entity instanceof Monster || entity instanceof PlayerEntity && entity != player) && isOutsideFOV(player, entity, 70)
             );
 
             List<ProjectileEntity> nearbyProjectiles = player.getWorld().getEntitiesByClass(
                     ProjectileEntity.class,
                     player.getBoundingBox().expand(20),
-                    (entity) -> !entity.isRemoved() && isMovingToPlayer(entity, player) && entity.getOwner() != player
+                    (entity) -> !entity.isRemoved() && isMovingToPlayer(entity, player)
             );
 
             return !nearbyProjectiles.isEmpty() || !nearbyEntities.isEmpty();
@@ -54,6 +54,21 @@ public class SpiderSenseHudAbility extends HudAbility {
 
         double dot = projectileVelocity.dotProduct(toPlayer);
 
-        return dot > 0;
+        return dot > 0.9;
+    }
+
+    private boolean isOutsideFOV(PlayerEntity player, Entity entity, double fovDegrees) {
+        Vec3d look = player.getRotationVec(1.0F).normalize();
+
+        Vec3d toEntity = entity.getPos()
+                .add(0, entity.getHeight() * 0.5, 0)
+                .subtract(player.getEyePos())
+                .normalize();
+
+        double dot = look.dotProduct(toEntity);
+
+        double threshold = Math.cos(Math.toRadians(fovDegrees / 2.0));
+
+        return dot < threshold;
     }
 }
