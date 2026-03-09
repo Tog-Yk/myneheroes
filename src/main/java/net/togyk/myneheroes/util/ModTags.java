@@ -28,6 +28,8 @@ public class ModTags {
         public static final TagKey<Block> RADIATION_GOES_THROUGH = createTag("radiation_goes_trough");
         public static final TagKey<Block> INCORRECT_FOR_ADAMANTIUM_TOOL = createTag("incorrect_for_adamantium_tool");
 
+        public static final TagKey<Block> CANT_PHASE_THROUGH = createTag("cant_phase_through");
+
         private static TagKey<Block> createTag(String name) {
             return TagKey.of(RegistryKeys.BLOCK, Identifier.of(MyneHeroes.MOD_ID, name));
         }
