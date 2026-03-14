@@ -1,0 +1,18 @@
+{
+  "name": "Mjolnir",
+  "icon": "myneheroes:mjolnir",
+  "category": "myneheroes:items",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "myneheroes:mjolnir",
+      "link_recipe": true,
+      "title": "Mjölnir",
+      "text": "When traveling the world you have a chance of finding the crash site of Mjölnir.$(br2)To be able to pick it up it must first deem you worthy.$(br2)You can throw Mjölnir by punching in the air."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "By right clicking you can select entities Mjölnir will fly to when thrown."
+    }
+  ]
+}

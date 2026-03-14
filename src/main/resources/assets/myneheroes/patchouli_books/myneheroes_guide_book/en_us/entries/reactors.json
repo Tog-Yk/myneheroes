@@ -1,0 +1,15 @@
+{
+  "name": "Reactors",
+  "icon": "myneheroes:arc_reactor",
+  "category": "myneheroes:items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The reactors are a source of fuel for some of the $(l:myneheroes:armor_upgrades)armor upgrades$(/l).$(br2)For the upgrades to be able to use the arc reactor it just has to be in the inventory.$(br)the hud's will also display the info of the found reactor."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:arc_reactor"
+    }
+  ]
+}

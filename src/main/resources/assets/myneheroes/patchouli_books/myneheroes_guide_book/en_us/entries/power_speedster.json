@@ -1,0 +1,19 @@
+{
+  "name": "Speedster",
+  "icon": "lightning_rod",
+  "category": "myneheroes:powers",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Be struck by lighting while having speed and become a speedster.$(br2)Toggle or configure speed:$(br)You can tap the ability to toggle your speed.$(br)You can hold the ability and scroll up or down to speed up or down."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Phasing:$(br)When pressed allows you to walk through blocks for up to 12.5 seconds.$(br)When pressed again it goes on cooldown for 30 seconds.$(br)If you shift while you're falling you will phase through the floor$(br2)Wall climb:$(br)You can walk up walls if you go fast enough and look where you're going."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Water walking:$(br)When you go fast enough you can run on water.$(br2)Trail colors:$(br)You can upgrade this power with dyed $(l:myneheroes:miscellaneous#coloring_compound)coloring compounds$(/l) to give your trail an unique look."
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "Miscellaneous",
+  "icon": "crafting_table",
+  "category": "myneheroes:items",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:web_fluid",
+      "text": "Can be used to fuel an $(l:myneheroes:armor_upgrades#web_shooter)web shooter$(/l) by right clicking the web shooter in the inventory while holding this.",
+      "anchor": "web_fluid"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:circuit_board",
+      "text": "Crafting ingredient",
+      "anchor": "circuit_board"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:coloring_compound",
+      "text": "Is used as fuel for dyeing armor. Can be dyed and used as an power 'upgrade'.",
+      "anchor": "coloring_compound"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "myneheroes:bottle_of_spider_venom",
+      "link_recipe": true,
+      "text": "Can be obtained by milking a cave spider with a glass bottle.",
+      "anchor": "bottle_of_spider_venom"
+    }
+  ]
+}

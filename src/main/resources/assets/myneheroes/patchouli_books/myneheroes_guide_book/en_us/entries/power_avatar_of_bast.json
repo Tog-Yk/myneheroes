@@ -1,0 +1,15 @@
+{
+  "name": "Avatar of Bast",
+  "icon": "myneheroes:heart_shaped_herb",
+  "category": "myneheroes:powers",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "After drinking a mix made from an heart shaped herb, you will become the Avatar of bast. This power can't be stored in an injection, but you can remove it by drinking the mix again.$(br2)You become stronger and more durable. You also gain a boost to your speed"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:heart_shaped_herb_mix"
+    }
+  ]
+}

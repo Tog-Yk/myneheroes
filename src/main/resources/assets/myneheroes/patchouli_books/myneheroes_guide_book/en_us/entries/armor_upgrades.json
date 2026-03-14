@@ -10,37 +10,85 @@
     {
       "type": "patchouli:crafting",
       "recipe": "myneheroes:upgrade_station",
-      "text": "To apply an upgrade on your advanced armor you have to place your armor inside the upgrade station and surround it with the chosen upgrades."
+      "text": "To apply an upgrade on your advanced armor you have to place your armor inside the upgrade station and surround it with the chosen upgrades.",
+      "anchor": "kinetic_energy_storage"
     },
     {
       "type": "patchouli:spotlight",
       "item": "myneheroes:mechanical_hud_upgrade,myneheroes:speedster_hud_upgrade",
-      "text": "Craftable by putting a $(l:myneheroes:items)circuit board$(/l)$(br)Helmet upgrade.$(br2)Adds a HUD to the first person when activated."
+      "text": "Craftable by putting a $(l:myneheroes:items)circuit board$(/l) in a stonecutter.$(br)Helmet upgrade.$(br2)Adds a HUD to the first person when activated.",
+      "anchor": "hud"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "myneheroes:laser_upgrade",
+      "text": "Craftable by putting a $(l:myneheroes:items)circuit board$(/l) in a stonecutter.$(br)Chestplate upgrade.$(br2)Shoots a laser using 50 charge from the arc reactor.",
+      "anchor": "laser"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "myneheroes:fly_upgrade",
+      "text": "Craftable by putting a $(l:myneheroes:items)circuit board$(/l) in a stonecutter.$(br)Boots upgrade.$(br2)Allows the user to fly using 1 charge from the arc reactor per tick when activated.",
+      "anchor": "fly"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "myneheroes:take_off_suit_upgrade",
+      "text": "Craftable by putting a $(l:myneheroes:items)circuit board$(/l) in a stonecutter.$(br)Armor upgrade.$(br2)When all the equipped armor pieces have this upgrade, it takes of the armor and puts it stationary in the world. You can then walk into it to equip it again.",
+      "anchor": "take_off_suit"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:kinetic_energy_storage_upgrade",
+      "title": "Kinetic Energy Storage",
+      "text": "Armor upgrade.$(br2)The damage you take will be build up. when using the ability it releases this energy damaging nearby mobs.",
+      "anchor": "kinetic_energy_storage"
     },
     {
       "type": "patchouli:crafting",
       "recipe": "myneheroes:anti_radiation_coating",
-      "text": "Wearing armor with this upgrade lowers the amount of damage you take from radiation by 25% each."
+      "text": "Armor upgrade.$(br2)Wearing armor with this upgrade lowers the amount of damage you take from radiation by 25% each.",
+      "anchor": "anti_radiation_coating"
     },
     {
       "type": "patchouli:crafting",
       "recipe": "myneheroes:toolbelt",
-      "text": "3 extra storage slots.$(br2)Note:$(br)Can be worn as leggings."
+      "text": "Leggings upgrade.$(br2)3 extra storage slots.$(br2)Note:$(br)Can be worn as leggings.",
+      "anchor": "toolbelt"
     },
     {
       "type": "patchouli:crafting",
       "recipe": "myneheroes:iron_toolbelt",
-      "text": "4 extra storage slots.$(br2)Note:$(br)Can be worn as leggings.$(br)Be careful when crafting, all items in the original toolbelt will be lost"
+      "text": "4 extra storage slots.$(br2)Note:$(br)Can be worn as leggings.$(br)Be careful when crafting, all items in the original toolbelt will be lost.",
+      "anchor": "iron_toolbelt"
     },
     {
       "type": "patchouli:crafting",
       "recipe": "myneheroes:diamond_toolbelt",
-      "text": "6 extra storage slots.$(br2)Note:$(br)Can be worn as leggings.$(br)Be careful when crafting, all items in the original toolbelt will be lost"
+      "text": "Leggings upgrade.$(br2)6 extra storage slots.$(br2)Note:$(br)Can be worn as leggings.$(br)Be careful when crafting, all items in the original toolbelt will be lost.",
+      "anchor": "diamond_toolbelt"
     },
     {
       "type": "patchouli:spotlight",
       "item": "myneheroes:netherite_toolbelt",
-      "text": "8 extra storage slots.$(br2)Note:$(br)Can be worn as leggings.$(br)Be careful when crafting, all items in the original toolbelt will be lost"
+      "text": "Leggings upgrade.$(br2)8 extra storage slots.$(br2)Note:$(br)Can be worn as leggings.$(br)Be careful when crafting, all items in the original toolbelt will be lost.",
+      "anchor": "netherite_toolbelt"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:exo_skeleton",
+      "text": "Chestplate, Leggings and Boots upgrade.$(br2)Adds attributes based on the type of armor it is on.",
+      "anchor": "exo_skeleton"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "When it is on an Chestplate it gives an small boost to damage and block break speed.$(br2)When it is on the leggings it gives an small jump boost and a small reduction to fall damage.$(br2)When it is on the leggings it gives an small speed boost."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:web_shooter_upgrade",
+      "text": "Chestplate upgrade.$(br2)Allows you to shoot different types of webs.$(br)You can disable it by clicking the background.$(br)Refuel using $(l:myneheroes:miscellaneous#web_fluid)Web Fluid$(/l).$(br)Note:$(br)Can be used from the hotbar.",
+      "anchor": "web_shooter"
     }
   ]
 }

@@ -1,0 +1,15 @@
+{
+  "name": "Super Soldier",
+  "icon": "myneheroes:a_symbols_shield",
+  "category": "myneheroes:powers",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "After injecting the serum, you will become an super soldier.$(br2)You become stronger and more durable.$(br)You also gain a boost to your speed"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:super_soldier_serum"
+    }
+  ]
+}
