@@ -182,7 +182,7 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
 
     @Override
     public boolean canSet(String name, Object variable) {
-        return (name.equals("speedActive") && variable instanceof Boolean) || (name.equals("phasing") && variable instanceof Boolean) || this.isSpeedActive() && (name.equals("speedLevel") && variable instanceof Integer);
+        return (name.equals("speedActive") && variable instanceof Boolean) || (name.equals("phasing") && variable instanceof Boolean) || name.equals("speedLevel") && variable instanceof Integer;
     }
 
     @Override
