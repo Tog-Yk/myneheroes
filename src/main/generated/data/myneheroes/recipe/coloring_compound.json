@@ -3,7 +3,7 @@
   "category": "equipment",
   "ingredients": [
     {
-      "item": "minecraft:clay"
+      "item": "minecraft:clay_ball"
     },
     {
       "tag": "myneheroes:dyes"

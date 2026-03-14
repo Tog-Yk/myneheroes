@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-09T01:13:36.240779	MyneHeroes/Recipes
+// 1.21.1	2026-03-14T15:06:33.5081177	MyneHeroes/Recipes
 a10f4eba902c63fc2bab3b8c06d34683b5ef3e67 data\myneheroes\recipe\uranium_ingot_from_smelting_uranium_ore.json
 75a7cfe4101361761ed682a05e1ae01acc0962f1 data\myneheroes\recipe\polished_kryptonite.json
 f5b82559eb77d655c81860b7c173b0529bd8ea52 data\myneheroes\advancement\recipes\combat\wooden_katana.json
@@ -202,7 +202,7 @@ f198688b51ae463af7cf84a093d5df847afc16e4 data\myneheroes\advancement\recipes\dec
 d50270d0774a4d25bba49a12854c6b0ecdef2feb data\myneheroes\recipe\take_off_suit_upgrade.json
 a4345fe0f0d57a5215661606ef883dd529d26f5a data\myneheroes\advancement\recipes\misc\toolbelt.json
 a867c76b7c851213377ceda1071242690fc1e976 data\myneheroes\recipe\speedster_vibranium_leggings.json
-6f9374e05c3be0e8828ac3cdf13aac844e2b0013 data\myneheroes\recipe\coloring_compound.json
+e820d288a2c6cfffd71e669a0861af51b83927ad data\myneheroes\recipe\coloring_compound.json
 de0070aaeec0b0bc2a8532439f309616d42d90f1 data\myneheroes\advancement\recipes\misc\web_shooter_upgrade.json
 7462037d5063d81a9e55bcd2e4b0f78a755d70ec data\myneheroes\advancement\recipes\combat\wooden_katana_mirrored.json
 a2e1543be3e5565bc3ab093f10e38afbc40c79b5 data\myneheroes\advancement\recipes\misc\titanium_ingot_from_blasting_raw_titanium.json
@@ -234,7 +234,7 @@ d1f605519ca6a8295992c7ceaf996a3b3e010731 data\myneheroes\advancement\recipes\com
 31f15ef4b7453f4d5ac11f631c85c31ac2fe2db9 data\myneheroes\advancement\recipes\misc\raw_uranium.json
 ddb03434ebb7d44405d839329a0569424c137264 data\myneheroes\recipe\speedster_netherite_leggings.json
 420037eb04f0c44be6d5781c34099e5cec560210 data\myneheroes\advancement\recipes\misc\gold_titanium_chestplate.json
-7f59e686990c1062f72e3f7d0c1f5b98e30bce69 data\myneheroes\advancement\recipes\combat\coloring_compound.json
+fbfda1312809cb8887a430aac3cb648d2a68cfcb data\myneheroes\advancement\recipes\combat\coloring_compound.json
 8115cd12f5eb8dbfc153cec792779f69e887b130 data\myneheroes\recipe\mark6_vibranium_helmet.json
 a9de215826fa8d33ff2af8887e6e8f97ecf4938d data\myneheroes\recipe\spider_gold_titanium_chestplate.json
 862dd9f6423d243dcab67e2724f6cfde006bd2c1 data\myneheroes\recipe\netherite_katana.json
