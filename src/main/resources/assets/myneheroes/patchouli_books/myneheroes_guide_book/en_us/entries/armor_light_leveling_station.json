@@ -1,0 +1,12 @@
+{
+  "name": "Armor Light Leveling station",
+  "icon": "myneheroes:armor_light_leveling_station",
+  "category": "myneheroes:armor",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:armor_light_leveling_station",
+      "text": "You can set the light level of different layers of Advanced armor with the Armor light leveling station."
+    }
+  ]
+}
