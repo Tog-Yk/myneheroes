@@ -1,0 +1,16 @@
+{
+  "name": "Regeneration",
+  "icon": "myneheroes:bone_claws",
+  "category": "myneheroes:powers",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Be exposed to radiation to have a chance of becoming a mutant.$(br2)Renewal:$(br)Just when your at your lowest your body start regenerating at a fast pace. It takes up a lot of power so you can only do it again after 120 seconds.$(br2)Bone claws:$(br)You can grow out your claws, giving you an great weapon."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:adamantium_injection",
+      "text": "By injecting yourself with adamantium you can upgrade your durability and claws."
+    }
+  ]
+}

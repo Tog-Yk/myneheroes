@@ -1,0 +1,11 @@
+{
+  "name": "Power",
+  "icon": "myneheroes:power_injection",
+  "category": "myneheroes:commands",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "/power player action$(br2)Add:$(br)add a power to the player.$(br2)Remove:$(br)remove a power from the player.$(br2)Clear:$(br)remove all powers from the player."
+    }
+  ]
+}

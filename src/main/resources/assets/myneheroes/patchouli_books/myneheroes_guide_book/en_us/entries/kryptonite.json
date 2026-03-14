@@ -1,0 +1,19 @@
+{
+  "name": "Kryptonite",
+  "icon": "myneheroes:kryptonite_cluster",
+  "category": "myneheroes:items",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "myneheroes:kryptonite_cluster,myneheroes:kryptonite_block",
+      "link_recipe": true,
+      "title": "Kryptonite",
+      "text": "Sometimes when you find an meteor it wil contain kryptonite in its core.$(br2)When the block is mined it will drop 1-4 cluster.$(br)When you mine the block with silktouch it will drop itself.$(br)When you have at least 1 level of fortune it will drop 4 clusters."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:polished_kryptonite",
+      "recipe2": "myneheroes:kryptonite_bricks"
+    }
+  ]
+}

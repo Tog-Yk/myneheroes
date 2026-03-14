@@ -1,0 +1,15 @@
+{
+  "name": "Spider",
+  "icon": "cobweb",
+  "category": "myneheroes:powers",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "By ingesting a brew of radioactive spider venom you.$(br2)Spider sense:$(br)You can sense it if there are hostile mobs outside your field of view or projectiles coming towards you."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Wall climbing:$(br)You can climb walls.$(br)To make sure your not accidentally climbing up walls you have to be in the air for you to be able to do so.$(br2)Webs:$(br)If you have the Weaving effect when obtaining this power you are able to use $(l:myneheroes:armor_upgrades#web_shooter)the web shooter$(/l) organically."
+    }
+  ]
+}

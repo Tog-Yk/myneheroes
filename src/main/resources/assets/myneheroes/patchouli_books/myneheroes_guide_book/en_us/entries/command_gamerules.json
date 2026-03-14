@@ -1,0 +1,15 @@
+{
+  "name": "Game rules",
+  "icon": "chain_command_block",
+  "category": "myneheroes:commands",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "doMeteorSpawning_MH:$(br)True/False$(br)$(t:default_value)False$(/t)$(br)Makes meteor fall from the sky.$(br2)powerLimit_MH:$(br)Whole Number$(br)$(t:default_value)1$(/t)$(br)The amount of powers a player may have at once."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "givePowersAboveLimit_MH:$(br)True/False$(br)$(t:default_value)False$(/t)$(br)Allows someone to add more powers that his limits but makes him take damage when he has."
+    }
+  ]
+}

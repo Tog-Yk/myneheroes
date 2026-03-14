@@ -1,0 +1,19 @@
+{
+  "name": "Katana",
+  "icon": "myneheroes:diamond_katana",
+  "category": "myneheroes:items",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "myneheroes:wooden_katana,myneheroes:stone_katana,myneheroes:iron_katana,myneheroes:gold_katana,myneheroes:diamond_katana,myneheroes:netherite_katana,myneheroes:adamantium_katana",
+      "link_recipe": true,
+      "title": "Adamantium",
+      "text": "You can block using the katanas.$(br)When an katana is hit while blocking all katanas wil go on a cooldown for 6 seconds.$(br2)When you stop blocking all katanas will fo on cooldown for 2 seconds."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:diamond_katana",
+      "text": "When the mod $(l:https://modrinth.com/mod/better-combat)better combat$(/l) is installed. the katanas will be recognised as an 2 handed katana."
+    }
+  ]
+}

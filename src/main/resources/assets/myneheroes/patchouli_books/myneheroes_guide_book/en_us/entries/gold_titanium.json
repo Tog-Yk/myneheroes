@@ -1,0 +1,19 @@
+{
+  "name": "Gold-Titanium",
+  "icon": "myneheroes:gold_titanium_ingot",
+  "category": "myneheroes:items",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "myneheroes:raw_gold_titanium,myneheroes:gold_titanium_ingot,myneheroes:raw_gold_titanium_block,myneheroes:gold_titanium_block",
+      "link_recipe": true,
+      "title": "Gold-Titanium",
+      "text": "Gold-Titanium is an alloy created with gold and titanium.$(br2)Its very malleable but still durable. Making it perfect for creating advanced armor."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:gold_titanium_alloying",
+      "text": "Gold-Titanium is an alloy created with gold and titanium.$(br2)Its very malleable but still durable. Making it perfect for creating advanced armor."
+    }
+  ]
+}

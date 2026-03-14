@@ -1,0 +1,19 @@
+{
+  "name": "Kryptonian",
+  "icon": "myneheroes:kryptonite_cluster",
+  "category": "myneheroes:powers",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Be exposed to krytonite while not being directly under the sun for long enough and become a kryptonian."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Solar stockpile:$(br)You are now able to store energy from the sun in your body.$(br)Your strength and defence is increased based on the amount of energy you have stored.$(br)When you have none/low energy your strength and defence is decreased in the same way.$(br2)Flight:$(br)When the amount of energy has surpassed 5% you are able to fly."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "laser eyes:$(br)From 10% of energy you are able to damage any mob in your line of sight with a max range of 32 blocks.$(br2)Frost breath:$(br)You can freeze enemies, slowing and weakening them while also applying a bit of the freezing effect from being in powdered snow. You can also cover the ground with snow and freeze water."
+    }
+  ]
+}

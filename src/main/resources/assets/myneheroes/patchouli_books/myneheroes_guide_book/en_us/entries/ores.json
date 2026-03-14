@@ -1,0 +1,31 @@
+{
+  "name": "Ores",
+  "icon": "myneheroes:vibranium_ore",
+  "category": "myneheroes:items",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "myneheroes:titanium_ore,myneheroes:deepslate_titanium_ore,myneheroes:raw_titanium,myneheroes:titanium_ingot,myneheroes:raw_titanium_block,myneheroes:titanium_block",
+      "link_recipe": true,
+      "title": "Titanium",
+      "text": "Y-level: bellow 64$(br2)Minimum tool material: Iron$(br2)Amount of veins per chunk: 15",
+      "anchor": "titanium"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "myneheroes:vibranium_ore,myneheroes:deepslate_vibranium_ore,myneheroes:raw_vibranium,myneheroes:vibranium_ingot,myneheroes:raw_vibranium_block,myneheroes:vibranium_block",
+      "link_recipe": true,
+      "title": "Vibranium",
+      "text": "Y-level: bellow 24$(br2)Minimum tool material: Iron$(br2)Amount of veins per chunk: 6",
+      "anchor": "vibranium"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "myneheroes:uranium_ore,myneheroes:deepslate_uranium_ore,myneheroes:raw_uranium,myneheroes:uranium_ingot,myneheroes:raw_uranium_block,myneheroes:uranium_block",
+      "link_recipe": true,
+      "title": "Uranium",
+      "text": "Y-level: bellow 4$(br2)Minimum tool material: Iron$(br2)Amount of cluster per chunk: 9",
+      "anchor": "uranium"
+    }
+  ]
+}
