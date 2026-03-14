@@ -8,5 +8,6 @@
       "recipe": "myneheroes:power_injection",
       "text": "To store and transfer powers you need to use an Power Injection"
     }
-  ]
+  ],
+  "priority": true
 }
