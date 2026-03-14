@@ -1,0 +1,12 @@
+{
+  "name": "Armor Dyeing station",
+  "icon": "myneheroes:armor_dyeing_station",
+  "category": "myneheroes:armor",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "myneheroes:armor_dyeing_station",
+      "text": "You can dye different layers of Advanced armor with the Armor dyeing station. it uses $(l:miscellanous#coloring_compound)coloring compounds$(/l) as fuel."
+    }
+  ]
+}
