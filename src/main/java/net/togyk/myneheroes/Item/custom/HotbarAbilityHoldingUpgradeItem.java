@@ -2,7 +2,6 @@ package net.togyk.myneheroes.Item.custom;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.slot.Slot;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HotbarAbilityHoldingUpgradeItem extends UpgradeItem implements AbilityHolding, UpgradeHolding {
-    public HotbarAbilityHoldingUpgradeItem(Upgrade upgrade, Item.Settings settings) {
+    public HotbarAbilityHoldingUpgradeItem(Upgrade upgrade, Settings settings) {
         super(upgrade, settings);
     }
 

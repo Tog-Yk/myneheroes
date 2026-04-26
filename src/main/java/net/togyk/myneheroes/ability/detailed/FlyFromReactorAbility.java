@@ -5,21 +5,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.togyk.myneheroes.Item.custom.ReactorItem;
 import net.togyk.myneheroes.MyneHeroes;
-import net.togyk.myneheroes.ability.Ability;
 import net.togyk.myneheroes.ability.BooleanAbility;
 import net.togyk.myneheroes.upgrade.Upgrade;
+import net.togyk.myneheroes.util.PlayerHoverFlightControl;
 
 public class FlyFromReactorAbility extends BooleanAbility {
     private final int cost;
 
-    public FlyFromReactorAbility(Identifier id, Ability.Settings settings, int cost) {
+    public FlyFromReactorAbility(Identifier id, Settings settings, int cost) {
         super(id, settings);
         this.cost = cost;
     }
 
     @Override
     public void tick(PlayerEntity player) {
-        if (this.get() && player.getAbilities().flying) {
+        if (this.get() && ((PlayerHoverFlightControl) player).myneheroes$isHoverFlying()) {
             ItemStack reactorStack = MyneHeroes.getItemClass(player, ReactorItem.class);
             if (reactorStack.getItem() instanceof ReactorItem reactor) {
                 int reactorPower = reactor.getStoredPowerOrDefault(reactorStack, 0);

@@ -273,5 +273,10 @@ public class ModArmorRenderers {private static void registerUpgrade(Item item) {
         registerDyeableAdvancedArmor(ModItems.SPEEDSTER_NETHERITE_CHESTPLATE);
         registerDyeableAdvancedArmor(ModItems.SPEEDSTER_NETHERITE_LEGGINGS);
         registerDyeableAdvancedArmor(ModItems.SPEEDSTER_NETHERITE_BOOTS);
+
+        registerDyeableAdvancedArmor(ModItems.SPIDER_GOLD_TITANIUM_HELMET);
+        registerDyeableAdvancedArmor(ModItems.SPIDER_GOLD_TITANIUM_CHESTPLATE);
+        registerDyeableAdvancedArmor(ModItems.SPIDER_GOLD_TITANIUM_LEGGINGS);
+        registerDyeableAdvancedArmor(ModItems.SPIDER_GOLD_TITANIUM_BOOTS);
     }
 }

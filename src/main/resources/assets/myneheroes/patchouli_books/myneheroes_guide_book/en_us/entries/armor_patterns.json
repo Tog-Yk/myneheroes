@@ -40,6 +40,21 @@
       "scale": 0.9,
       "offset": 0.1,
       "name": "Gold-Titanium Example"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "myneheroes:spider_gold_titanium_helmet,myneheroes:spider_gold_titanium_chestplate,myneheroes:spider_gold_titanium_leggings,myneheroes:spider_gold_titanium_boots",
+      "link_recipe": true,
+      "title": "Spider",
+      "text": "Unlock:$(br)To unlock the spider pattern you have to become a $(l:myneheroes:power_spider)spider$(/l) or obtain an $(l:myneheroes:armor_upgrades#web_shooter)web shooter$(/l).",
+      "anchor": "spider"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "myneheroes:stationary_armor{ArmorItems: [{components: {\"myneheroes:colors\": [I; -6854105, -1, -12471809, -9707931], \"myneheroes:is_dyed\": [B; 0B, 1B, 1B, 1B]}, count: 1, id: \"myneheroes:spider_gold_titanium_boots\"}, {components: {\"myneheroes:colors\": [I; -6854105, -1, -12471809, -9707931], \"myneheroes:is_dyed\": [B; 0B, 1B, 1B, 1B]}, count: 1, id: \"myneheroes:spider_gold_titanium_leggings\"}, {components: {\"myneheroes:colors\": [I; -6854105, -1, -12471809, -9707931], \"myneheroes:is_dyed\": [B; 0B, 1B, 1B, 1B]}, count: 1, id: \"myneheroes:spider_gold_titanium_chestplate\"}, {components: {\"myneheroes:colors\": [I; -6854105, -1, -12471809, -9707931], \"myneheroes:is_dyed\": [B; 0B, 1B, 1B, 1B]}, count: 1, id: \"myneheroes:spider_gold_titanium_helmet\"}], NoBasePlate: 1b}",
+      "scale": 0.9,
+      "offset": 0.1,
+      "name": "Gold-Titanium Example"
     }
   ]
 }

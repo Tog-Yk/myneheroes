@@ -43,6 +43,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.SPEEDSTER_GOLD_TITANIUM_HELMET)
                 .add(ModItems.SPEEDSTER_VIBRANIUM_HELMET)
                 .add(ModItems.SPEEDSTER_NETHERITE_HELMET)
+                .add(ModItems.SPIDER_GOLD_TITANIUM_HELMET)
         ;
 
         getOrCreateTagBuilder(ItemTags.CHEST_ARMOR)
@@ -59,6 +60,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.SPEEDSTER_GOLD_TITANIUM_CHESTPLATE)
                 .add(ModItems.SPEEDSTER_VIBRANIUM_CHESTPLATE)
                 .add(ModItems.SPEEDSTER_NETHERITE_CHESTPLATE)
+                .add(ModItems.SPIDER_GOLD_TITANIUM_CHESTPLATE)
         ;
 
         getOrCreateTagBuilder(ItemTags.LEG_ARMOR)
@@ -75,6 +77,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.SPEEDSTER_GOLD_TITANIUM_LEGGINGS)
                 .add(ModItems.SPEEDSTER_VIBRANIUM_LEGGINGS)
                 .add(ModItems.SPEEDSTER_NETHERITE_LEGGINGS)
+                .add(ModItems.SPIDER_GOLD_TITANIUM_LEGGINGS)
         ;
 
         getOrCreateTagBuilder(ItemTags.FOOT_ARMOR)
@@ -91,6 +94,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.SPEEDSTER_GOLD_TITANIUM_BOOTS)
                 .add(ModItems.SPEEDSTER_VIBRANIUM_BOOTS)
                 .add(ModItems.SPEEDSTER_NETHERITE_BOOTS)
+                .add(ModItems.SPIDER_GOLD_TITANIUM_BOOTS)
         ;
 
         getOrCreateTagBuilder(ItemTags.SWORDS)
@@ -151,6 +155,11 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.SPEEDSTER_NETHERITE_CHESTPLATE)
                 .add(ModItems.SPEEDSTER_NETHERITE_LEGGINGS)
                 .add(ModItems.SPEEDSTER_NETHERITE_BOOTS)
+
+                .add(ModItems.SPIDER_GOLD_TITANIUM_HELMET)
+                .add(ModItems.SPIDER_GOLD_TITANIUM_CHESTPLATE)
+                .add(ModItems.SPIDER_GOLD_TITANIUM_LEGGINGS)
+                .add(ModItems.SPIDER_GOLD_TITANIUM_BOOTS)
 
                 .add(ModItems.MJOLNIR)
 

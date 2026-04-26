@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "myneheroes:item/spider_gold_titanium_chestplate",
+    "layer1": "myneheroes:item/spider_gold_titanium_details_chestplate",
+    "layer2": "myneheroes:item/spider_gold_titanium_details_2_chestplate"
+  }
+}

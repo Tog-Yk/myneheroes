@@ -1,0 +1,10 @@
+{
+  "type": "myneheroes:armor_fabricating",
+  "ingredient": {
+    "item": "myneheroes:gold_titanium_boots"
+  },
+  "result": {
+    "count": 1,
+    "id": "myneheroes:spider_gold_titanium_boots"
+  }
+}

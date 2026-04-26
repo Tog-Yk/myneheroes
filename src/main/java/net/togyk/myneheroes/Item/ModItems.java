@@ -512,6 +512,56 @@ public class ModItems {
                     new Item.Settings().maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(39)).fireproof()
             ));
 
+    // Spider
+    // spider — gold titanium
+    public static final Item SPIDER_GOLD_TITANIUM_HELMET = registerItem("spider_gold_titanium_helmet",
+            new DyeableAdvancedArmorItem(
+                    List.of(0xFF976A27, 0xffd0a75e, 0xffffffff),
+                    List.of(-1, -1, 15),
+                    Text.translatable(Util.createTranslationKey("armor_pattern",
+                                    Identifier.of(MyneHeroes.MOD_ID, "spider_gold_titanium")))
+                            .formatted(Formatting.GOLD),
+                    ModArmorMaterials.GOLD_TITANIUM_SPIDER_MATERIAL,
+                    ArmorItem.Type.HELMET,
+                    new Item.Settings().maxDamage(ArmorItem.Type.HELMET.getMaxDamage(31))
+            ));
+
+    public static final Item SPIDER_GOLD_TITANIUM_CHESTPLATE = registerItem("spider_gold_titanium_chestplate",
+            new DyeableAdvancedArmorItem(
+                    List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e),
+                    List.of(-1, -1, -1),
+                    Text.translatable(Util.createTranslationKey("armor_pattern",
+                                    Identifier.of(MyneHeroes.MOD_ID, "spider_gold_titanium")))
+                            .formatted(Formatting.GOLD),
+                    ModArmorMaterials.GOLD_TITANIUM_SPIDER_MATERIAL,
+                    ArmorItem.Type.CHESTPLATE,
+                    new Item.Settings().maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(31))
+            ));
+
+    public static final Item SPIDER_GOLD_TITANIUM_LEGGINGS = registerItem("spider_gold_titanium_leggings",
+            new DyeableAdvancedArmorItem(
+                    List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e),
+                    List.of(-1, -1, -1),
+                    Text.translatable(Util.createTranslationKey("armor_pattern",
+                                    Identifier.of(MyneHeroes.MOD_ID, "spider_gold_titanium")))
+                            .formatted(Formatting.GOLD),
+                    ModArmorMaterials.GOLD_TITANIUM_SPIDER_MATERIAL,
+                    ArmorItem.Type.LEGGINGS,
+                    new Item.Settings().maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(31))
+            ));
+
+    public static final Item SPIDER_GOLD_TITANIUM_BOOTS = registerItem("spider_gold_titanium_boots",
+            new DyeableAdvancedArmorItem(
+                    List.of(0xFF976A27, 0xffd0a75e, 0xffd0a75e),
+                    List.of(-1, -1, -1),
+                    Text.translatable(Util.createTranslationKey("armor_pattern",
+                                    Identifier.of(MyneHeroes.MOD_ID, "spider_gold_titanium")))
+                            .formatted(Formatting.GOLD),
+                    ModArmorMaterials.GOLD_TITANIUM_SPIDER_MATERIAL,
+                    ArmorItem.Type.BOOTS,
+                    new Item.Settings().maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(31))
+            ));
+
 
     //tutorial items
     public static Item CLARK_KENT_GLASSES = registerItem("clark_kent_glasses",

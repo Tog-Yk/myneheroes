@@ -190,6 +190,11 @@ public class ModItemGroups {
                         entries.add(ModItems.SPEEDSTER_NETHERITE_LEGGINGS);
                         entries.add(ModItems.SPEEDSTER_NETHERITE_BOOTS);
 
+                        entries.add(ModItems.SPIDER_GOLD_TITANIUM_HELMET);
+                        entries.add(ModItems.SPIDER_GOLD_TITANIUM_CHESTPLATE);
+                        entries.add(ModItems.SPIDER_GOLD_TITANIUM_LEGGINGS);
+                        entries.add(ModItems.SPIDER_GOLD_TITANIUM_BOOTS);
+
                     }).build());
 
     public static final ItemGroup MYNEHEROES_POWER_GROUP = Registry.register(Registries.ITEM_GROUP,

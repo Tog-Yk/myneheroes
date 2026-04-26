@@ -161,11 +161,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.COLORING_COMPOUND)
-                .input(Items.CLAY)
+                .input(Items.CLAY_BALL)
                 .input(ModTags.Items.DYES)
                 .input(ModTags.Items.DYES)
-                .criterion(FabricRecipeProvider.hasItem(Items.CLAY),
-                        FabricRecipeProvider.conditionsFromItem(Items.CLAY))
+                .criterion(FabricRecipeProvider.hasItem(Items.CLAY_BALL),
+                        FabricRecipeProvider.conditionsFromItem(Items.CLAY_BALL))
                 .offerTo(exporter);
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ANTI_RADIATION_COATING)
@@ -351,6 +351,16 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('&', ModItems.IRON_TOOLBELT)
                 .criterion(FabricRecipeProvider.hasItem(Items.DIAMOND),
                         FabricRecipeProvider.conditionsFromItem(Items.DIAMOND))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.WEB_SHOOTER_UPGRADE)
+                .pattern(" % ")
+                .pattern("#&#")
+                .input('#', Items.LEATHER)
+                .input('&', Items.STICKY_PISTON)
+                .input('%', Items.GLASS_BOTTLE)
+                .criterion(FabricRecipeProvider.hasItem(Items.GLASS_BOTTLE),
+                        FabricRecipeProvider.conditionsFromItem(Items.GLASS_BOTTLE))
                 .offerTo(exporter);
 
         SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.ofItems(ModItems.DIAMOND_TOOLBELT), Ingredient.ofItems(Items.NETHERITE_INGOT),
@@ -688,6 +698,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         ArmorFabricatingRecipeJsonBuilder.create(Items.NETHERITE_CHESTPLATE, ModItems.SPEEDSTER_NETHERITE_CHESTPLATE).offerTo(exporter);
         ArmorFabricatingRecipeJsonBuilder.create(Items.NETHERITE_LEGGINGS, ModItems.SPEEDSTER_NETHERITE_LEGGINGS).offerTo(exporter);
         ArmorFabricatingRecipeJsonBuilder.create(Items.NETHERITE_BOOTS, ModItems.SPEEDSTER_NETHERITE_BOOTS).offerTo(exporter);
+
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.GOLD_TITANIUM_HELMET, ModItems.SPIDER_GOLD_TITANIUM_HELMET).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.GOLD_TITANIUM_CHESTPLATE, ModItems.SPIDER_GOLD_TITANIUM_CHESTPLATE).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.GOLD_TITANIUM_LEGGINGS, ModItems.SPIDER_GOLD_TITANIUM_LEGGINGS).offerTo(exporter);
+        ArmorFabricatingRecipeJsonBuilder.create(ModItems.GOLD_TITANIUM_BOOTS, ModItems.SPIDER_GOLD_TITANIUM_BOOTS).offerTo(exporter);
 
         //Entity interaction Recipes
         EntityInteractionRecipeJsonBuilder.create(Items.GLASS_BOTTLE, EntityType.CAVE_SPIDER, ModItems.BOTTLE_OF_SPIDER_VENOM).offerTo(exporter);

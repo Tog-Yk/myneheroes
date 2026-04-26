@@ -1,0 +1,43 @@
+{
+  "criteria": {
+    "spider": {
+      "conditions": {
+        "id": "myneheroes:spider"
+      },
+      "trigger": "myneheroes:powers_changed"
+    },
+    "spider_organic": {
+      "conditions": {
+        "id": "myneheroes:spider_organic_webbing"
+      },
+      "trigger": "myneheroes:powers_changed"
+    },
+    "has_web_shooter": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "myneheroes:web_shooter_upgrade"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "spider",
+      "spider_organic",
+      "has_web_shooter"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "myneheroes:spider_gold_titanium_helmet",
+      "myneheroes:spider_gold_titanium_chestplate",
+      "myneheroes:spider_gold_titanium_leggings",
+      "myneheroes:spider_gold_titanium_boots"
+    ]
+  }
+}
