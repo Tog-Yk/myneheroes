@@ -143,5 +143,9 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(ModTags.Blocks.RADIATION_GOES_THROUGH)
                 .add(Blocks.AIR)
         ;
+
+        getOrCreateTagBuilder(ModTags.Blocks.CANT_PHASE_THROUGH)
+                .add(Blocks.BEDROCK)
+        ;
     }
 }

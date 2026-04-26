@@ -5,8 +5,8 @@
   "item.myneheroes.titanium_ingot": "Titanium Ingot",
   "item.myneheroes.raw_titanium": "Raw Titanium",
 
-  "item.myneheroes.gold_titanium_ingot": "Gold Titanium Ingot",
-  "item.myneheroes.raw_gold_titanium": "Raw Gold Titanium",
+  "item.myneheroes.gold_titanium_ingot": "Gold-Titanium Ingot",
+  "item.myneheroes.raw_gold_titanium": "Raw Gold-Titanium",
 
   "item.myneheroes.uranium_ingot": "Uranium Ingot",
   "item.myneheroes.raw_uranium": "Raw Uranium",
@@ -100,10 +100,10 @@
   "item.myneheroes.adamantium_leggings": "Adamantium Leggings",
   "item.myneheroes.adamantium_boots": "Adamantium Boost",
 
-  "item.myneheroes.gold_titanium_helmet": "Gold Titanium Helmet",
-  "item.myneheroes.gold_titanium_chestplate": "Gold Titanium Chestplate",
-  "item.myneheroes.gold_titanium_leggings": "Gold Titanium Leggings",
-  "item.myneheroes.gold_titanium_boots": "Gold Titanium Boost",
+  "item.myneheroes.gold_titanium_helmet": "Gold-Titanium Helmet",
+  "item.myneheroes.gold_titanium_chestplate": "Gold-Titanium Chestplate",
+  "item.myneheroes.gold_titanium_leggings": "Gold-Titanium Leggings",
+  "item.myneheroes.gold_titanium_boots": "Gold-Titanium Boost",
 
   "item.myneheroes.mark3_gold_titanium_helmet": "Advanced Helmet",
   "item.myneheroes.mark3_gold_titanium_chestplate": "Advanced Chestplate",
@@ -130,6 +130,11 @@
   "item.myneheroes.speedster_netherite_leggings": "Advanced Leggings",
   "item.myneheroes.speedster_netherite_boots": "Advanced Boost",
 
+  "item.myneheroes.spider_gold_titanium_helmet": "Advanced Helmet",
+  "item.myneheroes.spider_gold_titanium_chestplate": "Advanced Chestplate",
+  "item.myneheroes.spider_gold_titanium_leggings": "Advanced Leggings",
+  "item.myneheroes.spider_gold_titanium_boots": "Advanced Boost",
+
 
 
   "block.myneheroes.vibranium_block": "Vibranium Block",
@@ -142,8 +147,8 @@
   "block.myneheroes.titanium_ore": "Titanium Ore",
   "block.myneheroes.deepslate_titanium_ore": "Deepslate Titanium Ore",
 
-  "block.myneheroes.gold_titanium_block": "Gold Titanium Block",
-  "block.myneheroes.raw_gold_titanium_block": "Raw Gold Titanium Block",
+  "block.myneheroes.gold_titanium_block": "Gold-Titanium Block",
+  "block.myneheroes.raw_gold_titanium_block": "Raw Gold-Titanium Block",
   "block.myneheroes.armor_dyeing_station": "Armor Dyeing Station",
 
   "block.myneheroes.uranium_block": "Uranium Block",
@@ -214,7 +219,7 @@
 
   "trim_material.myneheroes.vibranium": "Vibranium",
   "trim_material.myneheroes.titanium": "Titanium",
-  "trim_material.myneheroes.gold_titanium": "Gold Titanium",
+  "trim_material.myneheroes.gold_titanium": "Gold-Titanium",
   "trim_material.myneheroes.adamantium": "Adamantium",
 
   "trim_pattern.myneheroes.iron_suit": "Iron Suit",
@@ -328,6 +333,7 @@
   "armor_pattern.myneheroes.speedster_gold_titanium": " Speedster Gold-Titanium",
   "armor_pattern.myneheroes.speedster_vibranium": " Speedster Vibranium",
   "armor_pattern.myneheroes.speedster_netherite": " Speedster Netherite",
+  "armor_pattern.myneheroes.spider_gold_titanium": " Spider Gold-Titanium",
 
   "recipe_category.myneheroes.entity_interaction": "Entity Interaction",
 
