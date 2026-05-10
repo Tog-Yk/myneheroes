@@ -33,6 +33,7 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
 
     private boolean speedActive = true;
     private boolean phasing = false;
+    private double phasingProgress = 0.0D;
 
     private List<Upgrade> upgrades = new ArrayList<>();
 
@@ -89,6 +90,12 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
                 trailCooldown -= 1;
             }
         }
+
+        if (isPhasing()) {
+            phasingProgress = Math.clamp(phasingProgress + 0.1D, 0, 1);
+        } else  {
+            phasingProgress = Math.clamp(phasingProgress - 0.2D, 0, 1);
+        }
     }
 
     private Double getStepHeight() {
@@ -127,6 +134,10 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
     @Override
     public boolean isPhasing() {
         return phasing && !isDampened();
+    }
+    @Override
+    public double getPhasingProgress() {
+        return phasingProgress;
     }
 
     public void setPhasing(boolean phasing) {
@@ -211,6 +222,7 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
     public NbtCompound writeNbt(NbtCompound nbt) {
         nbt.putBoolean("speedActive", speedActive);
         nbt.putBoolean("phasing", phasing);
+        nbt.putDouble("phasingProgress", phasingProgress);
         nbt.putInt("speedLevel", speedLevel);
 
         lastSegment.ifPresent(uuid -> nbt.putUuid("lastSegment", uuid));
@@ -245,6 +257,10 @@ public class SpeedsterPower extends Power implements VariableLinkedPower, Upgrad
 
         if (nbt.contains("phasing")) {
             phasing = nbt.getBoolean("phasing");
+        }
+
+        if (nbt.contains("phasingProgress")) {
+            phasingProgress = nbt.getDouble("phasingProgress");
         }
 
         if (nbt.contains("speedLevel")) {
