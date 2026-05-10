@@ -13,7 +13,22 @@ import net.togyk.myneheroes.mixin.EntityShapeContextAccessor;
 import net.togyk.myneheroes.power.Power;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.Comparator;
+
 public class PhasingUtil {
+    public static boolean isPhasing(PlayerEntity player) {
+        for (Power power : PowerData.getPowersWithoutSyncing(player)) {
+            if (power.isPhasing()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static double getPhasingProgress(PlayerEntity player) {
+        return PowerData.getPowersWithoutSyncing(player).stream().map(Power::getPhasingProgress).max(Comparator.comparingDouble(Double::doubleValue)).orElse(0.0D);
+    }
+
     public static void handlePhasing(BlockPos pos, ShapeContext context, CallbackInfoReturnable<VoxelShape> cir) {
         VoxelShape voxelShape = cir.getReturnValue();
         if (voxelShape == null) {
@@ -28,14 +43,11 @@ public class PhasingUtil {
         Entity entity = ((EntityShapeContextAccessor) entityContext).getEntity();
         if (!(entity instanceof PlayerEntity player)) return;
 
-        for (Power power : PowerData.getPowersWithoutSyncing(player)) {
-            if (!power.isPhasing()) continue;
-
+        if (isPhasing(player)) {
             double blockTop = pos.getY() + blockHeight;
 
             if ((player.getPos().getY() < blockTop || (player.isSneaking() && !player.isOnGround())) && player.getPos().getY() + player.getBoundingBox().getLengthY() + 2 >= pos.getY()) {
                 cir.setReturnValue(VoxelShapes.empty());
-                break;
             }
         }
     }
@@ -45,21 +57,17 @@ public class PhasingUtil {
         Entity entity = ((EntityShapeContextAccessor) entityContext).getEntity();
         if (!(entity instanceof PlayerEntity player)) return;
 
-        for (Power power : PowerData.getPowersWithoutSyncing(player)) {
-            if (!power.isPhasing()) continue;
-
+        if (isPhasing(player)) {
             boolean isBelowTop = player.getPos().getY() < pos.getY() + 1F;
             boolean isBelowSlab = player.getPos().getY() < pos.getY() + 0.5F;
 
             if (player.getPos().getY() + player.getBoundingBox().getLengthY() + 2 >= pos.getY()) {
                 if ((isBelowSlab || (player.isSneaking() && !player.isOnGround()))) {
                     cir.setReturnValue(VoxelShapes.empty());
-                    break;
                 } else if (isBelowTop) {
                     //set the collision shape to that of a bottom slab
                     VoxelShape bottomSlabShape = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
                     cir.setReturnValue(bottomSlabShape);
-                    break;
                 }
             }
         }

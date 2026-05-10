@@ -1,5 +1,7 @@
 package net.togyk.myneheroes.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -9,6 +11,8 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
@@ -17,8 +21,10 @@ import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import net.togyk.myneheroes.client.render.entity.feature.TintableSkinFeature;
 import net.togyk.myneheroes.power.Power;
+import net.togyk.myneheroes.util.PhasingUtil;
 import net.togyk.myneheroes.util.PlayerHoverFlightControl;
 import net.togyk.myneheroes.util.PowerData;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -90,5 +96,99 @@ public abstract class PlayerRendererMixin {
         if (roll != 0) {
             matrixStack.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees(roll));
         }
+    }
+
+    @WrapOperation(method = "render", at = @At(
+            value = "INVOKE",
+            target =
+                    "Lnet/minecraft/client/render/entity/LivingEntityRenderer;" +
+                            "render(Lnet/minecraft/entity/LivingEntity;FF" +
+                            "Lnet/minecraft/client/util/math/MatrixStack;" +
+                            "Lnet/minecraft/client/render/VertexConsumerProvider;I)V"
+    ))
+    private void offsetRenders(
+            PlayerEntityRenderer instance,
+            LivingEntity entity,
+            float entityYaw,
+            float tickDelta,
+            MatrixStack matrices,
+            VertexConsumerProvider vertexConsumers,
+            int light,
+            Operation<Void> original
+    ) {
+        if (entity instanceof PlayerEntity player) {
+            double phasingProgress = PhasingUtil.getPhasingProgress(player);
+            if (phasingProgress != 0) {
+                double[][] offsets = getDoubles(player);
+
+                matrices.push();
+
+                matrices.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees(player.getYaw(tickDelta)));
+
+                // extra renders
+                for (double[] offset : offsets) {
+
+                    matrices.push();
+
+                    matrices.translate(
+                            offset[0] * phasingProgress,
+                            offset[1] * phasingProgress,
+                            offset[2] * phasingProgress
+                    );
+
+                    matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(player.getBodyYaw()));
+
+                    original.call(
+                            instance,
+                            entity,
+                            entityYaw,
+                            tickDelta,
+                            matrices,
+                            vertexConsumers,
+                            light
+                    );
+
+                    matrices.pop();
+                }
+                matrices.pop();
+            } else {
+                original.call(
+                        instance,
+                        entity,
+                        entityYaw,
+                        tickDelta,
+                        matrices,
+                        vertexConsumers,
+                        light
+                );
+            }
+        } else {
+            original.call(
+                    instance,
+                    entity,
+                    entityYaw,
+                    tickDelta,
+                    matrices,
+                    vertexConsumers,
+                    light
+            );
+        }
+    }
+
+    private static double[] @NotNull [] getDoubles(PlayerEntity player) {
+        float clock = player.getWorld().getTime() * 80;
+        float time = clock % 360;
+        float time1 = clock * 1.5F + 60 % 360;
+        float time2 = clock * 1.25F + 120 % 360;
+
+        return new double[][]{
+                {0, 0.02 * Math.sin(Math.toRadians(time1)), 0.01 * Math.sin(Math.toRadians(time))},
+                {-0.15 * Math.cos(Math.toRadians(time1)), 0.02 * Math.sin(Math.toRadians(time2)), 0},
+                {0.075 * Math.cos(Math.toRadians(time1)), 0.02 * Math.sin(Math.toRadians(time)), 0.03 * Math.cos(Math.toRadians(time2))},
+                {0.1 * Math.cos(Math.toRadians(time2)), 0, 0.01 * Math.cos(Math.toRadians(time1))},
+
+                // normal render
+                {0, 0, 0}
+        };
     }
 }

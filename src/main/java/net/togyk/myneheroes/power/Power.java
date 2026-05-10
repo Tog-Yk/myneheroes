@@ -120,6 +120,9 @@ public class Power {
     public boolean isPhasing() {
         return false;
     }
+    public double getPhasingProgress() {
+        return 0;
+    }
 
     public boolean canWallClimb() {
         return settings.canWallCrawl && this.holder != null && !this.holder.isOnGround();
